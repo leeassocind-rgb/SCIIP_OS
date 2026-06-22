@@ -1,0 +1,227 @@
+/* ==========================================================
+   SCIIP_OS
+   Module: Events
+   File: CommandFactory.gs
+
+   Purpose:
+   Creates canonical SCIIP commands.
+
+   Commands represent requested actions.
+
+   Commands produce Events.
+
+   Observation
+        ↓
+   Command
+        ↓
+   Event
+        ↓
+   Graph
+        ↓
+   Timeline
+
+   Source of Truth:
+   GitHub
+
+   Runtime:
+   Google Apps Script
+========================================================== */
+
+/**
+ * Canonical SCIIP command types.
+ */
+const SCIIP_COMMAND_TYPES = {
+
+  CREATE_ASSET:
+    'CREATE_ASSET',
+
+  UPDATE_ASSET:
+    'UPDATE_ASSET',
+
+  MERGE_ASSET:
+    'MERGE_ASSET',
+
+  CREATE_CANDIDATE:
+    'CREATE_CANDIDATE',
+
+  CREATE_ALIAS:
+    'CREATE_ALIAS',
+
+  CREATE_GRAPH_NODE:
+    'CREATE_GRAPH_NODE',
+
+  CREATE_GRAPH_EDGE:
+    'CREATE_GRAPH_EDGE',
+
+  RECORD_OBSERVATION:
+    'RECORD_OBSERVATION'
+};
+
+/**
+ * Creates a command.
+ *
+ * @param {string} commandType
+ * @param {Object} payload
+ * @returns {Object}
+ */
+function sciipCreateCommand(
+  commandType,
+  payload
+) {
+  sciipValidateCommandType(
+    commandType
+  );
+
+  const data = payload || {};
+
+  return {
+    commandId:
+      'COMMAND_' +
+      sciipUuid()
+        .replace(/-/g, '')
+        .substring(0, 16)
+        .toUpperCase(),
+
+    commandType:
+      commandType,
+
+    payload:
+      data,
+
+    createdAt:
+      sciipNowIso()
+  };
+}
+
+/**
+ * Validates command type.
+ *
+ * @param {string} commandType
+ */
+function sciipValidateCommandType(
+  commandType
+) {
+  if (
+    !Object.values(
+      SCIIP_COMMAND_TYPES
+    ).includes(commandType)
+  ) {
+    throw new Error(
+      'Invalid Command Type: ' +
+      commandType
+    );
+  }
+}
+
+/**
+ * Converts a command into an event.
+ *
+ * Initial implementation.
+ *
+ * Future versions will support:
+ *
+ * - Command Handlers
+ * - Validation Pipelines
+ * - Work Queues
+ * - Retry Logic
+ *
+ * @param {Object} command
+ * @returns {Object}
+ */
+function sciipExecuteCommand(
+  command
+) {
+
+  switch (
+    command.commandType
+  ) {
+
+    case SCIIP_COMMAND_TYPES.CREATE_ASSET:
+
+      return sciipCreateAndRecordEvent(
+        SCIIP_EVENT_TYPES.ASSET_CREATED,
+        command.payload
+      );
+
+    case SCIIP_COMMAND_TYPES.CREATE_CANDIDATE:
+
+      return sciipCreateAndRecordEvent(
+        SCIIP_EVENT_TYPES.CANDIDATE_CREATED,
+        command.payload
+      );
+
+    case SCIIP_COMMAND_TYPES.CREATE_ALIAS:
+
+      return sciipCreateAndRecordEvent(
+        SCIIP_EVENT_TYPES.ALIAS_CREATED,
+        command.payload
+      );
+
+    case SCIIP_COMMAND_TYPES.CREATE_GRAPH_NODE:
+
+      return sciipCreateAndRecordEvent(
+        SCIIP_EVENT_TYPES.GRAPH_NODE_CREATED,
+        command.payload
+      );
+
+    case SCIIP_COMMAND_TYPES.CREATE_GRAPH_EDGE:
+
+      return sciipCreateAndRecordEvent(
+        SCIIP_EVENT_TYPES.GRAPH_EDGE_CREATED,
+        command.payload
+      );
+
+    case SCIIP_COMMAND_TYPES.RECORD_OBSERVATION:
+
+      return sciipCreateAndRecordEvent(
+        SCIIP_EVENT_TYPES.PROPERTY_OBSERVED,
+        command.payload
+      );
+
+    default:
+
+      throw new Error(
+        'Unhandled Command Type: ' +
+        command.commandType
+      );
+  }
+}
+
+/**
+ * Creates and executes a command.
+ *
+ * @param {string} commandType
+ * @param {Object} payload
+ * @returns {Object}
+ */
+function sciipCreateAndExecuteCommand(
+  commandType,
+  payload
+) {
+  const command =
+    sciipCreateCommand(
+      commandType,
+      payload
+    );
+
+  return sciipExecuteCommand(
+    command
+  );
+}
+
+/**
+ * Returns command factory stats.
+ *
+ * @returns {Object}
+ */
+function sciipCommandFactoryStats() {
+  return {
+    commandTypes:
+      Object.keys(
+        SCIIP_COMMAND_TYPES
+      ).length,
+
+    generatedAt:
+      sciipNowIso()
+  };
+}
