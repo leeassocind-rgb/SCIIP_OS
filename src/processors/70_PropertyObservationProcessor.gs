@@ -1,3 +1,65 @@
+/* ==========================================================
+   SCIIP_OS
+   Module: Processors
+   File: 70_PropertyObservationProcessor.gs
+
+   Purpose:
+   Processes raw property observations into SCIIP events,
+   candidates, assets, graph records, and timeline history.
+
+   Observation
+      ↓
+   Event
+      ↓
+   Identity Resolution
+      ↓
+   Candidate / Match
+      ↓
+   Asset Registry
+      ↓
+   Knowledge Graph
+      ↓
+   Timeline
+
+   Source of Truth:
+   GitHub
+
+   Runtime:
+   Google Apps Script
+========================================================== */
+
+const SCIIP_OBSERVATION_QUEUE_SHEET =
+  'OBSERVATION_QUEUE';
+
+function sciipGetObservationQueueSheet() {
+  return sciipGetOrCreateSheet(
+    SCIIP_OBSERVATION_QUEUE_SHEET
+  );
+}
+
+function sciipInitializeObservationQueue() {
+  const sheet =
+    sciipGetObservationQueueSheet();
+
+  if (sheet.getLastRow() > 0) {
+    return;
+  }
+
+  sheet.appendRow([
+    'Observation_ID',
+    'Observation_Type',
+    'Address',
+    'City',
+    'Zip',
+    'APN',
+    'Source',
+    'Raw_Text',
+    'Status',
+    'Created_At',
+    'Processed_At'
+  ]);
+}
+
 function sciipRunPropertyObservationProcessor(context) {
 
   sciipInitializeObservationQueue();
@@ -15,7 +77,6 @@ function sciipRunPropertyObservationProcessor(context) {
     sheet.getDataRange().getValues();
 
   if (rows.length < 2) {
-
     return sciipObservationProcessorResult_(
       0,
       0,
@@ -113,23 +174,22 @@ function sciipRunPropertyObservationProcessor(context) {
 
     } else {
 
-      const candidate =
-        sciipCreateCandidate({
-          address:
-            payload.address,
+      sciipCreateCandidate({
+        address:
+          payload.address,
 
-          city:
-            payload.city,
+        city:
+          payload.city,
 
-          zip:
-            payload.zip,
+        zip:
+          payload.zip,
 
-          apn:
-            payload.apn,
+        apn:
+          payload.apn,
 
-          source:
-            payload.source
-        });
+        source:
+          payload.source
+      });
 
       candidatesCreated++;
 
@@ -160,23 +220,31 @@ function sciipRunPropertyObservationProcessor(context) {
       }
     }
 
-    /*
-     * Mark observation processed
-     */
+    if (
+      statusIndex >= 0
+    ) {
+      sheet
+        .getRange(
+          i + 1,
+          statusIndex + 1
+        )
+        .setValue(
+          'PROCESSED'
+        );
+    }
 
-    sheet.getRange(
-      i + 1,
-      statusIndex + 1
-    ).setValue(
-      'PROCESSED'
-    );
-
-    sheet.getRange(
-      i + 1,
-      processedAtIndex + 1
-    ).setValue(
-      sciipNowIso()
-    );
+    if (
+      processedAtIndex >= 0
+    ) {
+      sheet
+        .getRange(
+          i + 1,
+          processedAtIndex + 1
+        )
+        .setValue(
+          sciipNowIso()
+        );
+    }
   }
 
   return sciipObservationProcessorResult_(
@@ -185,4 +253,103 @@ function sciipRunPropertyObservationProcessor(context) {
     candidatesCreated,
     assetsCreated
   );
+}
+
+function sciipNormalizePropertyObservation_(
+  observation
+) {
+  return {
+    observationId:
+      observation.Observation_ID ||
+      observation.observationId ||
+      'OBS_' + sciipUuid(),
+
+    observationType:
+      observation.Observation_Type ||
+      observation.observationType ||
+      'PROPERTY_OBSERVED',
+
+    address:
+      observation.Address ||
+      observation.address ||
+      '',
+
+    city:
+      observation.City ||
+      observation.city ||
+      '',
+
+    zip:
+      observation.Zip ||
+      observation.zip ||
+      '',
+
+    apn:
+      observation.APN ||
+      observation.apn ||
+      '',
+
+    source:
+      observation.Source ||
+      observation.source ||
+      'OBSERVATION_QUEUE',
+
+    rawText:
+      observation.Raw_Text ||
+      observation.rawText ||
+      '',
+
+    createdAt:
+      observation.Created_At ||
+      observation.createdAt ||
+      sciipNowIso()
+  };
+}
+
+function sciipObservationRowToObject_(
+  headers,
+  row
+) {
+
+  const obj = {};
+
+  headers.forEach(
+    function(header, index) {
+      obj[header] =
+        row[index];
+    }
+  );
+
+  return obj;
+}
+
+function sciipObservationProcessorResult_(
+  observationsProcessed,
+  matchedAssets,
+  candidatesCreated,
+  assetsCreated
+) {
+
+  return {
+    processor:
+      'PropertyObservationProcessor',
+
+    status:
+      'SUCCESS',
+
+    observationsProcessed:
+      observationsProcessed,
+
+    matchedAssets:
+      matchedAssets,
+
+    candidatesCreated:
+      candidatesCreated,
+
+    assetsCreated:
+      assetsCreated,
+
+    generatedAt:
+      sciipNowIso()
+  };
 }
