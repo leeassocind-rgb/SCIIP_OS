@@ -20,42 +20,17 @@
         ↓
    Timeline
 
+   Vocabulary is governed by:
+
+   SCIIP.VOCABULARY.COMMAND_TYPES
+   SCIIP.VOCABULARY.EVENT_TYPES
+
    Source of Truth:
    GitHub
 
    Runtime:
    Google Apps Script
 ========================================================== */
-
-/**
- * Canonical SCIIP command types.
- */
-const SCIIP_COMMAND_TYPES = {
-
-  CREATE_ASSET:
-    'CREATE_ASSET',
-
-  UPDATE_ASSET:
-    'UPDATE_ASSET',
-
-  MERGE_ASSET:
-    'MERGE_ASSET',
-
-  CREATE_CANDIDATE:
-    'CREATE_CANDIDATE',
-
-  CREATE_ALIAS:
-    'CREATE_ALIAS',
-
-  CREATE_GRAPH_NODE:
-    'CREATE_GRAPH_NODE',
-
-  CREATE_GRAPH_EDGE:
-    'CREATE_GRAPH_EDGE',
-
-  RECORD_OBSERVATION:
-    'RECORD_OBSERVATION'
-};
 
 /**
  * Creates a command.
@@ -68,13 +43,16 @@ function sciipCreateCommand(
   commandType,
   payload
 ) {
+
   sciipValidateCommandType(
     commandType
   );
 
-  const data = payload || {};
+  const data =
+    payload || {};
 
   return {
+
     commandId:
       'COMMAND_' +
       sciipUuid()
@@ -96,16 +74,20 @@ function sciipCreateCommand(
 /**
  * Validates command type.
  *
+ * Uses centralized vocabulary registry.
+ *
  * @param {string} commandType
  */
 function sciipValidateCommandType(
   commandType
 ) {
+
   if (
     !Object.values(
-      SCIIP_COMMAND_TYPES
+      SCIIP.VOCABULARY.COMMAND_TYPES
     ).includes(commandType)
   ) {
+
     throw new Error(
       'Invalid Command Type: ' +
       commandType
@@ -118,8 +100,7 @@ function sciipValidateCommandType(
  *
  * Initial implementation.
  *
- * Future versions will support:
- *
+ * Future:
  * - Command Handlers
  * - Validation Pipelines
  * - Work Queues
@@ -136,45 +117,45 @@ function sciipExecuteCommand(
     command.commandType
   ) {
 
-    case SCIIP_COMMAND_TYPES.CREATE_ASSET:
+    case SCIIP.VOCABULARY.COMMAND_TYPES.CREATE_ASSET:
 
       return sciipCreateAndRecordEvent(
-        SCIIP_EVENT_TYPES.ASSET_CREATED,
+        SCIIP.VOCABULARY.EVENT_TYPES.ASSET_CREATED,
         command.payload
       );
 
-    case SCIIP_COMMAND_TYPES.CREATE_CANDIDATE:
+    case SCIIP.VOCABULARY.COMMAND_TYPES.CREATE_CANDIDATE:
 
       return sciipCreateAndRecordEvent(
-        SCIIP_EVENT_TYPES.CANDIDATE_CREATED,
+        SCIIP.VOCABULARY.EVENT_TYPES.CANDIDATE_CREATED,
         command.payload
       );
 
-    case SCIIP_COMMAND_TYPES.CREATE_ALIAS:
+    case SCIIP.VOCABULARY.COMMAND_TYPES.CREATE_ALIAS:
 
       return sciipCreateAndRecordEvent(
-        SCIIP_EVENT_TYPES.ALIAS_CREATED,
+        SCIIP.VOCABULARY.EVENT_TYPES.ALIAS_CREATED,
         command.payload
       );
 
-    case SCIIP_COMMAND_TYPES.CREATE_GRAPH_NODE:
+    case SCIIP.VOCABULARY.COMMAND_TYPES.CREATE_GRAPH_NODE:
 
       return sciipCreateAndRecordEvent(
-        SCIIP_EVENT_TYPES.GRAPH_NODE_CREATED,
+        SCIIP.VOCABULARY.EVENT_TYPES.GRAPH_NODE_CREATED,
         command.payload
       );
 
-    case SCIIP_COMMAND_TYPES.CREATE_GRAPH_EDGE:
+    case SCIIP.VOCABULARY.COMMAND_TYPES.CREATE_GRAPH_EDGE:
 
       return sciipCreateAndRecordEvent(
-        SCIIP_EVENT_TYPES.GRAPH_EDGE_CREATED,
+        SCIIP.VOCABULARY.EVENT_TYPES.GRAPH_EDGE_CREATED,
         command.payload
       );
 
-    case SCIIP_COMMAND_TYPES.RECORD_OBSERVATION:
+    case SCIIP.VOCABULARY.COMMAND_TYPES.RECORD_OBSERVATION:
 
       return sciipCreateAndRecordEvent(
-        SCIIP_EVENT_TYPES.PROPERTY_OBSERVED,
+        SCIIP.VOCABULARY.EVENT_TYPES.PROPERTY_OBSERVED,
         command.payload
       );
 
@@ -198,6 +179,7 @@ function sciipCreateAndExecuteCommand(
   commandType,
   payload
 ) {
+
   const command =
     sciipCreateCommand(
       commandType,
@@ -210,15 +192,27 @@ function sciipCreateAndExecuteCommand(
 }
 
 /**
- * Returns command factory stats.
+ * Returns all command types.
+ *
+ * @returns {Object}
+ */
+function sciipGetCommandTypes() {
+
+  return SCIIP.VOCABULARY.COMMAND_TYPES;
+}
+
+/**
+ * Returns command factory statistics.
  *
  * @returns {Object}
  */
 function sciipCommandFactoryStats() {
+
   return {
+
     commandTypes:
       Object.keys(
-        SCIIP_COMMAND_TYPES
+        SCIIP.VOCABULARY.COMMAND_TYPES
       ).length,
 
     generatedAt:
