@@ -22,7 +22,9 @@
  * @param {Object} asset
  * @returns {Object}
  */
-function sciipBuildAssetGraph(asset) {
+function sciipBuildAssetGraph(
+  asset
+) {
 
   sciipRequire(
     asset,
@@ -37,7 +39,7 @@ function sciipBuildAssetGraph(asset) {
   const createdEdges = [];
 
   /*
-   * City Node
+   * Asset -> City
    */
 
   if (
@@ -46,8 +48,9 @@ function sciipBuildAssetGraph(asset) {
 
     const cityNode =
       sciipGraphCreateNode({
+
         nodeType:
-          SCIIP_NODE_TYPES.CITY,
+          SCIIP.VOCABULARY.NODE_TYPES.CITY,
 
         businessKey:
           sciipCreateBusinessKey([
@@ -61,12 +64,13 @@ function sciipBuildAssetGraph(asset) {
 
     const cityEdge =
       sciipGraphCreateEdge({
+
         fromNodeId:
           assetNode.nodeId ||
           assetNode.Node_ID,
 
         relationshipType:
-          SCIIP_EDGE_TYPES.LOCATED_IN,
+          SCIIP.VOCABULARY.EDGE_TYPES.LOCATED_IN,
 
         toNodeId:
           cityNode.nodeId ||
@@ -79,6 +83,7 @@ function sciipBuildAssetGraph(asset) {
   }
 
   return {
+
     assetNode:
       assetNode,
 
@@ -91,7 +96,7 @@ function sciipBuildAssetGraph(asset) {
 }
 
 /**
- * Builds graph for an Asset ID.
+ * Builds graph for an asset.
  *
  * @param {string} assetId
  * @returns {Object}
@@ -119,9 +124,10 @@ function sciipBuildAssetGraphById(
 }
 
 /**
- * Creates graph nodes from all assets.
+ * Bootstrap utility.
  *
- * Initial bootstrap utility.
+ * Creates graph records from
+ * Asset Registry.
  *
  * @returns {Object}
  */
@@ -129,7 +135,7 @@ function sciipBuildGraphFromRegistry() {
 
   const rows =
     sciipGetSheetValues(
-      'ASSET_REGISTRY'
+      SCIIP.SHEETS.ASSET_REGISTRY
     );
 
   if (
@@ -157,35 +163,37 @@ function sciipBuildGraphFromRegistry() {
           header,
           index
         ) {
+
           asset[header] =
             row[index];
+
         }
       );
 
-      sciipBuildAssetGraph(
-        {
-          assetId:
-            asset.Asset_ID,
+      sciipBuildAssetGraph({
 
-          businessKey:
-            asset.Business_Key,
+        assetId:
+          asset.Asset_ID,
 
-          canonicalAddress:
-            asset.Canonical_Address,
+        businessKey:
+          asset.Business_Key,
 
-          canonicalCity:
-            asset.Canonical_City,
+        canonicalAddress:
+          asset.Canonical_Address,
 
-          canonicalZip:
-            asset.Canonical_Zip
-        }
-      );
+        canonicalCity:
+          asset.Canonical_City,
+
+        canonicalZip:
+          asset.Canonical_Zip
+      });
 
       processed++;
 
     });
 
   return {
+
     assetsProcessed:
       processed,
 
@@ -195,7 +203,7 @@ function sciipBuildGraphFromRegistry() {
 }
 
 /**
- * Processor entry point.
+ * Queue processor entry point.
  *
  * @param {Object=} context
  * @returns {Object}
@@ -205,6 +213,7 @@ function sciipRunGraphBuilder(
 ) {
 
   return {
+
     processor:
       'GraphBuilder',
 
@@ -217,7 +226,7 @@ function sciipRunGraphBuilder(
 }
 
 /**
- * Graph Builder statistics.
+ * Returns Graph Builder statistics.
  *
  * @returns {Object}
  */
