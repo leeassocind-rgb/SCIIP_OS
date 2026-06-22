@@ -9,42 +9,16 @@
    All events should be generated through
    the Event Factory.
 
+   Event vocabulary is governed by:
+
+   SCIIP.VOCABULARY.EVENT_TYPES
+
    Source of Truth:
    GitHub
 
    Runtime:
    Google Apps Script
 ========================================================== */
-
-/**
- * Canonical SCIIP event types.
- */
-const SCIIP_EVENT_TYPES = {
-
-  ASSET_CREATED:
-    'ASSET_CREATED',
-
-  ASSET_UPDATED:
-    'ASSET_UPDATED',
-
-  ASSET_MERGED:
-    'ASSET_MERGED',
-
-  CANDIDATE_CREATED:
-    'CANDIDATE_CREATED',
-
-  ALIAS_CREATED:
-    'ALIAS_CREATED',
-
-  GRAPH_NODE_CREATED:
-    'GRAPH_NODE_CREATED',
-
-  GRAPH_EDGE_CREATED:
-    'GRAPH_EDGE_CREATED',
-
-  PROPERTY_OBSERVED:
-    'PROPERTY_OBSERVED'
-};
 
 /**
  * Creates a canonical event.
@@ -57,13 +31,16 @@ function sciipCreateEvent(
   eventType,
   payload
 ) {
+
   sciipValidateEventType(
     eventType
   );
 
-  const data = payload || {};
+  const data =
+    payload || {};
 
   return {
+
     eventId:
       'EVENT_' +
       sciipUuid()
@@ -102,6 +79,7 @@ function sciipCreateAndRecordEvent(
   eventType,
   payload
 ) {
+
   const event =
     sciipCreateEvent(
       eventType,
@@ -118,16 +96,20 @@ function sciipCreateAndRecordEvent(
 /**
  * Validates event type.
  *
+ * Uses centralized vocabulary registry.
+ *
  * @param {string} eventType
  */
 function sciipValidateEventType(
   eventType
 ) {
+
   if (
     !Object.values(
-      SCIIP_EVENT_TYPES
+      SCIIP.VOCABULARY.EVENT_TYPES
     ).includes(eventType)
   ) {
+
     throw new Error(
       'Invalid Event Type: ' +
       eventType
@@ -141,19 +123,22 @@ function sciipValidateEventType(
  * @returns {Object}
  */
 function sciipGetEventTypes() {
-  return SCIIP_EVENT_TYPES;
+
+  return SCIIP.VOCABULARY.EVENT_TYPES;
 }
 
 /**
- * Returns event factory stats.
+ * Returns event factory statistics.
  *
  * @returns {Object}
  */
 function sciipEventFactoryStats() {
+
   return {
+
     eventTypes:
       Object.keys(
-        SCIIP_EVENT_TYPES
+        SCIIP.VOCABULARY.EVENT_TYPES
       ).length,
 
     generatedAt:
