@@ -34,6 +34,12 @@ function sciipAssetRegistrySheetName() {
   ) || 'ASSET_REGISTRY';
 }
 
+function sciipGetAssetRegistrySheet() {
+  return sciipGetOrCreateSheet(
+    sciipAssetRegistrySheetName()
+  );
+}
+
 /**
  * Initializes Asset Registry.
  */
