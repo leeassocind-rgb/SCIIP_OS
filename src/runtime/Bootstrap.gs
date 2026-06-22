@@ -20,20 +20,48 @@
  * @returns {Object}
  */
 function sciipBootstrap(options) {
-  const startedAt = sciipNowIso();
 
-  const context = sciipCreateRuntimeContext(options || {});
+  const startedAt =
+    sciipNowIso();
 
-  const processorResults = sciipRunEnabledProcessors(context);
+  const context =
+    sciipCreateRuntimeContext(
+      options || {}
+    );
+
+  const processorResults =
+    sciipRunEnabledProcessors(
+      context
+    );
+
+  const queueResults =
+    sciipRunQueue();
 
   return {
-    platform: SCIIP.SHORT_NAME,
-    version: SCIIP.VERSION,
-    status: 'BOOTSTRAP_COMPLETE',
-    startedAt: startedAt,
-    completedAt: sciipNowIso(),
-    context: context,
-    processors: processorResults
+
+    platform:
+      SCIIP.SHORT_NAME,
+
+    version:
+      SCIIP.VERSION,
+
+    status:
+      'BOOTSTRAP_COMPLETE',
+
+    startedAt:
+      startedAt,
+
+    completedAt:
+      sciipNowIso(),
+
+    context:
+      context,
+
+    processors:
+      processorResults,
+
+    queueResults:
+      queueResults
   };
 }
 
@@ -43,22 +71,52 @@ function sciipBootstrap(options) {
  * @param {Object=} options
  * @returns {Object}
  */
-function sciipCreateRuntimeContext(options) {
-  const runtimeOptions = options || {};
+function sciipCreateRuntimeContext(
+  options
+) {
+
+  const runtimeOptions =
+    options || {};
 
   return {
-    platform: SCIIP.SHORT_NAME,
-    version: SCIIP.VERSION,
-    region: SCIIP.REGION,
-    architecture: SCIIP.ARCHITECTURE,
-    coreObject: SCIIP.CORE_OBJECT,
-    sourceOfTruth: SCIIP.SOURCE_OF_TRUTH,
-    runtime: SCIIP.RUNTIME,
-    runId: sciipCreateRunId(),
-    mode: runtimeOptions.mode || 'STANDARD',
-    dryRun: runtimeOptions.dryRun === true,
-    startedAt: sciipNowIso(),
-    options: runtimeOptions
+
+    platform:
+      SCIIP.SHORT_NAME,
+
+    version:
+      SCIIP.VERSION,
+
+    region:
+      SCIIP.REGION,
+
+    architecture:
+      SCIIP.ARCHITECTURE,
+
+    coreObject:
+      SCIIP.CORE_OBJECT,
+
+    sourceOfTruth:
+      SCIIP.SOURCE_OF_TRUTH,
+
+    runtime:
+      SCIIP.RUNTIME,
+
+    runId:
+      sciipCreateRunId(),
+
+    mode:
+      runtimeOptions.mode ||
+      'STANDARD',
+
+    dryRun:
+      runtimeOptions.dryRun ===
+      true,
+
+    startedAt:
+      sciipNowIso(),
+
+    options:
+      runtimeOptions
   };
 }
 
@@ -68,20 +126,38 @@ function sciipCreateRuntimeContext(options) {
  * @returns {string}
  */
 function sciipCreateRunId() {
-  return 'SCIIP_RUN_' + Utilities.getUuid();
+
+  return (
+    'SCIIP_RUN_' +
+    Utilities.getUuid()
+  );
 }
 
 /**
- * Manual smoke test for Apps Script.
+ * Manual smoke test.
  *
  * @returns {Object}
  */
 function sciipSmokeTest() {
+
   return {
+
     status: 'OK',
-    platform: SCIIP.SHORT_NAME,
-    version: SCIIP.VERSION,
-    timestamp: sciipNowIso(),
-    registeredProcessors: sciipGetProcessorRegistry().length
+
+    platform:
+      SCIIP.SHORT_NAME,
+
+    version:
+      SCIIP.VERSION,
+
+    timestamp:
+      sciipNowIso(),
+
+    registeredProcessors:
+      sciipGetProcessorRegistry()
+        .length,
+
+    queueStats:
+      sciipQueueStats()
   };
 }
