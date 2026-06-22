@@ -21,19 +21,17 @@
    Google Apps Script
 ========================================================== */
 
-const SCIIP_ASSET_REGISTRY_SHEET =
-  SCIIP.SHEETS.ASSET_REGISTRY;
-
 /**
  * Returns Asset Registry sheet.
  *
  * @returns {GoogleAppsScript.Spreadsheet.Sheet}
  */
-function sciipGetAssetRegistrySheet() {
-
-  return sciipGetOrCreateSheet(
-    SCIIP_ASSET_REGISTRY_SHEET
-  );
+function sciipAssetRegistrySheetName() {
+  return (
+    typeof SCIIP !== 'undefined' &&
+    SCIIP.SHEETS &&
+    SCIIP.SHEETS.ASSET_REGISTRY
+  ) || 'ASSET_REGISTRY';
 }
 
 /**
@@ -76,7 +74,7 @@ function sciipFindAssetByBusinessKey(
 
   const rows =
     sciipGetSheetValues(
-      SCIIP_ASSET_REGISTRY_SHEET
+      sciipAssetRegistrySheetName()
     );
 
   if (rows.length < 2) {
@@ -129,7 +127,7 @@ function sciipFindAssetById(
 
   const rows =
     sciipGetSheetValues(
-      SCIIP_ASSET_REGISTRY_SHEET
+      sciipAssetRegistrySheetName()
     );
 
   if (rows.length < 2) {
@@ -238,7 +236,7 @@ function sciipRegisterAsset(
   ];
 
   sciipAppendRow(
-    SCIIP_ASSET_REGISTRY_SHEET,
+    sciipAssetRegistrySheetName(),
     row
   );
 
@@ -316,7 +314,7 @@ function sciipAssetRegistryStats() {
 
   const rows =
     sciipGetSheetValues(
-      SCIIP_ASSET_REGISTRY_SHEET
+      sciipAssetRegistrySheetName()
     );
 
   return {
