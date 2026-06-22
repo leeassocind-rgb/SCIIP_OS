@@ -21,20 +21,28 @@
    Google Apps Script
 ========================================================== */
 
+const SCIIP_ASSET_REGISTRY_SHEET =
+  SCIIP.SHEETS.ASSET_REGISTRY;
+
 /**
- * Returns the Asset Registry sheet.
+ * Returns Asset Registry sheet.
  *
  * @returns {GoogleAppsScript.Spreadsheet.Sheet}
  */
 function sciipGetAssetRegistrySheet() {
-  return sciipGetOrCreateSheet('ASSET_REGISTRY');
+
+  return sciipGetOrCreateSheet(
+    SCIIP_ASSET_REGISTRY_SHEET
+  );
 }
 
 /**
- * Creates Asset Registry sheet headers if missing.
+ * Initializes Asset Registry.
  */
 function sciipInitializeAssetRegistry() {
-  const sheet = sciipGetAssetRegistrySheet();
+
+  const sheet =
+    sciipGetAssetRegistrySheet();
 
   if (sheet.getLastRow() > 0) {
     return;
@@ -55,28 +63,52 @@ function sciipInitializeAssetRegistry() {
 }
 
 /**
- * Finds an asset by business key.
+ * Finds asset by business key.
  *
  * @param {string} businessKey
  * @returns {Object|null}
  */
-function sciipFindAssetByBusinessKey(businessKey) {
+function sciipFindAssetByBusinessKey(
+  businessKey
+) {
+
   sciipInitializeAssetRegistry();
 
-  const rows = sciipGetSheetValues('ASSET_REGISTRY');
+  const rows =
+    sciipGetSheetValues(
+      SCIIP_ASSET_REGISTRY_SHEET
+    );
 
   if (rows.length < 2) {
     return null;
   }
 
-  const headers = rows[0];
-  const keyIndex = headers.indexOf('Business_Key');
+  const headers =
+    rows[0];
 
-  for (let i = 1; i < rows.length; i++) {
-    const row = rows[i];
+  const keyIndex =
+    headers.indexOf(
+      'Business_Key'
+    );
 
-    if (row[keyIndex] === businessKey) {
-      return sciipAssetRowToObject(headers, row);
+  for (
+    let i = 1;
+    i < rows.length;
+    i++
+  ) {
+
+    const row =
+      rows[i];
+
+    if (
+      row[keyIndex] ===
+      businessKey
+    ) {
+
+      return sciipAssetRowToObject(
+        headers,
+        row
+      );
     }
   }
 
@@ -84,32 +116,71 @@ function sciipFindAssetByBusinessKey(businessKey) {
 }
 
 /**
- * Finds an asset by Asset ID.
+ * Finds asset by Asset ID.
  *
  * @param {string} assetId
  * @returns {Object|null}
  */
-function sciipFindAssetById(assetId) {
+function sciipFindAssetById(
+  assetId
+) {
+
   sciipInitializeAssetRegistry();
 
-  const rows = sciipGetSheetValues('ASSET_REGISTRY');
+  const rows =
+    sciipGetSheetValues(
+      SCIIP_ASSET_REGISTRY_SHEET
+    );
 
   if (rows.length < 2) {
     return null;
   }
 
-  const headers = rows[0];
-  const idIndex = headers.indexOf('Asset_ID');
+  const headers =
+    rows[0];
 
-  for (let i = 1; i < rows.length; i++) {
-    const row = rows[i];
+  const idIndex =
+    headers.indexOf(
+      'Asset_ID'
+    );
 
-    if (row[idIndex] === assetId) {
-      return sciipAssetRowToObject(headers, row);
+  for (
+    let i = 1;
+    i < rows.length;
+    i++
+  ) {
+
+    const row =
+      rows[i];
+
+    if (
+      row[idIndex] ===
+      assetId
+    ) {
+
+      return sciipAssetRowToObject(
+        headers,
+        row
+      );
     }
   }
 
   return null;
+}
+
+/**
+ * Alias for asset lookup.
+ *
+ * @param {string} assetId
+ * @returns {Object|null}
+ */
+function sciipGetAsset(
+  assetId
+) {
+
+  return sciipFindAssetById(
+    assetId
+  );
 }
 
 /**
@@ -120,37 +191,87 @@ function sciipFindAssetById(assetId) {
  * @param {Object} asset
  * @returns {Object}
  */
-function sciipRegisterAsset(asset) {
+function sciipRegisterAsset(
+  asset
+) {
+
   sciipInitializeAssetRegistry();
 
-  const existing = sciipFindAssetByBusinessKey(
-    asset.businessKey
-  );
+  const existing =
+    sciipFindAssetByBusinessKey(
+      asset.businessKey
+    );
 
   if (existing) {
     return existing;
   }
 
   const row = [
+
     asset.assetId,
+
     asset.businessKey,
-    asset.status || 'ACTIVE',
-    asset.canonicalAddress || '',
-    asset.canonicalCity || '',
-    asset.canonicalZip || '',
-    asset.canonicalApn || '',
-    asset.createdAt || sciipNowIso(),
-    asset.updatedAt || sciipNowIso(),
-    asset.source || ''
+
+    asset.status ||
+      'ACTIVE',
+
+    asset.canonicalAddress ||
+      '',
+
+    asset.canonicalCity ||
+      '',
+
+    asset.canonicalZip ||
+      '',
+
+    asset.canonicalApn ||
+      '',
+
+    asset.createdAt ||
+      sciipNowIso(),
+
+    asset.updatedAt ||
+      sciipNowIso(),
+
+    asset.source ||
+      ''
   ];
 
-  sciipAppendRow('ASSET_REGISTRY', row);
+  sciipAppendRow(
+    SCIIP_ASSET_REGISTRY_SHEET,
+    row
+  );
+
+  /*
+   * Event Source
+   */
+
+  sciipCreateAndRecordEvent(
+    SCIIP.VOCABULARY.EVENT_TYPES.ASSET_CREATED,
+    {
+
+      assetId:
+        asset.assetId,
+
+      businessKey:
+        asset.businessKey,
+
+      source:
+        asset.source ||
+
+        'SCIIP'
+    }
+  );
 
   sciipInfo(
     'Asset Registered',
     {
-      assetId: asset.assetId,
-      businessKey: asset.businessKey
+
+      assetId:
+        asset.assetId,
+
+      businessKey:
+        asset.businessKey
     }
   );
 
@@ -158,18 +279,54 @@ function sciipRegisterAsset(asset) {
 }
 
 /**
- * Converts a registry row to an object.
+ * Converts registry row to object.
  *
  * @param {Array} headers
  * @param {Array} row
  * @returns {Object}
  */
-function sciipAssetRowToObject(headers, row) {
+function sciipAssetRowToObject(
+  headers,
+  row
+) {
+
   const obj = {};
 
-  headers.forEach(function(header, index) {
-    obj[header] = row[index];
-  });
+  headers.forEach(
+    function(
+      header,
+      index
+    ) {
+
+      obj[header] =
+        row[index];
+
+    }
+  );
 
   return obj;
+}
+
+/**
+ * Returns asset registry statistics.
+ *
+ * @returns {Object}
+ */
+function sciipAssetRegistryStats() {
+
+  const rows =
+    sciipGetSheetValues(
+      SCIIP_ASSET_REGISTRY_SHEET
+    );
+
+  return {
+
+    assetCount:
+      rows.length > 0
+        ? rows.length - 1
+        : 0,
+
+    generatedAt:
+      sciipNowIso()
+  };
 }
