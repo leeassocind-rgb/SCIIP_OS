@@ -8,18 +8,6 @@
 
    Every entity in SCIIP becomes a node.
 
-   Examples:
-
-   ASSET
-   OWNER
-   TENANT
-   LEASE
-   SALE
-   LISTING
-   PARCEL
-   CAMPUS
-   CITY
-
    Source of Truth:
    GitHub
 
@@ -28,7 +16,7 @@
 ========================================================== */
 
 const SCIIP_GRAPH_NODE_SHEET =
-  'GRAPH_NODE';
+  SCIIP.SHEETS.GRAPH_NODE;
 
 /**
  * Returns graph node sheet.
@@ -36,6 +24,7 @@ const SCIIP_GRAPH_NODE_SHEET =
  * @returns {GoogleAppsScript.Spreadsheet.Sheet}
  */
 function sciipGetGraphNodeSheet() {
+
   return sciipGetOrCreateSheet(
     SCIIP_GRAPH_NODE_SHEET
   );
@@ -45,6 +34,7 @@ function sciipGetGraphNodeSheet() {
  * Initializes graph node table.
  */
 function sciipInitializeGraphNodeSheet() {
+
   const sheet =
     sciipGetGraphNodeSheet();
 
@@ -71,15 +61,22 @@ function sciipInitializeGraphNodeSheet() {
 function sciipGraphCreateNode(
   node
 ) {
+
   sciipInitializeGraphNodeSheet();
+
+  sciipValidateNodeType(
+    node.nodeType
+  );
 
   const nodeId =
     node.nodeId ||
-    ('NODE_' +
+    (
+      'NODE_' +
       sciipUuid()
         .replace(/-/g, '')
         .substring(0, 16)
-        .toUpperCase());
+        .toUpperCase()
+    );
 
   const existing =
     sciipGraphFindNodeByKey(
@@ -103,10 +100,15 @@ function sciipGraphCreateNode(
   );
 
   return {
-    nodeId: nodeId,
-    nodeType: node.nodeType,
+    nodeId:
+      nodeId,
+
+    nodeType:
+      node.nodeType,
+
     businessKey:
       node.businessKey,
+
     displayName:
       node.displayName
   };
@@ -121,6 +123,7 @@ function sciipGraphCreateNode(
 function sciipGraphFindNodeByKey(
   businessKey
 ) {
+
   const rows =
     sciipGetSheetValues(
       SCIIP_GRAPH_NODE_SHEET
@@ -130,7 +133,9 @@ function sciipGraphFindNodeByKey(
     return null;
   }
 
-  const headers = rows[0];
+  const headers =
+    rows[0];
+
   const keyIndex =
     headers.indexOf(
       'Business_Key'
@@ -141,18 +146,23 @@ function sciipGraphFindNodeByKey(
     i < rows.length;
     i++
   ) {
-    const row = rows[i];
+
+    const row =
+      rows[i];
 
     if (
       row[keyIndex] ===
       businessKey
     ) {
+
       const obj = {};
 
       headers.forEach(
         function(header, idx) {
+
           obj[header] =
             row[idx];
+
         }
       );
 
@@ -172,10 +182,15 @@ function sciipGraphFindNodeByKey(
 function sciipGraphCreateAssetNode(
   asset
 ) {
+
   return sciipGraphCreateNode({
-    nodeType: 'ASSET',
+
+    nodeType:
+      SCIIP.VOCABULARY.NODE_TYPES.ASSET,
+
     businessKey:
       asset.businessKey,
+
     displayName:
       asset.canonicalAddress
   });
@@ -187,16 +202,19 @@ function sciipGraphCreateAssetNode(
  * @returns {Object}
  */
 function sciipGraphNodeStats() {
+
   const rows =
     sciipGetSheetValues(
       SCIIP_GRAPH_NODE_SHEET
     );
 
   return {
+
     nodeCount:
       rows.length > 0
         ? rows.length - 1
         : 0,
+
     generatedAt:
       sciipNowIso()
   };
