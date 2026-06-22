@@ -9,12 +9,6 @@
    A Campus is a collection of related assets that
    function as a single operating environment.
 
-   Examples:
-
-   Carson Industrial Campus
-   Rancho Gateway Campus
-   Tejon Ranch Logistics Campus
-
    Source of Truth:
    GitHub
 
@@ -23,7 +17,7 @@
 ========================================================== */
 
 const SCIIP_CAMPUS_SHEET =
-  'CAMPUS_REGISTRY';
+  SCIIP.SHEETS.CAMPUS_REGISTRY;
 
 /**
  * Returns campus sheet.
@@ -31,6 +25,7 @@ const SCIIP_CAMPUS_SHEET =
  * @returns {GoogleAppsScript.Spreadsheet.Sheet}
  */
 function sciipGetCampusSheet() {
+
   return sciipGetOrCreateSheet(
     SCIIP_CAMPUS_SHEET
   );
@@ -71,11 +66,13 @@ function sciipCreateCampus(
 
   const campusId =
     campus.campusId ||
-    ('CAMPUS_' +
+    (
+      'CAMPUS_' +
       sciipUuid()
         .replace(/-/g, '')
         .substring(0, 16)
-        .toUpperCase());
+        .toUpperCase()
+    );
 
   const businessKey =
     campus.businessKey ||
@@ -84,23 +81,34 @@ function sciipCreateCampus(
       campus.campusName
     ]);
 
+  const existing =
+    sciipFindCampus(
+      businessKey
+    );
+
+  if (existing) {
+    return existing;
+  }
+
   sciipAppendRow(
     SCIIP_CAMPUS_SHEET,
     [
       campusId,
       campus.campusName,
       businessKey,
-      campus.status ||
-        'ACTIVE',
+      campus.status || 'ACTIVE',
       sciipNowIso()
     ]
   );
 
   return {
+
     campusId:
       campusId,
+
     campusName:
       campus.campusName,
+
     businessKey:
       businessKey
   };
@@ -139,7 +147,8 @@ function sciipFindCampus(
     i++
   ) {
 
-    const row = rows[i];
+    const row =
+      rows[i];
 
     if (
       row[keyIndex] ===
@@ -150,8 +159,10 @@ function sciipFindCampus(
 
       headers.forEach(
         function(header, index) {
+
           obj[header] =
             row[index];
+
         }
       );
 
@@ -165,12 +176,12 @@ function sciipFindCampus(
 /**
  * Associates an asset with a campus.
  *
- * Creates graph relationship:
+ * Creates:
  *
  * ASSET
- *    │
+ *   │
  * PART_OF
- *    ▼
+ *   ▼
  * CAMPUS
  *
  * @param {Object} asset
@@ -189,8 +200,9 @@ function sciipAssociateAssetToCampus(
 
   const campusNode =
     sciipGraphCreateNode({
+
       nodeType:
-        SCIIP_NODE_TYPES.CAMPUS,
+        SCIIP.VOCABULARY.NODE_TYPES.CAMPUS,
 
       businessKey:
         campus.businessKey,
@@ -201,12 +213,13 @@ function sciipAssociateAssetToCampus(
 
   const edge =
     sciipGraphCreateEdge({
+
       fromNodeId:
         assetNode.nodeId ||
         assetNode.Node_ID,
 
       relationshipType:
-        SCIIP_EDGE_TYPES.PART_OF,
+        SCIIP.VOCABULARY.EDGE_TYPES.PART_OF,
 
       toNodeId:
         campusNode.nodeId ||
@@ -214,6 +227,7 @@ function sciipAssociateAssetToCampus(
     });
 
   return {
+
     assetNode:
       assetNode,
 
@@ -228,13 +242,13 @@ function sciipAssociateAssetToCampus(
 /**
  * Future campus detection engine.
  *
- * Will eventually use:
+ * Planned signals:
  *
  * - Distance
  * - Ownership
- * - Shared infrastructure
- * - Parcel adjacency
- * - Common branding
+ * - Shared Infrastructure
+ * - Parcel Adjacency
+ * - Branding
  *
  * @param {Object} asset
  * @returns {Object}
@@ -244,6 +258,7 @@ function sciipDetectCampus(
 ) {
 
   return {
+
     assetId:
       asset.assetId ||
       asset.Asset_ID,
@@ -266,6 +281,7 @@ function sciipRunCampusProcessor(
   sciipInitializeCampusRegistry();
 
   return {
+
     processor:
       'CampusProcessor',
 
