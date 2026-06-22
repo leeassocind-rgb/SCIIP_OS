@@ -19,6 +19,7 @@ const SCIIP = {
   NAME: 'Southern California Industrial Intelligence Platform',
   SHORT_NAME: 'SCIIP_OS',
   VERSION: '3.0.0',
+  SPREADSHEET_ID: '1x5lXkh0l63v92tYacGe7S8vHISHycBufaLfE54dPPDk'
   CORE_OBJECT: 'ASSET',
   ARCHITECTURE: 'Asset Driven | Event Sourced | Knowledge Graph',
   SOURCE_OF_TRUTH: 'Git',
