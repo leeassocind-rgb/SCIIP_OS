@@ -9,16 +9,6 @@
    Graph edges connect nodes and form the
    SCIIP Knowledge Graph.
 
-   Examples:
-
-   OWNER ── OWNS ──► ASSET
-
-   TENANT ── LEASES ──► ASSET
-
-   ASSET ── LOCATED_IN ──► CITY
-
-   ASSET ── PART_OF ──► CAMPUS
-
    Source of Truth:
    GitHub
 
@@ -27,7 +17,7 @@
 ========================================================== */
 
 const SCIIP_GRAPH_EDGE_SHEET =
-  'GRAPH_EDGE';
+  SCIIP.SHEETS.GRAPH_EDGE;
 
 /**
  * Returns graph edge sheet.
@@ -35,6 +25,7 @@ const SCIIP_GRAPH_EDGE_SHEET =
  * @returns {GoogleAppsScript.Spreadsheet.Sheet}
  */
 function sciipGetGraphEdgeSheet() {
+
   return sciipGetOrCreateSheet(
     SCIIP_GRAPH_EDGE_SHEET
   );
@@ -44,6 +35,7 @@ function sciipGetGraphEdgeSheet() {
  * Initializes graph edge sheet.
  */
 function sciipInitializeGraphEdgeSheet() {
+
   const sheet =
     sciipGetGraphEdgeSheet();
 
@@ -67,16 +59,25 @@ function sciipInitializeGraphEdgeSheet() {
  * @param {Object} edge
  * @returns {Object}
  */
-function sciipGraphCreateEdge(edge) {
+function sciipGraphCreateEdge(
+  edge
+) {
+
   sciipInitializeGraphEdgeSheet();
+
+  sciipValidateEdgeType(
+    edge.relationshipType
+  );
 
   const edgeId =
     edge.edgeId ||
-    ('EDGE_' +
+    (
+      'EDGE_' +
       sciipUuid()
         .replace(/-/g, '')
         .substring(0, 16)
-        .toUpperCase());
+        .toUpperCase()
+    );
 
   const existing =
     sciipGraphFindEdge(
@@ -102,11 +103,16 @@ function sciipGraphCreateEdge(edge) {
   );
 
   return {
-    edgeId: edgeId,
+
+    edgeId:
+      edgeId,
+
     fromNodeId:
       edge.fromNodeId,
+
     relationshipType:
       edge.relationshipType,
+
     toNodeId:
       edge.toNodeId
   };
@@ -125,6 +131,7 @@ function sciipGraphFindEdge(
   relationshipType,
   toNodeId
 ) {
+
   const rows =
     sciipGetSheetValues(
       SCIIP_GRAPH_EDGE_SHEET
@@ -134,7 +141,8 @@ function sciipGraphFindEdge(
     return null;
   }
 
-  const headers = rows[0];
+  const headers =
+    rows[0];
 
   const fromIndex =
     headers.indexOf(
@@ -156,7 +164,9 @@ function sciipGraphFindEdge(
     i < rows.length;
     i++
   ) {
-    const row = rows[i];
+
+    const row =
+      rows[i];
 
     if (
       row[fromIndex] ===
@@ -166,12 +176,15 @@ function sciipGraphFindEdge(
       row[toIndex] ===
         toNodeId
     ) {
+
       const obj = {};
 
       headers.forEach(
         function(header, idx) {
+
           obj[header] =
             row[idx];
+
         }
       );
 
@@ -183,7 +196,7 @@ function sciipGraphFindEdge(
 }
 
 /**
- * Returns all outgoing edges.
+ * Returns outgoing edges.
  *
  * @param {string} nodeId
  * @returns {Array}
@@ -191,6 +204,7 @@ function sciipGraphFindEdge(
 function sciipGraphGetOutgoingEdges(
   nodeId
 ) {
+
   const rows =
     sciipGetSheetValues(
       SCIIP_GRAPH_EDGE_SHEET
@@ -200,7 +214,9 @@ function sciipGraphGetOutgoingEdges(
     return [];
   }
 
-  const headers = rows[0];
+  const headers =
+    rows[0];
+
   const fromIndex =
     headers.indexOf(
       'From_Node_ID'
@@ -209,18 +225,79 @@ function sciipGraphGetOutgoingEdges(
   return rows
     .slice(1)
     .filter(function(row) {
+
       return (
         row[fromIndex] ===
         nodeId
       );
+
     })
     .map(function(row) {
+
       const obj = {};
 
       headers.forEach(
         function(header, idx) {
+
           obj[header] =
             row[idx];
+
+        }
+      );
+
+      return obj;
+    });
+}
+
+/**
+ * Returns incoming edges.
+ *
+ * Useful for graph traversal.
+ *
+ * @param {string} nodeId
+ * @returns {Array}
+ */
+function sciipGraphGetIncomingEdges(
+  nodeId
+) {
+
+  const rows =
+    sciipGetSheetValues(
+      SCIIP_GRAPH_EDGE_SHEET
+    );
+
+  if (rows.length < 2) {
+    return [];
+  }
+
+  const headers =
+    rows[0];
+
+  const toIndex =
+    headers.indexOf(
+      'To_Node_ID'
+    );
+
+  return rows
+    .slice(1)
+    .filter(function(row) {
+
+      return (
+        row[toIndex] ===
+        nodeId
+      );
+
+    })
+    .map(function(row) {
+
+      const obj = {};
+
+      headers.forEach(
+        function(header, idx) {
+
+          obj[header] =
+            row[idx];
+
         }
       );
 
@@ -234,16 +311,19 @@ function sciipGraphGetOutgoingEdges(
  * @returns {Object}
  */
 function sciipGraphEdgeStats() {
+
   const rows =
     sciipGetSheetValues(
       SCIIP_GRAPH_EDGE_SHEET
     );
 
   return {
+
     edgeCount:
       rows.length > 0
         ? rows.length - 1
         : 0,
+
     generatedAt:
       sciipNowIso()
   };
