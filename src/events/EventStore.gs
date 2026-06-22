@@ -1,0 +1,165 @@
+/* ==========================================================
+   SCIIP_OS
+   Module: Events
+   File: EventStore.gs
+
+   Purpose:
+   SCIIP Event Store
+
+   SCIIP is event sourced.
+
+   Nothing is overwritten.
+
+   Every observation becomes an event.
+
+   Source of Truth:
+   GitHub
+
+   Runtime:
+   Google Apps Script
+========================================================== */
+
+const SCIIP_EVENT_SHEET =
+  'PROPERTY_EVENTS';
+
+/**
+ * Returns event sheet.
+ *
+ * @returns {GoogleAppsScript.Spreadsheet.Sheet}
+ */
+function sciipGetEventSheet() {
+  return sciipGetOrCreateSheet(
+    SCIIP_EVENT_SHEET
+  );
+}
+
+/**
+ * Initializes event store.
+ */
+function sciipInitializeEventStore() {
+  const sheet =
+    sciipGetEventSheet();
+
+  if (sheet.getLastRow() > 0) {
+    return;
+  }
+
+  sheet.appendRow([
+    'Event_ID',
+    'Event_Type',
+    'Asset_ID',
+    'Business_Key',
+    'Source',
+    'Payload',
+    'Created_At'
+  ]);
+}
+
+/**
+ * Records an event.
+ *
+ * @param {Object} event
+ * @returns {Object}
+ */
+function sciipRecordEvent(event) {
+  sciipInitializeEventStore();
+
+  const eventId =
+    event.eventId ||
+    ('EVENT_' +
+      sciipUuid()
+        .replace(/-/g, '')
+        .substring(0, 16)
+        .toUpperCase());
+
+  sciipAppendRow(
+    SCIIP_EVENT_SHEET,
+    [
+      eventId,
+      event.eventType,
+      event.assetId || '',
+      event.businessKey || '',
+      event.source || 'SCIIP',
+      sciipSafeJson(
+        event.payload || {}
+      ),
+      sciipNowIso()
+    ]
+  );
+
+  return {
+    eventId: eventId,
+    eventType: event.eventType,
+    assetId: event.assetId || '',
+    createdAt: sciipNowIso()
+  };
+}
+
+/**
+ * Returns events for an asset.
+ *
+ * @param {string} assetId
+ * @returns {Array}
+ */
+function sciipGetAssetEvents(
+  assetId
+) {
+  const rows =
+    sciipGetSheetValues(
+      SCIIP_EVENT_SHEET
+    );
+
+  if (rows.length < 2) {
+    return [];
+  }
+
+  const headers = rows[0];
+
+  const assetIndex =
+    headers.indexOf(
+      'Asset_ID'
+    );
+
+  return rows
+    .slice(1)
+    .filter(function(row) {
+      return (
+        row[assetIndex] ===
+        assetId
+      );
+    })
+    .map(function(row) {
+
+      const obj = {};
+
+      headers.forEach(
+        function(header, index) {
+          obj[header] =
+            row[index];
+        }
+      );
+
+      return obj;
+    });
+}
+
+/**
+ * Returns event store stats.
+ *
+ * @returns {Object}
+ */
+function sciipEventStoreStats() {
+  const rows =
+    sciipGetSheetValues(
+      SCIIP_EVENT_SHEET
+    );
+
+  return {
+    eventCount:
+      rows.length > 0
+        ? rows.length - 1
+        : 0,
+    generatedAt:
+      sciipNowIso()
+  };
+}
