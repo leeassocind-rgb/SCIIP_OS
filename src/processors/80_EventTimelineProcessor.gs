@@ -296,6 +296,19 @@ function sciipFindAssetIdByBusinessKey_(businessKey) {
   return '';
 }
 
+  /**
+ * Stable timeline idempotency key.
+ */
+function sciipBuildTimelineKey_(assetId, eventId, eventType, eventDate) {
+  if (eventId) {
+    return [
+      'TIMELINE',
+      String(assetId).trim(),
+      String(eventId).trim(),
+      String(eventType).trim()
+    ].join('|');
+  }
+
   var normalizedDate = eventDate instanceof Date
     ? eventDate.toISOString()
     : String(eventDate || '').trim();
