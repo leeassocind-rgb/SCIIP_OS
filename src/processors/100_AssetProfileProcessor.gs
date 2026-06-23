@@ -183,13 +183,48 @@ function sciipProcessAssetProfiles() {
       latestEventType,
       latestEventAt,
       latestRawText,
-      latestPayload.buildingSf || latestPayload.Building_SF || '',
-      latestPayload.landAcres || latestPayload.Land_Acres || '',
-      latestPayload.clearHeight || latestPayload.Clear_Height || '',
-      latestPayload.dockDoors || latestPayload.Dock_Doors || '',
-      latestPayload.glDoors || latestPayload.GL_Doors || '',
-      latestPayload.rate || latestPayload.Rate || '',
-      latestPayload.salePrice || latestPayload.Sale_Price || '',
+      sciipProfileValueFromPayloadOrRaw_(
+  latestPayload,
+  latestRawText,
+  ['buildingSf', 'Building_SF', 'Available_SF'],
+  'Building SF'
+),
+sciipProfileValueFromPayloadOrRaw_(
+  latestPayload,
+  latestRawText,
+  ['landAcres', 'Land_Acres', 'Acres'],
+  'Land Acres'
+),
+sciipProfileValueFromPayloadOrRaw_(
+  latestPayload,
+  latestRawText,
+  ['clearHeight', 'Clear_Height', 'Clear'],
+  'Clear Height'
+),
+sciipProfileValueFromPayloadOrRaw_(
+  latestPayload,
+  latestRawText,
+  ['dockDoors', 'Dock_Doors', 'DH'],
+  'Dock Doors'
+),
+sciipProfileValueFromPayloadOrRaw_(
+  latestPayload,
+  latestRawText,
+  ['glDoors', 'GL_Doors', 'GL'],
+  'GL Doors'
+),
+sciipProfileValueFromPayloadOrRaw_(
+  latestPayload,
+  latestRawText,
+  ['rate', 'Rate'],
+  'Rate'
+),
+sciipProfileValueFromPayloadOrRaw_(
+  latestPayload,
+  latestRawText,
+  ['salePrice', 'Sale_Price', 'Price'],
+  'Sale Price'
+),
       graphNodeCounts[assetId] || 0,
       graphEdgeCounts[assetId] || 0,
       sciipCalculateProfileConfidence_(asset, assetEvents, assetTimeline),
@@ -515,4 +550,33 @@ function sciipAssetProfileHash_(value) {
 
 function sciipAssetProfileId_(prefix, seed) {
   return prefix + '_' + sciipAssetProfileHash_(seed);
+}
+function sciipExtractProfileFieldFromRawText_(rawText, label) {
+  if (!rawText || !label) return '';
+
+  var parts = String(rawText).split('|');
+
+  for (var i = 0; i < parts.length; i++) {
+    var part = String(parts[i]).trim();
+    var prefix = label + ':';
+
+    if (part.toUpperCase().indexOf(prefix.toUpperCase()) === 0) {
+      return part.substring(prefix.length).trim();
+    }
+  }
+
+  return '';
+}
+
+function sciipProfileValueFromPayloadOrRaw_(payload, rawText, payloadKeys, rawLabel) {
+  payload = payload || {};
+
+  for (var i = 0; i < payloadKeys.length; i++) {
+    var value = payload[payloadKeys[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return value;
+    }
+  }
+
+  return sciipExtractProfileFieldFromRawText_(rawText, rawLabel);
 }
