@@ -299,16 +299,25 @@ function sciipFindAssetIdByBusinessKey_(businessKey) {
 /**
  * Builds canonical SCIIP asset business key.
  */
-function sciipBuildAssetBusinessKeyFromParts_(address, city, zip) {
-  var normalizedAddress = sciipNormalizeBusinessKeyPart_(address);
-  var normalizedCity = sciipNormalizeBusinessKeyPart_(city);
-  var normalizedZip = String(zip).trim();
+function sciipBuildTimelineKey_(assetId, eventId, eventType, eventDate) {
+  if (eventId) {
+    return [
+      'TIMELINE',
+      String(assetId).trim(),
+      String(eventId).trim(),
+      String(eventType).trim()
+    ].join('|');
+  }
+
+  var normalizedDate = eventDate instanceof Date
+    ? eventDate.toISOString()
+    : String(eventDate || '').trim();
 
   return [
-    'ASSET',
-    normalizedAddress,
-    normalizedCity,
-    normalizedZip
+    'TIMELINE',
+    String(assetId).trim(),
+    String(eventType).trim(),
+    normalizedDate
   ].join('|');
 }
 
