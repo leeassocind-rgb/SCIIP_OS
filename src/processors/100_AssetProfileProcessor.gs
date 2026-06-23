@@ -340,9 +340,14 @@ function sciipGroupByAssetProfile_(rows) {
       'asset_id'
     ]);
 
+    if (!assetId) {
+      assetId = sciipResolveAssetIdForProfileEvent_(row);
+    }
+
     if (!assetId) return;
 
     if (!grouped[assetId]) grouped[assetId] = [];
+
     grouped[assetId].push(row);
   });
 
@@ -602,4 +607,48 @@ function sciipLatestEventByType_(rows, eventType) {
     'Event_Date',
     'Timestamp'
   ]);
+}
+
+function sciipResolveAssetIdForProfileEvent_(eventRow) {
+  var businessKey = sciipFirstProfileValue_(eventRow, [
+    'Business_Key',
+    'BusinessKey',
+    'business_key'
+  ]);
+
+  if (businessKey) {
+    var byKey = sciipFindAssetIdByBusinessKeyProfile_(businessKey);
+
+    if (byKey) return byKey;
+  }
+
+  var payload = sciipParseProfilePayload_(eventRow);
+
+  var address = payload.address || payload.Address || '';
+  var city = payload.city || payload.City || '';
+  var zip = payload.zip || payload.Zip || payload.ZIP || '';
+
+  if (!address || !city || !zip) return '';
+
+  var derivedBusinessKey =
+    sciipProfileAssetBusinessKeyFromParts_(address, city, zip);
+
+  return sciipFindAssetIdByBusinessKeyProfile_(derivedBusinessKey);
+}
+
+function sciipProfileAssetBusinessKeyFromParts_(address, city, zip) {
+  return [
+    'ASSET',
+    sciipProfileBusinessKeyPart_(address),
+    sciipProfileBusinessKeyPart_(city),
+    String(zip || '').trim()
+  ].join('|');
+}
+
+function sciipProfileBusinessKeyPart_(value) {
+  return String(value || '')
+    .trim()
+    .toUpperCase()
+    .replace(/[^\w\s]/g, '')
+    .replace(/\s+/g, '_');
 }
