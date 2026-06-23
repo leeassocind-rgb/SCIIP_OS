@@ -321,6 +321,19 @@ function sciipBuildTimelineKey_(assetId, eventId, eventType, eventDate) {
   ].join('|');
 }
 
+function sciipBuildAssetBusinessKeyFromParts_(address, city, zip) {
+  var normalizedAddress = sciipNormalizeBusinessKeyPart_(address);
+  var normalizedCity = sciipNormalizeBusinessKeyPart_(city);
+  var normalizedZip = String(zip || '').trim();
+
+  return [
+    'ASSET',
+    normalizedAddress,
+    normalizedCity,
+    normalizedZip
+  ].join('|');
+}
+
 /**
  * Normalizes address/city for business key generation.
  */
@@ -372,14 +385,22 @@ function sciipFirstValue_(obj, keys) {
  * Stable idempotency key.
  */
 function sciipBuildTimelineKey_(assetId, eventId, eventType, eventDate) {
+  if (eventId) {
+    return [
+      'TIMELINE',
+      String(assetId).trim(),
+      String(eventId).trim(),
+      String(eventType).trim()
+    ].join('|');
+  }
+
   var normalizedDate = eventDate instanceof Date
     ? eventDate.toISOString()
-    : String(eventDate);
+    : String(eventDate || '').trim();
 
   return [
     'TIMELINE',
     String(assetId).trim(),
-    String(eventId || '').trim(),
     String(eventType).trim(),
     normalizedDate
   ].join('|');
