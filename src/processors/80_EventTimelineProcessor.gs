@@ -296,19 +296,6 @@ function sciipFindAssetIdByBusinessKey_(businessKey) {
   return '';
 }
 
-/**
- * Builds canonical SCIIP asset business key.
- */
-function sciipBuildTimelineKey_(assetId, eventId, eventType, eventDate) {
-  if (eventId) {
-    return [
-      'TIMELINE',
-      String(assetId).trim(),
-      String(eventId).trim(),
-      String(eventType).trim()
-    ].join('|');
-  }
-
   var normalizedDate = eventDate instanceof Date
     ? eventDate.toISOString()
     : String(eventDate || '').trim();
@@ -382,7 +369,7 @@ function sciipFirstValue_(obj, keys) {
 }
 
 /**
- * Stable idempotency key.
+ * Stable timeline idempotency key.
  */
 function sciipBuildTimelineKey_(assetId, eventId, eventType, eventDate) {
   if (eventId) {
