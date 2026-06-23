@@ -123,8 +123,16 @@ function sciipProcessAssetProfiles() {
       'Created_At'
     ]);
 
-    var latestPayload = sciipParseProfilePayload_(latestEvent);
+var latestObservationEvent =
+  sciipLatestEventByType_(assetEvents, 'PROPERTY_OBSERVED');
 
+if (!latestObservationEvent ||
+    Object.keys(latestObservationEvent).length === 0) {
+  latestObservationEvent = latestEvent;
+}
+
+var latestPayload =
+  sciipParseProfilePayload_(latestObservationEvent);
     var firstSeenAt = sciipEarliestDateProfile_(assetEvents.concat(assetTimeline), [
       'Created_At',
       'Event_Date',
@@ -150,7 +158,8 @@ function sciipProcessAssetProfiles() {
       '';
 
     var latestRawText =
-      latestPayload.rawText ||
+  sciipFirstProfileValue_(latestObservationEvent, ['Raw_Text']) ||
+  latestPayload.rawText ||
       latestPayload.Raw_Text ||
       sciipFirstProfileValue_(latestEvent, ['Raw_Text']) ||
       sciipFirstProfileValue_(latestTimeline, ['Timeline_Description']) ||
@@ -579,4 +588,18 @@ function sciipProfileValueFromPayloadOrRaw_(payload, rawText, payloadKeys, rawLa
   }
 
   return sciipExtractProfileFieldFromRawText_(rawText, rawLabel);
+}
+
+function sciipLatestEventByType_(rows, eventType) {
+  var filtered = rows.filter(function(row) {
+    return String(
+      sciipFirstProfileValue_(row, ['Event_Type'])
+    ).toUpperCase() === String(eventType).toUpperCase();
+  });
+
+  return sciipLatestProfileRow_(filtered, [
+    'Created_At',
+    'Event_Date',
+    'Timestamp'
+  ]);
 }
