@@ -136,6 +136,15 @@ function sciipExecuteNLIQuery_(queryType, query) {
     case 'TOP_CITIES':
       return sciipNLITopCities_();
 
+    case 'RENT_INCREASES':
+      return sciipNLIRentIncreases_();
+
+    case 'HIGH_SEVERITY_SIGNALS':
+      return sciipNLIHighSeveritySignals_();
+
+    case 'CITY_SUMMARY':
+      return sciipNLICitySummary_(query);
+
     default:
       return {
         status: 'NO_MATCH',
@@ -359,4 +368,276 @@ function sciipNLIHash_(value) {
 
 function sciipNLIId_(prefix, seed) {
   return prefix + '_' + sciipNLIHash_(seed);
+}
+
+function sciipNLIRentIncreases_() {
+
+  var signals =
+    sciipReadOptionalNLIObjects_(
+      SCIIP_NLI.SHEETS.MARKET_SIGNAL
+    );
+
+  var rentSignals = signals.filter(function(row) {
+    return String(
+      sciipFirstNLIValue_(row, ['Signal_Type'])
+    ).toUpperCase() === 'RENT_INCREASE_SIGNAL';
+  });
+
+  rentSignals = sciipSortNLIRowsDesc_(
+    rentSignals,
+    ['Signal_Date', 'Created_At']
+  ).slice(0, 10);
+
+  if (!rentSignals.length) {
+    return {
+      status: 'NO_MATCH',
+      text: 'SCIIP found no rent increase signals.',
+      evidenceCount: 0
+    };
+  }
+
+  return {
+    status: 'SUCCESS',
+    text:
+      'Rent Increase Signals\n\n' +
+      rentSignals.map(function(row) {
+        return '- ' +
+          sciipFirstNLIValue_(row, ['Address']) +
+          ', ' +
+          sciipFirstNLIValue_(row, ['City']) +
+          ' | ' +
+          sciipFirstNLIValue_(row, ['Old_Value']) +
+          ' → ' +
+          sciipFirstNLIValue_(row, ['New_Value']) +
+          ' | ' +
+          sciipFirstNLIValue_(row, ['Delta']);
+      }).join('\n'),
+    evidenceCount: rentSignals.length
+  };
+}
+
+function sciipNLIHighSeveritySignals_() {
+
+  var signals =
+    sciipReadOptionalNLIObjects_(
+      SCIIP_NLI.SHEETS.MARKET_SIGNAL
+    );
+
+  var highSignals = signals.filter(function(row) {
+    return String(
+      sciipFirstNLIValue_(row, ['Signal_Severity'])
+    ).toUpperCase() === 'HIGH';
+  });
+
+  highSignals = sciipSortNLIRowsDesc_(
+    highSignals,
+    ['Signal_Date', 'Created_At']
+  ).slice(0, 10);
+
+  if (!highSignals.length) {
+    return {
+      status: 'NO_MATCH',
+      text: 'SCIIP found no high severity signals.',
+      evidenceCount: 0
+    };
+  }
+
+  return {
+    status: 'SUCCESS',
+    text:
+      'High Severity Signals\n\n' +
+      highSignals.map(function(row) {
+        return '- ' +
+          sciipFirstNLIValue_(row, ['Signal_Type']) +
+          ' | ' +
+          sciipFirstNLIValue_(row, ['Address']) +
+          ', ' +
+          sciipFirstNLIValue_(row, ['City']) +
+          ' | ' +
+          sciipFirstNLIValue_(row, ['Signal_Summary']);
+      }).join('\n'),
+    evidenceCount: highSignals.length
+  };
+}
+
+function sciipNLICitySummary_(query) {
+
+  var city =
+    sciipFirstNLIValue_(query, ['City']);
+
+  if (!city) {
+    var text =
+      sciipFirstNLIValue_(query, ['Query_Text']);
+
+    city = sciipExtractKnownCityFromText_(text);
+  }
+
+  if (!city) {
+    return {
+      status: 'NO_MATCH',
+      text: 'SCIIP could not identify a city for this query.',
+      evidenceCount: 0
+    };
+  }
+
+  var assets =
+    sciipReadOptionalNLIObjects_(
+      SCIIP_NLI.SHEETS.ASSET_PROFILE
+    );
+
+  var signals =
+    sciipReadOptionalNLIObjects_(
+      SCIIP_NLI.SHEETS.MARKET_SIGNAL
+    );
+
+  var normalizedCity =
+    sciipNormalizeNLIToken_(city);
+
+  var cityAssets = assets.filter(function(row) {
+    return sciipNormalizeNLIToken_(
+      sciipFirstNLIValue_(row, ['City'])
+    ) === normalizedCity;
+  });
+
+  var citySignals = signals.filter(function(row) {
+    return sciipNormalizeNLIToken_(
+      sciipFirstNLIValue_(row, ['City'])
+    ) === normalizedCity;
+  });
+
+  var avgRate =
+    sciipNLIAverageNumber_(cityAssets, ['Latest_Rate']);
+
+  var latestSignal =
+    sciipSortNLIRowsDesc_(
+      citySignals,
+      ['Signal_Date', 'Created_At']
+    )[0] || {};
+
+  return {
+    status: 'SUCCESS',
+    text:
+      'City Summary: ' + city + '\n\n' +
+      'Assets: ' + cityAssets.length + '\n' +
+      'Signals: ' + citySignals.length + '\n' +
+      'Average Rate: ' + (avgRate || '') + '\n' +
+      'Latest Signal: ' +
+        sciipFirstNLIValue_(latestSignal, ['Signal_Summary']),
+    evidenceCount: cityAssets.length + citySignals.length
+  };
+}
+
+function sciipSortNLIRowsDesc_(rows, dateKeys) {
+  return rows.slice().sort(function(a, b) {
+    var aDate =
+      sciipNLIDate_(
+        sciipFirstNLIValue_(a, dateKeys)
+      );
+
+    var bDate =
+      sciipNLIDate_(
+        sciipFirstNLIValue_(b, dateKeys)
+      );
+
+    var aTime = aDate ? aDate.getTime() : 0;
+    var bTime = bDate ? bDate.getTime() : 0;
+
+    return bTime - aTime;
+  });
+}
+
+function sciipNLIDate_(value) {
+  if (!value) return null;
+  if (value instanceof Date) return value;
+
+  var parsed = new Date(value);
+
+  if (isNaN(parsed.getTime())) return null;
+
+  return parsed;
+}
+
+function sciipNormalizeNLIToken_(value) {
+  return String(value || '')
+    .trim()
+    .toUpperCase()
+    .replace(/[^\w\s.-]/g, '')
+    .replace(/\s+/g, ' ');
+}
+
+function sciipNLIAverageNumber_(rows, keys) {
+  var total = 0;
+  var count = 0;
+
+  rows.forEach(function(row) {
+    var value =
+      sciipFirstNLIValue_(row, keys);
+
+    var number =
+      sciipNLINumber_(value);
+
+    if (number !== null) {
+      total += number;
+      count++;
+    }
+  });
+
+  if (!count) return '';
+
+  return Math.round((total / count) * 100) / 100;
+}
+
+function sciipNLINumber_(value) {
+  if (
+    value === null ||
+    value === undefined ||
+    String(value).trim() === ''
+  ) {
+    return null;
+  }
+
+  var cleaned =
+    String(value)
+      .replace(/[$,]/g, '')
+      .replace(/[^\d.-]/g, '');
+
+  if (cleaned === '') return null;
+
+  var number = Number(cleaned);
+
+  if (isNaN(number)) return null;
+
+  return number;
+}
+
+function sciipExtractKnownCityFromText_(text) {
+  var normalized =
+    sciipNormalizeNLIToken_(text);
+
+  var cities = [
+    'LOS ANGELES',
+    'LONG BEACH',
+    'CARSON',
+    'GARDENA',
+    'TORRANCE',
+    'COMPTON',
+    'ONTARIO',
+    'FONTANA',
+    'RIALTO',
+    'RIVERSIDE',
+    'SAN BERNARDINO',
+    'CITY OF INDUSTRY',
+    'IRWINDALE',
+    'ANAHEIM',
+    'SANTA ANA',
+    'IRVINE'
+  ];
+
+  for (var i = 0; i < cities.length; i++) {
+    if (normalized.indexOf(cities[i]) !== -1) {
+      return cities[i];
+    }
+  }
+
+  return '';
 }
