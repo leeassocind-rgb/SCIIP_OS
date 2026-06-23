@@ -11,13 +11,16 @@
  * Idempotent:
  * - Uses Timeline_Key to prevent duplicate timeline entries.
  * - Does not mutate source events.
+ * - Resolves PROPERTY_OBSERVED events to assets using:
+ *   Payload address/city/zip → Business_Key → ASSET_REGISTRY
  *******************************************************/
 
 var SCIIP_TIMELINE = SCIIP_TIMELINE || {};
 
 SCIIP_TIMELINE.SHEETS = {
   EVENTS: 'PROPERTY_EVENTS',
-  TIMELINE: 'ASSET_TIMELINE'
+  TIMELINE: 'ASSET_TIMELINE',
+  ASSETS: 'ASSET_REGISTRY'
 };
 
 SCIIP_TIMELINE.TIMELINE_HEADERS = [
@@ -106,13 +109,7 @@ function sciipProcessEventTimeline() {
       'event_id'
     ]);
 
-    var assetId = sciipFirstValue_(eventRow, [
-      'Asset_ID',
-      'AssetId',
-      'asset_id',
-      'Entity_ID',
-      'Node_ID'
-    ]);
+    var assetId = sciipResolveAssetIdForTimeline_(eventRow);
 
     if (!assetId) {
       skippedNoAsset++;
@@ -161,7 +158,12 @@ function sciipProcessEventTimeline() {
 
   if (rowsToAppend.length > 0) {
     timelineSheet
-      .getRange(timelineSheet.getLastRow() + 1, 1, rowsToAppend.length, SCIIP_TIMELINE.TIMELINE_HEADERS.length)
+      .getRange(
+        timelineSheet.getLastRow() + 1,
+        1,
+        rowsToAppend.length,
+        SCIIP_TIMELINE.TIMELINE_HEADERS.length
+      )
       .setValues(rowsToAppend);
   }
 
@@ -193,19 +195,132 @@ function sciipEnsureAssetTimelineSheet_() {
   }
 
   var existingHeaders = [];
-  if (sheet.getLastRow() > 0) {
+  if (sheet.getLastRow() > 0 && sheet.getLastColumn() > 0) {
     existingHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
   }
 
   if (sheet.getLastRow() === 0 || existingHeaders[0] !== 'Timeline_ID') {
     sheet.clear();
-    sheet.getRange(1, 1, 1, SCIIP_TIMELINE.TIMELINE_HEADERS.length)
+    sheet
+      .getRange(1, 1, 1, SCIIP_TIMELINE.TIMELINE_HEADERS.length)
       .setValues([SCIIP_TIMELINE.TIMELINE_HEADERS]);
 
     sheet.setFrozenRows(1);
   }
 
   return sheet;
+}
+
+/**
+ * Resolves an event row to an Asset_ID.
+ *
+ * Priority:
+ * 1. Direct Asset_ID on event
+ * 2. Event Business_Key lookup in ASSET_REGISTRY
+ * 3. Payload address/city/zip → derived business key → ASSET_REGISTRY
+ */
+function sciipResolveAssetIdForTimeline_(eventRow) {
+  var assetId = sciipFirstValue_(eventRow, [
+    'Asset_ID',
+    'AssetId',
+    'asset_id'
+  ]);
+
+  if (assetId) return assetId;
+
+  var businessKey = sciipFirstValue_(eventRow, [
+    'Business_Key',
+    'BusinessKey',
+    'business_key'
+  ]);
+
+  if (businessKey) {
+    var resolvedByKey = sciipFindAssetIdByBusinessKey_(businessKey);
+    if (resolvedByKey) return resolvedByKey;
+  }
+
+  var payloadRaw = sciipFirstValue_(eventRow, [
+    'Payload',
+    'payload'
+  ]);
+
+  if (!payloadRaw) return '';
+
+  var payload;
+  try {
+    payload = typeof payloadRaw === 'string'
+      ? JSON.parse(payloadRaw)
+      : payloadRaw;
+  } catch (err) {
+    return '';
+  }
+
+  var address = payload.address || payload.Address || payload.rawAddress || payload.Raw_Address || '';
+  var city = payload.city || payload.City || '';
+  var zip = payload.zip || payload.Zip || payload.ZIP || '';
+
+  if (!address || !city || !zip) return '';
+
+  var derivedBusinessKey = sciipBuildAssetBusinessKeyFromParts_(address, city, zip);
+
+  return sciipFindAssetIdByBusinessKey_(derivedBusinessKey);
+}
+
+/**
+ * Looks up Asset_ID from ASSET_REGISTRY by Business_Key.
+ */
+function sciipFindAssetIdByBusinessKey_(businessKey) {
+  var ss = SpreadsheetApp.openById(SCIIP.SPREADSHEET_ID);
+  var sheet = ss.getSheetByName(SCIIP_TIMELINE.SHEETS.ASSETS);
+
+  if (!sheet) return '';
+
+  var rows = sciipReadSheetObjects_(sheet);
+
+  for (var i = 0; i < rows.length; i++) {
+    var rowKey = sciipFirstValue_(rows[i], [
+      'Business_Key',
+      'BusinessKey',
+      'business_key'
+    ]);
+
+    if (String(rowKey).trim() === String(businessKey).trim()) {
+      return sciipFirstValue_(rows[i], [
+        'Asset_ID',
+        'AssetId',
+        'asset_id'
+      ]);
+    }
+  }
+
+  return '';
+}
+
+/**
+ * Builds canonical SCIIP asset business key.
+ */
+function sciipBuildAssetBusinessKeyFromParts_(address, city, zip) {
+  var normalizedAddress = sciipNormalizeBusinessKeyPart_(address);
+  var normalizedCity = sciipNormalizeBusinessKeyPart_(city);
+  var normalizedZip = String(zip).trim();
+
+  return [
+    'ASSET',
+    normalizedAddress,
+    normalizedCity,
+    normalizedZip
+  ].join('|');
+}
+
+/**
+ * Normalizes address/city for business key generation.
+ */
+function sciipNormalizeBusinessKeyPart_(value) {
+  return String(value || '')
+    .trim()
+    .toUpperCase()
+    .replace(/[^\w\s]/g, '')
+    .replace(/\s+/g, '_');
 }
 
 /**
@@ -306,10 +421,30 @@ function sciipTimelineTitle_(eventType, row) {
  * Human description by event type.
  */
 function sciipTimelineDescription_(eventType, row) {
-  var address = sciipFirstValue_(row, ['Address', 'Raw_Address', 'Property_Address']);
-  var city = sciipFirstValue_(row, ['City']);
-  var zip = sciipFirstValue_(row, ['Zip', 'ZIP']);
-  var source = sciipFirstValue_(row, ['Source_Type', 'Source']);
+  var payload = sciipParsePayloadSafe_(row);
+
+  var address =
+    sciipFirstValue_(row, ['Address', 'Raw_Address', 'Property_Address']) ||
+    payload.address ||
+    payload.Address ||
+    payload.rawAddress ||
+    payload.Raw_Address ||
+    '';
+
+  var city =
+    sciipFirstValue_(row, ['City']) ||
+    payload.city ||
+    payload.City ||
+    '';
+
+  var zip =
+    sciipFirstValue_(row, ['Zip', 'ZIP']) ||
+    payload.zip ||
+    payload.Zip ||
+    payload.ZIP ||
+    '';
+
+  var source = sciipFirstValue_(row, ['Source_Type', 'Source']) || payload.source || '';
 
   var location = [address, city, zip].filter(function(x) {
     return x && String(x).trim() !== '';
@@ -352,4 +487,24 @@ function sciipTimelineDescription_(eventType, row) {
   }
 
   return base;
+}
+
+/**
+ * Safely parses event Payload.
+ */
+function sciipParsePayloadSafe_(row) {
+  var payloadRaw = sciipFirstValue_(row, [
+    'Payload',
+    'payload'
+  ]);
+
+  if (!payloadRaw) return {};
+
+  try {
+    return typeof payloadRaw === 'string'
+      ? JSON.parse(payloadRaw)
+      : payloadRaw;
+  } catch (err) {
+    return {};
+  }
 }
