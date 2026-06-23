@@ -5,14 +5,8 @@
  * AIR CRE SuperSheet rows
  *      ↓
  * OBSERVATION_QUEUE
- *      ↓
- * 70_PropertyObservationProcessor
- *      ↓
- * PROPERTY_EVENTS / ASSET / GRAPH
- *      ↓
- * 80_EventTimelineProcessor
- *      ↓
- * ASSET_TIMELINE
+ *
+ * Backward-compatible with existing 70 processor.
  *******************************************************/
 
 var SCIIP_SUPERSHEET = SCIIP_SUPERSHEET || {};
@@ -25,27 +19,14 @@ SCIIP_SUPERSHEET.SHEETS = {
 
 SCIIP_SUPERSHEET.OBSERVATION_HEADERS = [
   'Observation_ID',
-  'Observation_Key',
   'Observation_Type',
   'Address',
   'City',
-  'State',
   'Zip',
   'APN',
-  'Building_SF',
-  'Land_Acres',
-  'Clear_Height',
-  'Dock_Doors',
-  'GL_Doors',
-  'Rate',
-  'Sale_Price',
-  'Status',
   'Source',
-  'Source_Sheet',
-  'Source_Row',
-  'Source_Record_Key',
   'Raw_Text',
-  'Payload',
+  'Status',
   'Created_At',
   'Processed_At'
 ];
@@ -83,17 +64,10 @@ SCIIP_SUPERSHEET.LOG_HEADERS = [
   'Created_By'
 ];
 
-/**
- * Processor entrypoint.
- */
 function sciipRunSuperSheetIngestionProcessor() {
   return sciipProcessSuperSheetIngestion();
 }
 
-/**
- * Optional full pipeline:
- * 90 → 70 → 80
- */
 function sciipRunSuperSheetIngestionPipeline() {
   var ingestionResult = sciipRunSuperSheetIngestionProcessor();
 
@@ -120,32 +94,30 @@ function sciipRunSuperSheetIngestionPipeline() {
   return result;
 }
 
-/**
- * Main processor.
- */
 function sciipProcessSuperSheetIngestion() {
   var startedAt = new Date();
-  var runId = sciipSuperSheetId_('SUPERSHEET_RUN', startedAt.toISOString());
+  var runId = sciipSuperSheetId90_('SUPERSHEET_RUN', startedAt.toISOString());
 
-  var ss = SpreadsheetApp.openById(SCIIP.SPREADSHEET_ID);
-
-  var sourceSheet = sciipEnsureSuperSheetImportSheet_();
-  var queueSheet = sciipEnsureObservationQueueSheet_();
-  var logSheet = sciipEnsureSuperSheetLogSheet_();
+  var sourceSheet = sciipEnsureSuperSheetImportSheet90_();
+  var queueSheet = sciipEnsureObservationQueueSheet90_();
+  var logSheet = sciipEnsureSuperSheetLogSheet90_();
 
   var sourceRows = sciipReadObjects90_(sourceSheet);
   var existingQueueRows = sciipReadObjects90_(queueSheet);
 
   var existingKeys = {};
   existingQueueRows.forEach(function(row) {
-    var key = sciipFirst90_(row, [
-      'Observation_Key',
-      'Source_Record_Key'
-    ]);
+    var key = sciipBuildObservationDuplicateKey90_({
+      observationType: sciipFirst90_(row, ['Observation_Type']),
+      address: sciipFirst90_(row, ['Address']),
+      city: sciipFirst90_(row, ['City']),
+      zip: sciipFirst90_(row, ['Zip']),
+      apn: sciipFirst90_(row, ['APN']),
+      source: sciipFirst90_(row, ['Source']),
+      rawText: sciipFirst90_(row, ['Raw_Text'])
+    });
 
-    if (key) {
-      existingKeys[String(key).trim()] = true;
-    }
+    if (key) existingKeys[key] = true;
   });
 
   var rowsToAppend = [];
@@ -153,54 +125,36 @@ function sciipProcessSuperSheetIngestion() {
   var skippedDuplicate = 0;
   var skippedNoAddress = 0;
 
-  sourceRows.forEach(function(row, index) {
-    var sourceRowNumber = index + 2;
-
-    var observation = sciipBuildObservationFromSuperSheetRow_(
-      row,
-      sourceSheet.getName(),
-      sourceRowNumber,
-      startedAt
-    );
+  sourceRows.forEach(function(row) {
+    var observation = sciipBuildObservationFromSuperSheetRow90_(row, startedAt);
 
     if (!observation.address) {
       skippedNoAddress++;
       return;
     }
 
-    if (existingKeys[observation.observationKey]) {
+    var duplicateKey = sciipBuildObservationDuplicateKey90_(observation);
+
+    if (existingKeys[duplicateKey]) {
       skippedDuplicate++;
       return;
     }
 
     rowsToAppend.push([
       observation.observationId,
-      observation.observationKey,
       observation.observationType,
       observation.address,
       observation.city,
-      observation.state,
       observation.zip,
       observation.apn,
-      observation.buildingSf,
-      observation.landAcres,
-      observation.clearHeight,
-      observation.dockDoors,
-      observation.glDoors,
-      observation.rate,
-      observation.salePrice,
-      'PENDING',
       observation.source,
-      observation.sourceSheet,
-      observation.sourceRow,
-      observation.sourceRecordKey,
       observation.rawText,
-      JSON.stringify(observation.payload),
+      'PENDING',
       startedAt,
       ''
     ]);
 
-    existingKeys[observation.observationKey] = true;
+    existingKeys[duplicateKey] = true;
     queued++;
   });
 
@@ -247,10 +201,7 @@ function sciipProcessSuperSheetIngestion() {
   return result;
 }
 
-/**
- * Creates AIR_CRE_SUPERSHEET_IMPORT if missing.
- */
-function sciipEnsureSuperSheetImportSheet_() {
+function sciipEnsureSuperSheetImportSheet90_() {
   var ss = SpreadsheetApp.openById(SCIIP.SPREADSHEET_ID);
   var sheet = ss.getSheetByName(SCIIP_SUPERSHEET.SHEETS.SOURCE);
 
@@ -265,10 +216,7 @@ function sciipEnsureSuperSheetImportSheet_() {
   return sheet;
 }
 
-/**
- * Creates/repairs OBSERVATION_QUEUE.
- */
-function sciipEnsureObservationQueueSheet_() {
+function sciipEnsureObservationQueueSheet90_() {
   var ss = SpreadsheetApp.openById(SCIIP.SPREADSHEET_ID);
   var sheet = ss.getSheetByName(SCIIP_SUPERSHEET.SHEETS.OBSERVATION_QUEUE);
 
@@ -278,29 +226,12 @@ function sciipEnsureObservationQueueSheet_() {
       .getRange(1, 1, 1, SCIIP_SUPERSHEET.OBSERVATION_HEADERS.length)
       .setValues([SCIIP_SUPERSHEET.OBSERVATION_HEADERS]);
     sheet.setFrozenRows(1);
-    return sheet;
-  }
-
-  var existingHeaders = [];
-  if (sheet.getLastRow() > 0 && sheet.getLastColumn() > 0) {
-    existingHeaders = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  }
-
-  if (sheet.getLastRow() === 0 || existingHeaders[0] !== 'Observation_ID') {
-    sheet.clear();
-    sheet
-      .getRange(1, 1, 1, SCIIP_SUPERSHEET.OBSERVATION_HEADERS.length)
-      .setValues([SCIIP_SUPERSHEET.OBSERVATION_HEADERS]);
-    sheet.setFrozenRows(1);
   }
 
   return sheet;
 }
 
-/**
- * Creates ingestion log.
- */
-function sciipEnsureSuperSheetLogSheet_() {
+function sciipEnsureSuperSheetLogSheet90_() {
   var ss = SpreadsheetApp.openById(SCIIP.SPREADSHEET_ID);
   var sheet = ss.getSheetByName(SCIIP_SUPERSHEET.SHEETS.INGESTION_LOG);
 
@@ -315,121 +246,29 @@ function sciipEnsureSuperSheetLogSheet_() {
   return sheet;
 }
 
-/**
- * Converts one AIR CRE row into a SCIIP observation.
- */
-function sciipBuildObservationFromSuperSheetRow_(row, sourceSheetName, sourceRowNumber, createdAt) {
-  var address = sciipFirst90_(row, [
-    'Address',
-    'Property Address',
-    'Property_Address',
-    'Street Address',
-    'Street'
-  ]);
+function sciipBuildObservationFromSuperSheetRow90_(row, createdAt) {
+  var address = sciipFirst90_(row, ['Address', 'Property Address', 'Street Address']);
+  var city = sciipFirst90_(row, ['City']);
+  var zip = sciipFirst90_(row, ['Zip', 'ZIP', 'Zip Code']);
+  var apn = sciipFirst90_(row, ['APN', 'Parcel', 'Parcel Number']);
+  var source = sciipFirst90_(row, ['Source']) || 'AIR_CRE_SUPERSHEET';
 
-  var city = sciipFirst90_(row, [
-    'City',
-    'Market City'
-  ]);
-
-  var state = sciipFirst90_(row, [
-    'State'
-  ]) || 'CA';
-
-  var zip = sciipFirst90_(row, [
-    'Zip',
-    'ZIP',
-    'Zip Code',
-    'Postal Code'
-  ]);
-
-  var apn = sciipFirst90_(row, [
-    'APN',
-    'Parcel',
-    'Parcel Number'
-  ]);
-
-  var buildingSf = sciipFirst90_(row, [
-    'Building SF',
-    'Building_SF',
-    'SF',
-    'Size',
-    'Available SF',
-    'Available_SF'
-  ]);
-
-  var landAcres = sciipFirst90_(row, [
-    'Land Acres',
-    'Land_Acres',
-    'Acres',
-    'Site Acres'
-  ]);
-
-  var clearHeight = sciipFirst90_(row, [
-    'Clear Height',
-    'Clear_Height',
-    'Clear',
-    'Clear Ht'
-  ]);
-
-  var dockDoors = sciipFirst90_(row, [
-    'Dock Doors',
-    'Dock_Doors',
-    'DH',
-    'Dock High Doors'
-  ]);
-
-  var glDoors = sciipFirst90_(row, [
-    'GL Doors',
-    'GL_Doors',
-    'Ground Level Doors',
-    'GL'
-  ]);
-
-  var rate = sciipFirst90_(row, [
-    'Rate',
-    'Lease Rate',
-    'Asking Rate',
-    'Rent'
-  ]);
-
-  var salePrice = sciipFirst90_(row, [
-    'Sale Price',
-    'Sale_Price',
-    'Price',
-    'Asking Price'
-  ]);
-
-  var dealType = sciipFirst90_(row, [
-    'Deal Type',
-    'Deal_Type',
-    'Type',
-    'Listing Type'
-  ]);
-
-  var status = sciipFirst90_(row, [
-    'Status',
-    'Availability Status'
-  ]);
-
-  var source = sciipFirst90_(row, [
-    'Source',
-    'Data Source'
-  ]) || 'AIR_CRE_SUPERSHEET';
-
-  var notes = sciipFirst90_(row, [
-    'Notes',
-    'Comments',
-    'Remarks',
-    'Description'
-  ]);
+  var buildingSf = sciipFirst90_(row, ['Building SF', 'Available SF', 'SF']);
+  var landAcres = sciipFirst90_(row, ['Land Acres', 'Acres']);
+  var clearHeight = sciipFirst90_(row, ['Clear Height', 'Clear Ht', 'Clear']);
+  var dockDoors = sciipFirst90_(row, ['Dock Doors', 'DH']);
+  var glDoors = sciipFirst90_(row, ['GL Doors', 'GL']);
+  var rate = sciipFirst90_(row, ['Rate', 'Lease Rate', 'Asking Rate']);
+  var salePrice = sciipFirst90_(row, ['Sale Price', 'Price']);
+  var dealType = sciipFirst90_(row, ['Deal Type', 'Type']);
+  var status = sciipFirst90_(row, ['Status']);
+  var notes = sciipFirst90_(row, ['Notes', 'Comments', 'Remarks']);
 
   var observationType = sciipInferObservationType90_(dealType, rate, salePrice);
 
   var rawText = sciipBuildRawObservationText90_({
     address: address,
     city: city,
-    state: state,
     zip: zip,
     apn: apn,
     buildingSf: buildingSf,
@@ -444,94 +283,45 @@ function sciipBuildObservationFromSuperSheetRow_(row, sourceSheetName, sourceRow
     notes: notes
   });
 
-  var payload = {
-    observationType: observationType,
-    address: address,
-    city: city,
-    state: state,
-    zip: zip,
-    apn: apn,
-    buildingSf: buildingSf,
-    landAcres: landAcres,
-    clearHeight: clearHeight,
-    dockDoors: dockDoors,
-    glDoors: glDoors,
-    rate: rate,
-    salePrice: salePrice,
-    dealType: dealType,
-    status: status,
-    source: source,
-    sourceSheet: sourceSheetName,
-    sourceRow: sourceRowNumber,
-    rawText: rawText,
-    createdAt: createdAt.toISOString()
-  };
-
-  var sourceRecordKey = sciipSuperSheetSourceRecordKey_(payload);
-  var observationKey = sourceRecordKey;
-  var observationId = sciipSuperSheetId_('OBS', observationKey);
-
-  payload.observationId = observationId;
+  var seed = [
+    observationType,
+    address,
+    city,
+    zip,
+    apn,
+    source,
+    rawText
+  ].join('|');
 
   return {
-    observationId: observationId,
-    observationKey: observationKey,
+    observationId: sciipSuperSheetId90_('OBS', seed),
     observationType: observationType,
     address: address,
     city: city,
-    state: state,
     zip: zip,
     apn: apn,
-    buildingSf: buildingSf,
-    landAcres: landAcres,
-    clearHeight: clearHeight,
-    dockDoors: dockDoors,
-    glDoors: glDoors,
-    rate: rate,
-    salePrice: salePrice,
     source: source,
-    sourceSheet: sourceSheetName,
-    sourceRow: sourceRowNumber,
-    sourceRecordKey: sourceRecordKey,
     rawText: rawText,
-    payload: payload
+    createdAt: createdAt
   };
 }
 
-/**
- * Infer observation type.
- */
 function sciipInferObservationType90_(dealType, rate, salePrice) {
-  var text = [
-    dealType,
-    rate,
-    salePrice
-  ].join(' ').toUpperCase();
+  var text = [dealType, rate, salePrice].join(' ').toUpperCase();
 
-  if (text.indexOf('SALE') !== -1 || salePrice) {
-    return 'SALE_LISTING';
-  }
-
-  if (
-    text.indexOf('LEASE') !== -1 ||
-    text.indexOf('SUBLEASE') !== -1 ||
-    rate
-  ) {
-    return 'LEASE_LISTING';
-  }
+  if (text.indexOf('SALE') !== -1 || salePrice) return 'SALE_LISTING';
+  if (text.indexOf('LEASE') !== -1 || text.indexOf('SUBLEASE') !== -1 || rate) return 'LISTING';
 
   return 'LISTING';
 }
 
-/**
- * Raw text summary.
- */
 function sciipBuildRawObservationText90_(obj) {
   var parts = [];
 
   if (obj.address) parts.push('Address: ' + obj.address);
   if (obj.city) parts.push('City: ' + obj.city);
   if (obj.zip) parts.push('Zip: ' + obj.zip);
+  if (obj.apn) parts.push('APN: ' + obj.apn);
   if (obj.buildingSf) parts.push('Building SF: ' + obj.buildingSf);
   if (obj.landAcres) parts.push('Land Acres: ' + obj.landAcres);
   if (obj.clearHeight) parts.push('Clear Height: ' + obj.clearHeight);
@@ -546,38 +336,22 @@ function sciipBuildRawObservationText90_(obj) {
   return parts.join(' | ');
 }
 
-/**
- * Stable idempotency key for imported source row.
- */
-function sciipSuperSheetSourceRecordKey_(payload) {
-  var normalized = {
-    observationType: sciipNormalize90_(payload.observationType),
-    address: sciipNormalize90_(payload.address),
-    city: sciipNormalize90_(payload.city),
-    state: sciipNormalize90_(payload.state),
-    zip: sciipNormalize90_(payload.zip),
-    apn: sciipNormalize90_(payload.apn),
-    buildingSf: sciipNormalize90_(payload.buildingSf),
-    landAcres: sciipNormalize90_(payload.landAcres),
-    rate: sciipNormalize90_(payload.rate),
-    salePrice: sciipNormalize90_(payload.salePrice),
-    dealType: sciipNormalize90_(payload.dealType),
-    status: sciipNormalize90_(payload.status),
-    source: sciipNormalize90_(payload.source)
-  };
-
-  return 'OBSERVATION|' + sciipHash90_(JSON.stringify(normalized));
+function sciipBuildObservationDuplicateKey90_(obj) {
+  return [
+    sciipNormalize90_(obj.observationType),
+    sciipNormalize90_(obj.address),
+    sciipNormalize90_(obj.city),
+    sciipNormalize90_(obj.zip),
+    sciipNormalize90_(obj.apn),
+    sciipNormalize90_(obj.source),
+    sciipNormalize90_(obj.rawText)
+  ].join('|');
 }
 
-/**
- * Reads sheet into objects.
- */
 function sciipReadObjects90_(sheet) {
   var values = sheet.getDataRange().getValues();
 
-  if (!values || values.length < 2) {
-    return [];
-  }
+  if (!values || values.length < 2) return [];
 
   var headers = values[0].map(function(header) {
     return String(header).trim();
@@ -592,9 +366,6 @@ function sciipReadObjects90_(sheet) {
   });
 }
 
-/**
- * First non-empty value.
- */
 function sciipFirst90_(obj, keys) {
   for (var i = 0; i < keys.length; i++) {
     var value = obj[keys[i]];
@@ -602,13 +373,9 @@ function sciipFirst90_(obj, keys) {
       return value;
     }
   }
-
   return '';
 }
 
-/**
- * Normalization for matching.
- */
 function sciipNormalize90_(value) {
   return String(value || '')
     .trim()
@@ -617,9 +384,6 @@ function sciipNormalize90_(value) {
     .replace(/\s+/g, ' ');
 }
 
-/**
- * Stable hash.
- */
 function sciipHash90_(value) {
   var digest = Utilities.computeDigest(
     Utilities.DigestAlgorithm.SHA_256,
@@ -633,9 +397,6 @@ function sciipHash90_(value) {
   }).join('').substring(0, 16).toUpperCase();
 }
 
-/**
- * ID factory.
- */
-function sciipSuperSheetId_(prefix, seed) {
+function sciipSuperSheetId90_(prefix, seed) {
   return prefix + '_' + sciipHash90_(seed);
 }
