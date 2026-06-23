@@ -7,6 +7,8 @@
  * OBSERVATION_QUEUE
  *
  * Backward-compatible with existing 70 processor.
+ *
+ * Preserves full AIR CRE row detail in Raw_Text.
  *******************************************************/
 
 var SCIIP_SUPERSHEET = SCIIP_SUPERSHEET || {};
@@ -260,8 +262,8 @@ function sciipBuildObservationFromSuperSheetRow90_(row, createdAt) {
   var glDoors = sciipFirst90_(row, ['GL Doors', 'GL']);
   var rate = sciipFirst90_(row, ['Rate', 'Lease Rate', 'Asking Rate']);
   var salePrice = sciipFirst90_(row, ['Sale Price', 'Price']);
-  var dealType = sciipFirst90_(row, ['Deal Type', 'Type']);
   var status = sciipFirst90_(row, ['Status']);
+  var dealType = sciipFirst90_(row, ['Deal Type', 'Type']);
   var notes = sciipFirst90_(row, ['Notes', 'Comments', 'Remarks']);
 
   var observationType = sciipInferObservationType90_(dealType, rate, salePrice);
@@ -278,8 +280,9 @@ function sciipBuildObservationFromSuperSheetRow90_(row, createdAt) {
     glDoors: glDoors,
     rate: rate,
     salePrice: salePrice,
-    dealType: dealType,
     status: status,
+    dealType: dealType,
+    source: source,
     notes: notes
   });
 
@@ -309,8 +312,17 @@ function sciipBuildObservationFromSuperSheetRow90_(row, createdAt) {
 function sciipInferObservationType90_(dealType, rate, salePrice) {
   var text = [dealType, rate, salePrice].join(' ').toUpperCase();
 
-  if (text.indexOf('SALE') !== -1 || salePrice) return 'SALE_LISTING';
-  if (text.indexOf('LEASE') !== -1 || text.indexOf('SUBLEASE') !== -1 || rate) return 'LISTING';
+  if (text.indexOf('SALE') !== -1 || salePrice) {
+    return 'SALE_LISTING';
+  }
+
+  if (
+    text.indexOf('LEASE') !== -1 ||
+    text.indexOf('SUBLEASE') !== -1 ||
+    rate
+  ) {
+    return 'LISTING';
+  }
 
   return 'LISTING';
 }
@@ -329,8 +341,9 @@ function sciipBuildRawObservationText90_(obj) {
   if (obj.glDoors) parts.push('GL Doors: ' + obj.glDoors);
   if (obj.rate) parts.push('Rate: ' + obj.rate);
   if (obj.salePrice) parts.push('Sale Price: ' + obj.salePrice);
-  if (obj.dealType) parts.push('Deal Type: ' + obj.dealType);
   if (obj.status) parts.push('Status: ' + obj.status);
+  if (obj.dealType) parts.push('Deal Type: ' + obj.dealType);
+  if (obj.source) parts.push('Source: ' + obj.source);
   if (obj.notes) parts.push('Notes: ' + obj.notes);
 
   return parts.join(' | ');
