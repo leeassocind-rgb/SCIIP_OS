@@ -233,3 +233,80 @@ function sciipNLITopCities_() {
     evidenceCount: 1
   };
 }
+
+function sciipReadOptionalNLIObjects_(sheetName) {
+  var ss = SpreadsheetApp.openById(SCIIP.SPREADSHEET_ID);
+  var sheet = ss.getSheetByName(sheetName);
+
+  if (!sheet) return [];
+
+  var values = sheet.getDataRange().getValues();
+
+  if (!values || values.length < 2) return [];
+
+  var headers = values[0].map(function(header) {
+    return String(header).trim();
+  });
+
+  return values.slice(1).map(function(row) {
+    var obj = {};
+
+    headers.forEach(function(header, index) {
+      obj[header] = row[index];
+    });
+
+    return obj;
+  });
+}
+
+function sciipEnsureNLIResponseSheet_() {
+  var ss = SpreadsheetApp.openById(SCIIP.SPREADSHEET_ID);
+  var sheet = ss.getSheetByName('INTELLIGENCE_RESPONSE');
+
+  if (!sheet) {
+    sheet = ss.insertSheet('INTELLIGENCE_RESPONSE');
+    sheet.appendRow([
+      'Response_ID',
+      'Query_ID',
+      'Query_Type',
+      'Status',
+      'Answer',
+      'Evidence_Count',
+      'Created_At'
+    ]);
+    sheet.setFrozenRows(1);
+  }
+
+  return sheet;
+}
+
+function sciipFirstNLIValue_(obj, keys) {
+  obj = obj || {};
+
+  for (var i = 0; i < keys.length; i++) {
+    var value = obj[keys[i]];
+
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return value;
+    }
+  }
+
+  return '';
+}
+
+function sciipNLIHash_(value) {
+  var digest = Utilities.computeDigest(
+    Utilities.DigestAlgorithm.SHA_256,
+    String(value)
+  );
+
+  return digest.map(function(byte) {
+    var v = byte < 0 ? byte + 256 : byte;
+    var hex = v.toString(16);
+    return hex.length === 1 ? '0' + hex : hex;
+  }).join('').substring(0, 16).toUpperCase();
+}
+
+function sciipNLIId_(prefix, seed) {
+  return prefix + '_' + sciipNLIHash_(seed);
+}
