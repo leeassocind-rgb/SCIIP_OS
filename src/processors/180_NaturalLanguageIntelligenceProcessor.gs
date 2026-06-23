@@ -16,24 +16,64 @@ function sciipRunNaturalLanguageIntelligenceProcessor() {
 
 function sciipProcessNaturalLanguageQueries() {
 
-  var queries = sciipReadOptionalNLIObjects_(
-    SCIIP_NLI.SHEETS.QUERY
-  );
+  var startedAt = new Date();
+
+  var querySheet =
+    SpreadsheetApp
+      .openById(SCIIP.SPREADSHEET_ID)
+      .getSheetByName(SCIIP_NLI.SHEETS.QUERY);
+
+  var queries =
+    sciipReadOptionalNLIObjects_(
+      SCIIP_NLI.SHEETS.QUERY
+    );
+
+  var existingResponses =
+    sciipReadOptionalNLIObjects_(
+      SCIIP_NLI.SHEETS.RESPONSE
+    );
+
+  var responsesByQueryId = {};
+
+  existingResponses.forEach(function(response) {
+    var queryId =
+      sciipFirstNLIValue_(response, ['Query_ID']);
+
+    if (queryId) {
+      responsesByQueryId[String(queryId).trim()] = true;
+    }
+  });
 
   var responsesSheet =
     sciipEnsureNLIResponseSheet_();
 
   var processed = 0;
+  var skippedAlreadyProcessed = 0;
+  var skippedDuplicateResponse = 0;
 
-  queries.forEach(function(query) {
+  queries.forEach(function(query, index) {
 
     var status =
       sciipFirstNLIValue_(query, ['Status']);
 
-    if (status === 'PROCESSED') return;
-
     var queryId =
       sciipFirstNLIValue_(query, ['Query_ID']);
+
+    if (String(status).toUpperCase() === 'PROCESSED') {
+      skippedAlreadyProcessed++;
+      return;
+    }
+
+    if (responsesByQueryId[String(queryId).trim()]) {
+      skippedDuplicateResponse++;
+
+      if (querySheet) {
+        querySheet.getRange(index + 2, 8).setValue('PROCESSED');
+        querySheet.getRange(index + 2, 10).setValue(startedAt);
+      }
+
+      return;
+    }
 
     var queryType =
       sciipFirstNLIValue_(query, ['Query_Type']);
@@ -48,10 +88,15 @@ function sciipProcessNaturalLanguageQueries() {
       answer.status,
       answer.text,
       answer.evidenceCount,
-      new Date()
+      startedAt
     ]);
 
-    query.Status = 'PROCESSED';
+    responsesByQueryId[String(queryId).trim()] = true;
+
+    if (querySheet) {
+      querySheet.getRange(index + 2, 8).setValue('PROCESSED');
+      querySheet.getRange(index + 2, 10).setValue(startedAt);
+    }
 
     processed++;
 
@@ -59,7 +104,12 @@ function sciipProcessNaturalLanguageQueries() {
 
   var result = {
     processor: '180_NaturalLanguageIntelligenceProcessor',
-    processed: processed
+    status: 'SUCCESS',
+    queriesRead: queries.length,
+    processed: processed,
+    skippedAlreadyProcessed: skippedAlreadyProcessed,
+    skippedDuplicateResponse: skippedDuplicateResponse,
+    completedAt: new Date()
   };
 
   Logger.log(JSON.stringify(result));
