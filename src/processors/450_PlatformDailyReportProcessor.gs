@@ -355,14 +355,6 @@ function sciipGenerateId_(prefix) {
   return `${prefix}_${Utilities.getUuid()}`;
 }
 
-function sciipGetSpreadsheet_() {
-  if (typeof SCIIP_SPREADSHEET_ID !== 'undefined' && SCIIP_SPREADSHEET_ID) {
-    return SpreadsheetApp.openById(SCIIP_SPREADSHEET_ID);
-  }
-
-  return SpreadsheetApp.getActiveSpreadsheet();
-}
-
 function sciipTestPlatformDailyReportProcessor() {
   const result = sciipRunPlatformDailyReportProcessor();
   Logger.log(JSON.stringify({
