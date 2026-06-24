@@ -74,7 +74,12 @@ function sciipRunIntelligenceRequirementProcessor() {
   const requirementDate = sciipFormatDateKey_(startedAt);
   const businessKey = `INTELLIGENCE_REQUIREMENTS|${requirementDate}`;
 
-  if (sciipBusinessKeyExists_(outputSheet, businessKey)) {
+  if (
+  sciipBusinessKeyPrefixExists_(
+    outputSheet,
+    businessKey
+  )
+) {
     const result = {
       processor,
       status: 'SUCCESS',
@@ -258,4 +263,33 @@ function sciipTestIntelligenceRequirementProcessor() {
     result
   }));
   return result;
+}
+
+function sciipBusinessKeyPrefixExists_(
+  sheet,
+  businessKeyPrefix
+) {
+
+  const values =
+    sheet.getDataRange().getValues();
+
+  if (values.length < 2) {
+    return false;
+  }
+
+  const headers = values[0];
+
+  const keyIndex =
+    headers.indexOf('Business_Key');
+
+  if (keyIndex === -1) {
+    return false;
+  }
+
+  return values
+    .slice(1)
+    .some(row =>
+      String(row[keyIndex] || '')
+        .startsWith(businessKeyPrefix)
+    );
 }
