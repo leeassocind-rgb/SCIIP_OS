@@ -93,7 +93,7 @@ const SCIIP_RESEARCH_INSIGHTS_HEADERS = [
  */
 function sciipRunAutonomousResearchAgentProcessor() {
   const startedAt = new Date();
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+const ss = sciipGetRuntimeSpreadsheet_();
 
   sciipEnsureAutonomousResearchSheets_(ss);
 
@@ -483,8 +483,7 @@ function sciipCreateResearchCandidate_(o) {
  ************************************************************/
 
 function sciipSeedPendingResearchFindings() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  sciipEnsureAutonomousResearchSheets_(ss);
+const ss = sciipGetRuntimeSpreadsheet_();  sciipEnsureAutonomousResearchSheets_(ss);
 
   const queue = ss.getSheetByName(SCIIP_RESEARCH_QUEUE_SHEET);
   const findings = ss.getSheetByName(SCIIP_RESEARCH_FINDINGS_SHEET);
@@ -565,8 +564,7 @@ function sciipSeedPendingResearchFindings() {
  ************************************************************/
 
 function sciipTestAutonomousResearchAgentProcessor() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  sciipEnsureAutonomousResearchSheets_(ss);
+const ss = sciipGetRuntimeSpreadsheet_();  sciipEnsureAutonomousResearchSheets_(ss);
 
   const result = sciipRunAutonomousResearchAgentProcessor();
   const seed = sciipSeedPendingResearchFindings();
@@ -699,4 +697,21 @@ function sciipStableHash_(input) {
     const v = (b < 0 ? b + 256 : b).toString(16);
     return v.length === 1 ? '0' + v : v;
   }).join('').toUpperCase();
+}
+
+function sciipGetRuntimeSpreadsheet_() {
+  const props = PropertiesService.getScriptProperties();
+  const id =
+    props.getProperty('SCIIP_SPREADSHEET_ID') ||
+    props.getProperty('SPREADSHEET_ID') ||
+    props.getProperty('RUNTIME_SPREADSHEET_ID');
+
+  if (id) return SpreadsheetApp.openById(id);
+
+  const active = SpreadsheetApp.getActiveSpreadsheet();
+  if (active) return active;
+
+  throw new Error(
+    'No runtime spreadsheet found. Set Script Property SCIIP_SPREADSHEET_ID to the SCIIP workbook ID.'
+  );
 }
