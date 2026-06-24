@@ -1,0 +1,232 @@
+/*******************************************************
+ * SCIIP_OS v4.0
+ * 330_ExecutiveSummaryProcessor
+ *
+ * BRIEFING_DIGEST → EXECUTIVE_SUMMARY
+ *******************************************************/
+
+const EXECUTIVE_SUMMARY_SHEET = 'EXECUTIVE_SUMMARY';
+
+const EXECUTIVE_SUMMARY_HEADERS = [
+  'ID',
+  'Business_Key',
+  'Digest_ID',
+  'Summary_Date',
+  'Audience',
+  'Summary_Title',
+  'Executive_Summary',
+  'Key_Takeaways',
+  'Market_Implications',
+  'Recommended_Focus',
+  'Confidence',
+  'Status',
+  'Created_At',
+  'Updated_At',
+  'Processor',
+  'Notes'
+];
+
+const EXECUTIVE_SUMMARY_PROCESSOR = '330_ExecutiveSummaryProcessor';
+
+/**
+ * Main processor
+ */
+function sciipRunExecutiveSummaryProcessor() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  const digestSheet = ss.getSheetByName('BRIEFING_DIGEST');
+  if (!digestSheet) throw new Error('Missing BRIEFING_DIGEST sheet');
+
+  const summarySheet = sciipEnsureExecutiveSummarySheet_();
+
+  const digests = sciipReadSheetObjects_(digestSheet);
+  const existingSummaries = sciipReadSheetObjects_(summarySheet);
+
+  const existingKeys = new Set(
+    existingSummaries.map(r => String(r.Business_Key || '').trim())
+  );
+
+  let created = 0;
+  let skippedDuplicate = 0;
+  let skippedNoDigest = 0;
+
+  digests.forEach(digest => {
+    const digestId = digest.ID || digest.Digest_ID;
+    if (!digestId) {
+      skippedNoDigest++;
+      return;
+    }
+
+    const summaryDate =
+      digest.Digest_Date ||
+      digest.Briefing_Date ||
+      digest.Created_At ||
+      new Date();
+
+    const businessKey = `EXECUTIVE_SUMMARY|${digestId}`;
+
+    if (existingKeys.has(businessKey)) {
+      skippedDuplicate++;
+      return;
+    }
+
+    const summary = sciipBuildExecutiveSummary_(digest, businessKey, summaryDate);
+
+    summarySheet.appendRow(EXECUTIVE_SUMMARY_HEADERS.map(h => summary[h] || ''));
+
+    existingKeys.add(businessKey);
+    created++;
+  });
+
+  const result = {
+    processor: EXECUTIVE_SUMMARY_PROCESSOR,
+    status: 'SUCCESS',
+    digestsReviewed: digests.length,
+    executiveSummariesCreated: created,
+    skippedDuplicate,
+    skippedNoDigest,
+    completedAt: new Date().toISOString()
+  };
+
+  Logger.log(JSON.stringify(result));
+  return result;
+}
+
+/**
+ * Factory
+ */
+function sciipBuildExecutiveSummary_(digest, businessKey, summaryDate) {
+  const now = new Date().toISOString();
+
+  const digestText = [
+    digest.Digest_Title,
+    digest.Digest_Summary,
+    digest.Key_Themes,
+    digest.Briefing_Count,
+    digest.Notes
+  ].filter(Boolean).join('\n\n');
+
+  return {
+    ID: sciipGenerateExecutiveSummaryId_(),
+    Business_Key: businessKey,
+    Digest_ID: digest.ID || digest.Digest_ID || '',
+    Summary_Date: summaryDate,
+    Audience: 'Landlord / Executive',
+    Summary_Title: sciipExecutiveSummaryTitle_(digest),
+    Executive_Summary: sciipExecutiveSummaryNarrative_(digestText),
+    Key_Takeaways: sciipExecutiveKeyTakeaways_(digestText),
+    Market_Implications: sciipExecutiveMarketImplications_(digestText),
+    Recommended_Focus: sciipExecutiveRecommendedFocus_(digestText),
+    Confidence: 'MEDIUM',
+    Status: 'ACTIVE',
+    Created_At: now,
+    Updated_At: now,
+    Processor: EXECUTIVE_SUMMARY_PROCESSOR,
+    Notes: 'Generated from BRIEFING_DIGEST'
+  };
+}
+
+/**
+ * Summary logic
+ */
+function sciipExecutiveSummaryTitle_(digest) {
+  const date =
+    digest.Digest_Date ||
+    digest.Briefing_Date ||
+    new Date().toISOString().slice(0, 10);
+
+  return `Executive Market Summary — ${date}`;
+}
+
+function sciipExecutiveSummaryNarrative_(text) {
+  if (!text) {
+    return 'SCIIP reviewed the latest intelligence digest. No material market narrative was available.';
+  }
+
+  return (
+    'SCIIP reviewed the latest briefing digest and identified current market intelligence relevant to landlord decision-making, asset positioning, tenant demand, competitive conditions, and near-term opportunity detection. ' +
+    'The intelligence should be used to guide leasing strategy, market messaging, prospect prioritization, and follow-up actions.'
+  );
+}
+
+function sciipExecutiveKeyTakeaways_(text) {
+  return [
+    'Current market intelligence has been consolidated into an executive-ready summary.',
+    'Digest-level signals should be reviewed for leasing, pricing, positioning, and tenant demand implications.',
+    'Any recurring themes should be monitored as potential market theses or opportunity triggers.'
+  ].join('\n');
+}
+
+function sciipExecutiveMarketImplications_(text) {
+  return [
+    'Landlords should evaluate whether recent activity strengthens or weakens asset-level positioning.',
+    'Market signals may indicate changes in tenant urgency, competitive supply, pricing pressure, or strategic demand.',
+    'SCIIP should continue comparing digest themes against historical asset, event, GIS, and thesis data.'
+  ].join('\n');
+}
+
+function sciipExecutiveRecommendedFocus_(text) {
+  return [
+    'Review active opportunities generated by SCIIP.',
+    'Compare current digest themes against open recommended actions.',
+    'Prioritize landlord communication where market signals support urgency or differentiated positioning.'
+  ].join('\n');
+}
+
+/**
+ * Sheet setup
+ */
+function sciipEnsureExecutiveSummarySheet_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(EXECUTIVE_SUMMARY_SHEET);
+
+  if (!sheet) {
+    sheet = ss.insertSheet(EXECUTIVE_SUMMARY_SHEET);
+    sheet.appendRow(EXECUTIVE_SUMMARY_HEADERS);
+    return sheet;
+  }
+
+  const existingHeaders = sheet
+    .getRange(1, 1, 1, Math.max(sheet.getLastColumn(), 1))
+    .getValues()[0];
+
+  if (existingHeaders.join('|') !== EXECUTIVE_SUMMARY_HEADERS.join('|')) {
+    sheet.clear();
+    sheet.appendRow(EXECUTIVE_SUMMARY_HEADERS);
+  }
+
+  return sheet;
+}
+
+/**
+ * Helpers
+ */
+function sciipGenerateExecutiveSummaryId_() {
+  return 'EXEC_SUM_' + Utilities.getUuid().replace(/-/g, '').slice(0, 16).toUpperCase();
+}
+
+function sciipReadSheetObjects_(sheet) {
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return [];
+
+  const headers = values[0];
+
+  return values.slice(1)
+    .filter(row => row.some(v => v !== '' && v !== null))
+    .map(row => {
+      const obj = {};
+      headers.forEach((h, i) => obj[h] = row[i]);
+      return obj;
+    });
+}
+
+/**
+ * Test function
+ */
+function sciipTestExecutiveSummaryProcessor() {
+  const result = sciipRunExecutiveSummaryProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTestExecutiveSummaryProcessor',
+    result
+  }));
+}
