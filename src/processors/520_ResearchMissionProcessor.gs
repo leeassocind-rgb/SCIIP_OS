@@ -330,8 +330,40 @@ function sciipGetRecordsByDate_(sheetName, dateField, dateValue) {
 
   return values
     .slice(1)
-    .filter(row => String(row[dateIndex]) === String(dateValue))
+    .filter(row => {
+      const rowDate = sciipNormalizeDateValue_(row[dateIndex]);
+      return rowDate === String(dateValue);
+    })
     .map(row => sciipRowToObject_(headers, row));
+}
+
+function sciipNormalizeDateValue_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(
+      value,
+      Session.getScriptTimeZone(),
+      'yyyy-MM-dd'
+    );
+  }
+
+  const text = String(value).trim();
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    return text;
+  }
+
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(
+      parsed,
+      Session.getScriptTimeZone(),
+      'yyyy-MM-dd'
+    );
+  }
+
+  return text;
 }
 
 function sciipNormalizeMissionKey_(value) {
