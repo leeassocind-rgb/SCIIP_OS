@@ -32,7 +32,7 @@ const EXECUTIVE_SUMMARY_PROCESSOR = '330_ExecutiveSummaryProcessor';
  * Main processor
  */
 function sciipRunExecutiveSummaryProcessor() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = sciipGetRuntimeSpreadsheet_();
 
   const digestSheet = ss.getSheetByName('BRIEFING_DIGEST');
   if (!digestSheet) throw new Error('Missing BRIEFING_DIGEST sheet');
@@ -177,7 +177,7 @@ function sciipExecutiveRecommendedFocus_(text) {
  * Sheet setup
  */
 function sciipEnsureExecutiveSummarySheet_() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = sciipGetRuntimeSpreadsheet_();
   let sheet = ss.getSheetByName(EXECUTIVE_SUMMARY_SHEET);
 
   if (!sheet) {
@@ -218,6 +218,23 @@ function sciipReadSheetObjects_(sheet) {
       headers.forEach((h, i) => obj[h] = row[i]);
       return obj;
     });
+}
+
+function sciipGetRuntimeSpreadsheet_() {
+  const props = PropertiesService.getScriptProperties();
+
+  const spreadsheetId =
+    props.getProperty('SCIIP_SPREADSHEET_ID') ||
+    props.getProperty('SPREADSHEET_ID') ||
+    props.getProperty('RUNTIME_SPREADSHEET_ID');
+
+  if (!spreadsheetId) {
+    throw new Error(
+      'Missing SCIIP_SPREADSHEET_ID in Script Properties. Add your SCIIP runtime Google Sheet ID.'
+    );
+  }
+
+  return SpreadsheetApp.openById(spreadsheetId);
 }
 
 /**
