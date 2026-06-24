@@ -49,9 +49,9 @@ function sciipRunBriefingDigestProcessor() {
   const today = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
 
   const briefings = sciipReadSheetAsObjects_(briefingSheet).filter(function(b) {
-    return String(b.Status || '').toUpperCase() === 'ACTIVE' &&
-           String(b.Briefing_Date || '') === today;
-  });
+  return String(b.Status || '').toUpperCase() === 'ACTIVE' &&
+         sciipNormalizeDateString_(b.Briefing_Date) === today;
+});
 
   const existingKeys = sciipGetExistingColumnValues_(digestSheet, 'Business_Key');
 
@@ -171,6 +171,25 @@ function sciipSumColumn_(rows, columnName) {
   return rows.reduce(function(total, r) {
     return total + Number(r[columnName] || 0);
   }, 0);
+}
+
+function sciipNormalizeDateString_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+
+  const s = String(value).trim();
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+
+  const d = new Date(s);
+  if (!isNaN(d.getTime())) {
+    return Utilities.formatDate(d, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+
+  return s;
 }
 
 /************************************************************
