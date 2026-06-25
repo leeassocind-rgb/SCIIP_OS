@@ -1,334 +1,554 @@
-/***************************************
+/************************************************************
  * 560_HypothesisGenerationProcessor
  * SCIIP_OS v4.1
- ***************************************/
+ *
+ * Inputs:
+ * - KNOWLEDGE_GRAPH_ENRICHMENT
+ * - KNOWLEDGE_GAPS
+ * - STRATEGIC_INTELLIGENCE
+ *
+ * Output:
+ * - HYPOTHESES
+ ************************************************************/
 
-const SCIIP_HYPOTHESIS_SHEET = 'HYPOTHESES';
+const HYPOTHESES_SHEET = 'HYPOTHESES';
 
-const SCIIP_HYPOTHESIS_SCHEMA = [
+const HYPOTHESES_HEADERS = [
   'Hypothesis_ID',
   'Business_Key',
+  'Hypothesis_Date',
   'Hypothesis_Type',
   'Hypothesis_Title',
   'Hypothesis_Statement',
   'Testable_Question',
-  'Source_Strategic_Intelligence_ID',
-  'Source_Knowledge_Gap_ID',
-  'Source_Enrichment_ID',
-  'Linked_Asset_ID',
-  'Linked_Company',
-  'Linked_Market',
+  'Strategic_Intelligence_ID',
+  'Knowledge_Gap_ID',
+  'Enrichment_ID',
+  'Target_Entity_Type',
+  'Target_Entity_ID',
+  'Target_Graph_Object',
+  'Source_Record',
+  'Evidence_Basis',
   'Confidence',
   'Validation_Priority',
   'Validation_Status',
   'Recommended_Validation_Action',
+  'Status',
   'Created_At',
   'Processor'
 ];
 
-function sciipRunHypothesisGenerationProcessor() {
+function sciipEnsureHypothesesSchema() {
   const ss = sciipGetSpreadsheet_();
+  let sheet = ss.getSheetByName(HYPOTHESES_SHEET);
 
-  const hypothesisSheet = sciipEnsureSheetWithSchema_(
-    ss,
-    SCIIP_HYPOTHESIS_SHEET,
-    SCIIP_HYPOTHESIS_SCHEMA
-  );
-
-  const enrichments = sciipReadSheetObjects_(ss, 'KNOWLEDGE_GRAPH_ENRICHMENT');
-  const gaps = sciipReadSheetObjects_(ss, 'KNOWLEDGE_GAPS');
-  const strategic = sciipReadSheetObjects_(ss, 'STRATEGIC_INTELLIGENCE');
-
-  const rows = [];
-  const now = new Date().toISOString();
-
-  enrichments.forEach(function(enrichment) {
-    const enrichmentId =
-      enrichment.Enrichment_ID ||
-      enrichment.Knowledge_Graph_Enrichment_ID ||
-      enrichment.ID ||
-      '';
-
-    if (!enrichmentId) return;
-
-    const gap = sciipFindRelatedKnowledgeGap_(enrichment, gaps);
-    const intel = sciipFindRelatedStrategicIntelligence_(enrichment, strategic);
-
-    const candidates = sciipCreateHypothesesFromEnrichment_(
-      enrichment,
-      gap,
-      intel,
-      now
-    );
-
-    candidates.forEach(function(hypothesis) {
-      const prefix = hypothesis.Business_Key;
-
-      if (!sciipBusinessKeyPrefixExists_(hypothesisSheet, prefix)) {
-        rows.push(SCIIP_HYPOTHESIS_SCHEMA.map(function(col) {
-          return hypothesis[col] || '';
-        }));
-      }
-    });
-  });
-
-  if (rows.length) {
-    hypothesisSheet
-      .getRange(hypothesisSheet.getLastRow() + 1, 1, rows.length, SCIIP_HYPOTHESIS_SCHEMA.length)
-      .setValues(rows);
+  if (!sheet) {
+    sheet = ss.insertSheet(HYPOTHESES_SHEET);
   }
 
+  sheet.getRange(1, 1, 1, HYPOTHESES_HEADERS.length)
+    .setValues([HYPOTHESES_HEADERS]);
+
+  sheet.setFrozenRows(1);
+  return sheet;
+}
+
+function sciipRunHypothesisGenerationProcessor() {
+  const processor = '560_HypothesisGenerationProcessor';
+  const startedAt = new Date();
+
+  const outputSheet = sciipEnsureHypothesesSchema();
+
+  const hypothesisDate = sciipFormatDateKey_(startedAt);
+  const businessKey = `HYPOTHESIS|${hypothesisDate}`;
+
+  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
+    const result = {
+      processor,
+      status: 'SUCCESS',
+      hypothesesCreated: 0,
+      skippedDuplicate: 1,
+      businessKey,
+      completedAt: new Date().toISOString()
+    };
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const enrichments = sciipGetRecordsByDate_(
+    'KNOWLEDGE_GRAPH_ENRICHMENT',
+    'Enrichment_Date',
+    hypothesisDate
+  );
+
+  const knowledgeGaps = sciipGetRecordsByDate_(
+    'KNOWLEDGE_GAPS',
+    'Gap_Date',
+    hypothesisDate
+  );
+
+  const strategicIntelligence = sciipGetRecordsByDate_(
+    'STRATEGIC_INTELLIGENCE',
+    'Strategic_Intelligence_Date',
+    hypothesisDate
+  );
+
+  if (
+    enrichments.length === 0 &&
+    knowledgeGaps.length === 0 &&
+    strategicIntelligence.length === 0
+  ) {
+    const result = {
+      processor,
+      status: 'SKIPPED_NO_INPUTS',
+      hypothesesCreated: 0,
+      completedAt: new Date().toISOString()
+    };
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const hypotheses = sciipCreateHypotheses_({
+    businessKey,
+    hypothesisDate,
+    enrichments,
+    knowledgeGaps,
+    strategicIntelligence,
+    processor
+  });
+
+  hypotheses.forEach(row => outputSheet.appendRow(row));
+
   const result = {
-    processor: '560_HypothesisGenerationProcessor',
+    processor,
     status: 'SUCCESS',
-    enrichmentsReviewed: enrichments.length,
-    knowledgeGapsReviewed: gaps.length,
-    strategicIntelligenceReviewed: strategic.length,
-    hypothesesCreated: rows.length,
-    completedAt: now
+    hypothesesCreated: hypotheses.length,
+    skippedDuplicate: 0,
+    businessKey,
+    completedAt: new Date().toISOString(),
+    durationMs: new Date() - startedAt
   };
 
   Logger.log(JSON.stringify(result));
   return result;
 }
 
-function sciipCreateHypothesesFromEnrichment_(enrichment, gap, intel, now) {
-  const enrichmentId =
-    enrichment.Enrichment_ID ||
-    enrichment.Knowledge_Graph_Enrichment_ID ||
-    enrichment.ID ||
-    '';
+function sciipCreateHypotheses_(args) {
+  const now = new Date();
 
-  const gapId =
-    gap.Knowledge_Gap_ID ||
-    gap.Gap_ID ||
-    '';
+  const sourceRecords =
+    args.enrichments.length > 0
+      ? args.enrichments
+      : args.knowledgeGaps.length > 0
+        ? args.knowledgeGaps
+        : args.strategicIntelligence;
 
-  const strategicId =
-    intel.Strategic_Intelligence_ID ||
-    intel.Intelligence_ID ||
-    intel.ID ||
-    '';
+  const rows = sourceRecords.map(record => {
+    const enrichmentId = sciipExtractFirstAvailable_(record, [
+      'Enrichment_ID',
+      'Knowledge_Graph_Enrichment_ID'
+    ]);
 
-  const assetId =
-    enrichment.Asset_ID ||
-    enrichment.Linked_Asset_ID ||
-    gap.Asset_ID ||
-    '';
+    const knowledgeGapId = sciipExtractFirstAvailable_(record, [
+      'Knowledge_Gap_ID',
+      'Gap_ID'
+    ]);
 
-  const company =
-    enrichment.Company ||
-    enrichment.Linked_Company ||
-    gap.Company ||
-    '';
+    const strategicIntelligenceId = sciipExtractFirstAvailable_(record, [
+      'Strategic_Intelligence_ID',
+      'Intelligence_ID'
+    ]);
 
-  const market =
-    enrichment.Market ||
-    enrichment.Linked_Market ||
-    gap.Market ||
-    '';
+    const matchedGap = sciipFindKnowledgeGapById_(
+      args.knowledgeGaps,
+      knowledgeGapId
+    );
 
-  const sourceText = [
-    enrichment.Enrichment_Summary,
-    enrichment.Candidate_Summary,
-    enrichment.Observation,
-    gap.Knowledge_Gap,
-    gap.Gap_Statement,
-    intel.Strategic_Theme,
-    intel.Intelligence_Summary
-  ].filter(Boolean).join(' | ');
+    const matchedStrategicIntelligence = sciipFindStrategicIntelligenceById_(
+      args.strategicIntelligence,
+      strategicIntelligenceId
+    );
 
-  const types = sciipInferHypothesisTypes_(sourceText);
+    const profile = sciipInferHypothesisProfile_(
+      record,
+      matchedGap,
+      matchedStrategicIntelligence
+    );
 
-  return types.map(function(type) {
-    const title = sciipBuildHypothesisTitle_(type, market, company, assetId);
-    const statement = sciipBuildHypothesisStatement_(type, sourceText, market, company, assetId);
+    const rowKey =
+      `${args.businessKey}|${profile.hypothesisType}|${profile.targetEntityType}|${sciipNormalizeMissionKey_(enrichmentId || knowledgeGapId || strategicIntelligenceId || profile.hypothesisTitle)}`;
 
-    return {
-      Hypothesis_ID: sciipCreateHypothesisId_(),
-      Business_Key: [
-        'HYPOTHESIS',
-        type,
-        enrichmentId,
-        gapId || 'NO_GAP',
-        strategicId || 'NO_STRATEGIC'
-      ].join('|'),
-      Hypothesis_Type: type,
-      Hypothesis_Title: title,
-      Hypothesis_Statement: statement,
-      Testable_Question: sciipBuildTestableQuestion_(type, market, company, assetId),
-      Source_Strategic_Intelligence_ID: strategicId,
-      Source_Knowledge_Gap_ID: gapId,
-      Source_Enrichment_ID: enrichmentId,
-      Linked_Asset_ID: assetId,
-      Linked_Company: company,
-      Linked_Market: market,
-      Confidence: sciipAssignHypothesisConfidence_(enrichment, gap, intel),
-      Validation_Priority: sciipAssignValidationPriority_(type, gap, intel),
-      Validation_Status: 'UNVALIDATED',
-      Recommended_Validation_Action: sciipRecommendValidationAction_(type),
-      Created_At: now,
-      Processor: '560_HypothesisGenerationProcessor'
-    };
+    return [
+      sciipGenerateId_('HYP'),
+      rowKey,
+      args.hypothesisDate,
+      profile.hypothesisType,
+      profile.hypothesisTitle,
+      profile.hypothesisStatement,
+      profile.testableQuestion,
+      strategicIntelligenceId,
+      knowledgeGapId,
+      enrichmentId,
+      profile.targetEntityType,
+      profile.targetEntityId,
+      profile.targetGraphObject,
+      profile.sourceRecord,
+      profile.evidenceBasis,
+      profile.confidence,
+      profile.validationPriority,
+      'UNVALIDATED',
+      profile.recommendedValidationAction,
+      'ACTIVE',
+      now.toISOString(),
+      args.processor
+    ];
   });
+
+  return sciipDeduplicateHypothesisRows_(rows);
 }
 
-function sciipInferHypothesisTypes_(text) {
-  const t = String(text || '').toLowerCase();
-  const types = [];
+function sciipInferHypothesisProfile_(record, gap, strategicIntelligence) {
+  const combined = [
+    sciipExtractFirstAvailable_(record, [
+      'Enrichment_Type',
+      'Target_Entity_Type',
+      'Target_Graph_Object',
+      'Proposed_Node_Type',
+      'Proposed_Edge_Type',
+      'Proposed_Property_Update',
+      'Enrichment_Rationale',
+      'Source_Record'
+    ]),
+    sciipExtractFirstAvailable_(gap, [
+      'Entity_Type',
+      'Gap_Category',
+      'Missing_Fact',
+      'Why_It_Matters',
+      'Suggested_Data_Source',
+      'Discovery_Source'
+    ]),
+    sciipExtractFirstAvailable_(strategicIntelligence, [
+      'Strategic_Theme',
+      'Strategic_Intelligence_Summary',
+      'Intelligence_Summary',
+      'Signal_Type',
+      'Recommended_Action'
+    ])
+  ].join(' ').toLowerCase();
 
-  if (t.match(/lease|sale|vacancy|availability|absorption|rate|tenant|market/)) {
-    types.push('MARKET_HYPOTHESIS');
-  }
+  let hypothesisType = 'MARKET_HYPOTHESIS';
+  let targetEntityType =
+    sciipExtractFirstAvailable_(record, ['Target_Entity_Type']) ||
+    sciipExtractFirstAvailable_(gap, ['Entity_Type']) ||
+    'MARKET';
 
-  if (t.match(/property|asset|building|parcel|site|dock|clear|yard|power/)) {
-    types.push('PROPERTY_HYPOTHESIS');
-  }
+  let targetEntityId =
+    sciipExtractFirstAvailable_(record, ['Target_Entity_ID']) ||
+    sciipExtractFirstAvailable_(gap, ['Entity_ID']);
 
-  if (t.match(/company|tenant|occupier|manufacturer|supplier|oem|operator/)) {
-    types.push('COMPANY_HYPOTHESIS');
-  }
+  let targetGraphObject =
+    sciipExtractFirstAvailable_(record, ['Target_Graph_Object']) ||
+    'MARKET_INTELLIGENCE_GRAPH';
 
-  if (t.match(/risk|exposure|decline|constraint|weakness|threat|delay/)) {
-    types.push('RISK_HYPOTHESIS');
-  }
+  let confidence =
+    sciipExtractFirstAvailable_(record, ['Confidence']) ||
+    sciipExtractFirstAvailable_(gap, ['Confidence']) ||
+    'MEDIUM';
 
-  if (t.match(/opportunity|growth|expansion|demand|advantage|signal/)) {
-    types.push('OPPORTUNITY_HYPOTHESIS');
-  }
-
-  if (t.match(/processor|workflow|system|pipeline|automation|knowledge graph/)) {
-    types.push('OPERATING_SYSTEM_HYPOTHESIS');
-  }
-
-  return types.length ? types : ['MARKET_HYPOTHESIS'];
-}
-
-function sciipBuildHypothesisTitle_(type, market, company, assetId) {
-  const subject = company || assetId || market || 'Observed Market Signal';
-
-  return type.replace(/_/g, ' ') + ': ' + subject;
-}
-
-function sciipBuildHypothesisStatement_(type, sourceText, market, company, assetId) {
-  const subject = company || assetId || market || 'the observed signal';
-
-  return 'Based on linked intelligence and knowledge graph enrichment, SCIIP hypothesizes that ' +
-    subject +
-    ' may represent a testable ' +
-    type.toLowerCase().replace(/_/g, ' ') +
-    '. Source basis: ' +
-    String(sourceText || '').substring(0, 500);
-}
-
-function sciipBuildTestableQuestion_(type, market, company, assetId) {
-  const subject = company || assetId || market || 'this signal';
-
-  const questions = {
-    MARKET_HYPOTHESIS:
-      'Can additional market evidence confirm that ' + subject + ' reflects a broader market pattern?',
-    PROPERTY_HYPOTHESIS:
-      'Can property-level evidence confirm that ' + subject + ' has materially differentiated characteristics?',
-    COMPANY_HYPOTHESIS:
-      'Can company-level evidence confirm that ' + subject + ' has a current or emerging real estate requirement?',
-    RISK_HYPOTHESIS:
-      'Can additional evidence confirm that ' + subject + ' presents a measurable risk?',
-    OPPORTUNITY_HYPOTHESIS:
-      'Can additional evidence confirm that ' + subject + ' represents an actionable opportunity?',
-    OPERATING_SYSTEM_HYPOTHESIS:
-      'Can SCIIP workflow evidence confirm that ' + subject + ' should change system behavior or processor logic?'
-  };
-
-  return questions[type] || questions.MARKET_HYPOTHESIS;
-}
-
-function sciipAssignHypothesisConfidence_(enrichment, gap, intel) {
-  let score = 0.35;
-
-  if (enrichment && Object.keys(enrichment).length) score += 0.2;
-  if (gap && Object.keys(gap).length) score += 0.2;
-  if (intel && Object.keys(intel).length) score += 0.15;
-
-  if (String(enrichment.Confidence || '').toUpperCase() === 'HIGH') score += 0.1;
-  if (String(gap.Priority || '').toUpperCase() === 'HIGH') score += 0.1;
-
-  if (score >= 0.75) return 'HIGH';
-  if (score >= 0.5) return 'MEDIUM';
-  return 'LOW';
-}
-
-function sciipAssignValidationPriority_(type, gap, intel) {
-  const gapPriority = String(gap.Priority || gap.Validation_Priority || '').toUpperCase();
-  const intelPriority = String(intel.Priority || intel.Strategic_Priority || '').toUpperCase();
-
-  if (gapPriority === 'HIGH' || intelPriority === 'HIGH') return 'HIGH';
+  let validationPriority = 'MEDIUM';
 
   if (
-    type === 'OPPORTUNITY_HYPOTHESIS' ||
-    type === 'RISK_HYPOTHESIS' ||
-    type === 'PROPERTY_HYPOTHESIS'
+    combined.includes('property') ||
+    combined.includes('asset') ||
+    combined.includes('building') ||
+    combined.includes('parcel') ||
+    combined.includes('ownership') ||
+    combined.includes('yard') ||
+    combined.includes('power')
   ) {
-    return 'HIGH';
+    hypothesisType = 'PROPERTY_HYPOTHESIS';
+    targetEntityType = 'PROPERTY';
+    targetGraphObject = 'PROPERTY_KNOWLEDGE_GRAPH';
+    validationPriority = 'HIGH';
   }
 
-  return 'MEDIUM';
-}
+  if (
+    combined.includes('company') ||
+    combined.includes('tenant') ||
+    combined.includes('occupier') ||
+    combined.includes('supplier') ||
+    combined.includes('oem') ||
+    combined.includes('manufacturer')
+  ) {
+    hypothesisType = 'COMPANY_HYPOTHESIS';
+    targetEntityType = 'COMPANY';
+    targetGraphObject = 'COMPANY_KNOWLEDGE_GRAPH';
+    validationPriority = 'HIGH';
+  }
 
-function sciipRecommendValidationAction_(type) {
-  const actions = {
-    MARKET_HYPOTHESIS:
-      'Compare against recent lease, sale, availability, tenant, and absorption signals.',
-    PROPERTY_HYPOTHESIS:
-      'Validate against asset registry, property events, GIS attributes, and broker-observed property facts.',
-    COMPANY_HYPOTHESIS:
-      'Validate through company research, funding events, hiring signals, permits, and occupier movement.',
-    RISK_HYPOTHESIS:
-      'Validate through negative signals, timing risk, regulatory constraints, vacancy exposure, and counterevidence.',
-    OPPORTUNITY_HYPOTHESIS:
-      'Validate through demand signals, ownership fit, tenant activity, pricing gaps, and market timing.',
-    OPERATING_SYSTEM_HYPOTHESIS:
-      'Validate through processor outputs, duplicate patterns, missing fields, workflow friction, and graph incompleteness.'
+  if (
+    combined.includes('risk') ||
+    combined.includes('threat') ||
+    combined.includes('constraint') ||
+    combined.includes('exposure') ||
+    combined.includes('delay') ||
+    combined.includes('critical')
+  ) {
+    hypothesisType = 'RISK_HYPOTHESIS';
+    targetGraphObject = 'RISK_INTELLIGENCE_GRAPH';
+    validationPriority = 'HIGH';
+    confidence = confidence === 'LOW' ? 'MEDIUM' : confidence;
+  }
+
+  if (
+    combined.includes('opportunity') ||
+    combined.includes('growth') ||
+    combined.includes('expansion') ||
+    combined.includes('demand') ||
+    combined.includes('advantage') ||
+    combined.includes('signal')
+  ) {
+    hypothesisType = 'OPPORTUNITY_HYPOTHESIS';
+    targetGraphObject = 'OPPORTUNITY_INTELLIGENCE_GRAPH';
+    validationPriority = 'HIGH';
+  }
+
+  if (
+    combined.includes('workflow') ||
+    combined.includes('automation') ||
+    combined.includes('processor') ||
+    combined.includes('pipeline') ||
+    combined.includes('system') ||
+    combined.includes('knowledge graph')
+  ) {
+    hypothesisType = 'OPERATING_SYSTEM_HYPOTHESIS';
+    targetEntityType = 'SCIIP_SYSTEM';
+    targetGraphObject = 'SCIIP_OPERATING_GRAPH';
+    validationPriority = 'MEDIUM';
+  }
+
+  const evidenceBasis = sciipComposeHypothesisEvidenceBasis_(
+    record,
+    gap,
+    strategicIntelligence
+  );
+
+  const hypothesisTitle =
+    sciipComposeHypothesisTitle_(
+      hypothesisType,
+      targetEntityType,
+      targetEntityId
+    );
+
+  return {
+    hypothesisType,
+    hypothesisTitle,
+    hypothesisStatement: sciipComposeHypothesisStatement_(
+      hypothesisType,
+      targetEntityType,
+      targetEntityId,
+      evidenceBasis
+    ),
+    testableQuestion: sciipComposeTestableQuestion_(
+      hypothesisType,
+      targetEntityType,
+      targetEntityId
+    ),
+    targetEntityType,
+    targetEntityId,
+    targetGraphObject,
+    sourceRecord: sciipInferHypothesisSourceRecord_(record, gap, strategicIntelligence),
+    evidenceBasis,
+    confidence,
+    validationPriority,
+    recommendedValidationAction:
+      sciipRecommendHypothesisValidationAction_(hypothesisType)
   };
-
-  return actions[type] || actions.MARKET_HYPOTHESIS;
 }
 
-function sciipFindRelatedKnowledgeGap_(enrichment, gaps) {
-  const gapId =
-    enrichment.Knowledge_Gap_ID ||
-    enrichment.Source_Knowledge_Gap_ID ||
-    enrichment.Gap_ID ||
-    '';
+function sciipComposeHypothesisTitle_(type, entityType, entityId) {
+  const subject = entityId || entityType || 'MARKET_SIGNAL';
+  return `${type}: ${subject}`;
+}
+
+function sciipComposeHypothesisStatement_(type, entityType, entityId, evidenceBasis) {
+  const subject = entityId || entityType || 'the observed market signal';
+
+  return `SCIIP hypothesizes that ${subject} represents a testable ${type.toLowerCase().replace(/_/g, ' ')} based on linked intelligence, knowledge gaps, and graph enrichment evidence.\n\nEvidence basis: ${evidenceBasis}`;
+}
+
+function sciipComposeTestableQuestion_(type, entityType, entityId) {
+  const subject = entityId || entityType || 'this signal';
+
+  if (type === 'PROPERTY_HYPOTHESIS') {
+    return `Can property-level evidence confirm that ${subject} has materially relevant industrial market characteristics?`;
+  }
+
+  if (type === 'COMPANY_HYPOTHESIS') {
+    return `Can company-level evidence confirm that ${subject} has a current or emerging real estate requirement?`;
+  }
+
+  if (type === 'RISK_HYPOTHESIS') {
+    return `Can additional evidence confirm that ${subject} presents a measurable market, property, company, or operating risk?`;
+  }
+
+  if (type === 'OPPORTUNITY_HYPOTHESIS') {
+    return `Can additional evidence confirm that ${subject} represents an actionable industrial market opportunity?`;
+  }
+
+  if (type === 'OPERATING_SYSTEM_HYPOTHESIS') {
+    return `Can SCIIP workflow evidence confirm that ${subject} should change processor logic, graph structure, or operating behavior?`;
+  }
+
+  return `Can additional market evidence confirm that ${subject} reflects a broader industrial market pattern?`;
+}
+
+function sciipComposeHypothesisEvidenceBasis_(record, gap, strategicIntelligence) {
+  const parts = [];
+
+  const enrichmentRationale = sciipExtractFirstAvailable_(record, [
+    'Enrichment_Rationale'
+  ]);
+
+  const proposedUpdate = sciipExtractFirstAvailable_(record, [
+    'Proposed_Property_Update'
+  ]);
+
+  const missingFact = sciipExtractFirstAvailable_(gap, [
+    'Missing_Fact'
+  ]);
+
+  const whyItMatters = sciipExtractFirstAvailable_(gap, [
+    'Why_It_Matters'
+  ]);
+
+  const strategicSummary = sciipExtractFirstAvailable_(strategicIntelligence, [
+    'Strategic_Intelligence_Summary',
+    'Intelligence_Summary',
+    'Strategic_Theme'
+  ]);
+
+  if (enrichmentRationale) {
+    parts.push(`Graph enrichment rationale: ${enrichmentRationale}`);
+  }
+
+  if (proposedUpdate) {
+    parts.push(`Proposed graph update: ${proposedUpdate}`);
+  }
+
+  if (missingFact) {
+    parts.push(`Knowledge gap: ${missingFact}`);
+  }
+
+  if (whyItMatters) {
+    parts.push(`Why it matters: ${whyItMatters}`);
+  }
+
+  if (strategicSummary) {
+    parts.push(`Strategic intelligence: ${strategicSummary}`);
+  }
+
+  if (parts.length === 0) {
+    parts.push(
+      'SCIIP identified a connected intelligence signal requiring hypothesis testing.'
+    );
+  }
+
+  return parts.join('\n');
+}
+
+function sciipInferHypothesisSourceRecord_(record, gap, strategicIntelligence) {
+  const enrichmentId = sciipExtractFirstAvailable_(record, [
+    'Enrichment_ID'
+  ]);
+
+  if (enrichmentId) {
+    return `KNOWLEDGE_GRAPH_ENRICHMENT:${enrichmentId}`;
+  }
+
+  const gapId = sciipExtractFirstAvailable_(gap, [
+    'Knowledge_Gap_ID',
+    'Gap_ID'
+  ]);
 
   if (gapId) {
-    const match = gaps.find(function(g) {
-      return String(g.Knowledge_Gap_ID || g.Gap_ID || '') === String(gapId);
-    });
-    if (match) return match;
+    return `KNOWLEDGE_GAPS:${gapId}`;
   }
 
-  return gaps[0] || {};
-}
-
-function sciipFindRelatedStrategicIntelligence_(enrichment, strategic) {
-  const strategicId =
-    enrichment.Strategic_Intelligence_ID ||
-    enrichment.Source_Strategic_Intelligence_ID ||
-    enrichment.Intelligence_ID ||
-    '';
+  const strategicId = sciipExtractFirstAvailable_(strategicIntelligence, [
+    'Strategic_Intelligence_ID',
+    'Intelligence_ID'
+  ]);
 
   if (strategicId) {
-    const match = strategic.find(function(s) {
-      return String(s.Strategic_Intelligence_ID || s.Intelligence_ID || s.ID || '') === String(strategicId);
-    });
-    if (match) return match;
+    return `STRATEGIC_INTELLIGENCE:${strategicId}`;
   }
 
-  return strategic[0] || {};
+  return 'UNKNOWN_SOURCE_RECORD';
 }
 
-function sciipCreateHypothesisId_() {
-  return 'HYP_' + Utilities.getUuid().replace(/-/g, '').substring(0, 16).toUpperCase();
+function sciipRecommendHypothesisValidationAction_(type) {
+  if (type === 'PROPERTY_HYPOTHESIS') {
+    return 'Validate against asset registry, property events, GIS attributes, ownership facts, tenant signals, power, yard, and availability evidence.';
+  }
+
+  if (type === 'COMPANY_HYPOTHESIS') {
+    return 'Validate through company research, funding events, hiring signals, permits, supplier relationships, OEM linkages, and occupier movement.';
+  }
+
+  if (type === 'RISK_HYPOTHESIS') {
+    return 'Validate through counterevidence, timing risk, regulatory constraints, vacancy exposure, tenant exposure, and market weakness signals.';
+  }
+
+  if (type === 'OPPORTUNITY_HYPOTHESIS') {
+    return 'Validate through demand signals, ownership fit, tenant movement, pricing gaps, supply constraints, and market timing.';
+  }
+
+  if (type === 'OPERATING_SYSTEM_HYPOTHESIS') {
+    return 'Validate through processor outputs, duplicate patterns, missing fields, workflow friction, graph incompleteness, and operator feedback.';
+  }
+
+  return 'Validate against recent lease, sale, availability, tenant, capital markets, and absorption signals.';
+}
+
+function sciipFindKnowledgeGapById_(knowledgeGaps, knowledgeGapId) {
+  if (!knowledgeGapId) return null;
+
+  return knowledgeGaps.find(gap =>
+    sciipExtractFirstAvailable_(gap, [
+      'Knowledge_Gap_ID',
+      'Gap_ID',
+      'ID'
+    ]) === knowledgeGapId
+  ) || null;
+}
+
+function sciipFindStrategicIntelligenceById_(strategicIntelligence, strategicIntelligenceId) {
+  if (!strategicIntelligenceId) return null;
+
+  return strategicIntelligence.find(intelligence =>
+    sciipExtractFirstAvailable_(intelligence, [
+      'Strategic_Intelligence_ID',
+      'Intelligence_ID',
+      'ID'
+    ]) === strategicIntelligenceId
+  ) || null;
+}
+
+function sciipDeduplicateHypothesisRows_(rows) {
+  const seen = {};
+  const deduped = [];
+
+  rows.forEach(row => {
+    const businessKey = row[1];
+
+    if (!seen[businessKey]) {
+      seen[businessKey] = true;
+      deduped.push(row);
+    }
+  });
+
+  return deduped;
 }
 
 function sciipTestHypothesisGenerationProcessor() {
@@ -336,7 +556,7 @@ function sciipTestHypothesisGenerationProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestHypothesisGenerationProcessor',
-    result: result
+    result
   }));
 
   return result;
