@@ -66,22 +66,28 @@ function sciipRunAutonomousOpsDigestProcessor() {
   const outputSheet =
     sciipEnsureAutonomousOpsDigestSchema();
 
-  const digestDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
+const digestDate =
+  sciipResolveLatestProcessingDate_(
+    'COMMAND_CENTER_UPDATES',
+    'Update_Date'
+  ) || sciipFormatDateKey_(startedAt);  const businessKey =
     `AUTONOMOUS_OPS_DIGEST|${digestDate}`;
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousOpsDigestsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+const businessKey = `AUTONOMOUS_OPS_DIGEST|${digestDate}`;
+
+if (sciipBusinessKeyPrefixExists_(
+  AUTONOMOUS_OPS_DIGEST_SHEET_NAME,
+  businessKey
+)) {
+  return {
+    processor: AUTONOMOUS_OPS_DIGEST_PROCESSOR_NAME,
+    status: 'SUCCESS',
+    autonomousOpsDigestsCreated: 0,
+    skippedDuplicate: 1,
+    businessKey,
+    completedAt: new Date().toISOString()
+  };
+}
 
   const commandUpdates = sciipGetRecordsByDate_(
     'COMMAND_CENTER_UPDATES',
