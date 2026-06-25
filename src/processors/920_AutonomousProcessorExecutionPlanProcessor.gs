@@ -43,11 +43,7 @@ function sciip920ResolveSpreadsheet_() {
     if (resolved) return resolved;
   }
 
-  if (
-    typeof SCIIP_920_SPREADSHEET_ID !== 'undefined' &&
-    SCIIP_920_SPREADSHEET_ID &&
-    SCIIP_920_SPREADSHEET_ID !== '1x5lXkh0l63v92tYacGe7S8vHISHycBufaLfE54dPPDk'
-  ) {
+  if (typeof SCIIP_920_SPREADSHEET_ID !== 'undefined' && SCIIP_920_SPREADSHEET_ID) {
     return SpreadsheetApp.openById(SCIIP_920_SPREADSHEET_ID);
   }
 
