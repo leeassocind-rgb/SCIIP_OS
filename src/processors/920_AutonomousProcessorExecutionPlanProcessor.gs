@@ -61,7 +61,9 @@ function sciip920ResolveSpreadsheet_() {
  ***********************/
 function sciipRunAutonomousProcessorExecutionPlanProcessor() {
   const startedAt = new Date();
-  const ss = sciipResolveSpreadsheet_();
+  const ss = sciipGetSpreadsheet_();
+
+  const inputSheet = ss.getSheetByName(SCIIP_920_INPUT_SHEET);
 
   const inputSheet = ss.getSheetByName(SCIIP_920_INPUT_SHEET);
   if (!inputSheet) {
