@@ -37,6 +37,28 @@ const SCIIP_920_OUTPUT_HEADERS = [
 const SCIIP_920_PROCESSOR = '920_AutonomousProcessorExecutionPlanProcessor';
 const SCIIP_920_BUSINESS_PREFIX = 'AUTONOMOUS_PROCESSOR_EXECUTION_PLAN';
 
+function sciip920ResolveSpreadsheet_() {
+  if (typeof sciipResolveSpreadsheet_ === 'function') {
+    const resolved = sciipResolveSpreadsheet_();
+    if (resolved) return resolved;
+  }
+
+  if (
+    typeof SCIIP_920_SPREADSHEET_ID !== 'undefined' &&
+    SCIIP_920_SPREADSHEET_ID &&
+    SCIIP_920_SPREADSHEET_ID !== '1x5lXkh0l63v92tYacGe7S8vHISHycBufaLfE54dPPDk'
+  ) {
+    return SpreadsheetApp.openById(SCIIP_920_SPREADSHEET_ID);
+  }
+
+  const active = SpreadsheetApp.getActiveSpreadsheet();
+  if (active) return active;
+
+  throw new Error(
+    `${SCIIP_920_PROCESSOR}: Unable to resolve spreadsheet. Paste your SCIIP_OS Google Sheet ID into SCIIP_920_SPREADSHEET_ID.`
+  );
+}
+
 /***********************
  * Main Processor
  ***********************/
