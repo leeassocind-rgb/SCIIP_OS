@@ -157,25 +157,25 @@ function sciip920EnsureSheet_(ss, name, headers) {
 
 function sciip920ResolveSpreadsheet_() {
   if (typeof sciipResolveSpreadsheet_ === 'function') {
-    return sciipResolveSpreadsheet_();
+    const resolved = sciipResolveSpreadsheet_();
+    if (resolved) return resolved;
   }
-  return SpreadsheetApp.getActiveSpreadsheet();
-}
 
-function sciip920CreateId_(prefix) {
-  return `${prefix}_${Utilities.getUuid()}`;
-}
+  if (typeof SCIIP_SPREADSHEET_ID !== 'undefined' && SCIIP_SPREADSHEET_ID) {
+    return SpreadsheetApp.openById(SCIIP_SPREADSHEET_ID);
+  }
 
-function sciip920Result_(status, created, skippedDuplicate, businessKey, startedAt) {
-  return {
-    processor: SCIIP_920_PROCESSOR,
-    status,
-    autonomousProcessorExecutionPlansCreated: created,
-    skippedDuplicate,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+  if (typeof SCIIP_CONFIG !== 'undefined' && SCIIP_CONFIG.SPREADSHEET_ID) {
+    return SpreadsheetApp.openById(SCIIP_CONFIG.SPREADSHEET_ID);
+  }
+
+  const active = SpreadsheetApp.getActiveSpreadsheet();
+  if (active) return active;
+
+  throw new Error(
+    `${SCIIP_920_PROCESSOR}: Unable to resolve spreadsheet. ` +
+    `Set SCIIP_SPREADSHEET_ID or SCIIP_CONFIG.SPREADSHEET_ID.`
+  );
 }
 
 /***********************
