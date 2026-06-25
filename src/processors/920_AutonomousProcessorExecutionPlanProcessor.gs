@@ -1,10 +1,6 @@
 /*******************************************************
  * SCIIP_OS v4.1
  * 920_AutonomousProcessorExecutionPlanProcessor
- *
- * Purpose:
- * Converts autonomous processor guidance into permanent
- * implementation execution plans.
  *******************************************************/
 
 /***********************
@@ -43,7 +39,6 @@ const SCIIP_920_BUSINESS_PREFIX = 'AUTONOMOUS_PROCESSOR_EXECUTION_PLAN';
 function sciipRunAutonomousProcessorExecutionPlanProcessor() {
   const startedAt = new Date();
   const ss = sciipGetSpreadsheet_();
-  const inputSheet = ss.getSheetByName(SCIIP_920_INPUT_SHEET);
 
   const inputSheet = ss.getSheetByName(SCIIP_920_INPUT_SHEET);
   if (!inputSheet) {
@@ -68,8 +63,8 @@ function sciipRunAutonomousProcessorExecutionPlanProcessor() {
     return sciip920Result_('SKIPPED_NO_INPUTS', 0, 0, businessKey, startedAt);
   }
 
-  const records = guidanceRows.map((row, i) =>
-    sciip920BuildExecutionPlan_(row, resolvedPlanDate, businessKey, startedAt, i)
+  const records = guidanceRows.map((row, index) =>
+    sciip920BuildExecutionPlan_(row, resolvedPlanDate, businessKey, startedAt, index)
   );
 
   outputSheet
@@ -86,7 +81,7 @@ function sciip920BuildExecutionPlan_(row, planDate, businessKey, startedAt, inde
   const sourceGuidanceId =
     row.Guidance_ID ||
     row.Autonomous_Guidance_ID ||
-    row.Source_ID ||
+    row.Source_Guidance_ID ||
     `GUIDANCE_ROW_${index + 1}`;
 
   const targetProcessor =
@@ -95,13 +90,17 @@ function sciip920BuildExecutionPlan_(row, planDate, businessKey, startedAt, inde
     row.Recommended_Processor ||
     'NEXT_AUTONOMOUS_PROCESSOR';
 
-  const priority = row.Priority || row.Guidance_Priority || 'NORMAL';
+  const priority =
+    row.Priority ||
+    row.Guidance_Priority ||
+    'NORMAL';
 
-  const action =
+  const executionAction =
     row.Guidance ||
     row.Recommendation ||
     row.Processor_Guidance ||
-    'Create next downstream processor using SCIIP_OS v4.1 standards.';
+    row.Action ||
+    'Create next downstream SCIIP_OS processor using v4.1 architecture standards.';
 
   return [
     sciip920CreateId_('EXEC_PLAN'),
@@ -109,12 +108,12 @@ function sciip920BuildExecutionPlan_(row, planDate, businessKey, startedAt, inde
     sourceGuidanceId,
     targetProcessor,
     priority,
-    action,
-    row.Required_Input || row.Input_Sheet || 'Resolved from upstream processor output',
-    row.Required_Output || row.Output_Sheet || 'Permanent downstream history sheet',
-    'Resolved latest processing date, prefix idempotency, standalone spreadsheet resolver',
-    'Strengthens autonomous processor knowledge graph by converting guidance into executable planning history',
-    'Processor must return SUCCESS on first run and skippedDuplicate = 1 on rerun',
+    executionAction,
+    row.Required_Input || row.Input_Sheet || SCIIP_920_INPUT_SHEET,
+    row.Required_Output || row.Output_Sheet || SCIIP_920_OUTPUT_SHEET,
+    'Resolved latest processing date; prefix idempotency; event-sourced output; permanent history',
+    'Converts autonomous processor guidance into build-ready execution plan history',
+    'First run creates execution plans; second run returns skippedDuplicate = 1',
     'READY_FOR_BUILD',
     `${businessKey}|${targetProcessor}|${sourceGuidanceId}`,
     startedAt.toISOString()
@@ -124,52 +123,55 @@ function sciip920BuildExecutionPlan_(row, planDate, businessKey, startedAt, inde
 /***********************
  * Helper Functions
  ***********************/
-function sciip920ReadRowsForDate_(sheet, dateColumn, dateKey) {
+function sciip920ReadRowsForDate_(sheet, dateColumnName, dateKey) {
   const values = sheet.getDataRange().getValues();
   if (values.length < 2) return [];
 
   const headers = values[0].map(String);
-  const dateIdx = headers.indexOf(dateColumn);
+  const dateIndex = headers.indexOf(dateColumnName);
 
-  if (dateIdx === -1) {
-    throw new Error(`${SCIIP_920_PROCESSOR}: Missing input date column: ${dateColumn}`);
+  if (dateIndex === -1) {
+    throw new Error(`${SCIIP_920_PROCESSOR}: Missing input date column ${dateColumnName}`);
   }
 
   return values.slice(1)
-    .filter(r => sciipFormatDateKey_(r[dateIdx]) === dateKey)
-    .map(r => {
+    .filter(row => sciipFormatDateKey_(row[dateIndex]) === dateKey)
+    .map(row => {
       const obj = {};
-      headers.forEach((h, i) => obj[h] = r[i]);
+      headers.forEach((header, i) => obj[header] = row[i]);
       return obj;
     });
 }
 
-function sciip920EnsureSheet_(ss, name, headers) {
-  let sheet = ss.getSheetByName(name);
-  if (!sheet) sheet = ss.insertSheet(name);
+function sciip920EnsureSheet_(ss, sheetName, headers) {
+  let sheet = ss.getSheetByName(sheetName);
+
+  if (!sheet) {
+    sheet = ss.insertSheet(sheetName);
+  }
 
   if (sheet.getLastRow() === 0) {
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
     sheet.setFrozenRows(1);
   }
+
   return sheet;
 }
 
-  if (typeof SCIIP_SPREADSHEET_ID !== 'undefined' && SCIIP_SPREADSHEET_ID) {
-    return SpreadsheetApp.openById(SCIIP_SPREADSHEET_ID);
-  }
+function sciip920CreateId_(prefix) {
+  return `${prefix}_${Utilities.getUuid()}`;
+}
 
-  if (typeof SCIIP_CONFIG !== 'undefined' && SCIIP_CONFIG.SPREADSHEET_ID) {
-    return SpreadsheetApp.openById(SCIIP_CONFIG.SPREADSHEET_ID);
-  }
-
-  const active = SpreadsheetApp.getActiveSpreadsheet();
-  if (active) return active;
-
-  throw new Error(
-    `${SCIIP_920_PROCESSOR}: Unable to resolve spreadsheet. ` +
-    `Set SCIIP_SPREADSHEET_ID or SCIIP_CONFIG.SPREADSHEET_ID.`
-  );
+function sciip920Result_(status, created, skippedDuplicate, businessKey, startedAt) {
+  return {
+    processor: SCIIP_920_PROCESSOR,
+    status,
+    autonomousProcessorExecutionPlansCreated: created,
+    skippedDuplicate,
+    businessKey,
+    completedAt: new Date().toISOString(),
+    durationMs: new Date() - startedAt
+  };
 }
 
 /***********************
