@@ -38,12 +38,14 @@ function sciipRunAutonomousOpsDigestProcessor() {
     businessKey
   }));
 
-  if (
-    sciipBusinessKeyPrefixExists_(
-      AUTONOMOUS_OPS_DIGEST_OUTPUT_SHEET,
-      businessKey
-    )
-  ) {
+const outputSheet = sciipEnsureAutonomousOpsDigestSheet_();
+
+if (
+  sciipBusinessKeyPrefixExists_(
+    outputSheet,
+    businessKey
+  )
+) {
     return {
       processor: AUTONOMOUS_OPS_DIGEST_PROCESSOR_NAME,
       status: 'SUCCESS',
