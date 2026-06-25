@@ -1,0 +1,557 @@
+/*******************************************************
+ * SCIIP_OS v4.1
+ * 1240_AutonomousProcessorExecutionRunStateExecutiveSummaryProcessor
+ *******************************************************/
+
+const SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_PROCESSOR =
+  '1240_AutonomousProcessorExecutionRunStateExecutiveSummaryProcessor';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_INPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_COMMAND_CENTER_LEDGER';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_OUTPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_EXECUTIVE_SUMMARY';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_INPUT_DATE_COLUMN =
+  'Run_State_Date';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_OUTPUT_HEADERS = [
+  'Executive_Summary_ID',
+  'Business_Key',
+  'Run_State_Date',
+  'Summary_Type',
+  'Executive_Status',
+  'Executive_Severity',
+  'Executive_Headline',
+  'Executive_Summary',
+  'Leadership_Interpretation',
+  'Governance_Interpretation',
+  'Operational_Risk',
+  'Recommended_Action',
+  'Autonomous_Action_Allowed',
+  'Human_Review_Required',
+  'Command_Center_Status',
+  'Display_Severity',
+  'Display_Posture',
+  'Dashboard_Posture',
+  'Governance_Posture',
+  'Orchestration_Posture',
+  'Decisioning_Posture',
+  'Signals_Reviewed',
+  'Critical_Signal_Count',
+  'High_Signal_Count',
+  'Medium_Signal_Count',
+  'Low_Signal_Count',
+  'Source_Command_Center_Record_ID',
+  'Source_Ledger_Entry_ID',
+  'Source_Business_Key',
+  'Source_Sheet',
+  'Source_Date_Column',
+  'Executive_Summary_JSON',
+  'Processor',
+  'Created_At'
+];
+
+/**
+ * Main processor.
+ */
+function sciipRunAutonomousProcessorExecutionRunStateExecutiveSummaryProcessor() {
+  const startedAt = new Date();
+  const ss = sciipGetSpreadsheet_();
+
+  const inputSheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_INPUT_SHEET
+  );
+
+  if (!inputSheet) {
+    throw new Error(
+      'Missing input sheet: ' +
+      SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_INPUT_SHEET
+    );
+  }
+
+  const outputSheet =
+    sciipEnsureAutonomousProcessorExecutionRunStateExecutiveSummarySheet_();
+
+  const resolvedRunStateDate =
+    sciipResolveLatestProcessingDate_(
+      SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_INPUT_SHEET,
+      SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_INPUT_DATE_COLUMN
+    ) || sciipFormatDateKey_(startedAt);
+
+  const businessKey =
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_EXECUTIVE_SUMMARY|' +
+    resolvedRunStateDate;
+
+  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_PROCESSOR,
+      status: 'SUCCESS',
+      autonomousProcessorExecutionRunStateExecutiveSummariesCreated: 0,
+      skippedDuplicate: 1,
+      businessKey: businessKey,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const ledgerRows =
+    sciipReadAutonomousProcessorExecutionRunStateExecutiveSummaryInputRows_(
+      inputSheet
+    );
+
+  const sourceRows =
+    sciipFilterAutonomousProcessorExecutionRunStateExecutiveSummaryRowsByDate_(
+      ledgerRows,
+      resolvedRunStateDate
+    );
+
+  if (!sourceRows.length) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_PROCESSOR,
+      status: 'SKIPPED_NO_INPUTS',
+      autonomousProcessorExecutionRunStateExecutiveSummariesCreated: 0,
+      skippedDuplicate: 0,
+      businessKey: businessKey,
+      resolvedRunStateDate: resolvedRunStateDate,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const latestLedgerRow =
+    sciipResolveLatestAutonomousProcessorExecutionRunStateExecutiveSummaryInputRow_(
+      sourceRows
+    );
+
+  const summaryRow =
+    sciipBuildAutonomousProcessorExecutionRunStateExecutiveSummary_(
+      latestLedgerRow,
+      resolvedRunStateDate,
+      businessKey,
+      startedAt
+    );
+
+  outputSheet.appendRow(summaryRow);
+
+  const result = {
+    processor: SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_PROCESSOR,
+    status: 'SUCCESS',
+    autonomousProcessorExecutionRunStateExecutiveSummariesCreated: 1,
+    skippedDuplicate: 0,
+    businessKey: businessKey,
+    resolvedRunStateDate: resolvedRunStateDate,
+    completedAt: new Date().toISOString()
+  };
+
+  Logger.log(JSON.stringify(result));
+  return result;
+}
+
+/**
+ * Factory: output sheet.
+ */
+function sciipEnsureAutonomousProcessorExecutionRunStateExecutiveSummarySheet_() {
+  const ss = sciipGetSpreadsheet_();
+  let sheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_OUTPUT_SHEET
+  );
+
+  if (!sheet) {
+    sheet = ss.insertSheet(
+      SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_OUTPUT_SHEET
+    );
+  }
+
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(
+      SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_OUTPUT_HEADERS
+    );
+  }
+
+  const headers =
+    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  const missing =
+    SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_OUTPUT_HEADERS.filter(function(h) {
+      return headers.indexOf(h) === -1;
+    });
+
+  if (missing.length) {
+    sheet
+      .getRange(1, headers.length + 1, 1, missing.length)
+      .setValues([missing]);
+  }
+
+  return sheet;
+}
+
+/**
+ * Factory: executive summary.
+ */
+function sciipBuildAutonomousProcessorExecutionRunStateExecutiveSummary_(
+  row,
+  resolvedRunStateDate,
+  businessKey,
+  startedAt
+) {
+  const executiveSeverity =
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Display_Severity']);
+
+  const commandCenterStatus =
+    sciipGetRunStateExecutiveSummaryInputValue_(row, [
+      'Command_Center_Status'
+    ]);
+
+  const recommendedAction =
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Recommended_Action']);
+
+  const humanReviewRequired =
+    sciipGetRunStateExecutiveSummaryInputValue_(row, [
+      'Human_Review_Required'
+    ]);
+
+  const autonomousAllowed =
+    sciipGetRunStateExecutiveSummaryInputValue_(row, [
+      'Autonomous_Action_Allowed'
+    ]);
+
+  const executiveStatus =
+    sciipResolveAutonomousProcessorExecutionRunStateExecutiveStatus_(
+      executiveSeverity,
+      commandCenterStatus
+    );
+
+  const headline =
+    sciipResolveAutonomousProcessorExecutionRunStateExecutiveHeadline_(
+      executiveSeverity,
+      executiveStatus
+    );
+
+  const executiveSummary =
+    sciipResolveAutonomousProcessorExecutionRunStateExecutiveSummaryText_(
+      executiveSeverity,
+      commandCenterStatus,
+      recommendedAction,
+      humanReviewRequired,
+      autonomousAllowed
+    );
+
+  const leadershipInterpretation =
+    sciipResolveAutonomousProcessorExecutionRunStateLeadershipInterpretation_(
+      executiveSeverity,
+      humanReviewRequired,
+      autonomousAllowed
+    );
+
+  const governanceInterpretation =
+    sciipResolveAutonomousProcessorExecutionRunStateGovernanceInterpretation_(
+      row
+    );
+
+  const operationalRisk =
+    sciipResolveAutonomousProcessorExecutionRunStateOperationalRisk_(
+      executiveSeverity
+    );
+
+  const summaryId = 'APRSES_' + Utilities.getUuid();
+
+  const summaryJson = {
+    runStateDate: resolvedRunStateDate,
+    summaryType: 'AUTONOMOUS_RUN_STATE_EXECUTIVE_SUMMARY',
+    executiveStatus: executiveStatus,
+    executiveSeverity: executiveSeverity,
+    executiveHeadline: headline,
+    executiveSummary: executiveSummary,
+    leadershipInterpretation: leadershipInterpretation,
+    governanceInterpretation: governanceInterpretation,
+    operationalRisk: operationalRisk,
+    recommendedAction: recommendedAction,
+    autonomousActionAllowed: autonomousAllowed,
+    humanReviewRequired: humanReviewRequired,
+    sourceLedgerEntryId: sciipGetRunStateExecutiveSummaryInputValue_(row, [
+      'Ledger_Entry_ID'
+    ]),
+    sourceBusinessKey: sciipGetRunStateExecutiveSummaryInputValue_(row, [
+      'Business_Key'
+    ])
+  };
+
+  return [
+    summaryId,
+    businessKey,
+    resolvedRunStateDate,
+    'AUTONOMOUS_RUN_STATE_EXECUTIVE_SUMMARY',
+    executiveStatus,
+    executiveSeverity,
+    headline,
+    executiveSummary,
+    leadershipInterpretation,
+    governanceInterpretation,
+    operationalRisk,
+    recommendedAction,
+    autonomousAllowed,
+    humanReviewRequired,
+    commandCenterStatus,
+    executiveSeverity,
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Display_Posture']),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Dashboard_Posture']),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Governance_Posture']),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Orchestration_Posture']),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Decisioning_Posture']),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Signals_Reviewed']),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Critical_Signal_Count']),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['High_Signal_Count']),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Medium_Signal_Count']),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Low_Signal_Count']),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, [
+      'Command_Center_Record_ID'
+    ]),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Ledger_Entry_ID']),
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Business_Key']),
+    SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_INPUT_SHEET,
+    SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_INPUT_DATE_COLUMN,
+    JSON.stringify(summaryJson),
+    SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_PROCESSOR,
+    startedAt.toISOString()
+  ];
+}
+
+/**
+ * Executive resolver logic.
+ */
+function sciipResolveAutonomousProcessorExecutionRunStateExecutiveStatus_(
+  severity,
+  commandCenterStatus
+) {
+  const sev = String(severity || '').toUpperCase();
+  const status = String(commandCenterStatus || '').toUpperCase();
+
+  if (sev === 'CRITICAL' || status.indexOf('CRITICAL') !== -1) {
+    return 'EXECUTIVE_ATTENTION_REQUIRED';
+  }
+
+  if (sev === 'HIGH' || status.indexOf('ATTENTION') !== -1) {
+    return 'EXECUTIVE_REVIEW_RECOMMENDED';
+  }
+
+  if (sev === 'MEDIUM' || status.indexOf('MONITOR') !== -1) {
+    return 'EXECUTIVE_MONITOR';
+  }
+
+  return 'EXECUTIVE_HEALTHY';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateExecutiveHeadline_(
+  severity,
+  executiveStatus
+) {
+  const sev = String(severity || '').toUpperCase();
+
+  if (sev === 'CRITICAL') {
+    return 'Autonomous run state requires immediate executive attention.';
+  }
+
+  if (sev === 'HIGH') {
+    return 'Autonomous run state requires governance review before advancement.';
+  }
+
+  if (sev === 'MEDIUM') {
+    return 'Autonomous run state is operational with monitoring conditions.';
+  }
+
+  return 'Autonomous run state is healthy and available for downstream processing.';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateExecutiveSummaryText_(
+  severity,
+  commandCenterStatus,
+  recommendedAction,
+  humanReviewRequired,
+  autonomousAllowed
+) {
+  return (
+    'The autonomous run state command center resolved a ' +
+    severity +
+    ' status under ' +
+    commandCenterStatus +
+    '. Recommended action: ' +
+    recommendedAction +
+    '. Autonomous action allowed: ' +
+    autonomousAllowed +
+    '. Human review required: ' +
+    humanReviewRequired +
+    '.'
+  );
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateLeadershipInterpretation_(
+  severity,
+  humanReviewRequired,
+  autonomousAllowed
+) {
+  const sev = String(severity || '').toUpperCase();
+  const review = String(humanReviewRequired || '').toUpperCase();
+  const allowed = String(autonomousAllowed || '').toUpperCase();
+
+  if (sev === 'CRITICAL' || allowed === 'FALSE') {
+    return 'Leadership should treat the autonomous execution run state as constrained until the underlying signal is reviewed.';
+  }
+
+  if (review === 'TRUE' || sev === 'HIGH') {
+    return 'Leadership should review the run state before allowing additional autonomous promotion.';
+  }
+
+  if (sev === 'MEDIUM') {
+    return 'Leadership can allow continued operation while monitoring the signal trail.';
+  }
+
+  return 'Leadership can treat the autonomous run state as stable for this processing date.';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateGovernanceInterpretation_(
+  row
+) {
+  const governance =
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Governance_Posture']);
+
+  const decisioning =
+    sciipGetRunStateExecutiveSummaryInputValue_(row, ['Decisioning_Posture']);
+
+  return (
+    'Governance posture is ' +
+    governance +
+    '; decisioning posture is ' +
+    decisioning +
+    '.'
+  );
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateOperationalRisk_(
+  severity
+) {
+  const sev = String(severity || '').toUpperCase();
+
+  if (sev === 'CRITICAL') return 'HIGH_OPERATIONAL_RISK';
+  if (sev === 'HIGH') return 'ELEVATED_OPERATIONAL_RISK';
+  if (sev === 'MEDIUM') return 'MONITORED_OPERATIONAL_RISK';
+
+  return 'LOW_OPERATIONAL_RISK';
+}
+
+/**
+ * Reader logic.
+ */
+function sciipReadAutonomousProcessorExecutionRunStateExecutiveSummaryInputRows_(
+  sheet
+) {
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return [];
+
+  const headers = values[0].map(String);
+
+  return values.slice(1).map(function(row) {
+    const obj = {};
+    headers.forEach(function(header, i) {
+      obj[header] = row[i];
+    });
+    return obj;
+  });
+}
+
+/**
+ * Resolver logic.
+ */
+function sciipFilterAutonomousProcessorExecutionRunStateExecutiveSummaryRowsByDate_(
+  rows,
+  resolvedDate
+) {
+  return rows.filter(function(row) {
+    const rawDate = sciipGetRunStateExecutiveSummaryInputValue_(row, [
+      SCIIP_AUTONOMOUS_RUN_STATE_EXEC_SUMMARY_INPUT_DATE_COLUMN,
+      'Processing_Date',
+      'Run_Date',
+      'Command_Center_Date',
+      'Created_At',
+      'createdAt'
+    ]);
+
+    return sciipNormalizeRunStateExecutiveSummaryDateKey_(rawDate) === resolvedDate;
+  });
+}
+
+function sciipResolveLatestAutonomousProcessorExecutionRunStateExecutiveSummaryInputRow_(
+  rows
+) {
+  if (!rows.length) return {};
+
+  const sorted = rows.slice().sort(function(a, b) {
+    const aDate = new Date(
+      sciipGetRunStateExecutiveSummaryInputValue_(a, [
+        'Created_At',
+        'createdAt'
+      ]) || 0
+    ).getTime();
+
+    const bDate = new Date(
+      sciipGetRunStateExecutiveSummaryInputValue_(b, [
+        'Created_At',
+        'createdAt'
+      ]) || 0
+    ).getTime();
+
+    return bDate - aDate;
+  });
+
+  return sorted[0];
+}
+
+function sciipGetRunStateExecutiveSummaryInputValue_(row, aliases) {
+  for (let i = 0; i < aliases.length; i++) {
+    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
+      return row[aliases[i]];
+    }
+  }
+
+  return '';
+}
+
+function sciipNormalizeRunStateExecutiveSummaryDateKey_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return sciipFormatDateKey_(value);
+  }
+
+  const text = String(value);
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    return text;
+  }
+
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return sciipFormatDateKey_(parsed);
+  }
+
+  return text;
+}
+
+/**
+ * Standalone test.
+ */
+function sciipTestAutonomousProcessorExecutionRunStateExecutiveSummaryProcessor() {
+  const result =
+    sciipRunAutonomousProcessorExecutionRunStateExecutiveSummaryProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousProcessorExecutionRunStateExecutiveSummaryProcessor',
+    result: result
+  }));
+
+  return result;
+}
