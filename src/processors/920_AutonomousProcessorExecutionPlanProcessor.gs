@@ -152,15 +152,8 @@ function sciip920EnsureSheet_(ss, name, headers) {
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
     sheet.setFrozenRows(1);
   }
-
   return sheet;
 }
-
-function sciip920ResolveSpreadsheet_() {
-  if (typeof sciipResolveSpreadsheet_ === 'function') {
-    const resolved = sciipResolveSpreadsheet_();
-    if (resolved) return resolved;
-  }
 
   if (typeof SCIIP_SPREADSHEET_ID !== 'undefined' && SCIIP_SPREADSHEET_ID) {
     return SpreadsheetApp.openById(SCIIP_SPREADSHEET_ID);
