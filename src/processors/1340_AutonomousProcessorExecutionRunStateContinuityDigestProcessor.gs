@@ -15,7 +15,7 @@ const SCIIP_1340_BUSINESS_KEY_PREFIX = 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE
 function sciipRunAutonomousProcessorExecutionRunStateContinuityDigestProcessor() {
   const ss = sciipGetSpreadsheet_();
   const processingDate = sciipResolveLatestProcessingDate_();
-  const dateKey = sciipFormatDateKey_(processingDate);
+  const dateKey = sciip1340ResolveDateKey_(processingDate);
   const businessKey = `${SCIIP_1340_BUSINESS_KEY_PREFIX}|${dateKey}`;
   const startedAt = new Date();
 
@@ -50,8 +50,17 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityDigestProcessor()
 
   const relevantRows = sourceRows.filter(row => {
     const rowBusinessKey = sciip1340Get_(row, sourceMap, ['Business_Key', 'businessKey', 'BUSINESS_KEY']);
-    const rowDate = sciip1340Get_(row, sourceMap, ['Date_Key', 'Ledger_Date', 'Continuity_Date', 'Processing_Date', 'Run_Date']);
-    return String(rowBusinessKey || '').indexOf(`|${dateKey}`) !== -1 || sciip1340NormalizeDateKey_(rowDate) === dateKey;
+    const rowDate = sciip1340Get_(row, sourceMap, [
+      'Date_Key',
+      'Ledger_Date',
+      'Continuity_Date',
+      'Processing_Date',
+      'Run_Date',
+      'Created_At'
+    ]);
+
+    return String(rowBusinessKey || '').indexOf(`|${dateKey}`) !== -1 ||
+           sciip1340NormalizeDateKey_(rowDate) === dateKey;
   });
 
   if (!relevantRows.length) {
@@ -202,10 +211,46 @@ function sciip1340BusinessKeyExists_(sheet, businessKey) {
   return values.some(r => String(r[0]) === String(businessKey));
 }
 
-function sciip1340NormalizeDateKey_(value) {
-  if (!value) return '';
-  if (Object.prototype.toString.call(value) === '[object Date]') {
+function sciip1340ResolveDateKey_(value) {
+  if (Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime())) {
     return sciipFormatDateKey_(value);
   }
-  return String(value).trim().substring(0, 10);
+
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+
+    if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+      return trimmed;
+    }
+
+    const parsed = new Date(trimmed);
+    if (!isNaN(parsed.getTime())) {
+      return sciipFormatDateKey_(parsed);
+    }
+  }
+
+  return sciipFormatDateKey_(new Date());
+}
+
+function sciip1340NormalizeDateKey_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]' && !isNaN(value.getTime())) {
+    return sciipFormatDateKey_(value);
+  }
+
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+
+    if (/^\d{4}-\d{2}-\d{2}/.test(trimmed)) {
+      return trimmed.substring(0, 10);
+    }
+
+    const parsed = new Date(trimmed);
+    if (!isNaN(parsed.getTime())) {
+      return sciipFormatDateKey_(parsed);
+    }
+  }
+
+  return '';
 }
