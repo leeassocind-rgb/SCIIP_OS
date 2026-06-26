@@ -42,7 +42,12 @@ if (!dateKey || dateKey === '1969-12-31' || dateKey === '1970-01-01') {
     'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_SYSTEM_INDEX_LEDGER|' +
     dateKey;
 
-  if (sciipBusinessKeyPrefixExists_(ledgerSheet, businessKey)) {
+  if (
+  sciipAutonomousProcessorExecutionRunStateContinuitySystemIndexLedgerBusinessKeyExists_(
+    ledgerSheet,
+    businessKey
+  )
+) {
     const result = {
       processor,
       status: 'SUCCESS',
@@ -190,4 +195,30 @@ function sciipTestAutonomousProcessorExecutionRunStateContinuitySystemIndexLedge
   );
 
   return result;
+}
+
+function sciipAutonomousProcessorExecutionRunStateContinuitySystemIndexLedgerBusinessKeyExists_(
+  sheet,
+  businessKey
+) {
+  const values = sheet.getDataRange().getValues();
+
+  if (values.length < 2) {
+    return false;
+  }
+
+  const headers = values[0];
+  const businessKeyIndex = headers.indexOf('businessKey');
+
+  if (businessKeyIndex === -1) {
+    return false;
+  }
+
+  for (let i = 1; i < values.length; i++) {
+    if (String(values[i][businessKeyIndex]) === String(businessKey)) {
+      return true;
+    }
+  }
+
+  return false;
 }
