@@ -1,12 +1,6 @@
 /************************************************************
  * SCIIP_OS v4.1
  * 1570_AutonomousProcessorExecutionRunStateContinuitySystemIndexLedgerProcessor
- *
- * Consumes:
- * AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_SYSTEM_INDEX
- *
- * Produces:
- * AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_SYSTEM_INDEX_LEDGER
  ************************************************************/
 
 const SCIIP_AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_SYSTEM_INDEX_SHEET =
@@ -20,27 +14,26 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuitySystemIndexLedger
     '1570_AutonomousProcessorExecutionRunStateContinuitySystemIndexLedgerProcessor';
 
   const ss = sciipGetSpreadsheet_();
-  const processingDate = sciipResolveLatestProcessingDate_();
+
+  let processingDate = sciipResolveLatestProcessingDate_();
+
+  if (!(processingDate instanceof Date)) {
+    processingDate = new Date(processingDate);
+  }
+
   const dateKey = sciipFormatDateKey_(processingDate);
 
-  const sourceSheet = sciipEnsureAutonomousProcessorExecutionRunStateContinuitySystemIndexSheet_(
-    ss
-  );
+  const sourceSheet =
+    sciipEnsureAutonomousProcessorExecutionRunStateContinuitySystemIndexSheet_(ss);
 
-  const ledgerSheet = sciipEnsureAutonomousProcessorExecutionRunStateContinuitySystemIndexLedgerSheet_(
-    ss
-  );
+  const ledgerSheet =
+    sciipEnsureAutonomousProcessorExecutionRunStateContinuitySystemIndexLedgerSheet_(ss);
 
   const businessKey =
     'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_SYSTEM_INDEX_LEDGER|' +
     dateKey;
 
-  if (
-    sciipBusinessKeyPrefixExists_(
-      ledgerSheet,
-      businessKey
-    )
-  ) {
+  if (sciipBusinessKeyPrefixExists_(ledgerSheet, businessKey)) {
     const result = {
       processor,
       status: 'SUCCESS',
@@ -74,6 +67,7 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuitySystemIndexLedger
   const latestSourceRow = sourceValues[sourceValues.length - 1];
 
   const sourceRecord = {};
+
   sourceHeaders.forEach(function(header, index) {
     sourceRecord[header] = latestSourceRow[index];
   });
@@ -88,7 +82,8 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuitySystemIndexLedger
     sourceRecord.processor || '',
     sourceRecord.status || '',
     sourceRecord.systemIndexDateKey || dateKey,
-    sourceRecord.systemIndexScope || 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
+    sourceRecord.systemIndexScope ||
+      'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
     sourceRecord.systemIndexName || 'Continuity System Index',
     sourceRecord.systemIndexSummary || '',
     sourceRecord.systemIndexEntryCount || '',
@@ -171,4 +166,19 @@ function sciipEnsureAutonomousProcessorExecutionRunStateContinuitySystemIndexShe
   }
 
   return sheet;
+}
+
+function sciipTestAutonomousProcessorExecutionRunStateContinuitySystemIndexLedgerProcessor() {
+  const result =
+    sciipRunAutonomousProcessorExecutionRunStateContinuitySystemIndexLedgerProcessor();
+
+  Logger.log(
+    JSON.stringify({
+      test:
+        'sciipTestAutonomousProcessorExecutionRunStateContinuitySystemIndexLedgerProcessor',
+      result
+    })
+  );
+
+  return result;
 }
