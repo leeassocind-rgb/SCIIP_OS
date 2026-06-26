@@ -1,6 +1,12 @@
 /************************************************************
  * SCIIP_OS v5.0 Architecture Review Track
  * 1710_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor
+ *
+ * Consumes:
+ * AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_INDEX
+ *
+ * Produces:
+ * AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_LEDGER
  ************************************************************/
 
 function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor() {
@@ -59,6 +65,7 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
       'architectureLedgerSummary',
       'architectureDecisionRecordJson',
       'architectureReviewPayloadJson',
+      'ledgerPayloadJson',
       'sourcePayloadJson',
       'createdAt'
     ]
@@ -98,15 +105,19 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
     return result;
   }
 
+  const now = new Date();
+
   const architectureDecisionRecord = {
-    decisionType: 'PLATFORM_EVOLUTION_ARCHITECTURE_REVIEW_LEDGER',
+    decisionType: 'SCIIP_OS_ARCHITECTURE_REVIEW_LEDGER',
     decisionSummary:
-      'SCIIP_OS architecture review records are promoted into permanent ledger history to make the platform architecture queryable, auditable, and reusable by future autonomous processors.',
+      'Architecture review index records are promoted into permanent ledger history so SCIIP_OS can maintain a durable, queryable record of its own platform architecture.',
     architecturalIntent:
-      'Transition the 1700-series from static processor output into a durable architectural memory layer for SCIIP_OS platform self-understanding.',
+      'Use the 1700-series as a platform evolution and architectural memory layer rather than a static design-document workflow.',
     principlesPreserved: [
       'event_sourced',
       'knowledge_graph_native',
+      'gis_native',
+      'ai_native',
       'processor_driven',
       'asset_driven',
       'permanent_history',
@@ -115,71 +126,75 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
       'production_ready'
     ],
     platformImpact:
-      'Creates a durable record of architecture review state that can support future planning, governance, system map enrichment, autonomous processor guidance, and self-improvement loops.',
+      'Creates explicit architecture-review ledger history that future processors can use for planning, governance, system-map enrichment, and autonomous self-improvement.',
     recommendedFutureUse:
-      'Future architecture review processors should treat ledger entries as first-class architectural knowledge, not merely execution logs.'
+      'Future Architecture Review Track processors should consume ledger entries as first-class architectural knowledge.'
   };
 
-  const row = {
+  const ledgerPayload = {
+    ledgerType: 'ARCHITECTURE_REVIEW_LEDGER',
+    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
+    reviewTrack: sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
+    currentVersion: sourceRecord.currentVersion || 'SCIIP_OS v4.1',
+    targetVersion: sourceRecord.targetVersion || 'SCIIP_OS v5.0',
+    sourceArchitectureReviewBusinessKey: sourceRecord.businessKey || '',
+    architectureReviewStatus:
+      sourceRecord.architectureReviewStatus || 'OPEN',
+    architectureReviewPhase:
+      sourceRecord.architectureReviewPhase || 'INDEX',
+    architectureLedgerStatus: 'ACTIVE',
+    recordedAt: now.toISOString()
+  };
+
+  ledgerSheet.appendRow([
     businessKey,
     dateKey,
     processor,
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.architectureReviewStatus || sourceRecord.sourceStatus || '',
-    architectureReviewScope:
-      sourceRecord.architectureReviewScope || 'SCIIP_OS_PLATFORM_ARCHITECTURE',
-    architectureReviewName:
-      sourceRecord.architectureReviewName || 'Architecture Review Ledger',
-    architectureReviewStatus:
-      sourceRecord.architectureReviewStatus || 'LEDGERED',
-    architectureReviewPhase:
-      sourceRecord.architectureReviewPhase || 'ARCHITECTURE_REVIEW_LEDGER',
-    architectureReviewSummary:
-      sourceRecord.architectureReviewSummary ||
+    sourceRecord.businessKey || '',
+    sourceRecord.processor || '',
+    sourceRecord.architectureReviewStatus || sourceRecord.sourceStatus || '',
+    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
+    sourceRecord.architectureReviewName || 'SCIIP_OS v5.0 Architecture Review Ledger',
+    sourceRecord.architectureReviewStatus || 'OPEN',
+    sourceRecord.architectureReviewPhase || 'LEDGER',
+    sourceRecord.architectureReviewSummary ||
       'Architecture review index promoted into permanent architecture review ledger history.',
-    reviewTrack:
-      sourceRecord.reviewTrack || 'SCIIP_OS_V5_ARCHITECTURE_REVIEW_TRACK',
-    currentVersion:
-      sourceRecord.currentVersion || 'v5.0',
-    targetVersion:
-      sourceRecord.targetVersion || 'v5.x',
-    architectureLedgerStatus: 'ACTIVE',
-    architectureLedgerSummary:
-      'Permanent architecture review ledger entry created from latest architecture review index record.',
-    architectureDecisionRecordJson:
-      JSON.stringify(architectureDecisionRecord),
-    architectureReviewPayloadJson:
-      sourceRecord.architectureReviewPayloadJson || '',
-    sourcePayloadJson:
-      JSON.stringify(sourceRecord),
-    createdAt:
-      new Date().toISOString()
+    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
+    sourceRecord.currentVersion || 'SCIIP_OS v4.1',
+    sourceRecord.targetVersion || 'SCIIP_OS v5.0',
+    'ACTIVE',
+    'Permanent architecture review ledger entry created from latest architecture review index record.',
+    JSON.stringify(architectureDecisionRecord),
+    sourceRecord.architectureReviewPayloadJson || '',
+    JSON.stringify(ledgerPayload),
+    JSON.stringify(sourceRecord),
+    now.toISOString()
+  ]);
+
+  const result = {
+    processor,
+    status: 'SUCCESS',
+    autonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerEntriesCreated: 1,
+    skippedDuplicate: 0,
+    businessKey,
+    completedAt: now.toISOString()
   };
 
-  sciipAppendObjectRow_(
-  ledgerSheet,
-  [
-    'businessKey',
-    'dateKey',
-    'processor',
-    'sourceBusinessKey',
-    'sourceProcessor',
-    'sourceStatus',
-    'architectureReviewScope',
-    'architectureReviewName',
-    'architectureReviewStatus',
-    'architectureReviewPhase',
-    'architectureReviewSummary',
-    'reviewTrack',
-    'currentVersion',
-    'targetVersion',
-    'architectureLedgerStatus',
-    'architectureLedgerSummary',
-    'architectureDecisionRecordJson',
-    'architectureReviewPayloadJson',
-    'sourcePayloadJson',
-    'createdAt'
-  ],
-  row
-);
+  Logger.log(JSON.stringify(result));
+  return result;
+}
+
+function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor() {
+  const result =
+    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor();
+
+  Logger.log(
+    JSON.stringify({
+      test:
+        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor',
+      result
+    })
+  );
+
+  return result;
+}
