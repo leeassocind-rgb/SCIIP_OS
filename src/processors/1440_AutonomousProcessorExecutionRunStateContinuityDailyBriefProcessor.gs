@@ -18,8 +18,7 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityDailyBriefProcess
   const businessKey = `${SCIIP_1440_BUSINESS_KEY_PREFIX}|${dateKey}`;
   const startedAt = new Date();
 
-  const targetSheet = sciip1440EnsureSheet_(ss, SCIIP_1440_TARGET_HEADERS_());
-
+const targetSheet = sciip1440EnsureSheet_(ss, SCIIP_1440_TARGET_SHEET, SCIIP_1440_TARGET_HEADERS_());
   if (sciip1440BusinessKeyExists_(targetSheet, businessKey)) {
     return {
       processor: '1440_AutonomousProcessorExecutionRunStateContinuityDailyBriefProcessor',
