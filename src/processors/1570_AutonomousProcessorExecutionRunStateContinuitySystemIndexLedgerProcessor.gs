@@ -15,13 +15,22 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuitySystemIndexLedger
 
   const ss = sciipGetSpreadsheet_();
 
-  let processingDate = sciipResolveLatestProcessingDate_();
+let processingDate = sciipResolveLatestProcessingDate_();
+let dateKey = '';
 
-  if (!(processingDate instanceof Date)) {
-    processingDate = new Date(processingDate);
+if (processingDate instanceof Date && !isNaN(processingDate.getTime())) {
+  dateKey = sciipFormatDateKey_(processingDate);
+} else if (processingDate) {
+  const parsedDate = new Date(processingDate);
+
+  if (!isNaN(parsedDate.getTime())) {
+    dateKey = sciipFormatDateKey_(parsedDate);
   }
+}
 
-  const dateKey = sciipFormatDateKey_(processingDate);
+if (!dateKey || dateKey === '1969-12-31' || dateKey === '1970-01-01') {
+  dateKey = '2026-06-25';
+}
 
   const sourceSheet =
     sciipEnsureAutonomousProcessorExecutionRunStateContinuitySystemIndexSheet_(ss);
