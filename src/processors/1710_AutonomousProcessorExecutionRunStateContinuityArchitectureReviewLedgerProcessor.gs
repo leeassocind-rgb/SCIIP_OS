@@ -1,120 +1,170 @@
-/**
- * SCIIP_OS v5.0
+/************************************************************
+ * SCIIP_OS v5.0 Architecture Review Track
  * 1710_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor
- */
-
-const SCIIP_ARCH_REVIEW_LEDGER_PROCESSOR =
-  '1710_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor';
-
-const SCIIP_ARCH_REVIEW_INDEX_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_INDEX';
-
-const SCIIP_ARCH_REVIEW_LEDGER_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_LEDGER';
-
-const SCIIP_ARCH_REVIEW_LEDGER_HEADERS = [
-  'Ledger_ID',
-  'Business_Key',
-  'Review_Date',
-  'Source_Business_Key',
-  'Source_Index_ID',
-  'Architecture_Domain',
-  'Architecture_Principle',
-  'Architecture_Decision',
-  'System_Impact',
-  'Continuity_Impact',
-  'Knowledge_Graph_Impact',
-  'Risk_Level',
-  'Review_Status',
-  'Processor',
-  'Created_At'
-];
+ ************************************************************/
 
 function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor() {
-  const startedAt = new Date();
-  const reviewDate = sciip1710NormalizeBusinessDate_(startedAt);
+  const processor =
+    '1710_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor';
 
-  sciip1710EnsureSheetWithHeaders_(
-    SCIIP_ARCH_REVIEW_LEDGER_SHEET,
-    SCIIP_ARCH_REVIEW_LEDGER_HEADERS
+  const ss = sciipGetSpreadsheet_();
+  const dateKey = sciipNormalizeProcessingDateKey_();
+
+  const sourceSheet = sciipEnsureSheetWithHeaders_(
+    ss,
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_INDEX',
+    [
+      'businessKey',
+      'dateKey',
+      'processor',
+      'sourceBusinessKey',
+      'sourceProcessor',
+      'sourceStatus',
+      'architectureReviewScope',
+      'architectureReviewName',
+      'architectureReviewStatus',
+      'architectureReviewPhase',
+      'architectureReviewSummary',
+      'reviewTrack',
+      'currentVersion',
+      'targetVersion',
+      'checkpointBusinessKey',
+      'checkpointStatus',
+      'reviewDeliverablesJson',
+      'architectureReviewPayloadJson',
+      'sourcePayloadJson',
+      'createdAt'
+    ]
   );
 
-  const indexRows = sciip1710GetSheetRecords_(SCIIP_ARCH_REVIEW_INDEX_SHEET);
+  const ledgerSheet = sciipEnsureSheetWithHeaders_(
+    ss,
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_LEDGER',
+    [
+      'businessKey',
+      'dateKey',
+      'processor',
+      'sourceBusinessKey',
+      'sourceProcessor',
+      'sourceStatus',
+      'architectureReviewScope',
+      'architectureReviewName',
+      'architectureReviewStatus',
+      'architectureReviewPhase',
+      'architectureReviewSummary',
+      'reviewTrack',
+      'currentVersion',
+      'targetVersion',
+      'architectureLedgerStatus',
+      'architectureLedgerSummary',
+      'architectureDecisionRecordJson',
+      'architectureReviewPayloadJson',
+      'sourcePayloadJson',
+      'createdAt'
+    ]
+  );
 
-  if (!indexRows.length) {
+  const businessKey =
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_LEDGER|' +
+    dateKey;
+
+  if (sciipSheetBusinessKeyExists_(ledgerSheet, businessKey)) {
     const result = {
-      processor: SCIIP_ARCH_REVIEW_LEDGER_PROCESSOR,
-      status: 'SKIPPED_NO_INPUTS',
+      processor,
+      status: 'SUCCESS',
       autonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerEntriesCreated: 0,
+      skippedDuplicate: 1,
+      businessKey,
       completedAt: new Date().toISOString()
     };
+
     Logger.log(JSON.stringify(result));
     return result;
   }
 
-  let created = 0;
-  let skippedDuplicate = 0;
-  let lastBusinessKey = '';
+  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
 
-  indexRows.forEach(function(row) {
-    const sourceBusinessKey =
-      row.Business_Key ||
-      row.businessKey ||
-      row.Source_Business_Key ||
-      '';
-
-    const sourceIndexId =
-      row.Index_ID ||
-      row.Architecture_Review_Index_ID ||
-      row.ID ||
-      sourceBusinessKey;
-
-    const businessKey =
-      'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_LEDGER|' +
-      reviewDate +
-      '|' +
-      sourceBusinessKey;
-
-    lastBusinessKey = businessKey;
-
-    if (sciip1710BusinessKeyExists_(SCIIP_ARCH_REVIEW_LEDGER_SHEET, businessKey)) {
-      skippedDuplicate++;
-      return;
-    }
-
-    const record = {
-      Ledger_ID: 'ARCH_REVIEW_LEDGER_' + Utilities.getUuid(),
-      Business_Key: businessKey,
-      Review_Date: reviewDate,
-      Source_Business_Key: sourceBusinessKey,
-      Source_Index_ID: sourceIndexId,
-      Architecture_Domain: row.Architecture_Domain || 'SCIIP_OS_PLATFORM_ARCHITECTURE',
-      Architecture_Principle: row.Architecture_Principle || 'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM',
-      Architecture_Decision: row.Architecture_Decision || 'Architecture review index entry promoted into permanent architecture review ledger history.',
-      System_Impact: row.System_Impact || 'Creates queryable architectural memory for SCIIP_OS platform evolution.',
-      Continuity_Impact: row.Continuity_Impact || 'Preserves design continuity across autonomous processor generations.',
-      Knowledge_Graph_Impact: row.Knowledge_Graph_Impact || 'Adds architecture-review facts as durable graph-ready records.',
-      Risk_Level: row.Risk_Level || 'LOW',
-      Review_Status: row.Review_Status || 'LEDGERED',
-      Processor: SCIIP_ARCH_REVIEW_LEDGER_PROCESSOR,
-      Created_At: startedAt.toISOString()
+  if (!sourceRecord) {
+    const result = {
+      processor,
+      status: 'SKIPPED_NO_INPUTS',
+      autonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerEntriesCreated: 0,
+      skippedDuplicate: 0,
+      businessKey,
+      completedAt: new Date().toISOString()
     };
 
-    sciip1710AppendRecord_(
-      SCIIP_ARCH_REVIEW_LEDGER_SHEET,
-      SCIIP_ARCH_REVIEW_LEDGER_HEADERS,
-      record
-    );
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
 
-    created++;
-  });
+  const architectureDecisionRecord = {
+    decisionType: 'PLATFORM_EVOLUTION_ARCHITECTURE_REVIEW_LEDGER',
+    decisionSummary:
+      'SCIIP_OS architecture review records are promoted into permanent ledger history to make the platform architecture queryable, auditable, and reusable by future autonomous processors.',
+    architecturalIntent:
+      'Transition the 1700-series from static processor output into a durable architectural memory layer for SCIIP_OS platform self-understanding.',
+    principlesPreserved: [
+      'event_sourced',
+      'knowledge_graph_native',
+      'processor_driven',
+      'asset_driven',
+      'permanent_history',
+      'idempotent',
+      'no_overwrites',
+      'production_ready'
+    ],
+    platformImpact:
+      'Creates a durable record of architecture review state that can support future planning, governance, system map enrichment, autonomous processor guidance, and self-improvement loops.',
+    recommendedFutureUse:
+      'Future architecture review processors should treat ledger entries as first-class architectural knowledge, not merely execution logs.'
+  };
+
+  const row = {
+    businessKey,
+    dateKey,
+    processor,
+    sourceBusinessKey: sourceRecord.businessKey || '',
+    sourceProcessor: sourceRecord.processor || '',
+    sourceStatus: sourceRecord.architectureReviewStatus || sourceRecord.sourceStatus || '',
+    architectureReviewScope:
+      sourceRecord.architectureReviewScope || 'SCIIP_OS_PLATFORM_ARCHITECTURE',
+    architectureReviewName:
+      sourceRecord.architectureReviewName || 'Architecture Review Ledger',
+    architectureReviewStatus:
+      sourceRecord.architectureReviewStatus || 'LEDGERED',
+    architectureReviewPhase:
+      sourceRecord.architectureReviewPhase || 'ARCHITECTURE_REVIEW_LEDGER',
+    architectureReviewSummary:
+      sourceRecord.architectureReviewSummary ||
+      'Architecture review index promoted into permanent architecture review ledger history.',
+    reviewTrack:
+      sourceRecord.reviewTrack || 'SCIIP_OS_V5_ARCHITECTURE_REVIEW_TRACK',
+    currentVersion:
+      sourceRecord.currentVersion || 'v5.0',
+    targetVersion:
+      sourceRecord.targetVersion || 'v5.x',
+    architectureLedgerStatus: 'ACTIVE',
+    architectureLedgerSummary:
+      'Permanent architecture review ledger entry created from latest architecture review index record.',
+    architectureDecisionRecordJson:
+      JSON.stringify(architectureDecisionRecord),
+    architectureReviewPayloadJson:
+      sourceRecord.architectureReviewPayloadJson || '',
+    sourcePayloadJson:
+      JSON.stringify(sourceRecord),
+    createdAt:
+      new Date().toISOString()
+  };
+
+  sciipAppendObjectRow_(ledgerSheet, row);
 
   const result = {
-    processor: SCIIP_ARCH_REVIEW_LEDGER_PROCESSOR,
+    processor,
     status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerEntriesCreated: created,
-    skippedDuplicate: skippedDuplicate,
-    businessKey: lastBusinessKey,
+    autonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerEntriesCreated: 1,
+    skippedDuplicate: 0,
+    businessKey,
     completedAt: new Date().toISOString()
   };
 
@@ -128,118 +178,8 @@ function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureRevi
 
   Logger.log(JSON.stringify({
     test: 'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor',
-    result: result
+    result
   }));
 
   return result;
-}
-
-/**
- * Spreadsheet resolver
- */
-
-function sciip1710GetSpreadsheet_() {
-  if (typeof SCIIP_SPREADSHEET_ID !== 'undefined' && SCIIP_SPREADSHEET_ID) {
-    return SpreadsheetApp.openById(SCIIP_SPREADSHEET_ID);
-  }
-
-  if (typeof CONFIG !== 'undefined' && CONFIG.SPREADSHEET_ID) {
-    return SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
-  }
-
-  const active = SpreadsheetApp.getActiveSpreadsheet();
-  if (active) return active;
-
-  throw new Error(
-    'No spreadsheet available. Define SCIIP_SPREADSHEET_ID or CONFIG.SPREADSHEET_ID in your config file.'
-  );
-}
-
-/**
- * 1710 guarded shared-utility adapters
- */
-
-function sciip1710NormalizeBusinessDate_(dateValue) {
-  if (typeof sciipNormalizeDateToBusinessDate === 'function') {
-    return sciipNormalizeDateToBusinessDate(dateValue);
-  }
-
-  if (typeof sciipNormalizeDate === 'function') {
-    return sciipNormalizeDate(dateValue);
-  }
-
-  return Utilities.formatDate(
-    dateValue,
-    Session.getScriptTimeZone(),
-    'yyyy-MM-dd'
-  );
-}
-
-function sciip1710EnsureSheetWithHeaders_(sheetName, headers) {
-  if (typeof sciipEnsureSheetWithHeaders === 'function') {
-    return sciipEnsureSheetWithHeaders(sheetName, headers);
-  }
-
-  const ss = sciip1710GetSpreadsheet_();
-  let sheet = ss.getSheetByName(sheetName);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(sheetName);
-  }
-
-  if (sheet.getLastRow() === 0) {
-    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-  }
-
-  return sheet;
-}
-
-function sciip1710GetSheetRecords_(sheetName) {
-  if (typeof sciipGetSheetRecords === 'function') {
-    return sciipGetSheetRecords(sheetName);
-  }
-
-  const ss = sciip1710GetSpreadsheet_();
-  const sheet = ss.getSheetByName(sheetName);
-
-  if (!sheet || sheet.getLastRow() < 2) {
-    return [];
-  }
-
-  const values = sheet.getDataRange().getValues();
-  const headers = values.shift();
-
-  return values.map(function(row) {
-    const record = {};
-    headers.forEach(function(header, index) {
-      record[header] = row[index];
-    });
-    return record;
-  });
-}
-
-function sciip1710BusinessKeyExists_(sheetName, businessKey) {
-  if (typeof sciipBusinessKeyExists === 'function') {
-    return sciipBusinessKeyExists(sheetName, businessKey);
-  }
-
-  const records = sciip1710GetSheetRecords_(sheetName);
-
-  return records.some(function(record) {
-    return record.Business_Key === businessKey;
-  });
-}
-
-function sciip1710AppendRecord_(sheetName, headers, record) {
-  if (typeof sciipAppendRecord === 'function') {
-    return sciipAppendRecord(sheetName, headers, record);
-  }
-
-  const sheet = sciip1710EnsureSheetWithHeaders_(sheetName, headers);
-
-  const row = headers.map(function(header) {
-    return record[header] !== undefined ? record[header] : '';
-  });
-
-  sheet.appendRow(row);
 }
