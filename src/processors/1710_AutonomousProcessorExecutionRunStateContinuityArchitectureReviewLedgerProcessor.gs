@@ -157,29 +157,29 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
       new Date().toISOString()
   };
 
-  sciipAppendObjectRow_(ledgerSheet, row);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerEntriesCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor();
-
-  Logger.log(JSON.stringify({
-    test: 'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor',
-    result
-  }));
-
-  return result;
-}
+  sciipAppendObjectRow_(
+  ledgerSheet,
+  [
+    'businessKey',
+    'dateKey',
+    'processor',
+    'sourceBusinessKey',
+    'sourceProcessor',
+    'sourceStatus',
+    'architectureReviewScope',
+    'architectureReviewName',
+    'architectureReviewStatus',
+    'architectureReviewPhase',
+    'architectureReviewSummary',
+    'reviewTrack',
+    'currentVersion',
+    'targetVersion',
+    'architectureLedgerStatus',
+    'architectureLedgerSummary',
+    'architectureDecisionRecordJson',
+    'architectureReviewPayloadJson',
+    'sourcePayloadJson',
+    'createdAt'
+  ],
+  row
+);
