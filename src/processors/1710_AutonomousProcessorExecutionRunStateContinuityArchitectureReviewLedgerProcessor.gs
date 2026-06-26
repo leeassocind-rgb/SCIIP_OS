@@ -1,24 +1,18 @@
 /**
  * SCIIP_OS v5.0
  * 1710_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor
- *
- * Consumes:
- * AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_INDEX
- *
- * Produces:
- * AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_LEDGER
  */
 
-const SCIIP_ARCHITECTURE_REVIEW_LEDGER_PROCESSOR =
+const SCIIP_ARCH_REVIEW_LEDGER_PROCESSOR =
   '1710_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor';
 
-const SCIIP_ARCHITECTURE_REVIEW_INDEX_SHEET =
+const SCIIP_ARCH_REVIEW_INDEX_SHEET =
   'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_INDEX';
 
-const SCIIP_ARCHITECTURE_REVIEW_LEDGER_SHEET =
+const SCIIP_ARCH_REVIEW_LEDGER_SHEET =
   'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_LEDGER';
 
-const SCIIP_ARCHITECTURE_REVIEW_LEDGER_HEADERS = [
+const SCIIP_ARCH_REVIEW_LEDGER_HEADERS = [
   'Ledger_ID',
   'Business_Key',
   'Review_Date',
@@ -38,24 +32,21 @@ const SCIIP_ARCHITECTURE_REVIEW_LEDGER_HEADERS = [
 
 function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor() {
   const startedAt = new Date();
+  const reviewDate = sciip1710NormalizeBusinessDate_(startedAt);
 
-  const reviewDate = sciipNormalizeDateToBusinessDate
-    ? sciipNormalizeDateToBusinessDate(new Date())
-    : Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
-
-  sciipEnsureSheetWithHeaders_1710_(
-    SCIIP_ARCHITECTURE_REVIEW_LEDGER_SHEET,
-    SCIIP_ARCHITECTURE_REVIEW_LEDGER_HEADERS
+  sciip1710EnsureSheetWithHeaders_(
+    SCIIP_ARCH_REVIEW_LEDGER_SHEET,
+    SCIIP_ARCH_REVIEW_LEDGER_HEADERS
   );
 
-  const indexRows = sciipGetSheetRecords_1710_(SCIIP_ARCHITECTURE_REVIEW_INDEX_SHEET);
+  const indexRows = sciip1710GetSheetRecords_(SCIIP_ARCH_REVIEW_INDEX_SHEET);
 
   if (!indexRows.length) {
     const result = {
-      processor: SCIIP_ARCHITECTURE_REVIEW_LEDGER_PROCESSOR,
+      processor: SCIIP_ARCH_REVIEW_LEDGER_PROCESSOR,
       status: 'SKIPPED_NO_INPUTS',
-      architectureReviewLedgerEntriesCreated: 0,
-      completedAt: startedAt.toISOString()
+      autonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerEntriesCreated: 0,
+      completedAt: new Date().toISOString()
     };
     Logger.log(JSON.stringify(result));
     return result;
@@ -63,7 +54,7 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
 
   let created = 0;
   let skippedDuplicate = 0;
-  let lastBusinessKey = null;
+  let lastBusinessKey = '';
 
   indexRows.forEach(function(row) {
     const sourceBusinessKey =
@@ -86,15 +77,13 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
 
     lastBusinessKey = businessKey;
 
-    if (sciipBusinessKeyExists_1710_(SCIIP_ARCHITECTURE_REVIEW_LEDGER_SHEET, businessKey)) {
+    if (sciip1710BusinessKeyExists_(SCIIP_ARCH_REVIEW_LEDGER_SHEET, businessKey)) {
       skippedDuplicate++;
       return;
     }
 
-    const ledgerId = 'ARCH_REVIEW_LEDGER_' + Utilities.getUuid();
-
     const record = {
-      Ledger_ID: ledgerId,
+      Ledger_ID: 'ARCH_REVIEW_LEDGER_' + Utilities.getUuid(),
       Business_Key: businessKey,
       Review_Date: reviewDate,
       Source_Business_Key: sourceBusinessKey,
@@ -107,16 +96,21 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
       Knowledge_Graph_Impact: row.Knowledge_Graph_Impact || 'Adds architecture-review facts as durable graph-ready records.',
       Risk_Level: row.Risk_Level || 'LOW',
       Review_Status: row.Review_Status || 'LEDGERED',
-      Processor: SCIIP_ARCHITECTURE_REVIEW_LEDGER_PROCESSOR,
+      Processor: SCIIP_ARCH_REVIEW_LEDGER_PROCESSOR,
       Created_At: startedAt.toISOString()
     };
 
-    sciipAppendRecord_1710_(SCIIP_ARCHITECTURE_REVIEW_LEDGER_SHEET, SCIIP_ARCHITECTURE_REVIEW_LEDGER_HEADERS, record);
+    sciip1710AppendRecord_(
+      SCIIP_ARCH_REVIEW_LEDGER_SHEET,
+      SCIIP_ARCH_REVIEW_LEDGER_HEADERS,
+      record
+    );
+
     created++;
   });
 
   const result = {
-    processor: SCIIP_ARCHITECTURE_REVIEW_LEDGER_PROCESSOR,
+    processor: SCIIP_ARCH_REVIEW_LEDGER_PROCESSOR,
     status: 'SUCCESS',
     autonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerEntriesCreated: created,
     skippedDuplicate: skippedDuplicate,
@@ -128,9 +122,6 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
   return result;
 }
 
-/**
- * Test
- */
 function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor() {
   const result =
     sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewLedgerProcessor();
@@ -144,11 +135,26 @@ function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureRevi
 }
 
 /**
- * Local compatibility helpers.
- * These defer to shared SCIIP utilities where available.
+ * 1710 guarded shared-utility adapters
  */
 
-function sciipEnsureSheetWithHeaders_1710_(sheetName, headers) {
+function sciip1710NormalizeBusinessDate_(dateValue) {
+  if (typeof sciipNormalizeDateToBusinessDate === 'function') {
+    return sciipNormalizeDateToBusinessDate(dateValue);
+  }
+
+  if (typeof sciipNormalizeDate === 'function') {
+    return sciipNormalizeDate(dateValue);
+  }
+
+  return Utilities.formatDate(
+    dateValue,
+    Session.getScriptTimeZone(),
+    'yyyy-MM-dd'
+  );
+}
+
+function sciip1710EnsureSheetWithHeaders_(sheetName, headers) {
   if (typeof sciipEnsureSheetWithHeaders === 'function') {
     return sciipEnsureSheetWithHeaders(sheetName, headers);
   }
@@ -160,53 +166,59 @@ function sciipEnsureSheetWithHeaders_1710_(sheetName, headers) {
     sheet = ss.insertSheet(sheetName);
   }
 
-  const existingHeaders = sheet.getLastColumn() > 0
-    ? sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
-    : [];
-
-  if (!existingHeaders.length || existingHeaders[0] === '') {
+  if (sheet.getLastRow() === 0) {
     sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
   }
 
   return sheet;
 }
 
-function sciipGetSheetRecords_1710_(sheetName) {
+function sciip1710GetSheetRecords_(sheetName) {
   if (typeof sciipGetSheetRecords === 'function') {
     return sciipGetSheetRecords(sheetName);
   }
 
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sheet = ss.getSheetByName(sheetName);
-  if (!sheet || sheet.getLastRow() < 2) return [];
+
+  if (!sheet || sheet.getLastRow() < 2) {
+    return [];
+  }
 
   const values = sheet.getDataRange().getValues();
   const headers = values.shift();
 
   return values.map(function(row) {
-    const obj = {};
-    headers.forEach(function(header, i) {
-      obj[header] = row[i];
+    const record = {};
+    headers.forEach(function(header, index) {
+      record[header] = row[index];
     });
-    return obj;
+    return record;
   });
 }
 
-function sciipBusinessKeyExists_1710_(sheetName, businessKey) {
+function sciip1710BusinessKeyExists_(sheetName, businessKey) {
   if (typeof sciipBusinessKeyExists === 'function') {
     return sciipBusinessKeyExists(sheetName, businessKey);
   }
 
-  const records = sciipGetSheetRecords_1710_(sheetName);
+  const records = sciip1710GetSheetRecords_(sheetName);
+
   return records.some(function(record) {
     return record.Business_Key === businessKey;
   });
 }
 
-function sciipAppendRecord_1710_(sheetName, headers, record) {
-  const sheet = sciipEnsureSheetWithHeaders_1710_(sheetName, headers);
+function sciip1710AppendRecord_(sheetName, headers, record) {
+  if (typeof sciipAppendRecord === 'function') {
+    return sciipAppendRecord(sheetName, headers, record);
+  }
+
+  const sheet = sciip1710EnsureSheetWithHeaders_(sheetName, headers);
+
   const row = headers.map(function(header) {
     return record[header] !== undefined ? record[header] : '';
   });
+
   sheet.appendRow(row);
 }
