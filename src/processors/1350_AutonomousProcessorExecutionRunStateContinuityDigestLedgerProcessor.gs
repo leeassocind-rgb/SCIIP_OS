@@ -14,8 +14,7 @@ const SCIIP_1350_BUSINESS_KEY_PREFIX = 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE
 
 function sciipRunAutonomousProcessorExecutionRunStateContinuityDigestLedgerProcessor() {
   const ss = sciipGetSpreadsheet_();
-  const processingDate = sciipResolveLatestProcessingDate_();
-  const dateKey = sciip1350ResolveDateKey_(processingDate);
+  const dateKey = sciip1350ResolveLatestSourceDateKey_(ss);
   const businessKey = `${SCIIP_1350_BUSINESS_KEY_PREFIX}|${dateKey}`;
   const startedAt = new Date();
 
@@ -260,4 +259,35 @@ function sciip1350NormalizeDateKey_(value) {
   }
 
   return '';
+}
+
+function sciip1350ResolveLatestSourceDateKey_(ss) {
+  const sourceSheet = ss.getSheetByName(SCIIP_1350_SOURCE_SHEET);
+
+  if (!sourceSheet || sourceSheet.getLastRow() < 2) {
+    return sciip1350ResolveDateKey_(sciipResolveLatestProcessingDate_());
+  }
+
+  const values = sourceSheet.getDataRange().getValues();
+  const headers = values[0];
+  const rows = values.slice(1);
+  const map = sciip1350HeaderMap_(headers);
+
+  const dateKeys = rows.map(row => {
+    const businessKey = sciip1350Get_(row, map, ['Business_Key', 'businessKey', 'BUSINESS_KEY']);
+    const digestDate = sciip1350Get_(row, map, ['Digest_Date', 'Date_Key', 'Processing_Date', 'Run_Date', 'Created_At']);
+
+    const fromBusinessKey = String(businessKey || '').split('|')[1];
+    const normalizedFromBusinessKey = sciip1350NormalizeDateKey_(fromBusinessKey);
+    if (normalizedFromBusinessKey) return normalizedFromBusinessKey;
+
+    return sciip1350NormalizeDateKey_(digestDate);
+  }).filter(Boolean);
+
+  if (!dateKeys.length) {
+    return sciip1350ResolveDateKey_(sciipResolveLatestProcessingDate_());
+  }
+
+  dateKeys.sort();
+  return dateKeys[dateKeys.length - 1];
 }
