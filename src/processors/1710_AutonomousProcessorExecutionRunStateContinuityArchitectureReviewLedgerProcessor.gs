@@ -135,6 +135,27 @@ function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureRevi
 }
 
 /**
+ * Spreadsheet resolver
+ */
+
+function sciip1710GetSpreadsheet_() {
+  if (typeof SCIIP_SPREADSHEET_ID !== 'undefined' && SCIIP_SPREADSHEET_ID) {
+    return SpreadsheetApp.openById(SCIIP_SPREADSHEET_ID);
+  }
+
+  if (typeof CONFIG !== 'undefined' && CONFIG.SPREADSHEET_ID) {
+    return SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  }
+
+  const active = SpreadsheetApp.getActiveSpreadsheet();
+  if (active) return active;
+
+  throw new Error(
+    'No spreadsheet available. Define SCIIP_SPREADSHEET_ID or CONFIG.SPREADSHEET_ID in your config file.'
+  );
+}
+
+/**
  * 1710 guarded shared-utility adapters
  */
 
@@ -159,7 +180,7 @@ function sciip1710EnsureSheetWithHeaders_(sheetName, headers) {
     return sciipEnsureSheetWithHeaders(sheetName, headers);
   }
 
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = sciip1710GetSpreadsheet_();
   let sheet = ss.getSheetByName(sheetName);
 
   if (!sheet) {
@@ -178,7 +199,7 @@ function sciip1710GetSheetRecords_(sheetName) {
     return sciipGetSheetRecords(sheetName);
   }
 
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = sciip1710GetSpreadsheet_();
   const sheet = ss.getSheetByName(sheetName);
 
   if (!sheet || sheet.getLastRow() < 2) {
