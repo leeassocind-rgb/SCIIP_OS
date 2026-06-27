@@ -38,7 +38,7 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
     ]
   );
 
-  const knowledgeGraphSheet = sciipEnsureSheetWithHeaders_(
+  const kgSheet = sciipEnsureSheetWithHeaders_(
     ss,
     'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_KNOWLEDGE_GRAPH',
     [
@@ -73,7 +73,7 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
     'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_KNOWLEDGE_GRAPH|' +
     dateKey;
 
-  if (sciipSheetBusinessKeyExists_(knowledgeGraphSheet, businessKey)) {
+  if (sciipSheetBusinessKeyExists_(kgSheet, businessKey)) {
     const result = {
       processor,
       status: 'SUCCESS',
@@ -106,6 +106,7 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
   const now = new Date();
 
   const nodeType = 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE';
+
   const nodeKey =
     'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE|' +
     dateKey +
@@ -118,6 +119,18 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
   const architectureRecommendation =
     sourceRecord.archivedRecommendation ||
     'Preserve architecture-review records as permanent graph-ready platform memory for future continuity processors.';
+
+  const compactSourcePayload = {
+    sourceBusinessKey: sourceRecord.businessKey || '',
+    sourceProcessor: sourceRecord.processor || '',
+    sourceStatus: sourceRecord.archiveStatus || sourceRecord.sourceStatus || '',
+    architectureReviewScope: sourceRecord.architectureReviewScope || '',
+    architectureReviewName: sourceRecord.architectureReviewName || '',
+    reviewTrack: sourceRecord.reviewTrack || '',
+    currentVersion: sourceRecord.currentVersion || '',
+    targetVersion: sourceRecord.targetVersion || '',
+    createdAt: sourceRecord.createdAt || ''
+  };
 
   const knowledgeGraphPayload = {
     knowledgeGraphType: 'ARCHITECTURE_REVIEW_KNOWLEDGE_GRAPH',
@@ -135,16 +148,13 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
     architectureFinding,
     architectureRecommendation,
     knowledgeGraphStatus: 'ACTIVE',
-    reviewTrack:
-      sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion:
-      sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    targetVersion:
-      sourceRecord.targetVersion || 'SCIIP_OS v5.0',
+    reviewTrack: sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
+    currentVersion: sourceRecord.currentVersion || 'SCIIP_OS v4.1',
+    targetVersion: sourceRecord.targetVersion || 'SCIIP_OS v5.0',
     createdAt: now.toISOString()
   };
 
-  knowledgeGraphSheet.appendRow([
+  kgSheet.appendRow([
     businessKey,
     dateKey,
     processor,
@@ -167,7 +177,7 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
     sourceRecord.currentVersion || 'SCIIP_OS v4.1',
     sourceRecord.targetVersion || 'SCIIP_OS v5.0',
     JSON.stringify(knowledgeGraphPayload),
-    JSON.stringify(sourceRecord),
+    JSON.stringify(compactSourcePayload),
     now.toISOString()
   ]);
 
