@@ -1,53 +1,38 @@
-/************************************************************
- * SCIIP_OS v5.0 Architecture Review Track
- * 2070_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewProcessor
- ************************************************************/
-
 function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewProcessor() {
   const processor =
     '2070_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewProcessor';
 
-  const ss = sciipGetSpreadsheet_();
-  const dateKey = sciipNormalizeProcessingDateKey_();
+  return sciipRunConfiguredContinuityProcessor_({
+    processor: processor,
 
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW',
-    [
+    sourceSheetName:
+      'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_HANDOFF_LEDGER',
+
+    outputSheetName:
+      'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW',
+
+    businessKeyPrefix:
+      'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_FRAMEWORK_PATTERN_REVIEW',
+
+    createdCountField:
+      'autonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewsCreated',
+
+    sourceHeaders: [
       'businessKey',
       'dateKey',
       'processor',
       'sourceBusinessKey',
       'sourceProcessor',
       'sourceStatus',
-      'handoffLedgerScope',
-      'handoffLedgerName',
       'handoffLedgerStatus',
-      'handoffLedgerSummary',
-      'ledgeredHandoffBusinessKey',
       'handoffResult',
-      'ledgeredNodeType',
-      'ledgeredNodeKey',
-      'ledgeredNodeLabel',
-      'ledgeredRelationshipType',
-      'ledgeredRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
       'reviewTrack',
       'currentVersion',
       'targetVersion',
-      'handoffLedgerPayloadJson',
-      'sourcePayloadJson',
       'createdAt'
-    ]
-  );
+    ],
 
-  const reviewSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW',
-    [
+    outputHeaders: [
       'businessKey',
       'dateKey',
       'processor',
@@ -74,129 +59,78 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
       'frameworkPatternReviewPayloadJson',
       'sourcePayloadJson',
       'createdAt'
-    ]
-  );
+    ],
 
-  const businessKey =
-    'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW|' +
-    dateKey;
+    buildRow: function(ctx) {
+      const sourceRecord = ctx.sourceRecord;
 
-  if (sciipSheetBusinessKeyExists_(reviewSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
+      const finding =
+        'Architecture Review Track processors share repeated sheet initialization, source lookup, business-key duplicate detection, compact payload construction, append-row emission, and standardized result logging.';
 
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      const recommendation =
+        'Create a reusable SCIIP processor execution framework for linear processor chains with configurable source/output sheets, field mappings, payload builders, status fields, count fields, and ledger/event modes.';
 
-  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
+      const payload = {
+        reviewType: 'ARCHITECTURE_REVIEW_FRAMEWORK_PATTERN_REVIEW',
+        reviewedProcessorRange: '1700-2060',
+        reviewedPatternCategory: 'REPEATED_PROCESSOR_BOILERPLATE',
+        reviewedPatternName: 'Architecture Review Track processor chain pattern',
+        repeatablePatternFinding: finding,
+        frameworkRecommendation: recommendation,
+        targetVersion: 'SCIIP_OS v5.1',
+        reviewedAt: ctx.now.toISOString()
+      };
 
-  if (!sourceRecord) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewsCreated: 0,
-      skippedDuplicate: 0,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
+      const compactSourcePayload = {
+        sourceBusinessKey: sourceRecord.businessKey || '',
+        sourceProcessor: sourceRecord.processor || '',
+        sourceStatus: sourceRecord.handoffLedgerStatus || sourceRecord.sourceStatus || '',
+        handoffResult: sourceRecord.handoffResult || '',
+        reviewTrack: sourceRecord.reviewTrack || '',
+        createdAt: sourceRecord.createdAt || ''
+      };
 
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const now = new Date();
-
-  const compactSourcePayload = {
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.handoffLedgerStatus || sourceRecord.sourceStatus || '',
-    handoffResult: sourceRecord.handoffResult || '',
-    reviewTrack: sourceRecord.reviewTrack || '',
-    currentVersion: sourceRecord.currentVersion || '',
-    targetVersion: sourceRecord.targetVersion || '',
-    createdAt: sourceRecord.createdAt || ''
-  };
-
-  const frameworkPatternReviewPayload = {
-    reviewType: 'ARCHITECTURE_REVIEW_FRAMEWORK_PATTERN_REVIEW',
-    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
-    reviewedProcessorRange: '1700-2060',
-    reviewedPatternCategory: 'REPEATED_PROCESSOR_BOILERPLATE',
-    reviewedPatternName: 'Architecture Review Track processor chain pattern',
-    repeatablePatternFinding:
-      'Architecture Review Track processors share repeated sheet initialization, source lookup, business-key duplicate detection, compact payload construction, append-row emission, and standardized result logging.',
-    frameworkRecommendation:
-      'Create a reusable SCIIP processor execution framework for linear processor chains with configurable source/output sheets, field mappings, payload builders, status fields, count fields, and ledger/event modes.',
-    architectureReviewScope:
-      sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    architecturePrinciple:
-      'PROCESSOR_DRIVEN_EVENT_SOURCED_IDEMPOTENT_FRAMEWORK_ABSTRACTION',
-    reviewTrack: sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion: sourceRecord.currentVersion || 'SCIIP_OS v5.0',
-    targetVersion: 'SCIIP_OS v5.1',
-    reviewedAt: now.toISOString()
-  };
-
-  reviewSheet.appendRow([
-    businessKey,
-    dateKey,
-    processor,
-    sourceRecord.businessKey || '',
-    sourceRecord.processor || '',
-    sourceRecord.handoffLedgerStatus || sourceRecord.sourceStatus || '',
-    'SCIIP_OS_ARCHITECTURE_REVIEW_FRAMEWORK_PATTERN_REVIEW',
-    'SCIIP_OS v5.0 Architecture Review Framework Pattern Review',
-    'REVIEWED',
-    'Repeated Architecture Review Track processor patterns reviewed for framework abstraction.',
-    'FRAMEWORK_PATTERN_IDENTIFIED',
-    sourceRecord.businessKey || '',
-    'REPEATED_PROCESSOR_BOILERPLATE',
-    'Architecture Review Track processor chain pattern',
-    frameworkPatternReviewPayload.repeatablePatternFinding,
-    frameworkPatternReviewPayload.frameworkRecommendation,
-    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    frameworkPatternReviewPayload.architecturePrinciple,
-    frameworkPatternReviewPayload.repeatablePatternFinding,
-    frameworkPatternReviewPayload.frameworkRecommendation,
-    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    sourceRecord.currentVersion || 'SCIIP_OS v5.0',
-    'SCIIP_OS v5.1',
-    JSON.stringify(frameworkPatternReviewPayload),
-    JSON.stringify(compactSourcePayload),
-    now.toISOString()
-  ]);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: now.toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
+      return [
+        ctx.businessKey,
+        ctx.dateKey,
+        ctx.processor,
+        sourceRecord.businessKey || '',
+        sourceRecord.processor || '',
+        sourceRecord.handoffLedgerStatus || sourceRecord.sourceStatus || '',
+        'SCIIP_OS_ARCHITECTURE_REVIEW_FRAMEWORK_PATTERN_REVIEW',
+        'SCIIP_OS v5.0 Architecture Review Framework Pattern Review',
+        'REVIEWED',
+        'Repeated Architecture Review Track processor patterns reviewed for framework abstraction.',
+        'FRAMEWORK_PATTERN_IDENTIFIED',
+        sourceRecord.businessKey || '',
+        'REPEATED_PROCESSOR_BOILERPLATE',
+        'Architecture Review Track processor chain pattern',
+        finding,
+        recommendation,
+        'SCIIP_OS_ARCHITECTURE',
+        'PROCESSOR_DRIVEN_EVENT_SOURCED_IDEMPOTENT_FRAMEWORK_ABSTRACTION',
+        finding,
+        recommendation,
+        sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
+        sourceRecord.currentVersion || 'SCIIP_OS v5.0',
+        'SCIIP_OS v5.1',
+        JSON.stringify(payload),
+        JSON.stringify(compactSourcePayload),
+        ctx.now.toISOString()
+      ];
+    }
+  });
 }
 
 function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewProcessor() {
   const result =
     sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewProcessor();
 
-  Logger.log(
-    JSON.stringify({
-      test:
-        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewProcessor',
-      result
-    })
-  );
+  Logger.log(JSON.stringify({
+    test:
+      'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewProcessor',
+    result: result
+  }));
 
   return result;
 }
