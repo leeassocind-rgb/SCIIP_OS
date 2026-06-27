@@ -2,8 +2,13 @@
  * 2020_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor.gs
  *******************************************************/
 
+function sciipRun2020_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor() {
+  return sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor();
+}
+
 function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor() {
-  const processor = '2020_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor';
+  const processor =
+    '2020_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor';
 
   const inputSheetName =
     'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_ACTIVATION';
@@ -16,92 +21,91 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
     'Business_Key',
     'Source_Business_Key',
     'Review_Date',
-    'Ledger_Type',
     'Ledger_Status',
+    'Ledger_Type',
+    'Activation_Status',
     'Activation_Reference',
     'Summary',
     'Created_At',
     'Processor'
   ];
 
-  SCIIP.ensureSheetWithHeaders(outputSheetName, outputHeaders);
+  sciipEnsureSheetWithHeaders(outputSheetName, outputHeaders);
 
-  const inputSheet = SCIIP.getSheet(inputSheetName);
-  if (!inputSheet) {
-    return {
-      processor,
-      status: 'SKIPPED_NO_INPUT_SHEET',
-      activationLedgerEntriesCreated: 0,
-      completedAt: SCIIP.nowIso()
-    };
-  }
+  const inputRows = sciipGetSheetRecords(inputSheetName);
 
-  const rows = SCIIP.getSheetRecords(inputSheetName);
-  if (!rows.length) {
+  if (!inputRows || inputRows.length === 0) {
     return {
-      processor,
+      processor: processor,
       status: 'SKIPPED_NO_INPUTS',
       activationLedgerEntriesCreated: 0,
-      completedAt: SCIIP.nowIso()
+      completedAt: sciipNowIso()
     };
   }
 
-  const latest = rows[rows.length - 1];
+  const latestActivation = inputRows[inputRows.length - 1];
 
   const reviewDate =
-    latest.Review_Date ||
-    latest.Activation_Date ||
-    SCIIP.resolveBusinessDate();
+    latestActivation.Review_Date ||
+    latestActivation.Activation_Date ||
+    sciipResolveBusinessDate();
 
   const sourceBusinessKey =
-    latest.Business_Key ||
-    latest.Activation_Business_Key ||
-    `AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_ACTIVATION|${reviewDate}`;
+    latestActivation.Business_Key ||
+    latestActivation.Activation_Business_Key ||
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_ACTIVATION|' + reviewDate;
 
   const businessKey =
-    `AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_ACTIVATION_LEDGER|${reviewDate}`;
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_ACTIVATION_LEDGER|' + reviewDate;
 
-  if (SCIIP.businessKeyExists(outputSheetName, businessKey)) {
+  if (sciipBusinessKeyExists(outputSheetName, businessKey)) {
     return {
-      processor,
+      processor: processor,
       status: 'SUCCESS',
       activationLedgerEntriesCreated: 0,
       skippedDuplicate: 1,
-      businessKey,
-      completedAt: SCIIP.nowIso()
+      businessKey: businessKey,
+      completedAt: sciipNowIso()
     };
   }
 
-  const ledgerId = SCIIP.createId('AR_ACTIVATION_LEDGER');
+  const activationLedgerId =
+    sciipCreateId('AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_ACTIVATION_LEDGER');
+
+  const activationStatus =
+    latestActivation.Activation_Status ||
+    latestActivation.Status ||
+    'ACTIVATED';
 
   const activationReference = JSON.stringify({
-    sourceBusinessKey,
-    sourceProcessor: latest.Processor || '',
-    sourceStatus: latest.Activation_Status || latest.Status || '',
-    reviewDate
+    sourceBusinessKey: sourceBusinessKey,
+    reviewDate: reviewDate,
+    activationStatus: activationStatus,
+    sourceProcessor: latestActivation.Processor || ''
   });
 
   const row = [
-    ledgerId,
+    activationLedgerId,
     businessKey,
     sourceBusinessKey,
     reviewDate,
-    'ARCHITECTURE_REVIEW_ACTIVATION_LEDGER',
     'RECORDED',
+    'ARCHITECTURE_REVIEW_ACTIVATION_LEDGER',
+    activationStatus,
     activationReference,
-    'Architecture review activation recorded in permanent activation ledger.',
-    SCIIP.nowIso(),
+    'Architecture review activation recorded into permanent activation ledger.',
+    sciipNowIso(),
     processor
   ];
 
-  SCIIP.appendRow(outputSheetName, row);
+  sciipAppendRow(outputSheetName, row);
 
   return {
-    processor,
+    processor: processor,
     status: 'SUCCESS',
     activationLedgerEntriesCreated: 1,
     skippedDuplicate: 0,
-    businessKey,
-    completedAt: SCIIP.nowIso()
+    businessKey: businessKey,
+    completedAt: sciipNowIso()
   };
 }
