@@ -1,9 +1,9 @@
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor() {
+function sciipTest2020_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor() {
   const result =
-      sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor();
+    sciipRun2020_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor();
 
   Logger.log(JSON.stringify({
-    test: "sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor",
+    test: "sciipTest2020_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewActivationLedgerProcessor",
     result: result
   }));
 
