@@ -10,9 +10,9 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
   const ss = sciipGetSpreadsheet_();
   const dateKey = sciipNormalizeProcessingDateKey_();
 
-  const sourceSheet = sciipEnsureSheetWithHeadersByAlias_(
-  ss,
-  'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW',
+  const sourceSheet = sciipEnsureSheetWithHeaders_(
+    ss,
+    'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW',
     [
       'businessKey',
       'dateKey',
@@ -43,9 +43,9 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
     ]
   );
 
-  const ledgerSheet = sciipEnsureSheetWithHeadersByAlias_(
-  ss,
-  'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW_LEDGER',,
+  const ledgerSheet = sciipEnsureSheetWithHeaders_(
+    ss,
+    'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW_LEDGER',
     [
       'businessKey',
       'dateKey',
@@ -89,7 +89,6 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
       businessKey,
       completedAt: new Date().toISOString()
     };
-
     Logger.log(JSON.stringify(result));
     return result;
   }
@@ -105,7 +104,6 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
       businessKey,
       completedAt: new Date().toISOString()
     };
-
     Logger.log(JSON.stringify(result));
     return result;
   }
@@ -210,13 +208,11 @@ function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureRevi
   const result =
     sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewLedgerProcessor();
 
-  Logger.log(
-    JSON.stringify({
-      test:
-        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewLedgerProcessor',
-      result
-    })
-  );
+  Logger.log(JSON.stringify({
+    test:
+      'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewFrameworkPatternReviewLedgerProcessor',
+    result
+  }));
 
   return result;
 }
