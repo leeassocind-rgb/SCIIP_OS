@@ -12,7 +12,7 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
 
   const sourceSheet = sciipEnsureSheetWithHeaders_(
     ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_HANDOFF_LEDGER',
+    'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW',
     [
       'businessKey',
       'dateKey',
