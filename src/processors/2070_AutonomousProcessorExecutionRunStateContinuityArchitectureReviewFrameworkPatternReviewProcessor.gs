@@ -46,7 +46,7 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
 
   const reviewSheet = sciipEnsureSheetWithHeaders_(
     ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_FRAMEWORK_PATTERN_REVIEW',
+    'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW',
     [
       'businessKey',
       'dateKey',
@@ -78,7 +78,7 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
   );
 
   const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_FRAMEWORK_PATTERN_REVIEW|' +
+    'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW|' +
     dateKey;
 
   if (sciipSheetBusinessKeyExists_(reviewSheet, businessKey)) {
