@@ -10,9 +10,9 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
   const ss = sciipGetSpreadsheet_();
   const dateKey = sciipNormalizeProcessingDateKey_();
 
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_FRAMEWORK_PATTERN_REVIEW',
+  const sourceSheet = sciipEnsureSheetWithHeadersByAlias_(
+  ss,
+  'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW',
     [
       'businessKey',
       'dateKey',
@@ -43,9 +43,9 @@ function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureRevie
     ]
   );
 
-  const ledgerSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_FRAMEWORK_PATTERN_REVIEW_LEDGER',
+  const ledgerSheet = sciipEnsureSheetWithHeadersByAlias_(
+  ss,
+  'ARCH_REVIEW_FRAMEWORK_PATTERN_REVIEW_LEDGER',,
     [
       'businessKey',
       'dateKey',
