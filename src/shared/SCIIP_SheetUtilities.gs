@@ -59,3 +59,37 @@ function sciipAppendRow(sheetName, row) {
   sheet.appendRow(row);
   return row;
 }
+
+/**
+ * Returns all records from a sheet as an array of objects.
+ *
+ * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet
+ * @return {Object[]}
+ */
+function sciipGetSheetRecords_(sheet) {
+
+  if (!sheet) {
+    return [];
+  }
+
+  const values = sheet.getDataRange().getValues();
+
+  if (values.length < 2) {
+    return [];
+  }
+
+  const headers = values[0];
+
+  return values.slice(1).map(function(row) {
+
+    const record = {};
+
+    headers.forEach(function(header, i) {
+      record[header] = row[i];
+    });
+
+    return record;
+
+  });
+
+}
