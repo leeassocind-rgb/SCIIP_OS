@@ -1,10 +1,16 @@
 /*******************************************************
- * SCIIP_OS v4.0
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 400_WorkQueueDigestProcessor
  *
  * WORK_QUEUE → WORK_QUEUE_DIGEST
+ *
+ * Migration note:
+ * Preserves original 400 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
  *******************************************************/
 
+const WORK_QUEUE_DIGEST_PROCESSOR = '400_WorkQueueDigestProcessor';
+const WORK_QUEUE_DIGEST_SOURCE_SHEET = 'WORK_QUEUE';
 const WORK_QUEUE_DIGEST_SHEET = 'WORK_QUEUE_DIGEST';
 
 const WORK_QUEUE_DIGEST_HEADERS = [
@@ -28,72 +34,152 @@ const WORK_QUEUE_DIGEST_HEADERS = [
   'Notes'
 ];
 
-const WORK_QUEUE_DIGEST_PROCESSOR = '400_WorkQueueDigestProcessor';
-
 function sciipRunWorkQueueDigestProcessor() {
-  const ss = sciipGetRuntimeSpreadsheet_();
-
-  const queueSheet = ss.getSheetByName('WORK_QUEUE');
-  if (!queueSheet) throw new Error('Missing WORK_QUEUE sheet');
-
-  const digestSheet = sciipEnsureWorkQueueDigestSheet_();
-
-  const queueItems = sciipReadSheetObjects_(queueSheet);
-  const existingDigests = sciipReadSheetObjects_(digestSheet);
-
-  const today = new Date().toISOString().slice(0, 10);
-  const businessKey = `WORK_QUEUE_DIGEST|${today}`;
-
-  const existingKeys = new Set(
-    existingDigests.map(r => String(r.Business_Key || '').trim())
-  );
-
-  if (existingKeys.has(businessKey)) {
-    const result = {
-      processor: WORK_QUEUE_DIGEST_PROCESSOR,
-      status: 'SUCCESS',
-      queueItemsReviewed: queueItems.length,
-      workQueueDigestsCreated: 0,
-      skippedDuplicate: 1,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const digest = sciipBuildWorkQueueDigest_(queueItems, businessKey, today);
-
-  digestSheet.appendRow(
-    WORK_QUEUE_DIGEST_HEADERS.map(h => digest[h] || '')
-  );
-
-  const result = {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
     processor: WORK_QUEUE_DIGEST_PROCESSOR,
-    status: 'SUCCESS',
-    queueItemsReviewed: queueItems.length,
-    workQueueDigestsCreated: 1,
-    skippedDuplicate: 0,
-    completedAt: new Date().toISOString()
-  };
+    action: 'WORK_QUEUE_DIGEST_BUILD',
+    sourceSheet: WORK_QUEUE_DIGEST_SOURCE_SHEET,
+    targetSheet: WORK_QUEUE_DIGEST_SHEET,
+    ledgerSheet: 'WORK_QUEUE_DIGEST_RUNTIME_LEDGER',
 
-  Logger.log(JSON.stringify(result));
-  return result;
+    buildPayload: function(context, definition) {
+      const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet);
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: records.length,
+        outputCount: 1,
+        summary: 'Work queue digest runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: WORK_QUEUE_DIGEST_PROCESSOR
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      const ss = SCIIP_RUNTIME_SHEET_FACTORY.getSpreadsheet();
+
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!ss.getSheetByName(definition.sourceSheet)) {
+        errors.push('Missing WORK_QUEUE sheet. Run 390 first.');
+      }
+
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+        definition.targetSheet,
+        WORK_QUEUE_DIGEST_HEADERS
+      );
+
+      const queueItems = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet);
+      const today = new Date().toISOString().slice(0, 10);
+      const digestBusinessKey = 'WORK_QUEUE_DIGEST|' + today;
+
+      const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+        definition.targetSheet,
+        digestBusinessKey
+      );
+
+      if (existing) {
+        SCIIP_RUNTIME_LOGGING.audit({
+          context: context,
+          payload: {
+            queueItemsReviewed: queueItems.length,
+            workQueueDigestsCreated: 0,
+            skippedDuplicate: 1,
+            digestBusinessKey: digestBusinessKey,
+            transactionId: transaction.transactionId
+          },
+          message: '400 WorkQueueDigestProcessor runtime duplicate skipped.'
+        });
+
+        return SCIIP_RUNTIME_RESULT_FACTORY.success({
+          processor: WORK_QUEUE_DIGEST_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsCreated: 0,
+          recordsRead: queueItems.length,
+          processed: queueItems.length,
+          skippedDuplicate: 1,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            queueItemsReviewed: queueItems.length,
+            workQueueDigestsCreated: 0,
+            skippedDuplicate: 1,
+            digestBusinessKey: digestBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const digest = sciipBuildWorkQueueDigest_(queueItems, digestBusinessKey, today);
+
+      SCIIP_RUNTIME_SHEET_FACTORY.appendObject(
+        definition.targetSheet,
+        WORK_QUEUE_DIGEST_HEADERS,
+        digest
+      );
+
+      SCIIP_RUNTIME_LOGGING.audit({
+        context: context,
+        payload: {
+          queueItemsReviewed: queueItems.length,
+          workQueueDigestsCreated: 1,
+          skippedDuplicate: 0,
+          digestBusinessKey: digestBusinessKey,
+          transactionId: transaction.transactionId
+        },
+        message: '400 WorkQueueDigestProcessor runtime execution completed.'
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: WORK_QUEUE_DIGEST_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: queueItems.length,
+        processed: queueItems.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          queueItemsReviewed: queueItems.length,
+          workQueueDigestsCreated: 1,
+          skippedDuplicate: 0,
+          digestBusinessKey: digestBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
 }
 
 function sciipBuildWorkQueueDigest_(queueItems, businessKey, today) {
   const now = new Date().toISOString();
 
-  const openItems = queueItems.filter(item =>
-    String(item.Work_Status || '').toUpperCase() !== 'CLOSED'
-  );
+  const openItems = queueItems.filter(function(item) {
+    return String(item.Work_Status || '').toUpperCase() !== 'CLOSED';
+  });
 
   const critical = sciipFilterQueueByPriority_(openItems, 'CRITICAL');
   const high = sciipFilterQueueByPriority_(openItems, 'HIGH');
   const medium = sciipFilterQueueByPriority_(openItems, 'MEDIUM');
   const low = sciipFilterQueueByPriority_(openItems, 'LOW');
 
-  const sorted = openItems.slice().sort((a, b) => {
+  const sorted = openItems.slice().sort(function(a, b) {
     const scoreB = Number(b.Composite_Score || 0);
     const scoreA = Number(a.Composite_Score || 0);
     return scoreB - scoreA;
@@ -121,13 +207,10 @@ function sciipBuildWorkQueueDigest_(queueItems, businessKey, today) {
   };
 }
 
-/**
- * Digest logic
- */
 function sciipFilterQueueByPriority_(items, label) {
-  return items.filter(item =>
-    String(item.Priority_Label || '').toUpperCase() === label
-  );
+  return items.filter(function(item) {
+    return String(item.Priority_Label || '').toUpperCase() === label;
+  });
 }
 
 function sciipTopWorkItems_(sortedItems) {
@@ -135,12 +218,12 @@ function sciipTopWorkItems_(sortedItems) {
     return 'No open work queue items.';
   }
 
-  return sortedItems.slice(0, 5).map((item, i) => {
+  return sortedItems.slice(0, 5).map(function(item, i) {
     return [
-      `${i + 1}. ${item.Work_Title || 'Untitled Work Item'}`,
-      `Priority: ${item.Priority_Label || 'UNKNOWN'}`,
-      `Score: ${item.Composite_Score || ''}`,
-      `Assigned: ${item.Assigned_Role || 'Unassigned'}`
+      (i + 1) + '. ' + (item.Work_Title || 'Untitled Work Item'),
+      'Priority: ' + (item.Priority_Label || 'UNKNOWN'),
+      'Score: ' + (item.Composite_Score || ''),
+      'Assigned: ' + (item.Assigned_Role || 'Unassigned')
     ].join(' | ');
   }).join('\n');
 }
@@ -166,16 +249,16 @@ function sciipExecutionFocus_(critical, high, medium, low) {
 }
 
 function sciipEscalationSummary_(sortedItems) {
-  const escalations = sortedItems.filter(item =>
-    String(item.Escalation_Trigger || '').trim() !== ''
-  );
+  const escalations = sortedItems.filter(function(item) {
+    return String(item.Escalation_Trigger || '').trim() !== '';
+  });
 
   if (!escalations.length) {
     return 'No escalation triggers currently identified.';
   }
 
-  return escalations.slice(0, 5).map((item, i) => {
-    return `${i + 1}. ${item.Work_Title || 'Untitled'} — ${item.Escalation_Trigger}`;
+  return escalations.slice(0, 5).map(function(item, i) {
+    return (i + 1) + '. ' + (item.Work_Title || 'Untitled') + ' — ' + item.Escalation_Trigger;
   }).join('\n');
 }
 
@@ -199,79 +282,16 @@ function sciipRecommendedQueueNextStep_(critical, high, medium, low) {
   return 'No open work queue action required.';
 }
 
-/**
- * Sheet setup
- */
-function sciipEnsureWorkQueueDigestSheet_() {
-  const ss = sciipGetRuntimeSpreadsheet_();
-  let sheet = ss.getSheetByName(WORK_QUEUE_DIGEST_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(WORK_QUEUE_DIGEST_SHEET);
-    sheet.appendRow(WORK_QUEUE_DIGEST_HEADERS);
-    return sheet;
-  }
-
-  const existingHeaders = sheet
-    .getRange(1, 1, 1, Math.max(sheet.getLastColumn(), 1))
-    .getValues()[0];
-
-  if (existingHeaders.join('|') !== WORK_QUEUE_DIGEST_HEADERS.join('|')) {
-    sheet.clear();
-    sheet.appendRow(WORK_QUEUE_DIGEST_HEADERS);
-  }
-
-  return sheet;
-}
-
-/**
- * Helpers
- */
 function sciipGenerateWorkQueueDigestId_() {
   return 'WQ_DIGEST_' + Utilities.getUuid().replace(/-/g, '').slice(0, 16).toUpperCase();
 }
 
-function sciipReadSheetObjects_(sheet) {
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0];
-
-  return values.slice(1)
-    .filter(row => row.some(v => v !== '' && v !== null))
-    .map(row => {
-      const obj = {};
-      headers.forEach((h, i) => obj[h] = row[i]);
-      return obj;
-    });
-}
-
-function sciipGetRuntimeSpreadsheet_() {
-  const props = PropertiesService.getScriptProperties();
-
-  const spreadsheetId =
-    props.getProperty('SCIIP_SPREADSHEET_ID') ||
-    props.getProperty('SPREADSHEET_ID') ||
-    props.getProperty('RUNTIME_SPREADSHEET_ID');
-
-  if (!spreadsheetId) {
-    throw new Error(
-      'Missing SCIIP_SPREADSHEET_ID in Script Properties. Add your SCIIP runtime Google Sheet ID.'
-    );
-  }
-
-  return SpreadsheetApp.openById(spreadsheetId);
-}
-
-/**
- * Test function
- */
 function sciipTestWorkQueueDigestProcessor() {
   const result = sciipRunWorkQueueDigestProcessor();
 
   Logger.log(JSON.stringify({
     test: 'sciipTestWorkQueueDigestProcessor',
-    result
+    result: result
   }));
 
   return result;
