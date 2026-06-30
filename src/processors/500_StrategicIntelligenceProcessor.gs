@@ -1,17 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 500_StrategicIntelligenceProcessor
- * SCIIP_OS v4.0
  *
- * Inputs:
- * - SYSTEM_LEARNING
- * - COMMAND_BRIEF
- * - PLATFORM_DAILY_REPORT
- * - BRIEFING_DIGEST
+ * SYSTEM_LEARNING + COMMAND_BRIEF + PLATFORM_DAILY_REPORT
+ * + BRIEFING_DIGEST → STRATEGIC_INTELLIGENCE
  *
- * Output:
- * - STRATEGIC_INTELLIGENCE
- ************************************************************/
+ * Migration note:
+ * Preserves original 500 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
+const STRATEGIC_INTELLIGENCE_PROCESSOR = '500_StrategicIntelligenceProcessor';
 const STRATEGIC_INTELLIGENCE_SHEET = 'STRATEGIC_INTELLIGENCE';
 
 const STRATEGIC_INTELLIGENCE_HEADERS = [
@@ -40,82 +39,179 @@ const STRATEGIC_INTELLIGENCE_HEADERS = [
 ];
 
 function sciipEnsureStrategicIntelligenceSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(STRATEGIC_INTELLIGENCE_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(STRATEGIC_INTELLIGENCE_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, STRATEGIC_INTELLIGENCE_HEADERS.length)
-    .setValues([STRATEGIC_INTELLIGENCE_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    STRATEGIC_INTELLIGENCE_SHEET,
+    STRATEGIC_INTELLIGENCE_HEADERS
+  );
 }
 
 function sciipRunStrategicIntelligenceProcessor() {
-  const processor = '500_StrategicIntelligenceProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: STRATEGIC_INTELLIGENCE_PROCESSOR,
+    action: 'STRATEGIC_INTELLIGENCE_BUILD',
+    sourceSheet: null,
+    targetSheet: STRATEGIC_INTELLIGENCE_SHEET,
+    ledgerSheet: 'STRATEGIC_INTELLIGENCE_RUNTIME_LEDGER',
 
-  const outputSheet = sciipEnsureStrategicIntelligenceSchema();
+    buildPayload: function(context, definition) {
+      const systemLearnings = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('SYSTEM_LEARNING');
+      const commandBriefs = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('COMMAND_BRIEF');
+      const platformReports = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('PLATFORM_DAILY_REPORT');
+      const briefingDigests = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('BRIEFING_DIGEST');
 
-  const systemLearning = sciipGetLatestRecordByCreatedAt_('SYSTEM_LEARNING');
-  const commandBrief = sciipGetLatestRecordByCreatedAt_('COMMAND_BRIEF');
-  const platformReport = sciipGetLatestRecordByCreatedAt_('PLATFORM_DAILY_REPORT');
-  const briefingDigest = sciipGetLatestRecordByCreatedAt_('BRIEFING_DIGEST');
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount:
+          systemLearnings.length +
+          commandBriefs.length +
+          platformReports.length +
+          briefingDigests.length,
+        outputCount: 1,
+        summary: 'Strategic intelligence runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: STRATEGIC_INTELLIGENCE_PROCESSOR,
+          inputSheets: [
+            'SYSTEM_LEARNING',
+            'COMMAND_BRIEF',
+            'PLATFORM_DAILY_REPORT',
+            'BRIEFING_DIGEST'
+          ]
+        }
+      });
+    },
 
-  if (!systemLearning && !commandBrief && !platformReport && !briefingDigest) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      strategicIntelligenceCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
 
-  const intelligenceDate = sciipFormatDateKey_(startedAt);
-  const businessKey = `STRATEGIC_INTELLIGENCE|${intelligenceDate}`;
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
 
-  if (sciipBusinessKeyExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      strategicIntelligenceCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
 
-  const intelligence = sciipCreateStrategicIntelligence_({
-    businessKey,
-    intelligenceDate,
-    systemLearning,
-    commandBrief,
-    platformReport,
-    briefingDigest,
-    processor
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureStrategicIntelligenceSchema();
+
+      const systemLearning = sciipGetLatestRuntimeRecordByCreatedAt_('SYSTEM_LEARNING');
+      const commandBrief = sciipGetLatestRuntimeRecordByCreatedAt_('COMMAND_BRIEF');
+      const platformReport = sciipGetLatestRuntimeRecordByCreatedAt_('PLATFORM_DAILY_REPORT');
+      const briefingDigest = sciipGetLatestRuntimeRecordByCreatedAt_('BRIEFING_DIGEST');
+
+      if (!systemLearning && !commandBrief && !platformReport && !briefingDigest) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: STRATEGIC_INTELLIGENCE_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            strategicIntelligenceCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const intelligenceDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const strategicIntelligenceBusinessKey = 'STRATEGIC_INTELLIGENCE|' + intelligenceDate;
+
+      const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+        definition.targetSheet,
+        strategicIntelligenceBusinessKey
+      );
+
+      if (existing) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: STRATEGIC_INTELLIGENCE_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 4,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            strategicIntelligenceCreated: 0,
+            skippedDuplicate: 1,
+            strategicIntelligenceBusinessKey: strategicIntelligenceBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const intelligence = sciipCreateStrategicIntelligence_({
+        businessKey: strategicIntelligenceBusinessKey,
+        intelligenceDate: intelligenceDate,
+        systemLearning: systemLearning,
+        commandBrief: commandBrief,
+        platformReport: platformReport,
+        briefingDigest: briefingDigest,
+        processor: STRATEGIC_INTELLIGENCE_PROCESSOR
+      });
+
+      outputSheet.appendRow(intelligence);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: STRATEGIC_INTELLIGENCE_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: 4,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          systemLearningFound: !!systemLearning,
+          commandBriefFound: !!commandBrief,
+          platformReportFound: !!platformReport,
+          briefingDigestFound: !!briefingDigest,
+          strategicIntelligenceCreated: 1,
+          skippedDuplicate: 0,
+          strategicIntelligenceBusinessKey: strategicIntelligenceBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipGetLatestRuntimeRecordByCreatedAt_(sheetName) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+
+  if (!records || records.length === 0) return null;
+
+  records.sort(function(a, b) {
+    const aTime = sciipRuntimeRecordTimestamp_(a);
+    const bTime = sciipRuntimeRecordTimestamp_(b);
+    return aTime - bTime;
   });
 
-  outputSheet.appendRow(intelligence);
+  return records[records.length - 1];
+}
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    strategicIntelligenceCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+function sciipRuntimeRecordTimestamp_(record) {
+  if (!record) return 0;
 
-  Logger.log(JSON.stringify(result));
-  return result;
+  const raw =
+    record.Created_At ||
+    record.Updated_At ||
+    record.Timestamp ||
+    record.completedAt ||
+    record.Completed_At ||
+    '';
+
+  const time = raw ? new Date(raw).getTime() : 0;
+  return isNaN(time) ? 0 : time;
 }
 
 function sciipCreateStrategicIntelligence_(args) {
@@ -549,6 +645,20 @@ function sciipInferStrategicIntelligenceConfidence_(args) {
   if (score >= 4) return 'HIGH';
   if (score >= 2) return 'MEDIUM';
   return 'LOW';
+}
+
+
+function sciipExtractFirstAvailable_(record, fieldNames) {
+  if (!record) return '';
+
+  for (let i = 0; i < fieldNames.length; i++) {
+    const fieldName = fieldNames[i];
+    if (record[fieldName] !== undefined && record[fieldName] !== null && record[fieldName] !== '') {
+      return record[fieldName];
+    }
+  }
+
+  return '';
 }
 
 function sciipTestStrategicIntelligenceProcessor() {
