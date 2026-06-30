@@ -148,7 +148,7 @@ function sciipRunCommandBriefProcessor() {
         processor: COMMAND_BRIEF_PROCESSOR
       });
 
-      SCIIP_RUNTIME_SHEET_FACTORY.appendRecord(
+      SCIIP_RUNTIME_SHEET_FACTORY.appendObject(
         definition.targetSheet,
         COMMAND_BRIEF_HEADERS,
         commandBrief
