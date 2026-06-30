@@ -1,43 +1,49 @@
 /*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 430_WorkQueueDigestProcessor
+ * SCIIP_OS v5.3.2 Runtime Migration Repair
+ * 430_SystemHealthProcessor
  *
- * WORK_QUEUE → WORK_QUEUE_DIGEST
+ * COMMAND_CENTER → SYSTEM_HEALTH
+ *
+ * Repair note:
+ * Restores the correct 430 processor behavior after the
+ * accidental overwrite with WorkQueueDigest logic.
+ * Preserves original 430 business logic and migrates runtime
+ * execution to SCIIP_RuntimeProcessorBase.
  *******************************************************/
 
-const WORK_QUEUE_DIGEST_PROCESSOR = '430_WorkQueueDigestProcessor';
-const WORK_QUEUE_DIGEST_SOURCE_SHEET = 'WORK_QUEUE';
-const WORK_QUEUE_DIGEST_SHEET = 'WORK_QUEUE_DIGEST';
+const SYSTEM_HEALTH_PROCESSOR = '430_SystemHealthProcessor';
+const SYSTEM_HEALTH_SOURCE_SHEET = 'COMMAND_CENTER';
+const SYSTEM_HEALTH_SHEET = 'SYSTEM_HEALTH';
 
-const WORK_QUEUE_DIGEST_HEADERS = [
+const SYSTEM_HEALTH_HEADERS = [
   'ID',
   'Business_Key',
-  'Digest_Date',
-  'Work_Items_Reviewed',
-  'Open_Items',
-  'Completed_Items',
-  'Blocked_Items',
-  'High_Priority_Items',
-  'Overdue_Items',
-  'Latest_Work_Item_ID',
-  'Digest_Title',
-  'Work_Queue_Summary',
-  'Risk_Summary',
-  'Recommended_Action',
-  'Digest_Status',
+  'Command_Center_ID',
+  'Health_Date',
+  'System_Status',
+  'Execution_Posture',
+  'Escalation_Level',
+  'Open_Workload',
+  'Health_Score',
+  'Health_Label',
+  'Operational_Risk',
+  'Health_Summary',
+  'Recommended_System_Action',
+  'Monitoring_Cadence',
+  'Status',
   'Created_At',
   'Updated_At',
   'Processor',
   'Notes'
 ];
 
-function sciipRunWorkQueueDigestProcessor() {
+function sciipRunSystemHealthProcessor() {
   return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: WORK_QUEUE_DIGEST_PROCESSOR,
-    action: 'WORK_QUEUE_DIGEST_BUILD',
-    sourceSheet: WORK_QUEUE_DIGEST_SOURCE_SHEET,
-    targetSheet: WORK_QUEUE_DIGEST_SHEET,
-    ledgerSheet: 'WORK_QUEUE_DIGEST_RUNTIME_LEDGER',
+    processor: SYSTEM_HEALTH_PROCESSOR,
+    action: 'SYSTEM_HEALTH_BUILD',
+    sourceSheet: SYSTEM_HEALTH_SOURCE_SHEET,
+    targetSheet: SYSTEM_HEALTH_SHEET,
+    ledgerSheet: 'SYSTEM_HEALTH_RUNTIME_LEDGER',
 
     buildPayload: function(context, definition) {
       const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet);
@@ -50,12 +56,13 @@ function sciipRunWorkQueueDigestProcessor() {
         targetSheet: definition.targetSheet,
         ledgerSheet: definition.ledgerSheet,
         inputCount: records.length,
-        outputCount: records.length ? 1 : 0,
-        summary: 'Work queue digest runtime payload created.',
+        outputCount: records.length,
+        summary: 'System health runtime payload created.',
         refs: {
           context: SCIIP_RUNTIME_CONTEXT.compact(context),
           migrationVersion: 'v5.3.2',
-          originalProcessor: WORK_QUEUE_DIGEST_PROCESSOR
+          repairedOverwrite: true,
+          originalProcessor: SYSTEM_HEALTH_PROCESSOR
         }
       });
     },
@@ -67,7 +74,7 @@ function sciipRunWorkQueueDigestProcessor() {
       if (!payload.businessKey) errors.push('Payload missing businessKey.');
       if (!context.businessKey) errors.push('Context missing businessKey.');
       if (!ss.getSheetByName(definition.sourceSheet)) {
-        errors.push('Missing WORK_QUEUE sheet.');
+        errors.push('Missing COMMAND_CENTER sheet. Run 420 first.');
       }
 
       return {
@@ -79,68 +86,74 @@ function sciipRunWorkQueueDigestProcessor() {
     execute: function(payload, context, transaction, definition) {
       SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
         definition.targetSheet,
-        WORK_QUEUE_DIGEST_HEADERS
+        SYSTEM_HEALTH_HEADERS
       );
 
-      const workItems = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet);
-      const today = SCIIP_RUNTIME.getDateKey({});
-      const businessKey = 'WORK_QUEUE_DIGEST|' + today;
+      const commands = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet);
 
-      const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
-        definition.targetSheet,
-        businessKey
-      );
+      let created = 0;
+      let skippedDuplicate = 0;
+      let skippedNoCommand = 0;
 
-      if (existing) {
-        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
-          processor: WORK_QUEUE_DIGEST_PROCESSOR,
-          businessKey: businessKey,
-          message: JSON.stringify({
-            migrationVersion: 'v5.3.2',
-            processorMigrated: true,
-            workItemsReviewed: workItems.length,
-            workQueueDigestsCreated: 0,
-            skippedDuplicate: 1,
-            transactionId: transaction.transactionId
-          })
-        });
-      }
+      commands.forEach(function(command) {
+        const commandId = command.ID || command.Command_Center_ID;
 
-      const digest = sciipBuildWorkQueueDigest_(
-        workItems,
-        businessKey,
-        today
-      );
+        if (!commandId) {
+          skippedNoCommand++;
+          return;
+        }
 
-      SCIIP_RUNTIME_SHEET_FACTORY.appendObject(
-        definition.targetSheet,
-        WORK_QUEUE_DIGEST_HEADERS,
-        digest
-      );
+        const businessKey = 'SYSTEM_HEALTH|' + commandId;
+
+        const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+          definition.targetSheet,
+          businessKey
+        );
+
+        if (existing) {
+          skippedDuplicate++;
+          return;
+        }
+
+        const health = sciipBuildSystemHealth_(command, businessKey);
+
+        SCIIP_RUNTIME_SHEET_FACTORY.appendObject(
+          definition.targetSheet,
+          SYSTEM_HEALTH_HEADERS,
+          health
+        );
+
+        created++;
+      });
 
       SCIIP_RUNTIME_LOGGING.audit({
         context: context,
         payload: {
-          workItemsReviewed: workItems.length,
-          workQueueDigestsCreated: 1,
-          businessKey: businessKey,
+          commandCenterRecordsReviewed: commands.length,
+          systemHealthRecordsCreated: created,
+          skippedDuplicate: skippedDuplicate,
+          skippedNoCommand: skippedNoCommand,
           transactionId: transaction.transactionId
         },
-        message: '430 WorkQueueDigestProcessor migrated runtime execution completed.'
+        message: '430 SystemHealthProcessor repaired runtime execution completed.'
       });
 
       return SCIIP_RUNTIME_RESULT_FACTORY.success({
-        processor: WORK_QUEUE_DIGEST_PROCESSOR,
-        businessKey: businessKey,
-        recordsCreated: 1,
-        recordsRead: workItems.length,
-        processed: workItems.length,
+        processor: SYSTEM_HEALTH_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: created,
+        recordsRead: commands.length,
+        processed: commands.length,
+        skippedDuplicate: skippedDuplicate,
+        skippedNoInputs: skippedNoCommand,
         message: JSON.stringify({
           migrationVersion: 'v5.3.2',
           processorMigrated: true,
-          workItemsReviewed: workItems.length,
-          workQueueDigestsCreated: 1,
-          skippedDuplicate: 0,
+          repairedOverwrite: true,
+          commandCenterRecordsReviewed: commands.length,
+          systemHealthRecordsCreated: created,
+          skippedDuplicate: skippedDuplicate,
+          skippedNoCommand: skippedNoCommand,
           transactionId: transaction.transactionId
         })
       });
@@ -148,120 +161,130 @@ function sciipRunWorkQueueDigestProcessor() {
   });
 }
 
-function sciipBuildWorkQueueDigest_(records, businessKey, today) {
+function sciipBuildSystemHealth_(command, businessKey) {
   const now = new Date().toISOString();
-  const activeRecords = records.filter(function(r) {
-    return String(r.Status || '').toUpperCase() !== 'INACTIVE';
-  });
-
-  const openItems = sciipCountWorkQueueStatus_(activeRecords, ['OPEN', 'PENDING', 'QUEUED', 'ACTIVE']);
-  const completedItems = sciipCountWorkQueueStatus_(activeRecords, ['DONE', 'COMPLETE', 'COMPLETED']);
-  const blockedItems = sciipCountWorkQueueStatus_(activeRecords, ['BLOCKED']);
-  const highPriorityItems = activeRecords.filter(function(r) {
-    return ['HIGH', 'CRITICAL'].indexOf(String(r.Priority || r.Priority_Level || '').toUpperCase()) !== -1;
-  }).length;
-
-  const overdueItems = activeRecords.filter(function(r) {
-    return sciipIsWorkQueueItemOverdue_(r);
-  }).length;
-
-  const latest = sciipLatestWorkQueueRecord_(activeRecords);
+  const healthScore = sciipSystemHealthScore_(command);
 
   return {
-    ID: sciipGenerateWorkQueueDigestId_(),
+    ID: sciipGenerateSystemHealthId_(),
     Business_Key: businessKey,
-    Digest_Date: today,
-    Work_Items_Reviewed: activeRecords.length,
-    Open_Items: openItems,
-    Completed_Items: completedItems,
-    Blocked_Items: blockedItems,
-    High_Priority_Items: highPriorityItems,
-    Overdue_Items: overdueItems,
-    Latest_Work_Item_ID: latest.ID || latest.Work_Item_ID || '',
-    Digest_Title: 'SCIIP Work Queue Digest — ' + today,
-    Work_Queue_Summary: sciipWorkQueueSummary_(activeRecords.length, openItems, completedItems, blockedItems, highPriorityItems, overdueItems),
-    Risk_Summary: sciipWorkQueueRiskSummary_(blockedItems, highPriorityItems, overdueItems),
-    Recommended_Action: sciipWorkQueueRecommendedAction_(blockedItems, highPriorityItems, overdueItems),
-    Digest_Status: 'ACTIVE',
+    Command_Center_ID: command.ID || command.Command_Center_ID || '',
+    Health_Date: command.Command_Date || now,
+    System_Status: command.System_Status || '',
+    Execution_Posture: command.Execution_Posture || '',
+    Escalation_Level: command.Escalation_Level || '',
+    Open_Workload: command.Open_Workload || 0,
+    Health_Score: healthScore,
+    Health_Label: sciipSystemHealthLabel_(healthScore),
+    Operational_Risk: sciipOperationalRisk_(command),
+    Health_Summary: sciipHealthSummary_(command, healthScore),
+    Recommended_System_Action: sciipRecommendedSystemAction_(command, healthScore),
+    Monitoring_Cadence: sciipHealthMonitoringCadence_(healthScore),
+    Status: 'ACTIVE',
     Created_At: now,
     Updated_At: now,
-    Processor: WORK_QUEUE_DIGEST_PROCESSOR,
-    Notes: 'Generated from WORK_QUEUE using SCIIP_RuntimeProcessorBase.'
+    Processor: SYSTEM_HEALTH_PROCESSOR,
+    Notes: 'Generated from COMMAND_CENTER using SCIIP_RuntimeProcessorBase.'
   };
 }
 
-function sciipCountWorkQueueStatus_(records, statuses) {
-  return records.filter(function(r) {
-    const status = String(r.Status || r.Queue_Status || r.Work_Status || '').toUpperCase();
-    return statuses.indexOf(status) !== -1;
-  }).length;
+function sciipSystemHealthScore_(command) {
+  const systemStatus = String(command.System_Status || '').toUpperCase();
+  const posture = String(command.Execution_Posture || '').toUpperCase();
+  const escalation = String(command.Escalation_Level || '').toUpperCase();
+  const workload = Number(command.Open_Workload || 0);
+
+  let score = 100;
+
+  if (systemStatus === 'ATTENTION_REQUIRED') score -= 35;
+  if (systemStatus === 'ACTIVE') score -= 20;
+  if (systemStatus === 'STABLE') score -= 5;
+
+  if (posture === 'ESCALATE_AND_ACT') score -= 25;
+  if (posture === 'PRIORITIZE_CURRENT_CYCLE') score -= 15;
+  if (posture === 'MONITOR_AND_EXECUTE') score -= 5;
+
+  if (escalation === 'LEVEL_1') score -= 20;
+  if (escalation === 'LEVEL_2') score -= 10;
+
+  if (workload >= 10) score -= 10;
+  if (workload >= 25) score -= 20;
+
+  if (score < 0) score = 0;
+  if (score > 100) score = 100;
+
+  return score;
 }
 
-function sciipIsWorkQueueItemOverdue_(record) {
-  const due = record.Due_Date || record.Target_Date || record.Required_By;
-  if (!due) return false;
+function sciipSystemHealthLabel_(score) {
+  if (score >= 90) return 'CLEAR';
+  if (score >= 75) return 'STABLE';
+  if (score >= 55) return 'ACTIVE';
+  if (score >= 35) return 'ATTENTION_REQUIRED';
 
-  const d = new Date(due);
-  if (isNaN(d.getTime())) return false;
-
-  const today = new Date(SCIIP_RUNTIME.getDateKey({}) + 'T00:00:00');
-  return d.getTime() < today.getTime() &&
-    ['DONE', 'COMPLETE', 'COMPLETED'].indexOf(String(record.Status || '').toUpperCase()) === -1;
+  return 'CRITICAL';
 }
 
-function sciipLatestWorkQueueRecord_(records) {
-  if (!records.length) return {};
+function sciipOperationalRisk_(command) {
+  const escalation = String(command.Escalation_Level || '').toUpperCase();
 
-  return records.slice().sort(function(a, b) {
-    const dateA = new Date(a.Created_At || a.Updated_At || a.Timestamp || 0).getTime();
-    const dateB = new Date(b.Created_At || b.Updated_At || b.Timestamp || 0).getTime();
-    return dateB - dateA;
-  })[0];
+  if (escalation === 'LEVEL_1') return 'HIGH';
+  if (escalation === 'LEVEL_2') return 'MEDIUM';
+
+  return 'LOW';
 }
 
-function sciipWorkQueueSummary_(total, open, completed, blocked, highPriority, overdue) {
+function sciipHealthSummary_(command, score) {
   return [
-    'Work items reviewed: ' + total,
-    'Open items: ' + open,
-    'Completed items: ' + completed,
-    'Blocked items: ' + blocked,
-    'High-priority items: ' + highPriority,
-    'Overdue items: ' + overdue
+    'SCIIP system health score: ' + score,
+    'System status: ' + (command.System_Status || 'UNKNOWN'),
+    'Execution posture: ' + (command.Execution_Posture || 'UNKNOWN'),
+    'Escalation level: ' + (command.Escalation_Level || 'UNKNOWN'),
+    'Open workload: ' + (command.Open_Workload || 0)
   ].join('\n');
 }
 
-function sciipWorkQueueRiskSummary_(blocked, highPriority, overdue) {
-  const risks = [];
+function sciipRecommendedSystemAction_(command, score) {
+  if (score < 35) {
+    return 'Immediate review required. Escalate command center items and resolve critical workload.';
+  }
 
-  if (blocked > 0) risks.push(blocked + ' blocked work item(s) require review.');
-  if (overdue > 0) risks.push(overdue + ' overdue work item(s) require follow-up.');
-  if (highPriority > 0) risks.push(highPriority + ' high-priority work item(s) remain active.');
+  if (score < 55) {
+    return 'Attention required. Review open command center items and prioritize unresolved escalations.';
+  }
 
-  if (!risks.length) risks.push('No material work queue risks identified.');
+  if (score < 75) {
+    return 'Active monitoring required. Continue execution cycle and watch for recurring escalation themes.';
+  }
 
-  return risks.join('\n');
+  if (score < 90) {
+    return 'System stable. Continue normal monitoring and execution cadence.';
+  }
+
+  return 'System clear. No immediate action required.';
 }
 
-function sciipWorkQueueRecommendedAction_(blocked, highPriority, overdue) {
-  if (blocked > 0) return 'Review blocked work items and resolve dependencies.';
-  if (overdue > 0) return 'Prioritize overdue work items.';
-  if (highPriority > 0) return 'Review high-priority work items during next operating cadence.';
-  return 'Continue normal work queue monitoring.';
+function sciipHealthMonitoringCadence_(score) {
+  if (score < 35) return 'Immediate';
+  if (score < 55) return 'Current cycle';
+  if (score < 75) return 'Next intelligence cycle';
+
+  return 'Routine';
 }
 
-function sciipGenerateWorkQueueDigestId_() {
-  return 'WORK_QUEUE_DIGEST_' +
+function sciipGenerateSystemHealthId_() {
+  return 'SYS_HEALTH_' +
     Utilities.getUuid()
       .replace(/-/g, '')
       .slice(0, 16)
       .toUpperCase();
 }
 
-function sciipTestWorkQueueDigestProcessor() {
-  const result = sciipRunWorkQueueDigestProcessor();
+function sciipTestSystemHealthProcessor() {
+  const result = sciipRunSystemHealthProcessor();
 
   Logger.log(JSON.stringify({
-    test: 'sciipTestWorkQueueDigestProcessor',
+    test: 'sciipTestSystemHealthProcessor',
     result: result
   }));
 
