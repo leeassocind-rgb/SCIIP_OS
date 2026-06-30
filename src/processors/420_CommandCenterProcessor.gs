@@ -1,10 +1,16 @@
 /*******************************************************
- * SCIIP_OS v4.0
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 420_CommandCenterProcessor
  *
  * OPERATOR_CONSOLE → COMMAND_CENTER
+ *
+ * Migration note:
+ * Preserves original 420 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
  *******************************************************/
 
+const COMMAND_CENTER_PROCESSOR = '420_CommandCenterProcessor';
+const COMMAND_CENTER_SOURCE_SHEET = 'OPERATOR_CONSOLE';
 const COMMAND_CENTER_SHEET = 'COMMAND_CENTER';
 
 const COMMAND_CENTER_HEADERS = [
@@ -29,64 +35,124 @@ const COMMAND_CENTER_HEADERS = [
   'Notes'
 ];
 
-const COMMAND_CENTER_PROCESSOR = '420_CommandCenterProcessor';
-
 function sciipRunCommandCenterProcessor() {
-  const ss = sciipGetRuntimeSpreadsheet_();
-
-  const consoleSheet = ss.getSheetByName('OPERATOR_CONSOLE');
-  if (!consoleSheet) throw new Error('Missing OPERATOR_CONSOLE sheet');
-
-  const commandSheet = sciipEnsureCommandCenterSheet_();
-
-  const consoles = sciipReadSheetObjects_(consoleSheet);
-  const existingCommands = sciipReadSheetObjects_(commandSheet);
-
-  const existingKeys = new Set(
-    existingCommands.map(r => String(r.Business_Key || '').trim())
-  );
-
-  let created = 0;
-  let skippedDuplicate = 0;
-  let skippedNoConsole = 0;
-
-  consoles.forEach(console => {
-    const consoleId = console.ID || console.Operator_Console_ID;
-
-    if (!consoleId) {
-      skippedNoConsole++;
-      return;
-    }
-
-    const businessKey = `COMMAND_CENTER|${consoleId}`;
-
-    if (existingKeys.has(businessKey)) {
-      skippedDuplicate++;
-      return;
-    }
-
-    const command = sciipBuildCommandCenter_(console, businessKey);
-
-    commandSheet.appendRow(
-      COMMAND_CENTER_HEADERS.map(h => command[h] || '')
-    );
-
-    existingKeys.add(businessKey);
-    created++;
-  });
-
-  const result = {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
     processor: COMMAND_CENTER_PROCESSOR,
-    status: 'SUCCESS',
-    operatorConsolesReviewed: consoles.length,
-    commandCenterRecordsCreated: created,
-    skippedDuplicate,
-    skippedNoConsole,
-    completedAt: new Date().toISOString()
-  };
+    action: 'COMMAND_CENTER_BUILD',
+    sourceSheet: COMMAND_CENTER_SOURCE_SHEET,
+    targetSheet: COMMAND_CENTER_SHEET,
+    ledgerSheet: 'COMMAND_CENTER_RUNTIME_LEDGER',
 
-  Logger.log(JSON.stringify(result));
-  return result;
+    buildPayload: function(context, definition) {
+      const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet);
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: records.length,
+        outputCount: records.length,
+        summary: 'Command center runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: COMMAND_CENTER_PROCESSOR
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      const ss = SCIIP_RUNTIME_SHEET_FACTORY.getSpreadsheet();
+
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!ss.getSheetByName(definition.sourceSheet)) {
+        errors.push('Missing OPERATOR_CONSOLE sheet. Run 410 first.');
+      }
+
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+        definition.targetSheet,
+        COMMAND_CENTER_HEADERS
+      );
+
+      const consoles = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet);
+      let created = 0;
+      let skippedDuplicate = 0;
+      let skippedNoConsole = 0;
+
+      consoles.forEach(function(console) {
+        const consoleId = console.ID || console.Operator_Console_ID;
+
+        if (!consoleId) {
+          skippedNoConsole++;
+          return;
+        }
+
+        const commandBusinessKey = 'COMMAND_CENTER|' + consoleId;
+        const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+          definition.targetSheet,
+          commandBusinessKey
+        );
+
+        if (existing) {
+          skippedDuplicate++;
+          return;
+        }
+
+        const command = sciipBuildCommandCenter_(console, commandBusinessKey);
+
+        SCIIP_RUNTIME_SHEET_FACTORY.appendObject(
+          definition.targetSheet,
+          COMMAND_CENTER_HEADERS,
+          command
+        );
+
+        created++;
+      });
+
+      SCIIP_RUNTIME_LOGGING.audit({
+        context: context,
+        payload: {
+          operatorConsolesReviewed: consoles.length,
+          commandCenterRecordsCreated: created,
+          skippedDuplicate: skippedDuplicate,
+          skippedNoConsole: skippedNoConsole,
+          transactionId: transaction.transactionId
+        },
+        message: '420 CommandCenterProcessor runtime execution completed.'
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: COMMAND_CENTER_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: created,
+        recordsRead: consoles.length,
+        processed: consoles.length,
+        skippedDuplicate: skippedDuplicate,
+        skippedNoInputs: skippedNoConsole,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          operatorConsolesReviewed: consoles.length,
+          commandCenterRecordsCreated: created,
+          skippedDuplicate: skippedDuplicate,
+          skippedNoConsole: skippedNoConsole,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
 }
 
 function sciipBuildCommandCenter_(console, businessKey) {
@@ -115,15 +181,9 @@ function sciipBuildCommandCenter_(console, businessKey) {
   };
 }
 
-/**
- * Command logic
- */
 function sciipCommandCenterTitle_(console) {
-  const date =
-    console.Console_Date ||
-    new Date().toISOString().slice(0, 10);
-
-  return `SCIIP Command Center — ${date}`;
+  const date = console.Console_Date || new Date().toISOString().slice(0, 10);
+  return 'SCIIP Command Center — ' + date;
 }
 
 function sciipCommandSystemStatus_(console) {
@@ -164,11 +224,11 @@ function sciipLeadershipFocus_(console) {
 
 function sciipCommandSummary_(console) {
   return [
-    `Open workload: ${console.Open_Work_Items || 0}`,
-    `Critical: ${console.Critical_Count || 0}`,
-    `High: ${console.High_Count || 0}`,
-    `Medium: ${console.Medium_Count || 0}`,
-    `Low: ${console.Low_Count || 0}`,
+    'Open workload: ' + (console.Open_Work_Items || 0),
+    'Critical: ' + (console.Critical_Count || 0),
+    'High: ' + (console.High_Count || 0),
+    'Medium: ' + (console.Medium_Count || 0),
+    'Low: ' + (console.Low_Count || 0),
     '',
     console.Primary_Focus || ''
   ].join('\n');
@@ -201,79 +261,16 @@ function sciipMonitoringInstructions_(console) {
   ].join('\n');
 }
 
-/**
- * Sheet setup
- */
-function sciipEnsureCommandCenterSheet_() {
-  const ss = sciipGetRuntimeSpreadsheet_();
-  let sheet = ss.getSheetByName(COMMAND_CENTER_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(COMMAND_CENTER_SHEET);
-    sheet.appendRow(COMMAND_CENTER_HEADERS);
-    return sheet;
-  }
-
-  const existingHeaders = sheet
-    .getRange(1, 1, 1, Math.max(sheet.getLastColumn(), 1))
-    .getValues()[0];
-
-  if (existingHeaders.join('|') !== COMMAND_CENTER_HEADERS.join('|')) {
-    sheet.clear();
-    sheet.appendRow(COMMAND_CENTER_HEADERS);
-  }
-
-  return sheet;
-}
-
-/**
- * Helpers
- */
 function sciipGenerateCommandCenterId_() {
   return 'COMMAND_' + Utilities.getUuid().replace(/-/g, '').slice(0, 16).toUpperCase();
 }
 
-function sciipReadSheetObjects_(sheet) {
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0];
-
-  return values.slice(1)
-    .filter(row => row.some(v => v !== '' && v !== null))
-    .map(row => {
-      const obj = {};
-      headers.forEach((h, i) => obj[h] = row[i]);
-      return obj;
-    });
-}
-
-function sciipGetRuntimeSpreadsheet_() {
-  const props = PropertiesService.getScriptProperties();
-
-  const spreadsheetId =
-    props.getProperty('SCIIP_SPREADSHEET_ID') ||
-    props.getProperty('SPREADSHEET_ID') ||
-    props.getProperty('RUNTIME_SPREADSHEET_ID');
-
-  if (!spreadsheetId) {
-    throw new Error(
-      'Missing SCIIP_SPREADSHEET_ID in Script Properties. Add your SCIIP runtime Google Sheet ID.'
-    );
-  }
-
-  return SpreadsheetApp.openById(spreadsheetId);
-}
-
-/**
- * Test function
- */
 function sciipTestCommandCenterProcessor() {
   const result = sciipRunCommandCenterProcessor();
 
   Logger.log(JSON.stringify({
     test: 'sciipTestCommandCenterProcessor',
-    result
+    result: result
   }));
 
   return result;
