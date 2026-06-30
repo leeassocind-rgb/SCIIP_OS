@@ -441,6 +441,15 @@ function sciipComposeMissionExpectedOutput_(requirementType) {
 }
 
 
+
+function sciipNormalizeMissionKey_(value) {
+  return String(value || 'MISSION')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80);
+}
+
 function sciipTestResearchMissionProcessor() {
   const result = sciipRunResearchMissionProcessor();
   Logger.log(JSON.stringify({
