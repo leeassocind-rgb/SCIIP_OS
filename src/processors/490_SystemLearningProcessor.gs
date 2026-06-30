@@ -1,17 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 490_SystemLearningProcessor
- * SCIIP_OS v4.0
  *
- * Inputs:
- * - AUTONOMOUS_OPERATIONS
- * - SYSTEM_HEALTH
- * - WORK_QUEUE
- * - PLATFORM_DAILY_REPORT
+ * AUTONOMOUS_OPERATIONS + SYSTEM_HEALTH + WORK_QUEUE
+ * + PLATFORM_DAILY_REPORT → SYSTEM_LEARNING
  *
- * Output:
- * - SYSTEM_LEARNING
- ************************************************************/
+ * Migration note:
+ * Preserves original 490 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
+const SYSTEM_LEARNING_PROCESSOR = '490_SystemLearningProcessor';
 const SYSTEM_LEARNING_SHEET = 'SYSTEM_LEARNING';
 
 const SYSTEM_LEARNING_HEADERS = [
@@ -37,82 +36,180 @@ const SYSTEM_LEARNING_HEADERS = [
 ];
 
 function sciipEnsureSystemLearningSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(SYSTEM_LEARNING_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(SYSTEM_LEARNING_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, SYSTEM_LEARNING_HEADERS.length)
-    .setValues([SYSTEM_LEARNING_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    SYSTEM_LEARNING_SHEET,
+    SYSTEM_LEARNING_HEADERS
+  );
 }
 
 function sciipRunSystemLearningProcessor() {
-  const processor = '490_SystemLearningProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: SYSTEM_LEARNING_PROCESSOR,
+    action: 'SYSTEM_LEARNING_BUILD',
+    sourceSheet: null,
+    targetSheet: SYSTEM_LEARNING_SHEET,
+    ledgerSheet: 'SYSTEM_LEARNING_RUNTIME_LEDGER',
 
-  const outputSheet = sciipEnsureSystemLearningSchema();
+    buildPayload: function(context, definition) {
+      const autonomousOperations = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_OPERATIONS');
+      const systemHealthRecords = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('SYSTEM_HEALTH');
+      const workQueueItems = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('WORK_QUEUE');
+      const platformReports = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('PLATFORM_DAILY_REPORT');
 
-  const autonomousOperation = sciipGetLatestRecordByCreatedAt_('AUTONOMOUS_OPERATIONS');
-  const systemHealth = sciipGetLatestRecordByCreatedAt_('SYSTEM_HEALTH');
-  const workQueue = sciipGetLatestRecordByCreatedAt_('WORK_QUEUE');
-  const platformReport = sciipGetLatestRecordByCreatedAt_('PLATFORM_DAILY_REPORT');
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount:
+          autonomousOperations.length +
+          systemHealthRecords.length +
+          workQueueItems.length +
+          platformReports.length,
+        outputCount: 1,
+        summary: 'System learning runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: SYSTEM_LEARNING_PROCESSOR,
+          inputSheets: [
+            'AUTONOMOUS_OPERATIONS',
+            'SYSTEM_HEALTH',
+            'WORK_QUEUE',
+            'PLATFORM_DAILY_REPORT'
+          ]
+        }
+      });
+    },
 
-  if (!autonomousOperation && !systemHealth && !workQueue && !platformReport) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      systemLearningsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
 
-  const learningDate = sciipFormatDateKey_(startedAt);
-  const businessKey = `SYSTEM_LEARNING|${learningDate}`;
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
 
-  if (sciipBusinessKeyExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      systemLearningsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
 
-  const learning = sciipCreateSystemLearning_({
-    businessKey,
-    learningDate,
-    autonomousOperation,
-    systemHealth,
-    workQueue,
-    platformReport,
-    processor
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureSystemLearningSchema();
+
+      const autonomousOperation = sciipGetLatestRuntimeRecordByCreatedAt_('AUTONOMOUS_OPERATIONS');
+      const systemHealth = sciipGetLatestRuntimeRecordByCreatedAt_('SYSTEM_HEALTH');
+      const workQueue = sciipGetLatestRuntimeRecordByCreatedAt_('WORK_QUEUE');
+      const platformReport = sciipGetLatestRuntimeRecordByCreatedAt_('PLATFORM_DAILY_REPORT');
+
+      if (!autonomousOperation && !systemHealth && !workQueue && !platformReport) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: SYSTEM_LEARNING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            systemLearningsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const learningDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const systemLearningBusinessKey = 'SYSTEM_LEARNING|' + learningDate;
+
+      const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+        definition.targetSheet,
+        systemLearningBusinessKey
+      );
+
+      if (existing) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: SYSTEM_LEARNING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 4,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            systemLearningsCreated: 0,
+            skippedDuplicate: 1,
+            systemLearningBusinessKey: systemLearningBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const learning = sciipCreateSystemLearning_({
+        businessKey: systemLearningBusinessKey,
+        learningDate: learningDate,
+        autonomousOperation: autonomousOperation,
+        systemHealth: systemHealth,
+        workQueue: workQueue,
+        platformReport: platformReport,
+        processor: SYSTEM_LEARNING_PROCESSOR
+      });
+
+      outputSheet.appendRow(learning);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: SYSTEM_LEARNING_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: 4,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          autonomousOperationFound: !!autonomousOperation,
+          systemHealthFound: !!systemHealth,
+          workQueueFound: !!workQueue,
+          platformReportFound: !!platformReport,
+          systemLearningsCreated: 1,
+          skippedDuplicate: 0,
+          systemLearningBusinessKey: systemLearningBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+
+function sciipGetLatestRuntimeRecordByCreatedAt_(sheetName) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+
+  if (!records || records.length === 0) return null;
+
+  records.sort(function(a, b) {
+    const aTime = sciipRuntimeRecordTimestamp_(a);
+    const bTime = sciipRuntimeRecordTimestamp_(b);
+    return aTime - bTime;
   });
 
-  outputSheet.appendRow(learning);
+  return records[records.length - 1];
+}
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    systemLearningsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+function sciipRuntimeRecordTimestamp_(record) {
+  if (!record) return 0;
 
-  Logger.log(JSON.stringify(result));
-  return result;
+  const raw =
+    record.Created_At ||
+    record.Updated_At ||
+    record.Timestamp ||
+    record.completedAt ||
+    record.Completed_At ||
+    '';
+
+  const time = raw ? new Date(raw).getTime() : 0;
+  return isNaN(time) ? 0 : time;
 }
 
 function sciipCreateSystemLearning_(args) {
@@ -440,3 +537,19 @@ function sciipTestSystemLearningProcessor() {
   }));
   return result;
 }
+
+function sciipExtractFirstAvailable_(record, fieldNames) {
+  if (!record || !fieldNames) return '';
+
+  for (var i = 0; i < fieldNames.length; i++) {
+    var fieldName = fieldNames[i];
+    var value = record[fieldName];
+
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return value;
+    }
+  }
+
+  return '';
+}
+
