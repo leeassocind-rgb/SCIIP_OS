@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 460_ExecutiveDashboardProcessor
- * SCIIP_OS v4.0
  *
- * Inputs:
- * - PLATFORM_DAILY_REPORT
- * - COMMAND_CENTER
- * - OPERATOR_CONSOLE
+ * PLATFORM_DAILY_REPORT + COMMAND_CENTER + OPERATOR_CONSOLE
+ * → EXECUTIVE_DASHBOARD
  *
- * Output:
- * - EXECUTIVE_DASHBOARD
- ************************************************************/
+ * Migration note:
+ * Preserves original 460 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
+const EXECUTIVE_DASHBOARD_PROCESSOR = '460_ExecutiveDashboardProcessor';
 const EXECUTIVE_DASHBOARD_SHEET = 'EXECUTIVE_DASHBOARD';
 
 const EXECUTIVE_DASHBOARD_HEADERS = [
@@ -37,80 +37,200 @@ const EXECUTIVE_DASHBOARD_HEADERS = [
 ];
 
 function sciipEnsureExecutiveDashboardSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(EXECUTIVE_DASHBOARD_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(EXECUTIVE_DASHBOARD_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, EXECUTIVE_DASHBOARD_HEADERS.length)
-    .setValues([EXECUTIVE_DASHBOARD_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    EXECUTIVE_DASHBOARD_SHEET,
+    EXECUTIVE_DASHBOARD_HEADERS
+  );
 }
 
 function sciipRunExecutiveDashboardProcessor() {
-  const processor = '460_ExecutiveDashboardProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: EXECUTIVE_DASHBOARD_PROCESSOR,
+    action: 'EXECUTIVE_DASHBOARD_BUILD',
+    sourceSheet: null,
+    targetSheet: EXECUTIVE_DASHBOARD_SHEET,
+    ledgerSheet: 'EXECUTIVE_DASHBOARD_RUNTIME_LEDGER',
 
-  const outputSheet = sciipEnsureExecutiveDashboardSchema();
+    buildPayload: function(context, definition) {
+      const platformReports = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('PLATFORM_DAILY_REPORT');
+      const commandCenters = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('COMMAND_CENTER');
+      const operatorConsoles = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('OPERATOR_CONSOLE');
 
-  const platformReport = sciipGetLatestRecordByCreatedAt_('PLATFORM_DAILY_REPORT');
-  const commandCenter = sciipGetLatestRecordByCreatedAt_('COMMAND_CENTER');
-  const operatorConsole = sciipGetLatestRecordByCreatedAt_('OPERATOR_CONSOLE');
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: platformReports.length + commandCenters.length + operatorConsoles.length,
+        outputCount: 1,
+        summary: 'Executive dashboard runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: EXECUTIVE_DASHBOARD_PROCESSOR,
+          inputSheets: [
+            'PLATFORM_DAILY_REPORT',
+            'COMMAND_CENTER',
+            'OPERATOR_CONSOLE'
+          ]
+        }
+      });
+    },
 
-  if (!platformReport && !commandCenter && !operatorConsole) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      executiveDashboardsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
 
-  const dashboardDate = sciipFormatDateKey_(startedAt);
-  const businessKey = `EXECUTIVE_DASHBOARD|${dashboardDate}`;
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
 
-  if (sciipBusinessKeyExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      executiveDashboardsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
 
-  const dashboard = sciipCreateExecutiveDashboard_({
-    businessKey,
-    dashboardDate,
-    platformReport,
-    commandCenter,
-    operatorConsole,
-    processor
+    execute: function(payload, context, transaction, definition) {
+      sciipEnsureExecutiveDashboardSchema();
+
+      const platformReport = sciipGetLatestRuntimeRecordByCreatedAt_('PLATFORM_DAILY_REPORT');
+      const commandCenter = sciipGetLatestRuntimeRecordByCreatedAt_('COMMAND_CENTER');
+      const operatorConsole = sciipGetLatestRuntimeRecordByCreatedAt_('OPERATOR_CONSOLE');
+
+      if (!platformReport && !commandCenter && !operatorConsole) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: EXECUTIVE_DASHBOARD_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            executiveDashboardsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const dashboardDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const dashboardBusinessKey = 'EXECUTIVE_DASHBOARD|' + dashboardDate;
+
+      const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+        definition.targetSheet,
+        dashboardBusinessKey
+      );
+
+      if (existing) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: EXECUTIVE_DASHBOARD_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 3,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            executiveDashboardsCreated: 0,
+            skippedDuplicate: 1,
+            dashboardBusinessKey: dashboardBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const dashboardRow = sciipCreateExecutiveDashboard_({
+        businessKey: dashboardBusinessKey,
+        dashboardDate: dashboardDate,
+        platformReport: platformReport,
+        commandCenter: commandCenter,
+        operatorConsole: operatorConsole,
+        processor: EXECUTIVE_DASHBOARD_PROCESSOR
+      });
+
+      const dashboardObject = sciipExecutiveDashboardRowToObject_(dashboardRow);
+
+      SCIIP_RUNTIME_SHEET_FACTORY.appendObject(
+        definition.targetSheet,
+        EXECUTIVE_DASHBOARD_HEADERS,
+        dashboardObject
+      );
+
+      SCIIP_RUNTIME_LOGGING.audit({
+        context: context,
+        payload: {
+          platformReportFound: !!platformReport,
+          commandCenterFound: !!commandCenter,
+          operatorConsoleFound: !!operatorConsole,
+          executiveDashboardsCreated: 1,
+          skippedDuplicate: 0,
+          dashboardBusinessKey: dashboardBusinessKey,
+          transactionId: transaction.transactionId
+        },
+        message: '460 ExecutiveDashboardProcessor runtime execution completed.'
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: EXECUTIVE_DASHBOARD_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: 3,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          platformReportFound: !!platformReport,
+          commandCenterFound: !!commandCenter,
+          operatorConsoleFound: !!operatorConsole,
+          executiveDashboardsCreated: 1,
+          skippedDuplicate: 0,
+          dashboardBusinessKey: dashboardBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipGetLatestRuntimeRecordByCreatedAt_(sheetName) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+
+  if (!records || records.length === 0) return null;
+
+  records.sort(function(a, b) {
+    const aTime = sciipRuntimeRecordTimestamp_(a);
+    const bTime = sciipRuntimeRecordTimestamp_(b);
+    return aTime - bTime;
   });
 
-  outputSheet.appendRow(dashboard);
+  return records[records.length - 1];
+}
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    executiveDashboardsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+function sciipRuntimeRecordTimestamp_(record) {
+  if (!record) return 0;
 
-  Logger.log(JSON.stringify(result));
-  return result;
+  const raw =
+    record.Created_At ||
+    record.Updated_At ||
+    record.Timestamp ||
+    record.completedAt ||
+    record.Completed_At ||
+    '';
+
+  const time = raw ? new Date(raw).getTime() : 0;
+  return isNaN(time) ? 0 : time;
+}
+
+function sciipExecutiveDashboardRowToObject_(row) {
+  const object = {};
+
+  EXECUTIVE_DASHBOARD_HEADERS.forEach(function(header, index) {
+    object[header] = row[index];
+  });
+
+  return object;
 }
 
 function sciipCreateExecutiveDashboard_(args) {
