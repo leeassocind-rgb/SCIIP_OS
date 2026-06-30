@@ -2,11 +2,6 @@
  * SCIIP_OS v5.2
  * Shared Runtime Framework
  * File: SCIIP_RuntimeCommon.gs
- *
- * Purpose:
- * Centralizes runtime framework constants, lifecycle helpers,
- * duplicate detection, payload compaction, result creation,
- * and sheet bootstrap helpers for future autonomous runtime processors.
  */
 
 var SCIIP_RUNTIME = SCIIP_RUNTIME || {};
@@ -70,23 +65,45 @@ SCIIP_RUNTIME.ensureRuntimeSheets = function() {
   });
 };
 
+SCIIP_RUNTIME.getDateKey = function(config) {
+  if (config && config.dateKey) return config.dateKey;
+
+  if (typeof sciipTodayIso === 'function') {
+    return sciipTodayIso();
+  }
+
+  return Utilities.formatDate(
+    new Date(),
+    Session.getScriptTimeZone(),
+    'yyyy-MM-dd'
+  );
+};
+
 SCIIP_RUNTIME.makeBusinessKey = function(parts) {
   return parts
-    .filter(function(p) { return p !== null && p !== undefined && String(p).trim() !== ''; })
-    .map(function(p) { return String(p).trim().toUpperCase(); })
+    .filter(function(p) {
+      return p !== null && p !== undefined && String(p).trim() !== '';
+    })
+    .map(function(p) {
+      return String(p).trim().toUpperCase();
+    })
     .join('|');
 };
 
 SCIIP_RUNTIME.existsInLedger = function(sheetName, businessKey) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(sheetName);
+
   if (!sheet || sheet.getLastRow() < 2) return false;
 
-  var values = sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn()).getValues();
   var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
   var idx = headers.indexOf('Business_Key');
 
   if (idx === -1) return false;
+
+  var values = sheet
+    .getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn())
+    .getValues();
 
   return values.some(function(row) {
     return String(row[idx]) === String(businessKey);
@@ -120,7 +137,8 @@ SCIIP_RUNTIME.result = function(config) {
 SCIIP_RUNTIME.logLedger = function(config) {
   SCIIP_RUNTIME.ensureRuntimeSheets();
 
-  var sheet = SpreadsheetApp.getActiveSpreadsheet()
+  var sheet = SpreadsheetApp
+    .getActiveSpreadsheet()
     .getSheetByName(SCIIP_RUNTIME.SHEETS.RUNTIME_FRAMEWORK_LEDGER);
 
   sheet.appendRow([
@@ -138,7 +156,8 @@ SCIIP_RUNTIME.logLedger = function(config) {
 SCIIP_RUNTIME.logError = function(config, error) {
   SCIIP_RUNTIME.ensureRuntimeSheets();
 
-  var sheet = SpreadsheetApp.getActiveSpreadsheet()
+  var sheet = SpreadsheetApp
+    .getActiveSpreadsheet()
     .getSheetByName(SCIIP_RUNTIME.SHEETS.RUNTIME_FRAMEWORK_ERRORS);
 
   sheet.appendRow([
@@ -154,31 +173,21 @@ SCIIP_RUNTIME.logError = function(config, error) {
 SCIIP_RUNTIME.runProcessor = function(config) {
   SCIIP_RUNTIME.ensureRuntimeSheets();
 
-var dateKey = config.dateKey;
+  var dateKey = SCIIP_RUNTIME.getDateKey(config);
 
-if (!dateKey) {
-  if (typeof sciipTodayIso === 'function') {
-    dateKey = sciipTodayIso();
-  } else {
-    dateKey = Utilities.formatDate(
-      new Date(),
-      Session.getScriptTimeZone(),
-      'yyyy-MM-dd'
-    );
-  }
-}
-
-var businessKey = SCIIP_RUNTIME.makeBusinessKey([
-  config.processor,
-  config.action,
-  dateKey
-]);
+  var businessKey = SCIIP_RUNTIME.makeBusinessKey([
+    config.processor,
+    config.action,
+    dateKey
+  ]);
 
   try {
-    if (SCIIP_RUNTIME.existsInLedger(
-      SCIIP_RUNTIME.SHEETS.RUNTIME_FRAMEWORK_LEDGER,
-      businessKey
-    )) {
+    if (
+      SCIIP_RUNTIME.existsInLedger(
+        SCIIP_RUNTIME.SHEETS.RUNTIME_FRAMEWORK_LEDGER,
+        businessKey
+      )
+    ) {
       var duplicateResult = SCIIP_RUNTIME.result({
         processor: config.processor,
         status: 'SUCCESS',
@@ -231,3 +240,36 @@ var businessKey = SCIIP_RUNTIME.makeBusinessKey([
     throw err;
   }
 };
+
+/**
+ * Standalone validation test.
+ */
+function sciipTest2380_RuntimeFrameworkCommon() {
+  var result = SCIIP_RUNTIME.runProcessor({
+    processor: '2380_RuntimeFrameworkCommon',
+    action: 'RUNTIME_FRAMEWORK_BOOTSTRAP',
+
+    buildPayload: function() {
+      return {
+        processor: '2380_RuntimeFrameworkCommon',
+        status: 'TEST_PAYLOAD_CREATED',
+        count: 1
+      };
+    },
+
+    execute: function(payload) {
+      return {
+        status: 'SUCCESS',
+        recordsCreated: 1,
+        message: 'Runtime framework common validated.'
+      };
+    }
+  });
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTest2380_RuntimeFrameworkCommon',
+    result: result
+  }));
+
+  return result;
+}
