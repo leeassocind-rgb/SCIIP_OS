@@ -1,19 +1,21 @@
 /************************************************************
  * 320_BriefingDigestProcessor.gs
- * SCIIP_OS v4.0
+ * SCIIP_OS v5.3.2 Runtime Migration
  *
  * Purpose:
  * Consolidate individual intelligence briefings into one digest.
  *
- * Input:
- * - INTELLIGENCE_BRIEFING
- *
- * Output:
- * - BRIEFING_DIGEST
+ * Migrated to:
+ * - SCIIP_RuntimeProcessorBase
+ * - SCIIP_RuntimePayloadFactory
+ * - SCIIP_RuntimeResultFactory
+ * - SCIIP_RuntimeSheetFactory
+ * - SCIIP_RuntimeLogging
  ************************************************************/
 
 const SCIIP_BRIEFING_DIGEST_PROCESSOR = '320_BriefingDigestProcessor';
 const SCIIP_BRIEFING_DIGEST_SHEET = 'BRIEFING_DIGEST';
+const SCIIP_BRIEFING_SOURCE_SHEET = 'INTELLIGENCE_BRIEFING';
 
 const SCIIP_BRIEFING_DIGEST_HEADERS = [
   'Digest_ID',
@@ -36,55 +38,138 @@ const SCIIP_BRIEFING_DIGEST_HEADERS = [
 ];
 
 function sciipRunBriefingDigestProcessor() {
-  const startedAt = new Date();
-  const ss = sciipGetRuntimeSpreadsheet_();
-
-  sciipEnsureSheetWithHeaders_(ss, SCIIP_BRIEFING_DIGEST_SHEET, SCIIP_BRIEFING_DIGEST_HEADERS);
-
-  const briefingSheet = ss.getSheetByName('INTELLIGENCE_BRIEFING');
-  const digestSheet = ss.getSheetByName(SCIIP_BRIEFING_DIGEST_SHEET);
-
-  if (!briefingSheet) throw new Error('Missing INTELLIGENCE_BRIEFING. Run 310 first.');
-
-  const today = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
-
-  const briefings = sciipReadSheetAsObjects_(briefingSheet).filter(function(b) {
-  return String(b.Status || '').toUpperCase() === 'ACTIVE' &&
-         sciipNormalizeDateString_(b.Briefing_Date) === today;
-});
-
-  const existingKeys = sciipGetExistingColumnValues_(digestSheet, 'Business_Key');
-
-  let digestsCreated = 0;
-  let skippedDuplicate = 0;
-  let skippedNoBriefings = 0;
-
-  if (!briefings.length) {
-    skippedNoBriefings++;
-  } else {
-    const digest = sciipCreateBriefingDigest_(briefings, today);
-
-    if (existingKeys.has(digest.Business_Key)) {
-      skippedDuplicate++;
-    } else {
-      sciipAppendObjectRow_(digestSheet, SCIIP_BRIEFING_DIGEST_HEADERS, digest);
-      digestsCreated++;
-    }
-  }
-
-  const result = {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
     processor: SCIIP_BRIEFING_DIGEST_PROCESSOR,
-    status: 'SUCCESS',
-    briefingsReviewed: briefings.length,
-    digestsCreated: digestsCreated,
-    skippedDuplicate: skippedDuplicate,
-    skippedNoBriefings: skippedNoBriefings,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+    action: 'BRIEFING_DIGEST_DAILY_BUILD',
+    sourceSheet: SCIIP_BRIEFING_SOURCE_SHEET,
+    targetSheet: SCIIP_BRIEFING_DIGEST_SHEET,
+    ledgerSheet: 'BRIEFING_DIGEST_RUNTIME_LEDGER',
 
-  Logger.log(JSON.stringify(result));
-  return result;
+    buildPayload: function(context, definition) {
+      const ss = SCIIP_RUNTIME_SHEET_FACTORY.getSpreadsheet();
+      const briefingSheet = ss.getSheetByName(definition.sourceSheet);
+
+      let briefings = [];
+
+      if (briefingSheet) {
+        const today = SCIIP_RUNTIME.getDateKey({});
+
+        briefings = SCIIP_RUNTIME_SHEET_FACTORY
+          .getAllRecords(definition.sourceSheet)
+          .filter(function(b) {
+            return String(b.Status || '').toUpperCase() === 'ACTIVE' &&
+              sciipNormalizeDateString_(b.Briefing_Date) === today;
+          });
+      }
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: briefings.length,
+        outputCount: briefings.length ? 1 : 0,
+        summary: 'Briefing digest runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: '320_BriefingDigestProcessor'
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      const ss = SCIIP_RUNTIME_SHEET_FACTORY.getSpreadsheet();
+
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!ss.getSheetByName(definition.sourceSheet)) {
+        errors.push('Missing INTELLIGENCE_BRIEFING. Run 310 first.');
+      }
+
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const today = SCIIP_RUNTIME.getDateKey({});
+
+      SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+        definition.targetSheet,
+        SCIIP_BRIEFING_DIGEST_HEADERS
+      );
+
+      const briefings = SCIIP_RUNTIME_SHEET_FACTORY
+        .getAllRecords(definition.sourceSheet)
+        .filter(function(b) {
+          return String(b.Status || '').toUpperCase() === 'ACTIVE' &&
+            sciipNormalizeDateString_(b.Briefing_Date) === today;
+        });
+
+      let digestsCreated = 0;
+      let skippedDuplicate = 0;
+      let skippedNoBriefings = 0;
+
+      if (!briefings.length) {
+        skippedNoBriefings++;
+      } else {
+        const digest = sciipCreateBriefingDigest_(briefings, today);
+
+        const existingDigest = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+          definition.targetSheet,
+          digest.Business_Key
+        );
+
+        if (existingDigest) {
+          skippedDuplicate++;
+        } else {
+          SCIIP_RUNTIME_SHEET_FACTORY.appendObject(
+            definition.targetSheet,
+            SCIIP_BRIEFING_DIGEST_HEADERS,
+            digest
+          );
+
+          digestsCreated++;
+        }
+      }
+
+      SCIIP_RUNTIME_LOGGING.audit({
+        context: context,
+        payload: {
+          briefingsReviewed: briefings.length,
+          digestsCreated: digestsCreated,
+          skippedDuplicate: skippedDuplicate,
+          skippedNoBriefings: skippedNoBriefings,
+          transactionId: transaction.transactionId
+        },
+        message: '320 BriefingDigestProcessor migrated runtime execution completed.'
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: SCIIP_BRIEFING_DIGEST_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: digestsCreated,
+        recordsRead: briefings.length,
+        processed: briefings.length,
+        skippedDuplicate: skippedDuplicate,
+        skippedNoInputs: skippedNoBriefings,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          briefingsReviewed: briefings.length,
+          digestsCreated: digestsCreated,
+          skippedDuplicate: skippedDuplicate,
+          skippedNoBriefings: skippedNoBriefings,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
 }
 
 /************************************************************
@@ -101,7 +186,15 @@ function sciipCreateBriefingDigest_(briefings, today) {
   const highCount = sciipSumColumn_(briefings, 'High_Count');
 
   const title = 'SCIIP Daily Intelligence Digest — ' + today;
-  const text = sciipBuildDigestText_(briefings, forecastCount, opportunityCount, openActionCount, criticalCount, highCount);
+
+  const text = sciipBuildDigestText_(
+    briefings,
+    forecastCount,
+    opportunityCount,
+    openActionCount,
+    criticalCount,
+    highCount
+  );
 
   const keyBasis = [
     today,
@@ -132,7 +225,7 @@ function sciipCreateBriefingDigest_(briefings, today) {
     Created_At: now.toISOString(),
     Updated_At: now.toISOString(),
     Processor: SCIIP_BRIEFING_DIGEST_PROCESSOR,
-    Notes: 'Generated from active intelligence briefings.'
+    Notes: 'Generated from active intelligence briefings using SCIIP_RuntimeProcessorBase.'
   };
 }
 
@@ -140,7 +233,14 @@ function sciipCreateBriefingDigest_(briefings, today) {
  * TEXT
  ************************************************************/
 
-function sciipBuildDigestText_(briefings, forecastCount, opportunityCount, openActionCount, criticalCount, highCount) {
+function sciipBuildDigestText_(
+  briefings,
+  forecastCount,
+  opportunityCount,
+  openActionCount,
+  criticalCount,
+  highCount
+) {
   const lines = [];
 
   lines.push('SCIIP Daily Intelligence Digest');
@@ -177,7 +277,11 @@ function sciipNormalizeDateString_(value) {
   if (!value) return '';
 
   if (Object.prototype.toString.call(value) === '[object Date]') {
-    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+    return Utilities.formatDate(
+      value,
+      Session.getScriptTimeZone(),
+      'yyyy-MM-dd'
+    );
   }
 
   const s = String(value).trim();
@@ -185,8 +289,13 @@ function sciipNormalizeDateString_(value) {
   if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
 
   const d = new Date(s);
+
   if (!isNaN(d.getTime())) {
-    return Utilities.formatDate(d, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+    return Utilities.formatDate(
+      d,
+      Session.getScriptTimeZone(),
+      'yyyy-MM-dd'
+    );
   }
 
   return s;
