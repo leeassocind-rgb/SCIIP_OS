@@ -8,6 +8,8 @@ var SCIIP_RUNTIME = SCIIP_RUNTIME || {};
 
 SCIIP_RUNTIME.VERSION = 'v5.2';
 
+SCIIP_RUNTIME.DEFAULT_SPREADSHEET_ID = '1x5lXkh0l63v92tYacGe7S8vHISHycBufaLfE54dPPDk';
+
 SCIIP_RUNTIME.SHEETS = {
   RUNTIME_FRAMEWORK_LEDGER: 'RUNTIME_FRAMEWORK_LEDGER',
   RUNTIME_FRAMEWORK_INDEX: 'RUNTIME_FRAMEWORK_INDEX',
@@ -43,8 +45,24 @@ SCIIP_RUNTIME.HEADERS = {
   ]
 };
 
+SCIIP_RUNTIME.getSpreadsheetId = function() {
+  if (
+    typeof SCIIP !== 'undefined' &&
+    SCIIP &&
+    SCIIP.SPREADSHEET_ID
+  ) {
+    return SCIIP.SPREADSHEET_ID;
+  }
+
+  return SCIIP_RUNTIME.DEFAULT_SPREADSHEET_ID;
+};
+
+SCIIP_RUNTIME.getSpreadsheet = function() {
+  return SpreadsheetApp.openById(SCIIP_RUNTIME.getSpreadsheetId());
+};
+
 SCIIP_RUNTIME.ensureSheet = function(sheetName, headers) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SCIIP_RUNTIME.getSpreadsheet();
   var sheet = ss.getSheetByName(sheetName);
 
   if (!sheet) {
@@ -53,6 +71,7 @@ SCIIP_RUNTIME.ensureSheet = function(sheetName, headers) {
 
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(headers);
+    sheet.setFrozenRows(1);
   }
 
   return sheet;
@@ -91,7 +110,7 @@ SCIIP_RUNTIME.makeBusinessKey = function(parts) {
 };
 
 SCIIP_RUNTIME.existsInLedger = function(sheetName, businessKey) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = SCIIP_RUNTIME.getSpreadsheet();
   var sheet = ss.getSheetByName(sheetName);
 
   if (!sheet || sheet.getLastRow() < 2) return false;
@@ -137,8 +156,8 @@ SCIIP_RUNTIME.result = function(config) {
 SCIIP_RUNTIME.logLedger = function(config) {
   SCIIP_RUNTIME.ensureRuntimeSheets();
 
-  var sheet = SpreadsheetApp
-    .getActiveSpreadsheet()
+  var sheet = SCIIP_RUNTIME
+    .getSpreadsheet()
     .getSheetByName(SCIIP_RUNTIME.SHEETS.RUNTIME_FRAMEWORK_LEDGER);
 
   sheet.appendRow([
@@ -156,8 +175,8 @@ SCIIP_RUNTIME.logLedger = function(config) {
 SCIIP_RUNTIME.logError = function(config, error) {
   SCIIP_RUNTIME.ensureRuntimeSheets();
 
-  var sheet = SpreadsheetApp
-    .getActiveSpreadsheet()
+  var sheet = SCIIP_RUNTIME
+    .getSpreadsheet()
     .getSheetByName(SCIIP_RUNTIME.SHEETS.RUNTIME_FRAMEWORK_ERRORS);
 
   sheet.appendRow([
