@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 480_AutonomousOperationsProcessor
- * SCIIP_OS v4.0
  *
- * Inputs:
- * - COMMAND_BRIEF
- * - EXECUTIVE_DASHBOARD
- * - WORK_QUEUE
+ * COMMAND_BRIEF + EXECUTIVE_DASHBOARD + WORK_QUEUE
+ * → AUTONOMOUS_OPERATIONS
  *
- * Output:
- * - AUTONOMOUS_OPERATIONS
- ************************************************************/
+ * Migration note:
+ * Preserves original 480 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
+const AUTONOMOUS_OPERATIONS_PROCESSOR = '480_AutonomousOperationsProcessor';
 const AUTONOMOUS_OPERATIONS_SHEET = 'AUTONOMOUS_OPERATIONS';
 
 const AUTONOMOUS_OPERATIONS_HEADERS = [
@@ -36,80 +36,170 @@ const AUTONOMOUS_OPERATIONS_HEADERS = [
 ];
 
 function sciipEnsureAutonomousOperationsSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(AUTONOMOUS_OPERATIONS_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(AUTONOMOUS_OPERATIONS_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, AUTONOMOUS_OPERATIONS_HEADERS.length)
-    .setValues([AUTONOMOUS_OPERATIONS_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    AUTONOMOUS_OPERATIONS_SHEET,
+    AUTONOMOUS_OPERATIONS_HEADERS
+  );
 }
 
 function sciipRunAutonomousOperationsProcessor() {
-  const processor = '480_AutonomousOperationsProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: AUTONOMOUS_OPERATIONS_PROCESSOR,
+    action: 'AUTONOMOUS_OPERATIONS_BUILD',
+    sourceSheet: null,
+    targetSheet: AUTONOMOUS_OPERATIONS_SHEET,
+    ledgerSheet: 'AUTONOMOUS_OPERATIONS_RUNTIME_LEDGER',
 
-  const outputSheet = sciipEnsureAutonomousOperationsSchema();
+    buildPayload: function(context, definition) {
+      const commandBriefs = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('COMMAND_BRIEF');
+      const executiveDashboards = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('EXECUTIVE_DASHBOARD');
+      const workQueueItems = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('WORK_QUEUE');
 
-  const commandBrief = sciipGetLatestRecordByCreatedAt_('COMMAND_BRIEF');
-  const executiveDashboard = sciipGetLatestRecordByCreatedAt_('EXECUTIVE_DASHBOARD');
-  const workQueue = sciipGetLatestRecordByCreatedAt_('WORK_QUEUE');
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: commandBriefs.length + executiveDashboards.length + workQueueItems.length,
+        outputCount: 1,
+        summary: 'Autonomous operations runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: AUTONOMOUS_OPERATIONS_PROCESSOR,
+          inputSheets: [
+            'COMMAND_BRIEF',
+            'EXECUTIVE_DASHBOARD',
+            'WORK_QUEUE'
+          ]
+        }
+      });
+    },
 
-  if (!commandBrief && !executiveDashboard && !workQueue) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousOperationsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
 
-  const operationDate = sciipFormatDateKey_(startedAt);
-  const businessKey = `AUTONOMOUS_OPERATIONS|${operationDate}`;
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
 
-  if (sciipBusinessKeyExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousOperationsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
 
-  const operation = sciipCreateAutonomousOperation_({
-    businessKey,
-    operationDate,
-    commandBrief,
-    executiveDashboard,
-    workQueue,
-    processor
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousOperationsSchema();
+
+      const commandBrief = sciipGetLatestRuntimeRecordByCreatedAt_('COMMAND_BRIEF');
+      const executiveDashboard = sciipGetLatestRuntimeRecordByCreatedAt_('EXECUTIVE_DASHBOARD');
+      const workQueue = sciipGetLatestRuntimeRecordByCreatedAt_('WORK_QUEUE');
+
+      if (!commandBrief && !executiveDashboard && !workQueue) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: AUTONOMOUS_OPERATIONS_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousOperationsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const operationDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const autonomousOperationsBusinessKey = 'AUTONOMOUS_OPERATIONS|' + operationDate;
+
+      const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+        definition.targetSheet,
+        autonomousOperationsBusinessKey
+      );
+
+      if (existing) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: AUTONOMOUS_OPERATIONS_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 3,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousOperationsCreated: 0,
+            skippedDuplicate: 1,
+            autonomousOperationsBusinessKey: autonomousOperationsBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const operation = sciipCreateAutonomousOperation_({
+        businessKey: autonomousOperationsBusinessKey,
+        operationDate: operationDate,
+        commandBrief: commandBrief,
+        executiveDashboard: executiveDashboard,
+        workQueue: workQueue,
+        processor: AUTONOMOUS_OPERATIONS_PROCESSOR
+      });
+
+      outputSheet.appendRow(operation);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: AUTONOMOUS_OPERATIONS_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: 3,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          commandBriefFound: !!commandBrief,
+          executiveDashboardFound: !!executiveDashboard,
+          workQueueFound: !!workQueue,
+          autonomousOperationsCreated: 1,
+          skippedDuplicate: 0,
+          autonomousOperationsBusinessKey: autonomousOperationsBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipGetLatestRuntimeRecordByCreatedAt_(sheetName) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+
+  if (!records || records.length === 0) return null;
+
+  records.sort(function(a, b) {
+    const aTime = sciipRuntimeRecordTimestamp_(a);
+    const bTime = sciipRuntimeRecordTimestamp_(b);
+    return aTime - bTime;
   });
 
-  outputSheet.appendRow(operation);
+  return records[records.length - 1];
+}
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousOperationsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+function sciipRuntimeRecordTimestamp_(record) {
+  if (!record) return 0;
 
-  Logger.log(JSON.stringify(result));
-  return result;
+  const raw =
+    record.Created_At ||
+    record.Updated_At ||
+    record.Timestamp ||
+    record.completedAt ||
+    record.Completed_At ||
+    '';
+
+  const time = raw ? new Date(raw).getTime() : 0;
+  return isNaN(time) ? 0 : time;
 }
 
 function sciipCreateAutonomousOperation_(args) {
@@ -379,7 +469,7 @@ function sciipTestAutonomousOperationsProcessor() {
   const result = sciipRunAutonomousOperationsProcessor();
   Logger.log(JSON.stringify({
     test: 'sciipTestAutonomousOperationsProcessor',
-    result
+    result: result
   }));
   return result;
 }
