@@ -154,11 +154,25 @@ SCIIP_RUNTIME.logError = function(config, error) {
 SCIIP_RUNTIME.runProcessor = function(config) {
   SCIIP_RUNTIME.ensureRuntimeSheets();
 
-  var businessKey = SCIIP_RUNTIME.makeBusinessKey([
-    config.processor,
-    config.action,
-    config.dateKey || SCIIP_getTodayDateKey && SCIIP_getTodayDateKey()
-  ]);
+var dateKey = config.dateKey;
+
+if (!dateKey) {
+  if (typeof sciipTodayIso === 'function') {
+    dateKey = sciipTodayIso();
+  } else {
+    dateKey = Utilities.formatDate(
+      new Date(),
+      Session.getScriptTimeZone(),
+      'yyyy-MM-dd'
+    );
+  }
+}
+
+var businessKey = SCIIP_RUNTIME.makeBusinessKey([
+  config.processor,
+  config.action,
+  dateKey
+]);
 
   try {
     if (SCIIP_RUNTIME.existsInLedger(
