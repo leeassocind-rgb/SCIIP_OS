@@ -1,10 +1,16 @@
 /*******************************************************
- * SCIIP_OS v4.0
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 410_OperatorConsoleProcessor
  *
  * WORK_QUEUE_DIGEST → OPERATOR_CONSOLE
+ *
+ * Migration note:
+ * Preserves original 410 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
  *******************************************************/
 
+const OPERATOR_CONSOLE_PROCESSOR = '410_OperatorConsoleProcessor';
+const OPERATOR_CONSOLE_SOURCE_SHEET = 'WORK_QUEUE_DIGEST';
 const OPERATOR_CONSOLE_SHEET = 'OPERATOR_CONSOLE';
 
 const OPERATOR_CONSOLE_HEADERS = [
@@ -30,64 +36,124 @@ const OPERATOR_CONSOLE_HEADERS = [
   'Notes'
 ];
 
-const OPERATOR_CONSOLE_PROCESSOR = '410_OperatorConsoleProcessor';
-
 function sciipRunOperatorConsoleProcessor() {
-  const ss = sciipGetRuntimeSpreadsheet_();
-
-  const digestSheet = ss.getSheetByName('WORK_QUEUE_DIGEST');
-  if (!digestSheet) throw new Error('Missing WORK_QUEUE_DIGEST sheet');
-
-  const consoleSheet = sciipEnsureOperatorConsoleSheet_();
-
-  const digests = sciipReadSheetObjects_(digestSheet);
-  const existingConsoles = sciipReadSheetObjects_(consoleSheet);
-
-  const existingKeys = new Set(
-    existingConsoles.map(r => String(r.Business_Key || '').trim())
-  );
-
-  let created = 0;
-  let skippedDuplicate = 0;
-  let skippedNoDigest = 0;
-
-  digests.forEach(digest => {
-    const digestId = digest.ID || digest.Work_Queue_Digest_ID;
-
-    if (!digestId) {
-      skippedNoDigest++;
-      return;
-    }
-
-    const businessKey = `OPERATOR_CONSOLE|${digestId}`;
-
-    if (existingKeys.has(businessKey)) {
-      skippedDuplicate++;
-      return;
-    }
-
-    const console = sciipBuildOperatorConsole_(digest, businessKey);
-
-    consoleSheet.appendRow(
-      OPERATOR_CONSOLE_HEADERS.map(h => console[h] || '')
-    );
-
-    existingKeys.add(businessKey);
-    created++;
-  });
-
-  const result = {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
     processor: OPERATOR_CONSOLE_PROCESSOR,
-    status: 'SUCCESS',
-    workQueueDigestsReviewed: digests.length,
-    operatorConsolesCreated: created,
-    skippedDuplicate,
-    skippedNoDigest,
-    completedAt: new Date().toISOString()
-  };
+    action: 'OPERATOR_CONSOLE_BUILD',
+    sourceSheet: OPERATOR_CONSOLE_SOURCE_SHEET,
+    targetSheet: OPERATOR_CONSOLE_SHEET,
+    ledgerSheet: 'OPERATOR_CONSOLE_RUNTIME_LEDGER',
 
-  Logger.log(JSON.stringify(result));
-  return result;
+    buildPayload: function(context, definition) {
+      const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet);
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: records.length,
+        outputCount: records.length,
+        summary: 'Operator console runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: OPERATOR_CONSOLE_PROCESSOR
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      const ss = SCIIP_RUNTIME_SHEET_FACTORY.getSpreadsheet();
+
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!ss.getSheetByName(definition.sourceSheet)) {
+        errors.push('Missing WORK_QUEUE_DIGEST sheet. Run 400 first.');
+      }
+
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+        definition.targetSheet,
+        OPERATOR_CONSOLE_HEADERS
+      );
+
+      const digests = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet);
+      let created = 0;
+      let skippedDuplicate = 0;
+      let skippedNoDigest = 0;
+
+      digests.forEach(function(digest) {
+        const digestId = digest.ID || digest.Work_Queue_Digest_ID;
+
+        if (!digestId) {
+          skippedNoDigest++;
+          return;
+        }
+
+        const consoleBusinessKey = 'OPERATOR_CONSOLE|' + digestId;
+        const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+          definition.targetSheet,
+          consoleBusinessKey
+        );
+
+        if (existing) {
+          skippedDuplicate++;
+          return;
+        }
+
+        const console = sciipBuildOperatorConsole_(digest, consoleBusinessKey);
+
+        SCIIP_RUNTIME_SHEET_FACTORY.appendObject(
+          definition.targetSheet,
+          OPERATOR_CONSOLE_HEADERS,
+          console
+        );
+
+        created++;
+      });
+
+      SCIIP_RUNTIME_LOGGING.audit({
+        context: context,
+        payload: {
+          workQueueDigestsReviewed: digests.length,
+          operatorConsolesCreated: created,
+          skippedDuplicate: skippedDuplicate,
+          skippedNoDigest: skippedNoDigest,
+          transactionId: transaction.transactionId
+        },
+        message: '410 OperatorConsoleProcessor runtime execution completed.'
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: OPERATOR_CONSOLE_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: created,
+        recordsRead: digests.length,
+        processed: digests.length,
+        skippedDuplicate: skippedDuplicate,
+        skippedNoInputs: skippedNoDigest,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          workQueueDigestsReviewed: digests.length,
+          operatorConsolesCreated: created,
+          skippedDuplicate: skippedDuplicate,
+          skippedNoDigest: skippedNoDigest,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
 }
 
 function sciipBuildOperatorConsole_(digest, businessKey) {
@@ -119,7 +185,7 @@ function sciipBuildOperatorConsole_(digest, businessKey) {
 
 function sciipOperatorConsoleTitle_(digest) {
   const date = digest.Digest_Date || new Date().toISOString().slice(0, 10);
-  return `SCIIP Operator Console — ${date}`;
+  return 'SCIIP Operator Console — ' + date;
 }
 
 function sciipOperatingStatus_(digest) {
@@ -134,79 +200,16 @@ function sciipOperatingStatus_(digest) {
   return 'CLEAR';
 }
 
-/**
- * Sheet setup
- */
-function sciipEnsureOperatorConsoleSheet_() {
-  const ss = sciipGetRuntimeSpreadsheet_();
-  let sheet = ss.getSheetByName(OPERATOR_CONSOLE_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(OPERATOR_CONSOLE_SHEET);
-    sheet.appendRow(OPERATOR_CONSOLE_HEADERS);
-    return sheet;
-  }
-
-  const existingHeaders = sheet
-    .getRange(1, 1, 1, Math.max(sheet.getLastColumn(), 1))
-    .getValues()[0];
-
-  if (existingHeaders.join('|') !== OPERATOR_CONSOLE_HEADERS.join('|')) {
-    sheet.clear();
-    sheet.appendRow(OPERATOR_CONSOLE_HEADERS);
-  }
-
-  return sheet;
-}
-
-/**
- * Helpers
- */
 function sciipGenerateOperatorConsoleId_() {
   return 'OP_CONSOLE_' + Utilities.getUuid().replace(/-/g, '').slice(0, 16).toUpperCase();
 }
 
-function sciipReadSheetObjects_(sheet) {
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0];
-
-  return values.slice(1)
-    .filter(row => row.some(v => v !== '' && v !== null))
-    .map(row => {
-      const obj = {};
-      headers.forEach((h, i) => obj[h] = row[i]);
-      return obj;
-    });
-}
-
-function sciipGetRuntimeSpreadsheet_() {
-  const props = PropertiesService.getScriptProperties();
-
-  const spreadsheetId =
-    props.getProperty('SCIIP_SPREADSHEET_ID') ||
-    props.getProperty('SPREADSHEET_ID') ||
-    props.getProperty('RUNTIME_SPREADSHEET_ID');
-
-  if (!spreadsheetId) {
-    throw new Error(
-      'Missing SCIIP_SPREADSHEET_ID in Script Properties. Add your SCIIP runtime Google Sheet ID.'
-    );
-  }
-
-  return SpreadsheetApp.openById(spreadsheetId);
-}
-
-/**
- * Test function
- */
 function sciipTestOperatorConsoleProcessor() {
   const result = sciipRunOperatorConsoleProcessor();
 
   Logger.log(JSON.stringify({
     test: 'sciipTestOperatorConsoleProcessor',
-    result
+    result: result
   }));
 
   return result;
