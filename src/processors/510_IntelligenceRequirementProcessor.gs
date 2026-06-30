@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 510_IntelligenceRequirementProcessor
- * SCIIP_OS v4.1
  *
- * Inputs:
- * - STRATEGIC_INTELLIGENCE
- * - COMMAND_BRIEF
- * - SYSTEM_LEARNING
+ * STRATEGIC_INTELLIGENCE + COMMAND_BRIEF + SYSTEM_LEARNING
+ * → INTELLIGENCE_REQUIREMENTS
  *
- * Output:
- * - INTELLIGENCE_REQUIREMENTS
- ************************************************************/
+ * Migration note:
+ * Preserves original 510 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
+const INTELLIGENCE_REQUIREMENT_PROCESSOR = '510_IntelligenceRequirementProcessor';
 const INTELLIGENCE_REQUIREMENTS_SHEET = 'INTELLIGENCE_REQUIREMENTS';
 
 const INTELLIGENCE_REQUIREMENTS_HEADERS = [
@@ -36,85 +36,175 @@ const INTELLIGENCE_REQUIREMENTS_HEADERS = [
 ];
 
 function sciipEnsureIntelligenceRequirementsSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(INTELLIGENCE_REQUIREMENTS_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(INTELLIGENCE_REQUIREMENTS_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, INTELLIGENCE_REQUIREMENTS_HEADERS.length)
-    .setValues([INTELLIGENCE_REQUIREMENTS_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    INTELLIGENCE_REQUIREMENTS_SHEET,
+    INTELLIGENCE_REQUIREMENTS_HEADERS
+  );
 }
 
 function sciipRunIntelligenceRequirementProcessor() {
-  const processor = '510_IntelligenceRequirementProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: INTELLIGENCE_REQUIREMENT_PROCESSOR,
+    action: 'INTELLIGENCE_REQUIREMENTS_BUILD',
+    sourceSheet: null,
+    targetSheet: INTELLIGENCE_REQUIREMENTS_SHEET,
+    ledgerSheet: 'INTELLIGENCE_REQUIREMENTS_RUNTIME_LEDGER',
 
-  const outputSheet = sciipEnsureIntelligenceRequirementsSchema();
+    buildPayload: function(context, definition) {
+      const strategicIntelligenceRecords = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('STRATEGIC_INTELLIGENCE');
+      const commandBriefRecords = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('COMMAND_BRIEF');
+      const systemLearningRecords = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('SYSTEM_LEARNING');
 
-  const strategicIntelligence = sciipGetLatestRecordByCreatedAt_('STRATEGIC_INTELLIGENCE');
-  const commandBrief = sciipGetLatestRecordByCreatedAt_('COMMAND_BRIEF');
-  const systemLearning = sciipGetLatestRecordByCreatedAt_('SYSTEM_LEARNING');
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount:
+          strategicIntelligenceRecords.length +
+          commandBriefRecords.length +
+          systemLearningRecords.length,
+        outputCount: 5,
+        summary: 'Intelligence requirements runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: INTELLIGENCE_REQUIREMENT_PROCESSOR,
+          inputSheets: [
+            'STRATEGIC_INTELLIGENCE',
+            'COMMAND_BRIEF',
+            'SYSTEM_LEARNING'
+          ]
+        }
+      });
+    },
 
-  if (!strategicIntelligence && !commandBrief && !systemLearning) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      intelligenceRequirementsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
 
-  const requirementDate = sciipFormatDateKey_(startedAt);
-  const businessKey = `INTELLIGENCE_REQUIREMENTS|${requirementDate}`;
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
 
-  if (
-  sciipBusinessKeyPrefixExists_(
-    outputSheet,
-    businessKey
-  )
-) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      intelligenceRequirementsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
 
-  const requirements = sciipCreateIntelligenceRequirements_({
-    businessKey,
-    requirementDate,
-    strategicIntelligence,
-    commandBrief,
-    systemLearning,
-    processor
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureIntelligenceRequirementsSchema();
+
+      const strategicIntelligence = sciipGetLatestRuntimeRecordByCreatedAt_('STRATEGIC_INTELLIGENCE');
+      const commandBrief = sciipGetLatestRuntimeRecordByCreatedAt_('COMMAND_BRIEF');
+      const systemLearning = sciipGetLatestRuntimeRecordByCreatedAt_('SYSTEM_LEARNING');
+
+      if (!strategicIntelligence && !commandBrief && !systemLearning) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: INTELLIGENCE_REQUIREMENT_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            intelligenceRequirementsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const requirementDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const intelligenceRequirementsBusinessKey = 'INTELLIGENCE_REQUIREMENTS|' + requirementDate;
+
+      const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+        definition.targetSheet,
+        intelligenceRequirementsBusinessKey
+      );
+
+      if (existing) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: INTELLIGENCE_REQUIREMENT_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 3,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            intelligenceRequirementsCreated: 0,
+            skippedDuplicate: 1,
+            intelligenceRequirementsBusinessKey: intelligenceRequirementsBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const requirements = sciipCreateIntelligenceRequirements_({
+        businessKey: intelligenceRequirementsBusinessKey,
+        requirementDate: requirementDate,
+        strategicIntelligence: strategicIntelligence,
+        commandBrief: commandBrief,
+        systemLearning: systemLearning,
+        processor: INTELLIGENCE_REQUIREMENT_PROCESSOR
+      });
+
+      requirements.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: INTELLIGENCE_REQUIREMENT_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: requirements.length,
+        recordsRead: 3,
+        processed: requirements.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          strategicIntelligenceFound: !!strategicIntelligence,
+          commandBriefFound: !!commandBrief,
+          systemLearningFound: !!systemLearning,
+          intelligenceRequirementsCreated: requirements.length,
+          skippedDuplicate: 0,
+          intelligenceRequirementsBusinessKey: intelligenceRequirementsBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipGetLatestRuntimeRecordByCreatedAt_(sheetName) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+
+  if (!records || records.length === 0) return null;
+
+  records.sort(function(a, b) {
+    const aTime = sciipRuntimeRecordTimestamp_(a);
+    const bTime = sciipRuntimeRecordTimestamp_(b);
+    return aTime - bTime;
   });
 
-  requirements.forEach(row => outputSheet.appendRow(row));
+  return records[records.length - 1];
+}
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    intelligenceRequirementsCreated: requirements.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+function sciipRuntimeRecordTimestamp_(record) {
+  if (!record) return 0;
 
-  Logger.log(JSON.stringify(result));
-  return result;
+  const raw =
+    record.Created_At ||
+    record.Updated_At ||
+    record.Timestamp ||
+    record.completedAt ||
+    record.Completed_At ||
+    '';
+
+  const time = raw ? new Date(raw).getTime() : 0;
+  return isNaN(time) ? 0 : time;
 }
 
 function sciipCreateIntelligenceRequirements_(args) {
@@ -149,40 +239,42 @@ function sciipCreateIntelligenceRequirements_(args) {
 
   const requirementSeeds = sciipGenerateRequirementSeeds_(strategicText);
 
-  return requirementSeeds.map(seed => [
-    sciipGenerateId_('IRQ'),
-    `${args.businessKey}|${seed.key}`,
-    args.requirementDate,
-    seed.type,
-    sciipExtractFirstAvailable_(args.strategicIntelligence, [
-      'Strategic_Intelligence_ID',
-      'Record_ID',
-      'ID'
-    ]),
-    sciipExtractFirstAvailable_(args.commandBrief, [
-      'Command_Brief_ID',
-      'Record_ID',
-      'ID'
-    ]),
-    sciipExtractFirstAvailable_(args.systemLearning, [
-      'Learning_ID',
-      'System_Learning_ID',
-      'Record_ID',
-      'ID'
-    ]),
-    seed.priority,
-    'OPEN',
-    seed.question,
-    seed.why,
-    seed.gap,
-    seed.direction,
-    seed.sources,
-    seed.decisionLinkage,
-    seed.operatorAction,
-    'ACTIVE',
-    now.toISOString(),
-    args.processor
-  ]);
+  return requirementSeeds.map(function(seed) {
+    return [
+      sciipGenerateId_('IRQ'),
+      args.businessKey + '|' + seed.key,
+      args.requirementDate,
+      seed.type,
+      sciipExtractFirstAvailable_(args.strategicIntelligence, [
+        'Strategic_Intelligence_ID',
+        'Record_ID',
+        'ID'
+      ]),
+      sciipExtractFirstAvailable_(args.commandBrief, [
+        'Command_Brief_ID',
+        'Record_ID',
+        'ID'
+      ]),
+      sciipExtractFirstAvailable_(args.systemLearning, [
+        'Learning_ID',
+        'System_Learning_ID',
+        'Record_ID',
+        'ID'
+      ]),
+      seed.priority,
+      'OPEN',
+      seed.question,
+      seed.why,
+      seed.gap,
+      seed.direction,
+      seed.sources,
+      seed.decisionLinkage,
+      seed.operatorAction,
+      'ACTIVE',
+      now.toISOString(),
+      args.processor
+    ];
+  });
 }
 
 function sciipGenerateRequirementSeeds_(text) {
@@ -260,36 +352,20 @@ function sciipTestIntelligenceRequirementProcessor() {
   const result = sciipRunIntelligenceRequirementProcessor();
   Logger.log(JSON.stringify({
     test: 'sciipTestIntelligenceRequirementProcessor',
-    result
+    result: result
   }));
   return result;
 }
 
-function sciipBusinessKeyPrefixExists_(
-  sheet,
-  businessKeyPrefix
-) {
+function sciipExtractFirstAvailable_(record, fieldNames) {
+  if (!record) return '';
 
-  const values =
-    sheet.getDataRange().getValues();
-
-  if (values.length < 2) {
-    return false;
+  for (let i = 0; i < fieldNames.length; i++) {
+    const fieldName = fieldNames[i];
+    if (record[fieldName] !== undefined && record[fieldName] !== null && record[fieldName] !== '') {
+      return String(record[fieldName]);
+    }
   }
 
-  const headers = values[0];
-
-  const keyIndex =
-    headers.indexOf('Business_Key');
-
-  if (keyIndex === -1) {
-    return false;
-  }
-
-  return values
-    .slice(1)
-    .some(row =>
-      String(row[keyIndex] || '')
-        .startsWith(businessKeyPrefix)
-    );
+  return '';
 }
