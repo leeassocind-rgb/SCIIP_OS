@@ -1,15 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 520_ResearchMissionProcessor
- * SCIIP_OS v4.1
  *
- * Inputs:
- * - INTELLIGENCE_REQUIREMENTS
- * - STRATEGIC_INTELLIGENCE
+ * INTELLIGENCE_REQUIREMENTS + STRATEGIC_INTELLIGENCE
+ * → RESEARCH_MISSIONS
  *
- * Output:
- * - RESEARCH_MISSIONS
- ************************************************************/
+ * Migration note:
+ * Preserves original 520 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
+const RESEARCH_MISSION_PROCESSOR = '520_ResearchMissionProcessor';
 const RESEARCH_MISSIONS_SHEET = 'RESEARCH_MISSIONS';
 
 const RESEARCH_MISSIONS_HEADERS = [
@@ -36,84 +37,209 @@ const RESEARCH_MISSIONS_HEADERS = [
 ];
 
 function sciipEnsureResearchMissionsSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(RESEARCH_MISSIONS_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(RESEARCH_MISSIONS_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, RESEARCH_MISSIONS_HEADERS.length)
-    .setValues([RESEARCH_MISSIONS_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    RESEARCH_MISSIONS_SHEET,
+    RESEARCH_MISSIONS_HEADERS
+  );
 }
 
 function sciipRunResearchMissionProcessor() {
-  const processor = '520_ResearchMissionProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: RESEARCH_MISSION_PROCESSOR,
+    action: 'RESEARCH_MISSIONS_BUILD',
+    sourceSheet: 'INTELLIGENCE_REQUIREMENTS',
+    targetSheet: RESEARCH_MISSIONS_SHEET,
+    ledgerSheet: 'RESEARCH_MISSIONS_RUNTIME_LEDGER',
 
-  const outputSheet = sciipEnsureResearchMissionsSchema();
+    buildPayload: function(context, definition) {
+      const requirements = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('INTELLIGENCE_REQUIREMENTS');
+      const strategicIntelligenceRecords = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('STRATEGIC_INTELLIGENCE');
 
-  const missionDate = sciipFormatDateKey_(startedAt);
-  const businessKey = `RESEARCH_MISSIONS|${missionDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: requirements.length + strategicIntelligenceRecords.length,
+        outputCount: requirements.length || 1,
+        summary: 'Research missions runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: RESEARCH_MISSION_PROCESSOR,
+          inputSheets: [
+            'INTELLIGENCE_REQUIREMENTS',
+            'STRATEGIC_INTELLIGENCE'
+          ]
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      researchMissionsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
+    validate: function(payload, context, definition) {
+      const errors = [];
+
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureResearchMissionsSchema();
+      const missionDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const researchMissionsBusinessKey = 'RESEARCH_MISSIONS|' + missionDate;
+
+      const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+        definition.targetSheet,
+        researchMissionsBusinessKey
+      );
+
+      if (existing) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: RESEARCH_MISSION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            researchMissionsCreated: 0,
+            skippedDuplicate: 1,
+            researchMissionsBusinessKey: researchMissionsBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const requirements = sciipGetRuntimeRecordsByDate_(
+        'INTELLIGENCE_REQUIREMENTS',
+        'Requirement_Date',
+        missionDate
+      );
+
+      const strategicIntelligence = sciipGetLatestRuntimeRecordByCreatedAt_('STRATEGIC_INTELLIGENCE');
+
+      if (requirements.length === 0 && !strategicIntelligence) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: RESEARCH_MISSION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            researchMissionsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const missions = sciipCreateResearchMissions_({
+        businessKey: researchMissionsBusinessKey,
+        missionDate: missionDate,
+        requirements: requirements,
+        strategicIntelligence: strategicIntelligence,
+        processor: RESEARCH_MISSION_PROCESSOR
+      });
+
+      missions.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: RESEARCH_MISSION_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: missions.length,
+        recordsRead: requirements.length + (strategicIntelligence ? 1 : 0),
+        processed: missions.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          intelligenceRequirementsReviewed: requirements.length,
+          strategicIntelligenceFound: !!strategicIntelligence,
+          researchMissionsCreated: missions.length,
+          skippedDuplicate: 0,
+          researchMissionsBusinessKey: researchMissionsBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipGetRuntimeRecordsByDate_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(
+      value,
+      Session.getScriptTimeZone(),
+      'yyyy-MM-dd'
+    );
   }
 
-  const requirements = sciipGetRecordsByDate_(
-    'INTELLIGENCE_REQUIREMENTS',
-    'Requirement_Date',
-    missionDate
-  );
+  const text = String(value).trim();
 
-  const strategicIntelligence =
-    sciipGetLatestRecordByCreatedAt_('STRATEGIC_INTELLIGENCE');
-
-  if (requirements.length === 0 && !strategicIntelligence) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      researchMissionsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    return text;
   }
 
-  const missions = sciipCreateResearchMissions_({
-    businessKey,
-    missionDate,
-    requirements,
-    strategicIntelligence,
-    processor
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(
+      parsed,
+      Session.getScriptTimeZone(),
+      'yyyy-MM-dd'
+    );
+  }
+
+  return text;
+}
+
+function sciipGetLatestRuntimeRecordByCreatedAt_(sheetName) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+
+  if (!records || records.length === 0) return null;
+
+  records.sort(function(a, b) {
+    const aTime = sciipRuntimeRecordTimestamp_(a);
+    const bTime = sciipRuntimeRecordTimestamp_(b);
+    return aTime - bTime;
   });
 
-  missions.forEach(row => outputSheet.appendRow(row));
+  return records[records.length - 1];
+}
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    researchMissionsCreated: missions.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+function sciipRuntimeRecordTimestamp_(record) {
+  if (!record) return 0;
 
-  Logger.log(JSON.stringify(result));
-  return result;
+  const raw =
+    record.Created_At ||
+    record.Updated_At ||
+    record.Timestamp ||
+    record.completedAt ||
+    record.Completed_At ||
+    '';
+
+  const time = raw ? new Date(raw).getTime() : 0;
+  return isNaN(time) ? 0 : time;
 }
 
 function sciipCreateResearchMissions_(args) {
@@ -314,71 +440,25 @@ function sciipComposeMissionExpectedOutput_(requirementType) {
   return 'Research finding, confidence level, source notes, and recommended next action.';
 }
 
-function sciipGetRecordsByDate_(sheetName, dateField, dateValue) {
-  const ss = sciipGetSpreadsheet_();
-  const sheet = ss.getSheetByName(sheetName);
-
-  if (!sheet) return [];
-
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0];
-  const dateIndex = headers.indexOf(dateField);
-
-  if (dateIndex === -1) return [];
-
-  return values
-    .slice(1)
-    .filter(row => {
-      const rowDate = sciipNormalizeDateValue_(row[dateIndex]);
-      return rowDate === String(dateValue);
-    })
-    .map(row => sciipRowToObject_(headers, row));
-}
-
-function sciipNormalizeDateValue_(value) {
-  if (!value) return '';
-
-  if (Object.prototype.toString.call(value) === '[object Date]') {
-    return Utilities.formatDate(
-      value,
-      Session.getScriptTimeZone(),
-      'yyyy-MM-dd'
-    );
-  }
-
-  const text = String(value).trim();
-
-  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
-    return text;
-  }
-
-  const parsed = new Date(text);
-  if (!isNaN(parsed.getTime())) {
-    return Utilities.formatDate(
-      parsed,
-      Session.getScriptTimeZone(),
-      'yyyy-MM-dd'
-    );
-  }
-
-  return text;
-}
-
-function sciipNormalizeMissionKey_(value) {
-  return String(value || 'MISSION')
-    .toUpperCase()
-    .replace(/[^A-Z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '')
-    .substring(0, 80);
-}
 
 function sciipTestResearchMissionProcessor() {
   const result = sciipRunResearchMissionProcessor();
   Logger.log(JSON.stringify({
     test: 'sciipTestResearchMissionProcessor',
-    result
+    result: result
   }));
   return result;
+}
+
+function sciipExtractFirstAvailable_(record, fieldNames) {
+  if (!record) return '';
+
+  for (let i = 0; i < fieldNames.length; i++) {
+    const fieldName = fieldNames[i];
+    if (record[fieldName] !== undefined && record[fieldName] !== null && record[fieldName] !== '') {
+      return String(record[fieldName]);
+    }
+  }
+
+  return '';
 }
