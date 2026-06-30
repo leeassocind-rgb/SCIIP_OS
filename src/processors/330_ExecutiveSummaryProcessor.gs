@@ -1,11 +1,14 @@
 /*******************************************************
- * SCIIP_OS v4.0
+ * SCIIP_OS v5.3.2
  * 330_ExecutiveSummaryProcessor
  *
  * BRIEFING_DIGEST → EXECUTIVE_SUMMARY
+ *
+ * Migrated to SCIIP_RuntimeProcessorBase.
  *******************************************************/
 
 const EXECUTIVE_SUMMARY_SHEET = 'EXECUTIVE_SUMMARY';
+const EXECUTIVE_SUMMARY_SOURCE_SHEET = 'BRIEFING_DIGEST';
 
 const EXECUTIVE_SUMMARY_HEADERS = [
   'ID',
@@ -28,73 +31,138 @@ const EXECUTIVE_SUMMARY_HEADERS = [
 
 const EXECUTIVE_SUMMARY_PROCESSOR = '330_ExecutiveSummaryProcessor';
 
-/**
- * Main processor
- */
 function sciipRunExecutiveSummaryProcessor() {
-  const ss = sciipGetRuntimeSpreadsheet_();
-
-  const digestSheet = ss.getSheetByName('BRIEFING_DIGEST');
-  if (!digestSheet) throw new Error('Missing BRIEFING_DIGEST sheet');
-
-  const summarySheet = sciipEnsureExecutiveSummarySheet_();
-
-  const digests = sciipReadSheetObjects_(digestSheet);
-  const existingSummaries = sciipReadSheetObjects_(summarySheet);
-
-  const existingKeys = new Set(
-    existingSummaries.map(r => String(r.Business_Key || '').trim())
-  );
-
-  let created = 0;
-  let skippedDuplicate = 0;
-  let skippedNoDigest = 0;
-
-  digests.forEach(digest => {
-    const digestId = digest.ID || digest.Digest_ID;
-    if (!digestId) {
-      skippedNoDigest++;
-      return;
-    }
-
-    const summaryDate =
-      digest.Digest_Date ||
-      digest.Briefing_Date ||
-      digest.Created_At ||
-      new Date();
-
-    const businessKey = `EXECUTIVE_SUMMARY|${digestId}`;
-
-    if (existingKeys.has(businessKey)) {
-      skippedDuplicate++;
-      return;
-    }
-
-    const summary = sciipBuildExecutiveSummary_(digest, businessKey, summaryDate);
-
-    summarySheet.appendRow(EXECUTIVE_SUMMARY_HEADERS.map(h => summary[h] || ''));
-
-    existingKeys.add(businessKey);
-    created++;
-  });
-
-  const result = {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
     processor: EXECUTIVE_SUMMARY_PROCESSOR,
-    status: 'SUCCESS',
-    digestsReviewed: digests.length,
-    executiveSummariesCreated: created,
-    skippedDuplicate,
-    skippedNoDigest,
-    completedAt: new Date().toISOString()
-  };
+    action: 'EXECUTIVE_SUMMARY_BUILD',
+    sourceSheet: EXECUTIVE_SUMMARY_SOURCE_SHEET,
+    targetSheet: EXECUTIVE_SUMMARY_SHEET,
+    ledgerSheet: 'EXECUTIVE_SUMMARY_RUNTIME_LEDGER',
 
-  Logger.log(JSON.stringify(result));
-  return result;
+    buildPayload: function(context, definition) {
+      const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet);
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: records.length,
+        outputCount: records.length,
+        summary: 'Executive summary runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: '330_ExecutiveSummaryProcessor'
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      const ss = SCIIP_RUNTIME_SHEET_FACTORY.getSpreadsheet();
+
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!ss.getSheetByName(definition.sourceSheet)) {
+        errors.push('Missing BRIEFING_DIGEST sheet. Run 320 first.');
+      }
+
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+        definition.targetSheet,
+        EXECUTIVE_SUMMARY_HEADERS
+      );
+
+      const digests = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet);
+
+      let created = 0;
+      let skippedDuplicate = 0;
+      let skippedNoDigest = 0;
+
+      digests.forEach(function(digest) {
+        const digestId = digest.ID || digest.Digest_ID;
+
+        if (!digestId) {
+          skippedNoDigest++;
+          return;
+        }
+
+        const summaryDate =
+          digest.Digest_Date ||
+          digest.Briefing_Date ||
+          digest.Created_At ||
+          new Date();
+
+        const businessKey = 'EXECUTIVE_SUMMARY|' + digestId;
+
+        const existingSummary = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+          definition.targetSheet,
+          businessKey
+        );
+
+        if (existingSummary) {
+          skippedDuplicate++;
+          return;
+        }
+
+        const summary = sciipBuildExecutiveSummary_(
+          digest,
+          businessKey,
+          summaryDate
+        );
+
+        SCIIP_RUNTIME_SHEET_FACTORY.appendObject(
+          definition.targetSheet,
+          EXECUTIVE_SUMMARY_HEADERS,
+          summary
+        );
+
+        created++;
+      });
+
+      SCIIP_RUNTIME_LOGGING.audit({
+        context: context,
+        payload: {
+          digestsReviewed: digests.length,
+          executiveSummariesCreated: created,
+          skippedDuplicate: skippedDuplicate,
+          skippedNoDigest: skippedNoDigest,
+          transactionId: transaction.transactionId
+        },
+        message: '330 ExecutiveSummaryProcessor migrated runtime execution completed.'
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: EXECUTIVE_SUMMARY_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: created,
+        recordsRead: digests.length,
+        processed: digests.length,
+        skippedDuplicate: skippedDuplicate,
+        skippedNoInputs: skippedNoDigest,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          digestsReviewed: digests.length,
+          executiveSummariesCreated: created,
+          skippedDuplicate: skippedDuplicate,
+          skippedNoDigest: skippedNoDigest,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
 }
 
-/**
- * Factory
- */
 function sciipBuildExecutiveSummary_(digest, businessKey, summaryDate) {
   const now = new Date().toISOString();
 
@@ -122,20 +190,17 @@ function sciipBuildExecutiveSummary_(digest, businessKey, summaryDate) {
     Created_At: now,
     Updated_At: now,
     Processor: EXECUTIVE_SUMMARY_PROCESSOR,
-    Notes: 'Generated from BRIEFING_DIGEST'
+    Notes: 'Generated from BRIEFING_DIGEST using SCIIP_RuntimeProcessorBase.'
   };
 }
 
-/**
- * Summary logic
- */
 function sciipExecutiveSummaryTitle_(digest) {
   const date =
     digest.Digest_Date ||
     digest.Briefing_Date ||
     new Date().toISOString().slice(0, 10);
 
-  return `Executive Market Summary — ${date}`;
+  return 'Executive Market Summary — ' + date;
 }
 
 function sciipExecutiveSummaryNarrative_(text) {
@@ -173,77 +238,21 @@ function sciipExecutiveRecommendedFocus_(text) {
   ].join('\n');
 }
 
-/**
- * Sheet setup
- */
-function sciipEnsureExecutiveSummarySheet_() {
-  const ss = sciipGetRuntimeSpreadsheet_();
-  let sheet = ss.getSheetByName(EXECUTIVE_SUMMARY_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(EXECUTIVE_SUMMARY_SHEET);
-    sheet.appendRow(EXECUTIVE_SUMMARY_HEADERS);
-    return sheet;
-  }
-
-  const existingHeaders = sheet
-    .getRange(1, 1, 1, Math.max(sheet.getLastColumn(), 1))
-    .getValues()[0];
-
-  if (existingHeaders.join('|') !== EXECUTIVE_SUMMARY_HEADERS.join('|')) {
-    sheet.clear();
-    sheet.appendRow(EXECUTIVE_SUMMARY_HEADERS);
-  }
-
-  return sheet;
-}
-
-/**
- * Helpers
- */
 function sciipGenerateExecutiveSummaryId_() {
-  return 'EXEC_SUM_' + Utilities.getUuid().replace(/-/g, '').slice(0, 16).toUpperCase();
+  return 'EXEC_SUM_' +
+    Utilities.getUuid()
+      .replace(/-/g, '')
+      .slice(0, 16)
+      .toUpperCase();
 }
 
-function sciipReadSheetObjects_(sheet) {
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0];
-
-  return values.slice(1)
-    .filter(row => row.some(v => v !== '' && v !== null))
-    .map(row => {
-      const obj = {};
-      headers.forEach((h, i) => obj[h] = row[i]);
-      return obj;
-    });
-}
-
-function sciipGetRuntimeSpreadsheet_() {
-  const props = PropertiesService.getScriptProperties();
-
-  const spreadsheetId =
-    props.getProperty('SCIIP_SPREADSHEET_ID') ||
-    props.getProperty('SPREADSHEET_ID') ||
-    props.getProperty('RUNTIME_SPREADSHEET_ID');
-
-  if (!spreadsheetId) {
-    throw new Error(
-      'Missing SCIIP_SPREADSHEET_ID in Script Properties. Add your SCIIP runtime Google Sheet ID.'
-    );
-  }
-
-  return SpreadsheetApp.openById(spreadsheetId);
-}
-
-/**
- * Test function
- */
 function sciipTestExecutiveSummaryProcessor() {
   const result = sciipRunExecutiveSummaryProcessor();
+
   Logger.log(JSON.stringify({
     test: 'sciipTestExecutiveSummaryProcessor',
-    result
+    result: result
   }));
+
+  return result;
 }
