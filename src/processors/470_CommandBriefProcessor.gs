@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 470_CommandBriefProcessor
- * SCIIP_OS v4.0
  *
- * Inputs:
- * - EXECUTIVE_DASHBOARD
- * - PLATFORM_DAILY_REPORT
- * - STRATEGIC_DECISION
+ * EXECUTIVE_DASHBOARD + PLATFORM_DAILY_REPORT + STRATEGIC_DECISION
+ * → COMMAND_BRIEF
  *
- * Output:
- * - COMMAND_BRIEF
- ************************************************************/
+ * Migration note:
+ * Preserves original 470 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
+const COMMAND_BRIEF_PROCESSOR = '470_CommandBriefProcessor';
 const COMMAND_BRIEF_SHEET = 'COMMAND_BRIEF';
 
 const COMMAND_BRIEF_HEADERS = [
@@ -36,80 +36,174 @@ const COMMAND_BRIEF_HEADERS = [
 ];
 
 function sciipEnsureCommandBriefSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(COMMAND_BRIEF_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(COMMAND_BRIEF_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, COMMAND_BRIEF_HEADERS.length)
-    .setValues([COMMAND_BRIEF_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    COMMAND_BRIEF_SHEET,
+    COMMAND_BRIEF_HEADERS
+  );
 }
 
 function sciipRunCommandBriefProcessor() {
-  const processor = '470_CommandBriefProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: COMMAND_BRIEF_PROCESSOR,
+    action: 'COMMAND_BRIEF_BUILD',
+    sourceSheet: null,
+    targetSheet: COMMAND_BRIEF_SHEET,
+    ledgerSheet: 'COMMAND_BRIEF_RUNTIME_LEDGER',
 
-  const outputSheet = sciipEnsureCommandBriefSchema();
+    buildPayload: function(context, definition) {
+      const dashboards = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('EXECUTIVE_DASHBOARD');
+      const platformReports = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('PLATFORM_DAILY_REPORT');
+      const strategicDecisions = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('STRATEGIC_DECISION');
 
-  const dashboard = sciipGetLatestRecordByCreatedAt_('EXECUTIVE_DASHBOARD');
-  const platformReport = sciipGetLatestRecordByCreatedAt_('PLATFORM_DAILY_REPORT');
-  const strategicDecision = sciipGetLatestRecordByCreatedAt_('STRATEGIC_DECISION');
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: dashboards.length + platformReports.length + strategicDecisions.length,
+        outputCount: 1,
+        summary: 'Command brief runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: COMMAND_BRIEF_PROCESSOR,
+          inputSheets: [
+            'EXECUTIVE_DASHBOARD',
+            'PLATFORM_DAILY_REPORT',
+            'STRATEGIC_DECISION'
+          ]
+        }
+      });
+    },
 
-  if (!dashboard && !platformReport && !strategicDecision) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      commandBriefsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
 
-  const briefDate = sciipFormatDateKey_(startedAt);
-  const businessKey = `COMMAND_BRIEF|${briefDate}`;
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
 
-  if (sciipBusinessKeyExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      commandBriefsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
 
-  const commandBrief = sciipCreateCommandBrief_({
-    businessKey,
-    briefDate,
-    dashboard,
-    platformReport,
-    strategicDecision,
-    processor
+    execute: function(payload, context, transaction, definition) {
+      sciipEnsureCommandBriefSchema();
+
+      const dashboard = sciipGetLatestRuntimeRecordByCreatedAt_('EXECUTIVE_DASHBOARD');
+      const platformReport = sciipGetLatestRuntimeRecordByCreatedAt_('PLATFORM_DAILY_REPORT');
+      const strategicDecision = sciipGetLatestRuntimeRecordByCreatedAt_('STRATEGIC_DECISION');
+
+      if (!dashboard && !platformReport && !strategicDecision) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: COMMAND_BRIEF_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            commandBriefsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const briefDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const commandBriefBusinessKey = 'COMMAND_BRIEF|' + briefDate;
+
+      const existing = SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(
+        definition.targetSheet,
+        commandBriefBusinessKey
+      );
+
+      if (existing) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: COMMAND_BRIEF_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 3,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            commandBriefsCreated: 0,
+            skippedDuplicate: 1,
+            commandBriefBusinessKey: commandBriefBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const commandBrief = sciipCreateCommandBrief_({
+        businessKey: commandBriefBusinessKey,
+        briefDate: briefDate,
+        dashboard: dashboard,
+        platformReport: platformReport,
+        strategicDecision: strategicDecision,
+        processor: COMMAND_BRIEF_PROCESSOR
+      });
+
+      SCIIP_RUNTIME_SHEET_FACTORY.appendRecord(
+        definition.targetSheet,
+        COMMAND_BRIEF_HEADERS,
+        commandBrief
+      );
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: COMMAND_BRIEF_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: 3,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          dashboardFound: !!dashboard,
+          platformReportFound: !!platformReport,
+          strategicDecisionFound: !!strategicDecision,
+          commandBriefsCreated: 1,
+          skippedDuplicate: 0,
+          commandBriefBusinessKey: commandBriefBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipGetLatestRuntimeRecordByCreatedAt_(sheetName) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+
+  if (!records || records.length === 0) return null;
+
+  records.sort(function(a, b) {
+    const aTime = sciipRuntimeRecordTimestamp_(a);
+    const bTime = sciipRuntimeRecordTimestamp_(b);
+    return aTime - bTime;
   });
 
-  outputSheet.appendRow(commandBrief);
+  return records[records.length - 1];
+}
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    commandBriefsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+function sciipRuntimeRecordTimestamp_(record) {
+  if (!record) return 0;
 
-  Logger.log(JSON.stringify(result));
-  return result;
+  const raw =
+    record.Created_At ||
+    record.Updated_At ||
+    record.Timestamp ||
+    record.completedAt ||
+    record.Completed_At ||
+    '';
+
+  const time = raw ? new Date(raw).getTime() : 0;
+  return isNaN(time) ? 0 : time;
 }
 
 function sciipCreateCommandBrief_(args) {
@@ -467,11 +561,42 @@ function sciipInferCommandBriefDecisionRequired_(args) {
   return 'NO';
 }
 
+
+function sciipExtractFirstAvailable_(record, fieldNames) {
+  if (!record || !fieldNames || !fieldNames.length) {
+    return '';
+  }
+
+  for (let i = 0; i < fieldNames.length; i++) {
+    const fieldName = fieldNames[i];
+    if (
+      Object.prototype.hasOwnProperty.call(record, fieldName) &&
+      record[fieldName] !== null &&
+      record[fieldName] !== undefined &&
+      String(record[fieldName]).trim() !== ''
+    ) {
+      return String(record[fieldName]).trim();
+    }
+  }
+
+  return '';
+}
+
+function sciipGenerateId_(prefix) {
+  const cleanPrefix = prefix || 'SCIIP';
+  const timestamp = new Date().getTime();
+  const random = Math.floor(Math.random() * 1000000)
+    .toString()
+    .padStart(6, '0');
+
+  return cleanPrefix + '_' + timestamp + '_' + random;
+}
+
 function sciipTestCommandBriefProcessor() {
   const result = sciipRunCommandBriefProcessor();
   Logger.log(JSON.stringify({
     test: 'sciipTestCommandBriefProcessor',
-    result
+    result: result
   }));
   return result;
 }
