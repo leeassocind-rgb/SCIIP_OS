@@ -600,6 +600,37 @@ function sciipSafeText_(value) {
   return String(value).trim();
 }
 
+
+function sciipExtractFirstAvailable_(record, fieldNames) {
+  if (!record || !fieldNames || !fieldNames.length) {
+    return '';
+  }
+
+  for (let i = 0; i < fieldNames.length; i++) {
+    const fieldName = fieldNames[i];
+    if (
+      Object.prototype.hasOwnProperty.call(record, fieldName) &&
+      record[fieldName] !== null &&
+      record[fieldName] !== undefined &&
+      String(record[fieldName]).trim() !== ''
+    ) {
+      return String(record[fieldName]).trim();
+    }
+  }
+
+  return '';
+}
+
+function sciipGenerateId_(prefix) {
+  const cleanPrefix = prefix || 'SCIIP';
+  const timestamp = new Date().getTime();
+  const random = Math.floor(Math.random() * 1000000)
+    .toString()
+    .padStart(6, '0');
+
+  return cleanPrefix + '_' + timestamp + '_' + random;
+}
+
 function sciipTestExecutiveDashboardProcessor() {
   const result = sciipRunExecutiveDashboardProcessor();
   Logger.log(JSON.stringify({
