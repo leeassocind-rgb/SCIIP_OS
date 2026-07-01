@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 540_KnowledgeGapProcessor
- * SCIIP_OS v4.1
  *
- * Inputs:
- * - AUTONOMOUS_RESEARCH_COORDINATION
- * - RESEARCH_MISSIONS
- * - INTELLIGENCE_REQUIREMENTS
+ * AUTONOMOUS_RESEARCH_COORDINATION + RESEARCH_MISSIONS
+ * + INTELLIGENCE_REQUIREMENTS → KNOWLEDGE_GAPS
  *
- * Output:
- * - KNOWLEDGE_GAPS
- ************************************************************/
+ * Migration note:
+ * Preserves original 540 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
+const KNOWLEDGE_GAP_PROCESSOR = '540_KnowledgeGapProcessor';
 const KNOWLEDGE_GAPS_SHEET = 'KNOWLEDGE_GAPS';
 
 const KNOWLEDGE_GAPS_HEADERS = [
@@ -37,101 +37,206 @@ const KNOWLEDGE_GAPS_HEADERS = [
 ];
 
 function sciipEnsureKnowledgeGapsSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(KNOWLEDGE_GAPS_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(KNOWLEDGE_GAPS_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, KNOWLEDGE_GAPS_HEADERS.length)
-    .setValues([KNOWLEDGE_GAPS_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    KNOWLEDGE_GAPS_SHEET,
+    KNOWLEDGE_GAPS_HEADERS
+  );
 }
 
 function sciipRunKnowledgeGapProcessor() {
-  const processor = '540_KnowledgeGapProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: KNOWLEDGE_GAP_PROCESSOR,
+    action: 'KNOWLEDGE_GAPS_BUILD',
+    sourceSheet: 'AUTONOMOUS_RESEARCH_COORDINATION',
+    targetSheet: KNOWLEDGE_GAPS_SHEET,
+    ledgerSheet: 'KNOWLEDGE_GAPS_RUNTIME_LEDGER',
 
-  const outputSheet = sciipEnsureKnowledgeGapsSchema();
+    buildPayload: function(context, definition) {
+      const coordinations = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_RESEARCH_COORDINATION');
+      const missions = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('RESEARCH_MISSIONS');
+      const requirements = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('INTELLIGENCE_REQUIREMENTS');
 
-  const gapDate = sciipFormatDateKey_(startedAt);
-  const businessKey = `KNOWLEDGE_GAPS|${gapDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: coordinations.length + missions.length + requirements.length,
+        outputCount: coordinations.length || missions.length || requirements.length || 1,
+        summary: 'Knowledge gap runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: KNOWLEDGE_GAP_PROCESSOR,
+          inputSheets: [
+            'AUTONOMOUS_RESEARCH_COORDINATION',
+            'RESEARCH_MISSIONS',
+            'INTELLIGENCE_REQUIREMENTS'
+          ]
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      knowledgeGapsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
 
-  const coordinations = sciipGetRecordsByDate_(
-    'AUTONOMOUS_RESEARCH_COORDINATION',
-    'Coordination_Date',
-    gapDate
-  );
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
 
-  const missions = sciipGetRecordsByDate_(
-    'RESEARCH_MISSIONS',
-    'Mission_Date',
-    gapDate
-  );
+      return {
+        valid: errors.length === 0,
+        errors: errors
+      };
+    },
 
-  const requirements = sciipGetRecordsByDate_(
-    'INTELLIGENCE_REQUIREMENTS',
-    'Requirement_Date',
-    gapDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureKnowledgeGapsSchema();
+      const gapDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const gapBusinessKey = 'KNOWLEDGE_GAPS|' + gapDate;
 
-  if (
-    coordinations.length === 0 &&
-    missions.length === 0 &&
-    requirements.length === 0
-  ) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      knowledgeGapsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists540_(definition.targetSheet, gapBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: KNOWLEDGE_GAP_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            knowledgeGapsCreated: 0,
+            skippedDuplicate: 1,
+            knowledgeGapsBusinessKey: gapBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const gaps = sciipCreateKnowledgeGaps_({
-    businessKey,
-    gapDate,
-    coordinations,
-    missions,
-    requirements,
-    processor
+      const coordinations = sciipGetRuntimeRecordsByDate540_(
+        'AUTONOMOUS_RESEARCH_COORDINATION',
+        'Coordination_Date',
+        gapDate
+      );
+
+      const missions = sciipGetRuntimeRecordsByDate540_(
+        'RESEARCH_MISSIONS',
+        'Mission_Date',
+        gapDate
+      );
+
+      const requirements = sciipGetRuntimeRecordsByDate540_(
+        'INTELLIGENCE_REQUIREMENTS',
+        'Requirement_Date',
+        gapDate
+      );
+
+      if (
+        coordinations.length === 0 &&
+        missions.length === 0 &&
+        requirements.length === 0
+      ) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: KNOWLEDGE_GAP_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            knowledgeGapsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const gapRows = sciipCreateKnowledgeGaps540_({
+        businessKey: gapBusinessKey,
+        gapDate: gapDate,
+        coordinations: coordinations,
+        missions: missions,
+        requirements: requirements,
+        processor: KNOWLEDGE_GAP_PROCESSOR
+      });
+
+      gapRows.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: KNOWLEDGE_GAP_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: gapRows.length,
+        recordsRead: coordinations.length + missions.length + requirements.length,
+        processed: gapRows.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          researchCoordinationsReviewed: coordinations.length,
+          researchMissionsReviewed: missions.length,
+          intelligenceRequirementsReviewed: requirements.length,
+          knowledgeGapsCreated: gapRows.length,
+          skippedDuplicate: 0,
+          knowledgeGapsBusinessKey: gapBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  gaps.forEach(row => outputSheet.appendRow(row));
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    knowledgeGapsCreated: gaps.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
 }
 
-function sciipCreateKnowledgeGaps_(args) {
+function sciipRuntimeBusinessKeyPrefixExists540_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate540_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue540_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue540_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(
+      value,
+      Session.getScriptTimeZone(),
+      'yyyy-MM-dd'
+    );
+  }
+
+  const text = String(value).trim();
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    return text;
+  }
+
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(
+      parsed,
+      Session.getScriptTimeZone(),
+      'yyyy-MM-dd'
+    );
+  }
+
+  return text;
+}
+
+function sciipCreateKnowledgeGaps540_(args) {
   const now = new Date();
   const rows = [];
 
@@ -143,29 +248,29 @@ function sciipCreateKnowledgeGaps_(args) {
         : args.requirements;
 
   sourceRecords.forEach(record => {
-    const coordinationId = sciipExtractFirstAvailable_(record, [
+    const coordinationId = sciipExtractFirstAvailable540_(record, [
       'Coordination_ID'
     ]);
 
-    const missionId = sciipExtractFirstAvailable_(record, [
+    const missionId = sciipExtractFirstAvailable540_(record, [
       'Research_Mission_ID'
     ]);
 
-    const requirementId = sciipExtractFirstAvailable_(record, [
+    const requirementId = sciipExtractFirstAvailable540_(record, [
       'Requirement_ID'
     ]);
 
     const matchedMission =
-      sciipFindMissionById_(args.missions, missionId);
+      sciipFindMissionById540_(args.missions, missionId);
 
     const matchedRequirement =
-      sciipFindRequirementById_(args.requirements, requirementId);
+      sciipFindRequirementById540_(args.requirements, requirementId);
 
     const gapProfile =
-      sciipInferKnowledgeGapProfile_(record, matchedMission, matchedRequirement);
+      sciipInferKnowledgeGapProfile540_(record, matchedMission, matchedRequirement);
 
     const rowBusinessKey =
-      `${args.businessKey}|${gapProfile.entityType}|${gapProfile.gapCategory}|${sciipNormalizeMissionKey_(missionId || requirementId || gapProfile.missingFact)}`;
+      `${args.businessKey}|${gapProfile.entityType}|${gapProfile.gapCategory}|${sciipNormalizeMissionKey540_(missionId || requirementId || gapProfile.missingFact)}`;
 
     rows.push([
       sciipGenerateId_('KGP'),
@@ -191,19 +296,19 @@ function sciipCreateKnowledgeGaps_(args) {
     ]);
   });
 
-  return sciipDeduplicateKnowledgeGapRows_(rows);
+  return sciipDeduplicateKnowledgeGapRows540_(rows);
 }
 
-function sciipInferKnowledgeGapProfile_(record, mission, requirement) {
+function sciipInferKnowledgeGapProfile540_(record, mission, requirement) {
   const combined = [
-    sciipExtractFirstAvailable_(record, [
+    sciipExtractFirstAvailable540_(record, [
       'Mission_Type',
       'Research_Route',
       'Research_Objective',
       'Research_Instructions',
       'Expected_Output'
     ]),
-    sciipExtractFirstAvailable_(mission, [
+    sciipExtractFirstAvailable540_(mission, [
       'Mission_Type',
       'Research_Question',
       'Mission_Objective',
@@ -211,7 +316,7 @@ function sciipInferKnowledgeGapProfile_(record, mission, requirement) {
       'Target_Entities',
       'Expected_Output'
     ]),
-    sciipExtractFirstAvailable_(requirement, [
+    sciipExtractFirstAvailable540_(requirement, [
       'Requirement_Type',
       'Intelligence_Question',
       'Knowledge_Gap',
@@ -306,16 +411,16 @@ function sciipInferKnowledgeGapProfile_(record, mission, requirement) {
     entityId: '',
     gapCategory,
     missingFact,
-    whyItMatters: sciipInferKnowledgeGapWhyItMatters_(record, mission, requirement),
+    whyItMatters: sciipInferKnowledgeGapWhyItMatters540_(record, mission, requirement),
     suggestedDataSource,
     priority,
     confidence,
-    discoverySource: sciipInferKnowledgeGapDiscoverySource_(record, mission, requirement)
+    discoverySource: sciipInferKnowledgeGapDiscoverySource540_(record, mission, requirement)
   };
 }
 
-function sciipInferKnowledgeGapWhyItMatters_(record, mission, requirement) {
-  const explicitWhy = sciipExtractFirstAvailable_(requirement, [
+function sciipInferKnowledgeGapWhyItMatters540_(record, mission, requirement) {
+  const explicitWhy = sciipExtractFirstAvailable540_(requirement, [
     'Why_It_Matters',
     'Decision_Linkage'
   ]);
@@ -324,7 +429,7 @@ function sciipInferKnowledgeGapWhyItMatters_(record, mission, requirement) {
     return explicitWhy;
   }
 
-  const missionObjective = sciipExtractFirstAvailable_(mission, [
+  const missionObjective = sciipExtractFirstAvailable540_(mission, [
     'Mission_Objective',
     'Decision_Linkage'
   ]);
@@ -333,7 +438,7 @@ function sciipInferKnowledgeGapWhyItMatters_(record, mission, requirement) {
     return missionObjective;
   }
 
-  const researchObjective = sciipExtractFirstAvailable_(record, [
+  const researchObjective = sciipExtractFirstAvailable540_(record, [
     'Research_Objective',
     'Expected_Output'
   ]);
@@ -345,27 +450,27 @@ function sciipInferKnowledgeGapWhyItMatters_(record, mission, requirement) {
   return 'Closing this gap improves SCIIP confidence, strengthens the knowledge graph, and supports better strategic decisions.';
 }
 
-function sciipInferKnowledgeGapDiscoverySource_(record, mission, requirement) {
-  if (record && sciipExtractFirstAvailable_(record, ['Coordination_ID'])) {
+function sciipInferKnowledgeGapDiscoverySource540_(record, mission, requirement) {
+  if (record && sciipExtractFirstAvailable540_(record, ['Coordination_ID'])) {
     return 'AUTONOMOUS_RESEARCH_COORDINATION';
   }
 
-  if (mission && sciipExtractFirstAvailable_(mission, ['Research_Mission_ID'])) {
+  if (mission && sciipExtractFirstAvailable540_(mission, ['Research_Mission_ID'])) {
     return 'RESEARCH_MISSIONS';
   }
 
-  if (requirement && sciipExtractFirstAvailable_(requirement, ['Requirement_ID'])) {
+  if (requirement && sciipExtractFirstAvailable540_(requirement, ['Requirement_ID'])) {
     return 'INTELLIGENCE_REQUIREMENTS';
   }
 
   return 'UNKNOWN';
 }
 
-function sciipFindMissionById_(missions, missionId) {
+function sciipFindMissionById540_(missions, missionId) {
   if (!missionId) return null;
 
   return missions.find(mission =>
-    sciipExtractFirstAvailable_(mission, [
+    sciipExtractFirstAvailable540_(mission, [
       'Research_Mission_ID',
       'Mission_ID',
       'ID'
@@ -373,7 +478,7 @@ function sciipFindMissionById_(missions, missionId) {
   ) || null;
 }
 
-function sciipDeduplicateKnowledgeGapRows_(rows) {
+function sciipDeduplicateKnowledgeGapRows540_(rows) {
   const seen = {};
   const deduped = [];
 
@@ -389,12 +494,48 @@ function sciipDeduplicateKnowledgeGapRows_(rows) {
   return deduped;
 }
 
+
+function sciipFindRequirementById540_(requirements, requirementId) {
+  if (!requirementId) return null;
+
+  return requirements.find(function(requirement) {
+    return sciipExtractFirstAvailable540_(requirement, [
+      'Requirement_ID',
+      'Intelligence_Requirement_ID',
+      'ID'
+    ]) === requirementId;
+  }) || null;
+}
+
+function sciipNormalizeMissionKey540_(value) {
+  return String(value || 'UNKNOWN')
+    .trim()
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '') || 'UNKNOWN';
+}
+
+function sciipExtractFirstAvailable540_(record, fieldNames) {
+  if (!record) return '';
+
+  for (let i = 0; i < fieldNames.length; i++) {
+    const fieldName = fieldNames[i];
+    const value = record[fieldName];
+
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+
+  return '';
+}
+
 function sciipTestKnowledgeGapProcessor() {
   const result = sciipRunKnowledgeGapProcessor();
 
   Logger.log(JSON.stringify({
     test: 'sciipTestKnowledgeGapProcessor',
-    result
+    result: result
   }));
 
   return result;
