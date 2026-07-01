@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 550_KnowledgeGraphEnrichmentProcessor
- * SCIIP_OS v4.1
  *
- * Inputs:
- * - KNOWLEDGE_GAPS
- * - RESEARCH_MISSIONS
- * - AUTONOMOUS_RESEARCH_COORDINATION
+ * KNOWLEDGE_GAPS + RESEARCH_MISSIONS +
+ * AUTONOMOUS_RESEARCH_COORDINATION → KNOWLEDGE_GRAPH_ENRICHMENT
  *
- * Output:
- * - KNOWLEDGE_GRAPH_ENRICHMENT
- ************************************************************/
+ * Migration note:
+ * Preserves original 550 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
+const KNOWLEDGE_GRAPH_ENRICHMENT_PROCESSOR = '550_KnowledgeGraphEnrichmentProcessor';
 const KNOWLEDGE_GRAPH_ENRICHMENT_SHEET =
   'KNOWLEDGE_GRAPH_ENRICHMENT';
 
@@ -38,105 +38,180 @@ const KNOWLEDGE_GRAPH_ENRICHMENT_HEADERS = [
   'Processor'
 ];
 
+
 function sciipEnsureKnowledgeGraphEnrichmentSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(KNOWLEDGE_GRAPH_ENRICHMENT_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(KNOWLEDGE_GRAPH_ENRICHMENT_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, KNOWLEDGE_GRAPH_ENRICHMENT_HEADERS.length)
-    .setValues([KNOWLEDGE_GRAPH_ENRICHMENT_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    KNOWLEDGE_GRAPH_ENRICHMENT_SHEET,
+    KNOWLEDGE_GRAPH_ENRICHMENT_HEADERS
+  );
 }
 
 function sciipRunKnowledgeGraphEnrichmentProcessor() {
-  const processor = '550_KnowledgeGraphEnrichmentProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: KNOWLEDGE_GRAPH_ENRICHMENT_PROCESSOR,
+    action: 'KNOWLEDGE_GRAPH_ENRICHMENT_BUILD',
+    sourceSheet: 'KNOWLEDGE_GAPS',
+    targetSheet: KNOWLEDGE_GRAPH_ENRICHMENT_SHEET,
+    ledgerSheet: 'KNOWLEDGE_GRAPH_ENRICHMENT_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureKnowledgeGraphEnrichmentSchema();
+    buildPayload: function(context, definition) {
+      const knowledgeGaps = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('KNOWLEDGE_GAPS');
+      const researchMissions = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('RESEARCH_MISSIONS');
+      const coordinations = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_RESEARCH_COORDINATION');
 
-  const enrichmentDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `KNOWLEDGE_GRAPH_ENRICHMENT|${enrichmentDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: knowledgeGaps.length + researchMissions.length + coordinations.length,
+        outputCount: knowledgeGaps.length || researchMissions.length || coordinations.length || 1,
+        summary: 'Knowledge graph enrichment runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: KNOWLEDGE_GRAPH_ENRICHMENT_PROCESSOR,
+          inputSheets: [
+            'KNOWLEDGE_GAPS',
+            'RESEARCH_MISSIONS',
+            'AUTONOMOUS_RESEARCH_COORDINATION'
+          ]
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      knowledgeGraphEnrichmentsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const knowledgeGaps = sciipGetRecordsByDate_(
-    'KNOWLEDGE_GAPS',
-    'Gap_Date',
-    enrichmentDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureKnowledgeGraphEnrichmentSchema();
+      const enrichmentDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const enrichmentBusinessKey = 'KNOWLEDGE_GRAPH_ENRICHMENT|' + enrichmentDate;
 
-  const researchMissions = sciipGetRecordsByDate_(
-    'RESEARCH_MISSIONS',
-    'Mission_Date',
-    enrichmentDate
-  );
+      if (sciipRuntimeBusinessKeyPrefixExists550_(definition.targetSheet, enrichmentBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: KNOWLEDGE_GRAPH_ENRICHMENT_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            knowledgeGraphEnrichmentsCreated: 0,
+            skippedDuplicate: 1,
+            enrichmentBusinessKey: enrichmentBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const coordinations = sciipGetRecordsByDate_(
-    'AUTONOMOUS_RESEARCH_COORDINATION',
-    'Coordination_Date',
-    enrichmentDate
-  );
+      const knowledgeGaps = sciipGetRuntimeRecordsByDate550_(
+        'KNOWLEDGE_GAPS',
+        'Gap_Date',
+        enrichmentDate
+      );
+      const researchMissions = sciipGetRuntimeRecordsByDate550_(
+        'RESEARCH_MISSIONS',
+        'Mission_Date',
+        enrichmentDate
+      );
+      const coordinations = sciipGetRuntimeRecordsByDate550_(
+        'AUTONOMOUS_RESEARCH_COORDINATION',
+        'Coordination_Date',
+        enrichmentDate
+      );
 
-  if (
-    knowledgeGaps.length === 0 &&
-    researchMissions.length === 0 &&
-    coordinations.length === 0
-  ) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      knowledgeGraphEnrichmentsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (knowledgeGaps.length === 0 && researchMissions.length === 0 && coordinations.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: KNOWLEDGE_GRAPH_ENRICHMENT_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            knowledgeGraphEnrichmentsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const enrichments =
-    sciipCreateKnowledgeGraphEnrichments_({
-      businessKey,
-      enrichmentDate,
-      knowledgeGaps,
-      researchMissions,
-      coordinations,
-      processor
-    });
+      const enrichmentRows = sciipCreateKnowledgeGraphEnrichments550_({
+        businessKey: enrichmentBusinessKey,
+        enrichmentDate: enrichmentDate,
+        knowledgeGaps: knowledgeGaps,
+        researchMissions: researchMissions,
+        coordinations: coordinations,
+        processor: KNOWLEDGE_GRAPH_ENRICHMENT_PROCESSOR
+      });
 
-  enrichments.forEach(row => outputSheet.appendRow(row));
+      enrichmentRows.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    knowledgeGraphEnrichmentsCreated: enrichments.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: KNOWLEDGE_GRAPH_ENRICHMENT_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: enrichmentRows.length,
+        recordsRead: knowledgeGaps.length + researchMissions.length + coordinations.length,
+        processed: enrichmentRows.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          knowledgeGapsReviewed: knowledgeGaps.length,
+          researchMissionsReviewed: researchMissions.length,
+          researchCoordinationsReviewed: coordinations.length,
+          knowledgeGraphEnrichmentsCreated: enrichmentRows.length,
+          skippedDuplicate: 0,
+          enrichmentBusinessKey: enrichmentBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
 }
 
-function sciipCreateKnowledgeGraphEnrichments_(args) {
+function sciipRuntimeBusinessKeyPrefixExists550_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate550_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue550_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue550_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipCreateKnowledgeGraphEnrichments550_(args) {
   const now = new Date();
 
   const sourceRecords =
@@ -147,34 +222,34 @@ function sciipCreateKnowledgeGraphEnrichments_(args) {
         : args.coordinations;
 
   const rows = sourceRecords.map(record => {
-    const knowledgeGapId = sciipExtractFirstAvailable_(record, [
+    const knowledgeGapId = sciipExtractFirstAvailable550_(record, [
       'Knowledge_Gap_ID',
       'Gap_ID'
     ]);
 
-    const researchMissionId = sciipExtractFirstAvailable_(record, [
+    const researchMissionId = sciipExtractFirstAvailable550_(record, [
       'Research_Mission_ID'
     ]);
 
-    const coordinationId = sciipExtractFirstAvailable_(record, [
+    const coordinationId = sciipExtractFirstAvailable550_(record, [
       'Coordination_ID'
     ]);
 
     const matchedMission =
-      sciipFindMissionById_(args.researchMissions, researchMissionId);
+      sciipFindMissionById550_(args.researchMissions, researchMissionId);
 
     const matchedCoordination =
-      sciipFindCoordinationById_(args.coordinations, coordinationId);
+      sciipFindCoordinationById550_(args.coordinations, coordinationId);
 
     const profile =
-      sciipInferGraphEnrichmentProfile_(
+      sciipInferGraphEnrichmentProfile550_(
         record,
         matchedMission,
         matchedCoordination
       );
 
     const rowKey =
-      `${args.businessKey}|${profile.targetEntityType}|${profile.proposedNodeType}|${sciipNormalizeMissionKey_(knowledgeGapId || researchMissionId || coordinationId || profile.proposedPropertyUpdate)}`;
+      `${args.businessKey}|${profile.targetEntityType}|${profile.proposedNodeType}|${sciipNormalizeMissionKey550_(knowledgeGapId || researchMissionId || coordinationId || profile.proposedPropertyUpdate)}`;
 
     return [
       sciipGenerateId_('KGE'),
@@ -201,12 +276,12 @@ function sciipCreateKnowledgeGraphEnrichments_(args) {
     ];
   });
 
-  return sciipDeduplicateKnowledgeGraphEnrichmentRows_(rows);
+  return sciipDeduplicateKnowledgeGraphEnrichmentRows550_(rows);
 }
 
-function sciipInferGraphEnrichmentProfile_(gap, mission, coordination) {
+function sciipInferGraphEnrichmentProfile550_(gap, mission, coordination) {
   const combined = [
-    sciipExtractFirstAvailable_(gap, [
+    sciipExtractFirstAvailable550_(gap, [
       'Entity_Type',
       'Gap_Category',
       'Missing_Fact',
@@ -214,14 +289,14 @@ function sciipInferGraphEnrichmentProfile_(gap, mission, coordination) {
       'Suggested_Data_Source',
       'Discovery_Source'
     ]),
-    sciipExtractFirstAvailable_(mission, [
+    sciipExtractFirstAvailable550_(mission, [
       'Mission_Type',
       'Research_Question',
       'Mission_Objective',
       'Target_Entities',
       'Expected_Output'
     ]),
-    sciipExtractFirstAvailable_(coordination, [
+    sciipExtractFirstAvailable550_(coordination, [
       'Research_Route',
       'Research_Objective',
       'Research_Instructions',
@@ -230,7 +305,7 @@ function sciipInferGraphEnrichmentProfile_(gap, mission, coordination) {
   ].join(' ').toLowerCase();
 
   let targetEntityType =
-    sciipExtractFirstAvailable_(gap, ['Entity_Type']) ||
+    sciipExtractFirstAvailable550_(gap, ['Entity_Type']) ||
     'UNKNOWN_ENTITY';
 
   let proposedNodeType = 'KNOWLEDGE_GAP';
@@ -239,7 +314,7 @@ function sciipInferGraphEnrichmentProfile_(gap, mission, coordination) {
   let proposedPropertyUpdate =
     'Add or update graph metadata describing missing intelligence and research need.';
   let confidence =
-    sciipExtractFirstAvailable_(gap, ['Confidence']) || 'MEDIUM';
+    sciipExtractFirstAvailable550_(gap, ['Confidence']) || 'MEDIUM';
 
   if (
     combined.includes('company') ||
@@ -313,33 +388,33 @@ function sciipInferGraphEnrichmentProfile_(gap, mission, coordination) {
 
   return {
     targetEntityType,
-    targetEntityId: sciipExtractFirstAvailable_(gap, ['Entity_ID']),
+    targetEntityId: sciipExtractFirstAvailable550_(gap, ['Entity_ID']),
     targetGraphObject,
     proposedNodeType,
     proposedEdgeType,
     proposedPropertyUpdate,
-    enrichmentRationale: sciipComposeGraphEnrichmentRationale_(gap, mission, coordination),
-    sourceRecord: sciipInferGraphEnrichmentSourceRecord_(gap, mission, coordination),
+    enrichmentRationale: sciipComposeGraphEnrichmentRationale550_(gap, mission, coordination),
+    sourceRecord: sciipInferGraphEnrichmentSourceRecord550_(gap, mission, coordination),
     confidence
   };
 }
 
-function sciipComposeGraphEnrichmentRationale_(gap, mission, coordination) {
+function sciipComposeGraphEnrichmentRationale550_(gap, mission, coordination) {
   const parts = [];
 
-  const missingFact = sciipExtractFirstAvailable_(gap, [
+  const missingFact = sciipExtractFirstAvailable550_(gap, [
     'Missing_Fact'
   ]);
 
-  const why = sciipExtractFirstAvailable_(gap, [
+  const why = sciipExtractFirstAvailable550_(gap, [
     'Why_It_Matters'
   ]);
 
-  const missionObjective = sciipExtractFirstAvailable_(mission, [
+  const missionObjective = sciipExtractFirstAvailable550_(mission, [
     'Mission_Objective'
   ]);
 
-  const instructions = sciipExtractFirstAvailable_(coordination, [
+  const instructions = sciipExtractFirstAvailable550_(coordination, [
     'Research_Instructions'
   ]);
 
@@ -368,8 +443,8 @@ function sciipComposeGraphEnrichmentRationale_(gap, mission, coordination) {
   return parts.join('\n');
 }
 
-function sciipInferGraphEnrichmentSourceRecord_(gap, mission, coordination) {
-  const gapId = sciipExtractFirstAvailable_(gap, [
+function sciipInferGraphEnrichmentSourceRecord550_(gap, mission, coordination) {
+  const gapId = sciipExtractFirstAvailable550_(gap, [
     'Knowledge_Gap_ID'
   ]);
 
@@ -377,7 +452,7 @@ function sciipInferGraphEnrichmentSourceRecord_(gap, mission, coordination) {
     return `KNOWLEDGE_GAPS:${gapId}`;
   }
 
-  const missionId = sciipExtractFirstAvailable_(mission, [
+  const missionId = sciipExtractFirstAvailable550_(mission, [
     'Research_Mission_ID'
   ]);
 
@@ -385,7 +460,7 @@ function sciipInferGraphEnrichmentSourceRecord_(gap, mission, coordination) {
     return `RESEARCH_MISSIONS:${missionId}`;
   }
 
-  const coordinationId = sciipExtractFirstAvailable_(coordination, [
+  const coordinationId = sciipExtractFirstAvailable550_(coordination, [
     'Coordination_ID'
   ]);
 
@@ -396,18 +471,18 @@ function sciipInferGraphEnrichmentSourceRecord_(gap, mission, coordination) {
   return 'UNKNOWN_SOURCE_RECORD';
 }
 
-function sciipFindCoordinationById_(coordinations, coordinationId) {
+function sciipFindCoordinationById550_(coordinations, coordinationId) {
   if (!coordinationId) return null;
 
   return coordinations.find(coordination =>
-    sciipExtractFirstAvailable_(coordination, [
+    sciipExtractFirstAvailable550_(coordination, [
       'Coordination_ID',
       'ID'
     ]) === coordinationId
   ) || null;
 }
 
-function sciipDeduplicateKnowledgeGraphEnrichmentRows_(rows) {
+function sciipDeduplicateKnowledgeGraphEnrichmentRows550_(rows) {
   const seen = {};
   const deduped = [];
 
@@ -423,13 +498,30 @@ function sciipDeduplicateKnowledgeGraphEnrichmentRows_(rows) {
   return deduped;
 }
 
+function sciipExtractFirstAvailable550_(record, fieldNames) {
+  if (!record) return '';
+  for (let i = 0; i < fieldNames.length; i++) {
+    const fieldName = fieldNames[i];
+    if (record[fieldName] !== undefined && record[fieldName] !== null && record[fieldName] !== '') {
+      return String(record[fieldName]);
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey550_(value) {
+  return String(value || 'MISSION')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80);
+}
+
 function sciipTestKnowledgeGraphEnrichmentProcessor() {
   const result = sciipRunKnowledgeGraphEnrichmentProcessor();
-
   Logger.log(JSON.stringify({
     test: 'sciipTestKnowledgeGraphEnrichmentProcessor',
-    result
+    result: result
   }));
-
   return result;
 }
