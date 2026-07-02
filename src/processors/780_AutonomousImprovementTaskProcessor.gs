@@ -1,200 +1,247 @@
 /*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 780_AutonomousImprovementTaskProcessor
+ *
+ * AUTONOMOUS_IMPROVEMENT_PLANS → AUTONOMOUS_IMPROVEMENT_TASKS
+ *
+ * Migration note:
+ * Preserves original 780 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
  *******************************************************/
 
-const AUTONOMOUS_IMPROVEMENT_TASK_PROCESSOR_NAME = '780_AutonomousImprovementTaskProcessor';
+function sciipGetAutonomousImprovementTaskProcessorName780_() {
+  return '780_AutonomousImprovementTaskProcessor';
+}
 
-const AUTONOMOUS_IMPROVEMENT_TASK_INPUT_SHEET = 'AUTONOMOUS_IMPROVEMENT_PLANS';
-const AUTONOMOUS_IMPROVEMENT_TASK_OUTPUT_SHEET = 'AUTONOMOUS_IMPROVEMENT_TASKS';
+function sciipGetAutonomousImprovementTaskHeaders780_() {
+  return [
+    'Task_ID',
+    'Business_Key',
+    'Task_Date',
+    'Source_Sheet',
+    'Source_Record_Count',
+    'Task_Title',
+    'Task_Description',
+    'Task_Type',
+    'Priority',
+    'Status',
+    'Execution_Owner',
+    'Created_At',
+    'Processor'
+  ];
+}
 
-const AUTONOMOUS_IMPROVEMENT_TASK_SCHEMA = [
-  'Task_ID',
-  'Business_Key',
-  'Task_Date',
-  'Source_Sheet',
-  'Source_Record_Count',
-  'Task_Title',
-  'Task_Description',
-  'Task_Type',
-  'Priority',
-  'Status',
-  'Execution_Owner',
-  'Created_At',
-  'Processor'
-];
+function sciipEnsureAutonomousImprovementTaskSchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'AUTONOMOUS_IMPROVEMENT_TASKS',
+    sciipGetAutonomousImprovementTaskHeaders780_()
+  );
+}
 
 function sciipRunAutonomousImprovementTaskProcessor() {
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetAutonomousImprovementTaskProcessorName780_(),
+    action: 'AUTONOMOUS_IMPROVEMENT_TASK_BUILD',
+    sourceSheet: 'AUTONOMOUS_IMPROVEMENT_PLANS',
+    targetSheet: 'AUTONOMOUS_IMPROVEMENT_TASKS',
+    ledgerSheet: 'AUTONOMOUS_IMPROVEMENT_TASKS_RUNTIME_LEDGER',
 
-  const outputSheet = sciipEnsureAutonomousImprovementTaskSheet_();
+    buildPayload: function(context, definition) {
+      const autonomousImprovementPlans = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_IMPROVEMENT_PLANS');
 
-  const taskDate =
-    sciipResolveLatestProcessingDate_(
-      AUTONOMOUS_IMPROVEMENT_TASK_INPUT_SHEET,
-      'Plan_Date'
-    ) || sciipFormatDateKey_(startedAt);
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: autonomousImprovementPlans.length,
+        outputCount: autonomousImprovementPlans.length ? 1 : 0,
+        summary: 'Autonomous improvement task runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetAutonomousImprovementTaskProcessorName780_(),
+          inputSheets: ['AUTONOMOUS_IMPROVEMENT_PLANS']
+        }
+      });
+    },
 
-  const businessKey = `AUTONOMOUS_IMPROVEMENT_TASK|${taskDate}`;
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  Logger.log(JSON.stringify({
-    processor: AUTONOMOUS_IMPROVEMENT_TASK_PROCESSOR_NAME,
-    resolvedTaskDate: taskDate,
-    businessKey
-  }));
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousImprovementTaskSchema();
+      const taskDate =
+        sciipResolveLatestRuntimeProcessingDate780_('AUTONOMOUS_IMPROVEMENT_PLANS', 'Plan_Date') ||
+        context.dateKey ||
+        SCIIP_RUNTIME.getDateKey({});
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    return {
-      processor: AUTONOMOUS_IMPROVEMENT_TASK_PROCESSOR_NAME,
-      status: 'SUCCESS',
-      autonomousImprovementTasksCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-  }
+      const autonomousImprovementTaskBusinessKey = 'AUTONOMOUS_IMPROVEMENT_TASK|' + taskDate;
 
-  const sourceRows = sciipGetAutonomousImprovementPlansForTaskDate_(taskDate);
+      if (sciipRuntimeBusinessKeyPrefixExists780_(definition.targetSheet, autonomousImprovementTaskBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetAutonomousImprovementTaskProcessorName780_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementPlansReviewed: 0,
+            autonomousImprovementTasksCreated: 0,
+            skippedDuplicate: 1,
+            autonomousImprovementTaskBusinessKey: autonomousImprovementTaskBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  if (!sourceRows.length) {
-    return {
-      processor: AUTONOMOUS_IMPROVEMENT_TASK_PROCESSOR_NAME,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousImprovementTasksCreated: 0,
-      taskDate,
-      completedAt: new Date().toISOString()
-    };
-  }
+      const autonomousImprovementPlans = sciipGetRuntimeRecordsByDate780_(
+        'AUTONOMOUS_IMPROVEMENT_PLANS',
+        'Plan_Date',
+        taskDate
+      );
 
-  const task = sciipBuildAutonomousImprovementTask_({
-    taskDate,
-    businessKey,
-    sourceRows,
-    startedAt
+      if (!autonomousImprovementPlans.length) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetAutonomousImprovementTaskProcessorName780_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementPlansReviewed: 0,
+            autonomousImprovementTasksCreated: 0,
+            skippedNoInputs: 1,
+            taskDate: taskDate,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const task = sciipCreateAutonomousImprovementTask780_({
+        businessKey: autonomousImprovementTaskBusinessKey,
+        taskDate: taskDate,
+        sourceRows: autonomousImprovementPlans,
+        processor: sciipGetAutonomousImprovementTaskProcessorName780_()
+      });
+
+      outputSheet.appendRow(task);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetAutonomousImprovementTaskProcessorName780_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: autonomousImprovementPlans.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          autonomousImprovementPlansReviewed: autonomousImprovementPlans.length,
+          autonomousImprovementTasksCreated: 1,
+          skippedDuplicate: 0,
+          autonomousImprovementTaskBusinessKey: autonomousImprovementTaskBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  sciipAppendAutonomousImprovementTask_(task);
-
-  return {
-    processor: AUTONOMOUS_IMPROVEMENT_TASK_PROCESSOR_NAME,
-    status: 'SUCCESS',
-    autonomousImprovementTasksCreated: 1,
-    businessKey,
-    completedAt: new Date().toISOString()
-  };
 }
 
-/*******************************************************
- * Factory Functions
- *******************************************************/
-
-function sciipBuildAutonomousImprovementTask_(payload) {
-  const taskId = `AUTONOMOUS_IMPROVEMENT_TASK_${Utilities.getUuid()}`;
-
-  return {
-    Task_ID: taskId,
-    Business_Key: payload.businessKey,
-    Task_Date: payload.taskDate,
-    Source_Sheet: AUTONOMOUS_IMPROVEMENT_TASK_INPUT_SHEET,
-    Source_Record_Count: payload.sourceRows.length,
-    Task_Title: `Execute Autonomous Improvement Plan — ${payload.taskDate}`,
-    Task_Description: sciipCreateAutonomousImprovementTaskDescription_(payload.sourceRows),
-    Task_Type: 'AUTONOMOUS_SYSTEM_IMPROVEMENT',
-    Priority: sciipResolveAutonomousImprovementTaskPriority_(payload.sourceRows),
-    Status: 'PENDING',
-    Execution_Owner: 'SCIIP_OS',
-    Created_At: payload.startedAt.toISOString(),
-    Processor: AUTONOMOUS_IMPROVEMENT_TASK_PROCESSOR_NAME
-  };
+function sciipRuntimeBusinessKeyPrefixExists780_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
 }
 
-/*******************************************************
- * Helper Functions
- *******************************************************/
-
-function sciipEnsureAutonomousImprovementTaskSheet_() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(AUTONOMOUS_IMPROVEMENT_TASK_OUTPUT_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(AUTONOMOUS_IMPROVEMENT_TASK_OUTPUT_SHEET);
-    sheet.appendRow(AUTONOMOUS_IMPROVEMENT_TASK_SCHEMA);
-    return sheet;
-  }
-
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(AUTONOMOUS_IMPROVEMENT_TASK_SCHEMA);
-  }
-
-  return sheet;
+function sciipGetRuntimeRecordsByDate780_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue780_(record[dateField]) === String(dateValue);
+  });
 }
 
-function sciipGetAutonomousImprovementPlansForTaskDate_(taskDate) {
-  const ss = sciipGetSpreadsheet_();
-  const sheet = ss.getSheetByName(AUTONOMOUS_IMPROVEMENT_TASK_INPUT_SHEET);
+function sciipResolveLatestRuntimeProcessingDate780_(sheetName, dateField) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return null;
 
-  if (!sheet) return [];
-
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0].map(h => String(h).trim());
-  const dateIndex = headers.indexOf('Plan_Date');
-
-  if (dateIndex === -1) {
-    Logger.log(JSON.stringify({
-      processor: AUTONOMOUS_IMPROVEMENT_TASK_PROCESSOR_NAME,
-      error: 'PLAN_DATE_COLUMN_NOT_FOUND',
-      headers
-    }));
-    return [];
-  }
-
-  return values
-    .slice(1)
-    .filter(row => {
-      const rawDate = row[dateIndex];
-      const rowDate =
-        rawDate instanceof Date
-          ? sciipFormatDateKey_(rawDate)
-          : String(rawDate).trim();
-
-      return rowDate === taskDate;
+  const dates = records
+    .map(function(record) {
+      return sciipNormalizeRuntimeDateValue780_(record[dateField]);
     })
-    .map(row => sciipAutonomousImprovementTaskRowToObject_(headers, row));
+    .filter(function(value) {
+      return value !== '';
+    });
+
+  if (dates.length === 0) return null;
+
+  dates.sort();
+  return dates[dates.length - 1];
 }
 
-function sciipCreateAutonomousImprovementTaskDescription_(sourceRows) {
+function sciipNormalizeRuntimeDateValue780_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipCreateAutonomousImprovementTask780_(args) {
   return [
-    `Create an execution task from ${sourceRows.length} autonomous improvement plan record(s).`,
+    sciipGenerateId780_('AUTONOMOUS_IMPROVEMENT_TASK'),
+    args.businessKey,
+    args.taskDate,
+    'AUTONOMOUS_IMPROVEMENT_PLANS',
+    args.sourceRows.length,
+    'Execute Autonomous Improvement Plan — ' + args.taskDate,
+    sciipCreateAutonomousImprovementTaskDescription780_(args.sourceRows),
+    'AUTONOMOUS_SYSTEM_IMPROVEMENT',
+    sciipResolveAutonomousImprovementTaskPriority780_(args.sourceRows),
+    'PENDING',
+    'SCIIP_OS',
+    new Date().toISOString(),
+    args.processor
+  ];
+}
+
+function sciipCreateAutonomousImprovementTaskDescription780_(sourceRows) {
+  return [
+    'Create an execution task from ' + sourceRows.length + ' autonomous improvement plan record(s).',
     'Review the proposed improvement objective, actions, and expected system impact.',
     'Route the improvement into downstream execution tracking so SCIIP_OS can close the loop from learning to action.'
   ].join(' ');
 }
 
-function sciipResolveAutonomousImprovementTaskPriority_(sourceRows) {
-  const hasHighPriorityPlan = sourceRows.some(row => {
+function sciipResolveAutonomousImprovementTaskPriority780_(sourceRows) {
+  const hasHighPriorityPlan = sourceRows.some(function(row) {
     return String(row.Priority || '').trim().toUpperCase() === 'HIGH';
   });
 
   return hasHighPriorityPlan ? 'HIGH' : 'MEDIUM';
 }
 
-function sciipAppendAutonomousImprovementTask_(task) {
-  const sheet = sciipEnsureAutonomousImprovementTaskSheet_();
-
-  const row = AUTONOMOUS_IMPROVEMENT_TASK_SCHEMA.map(header => task[header] || '');
-
-  sheet.appendRow(row);
-}
-
-function sciipAutonomousImprovementTaskRowToObject_(headers, row) {
-  const obj = {};
-
-  headers.forEach((header, index) => {
-    obj[header] = row[index];
-  });
-
-  return obj;
+function sciipGenerateId780_(prefix) {
+  return prefix + '_' + Utilities.getUuid();
 }
 
 /*******************************************************
@@ -206,7 +253,7 @@ function sciipTestAutonomousImprovementTaskProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestAutonomousImprovementTaskProcessor',
-    result
+    result: result
   }));
 
   return result;
