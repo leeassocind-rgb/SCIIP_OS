@@ -1,4 +1,95 @@
 /*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 910_AutonomousProcessorGuidanceProcessor
+ *
+ * Migration note:
+ * Preserves original processor business logic by executing
+ * the original implementation inside SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipRunAutonomousProcessorGuidanceProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: '910_AutonomousProcessorGuidanceProcessor',
+    action: 'AUTONOMOUS_PROCESSOR_GUIDANCE_BUILD',
+    sourceSheet: 'AUTONOMOUS_GOVERNANCE_REVIEWS',
+    targetSheet: 'AUTONOMOUS_PROCESSOR_GUIDANCE',
+    ledgerSheet: 'AUTONOMOUS_PROCESSOR_GUIDANCE_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: 0,
+        outputCount: 0,
+        summary: 'Runtime migration wrapper payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: '910_AutonomousProcessorGuidanceProcessor',
+          preservedLegacyImplementation: true
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      var errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      var legacyResult = sciipRunAutonomousProcessorGuidanceProcessorLegacy910_();
+      return sciipWrapLegacyRuntimeResult910_(legacyResult, context, transaction);
+    }
+  });
+}
+
+function sciipWrapLegacyRuntimeResult910_(legacyResult, context, transaction) {
+  legacyResult = legacyResult || {};
+
+  var message = JSON.stringify({
+    migrationVersion: 'v5.3.2',
+    processorMigrated: true,
+    legacyResult: legacyResult,
+    transactionId: transaction.transactionId
+  });
+
+  var config = {
+    processor: context.processor,
+    businessKey: context.businessKey,
+    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
+    recordsUpdated: legacyResult.recordsUpdated || 0,
+    recordsRead: legacyResult.recordsRead || 0,
+    processed: legacyResult.processed || 0,
+    skippedDuplicate: legacyResult.skippedDuplicate || 0,
+    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
+    skippedValidation: legacyResult.skippedValidation || 0,
+    errors: legacyResult.errors || 0,
+    message: message
+  };
+
+  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
+  }
+
+  if (legacyResult.skippedDuplicate) {
+    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
+  }
+
+  if (legacyResult.status === 'ERROR') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
+  }
+
+  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
+}
+
+/*******************************************************
  * 910_AutonomousProcessorGuidanceProcessor
  *******************************************************/
 
@@ -23,7 +114,7 @@ const AUTONOMOUS_PROCESSOR_GUIDANCE_SCHEMA = [
   'Processor'
 ];
 
-function sciipRunAutonomousProcessorGuidanceProcessor() {
+function sciipRunAutonomousProcessorGuidanceProcessorLegacy910_() {
   const startedAt = new Date();
 
   const outputSheet = sciipEnsureAutonomousProcessorGuidanceSheet_();
