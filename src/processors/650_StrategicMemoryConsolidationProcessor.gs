@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 650_StrategicMemoryConsolidationProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - AUTONOMOUS_MODEL_CALIBRATION
+ * AUTONOMOUS_MODEL_CALIBRATION → STRATEGIC_MEMORY
  *
- * Output:
- * - STRATEGIC_MEMORY
- ************************************************************/
+ * Migration note:
+ * Preserves original 650 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const STRATEGIC_MEMORY_SHEET =
-  'STRATEGIC_MEMORY';
+const STRATEGIC_MEMORY_CONSOLIDATION_PROCESSOR = '650_StrategicMemoryConsolidationProcessor';
+const STRATEGIC_MEMORY_SHEET = 'STRATEGIC_MEMORY';
 
 const STRATEGIC_MEMORY_HEADERS = [
   'Memory_ID',
@@ -40,123 +40,214 @@ const STRATEGIC_MEMORY_HEADERS = [
 ];
 
 function sciipEnsureStrategicMemorySchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(STRATEGIC_MEMORY_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(STRATEGIC_MEMORY_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, STRATEGIC_MEMORY_HEADERS.length)
-    .setValues([STRATEGIC_MEMORY_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    STRATEGIC_MEMORY_SHEET,
+    STRATEGIC_MEMORY_HEADERS
+  );
 }
 
 function sciipRunStrategicMemoryConsolidationProcessor() {
-  const processor = '650_StrategicMemoryConsolidationProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: STRATEGIC_MEMORY_CONSOLIDATION_PROCESSOR,
+    action: 'STRATEGIC_MEMORY_BUILD',
+    sourceSheet: 'AUTONOMOUS_MODEL_CALIBRATION',
+    targetSheet: STRATEGIC_MEMORY_SHEET,
+    ledgerSheet: 'STRATEGIC_MEMORY_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureStrategicMemorySchema();
+    buildPayload: function(context, definition) {
+      const calibrations = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_MODEL_CALIBRATION');
 
-  const memoryDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `STRATEGIC_MEMORY|${memoryDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: calibrations.length,
+        outputCount: calibrations.length || 1,
+        summary: 'Strategic memory consolidation runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: STRATEGIC_MEMORY_CONSOLIDATION_PROCESSOR,
+          inputSheets: ['AUTONOMOUS_MODEL_CALIBRATION']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      memoriesCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const calibrations = sciipGetRecordsByDate_(
-    'AUTONOMOUS_MODEL_CALIBRATION',
-    'Calibration_Date',
-    memoryDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureStrategicMemorySchema();
+      const memoryDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const memoryBusinessKey = 'STRATEGIC_MEMORY|' + memoryDate;
 
-  if (calibrations.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      calibrationsReviewed: 0,
-      memoriesCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists650_(definition.targetSheet, memoryBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: STRATEGIC_MEMORY_CONSOLIDATION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            memoriesCreated: 0,
+            skippedDuplicate: 1,
+            memoryBusinessKey: memoryBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const memories = sciipCreateStrategicMemories_({
-    businessKey,
-    memoryDate,
-    calibrations,
-    processor
+      const calibrations = sciipGetRuntimeRecordsByDate650_(
+        'AUTONOMOUS_MODEL_CALIBRATION',
+        'Calibration_Date',
+        memoryDate
+      );
+
+      if (calibrations.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: STRATEGIC_MEMORY_CONSOLIDATION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            calibrationsReviewed: 0,
+            memoriesCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const memories = sciipCreateStrategicMemories650_({
+        businessKey: memoryBusinessKey,
+        memoryDate: memoryDate,
+        calibrations: calibrations,
+        processor: STRATEGIC_MEMORY_CONSOLIDATION_PROCESSOR
+      });
+
+      memories.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: STRATEGIC_MEMORY_CONSOLIDATION_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: memories.length,
+        recordsRead: calibrations.length,
+        processed: memories.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          calibrationsReviewed: calibrations.length,
+          memoriesCreated: memories.length,
+          skippedDuplicate: 0,
+          memoryBusinessKey: memoryBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  memories.forEach(row => outputSheet.appendRow(row));
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    calibrationsReviewed: calibrations.length,
-    memoriesCreated: memories.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
 }
 
-function sciipCreateStrategicMemories_(args) {
+function sciipRuntimeBusinessKeyPrefixExists650_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate650_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue650_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue650_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable650_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey650_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipCreateStrategicMemories650_(args) {
   const now = new Date();
 
   const rows = args.calibrations.map(calibration => {
-    const calibrationId = sciipExtractFirstAvailable_(calibration, [
+    const calibrationId = sciipExtractFirstAvailable650_(calibration, [
       'Calibration_ID'
     ]);
 
-    const signalWeightId = sciipExtractFirstAvailable_(calibration, [
+    const signalWeightId = sciipExtractFirstAvailable650_(calibration, [
       'Signal_Weight_ID'
     ]);
 
-    const evolutionId = sciipExtractFirstAvailable_(calibration, [
+    const evolutionId = sciipExtractFirstAvailable650_(calibration, [
       'Evolution_ID'
     ]);
 
-    const learningId = sciipExtractFirstAvailable_(calibration, [
+    const learningId = sciipExtractFirstAvailable650_(calibration, [
       'Learning_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable_(calibration, [
+    const hypothesisId = sciipExtractFirstAvailable650_(calibration, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(calibration, [
+    const hypothesisType = sciipExtractFirstAvailable650_(calibration, [
       'Hypothesis_Type'
     ]);
 
-    const signalCategory = sciipExtractFirstAvailable_(calibration, [
+    const signalCategory = sciipExtractFirstAvailable650_(calibration, [
       'Signal_Category'
     ]);
 
     const profile =
-      sciipInferStrategicMemoryProfile_(calibration);
+      sciipInferStrategicMemoryProfile650_(calibration);
 
     const rowKey =
-      `${args.businessKey}|${profile.memoryType}|${sciipNormalizeMissionKey_(calibrationId || signalWeightId || evolutionId || learningId || hypothesisId || profile.memoryTitle)}`;
+      `${args.businessKey}|${profile.memoryType}|${sciipNormalizeMissionKey650_(calibrationId || signalWeightId || evolutionId || learningId || hypothesisId || profile.memoryTitle)}`;
 
     return [
       sciipGenerateId_('MEM'),
@@ -186,44 +277,44 @@ function sciipCreateStrategicMemories_(args) {
     ];
   });
 
-  return sciipDeduplicateStrategicMemoryRows_(rows);
+  return sciipDeduplicateStrategicMemoryRows650_(rows);
 }
 
-function sciipInferStrategicMemoryProfile_(calibration) {
-  const hypothesisType = sciipExtractFirstAvailable_(calibration, [
+function sciipInferStrategicMemoryProfile650_(calibration) {
+  const hypothesisType = sciipExtractFirstAvailable650_(calibration, [
     'Hypothesis_Type'
   ]);
 
-  const signalCategory = sciipExtractFirstAvailable_(calibration, [
+  const signalCategory = sciipExtractFirstAvailable650_(calibration, [
     'Signal_Category'
   ]);
 
-  const calibrationType = sciipExtractFirstAvailable_(calibration, [
+  const calibrationType = sciipExtractFirstAvailable650_(calibration, [
     'Calibration_Type'
   ]);
 
-  const calibrationAction = sciipExtractFirstAvailable_(calibration, [
+  const calibrationAction = sciipExtractFirstAvailable650_(calibration, [
     'Calibration_Action'
   ]);
 
-  const calibrationDirection = sciipExtractFirstAvailable_(calibration, [
+  const calibrationDirection = sciipExtractFirstAvailable650_(calibration, [
     'Calibration_Direction'
   ]);
 
-  const calibrationMagnitude = sciipExtractFirstAvailable_(calibration, [
+  const calibrationMagnitude = sciipExtractFirstAvailable650_(calibration, [
     'Calibration_Magnitude'
   ]);
 
-  const calibrationRationale = sciipExtractFirstAvailable_(calibration, [
+  const calibrationRationale = sciipExtractFirstAvailable650_(calibration, [
     'Calibration_Rationale'
   ]);
 
-  const expectedModelEffect = sciipExtractFirstAvailable_(calibration, [
+  const expectedModelEffect = sciipExtractFirstAvailable650_(calibration, [
     'Expected_Model_Effect'
   ]);
 
   const calibrationPriority =
-    sciipExtractFirstAvailable_(calibration, [
+    sciipExtractFirstAvailable650_(calibration, [
       'Calibration_Priority'
     ]) || 'MEDIUM';
 
@@ -348,7 +439,7 @@ function sciipInferStrategicMemoryProfile_(calibration) {
   };
 }
 
-function sciipDeduplicateStrategicMemoryRows_(rows) {
+function sciipDeduplicateStrategicMemoryRows650_(rows) {
   const seen = {};
   const deduped = [];
 
@@ -370,7 +461,7 @@ function sciipTestStrategicMemoryConsolidationProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestStrategicMemoryConsolidationProcessor',
-    result
+    result: result
   }));
 
   return result;
