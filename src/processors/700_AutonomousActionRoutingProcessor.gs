@@ -1,17 +1,15 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 700_AutonomousActionRoutingProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - MONITORING_SIGNALS
+ * MONITORING_SIGNALS → AUTONOMOUS_ACTION_ROUTING
  *
- * Output:
- * - AUTONOMOUS_ACTION_ROUTING
- ************************************************************/
+ * Migration note:
+ * Preserves original 700 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const AUTONOMOUS_ACTION_ROUTING_SHEET =
-  'AUTONOMOUS_ACTION_ROUTING';
-
+const AUTONOMOUS_ACTION_ROUTING_PROCESSOR = '700_AutonomousActionRoutingProcessor';
 const AUTONOMOUS_ACTION_ROUTING_HEADERS = [
   'Action_Route_ID',
   'Business_Key',
@@ -39,130 +37,226 @@ const AUTONOMOUS_ACTION_ROUTING_HEADERS = [
 ];
 
 function sciipEnsureAutonomousActionRoutingSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(AUTONOMOUS_ACTION_ROUTING_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(AUTONOMOUS_ACTION_ROUTING_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, AUTONOMOUS_ACTION_ROUTING_HEADERS.length)
-    .setValues([AUTONOMOUS_ACTION_ROUTING_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'AUTONOMOUS_ACTION_ROUTING',
+    AUTONOMOUS_ACTION_ROUTING_HEADERS
+  );
 }
 
 function sciipRunAutonomousActionRoutingProcessor() {
-  const processor = '700_AutonomousActionRoutingProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR,
+    action: 'AUTONOMOUS_ACTION_ROUTING_BUILD',
+    sourceSheet: 'MONITORING_SIGNALS',
+    targetSheet: 'AUTONOMOUS_ACTION_ROUTING',
+    ledgerSheet: 'AUTONOMOUS_ACTION_ROUTING_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureAutonomousActionRoutingSchema();
+    buildPayload: function(context, definition) {
+      const monitoringSignals = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('MONITORING_SIGNALS');
 
-  const routeDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `AUTONOMOUS_ACTION_ROUTING|${routeDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: monitoringSignals.length,
+        outputCount: monitoringSignals.length || 1,
+        summary: 'Autonomous action routing runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR,
+          inputSheets: ['MONITORING_SIGNALS']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      actionRoutesCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const monitoringSignals = sciipGetRecordsByDate_(
-    'MONITORING_SIGNALS',
-    'Signal_Date',
-    routeDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousActionRoutingSchema();
+      const routeDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const autonomousActionRoutingBusinessKey = 'AUTONOMOUS_ACTION_ROUTING|' + routeDate;
 
-  if (monitoringSignals.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      monitoringSignalsReviewed: 0,
-      actionRoutesCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists700_(definition.targetSheet, autonomousActionRoutingBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            actionRoutesCreated: 0,
+            skippedDuplicate: 1,
+            autonomousActionRoutingBusinessKey: autonomousActionRoutingBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const routes = sciipCreateAutonomousActionRoutes_({
-    businessKey,
-    routeDate,
-    monitoringSignals,
-    processor
+      const monitoringSignals = sciipGetRuntimeRecordsByDate700_(
+        'MONITORING_SIGNALS',
+        'Signal_Date',
+        routeDate
+      );
+
+      if (monitoringSignals.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            monitoringSignalsReviewed: 0,
+            actionRoutesCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const routes = sciipCreateAutonomousActionRoutes700_({
+        businessKey: autonomousActionRoutingBusinessKey,
+        routeDate: routeDate,
+        monitoringSignals: monitoringSignals,
+        processor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR
+      });
+
+      routes.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: routes.length,
+        recordsRead: monitoringSignals.length,
+        processed: routes.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          monitoringSignalsReviewed: monitoringSignals.length,
+          actionRoutesCreated: routes.length,
+          skippedDuplicate: 0,
+          autonomousActionRoutingBusinessKey: autonomousActionRoutingBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  routes.forEach(row => outputSheet.appendRow(row));
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    monitoringSignalsReviewed: monitoringSignals.length,
-    actionRoutesCreated: routes.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
 }
 
-function sciipCreateAutonomousActionRoutes_(args) {
+function sciipRuntimeBusinessKeyPrefixExists700_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate700_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue700_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue700_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable700_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey700_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipGenerateId700_(prefix) {
+  const safePrefix = String(prefix || 'ID').toUpperCase();
+  return safePrefix + '|' + Utilities.getUuid();
+}
+
+function sciipCreateAutonomousActionRoutes700_(args) {
   const now = new Date();
 
   const rows = args.monitoringSignals.map(signal => {
-    const monitoringSignalId = sciipExtractFirstAvailable_(signal, [
+    const monitoringSignalId = sciipExtractFirstAvailable700_(signal, [
       'Monitoring_Signal_ID'
     ]);
 
-    const monitoringId = sciipExtractFirstAvailable_(signal, [
+    const monitoringId = sciipExtractFirstAvailable700_(signal, [
       'Monitoring_ID'
     ]);
 
-    const scenarioId = sciipExtractFirstAvailable_(signal, [
+    const scenarioId = sciipExtractFirstAvailable700_(signal, [
       'Scenario_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable_(signal, [
+    const hypothesisId = sciipExtractFirstAvailable700_(signal, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(signal, [
+    const hypothesisType = sciipExtractFirstAvailable700_(signal, [
       'Hypothesis_Type'
     ]);
 
-    const signalCategory = sciipExtractFirstAvailable_(signal, [
+    const signalCategory = sciipExtractFirstAvailable700_(signal, [
       'Signal_Category'
     ]);
 
-    const detectedSignalType = sciipExtractFirstAvailable_(signal, [
+    const detectedSignalType = sciipExtractFirstAvailable700_(signal, [
       'Detected_Signal_Type'
     ]);
 
-    const recommendedActionRoute = sciipExtractFirstAvailable_(signal, [
+    const recommendedActionRoute = sciipExtractFirstAvailable700_(signal, [
       'Recommended_Action_Route'
     ]);
 
     const profile =
-      sciipInferAutonomousActionRouteProfile_(signal);
+      sciipInferAutonomousActionRouteProfile700_(signal);
 
     const rowKey =
-      `${args.businessKey}|${profile.actionRouteType}|${sciipNormalizeMissionKey_(monitoringSignalId || monitoringId || scenarioId || hypothesisId || profile.actionRouteTitle)}`;
+      `${args.businessKey}|${profile.actionRouteType}|${sciipNormalizeMissionKey700_(monitoringSignalId || monitoringId || scenarioId || hypothesisId || profile.actionRouteTitle)}`;
 
     return [
-      sciipGenerateId_('ART'),
+      sciipGenerateId700_('ART'),
       rowKey,
       args.routeDate,
       monitoringSignalId,
@@ -188,49 +282,49 @@ function sciipCreateAutonomousActionRoutes_(args) {
     ];
   });
 
-  return sciipDeduplicateAutonomousActionRoutingRows_(rows);
+  return sciipDeduplicateAutonomousActionRoutingRows700_(rows);
 }
 
-function sciipInferAutonomousActionRouteProfile_(signal) {
-  const hypothesisType = sciipExtractFirstAvailable_(signal, [
+function sciipInferAutonomousActionRouteProfile700_(signal) {
+  const hypothesisType = sciipExtractFirstAvailable700_(signal, [
     'Hypothesis_Type'
   ]);
 
-  const signalCategory = sciipExtractFirstAvailable_(signal, [
+  const signalCategory = sciipExtractFirstAvailable700_(signal, [
     'Signal_Category'
   ]);
 
-  const detectedSignalType = sciipExtractFirstAvailable_(signal, [
+  const detectedSignalType = sciipExtractFirstAvailable700_(signal, [
     'Detected_Signal_Type'
   ]);
 
-  const detectedSignalStatement = sciipExtractFirstAvailable_(signal, [
+  const detectedSignalStatement = sciipExtractFirstAvailable700_(signal, [
     'Detected_Signal_Statement'
   ]);
 
-  const detectionBasis = sciipExtractFirstAvailable_(signal, [
+  const detectionBasis = sciipExtractFirstAvailable700_(signal, [
     'Detection_Basis'
   ]);
 
-  const triggerState = sciipExtractFirstAvailable_(signal, [
+  const triggerState = sciipExtractFirstAvailable700_(signal, [
     'Trigger_State'
   ]);
 
-  const escalationReadiness = sciipExtractFirstAvailable_(signal, [
+  const escalationReadiness = sciipExtractFirstAvailable700_(signal, [
     'Escalation_Readiness'
   ]);
 
-  const recommendedActionRoute = sciipExtractFirstAvailable_(signal, [
+  const recommendedActionRoute = sciipExtractFirstAvailable700_(signal, [
     'Recommended_Action_Route'
   ]);
 
   const signalConfidence =
-    sciipExtractFirstAvailable_(signal, [
+    sciipExtractFirstAvailable700_(signal, [
       'Signal_Confidence'
     ]) || 'LOW';
 
   const signalPriority =
-    sciipExtractFirstAvailable_(signal, [
+    sciipExtractFirstAvailable700_(signal, [
       'Signal_Priority'
     ]) || 'MEDIUM';
 
@@ -365,7 +459,7 @@ function sciipInferAutonomousActionRouteProfile_(signal) {
   };
 }
 
-function sciipDeduplicateAutonomousActionRoutingRows_(rows) {
+function sciipDeduplicateAutonomousActionRoutingRows700_(rows) {
   const seen = {};
   const deduped = [];
 
@@ -387,7 +481,7 @@ function sciipTestAutonomousActionRoutingProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestAutonomousActionRoutingProcessor',
-    result
+    result: result
   }));
 
   return result;
