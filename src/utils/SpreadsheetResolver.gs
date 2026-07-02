@@ -51,3 +51,18 @@ function sciipResolveLatestProcessingDate_(sheetName, dateColumnName) {
 
   return dates[dates.length - 1];
 }
+
+function sciipFormatDateKey_(date) {
+  if (!date) return '';
+
+  if (Object.prototype.toString.call(date) === '[object Date]' && !isNaN(date.getTime())) {
+    return Utilities.formatDate(date, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+
+  const parsed = new Date(date);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+
+  return String(date).trim();
+}
