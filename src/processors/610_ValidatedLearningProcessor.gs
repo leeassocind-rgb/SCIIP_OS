@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 610_ValidatedLearningProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - HYPOTHESIS_VALIDATION_DECISIONS
+ * HYPOTHESIS_VALIDATION_DECISIONS → VALIDATED_LEARNINGS
  *
- * Output:
- * - VALIDATED_LEARNINGS
- ************************************************************/
+ * Migration note:
+ * Preserves original 610 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const VALIDATED_LEARNINGS_SHEET =
-  'VALIDATED_LEARNINGS';
+const VALIDATED_LEARNING_PROCESSOR = '610_ValidatedLearningProcessor';
+const VALIDATED_LEARNINGS_SHEET = 'VALIDATED_LEARNINGS';
 
 const VALIDATED_LEARNINGS_HEADERS = [
   'Learning_ID',
@@ -36,111 +36,202 @@ const VALIDATED_LEARNINGS_HEADERS = [
 ];
 
 function sciipEnsureValidatedLearningsSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(VALIDATED_LEARNINGS_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(VALIDATED_LEARNINGS_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, VALIDATED_LEARNINGS_HEADERS.length)
-    .setValues([VALIDATED_LEARNINGS_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    VALIDATED_LEARNINGS_SHEET,
+    VALIDATED_LEARNINGS_HEADERS
+  );
 }
 
 function sciipRunValidatedLearningProcessor() {
-  const processor = '610_ValidatedLearningProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: VALIDATED_LEARNING_PROCESSOR,
+    action: 'VALIDATED_LEARNINGS_BUILD',
+    sourceSheet: 'HYPOTHESIS_VALIDATION_DECISIONS',
+    targetSheet: VALIDATED_LEARNINGS_SHEET,
+    ledgerSheet: 'VALIDATED_LEARNINGS_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureValidatedLearningsSchema();
+    buildPayload: function(context, definition) {
+      const validationDecisions = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('HYPOTHESIS_VALIDATION_DECISIONS');
 
-  const learningDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `VALIDATED_LEARNING|${learningDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: validationDecisions.length,
+        outputCount: validationDecisions.length || 1,
+        summary: 'Validated learning runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: VALIDATED_LEARNING_PROCESSOR,
+          inputSheets: ['HYPOTHESIS_VALIDATION_DECISIONS']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      learningsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const validationDecisions = sciipGetRecordsByDate_(
-    'HYPOTHESIS_VALIDATION_DECISIONS',
-    'Decision_Date',
-    learningDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureValidatedLearningsSchema();
+      const learningDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const learningBusinessKey = 'VALIDATED_LEARNING|' + learningDate;
 
-  if (validationDecisions.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      validationDecisionsReviewed: 0,
-      learningsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists610_(definition.targetSheet, learningBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: VALIDATED_LEARNING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            learningsCreated: 0,
+            skippedDuplicate: 1,
+            learningBusinessKey: learningBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const learnings = sciipCreateValidatedLearnings_({
-    businessKey,
-    learningDate,
-    validationDecisions,
-    processor
+      const validationDecisions = sciipGetRuntimeRecordsByDate610_(
+        'HYPOTHESIS_VALIDATION_DECISIONS',
+        'Decision_Date',
+        learningDate
+      );
+
+      if (validationDecisions.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: VALIDATED_LEARNING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            validationDecisionsReviewed: 0,
+            learningsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const learnings = sciipCreateValidatedLearnings610_({
+        businessKey: learningBusinessKey,
+        learningDate: learningDate,
+        validationDecisions: validationDecisions,
+        processor: VALIDATED_LEARNING_PROCESSOR
+      });
+
+      learnings.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: VALIDATED_LEARNING_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: learnings.length,
+        recordsRead: validationDecisions.length,
+        processed: learnings.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          validationDecisionsReviewed: validationDecisions.length,
+          learningsCreated: learnings.length,
+          skippedDuplicate: 0,
+          learningBusinessKey: learningBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  learnings.forEach(row => outputSheet.appendRow(row));
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    validationDecisionsReviewed: validationDecisions.length,
-    learningsCreated: learnings.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
 }
 
-function sciipCreateValidatedLearnings_(args) {
+function sciipRuntimeBusinessKeyPrefixExists610_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate610_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue610_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue610_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable610_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey610_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipCreateValidatedLearnings610_(args) {
   const now = new Date();
 
   const rows = args.validationDecisions.map(decision => {
-    const validationDecisionId = sciipExtractFirstAvailable_(decision, [
+    const validationDecisionId = sciipExtractFirstAvailable610_(decision, [
       'Validation_Decision_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable_(decision, [
+    const hypothesisId = sciipExtractFirstAvailable610_(decision, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(decision, [
+    const hypothesisType = sciipExtractFirstAvailable610_(decision, [
       'Hypothesis_Type'
     ]);
 
-    const validationDecision = sciipExtractFirstAvailable_(decision, [
+    const validationDecision = sciipExtractFirstAvailable610_(decision, [
       'Validation_Decision'
     ]);
 
     const profile =
-      sciipInferValidatedLearningProfile_(decision);
+      sciipInferValidatedLearningProfile610_(decision);
 
     const rowKey =
-      `${args.businessKey}|${hypothesisType}|${sciipNormalizeMissionKey_(validationDecisionId || hypothesisId || profile.learningTitle)}`;
+      `${args.businessKey}|${hypothesisType}|${sciipNormalizeMissionKey610_(validationDecisionId || hypothesisId || profile.learningTitle)}`;
 
     return [
       sciipGenerateId_('LRN'),
@@ -166,36 +257,36 @@ function sciipCreateValidatedLearnings_(args) {
     ];
   });
 
-  return sciipDeduplicateValidatedLearningRows_(rows);
+  return sciipDeduplicateValidatedLearningRows610_(rows);
 }
 
-function sciipInferValidatedLearningProfile_(decision) {
-  const hypothesisType = sciipExtractFirstAvailable_(decision, [
+function sciipInferValidatedLearningProfile610_(decision) {
+  const hypothesisType = sciipExtractFirstAvailable610_(decision, [
     'Hypothesis_Type'
   ]);
 
-  const validationDecision = sciipExtractFirstAvailable_(decision, [
+  const validationDecision = sciipExtractFirstAvailable610_(decision, [
     'Validation_Decision'
   ]);
 
-  const decisionRationale = sciipExtractFirstAvailable_(decision, [
+  const decisionRationale = sciipExtractFirstAvailable610_(decision, [
     'Decision_Rationale'
   ]);
 
-  const supportingEvidence = sciipExtractFirstAvailable_(decision, [
+  const supportingEvidence = sciipExtractFirstAvailable610_(decision, [
     'Supporting_Evidence'
   ]);
 
-  const counterEvidence = sciipExtractFirstAvailable_(decision, [
+  const counterEvidence = sciipExtractFirstAvailable610_(decision, [
     'Counter_Evidence'
   ]);
 
-  const evidenceGaps = sciipExtractFirstAvailable_(decision, [
+  const evidenceGaps = sciipExtractFirstAvailable610_(decision, [
     'Evidence_Gaps'
   ]);
 
   const decisionConfidence =
-    sciipExtractFirstAvailable_(decision, [
+    sciipExtractFirstAvailable610_(decision, [
       'Decision_Confidence'
     ]) || 'LOW';
 
@@ -312,7 +403,7 @@ function sciipInferValidatedLearningProfile_(decision) {
   };
 }
 
-function sciipDeduplicateValidatedLearningRows_(rows) {
+function sciipDeduplicateValidatedLearningRows610_(rows) {
   const seen = {};
   const deduped = [];
 
@@ -329,12 +420,11 @@ function sciipDeduplicateValidatedLearningRows_(rows) {
 }
 
 function sciipTestValidatedLearningProcessor() {
-  const result =
-    sciipRunValidatedLearningProcessor();
+  const result = sciipRunValidatedLearningProcessor();
 
   Logger.log(JSON.stringify({
     test: 'sciipTestValidatedLearningProcessor',
-    result
+    result: result
   }));
 
   return result;
