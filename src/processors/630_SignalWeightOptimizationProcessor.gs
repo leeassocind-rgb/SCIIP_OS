@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 630_SignalWeightOptimizationProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - KNOWLEDGE_EVOLUTION
+ * KNOWLEDGE_EVOLUTION → SIGNAL_WEIGHT_OPTIMIZATION
  *
- * Output:
- * - SIGNAL_WEIGHT_OPTIMIZATION
- ************************************************************/
+ * Migration note:
+ * Preserves original 630 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const SIGNAL_WEIGHT_OPTIMIZATION_SHEET =
-  'SIGNAL_WEIGHT_OPTIMIZATION';
+const SIGNAL_WEIGHT_OPTIMIZATION_PROCESSOR = '630_SignalWeightOptimizationProcessor';
+const SIGNAL_WEIGHT_OPTIMIZATION_SHEET = 'SIGNAL_WEIGHT_OPTIMIZATION';
 
 const SIGNAL_WEIGHT_OPTIMIZATION_HEADERS = [
   'Signal_Weight_ID',
@@ -39,119 +39,210 @@ const SIGNAL_WEIGHT_OPTIMIZATION_HEADERS = [
 ];
 
 function sciipEnsureSignalWeightOptimizationSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(SIGNAL_WEIGHT_OPTIMIZATION_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(SIGNAL_WEIGHT_OPTIMIZATION_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, SIGNAL_WEIGHT_OPTIMIZATION_HEADERS.length)
-    .setValues([SIGNAL_WEIGHT_OPTIMIZATION_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    SIGNAL_WEIGHT_OPTIMIZATION_SHEET,
+    SIGNAL_WEIGHT_OPTIMIZATION_HEADERS
+  );
 }
 
 function sciipRunSignalWeightOptimizationProcessor() {
-  const processor = '630_SignalWeightOptimizationProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: SIGNAL_WEIGHT_OPTIMIZATION_PROCESSOR,
+    action: 'SIGNAL_WEIGHT_OPTIMIZATION_BUILD',
+    sourceSheet: 'KNOWLEDGE_EVOLUTION',
+    targetSheet: SIGNAL_WEIGHT_OPTIMIZATION_SHEET,
+    ledgerSheet: 'SIGNAL_WEIGHT_OPTIMIZATION_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureSignalWeightOptimizationSchema();
+    buildPayload: function(context, definition) {
+      const evolutions = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('KNOWLEDGE_EVOLUTION');
 
-  const optimizationDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `SIGNAL_WEIGHT_OPTIMIZATION|${optimizationDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: evolutions.length,
+        outputCount: evolutions.length || 1,
+        summary: 'Signal weight optimization runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: SIGNAL_WEIGHT_OPTIMIZATION_PROCESSOR,
+          inputSheets: ['KNOWLEDGE_EVOLUTION']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      signalWeightsOptimized: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const evolutions = sciipGetRecordsByDate_(
-    'KNOWLEDGE_EVOLUTION',
-    'Evolution_Date',
-    optimizationDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureSignalWeightOptimizationSchema();
+      const optimizationDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const optimizationBusinessKey = 'SIGNAL_WEIGHT_OPTIMIZATION|' + optimizationDate;
 
-  if (evolutions.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      knowledgeEvolutionsReviewed: 0,
-      signalWeightsOptimized: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists630_(definition.targetSheet, optimizationBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: SIGNAL_WEIGHT_OPTIMIZATION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            signalWeightsOptimized: 0,
+            skippedDuplicate: 1,
+            optimizationBusinessKey: optimizationBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const optimizations = sciipCreateSignalWeightOptimizations_({
-    businessKey,
-    optimizationDate,
-    evolutions,
-    processor
+      const evolutions = sciipGetRuntimeRecordsByDate630_(
+        'KNOWLEDGE_EVOLUTION',
+        'Evolution_Date',
+        optimizationDate
+      );
+
+      if (evolutions.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: SIGNAL_WEIGHT_OPTIMIZATION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            knowledgeEvolutionsReviewed: 0,
+            signalWeightsOptimized: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const optimizations = sciipCreateSignalWeightOptimizations630_({
+        businessKey: optimizationBusinessKey,
+        optimizationDate: optimizationDate,
+        evolutions: evolutions,
+        processor: SIGNAL_WEIGHT_OPTIMIZATION_PROCESSOR
+      });
+
+      optimizations.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: SIGNAL_WEIGHT_OPTIMIZATION_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: optimizations.length,
+        recordsRead: evolutions.length,
+        processed: optimizations.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          knowledgeEvolutionsReviewed: evolutions.length,
+          signalWeightsOptimized: optimizations.length,
+          skippedDuplicate: 0,
+          optimizationBusinessKey: optimizationBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  optimizations.forEach(row => outputSheet.appendRow(row));
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    knowledgeEvolutionsReviewed: evolutions.length,
-    signalWeightsOptimized: optimizations.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
 }
 
-function sciipCreateSignalWeightOptimizations_(args) {
+function sciipRuntimeBusinessKeyPrefixExists630_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate630_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue630_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue630_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable630_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey630_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipCreateSignalWeightOptimizations630_(args) {
   const now = new Date();
 
   const rows = args.evolutions.map(evolution => {
-    const evolutionId = sciipExtractFirstAvailable_(evolution, [
+    const evolutionId = sciipExtractFirstAvailable630_(evolution, [
       'Evolution_ID'
     ]);
 
-    const learningId = sciipExtractFirstAvailable_(evolution, [
+    const learningId = sciipExtractFirstAvailable630_(evolution, [
       'Learning_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable_(evolution, [
+    const hypothesisId = sciipExtractFirstAvailable630_(evolution, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(evolution, [
+    const hypothesisType = sciipExtractFirstAvailable630_(evolution, [
       'Hypothesis_Type'
     ]);
 
-    const learningType = sciipExtractFirstAvailable_(evolution, [
+    const learningType = sciipExtractFirstAvailable630_(evolution, [
       'Learning_Type'
     ]);
 
-    const evolutionType = sciipExtractFirstAvailable_(evolution, [
+    const evolutionType = sciipExtractFirstAvailable630_(evolution, [
       'Evolution_Type'
     ]);
 
     const profile =
-      sciipInferSignalWeightOptimizationProfile_(evolution);
+      sciipInferSignalWeightOptimizationProfile630_(evolution);
 
     const rowKey =
-      `${args.businessKey}|${profile.signalCategory}|${sciipNormalizeMissionKey_(evolutionId || learningId || hypothesisId || profile.signalCategory)}`;
+      `${args.businessKey}|${profile.signalCategory}|${sciipNormalizeMissionKey630_(evolutionId || learningId || hypothesisId || profile.signalCategory)}`;
 
     return [
       sciipGenerateId_('SWO'),
@@ -180,32 +271,32 @@ function sciipCreateSignalWeightOptimizations_(args) {
     ];
   });
 
-  return sciipDeduplicateSignalWeightOptimizationRows_(rows);
+  return sciipDeduplicateSignalWeightOptimizationRows630_(rows);
 }
 
-function sciipInferSignalWeightOptimizationProfile_(evolution) {
-  const hypothesisType = sciipExtractFirstAvailable_(evolution, [
+function sciipInferSignalWeightOptimizationProfile630_(evolution) {
+  const hypothesisType = sciipExtractFirstAvailable630_(evolution, [
     'Hypothesis_Type'
   ]);
 
-  const learningType = sciipExtractFirstAvailable_(evolution, [
+  const learningType = sciipExtractFirstAvailable630_(evolution, [
     'Learning_Type'
   ]);
 
-  const evolutionType = sciipExtractFirstAvailable_(evolution, [
+  const evolutionType = sciipExtractFirstAvailable630_(evolution, [
     'Evolution_Type'
   ]);
 
-  const signalWeightAdjustment = sciipExtractFirstAvailable_(evolution, [
+  const signalWeightAdjustment = sciipExtractFirstAvailable630_(evolution, [
     'Signal_Weight_Adjustment'
   ]);
 
   const evolutionPriority =
-    sciipExtractFirstAvailable_(evolution, [
+    sciipExtractFirstAvailable630_(evolution, [
       'Evolution_Priority'
     ]) || 'MEDIUM';
 
-  const evolutionRationale = sciipExtractFirstAvailable_(evolution, [
+  const evolutionRationale = sciipExtractFirstAvailable630_(evolution, [
     'Evolution_Rationale'
   ]);
 
@@ -326,7 +417,7 @@ function sciipInferSignalWeightOptimizationProfile_(evolution) {
   };
 }
 
-function sciipDeduplicateSignalWeightOptimizationRows_(rows) {
+function sciipDeduplicateSignalWeightOptimizationRows630_(rows) {
   const seen = {};
   const deduped = [];
 
