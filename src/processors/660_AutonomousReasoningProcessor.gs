@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 660_AutonomousReasoningProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - STRATEGIC_MEMORY
+ * STRATEGIC_MEMORY → AUTONOMOUS_REASONING
  *
- * Output:
- * - AUTONOMOUS_REASONING
- ************************************************************/
+ * Migration note:
+ * Preserves original 660 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const AUTONOMOUS_REASONING_SHEET =
-  'AUTONOMOUS_REASONING';
+const AUTONOMOUS_REASONING_PROCESSOR = '660_AutonomousReasoningProcessor';
+const AUTONOMOUS_REASONING_SHEET = 'AUTONOMOUS_REASONING';
 
 const AUTONOMOUS_REASONING_HEADERS = [
   'Reasoning_ID',
@@ -39,119 +39,210 @@ const AUTONOMOUS_REASONING_HEADERS = [
 ];
 
 function sciipEnsureAutonomousReasoningSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(AUTONOMOUS_REASONING_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(AUTONOMOUS_REASONING_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, AUTONOMOUS_REASONING_HEADERS.length)
-    .setValues([AUTONOMOUS_REASONING_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    AUTONOMOUS_REASONING_SHEET,
+    AUTONOMOUS_REASONING_HEADERS
+  );
 }
 
 function sciipRunAutonomousReasoningProcessor() {
-  const processor = '660_AutonomousReasoningProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: AUTONOMOUS_REASONING_PROCESSOR,
+    action: 'AUTONOMOUS_REASONING_BUILD',
+    sourceSheet: 'STRATEGIC_MEMORY',
+    targetSheet: AUTONOMOUS_REASONING_SHEET,
+    ledgerSheet: 'AUTONOMOUS_REASONING_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureAutonomousReasoningSchema();
+    buildPayload: function(context, definition) {
+      const memories = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('STRATEGIC_MEMORY');
 
-  const reasoningDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `AUTONOMOUS_REASONING|${reasoningDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: memories.length,
+        outputCount: memories.length || 1,
+        summary: 'Autonomous reasoning runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: AUTONOMOUS_REASONING_PROCESSOR,
+          inputSheets: ['STRATEGIC_MEMORY']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      reasoningOutputsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const memories = sciipGetRecordsByDate_(
-    'STRATEGIC_MEMORY',
-    'Memory_Date',
-    reasoningDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousReasoningSchema();
+      const reasoningDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const reasoningBusinessKey = 'AUTONOMOUS_REASONING|' + reasoningDate;
 
-  if (memories.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      memoriesReviewed: 0,
-      reasoningOutputsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists660_(definition.targetSheet, reasoningBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: AUTONOMOUS_REASONING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            reasoningOutputsCreated: 0,
+            skippedDuplicate: 1,
+            reasoningBusinessKey: reasoningBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const reasoningOutputs = sciipCreateAutonomousReasoningOutputs_({
-    businessKey,
-    reasoningDate,
-    memories,
-    processor
+      const memories = sciipGetRuntimeRecordsByDate660_(
+        'STRATEGIC_MEMORY',
+        'Memory_Date',
+        reasoningDate
+      );
+
+      if (memories.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: AUTONOMOUS_REASONING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            memoriesReviewed: 0,
+            reasoningOutputsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const reasoningOutputs = sciipCreateAutonomousReasoningOutputs660_({
+        businessKey: reasoningBusinessKey,
+        reasoningDate: reasoningDate,
+        memories: memories,
+        processor: AUTONOMOUS_REASONING_PROCESSOR
+      });
+
+      reasoningOutputs.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: AUTONOMOUS_REASONING_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: reasoningOutputs.length,
+        recordsRead: memories.length,
+        processed: reasoningOutputs.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          memoriesReviewed: memories.length,
+          reasoningOutputsCreated: reasoningOutputs.length,
+          skippedDuplicate: 0,
+          reasoningBusinessKey: reasoningBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  reasoningOutputs.forEach(row => outputSheet.appendRow(row));
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    memoriesReviewed: memories.length,
-    reasoningOutputsCreated: reasoningOutputs.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
 }
 
-function sciipCreateAutonomousReasoningOutputs_(args) {
+function sciipRuntimeBusinessKeyPrefixExists660_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate660_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue660_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue660_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable660_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey660_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipCreateAutonomousReasoningOutputs660_(args) {
   const now = new Date();
 
-  const rows = args.memories.map(memory => {
-    const memoryId = sciipExtractFirstAvailable_(memory, [
+  const rows = args.memories.map(function(memory) {
+    const memoryId = sciipExtractFirstAvailable660_(memory, [
       'Memory_ID'
     ]);
 
-    const calibrationId = sciipExtractFirstAvailable_(memory, [
+    const calibrationId = sciipExtractFirstAvailable660_(memory, [
       'Calibration_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable_(memory, [
+    const hypothesisId = sciipExtractFirstAvailable660_(memory, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(memory, [
+    const hypothesisType = sciipExtractFirstAvailable660_(memory, [
       'Hypothesis_Type'
     ]);
 
-    const signalCategory = sciipExtractFirstAvailable_(memory, [
+    const signalCategory = sciipExtractFirstAvailable660_(memory, [
       'Signal_Category'
     ]);
 
-    const memoryType = sciipExtractFirstAvailable_(memory, [
+    const memoryType = sciipExtractFirstAvailable660_(memory, [
       'Memory_Type'
     ]);
 
     const profile =
-      sciipInferAutonomousReasoningProfile_(memory);
+      sciipInferAutonomousReasoningProfile660_(memory);
 
     const rowKey =
-      `${args.businessKey}|${profile.reasoningType}|${sciipNormalizeMissionKey_(memoryId || calibrationId || hypothesisId || profile.reasoningTitle)}`;
+      args.businessKey + '|' + profile.reasoningType + '|' + sciipNormalizeMissionKey660_(memoryId || calibrationId || hypothesisId || profile.reasoningTitle);
 
     return [
       sciipGenerateId_('RSN'),
@@ -173,60 +264,60 @@ function sciipCreateAutonomousReasoningOutputs_(args) {
       profile.nextStrategicQuestion,
       profile.reasoningConfidence,
       'GENERATED',
-      `STRATEGIC_MEMORY:${memoryId}`,
+      'STRATEGIC_MEMORY:' + memoryId,
       'ACTIVE',
       now.toISOString(),
       args.processor
     ];
   });
 
-  return sciipDeduplicateAutonomousReasoningRows_(rows);
+  return sciipDeduplicateAutonomousReasoningRows660_(rows);
 }
 
-function sciipInferAutonomousReasoningProfile_(memory) {
-  const hypothesisType = sciipExtractFirstAvailable_(memory, [
+function sciipInferAutonomousReasoningProfile660_(memory) {
+  const hypothesisType = sciipExtractFirstAvailable660_(memory, [
     'Hypothesis_Type'
   ]);
 
-  const signalCategory = sciipExtractFirstAvailable_(memory, [
+  const signalCategory = sciipExtractFirstAvailable660_(memory, [
     'Signal_Category'
   ]);
 
-  const memoryType = sciipExtractFirstAvailable_(memory, [
+  const memoryType = sciipExtractFirstAvailable660_(memory, [
     'Memory_Type'
   ]);
 
-  const memoryStatement = sciipExtractFirstAvailable_(memory, [
+  const memoryStatement = sciipExtractFirstAvailable660_(memory, [
     'Memory_Statement'
   ]);
 
-  const strategicPrinciple = sciipExtractFirstAvailable_(memory, [
+  const strategicPrinciple = sciipExtractFirstAvailable660_(memory, [
     'Strategic_Principle'
   ]);
 
-  const patternToReinforce = sciipExtractFirstAvailable_(memory, [
+  const patternToReinforce = sciipExtractFirstAvailable660_(memory, [
     'Pattern_To_Reinforce'
   ]);
 
-  const patternToSuppress = sciipExtractFirstAvailable_(memory, [
+  const patternToSuppress = sciipExtractFirstAvailable660_(memory, [
     'Pattern_To_Suppress'
   ]);
 
-  const reasoningInstruction = sciipExtractFirstAvailable_(memory, [
+  const reasoningInstruction = sciipExtractFirstAvailable660_(memory, [
     'Reasoning_Instruction'
   ]);
 
-  const futureUseCase = sciipExtractFirstAvailable_(memory, [
+  const futureUseCase = sciipExtractFirstAvailable660_(memory, [
     'Future_Use_Case'
   ]);
 
   const memoryConfidence =
-    sciipExtractFirstAvailable_(memory, [
+    sciipExtractFirstAvailable660_(memory, [
       'Memory_Confidence'
     ]) || 'LOW';
 
   let reasoningType = 'GENERAL_AUTONOMOUS_REASONING';
-  let reasoningTitle = `Autonomous reasoning from ${signalCategory || 'strategic memory'}`;
+  let reasoningTitle = 'Autonomous reasoning from ' + (signalCategory || 'strategic memory');
   let strategicInterpretation =
     'SCIIP should preserve this memory as context for future hypothesis generation, evidence prioritization, and graph reasoning.';
   let futureImplication =
@@ -335,32 +426,32 @@ function sciipInferAutonomousReasoningProfile_(memory) {
   }
 
   const reasoningStatement = [
-    `Memory type: ${memoryType || 'UNKNOWN'}.`,
-    `Signal category: ${signalCategory || 'UNKNOWN'}.`,
-    `Strategic principle: ${strategicPrinciple || 'No strategic principle recorded.'}`,
-    `Reasoning instruction: ${reasoningInstruction || 'No reasoning instruction recorded.'}`,
-    `Future use case: ${futureUseCase || 'No future use case recorded.'}`,
-    `Memory basis: ${memoryStatement || 'No memory statement recorded.'}`
+    'Memory type: ' + (memoryType || 'UNKNOWN') + '.',
+    'Signal category: ' + (signalCategory || 'UNKNOWN') + '.',
+    'Strategic principle: ' + (strategicPrinciple || 'No strategic principle recorded.'),
+    'Reasoning instruction: ' + (reasoningInstruction || 'No reasoning instruction recorded.'),
+    'Future use case: ' + (futureUseCase || 'No future use case recorded.'),
+    'Memory basis: ' + (memoryStatement || 'No memory statement recorded.')
   ].join('\n');
 
   return {
-    reasoningType,
-    reasoningTitle,
-    reasoningStatement,
-    strategicInterpretation,
-    futureImplication,
-    recommendedIntelligenceAction,
-    recommendedOperatingAction,
-    nextStrategicQuestion,
-    reasoningConfidence
+    reasoningType: reasoningType,
+    reasoningTitle: reasoningTitle,
+    reasoningStatement: reasoningStatement,
+    strategicInterpretation: strategicInterpretation,
+    futureImplication: futureImplication,
+    recommendedIntelligenceAction: recommendedIntelligenceAction,
+    recommendedOperatingAction: recommendedOperatingAction,
+    nextStrategicQuestion: nextStrategicQuestion,
+    reasoningConfidence: reasoningConfidence
   };
 }
 
-function sciipDeduplicateAutonomousReasoningRows_(rows) {
+function sciipDeduplicateAutonomousReasoningRows660_(rows) {
   const seen = {};
   const deduped = [];
 
-  rows.forEach(row => {
+  rows.forEach(function(row) {
     const businessKey = row[1];
 
     if (!seen[businessKey]) {
@@ -378,7 +469,7 @@ function sciipTestAutonomousReasoningProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestAutonomousReasoningProcessor',
-    result
+    result: result
   }));
 
   return result;
