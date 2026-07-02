@@ -1,132 +1,220 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 720_ActionDigestProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - ACTION_QUEUE
+ * ACTION_QUEUE → ACTION_DIGESTS
  *
- * Output:
- * - ACTION_DIGESTS
- ************************************************************/
+ * Migration note:
+ * Preserves original 720 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const ACTION_DIGESTS_SHEET =
-  'ACTION_DIGESTS';
+function sciipGetActionDigestProcessorName720_() {
+  return '720_ActionDigestProcessor';
+}
 
-const ACTION_DIGESTS_HEADERS = [
-  'Action_Digest_ID',
-  'Business_Key',
-  'Digest_Date',
-  'Actions_Reviewed',
-  'High_Priority_Count',
-  'Medium_Priority_Count',
-  'Low_Priority_Count',
-  'Due_Now_Count',
-  'Operator_Review_Count',
-  'Risk_Action_Count',
-  'Opportunity_Action_Count',
-  'Property_Action_Count',
-  'Company_Action_Count',
-  'System_Action_Count',
-  'Digest_Title',
-  'Digest_Summary',
-  'Top_Action_Focus',
-  'Recommended_Operator_Response',
-  'Digest_Status',
-  'Status',
-  'Created_At',
-  'Processor'
-];
+function sciipGetActionDigestHeaders720_() {
+  return [
+    'Action_Digest_ID',
+    'Business_Key',
+    'Digest_Date',
+    'Actions_Reviewed',
+    'High_Priority_Count',
+    'Medium_Priority_Count',
+    'Low_Priority_Count',
+    'Due_Now_Count',
+    'Operator_Review_Count',
+    'Risk_Action_Count',
+    'Opportunity_Action_Count',
+    'Property_Action_Count',
+    'Company_Action_Count',
+    'System_Action_Count',
+    'Digest_Title',
+    'Digest_Summary',
+    'Top_Action_Focus',
+    'Recommended_Operator_Response',
+    'Digest_Status',
+    'Status',
+    'Created_At',
+    'Processor'
+  ];
+}
 
 function sciipEnsureActionDigestsSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(ACTION_DIGESTS_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(ACTION_DIGESTS_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, ACTION_DIGESTS_HEADERS.length)
-    .setValues([ACTION_DIGESTS_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'ACTION_DIGESTS',
+    sciipGetActionDigestHeaders720_()
+  );
 }
 
 function sciipRunActionDigestProcessor() {
-  const processor = '720_ActionDigestProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetActionDigestProcessorName720_(),
+    action: 'ACTION_DIGEST_BUILD',
+    sourceSheet: 'ACTION_QUEUE',
+    targetSheet: 'ACTION_DIGESTS',
+    ledgerSheet: 'ACTION_DIGESTS_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureActionDigestsSchema();
+    buildPayload: function(context, definition) {
+      const actionItems = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('ACTION_QUEUE');
 
-  const digestDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `ACTION_DIGEST|${digestDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: actionItems.length,
+        outputCount: actionItems.length ? 1 : 0,
+        summary: 'Action digest runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetActionDigestProcessorName720_(),
+          inputSheets: ['ACTION_QUEUE']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      actionDigestsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const actionItems = sciipGetRecordsByDate_(
-    'ACTION_QUEUE',
-    'Queue_Date',
-    digestDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureActionDigestsSchema();
+      const digestDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const actionDigestBusinessKey = 'ACTION_DIGEST|' + digestDate;
 
-  if (actionItems.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      actionsReviewed: 0,
-      actionDigestsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists720_(definition.targetSheet, actionDigestBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetActionDigestProcessorName720_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            actionsReviewed: 0,
+            actionDigestsCreated: 0,
+            skippedDuplicate: 1,
+            actionDigestBusinessKey: actionDigestBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const digest =
-    sciipCreateActionDigest_({
-      businessKey,
-      digestDate,
-      actionItems,
-      processor
-    });
+      const actionItems = sciipGetRuntimeRecordsByDate720_(
+        'ACTION_QUEUE',
+        'Queue_Date',
+        digestDate
+      );
 
-  outputSheet.appendRow(digest);
+      if (actionItems.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetActionDigestProcessorName720_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            actionsReviewed: 0,
+            actionDigestsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    actionsReviewed: actionItems.length,
-    actionDigestsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+      const digest = sciipCreateActionDigest720_({
+        businessKey: actionDigestBusinessKey,
+        digestDate: digestDate,
+        actionItems: actionItems,
+        processor: sciipGetActionDigestProcessorName720_()
+      });
 
-  Logger.log(JSON.stringify(result));
-  return result;
+      outputSheet.appendRow(digest);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetActionDigestProcessorName720_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: actionItems.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          actionsReviewed: actionItems.length,
+          actionDigestsCreated: 1,
+          skippedDuplicate: 0,
+          actionDigestBusinessKey: actionDigestBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
 }
 
-function sciipCreateActionDigest_(args) {
+function sciipRuntimeBusinessKeyPrefixExists720_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate720_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue720_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue720_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable720_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipGenerateId720_(prefix) {
+  const safePrefix = String(prefix || 'ID').toUpperCase();
+  return safePrefix + '|' + Utilities.getUuid();
+}
+
+function sciipCreateActionDigest720_(args) {
   const now = new Date();
 
-  const profile =
-    sciipInferActionDigestProfile_(args.actionItems);
+  const profile = sciipInferActionDigestProfile720_(args.actionItems);
 
   return [
-    sciipGenerateId_('ADG'),
+    sciipGenerateId720_('ADG'),
     args.businessKey,
     args.digestDate,
     args.actionItems.length,
@@ -151,7 +239,7 @@ function sciipCreateActionDigest_(args) {
   ];
 }
 
-function sciipInferActionDigestProfile_(actionItems) {
+function sciipInferActionDigestProfile720_(actionItems) {
   let highPriorityCount = 0;
   let mediumPriorityCount = 0;
   let lowPriorityCount = 0;
@@ -165,24 +253,24 @@ function sciipInferActionDigestProfile_(actionItems) {
 
   const topItems = [];
 
-  actionItems.forEach(item => {
+  actionItems.forEach(function(item) {
     const priority = String(
-      sciipExtractFirstAvailable_(item, ['Priority'])
+      sciipExtractFirstAvailable720_(item, ['Priority'])
     ).toUpperCase();
 
     const dueStatus = String(
-      sciipExtractFirstAvailable_(item, ['Due_Status'])
+      sciipExtractFirstAvailable720_(item, ['Due_Status'])
     ).toUpperCase();
 
     const actionType = String(
-      sciipExtractFirstAvailable_(item, ['Action_Item_Type'])
+      sciipExtractFirstAvailable720_(item, ['Action_Item_Type'])
     ).toUpperCase();
 
-    const title = sciipExtractFirstAvailable_(item, [
+    const title = sciipExtractFirstAvailable720_(item, [
       'Action_Title'
     ]);
 
-    const objective = sciipExtractFirstAvailable_(item, [
+    const objective = sciipExtractFirstAvailable720_(item, [
       'Action_Objective'
     ]);
 
@@ -192,22 +280,22 @@ function sciipInferActionDigestProfile_(actionItems) {
 
     if (dueStatus === 'DUE_NOW') dueNowCount++;
 
-    if (actionType.includes('OPERATOR')) operatorReviewCount++;
-    if (actionType.includes('RISK')) riskActionCount++;
-    if (actionType.includes('OPPORTUNITY')) opportunityActionCount++;
-    if (actionType.includes('PROPERTY')) propertyActionCount++;
-    if (actionType.includes('COMPANY')) companyActionCount++;
-    if (actionType.includes('SYSTEM')) systemActionCount++;
+    if (actionType.indexOf('OPERATOR') !== -1) operatorReviewCount++;
+    if (actionType.indexOf('RISK') !== -1) riskActionCount++;
+    if (actionType.indexOf('OPPORTUNITY') !== -1) opportunityActionCount++;
+    if (actionType.indexOf('PROPERTY') !== -1) propertyActionCount++;
+    if (actionType.indexOf('COMPANY') !== -1) companyActionCount++;
+    if (actionType.indexOf('SYSTEM') !== -1) systemActionCount++;
 
     if (
       priority === 'HIGH' ||
       dueStatus === 'DUE_NOW' ||
-      actionType.includes('RISK') ||
-      actionType.includes('OPPORTUNITY') ||
-      actionType.includes('OPERATOR')
+      actionType.indexOf('RISK') !== -1 ||
+      actionType.indexOf('OPPORTUNITY') !== -1 ||
+      actionType.indexOf('OPERATOR') !== -1
     ) {
       topItems.push(
-        `- ${title || actionType}: ${objective || 'No objective recorded.'}`
+        '- ' + (title || actionType) + ': ' + (objective || 'No objective recorded.')
       );
     }
   });
@@ -242,40 +330,39 @@ function sciipInferActionDigestProfile_(actionItems) {
   }
 
   const digestSummary = [
-    `SCIIP reviewed ${actionItems.length} queued action item(s).`,
-    `Priority mix: ${highPriorityCount} high, ${mediumPriorityCount} medium, ${lowPriorityCount} low.`,
-    `Due now: ${dueNowCount}.`,
-    `Workflow mix: ${operatorReviewCount} operator review, ${riskActionCount} risk, ${opportunityActionCount} opportunity, ${propertyActionCount} property, ${companyActionCount} company, ${systemActionCount} system.`,
+    'SCIIP reviewed ' + actionItems.length + ' queued action item(s).',
+    'Priority mix: ' + highPriorityCount + ' high, ' + mediumPriorityCount + ' medium, ' + lowPriorityCount + ' low.',
+    'Due now: ' + dueNowCount + '.',
+    'Workflow mix: ' + operatorReviewCount + ' operator review, ' + riskActionCount + ' risk, ' + opportunityActionCount + ' opportunity, ' + propertyActionCount + ' property, ' + companyActionCount + ' company, ' + systemActionCount + ' system.',
     '',
     'Top action items:',
     topItems.length ? topItems.join('\n') : '- No high-priority action items identified.'
   ].join('\n');
 
   return {
-    highPriorityCount,
-    mediumPriorityCount,
-    lowPriorityCount,
-    dueNowCount,
-    operatorReviewCount,
-    riskActionCount,
-    opportunityActionCount,
-    propertyActionCount,
-    companyActionCount,
-    systemActionCount,
-    digestTitle,
-    digestSummary,
-    topActionFocus,
-    recommendedOperatorResponse
+    highPriorityCount: highPriorityCount,
+    mediumPriorityCount: mediumPriorityCount,
+    lowPriorityCount: lowPriorityCount,
+    dueNowCount: dueNowCount,
+    operatorReviewCount: operatorReviewCount,
+    riskActionCount: riskActionCount,
+    opportunityActionCount: opportunityActionCount,
+    propertyActionCount: propertyActionCount,
+    companyActionCount: companyActionCount,
+    systemActionCount: systemActionCount,
+    digestTitle: digestTitle,
+    digestSummary: digestSummary,
+    topActionFocus: topActionFocus,
+    recommendedOperatorResponse: recommendedOperatorResponse
   };
 }
 
 function sciipTestActionDigestProcessor() {
-  const result =
-    sciipRunActionDigestProcessor();
+  const result = sciipRunActionDigestProcessor();
 
   Logger.log(JSON.stringify({
     test: 'sciipTestActionDigestProcessor',
-    result
+    result: result
   }));
 
   return result;
