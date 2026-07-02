@@ -1,176 +1,237 @@
 /*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 810_AutonomousImprovementMemoryProcessor
+ *
+ * AUTONOMOUS_IMPROVEMENT_OUTCOMES → AUTONOMOUS_IMPROVEMENT_MEMORY
+ *
+ * Migration note:
+ * Preserves original 810 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
  *******************************************************/
 
-const AUTONOMOUS_IMPROVEMENT_MEMORY_PROCESSOR_NAME = '810_AutonomousImprovementMemoryProcessor';
+function sciipGetAutonomousImprovementMemoryProcessorName810_() {
+  return '810_AutonomousImprovementMemoryProcessor';
+}
 
-const AUTONOMOUS_IMPROVEMENT_MEMORY_INPUT_SHEET = 'AUTONOMOUS_IMPROVEMENT_OUTCOMES';
-const AUTONOMOUS_IMPROVEMENT_MEMORY_OUTPUT_SHEET = 'AUTONOMOUS_IMPROVEMENT_MEMORY';
+function sciipGetAutonomousImprovementMemoryHeaders810_() {
+  return [
+    'Memory_ID',
+    'Business_Key',
+    'Memory_Date',
+    'Source_Sheet',
+    'Source_Record_Count',
+    'Memory_Title',
+    'Memory_Type',
+    'Memory_Summary',
+    'Reusable_Learning',
+    'Future_Use_Case',
+    'Confidence',
+    'Created_At',
+    'Processor'
+  ];
+}
 
-const AUTONOMOUS_IMPROVEMENT_MEMORY_SCHEMA = [
-  'Memory_ID',
-  'Business_Key',
-  'Memory_Date',
-  'Source_Sheet',
-  'Source_Record_Count',
-  'Memory_Title',
-  'Memory_Type',
-  'Memory_Summary',
-  'Reusable_Learning',
-  'Future_Use_Case',
-  'Confidence',
-  'Created_At',
-  'Processor'
-];
+function sciipEnsureAutonomousImprovementMemorySchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'AUTONOMOUS_IMPROVEMENT_MEMORY',
+    sciipGetAutonomousImprovementMemoryHeaders810_()
+  );
+}
 
 function sciipRunAutonomousImprovementMemoryProcessor() {
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetAutonomousImprovementMemoryProcessorName810_(),
+    action: 'AUTONOMOUS_IMPROVEMENT_MEMORY_BUILD',
+    sourceSheet: 'AUTONOMOUS_IMPROVEMENT_OUTCOMES',
+    targetSheet: 'AUTONOMOUS_IMPROVEMENT_MEMORY',
+    ledgerSheet: 'AUTONOMOUS_IMPROVEMENT_MEMORY_RUNTIME_LEDGER',
 
-  const outputSheet = sciipEnsureAutonomousImprovementMemorySheet_();
+    buildPayload: function(context, definition) {
+      const autonomousImprovementOutcomes = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_IMPROVEMENT_OUTCOMES');
 
-  const memoryDate =
-    sciipResolveLatestProcessingDate_(
-      AUTONOMOUS_IMPROVEMENT_MEMORY_INPUT_SHEET,
-      'Outcome_Date'
-    ) || sciipFormatDateKey_(startedAt);
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: autonomousImprovementOutcomes.length,
+        outputCount: autonomousImprovementOutcomes.length ? 1 : 0,
+        summary: 'Autonomous improvement memory runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetAutonomousImprovementMemoryProcessorName810_(),
+          inputSheets: ['AUTONOMOUS_IMPROVEMENT_OUTCOMES']
+        }
+      });
+    },
 
-  const businessKey = `AUTONOMOUS_IMPROVEMENT_MEMORY|${memoryDate}`;
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  Logger.log(JSON.stringify({
-    processor: AUTONOMOUS_IMPROVEMENT_MEMORY_PROCESSOR_NAME,
-    resolvedMemoryDate: memoryDate,
-    businessKey
-  }));
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousImprovementMemorySchema();
+      const memoryDate =
+        sciipResolveLatestRuntimeProcessingDate810_('AUTONOMOUS_IMPROVEMENT_OUTCOMES', 'Outcome_Date') ||
+        context.dateKey ||
+        SCIIP_RUNTIME.getDateKey({});
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    return {
-      processor: AUTONOMOUS_IMPROVEMENT_MEMORY_PROCESSOR_NAME,
-      status: 'SUCCESS',
-      autonomousImprovementMemoryCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-  }
+      const autonomousImprovementMemoryBusinessKey = 'AUTONOMOUS_IMPROVEMENT_MEMORY|' + memoryDate;
 
-  const sourceRows = sciipGetAutonomousImprovementOutcomesForMemoryDate_(memoryDate);
+      if (sciipRuntimeBusinessKeyPrefixExists810_(definition.targetSheet, autonomousImprovementMemoryBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetAutonomousImprovementMemoryProcessorName810_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementOutcomesReviewed: 0,
+            autonomousImprovementMemoryCreated: 0,
+            skippedDuplicate: 1,
+            autonomousImprovementMemoryBusinessKey: autonomousImprovementMemoryBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  if (!sourceRows.length) {
-    return {
-      processor: AUTONOMOUS_IMPROVEMENT_MEMORY_PROCESSOR_NAME,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousImprovementMemoryCreated: 0,
-      memoryDate,
-      completedAt: new Date().toISOString()
-    };
-  }
+      const autonomousImprovementOutcomes = sciipGetRuntimeRecordsByDate810_(
+        'AUTONOMOUS_IMPROVEMENT_OUTCOMES',
+        'Outcome_Date',
+        memoryDate
+      );
 
-  const memory = sciipBuildAutonomousImprovementMemory_({
-    memoryDate,
-    businessKey,
-    sourceRows,
-    startedAt
+      if (!autonomousImprovementOutcomes.length) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetAutonomousImprovementMemoryProcessorName810_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementOutcomesReviewed: 0,
+            autonomousImprovementMemoryCreated: 0,
+            skippedNoInputs: 1,
+            memoryDate: memoryDate,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const memory = sciipCreateAutonomousImprovementMemory810_({
+        businessKey: autonomousImprovementMemoryBusinessKey,
+        memoryDate: memoryDate,
+        sourceRows: autonomousImprovementOutcomes,
+        processor: sciipGetAutonomousImprovementMemoryProcessorName810_()
+      });
+
+      outputSheet.appendRow(memory);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetAutonomousImprovementMemoryProcessorName810_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: autonomousImprovementOutcomes.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          autonomousImprovementOutcomesReviewed: autonomousImprovementOutcomes.length,
+          autonomousImprovementMemoryCreated: 1,
+          skippedDuplicate: 0,
+          autonomousImprovementMemoryBusinessKey: autonomousImprovementMemoryBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  sciipAppendAutonomousImprovementMemory_(memory);
-
-  return {
-    processor: AUTONOMOUS_IMPROVEMENT_MEMORY_PROCESSOR_NAME,
-    status: 'SUCCESS',
-    autonomousImprovementMemoryCreated: 1,
-    businessKey,
-    completedAt: new Date().toISOString()
-  };
 }
 
-/*******************************************************
- * Factory Functions
- *******************************************************/
-
-function sciipBuildAutonomousImprovementMemory_(payload) {
-  const memoryId = `AUTONOMOUS_IMPROVEMENT_MEMORY_${Utilities.getUuid()}`;
-
-  return {
-    Memory_ID: memoryId,
-    Business_Key: payload.businessKey,
-    Memory_Date: payload.memoryDate,
-    Source_Sheet: AUTONOMOUS_IMPROVEMENT_MEMORY_INPUT_SHEET,
-    Source_Record_Count: payload.sourceRows.length,
-    Memory_Title: `Autonomous Improvement Memory — ${payload.memoryDate}`,
-    Memory_Type: 'AUTONOMOUS_OPERATING_LOOP_LEARNING',
-    Memory_Summary: sciipCreateAutonomousImprovementMemorySummary_(payload.sourceRows),
-    Reusable_Learning: sciipCreateAutonomousImprovementReusableLearning_(payload.sourceRows),
-    Future_Use_Case: sciipCreateAutonomousImprovementFutureUseCase_(payload.sourceRows),
-    Confidence: sciipResolveAutonomousImprovementMemoryConfidence_(payload.sourceRows),
-    Created_At: payload.startedAt.toISOString(),
-    Processor: AUTONOMOUS_IMPROVEMENT_MEMORY_PROCESSOR_NAME
-  };
+function sciipRuntimeBusinessKeyPrefixExists810_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
 }
 
-/*******************************************************
- * Helper Functions
- *******************************************************/
-
-function sciipEnsureAutonomousImprovementMemorySheet_() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(AUTONOMOUS_IMPROVEMENT_MEMORY_OUTPUT_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(AUTONOMOUS_IMPROVEMENT_MEMORY_OUTPUT_SHEET);
-    sheet.appendRow(AUTONOMOUS_IMPROVEMENT_MEMORY_SCHEMA);
-    return sheet;
-  }
-
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(AUTONOMOUS_IMPROVEMENT_MEMORY_SCHEMA);
-  }
-
-  return sheet;
+function sciipGetRuntimeRecordsByDate810_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue810_(record[dateField]) === String(dateValue);
+  });
 }
 
-function sciipGetAutonomousImprovementOutcomesForMemoryDate_(memoryDate) {
-  const ss = sciipGetSpreadsheet_();
-  const sheet = ss.getSheetByName(AUTONOMOUS_IMPROVEMENT_MEMORY_INPUT_SHEET);
+function sciipResolveLatestRuntimeProcessingDate810_(sheetName, dateField) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return null;
 
-  if (!sheet) return [];
-
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0].map(h => String(h).trim());
-  const dateIndex = headers.indexOf('Outcome_Date');
-
-  if (dateIndex === -1) {
-    Logger.log(JSON.stringify({
-      processor: AUTONOMOUS_IMPROVEMENT_MEMORY_PROCESSOR_NAME,
-      error: 'OUTCOME_DATE_COLUMN_NOT_FOUND',
-      headers
-    }));
-    return [];
-  }
-
-  return values
-    .slice(1)
-    .filter(row => {
-      const rawDate = row[dateIndex];
-      const rowDate =
-        rawDate instanceof Date
-          ? sciipFormatDateKey_(rawDate)
-          : String(rawDate).trim();
-
-      return rowDate === memoryDate;
+  const dates = records
+    .map(function(record) {
+      return sciipNormalizeRuntimeDateValue810_(record[dateField]);
     })
-    .map(row => sciipAutonomousImprovementMemoryRowToObject_(headers, row));
+    .filter(function(value) {
+      return value !== '';
+    });
+
+  if (dates.length === 0) return null;
+
+  dates.sort();
+  return dates[dates.length - 1];
 }
 
-function sciipCreateAutonomousImprovementMemorySummary_(sourceRows) {
+function sciipNormalizeRuntimeDateValue810_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipCreateAutonomousImprovementMemory810_(args) {
   return [
-    `SCIIP_OS converted ${sourceRows.length} autonomous improvement outcome record(s) into durable system memory.`,
+    sciipGenerateId810_('AUTONOMOUS_IMPROVEMENT_MEMORY'),
+    args.businessKey,
+    args.memoryDate,
+    'AUTONOMOUS_IMPROVEMENT_OUTCOMES',
+    args.sourceRows.length,
+    'Autonomous Improvement Memory — ' + args.memoryDate,
+    'AUTONOMOUS_OPERATING_LOOP_LEARNING',
+    sciipCreateAutonomousImprovementMemorySummary810_(args.sourceRows),
+    sciipCreateAutonomousImprovementReusableLearning810_(args.sourceRows),
+    sciipCreateAutonomousImprovementFutureUseCase810_(args.sourceRows),
+    sciipResolveAutonomousImprovementMemoryConfidence810_(args.sourceRows),
+    new Date().toISOString(),
+    args.processor
+  ];
+}
+
+function sciipCreateAutonomousImprovementMemorySummary810_(sourceRows) {
+  return [
+    'SCIIP_OS converted ' + sourceRows.length + ' autonomous improvement outcome record(s) into durable system memory.',
     'The system preserved the full loop from operations, learning, improvement planning, task creation, execution tracking, outcome capture, and memory consolidation.'
   ].join(' ');
 }
 
-function sciipCreateAutonomousImprovementReusableLearning_(sourceRows) {
+function sciipCreateAutonomousImprovementReusableLearning810_(sourceRows) {
   return [
     'Downstream processors should consume the latest completed processing date from upstream sheets instead of assuming the current execution date.',
     'Idempotent business keys must preserve one durable record per processing batch.',
@@ -178,7 +239,7 @@ function sciipCreateAutonomousImprovementReusableLearning_(sourceRows) {
   ].join(' ');
 }
 
-function sciipCreateAutonomousImprovementFutureUseCase_(sourceRows) {
+function sciipCreateAutonomousImprovementFutureUseCase810_(sourceRows) {
   return [
     'Use this memory when designing future autonomous processors.',
     'Use this memory when diagnosing SKIPPED_NO_INPUTS caused by date mismatch.',
@@ -186,32 +247,18 @@ function sciipCreateAutonomousImprovementFutureUseCase_(sourceRows) {
   ].join(' ');
 }
 
-function sciipResolveAutonomousImprovementMemoryConfidence_(sourceRows) {
+function sciipResolveAutonomousImprovementMemoryConfidence810_(sourceRows) {
   if (!sourceRows.length) return 'LOW';
 
-  const hasCapturedOutcome = sourceRows.some(row => {
+  const hasCapturedOutcome = sourceRows.some(function(row) {
     return String(row.Outcome_Status || '').trim().toUpperCase() === 'CAPTURED';
   });
 
   return hasCapturedOutcome ? 'HIGH' : 'MEDIUM';
 }
 
-function sciipAppendAutonomousImprovementMemory_(memory) {
-  const sheet = sciipEnsureAutonomousImprovementMemorySheet_();
-
-  const row = AUTONOMOUS_IMPROVEMENT_MEMORY_SCHEMA.map(header => memory[header] || '');
-
-  sheet.appendRow(row);
-}
-
-function sciipAutonomousImprovementMemoryRowToObject_(headers, row) {
-  const obj = {};
-
-  headers.forEach((header, index) => {
-    obj[header] = row[index];
-  });
-
-  return obj;
+function sciipGenerateId810_(prefix) {
+  return prefix + '_' + Utilities.getUuid();
 }
 
 /*******************************************************
@@ -223,7 +270,7 @@ function sciipTestAutonomousImprovementMemoryProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestAutonomousImprovementMemoryProcessor',
-    result
+    result: result
   }));
 
   return result;
