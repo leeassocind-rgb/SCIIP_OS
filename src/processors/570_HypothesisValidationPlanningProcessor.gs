@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 570_HypothesisValidationPlanningProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - HYPOTHESES
+ * HYPOTHESES → HYPOTHESIS_VALIDATION_PLANS
  *
- * Output:
- * - HYPOTHESIS_VALIDATION_PLANS
- ************************************************************/
+ * Migration note:
+ * Preserves original 570 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const HYPOTHESIS_VALIDATION_PLANS_SHEET =
-  'HYPOTHESIS_VALIDATION_PLANS';
+const HYPOTHESIS_VALIDATION_PLANNING_PROCESSOR = '570_HypothesisValidationPlanningProcessor';
+const HYPOTHESIS_VALIDATION_PLANS_SHEET = 'HYPOTHESIS_VALIDATION_PLANS';
 
 const HYPOTHESIS_VALIDATION_PLANS_HEADERS = [
   'Validation_Plan_ID',
@@ -36,103 +36,194 @@ const HYPOTHESIS_VALIDATION_PLANS_HEADERS = [
 ];
 
 function sciipEnsureHypothesisValidationPlansSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(HYPOTHESIS_VALIDATION_PLANS_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(HYPOTHESIS_VALIDATION_PLANS_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, HYPOTHESIS_VALIDATION_PLANS_HEADERS.length)
-    .setValues([HYPOTHESIS_VALIDATION_PLANS_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    HYPOTHESIS_VALIDATION_PLANS_SHEET,
+    HYPOTHESIS_VALIDATION_PLANS_HEADERS
+  );
 }
 
 function sciipRunHypothesisValidationPlanningProcessor() {
-  const processor = '570_HypothesisValidationPlanningProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: HYPOTHESIS_VALIDATION_PLANNING_PROCESSOR,
+    action: 'HYPOTHESIS_VALIDATION_PLANS_BUILD',
+    sourceSheet: 'HYPOTHESES',
+    targetSheet: HYPOTHESIS_VALIDATION_PLANS_SHEET,
+    ledgerSheet: 'HYPOTHESIS_VALIDATION_PLANS_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureHypothesisValidationPlansSchema();
+    buildPayload: function(context, definition) {
+      const hypotheses = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('HYPOTHESES');
 
-  const planDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `HYPOTHESIS_VALIDATION_PLAN|${planDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: hypotheses.length,
+        outputCount: hypotheses.length || 1,
+        summary: 'Hypothesis validation planning runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: HYPOTHESIS_VALIDATION_PLANNING_PROCESSOR,
+          inputSheets: ['HYPOTHESES']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      validationPlansCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const hypotheses = sciipGetRecordsByDate_(
-    'HYPOTHESES',
-    'Hypothesis_Date',
-    planDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureHypothesisValidationPlansSchema();
+      const planDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const validationPlanBusinessKey = 'HYPOTHESIS_VALIDATION_PLAN|' + planDate;
 
-  if (hypotheses.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      hypothesesReviewed: 0,
-      validationPlansCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists570_(definition.targetSheet, validationPlanBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: HYPOTHESIS_VALIDATION_PLANNING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            validationPlansCreated: 0,
+            skippedDuplicate: 1,
+            validationPlanBusinessKey: validationPlanBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const plans = sciipCreateHypothesisValidationPlans_({
-    businessKey,
-    planDate,
-    hypotheses,
-    processor
+      const hypotheses = sciipGetRuntimeRecordsByDate570_(
+        'HYPOTHESES',
+        'Hypothesis_Date',
+        planDate
+      );
+
+      if (hypotheses.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: HYPOTHESIS_VALIDATION_PLANNING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            hypothesesReviewed: 0,
+            validationPlansCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const plans = sciipCreateHypothesisValidationPlans570_({
+        businessKey: validationPlanBusinessKey,
+        planDate: planDate,
+        hypotheses: hypotheses,
+        processor: HYPOTHESIS_VALIDATION_PLANNING_PROCESSOR
+      });
+
+      plans.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: HYPOTHESIS_VALIDATION_PLANNING_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: plans.length,
+        recordsRead: hypotheses.length,
+        processed: plans.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          hypothesesReviewed: hypotheses.length,
+          validationPlansCreated: plans.length,
+          skippedDuplicate: 0,
+          validationPlanBusinessKey: validationPlanBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  plans.forEach(row => outputSheet.appendRow(row));
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    hypothesesReviewed: hypotheses.length,
-    validationPlansCreated: plans.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
 }
 
-function sciipCreateHypothesisValidationPlans_(args) {
+function sciipRuntimeBusinessKeyPrefixExists570_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate570_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue570_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue570_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable570_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey570_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipCreateHypothesisValidationPlans570_(args) {
   const now = new Date();
 
-  const rows = args.hypotheses.map(hypothesis => {
-    const hypothesisId = sciipExtractFirstAvailable_(hypothesis, [
+  const rows = args.hypotheses.map(function(hypothesis) {
+    const hypothesisId = sciipExtractFirstAvailable570_(hypothesis, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(hypothesis, [
+    const hypothesisType = sciipExtractFirstAvailable570_(hypothesis, [
       'Hypothesis_Type'
     ]);
 
-    const profile =
-      sciipInferHypothesisValidationPlanProfile_(hypothesis);
+    const profile = sciipInferHypothesisValidationPlanProfile570_(hypothesis);
 
     const rowKey =
-      `${args.businessKey}|${hypothesisType}|${sciipNormalizeMissionKey_(hypothesisId || profile.validationObjective)}`;
+      args.businessKey + '|' + hypothesisType + '|' +
+      sciipNormalizeMissionKey570_(hypothesisId || profile.validationObjective);
 
     return [
       sciipGenerateId_('HVP'),
@@ -140,7 +231,7 @@ function sciipCreateHypothesisValidationPlans_(args) {
       args.planDate,
       hypothesisId,
       hypothesisType,
-      sciipExtractFirstAvailable_(hypothesis, ['Hypothesis_Title']),
+      sciipExtractFirstAvailable570_(hypothesis, ['Hypothesis_Title']),
       profile.validationObjective,
       profile.validationMethod,
       profile.evidenceRequired,
@@ -151,23 +242,23 @@ function sciipCreateHypothesisValidationPlans_(args) {
       profile.decisionRule,
       profile.confidenceThreshold,
       'PENDING_VALIDATION',
-      `HYPOTHESES:${hypothesisId}`,
+      'HYPOTHESES:' + hypothesisId,
       'ACTIVE',
       now.toISOString(),
       args.processor
     ];
   });
 
-  return sciipDeduplicateHypothesisValidationPlanRows_(rows);
+  return sciipDeduplicateHypothesisValidationPlanRows570_(rows);
 }
 
-function sciipInferHypothesisValidationPlanProfile_(hypothesis) {
-  const hypothesisType = sciipExtractFirstAvailable_(hypothesis, [
+function sciipInferHypothesisValidationPlanProfile570_(hypothesis) {
+  const hypothesisType = sciipExtractFirstAvailable570_(hypothesis, [
     'Hypothesis_Type'
   ]);
 
   const priority =
-    sciipExtractFirstAvailable_(hypothesis, [
+    sciipExtractFirstAvailable570_(hypothesis, [
       'Validation_Priority'
     ]) || 'MEDIUM';
 
@@ -296,11 +387,12 @@ function sciipInferHypothesisValidationPlanProfile_(hypothesis) {
   };
 }
 
-function sciipDeduplicateHypothesisValidationPlanRows_(rows) {
+
+function sciipDeduplicateHypothesisValidationPlanRows570_(rows) {
   const seen = {};
   const deduped = [];
 
-  rows.forEach(row => {
+  rows.forEach(function(row) {
     const businessKey = row[1];
 
     if (!seen[businessKey]) {
@@ -313,12 +405,11 @@ function sciipDeduplicateHypothesisValidationPlanRows_(rows) {
 }
 
 function sciipTestHypothesisValidationPlanningProcessor() {
-  const result =
-    sciipRunHypothesisValidationPlanningProcessor();
+  const result = sciipRunHypothesisValidationPlanningProcessor();
 
   Logger.log(JSON.stringify({
     test: 'sciipTestHypothesisValidationPlanningProcessor',
-    result
+    result: result
   }));
 
   return result;
