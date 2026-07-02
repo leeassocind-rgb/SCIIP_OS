@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 680_ScenarioMonitoringProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - PREDICTIVE_SCENARIOS
+ * PREDICTIVE_SCENARIOS → SCENARIO_MONITORING
  *
- * Output:
- * - SCENARIO_MONITORING
- ************************************************************/
+ * Migration note:
+ * Preserves original 680 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const SCENARIO_MONITORING_SHEET =
-  'SCENARIO_MONITORING';
+const SCENARIO_MONITORING_PROCESSOR = '680_ScenarioMonitoringProcessor';
+const SCENARIO_MONITORING_SHEET = 'SCENARIO_MONITORING';
 
 const SCENARIO_MONITORING_HEADERS = [
   'Monitoring_ID',
@@ -41,120 +41,210 @@ const SCENARIO_MONITORING_HEADERS = [
 ];
 
 function sciipEnsureScenarioMonitoringSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(SCENARIO_MONITORING_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(SCENARIO_MONITORING_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, SCENARIO_MONITORING_HEADERS.length)
-    .setValues([SCENARIO_MONITORING_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    SCENARIO_MONITORING_SHEET,
+    SCENARIO_MONITORING_HEADERS
+  );
 }
 
 function sciipRunScenarioMonitoringProcessor() {
-  const processor = '680_ScenarioMonitoringProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: SCENARIO_MONITORING_PROCESSOR,
+    action: 'SCENARIO_MONITORING_BUILD',
+    sourceSheet: 'PREDICTIVE_SCENARIOS',
+    targetSheet: SCENARIO_MONITORING_SHEET,
+    ledgerSheet: 'SCENARIO_MONITORING_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureScenarioMonitoringSchema();
+    buildPayload: function(context, definition) {
+      const scenarios = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('PREDICTIVE_SCENARIOS');
 
-  const monitoringDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `SCENARIO_MONITORING|${monitoringDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: scenarios.length,
+        outputCount: scenarios.length || 1,
+        summary: 'Scenario monitoring runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: SCENARIO_MONITORING_PROCESSOR,
+          inputSheets: ['PREDICTIVE_SCENARIOS']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      monitoringRequirementsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const scenarios = sciipGetRecordsByDate_(
-    'PREDICTIVE_SCENARIOS',
-    'Scenario_Date',
-    monitoringDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureScenarioMonitoringSchema();
+      const monitoringDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const monitoringBusinessKey = 'SCENARIO_MONITORING|' + monitoringDate;
 
-  if (scenarios.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      scenariosReviewed: 0,
-      monitoringRequirementsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists680_(definition.targetSheet, monitoringBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: SCENARIO_MONITORING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            monitoringRequirementsCreated: 0,
+            skippedDuplicate: 1,
+            monitoringBusinessKey: monitoringBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const monitoringRequirements =
-    sciipCreateScenarioMonitoringRequirements_({
-      businessKey,
-      monitoringDate,
-      scenarios,
-      processor
-    });
+      const scenarios = sciipGetRuntimeRecordsByDate680_(
+        'PREDICTIVE_SCENARIOS',
+        'Scenario_Date',
+        monitoringDate
+      );
 
-  monitoringRequirements.forEach(row => outputSheet.appendRow(row));
+      if (scenarios.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: SCENARIO_MONITORING_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            scenariosReviewed: 0,
+            monitoringRequirementsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    scenariosReviewed: scenarios.length,
-    monitoringRequirementsCreated: monitoringRequirements.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+      const monitoringRequirements = sciipCreateScenarioMonitoringRequirements680_({
+        businessKey: monitoringBusinessKey,
+        monitoringDate: monitoringDate,
+        scenarios: scenarios,
+        processor: SCENARIO_MONITORING_PROCESSOR
+      });
 
-  Logger.log(JSON.stringify(result));
-  return result;
+      monitoringRequirements.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: SCENARIO_MONITORING_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: monitoringRequirements.length,
+        recordsRead: scenarios.length,
+        processed: monitoringRequirements.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          scenariosReviewed: scenarios.length,
+          monitoringRequirementsCreated: monitoringRequirements.length,
+          skippedDuplicate: 0,
+          monitoringBusinessKey: monitoringBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
 }
 
-function sciipCreateScenarioMonitoringRequirements_(args) {
+function sciipRuntimeBusinessKeyPrefixExists680_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate680_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue680_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue680_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable680_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey680_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipCreateScenarioMonitoringRequirements680_(args) {
   const now = new Date();
 
-  const rows = args.scenarios.map(scenario => {
-    const scenarioId = sciipExtractFirstAvailable_(scenario, [
+  const rows = args.scenarios.map(function(scenario) {
+    const scenarioId = sciipExtractFirstAvailable680_(scenario, [
       'Scenario_ID'
     ]);
 
-    const reasoningId = sciipExtractFirstAvailable_(scenario, [
+    const reasoningId = sciipExtractFirstAvailable680_(scenario, [
       'Reasoning_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable_(scenario, [
+    const hypothesisId = sciipExtractFirstAvailable680_(scenario, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(scenario, [
+    const hypothesisType = sciipExtractFirstAvailable680_(scenario, [
       'Hypothesis_Type'
     ]);
 
-    const signalCategory = sciipExtractFirstAvailable_(scenario, [
+    const signalCategory = sciipExtractFirstAvailable680_(scenario, [
       'Signal_Category'
     ]);
 
-    const scenarioType = sciipExtractFirstAvailable_(scenario, [
+    const scenarioType = sciipExtractFirstAvailable680_(scenario, [
       'Scenario_Type'
     ]);
 
     const profile =
-      sciipInferScenarioMonitoringProfile_(scenario);
+      sciipInferScenarioMonitoringProfile680_(scenario);
 
     const rowKey =
-      `${args.businessKey}|${profile.monitoringType}|${sciipNormalizeMissionKey_(scenarioId || reasoningId || hypothesisId || profile.monitoringTitle)}`;
+      `${args.businessKey}|${profile.monitoringType}|${sciipNormalizeMissionKey680_(scenarioId || reasoningId || hypothesisId || profile.monitoringTitle)}`;
 
     return [
       sciipGenerateId_('MON'),
@@ -185,54 +275,54 @@ function sciipCreateScenarioMonitoringRequirements_(args) {
     ];
   });
 
-  return sciipDeduplicateScenarioMonitoringRows_(rows);
+  return sciipDeduplicateScenarioMonitoringRows680_(rows);
 }
 
-function sciipInferScenarioMonitoringProfile_(scenario) {
-  const hypothesisType = sciipExtractFirstAvailable_(scenario, [
+function sciipInferScenarioMonitoringProfile680_(scenario) {
+  const hypothesisType = sciipExtractFirstAvailable680_(scenario, [
     'Hypothesis_Type'
   ]);
 
-  const signalCategory = sciipExtractFirstAvailable_(scenario, [
+  const signalCategory = sciipExtractFirstAvailable680_(scenario, [
     'Signal_Category'
   ]);
 
-  const scenarioType = sciipExtractFirstAvailable_(scenario, [
+  const scenarioType = sciipExtractFirstAvailable680_(scenario, [
     'Scenario_Type'
   ]);
 
-  const scenarioTitle = sciipExtractFirstAvailable_(scenario, [
+  const scenarioTitle = sciipExtractFirstAvailable680_(scenario, [
     'Scenario_Title'
   ]);
 
-  const probabilityAssessment = sciipExtractFirstAvailable_(scenario, [
+  const probabilityAssessment = sciipExtractFirstAvailable680_(scenario, [
     'Probability_Assessment'
   ]);
 
-  const strategicImplication = sciipExtractFirstAvailable_(scenario, [
+  const strategicImplication = sciipExtractFirstAvailable680_(scenario, [
     'Strategic_Implication'
   ]);
 
-  const marketImplication = sciipExtractFirstAvailable_(scenario, [
+  const marketImplication = sciipExtractFirstAvailable680_(scenario, [
     'Market_Implication'
   ]);
 
-  const operatingImplication = sciipExtractFirstAvailable_(scenario, [
+  const operatingImplication = sciipExtractFirstAvailable680_(scenario, [
     'Operating_Implication'
   ]);
 
   const earlyIndicators =
-    sciipExtractFirstAvailable_(scenario, [
+    sciipExtractFirstAvailable680_(scenario, [
       'Early_Indicators'
     ]) || 'Repeated signals, corroborating evidence, counterevidence, or operator-confirmed changes.';
 
   const monitoringAction =
-    sciipExtractFirstAvailable_(scenario, [
+    sciipExtractFirstAvailable680_(scenario, [
       'Monitoring_Action'
     ]) || 'Monitor for additional evidence and related signals.';
 
   const scenarioConfidence =
-    sciipExtractFirstAvailable_(scenario, [
+    sciipExtractFirstAvailable680_(scenario, [
       'Scenario_Confidence'
     ]) || 'LOW';
 
@@ -398,11 +488,11 @@ function sciipInferScenarioMonitoringProfile_(scenario) {
   };
 }
 
-function sciipDeduplicateScenarioMonitoringRows_(rows) {
+function sciipDeduplicateScenarioMonitoringRows680_(rows) {
   const seen = {};
   const deduped = [];
 
-  rows.forEach(row => {
+  rows.forEach(function(row) {
     const businessKey = row[1];
 
     if (!seen[businessKey]) {
@@ -420,7 +510,7 @@ function sciipTestScenarioMonitoringProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestScenarioMonitoringProcessor',
-    result
+    result: result
   }));
 
   return result;
