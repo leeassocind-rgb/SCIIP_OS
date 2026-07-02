@@ -1,166 +1,264 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 710_ActionQueueProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - AUTONOMOUS_ACTION_ROUTING
+ * AUTONOMOUS_ACTION_ROUTING → ACTION_QUEUE
  *
- * Output:
- * - ACTION_QUEUE
- ************************************************************/
+ * Migration note:
+ * Preserves original 710 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const ACTION_QUEUE_SHEET =
-  'ACTION_QUEUE';
+function sciipGetActionQueueProcessorName710_() {
+  return '710_ActionQueueProcessor';
+}
 
-const ACTION_QUEUE_HEADERS = [
-  'Action_Item_ID',
-  'Business_Key',
-  'Queue_Date',
-  'Action_Route_ID',
-  'Monitoring_Signal_ID',
-  'Scenario_ID',
-  'Hypothesis_ID',
-  'Hypothesis_Type',
-  'Action_Route_Type',
-  'Destination_Workflow',
-  'Action_Item_Type',
-  'Action_Title',
-  'Action_Objective',
-  'Execution_Instructions',
-  'Required_Input',
-  'Expected_Output',
-  'Priority',
-  'Due_Status',
-  'Queue_Status',
-  'Assigned_Owner',
-  'Source_Record',
-  'Status',
-  'Created_At',
-  'Processor'
-];
+function sciipGetActionQueueHeaders710_() {
+  return [
+    'Action_Item_ID',
+    'Business_Key',
+    'Queue_Date',
+    'Action_Route_ID',
+    'Monitoring_Signal_ID',
+    'Scenario_ID',
+    'Hypothesis_ID',
+    'Hypothesis_Type',
+    'Action_Route_Type',
+    'Destination_Workflow',
+    'Action_Item_Type',
+    'Action_Title',
+    'Action_Objective',
+    'Execution_Instructions',
+    'Required_Input',
+    'Expected_Output',
+    'Priority',
+    'Due_Status',
+    'Queue_Status',
+    'Assigned_Owner',
+    'Source_Record',
+    'Status',
+    'Created_At',
+    'Processor'
+  ];
+}
 
 function sciipEnsureActionQueueSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(ACTION_QUEUE_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(ACTION_QUEUE_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, ACTION_QUEUE_HEADERS.length)
-    .setValues([ACTION_QUEUE_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'ACTION_QUEUE',
+    sciipGetActionQueueHeaders710_()
+  );
 }
 
 function sciipRunActionQueueProcessor() {
-  const processor = '710_ActionQueueProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetActionQueueProcessorName710_(),
+    action: 'ACTION_QUEUE_BUILD',
+    sourceSheet: 'AUTONOMOUS_ACTION_ROUTING',
+    targetSheet: 'ACTION_QUEUE',
+    ledgerSheet: 'ACTION_QUEUE_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureActionQueueSchema();
+    buildPayload: function(context, definition) {
+      const actionRoutes = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_ACTION_ROUTING');
 
-  const queueDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `ACTION_QUEUE|${queueDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: actionRoutes.length,
+        outputCount: actionRoutes.length || 1,
+        summary: 'Action queue runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetActionQueueProcessorName710_(),
+          inputSheets: ['AUTONOMOUS_ACTION_ROUTING']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      actionItemsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const actionRoutes = sciipGetRecordsByDate_(
-    'AUTONOMOUS_ACTION_ROUTING',
-    'Route_Date',
-    queueDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureActionQueueSchema();
+      const queueDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const actionQueueBusinessKey = 'ACTION_QUEUE|' + queueDate;
 
-  if (actionRoutes.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      actionRoutesReviewed: 0,
-      actionItemsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists710_(definition.targetSheet, actionQueueBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetActionQueueProcessorName710_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            actionItemsCreated: 0,
+            skippedDuplicate: 1,
+            actionQueueBusinessKey: actionQueueBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const actionItems =
-    sciipCreateActionQueueItems_({
-      businessKey,
-      queueDate,
-      actionRoutes,
-      processor
-    });
+      const actionRoutes = sciipGetRuntimeRecordsByDate710_(
+        'AUTONOMOUS_ACTION_ROUTING',
+        'Route_Date',
+        queueDate
+      );
 
-  actionItems.forEach(row => outputSheet.appendRow(row));
+      if (actionRoutes.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetActionQueueProcessorName710_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            actionRoutesReviewed: 0,
+            actionItemsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    actionRoutesReviewed: actionRoutes.length,
-    actionItemsCreated: actionItems.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+      const actionItems = sciipCreateActionQueueItems710_({
+        businessKey: actionQueueBusinessKey,
+        queueDate: queueDate,
+        actionRoutes: actionRoutes,
+        processor: sciipGetActionQueueProcessorName710_()
+      });
 
-  Logger.log(JSON.stringify(result));
-  return result;
+      actionItems.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetActionQueueProcessorName710_(),
+        businessKey: context.businessKey,
+        recordsCreated: actionItems.length,
+        recordsRead: actionRoutes.length,
+        processed: actionItems.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          actionRoutesReviewed: actionRoutes.length,
+          actionItemsCreated: actionItems.length,
+          skippedDuplicate: 0,
+          actionQueueBusinessKey: actionQueueBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
 }
 
-function sciipCreateActionQueueItems_(args) {
+function sciipRuntimeBusinessKeyPrefixExists710_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate710_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue710_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue710_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable710_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey710_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipGenerateId710_(prefix) {
+  const safePrefix = String(prefix || 'ID').toUpperCase();
+  return safePrefix + '|' + Utilities.getUuid();
+}
+
+function sciipCreateActionQueueItems710_(args) {
   const now = new Date();
 
   const rows = args.actionRoutes.map(route => {
-    const actionRouteId = sciipExtractFirstAvailable_(route, [
+    const actionRouteId = sciipExtractFirstAvailable710_(route, [
       'Action_Route_ID'
     ]);
 
-    const monitoringSignalId = sciipExtractFirstAvailable_(route, [
+    const monitoringSignalId = sciipExtractFirstAvailable710_(route, [
       'Monitoring_Signal_ID'
     ]);
 
-    const scenarioId = sciipExtractFirstAvailable_(route, [
+    const scenarioId = sciipExtractFirstAvailable710_(route, [
       'Scenario_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable_(route, [
+    const hypothesisId = sciipExtractFirstAvailable710_(route, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(route, [
+    const hypothesisType = sciipExtractFirstAvailable710_(route, [
       'Hypothesis_Type'
     ]);
 
-    const actionRouteType = sciipExtractFirstAvailable_(route, [
+    const actionRouteType = sciipExtractFirstAvailable710_(route, [
       'Action_Route_Type'
     ]);
 
-    const destinationWorkflow = sciipExtractFirstAvailable_(route, [
+    const destinationWorkflow = sciipExtractFirstAvailable710_(route, [
       'Destination_Workflow'
     ]);
 
     const profile =
-      sciipInferActionQueueProfile_(route);
+      sciipInferActionQueueProfile710_(route);
 
     const rowKey =
-      `${args.businessKey}|${profile.actionItemType}|${sciipNormalizeMissionKey_(actionRouteId || monitoringSignalId || scenarioId || hypothesisId || profile.actionTitle)}`;
+      `${args.businessKey}|${profile.actionItemType}|${sciipNormalizeMissionKey710_(actionRouteId || monitoringSignalId || scenarioId || hypothesisId || profile.actionTitle)}`;
 
     return [
-      sciipGenerateId_('AQI'),
+      sciipGenerateId710_('AQI'),
       rowKey,
       args.queueDate,
       actionRouteId,
@@ -187,36 +285,36 @@ function sciipCreateActionQueueItems_(args) {
     ];
   });
 
-  return sciipDeduplicateActionQueueRows_(rows);
+  return sciipDeduplicateActionQueueRows710_(rows);
 }
 
-function sciipInferActionQueueProfile_(route) {
-  const hypothesisType = sciipExtractFirstAvailable_(route, [
+function sciipInferActionQueueProfile710_(route) {
+  const hypothesisType = sciipExtractFirstAvailable710_(route, [
     'Hypothesis_Type'
   ]);
 
-  const actionRouteType = sciipExtractFirstAvailable_(route, [
+  const actionRouteType = sciipExtractFirstAvailable710_(route, [
     'Action_Route_Type'
   ]);
 
-  const actionRouteTitle = sciipExtractFirstAvailable_(route, [
+  const actionRouteTitle = sciipExtractFirstAvailable710_(route, [
     'Action_Route_Title'
   ]);
 
-  const actionRouteObjective = sciipExtractFirstAvailable_(route, [
+  const actionRouteObjective = sciipExtractFirstAvailable710_(route, [
     'Action_Route_Objective'
   ]);
 
-  const destinationWorkflow = sciipExtractFirstAvailable_(route, [
+  const destinationWorkflow = sciipExtractFirstAvailable710_(route, [
     'Destination_Workflow'
   ]);
 
-  const routingReason = sciipExtractFirstAvailable_(route, [
+  const routingReason = sciipExtractFirstAvailable710_(route, [
     'Routing_Reason'
   ]);
 
   const routingPriority =
-    sciipExtractFirstAvailable_(route, [
+    sciipExtractFirstAvailable710_(route, [
       'Routing_Priority'
     ]) || 'MEDIUM';
 
@@ -367,7 +465,7 @@ function sciipInferActionQueueProfile_(route) {
   };
 }
 
-function sciipDeduplicateActionQueueRows_(rows) {
+function sciipDeduplicateActionQueueRows710_(rows) {
   const seen = {};
   const deduped = [];
 
@@ -389,7 +487,7 @@ function sciipTestActionQueueProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestActionQueueProcessor',
-    result
+    result: result
   }));
 
   return result;
