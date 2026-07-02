@@ -1,14 +1,15 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 690_MonitoringSignalDetectionProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - SCENARIO_MONITORING
+ * SCENARIO_MONITORING → MONITORING_SIGNALS
  *
- * Output:
- * - MONITORING_SIGNALS
- ************************************************************/
+ * Migration note:
+ * Preserves original 690 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
+const MONITORING_SIGNAL_DETECTION_PROCESSOR = '690_MonitoringSignalDetectionProcessor';
 const MONITORING_SIGNALS_SHEET =
   'MONITORING_SIGNALS';
 
@@ -39,121 +40,212 @@ const MONITORING_SIGNALS_HEADERS = [
   'Processor'
 ];
 
+
 function sciipEnsureMonitoringSignalsSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(MONITORING_SIGNALS_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(MONITORING_SIGNALS_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, MONITORING_SIGNALS_HEADERS.length)
-    .setValues([MONITORING_SIGNALS_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    MONITORING_SIGNALS_SHEET,
+    MONITORING_SIGNALS_HEADERS
+  );
 }
 
 function sciipRunMonitoringSignalDetectionProcessor() {
-  const processor = '690_MonitoringSignalDetectionProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: MONITORING_SIGNAL_DETECTION_PROCESSOR,
+    action: 'MONITORING_SIGNAL_DETECTION_BUILD',
+    sourceSheet: 'SCENARIO_MONITORING',
+    targetSheet: MONITORING_SIGNALS_SHEET,
+    ledgerSheet: 'MONITORING_SIGNAL_DETECTION_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureMonitoringSignalsSchema();
+    buildPayload: function(context, definition) {
+      const monitoringRequirements = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('SCENARIO_MONITORING');
 
-  const signalDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `MONITORING_SIGNAL|${signalDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: monitoringRequirements.length,
+        outputCount: monitoringRequirements.length || 1,
+        summary: 'Monitoring signal detection runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: MONITORING_SIGNAL_DETECTION_PROCESSOR,
+          inputSheets: ['SCENARIO_MONITORING']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      monitoringSignalsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const monitoringRequirements = sciipGetRecordsByDate_(
-    'SCENARIO_MONITORING',
-    'Monitoring_Date',
-    signalDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureMonitoringSignalsSchema();
+      const signalDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const monitoringSignalBusinessKey = 'MONITORING_SIGNAL|' + signalDate;
 
-  if (monitoringRequirements.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      monitoringRequirementsReviewed: 0,
-      monitoringSignalsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists690_(definition.targetSheet, monitoringSignalBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: MONITORING_SIGNAL_DETECTION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            monitoringSignalsCreated: 0,
+            skippedDuplicate: 1,
+            monitoringSignalBusinessKey: monitoringSignalBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const signals =
-    sciipCreateMonitoringSignals_({
-      businessKey,
-      signalDate,
-      monitoringRequirements,
-      processor
-    });
+      const monitoringRequirements = sciipGetRuntimeRecordsByDate690_(
+        'SCENARIO_MONITORING',
+        'Monitoring_Date',
+        signalDate
+      );
 
-  signals.forEach(row => outputSheet.appendRow(row));
+      if (monitoringRequirements.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: MONITORING_SIGNAL_DETECTION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            monitoringRequirementsReviewed: 0,
+            monitoringSignalsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    monitoringRequirementsReviewed: monitoringRequirements.length,
-    monitoringSignalsCreated: signals.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+      const signals = sciipCreateMonitoringSignals690_({
+        businessKey: monitoringSignalBusinessKey,
+        signalDate: signalDate,
+        monitoringRequirements: monitoringRequirements,
+        processor: MONITORING_SIGNAL_DETECTION_PROCESSOR
+      });
 
-  Logger.log(JSON.stringify(result));
-  return result;
+      signals.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: MONITORING_SIGNAL_DETECTION_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: signals.length,
+        recordsRead: monitoringRequirements.length,
+        processed: signals.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          monitoringRequirementsReviewed: monitoringRequirements.length,
+          monitoringSignalsCreated: signals.length,
+          skippedDuplicate: 0,
+          monitoringSignalBusinessKey: monitoringSignalBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
 }
 
-function sciipCreateMonitoringSignals_(args) {
+function sciipRuntimeBusinessKeyPrefixExists690_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate690_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue690_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue690_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable690_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey690_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipCreateMonitoringSignals690_(args) {
   const now = new Date();
 
   const rows = args.monitoringRequirements.map(monitoring => {
-    const monitoringId = sciipExtractFirstAvailable_(monitoring, [
+    const monitoringId = sciipExtractFirstAvailable690_(monitoring, [
       'Monitoring_ID'
     ]);
 
-    const scenarioId = sciipExtractFirstAvailable_(monitoring, [
+    const scenarioId = sciipExtractFirstAvailable690_(monitoring, [
       'Scenario_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable_(monitoring, [
+    const hypothesisId = sciipExtractFirstAvailable690_(monitoring, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(monitoring, [
+    const hypothesisType = sciipExtractFirstAvailable690_(monitoring, [
       'Hypothesis_Type'
     ]);
 
-    const signalCategory = sciipExtractFirstAvailable_(monitoring, [
+    const signalCategory = sciipExtractFirstAvailable690_(monitoring, [
       'Signal_Category'
     ]);
 
-    const monitoringType = sciipExtractFirstAvailable_(monitoring, [
+    const monitoringType = sciipExtractFirstAvailable690_(monitoring, [
       'Monitoring_Type'
     ]);
 
     const profile =
-      sciipInferMonitoringSignalProfile_(monitoring);
+      sciipInferMonitoringSignalProfile690_(monitoring);
 
     const rowKey =
-      `${args.businessKey}|${profile.detectedSignalType}|${sciipNormalizeMissionKey_(monitoringId || scenarioId || hypothesisId || profile.detectedSignalTitle)}`;
+      `${args.businessKey}|${profile.detectedSignalType}|${sciipNormalizeMissionKey690_(monitoringId || scenarioId || hypothesisId || profile.detectedSignalTitle)}`;
 
     return [
       sciipGenerateId_('MSG'),
@@ -183,48 +275,48 @@ function sciipCreateMonitoringSignals_(args) {
     ];
   });
 
-  return sciipDeduplicateMonitoringSignalRows_(rows);
+  return sciipDeduplicateMonitoringSignalRows690_(rows);
 }
 
-function sciipInferMonitoringSignalProfile_(monitoring) {
-  const hypothesisType = sciipExtractFirstAvailable_(monitoring, [
+function sciipInferMonitoringSignalProfile690_(monitoring) {
+  const hypothesisType = sciipExtractFirstAvailable690_(monitoring, [
     'Hypothesis_Type'
   ]);
 
-  const signalCategory = sciipExtractFirstAvailable_(monitoring, [
+  const signalCategory = sciipExtractFirstAvailable690_(monitoring, [
     'Signal_Category'
   ]);
 
-  const monitoringType = sciipExtractFirstAvailable_(monitoring, [
+  const monitoringType = sciipExtractFirstAvailable690_(monitoring, [
     'Monitoring_Type'
   ]);
 
-  const monitoringTitle = sciipExtractFirstAvailable_(monitoring, [
+  const monitoringTitle = sciipExtractFirstAvailable690_(monitoring, [
     'Monitoring_Title'
   ]);
 
-  const monitoringObjective = sciipExtractFirstAvailable_(monitoring, [
+  const monitoringObjective = sciipExtractFirstAvailable690_(monitoring, [
     'Monitoring_Objective'
   ]);
 
-  const triggerCondition = sciipExtractFirstAvailable_(monitoring, [
+  const triggerCondition = sciipExtractFirstAvailable690_(monitoring, [
     'Trigger_Condition'
   ]);
 
-  const earlyIndicators = sciipExtractFirstAvailable_(monitoring, [
+  const earlyIndicators = sciipExtractFirstAvailable690_(monitoring, [
     'Early_Indicators'
   ]);
 
-  const escalationCondition = sciipExtractFirstAvailable_(monitoring, [
+  const escalationCondition = sciipExtractFirstAvailable690_(monitoring, [
     'Escalation_Condition'
   ]);
 
-  const recommendedResponse = sciipExtractFirstAvailable_(monitoring, [
+  const recommendedResponse = sciipExtractFirstAvailable690_(monitoring, [
     'Recommended_Response'
   ]);
 
   const monitoringPriority =
-    sciipExtractFirstAvailable_(monitoring, [
+    sciipExtractFirstAvailable690_(monitoring, [
       'Monitoring_Priority'
     ]) || 'MEDIUM';
 
@@ -342,7 +434,7 @@ function sciipInferMonitoringSignalProfile_(monitoring) {
   };
 }
 
-function sciipDeduplicateMonitoringSignalRows_(rows) {
+function sciipDeduplicateMonitoringSignalRows690_(rows) {
   const seen = {};
   const deduped = [];
 
@@ -358,13 +450,14 @@ function sciipDeduplicateMonitoringSignalRows_(rows) {
   return deduped;
 }
 
+
 function sciipTestMonitoringSignalDetectionProcessor() {
   const result =
     sciipRunMonitoringSignalDetectionProcessor();
 
   Logger.log(JSON.stringify({
     test: 'sciipTestMonitoringSignalDetectionProcessor',
-    result
+    result: result
   }));
 
   return result;
