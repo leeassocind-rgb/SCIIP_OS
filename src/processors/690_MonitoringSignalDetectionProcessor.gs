@@ -1,63 +1,61 @@
 /*******************************************************
  * SCIIP_OS v5.3.2 Runtime Migration
- * 690_MonitoringSignalDetectionProcessor
+ * 700_AutonomousActionRoutingProcessor
  *
- * SCENARIO_MONITORING → MONITORING_SIGNALS
+ * MONITORING_SIGNALS → AUTONOMOUS_ACTION_ROUTING
  *
  * Migration note:
- * Preserves original 690 business logic and migrates
+ * Preserves original 700 business logic and migrates
  * execution to SCIIP_RuntimeProcessorBase.
  *******************************************************/
 
-const MONITORING_SIGNAL_DETECTION_PROCESSOR = '690_MonitoringSignalDetectionProcessor';
-const MONITORING_SIGNALS_SHEET =
-  'MONITORING_SIGNALS';
+const AUTONOMOUS_ACTION_ROUTING_PROCESSOR = '700_AutonomousActionRoutingProcessor';
+const AUTONOMOUS_ACTION_ROUTING_SHEET =
+  'AUTONOMOUS_ACTION_ROUTING';
 
-const MONITORING_SIGNALS_HEADERS = [
-  'Monitoring_Signal_ID',
+const AUTONOMOUS_ACTION_ROUTING_HEADERS = [
+  'Action_Route_ID',
   'Business_Key',
-  'Signal_Date',
+  'Route_Date',
+  'Monitoring_Signal_ID',
   'Monitoring_ID',
   'Scenario_ID',
   'Hypothesis_ID',
   'Hypothesis_Type',
   'Signal_Category',
-  'Monitoring_Type',
   'Detected_Signal_Type',
-  'Detected_Signal_Title',
-  'Detected_Signal_Statement',
-  'Detection_Basis',
-  'Trigger_Condition',
-  'Trigger_State',
-  'Escalation_Readiness',
   'Recommended_Action_Route',
-  'Signal_Confidence',
-  'Signal_Priority',
-  'Signal_Status',
+  'Action_Route_Type',
+  'Action_Route_Title',
+  'Action_Route_Objective',
+  'Destination_Workflow',
+  'Routing_Reason',
+  'Routing_Priority',
+  'Escalation_Status',
+  'Assigned_Status',
   'Source_Record',
   'Status',
   'Created_At',
   'Processor'
 ];
 
-
-function sciipEnsureMonitoringSignalsSchema() {
+function sciipEnsureAutonomousActionRoutingSchema() {
   return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
-    MONITORING_SIGNALS_SHEET,
-    MONITORING_SIGNALS_HEADERS
+    AUTONOMOUS_ACTION_ROUTING_SHEET,
+    AUTONOMOUS_ACTION_ROUTING_HEADERS
   );
 }
 
-function sciipRunMonitoringSignalDetectionProcessor() {
+function sciipRunAutonomousActionRoutingProcessor() {
   return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: MONITORING_SIGNAL_DETECTION_PROCESSOR,
-    action: 'MONITORING_SIGNAL_DETECTION_BUILD',
-    sourceSheet: 'SCENARIO_MONITORING',
-    targetSheet: MONITORING_SIGNALS_SHEET,
-    ledgerSheet: 'MONITORING_SIGNAL_DETECTION_RUNTIME_LEDGER',
+    processor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR,
+    action: 'AUTONOMOUS_ACTION_ROUTING_BUILD',
+    sourceSheet: 'MONITORING_SIGNALS',
+    targetSheet: AUTONOMOUS_ACTION_ROUTING_SHEET,
+    ledgerSheet: 'AUTONOMOUS_ACTION_ROUTING_RUNTIME_LEDGER',
 
     buildPayload: function(context, definition) {
-      const monitoringRequirements = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('SCENARIO_MONITORING');
+      const monitoringSignals = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('MONITORING_SIGNALS');
 
       return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
         processor: context.processor,
@@ -66,14 +64,14 @@ function sciipRunMonitoringSignalDetectionProcessor() {
         sourceSheet: definition.sourceSheet,
         targetSheet: definition.targetSheet,
         ledgerSheet: definition.ledgerSheet,
-        inputCount: monitoringRequirements.length,
-        outputCount: monitoringRequirements.length || 1,
-        summary: 'Monitoring signal detection runtime payload created.',
+        inputCount: monitoringSignals.length,
+        outputCount: monitoringSignals.length || 1,
+        summary: 'Autonomous action routing runtime payload created.',
         refs: {
           context: SCIIP_RUNTIME_CONTEXT.compact(context),
           migrationVersion: 'v5.3.2',
-          originalProcessor: MONITORING_SIGNAL_DETECTION_PROCESSOR,
-          inputSheets: ['SCENARIO_MONITORING']
+          originalProcessor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR,
+          inputSheets: ['MONITORING_SIGNALS']
         }
       });
     },
@@ -87,75 +85,75 @@ function sciipRunMonitoringSignalDetectionProcessor() {
     },
 
     execute: function(payload, context, transaction, definition) {
-      const outputSheet = sciipEnsureMonitoringSignalsSchema();
-      const signalDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
-      const monitoringSignalBusinessKey = 'MONITORING_SIGNAL|' + signalDate;
+      const outputSheet = sciipEnsureAutonomousActionRoutingSchema();
+      const routeDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const autonomousActionRoutingBusinessKey = 'AUTONOMOUS_ACTION_ROUTING|' + routeDate;
 
-      if (sciipRuntimeBusinessKeyPrefixExists690_(definition.targetSheet, monitoringSignalBusinessKey)) {
+      if (sciipRuntimeBusinessKeyPrefixExists700_(definition.targetSheet, autonomousActionRoutingBusinessKey)) {
         return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
-          processor: MONITORING_SIGNAL_DETECTION_PROCESSOR,
+          processor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR,
           businessKey: context.businessKey,
           recordsRead: 0,
           processed: 0,
           message: JSON.stringify({
             migrationVersion: 'v5.3.2',
             processorMigrated: true,
-            monitoringSignalsCreated: 0,
+            actionRoutesCreated: 0,
             skippedDuplicate: 1,
-            monitoringSignalBusinessKey: monitoringSignalBusinessKey,
+            autonomousActionRoutingBusinessKey: autonomousActionRoutingBusinessKey,
             transactionId: transaction.transactionId
           })
         });
       }
 
-      const monitoringRequirements = sciipGetRuntimeRecordsByDate690_(
-        'SCENARIO_MONITORING',
-        'Monitoring_Date',
-        signalDate
+      const monitoringSignals = sciipGetRuntimeRecordsByDate700_(
+        'MONITORING_SIGNALS',
+        'Signal_Date',
+        routeDate
       );
 
-      if (monitoringRequirements.length === 0) {
+      if (monitoringSignals.length === 0) {
         return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
-          processor: MONITORING_SIGNAL_DETECTION_PROCESSOR,
+          processor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR,
           businessKey: context.businessKey,
           recordsRead: 0,
           processed: 0,
           message: JSON.stringify({
             migrationVersion: 'v5.3.2',
             processorMigrated: true,
-            monitoringRequirementsReviewed: 0,
-            monitoringSignalsCreated: 0,
+            monitoringSignalsReviewed: 0,
+            actionRoutesCreated: 0,
             skippedNoInputs: 1,
             transactionId: transaction.transactionId
           })
         });
       }
 
-      const signals = sciipCreateMonitoringSignals690_({
-        businessKey: monitoringSignalBusinessKey,
-        signalDate: signalDate,
-        monitoringRequirements: monitoringRequirements,
-        processor: MONITORING_SIGNAL_DETECTION_PROCESSOR
+      const routes = sciipCreateAutonomousActionRoutes700_({
+        businessKey: autonomousActionRoutingBusinessKey,
+        routeDate: routeDate,
+        monitoringSignals: monitoringSignals,
+        processor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR
       });
 
-      signals.forEach(function(row) {
+      routes.forEach(function(row) {
         outputSheet.appendRow(row);
       });
 
       return SCIIP_RUNTIME_RESULT_FACTORY.success({
-        processor: MONITORING_SIGNAL_DETECTION_PROCESSOR,
+        processor: AUTONOMOUS_ACTION_ROUTING_PROCESSOR,
         businessKey: context.businessKey,
-        recordsCreated: signals.length,
-        recordsRead: monitoringRequirements.length,
-        processed: signals.length,
+        recordsCreated: routes.length,
+        recordsRead: monitoringSignals.length,
+        processed: routes.length,
         skippedDuplicate: 0,
         message: JSON.stringify({
           migrationVersion: 'v5.3.2',
           processorMigrated: true,
-          monitoringRequirementsReviewed: monitoringRequirements.length,
-          monitoringSignalsCreated: signals.length,
+          monitoringSignalsReviewed: monitoringSignals.length,
+          actionRoutesCreated: routes.length,
           skippedDuplicate: 0,
-          monitoringSignalBusinessKey: monitoringSignalBusinessKey,
+          autonomousActionRoutingBusinessKey: autonomousActionRoutingBusinessKey,
           transactionId: transaction.transactionId
         })
       });
@@ -163,7 +161,7 @@ function sciipRunMonitoringSignalDetectionProcessor() {
   });
 }
 
-function sciipRuntimeBusinessKeyPrefixExists690_(sheetName, businessKeyPrefix) {
+function sciipRuntimeBusinessKeyPrefixExists700_(sheetName, businessKeyPrefix) {
   const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
   if (!records || records.length === 0) return false;
   return records.some(function(record) {
@@ -172,15 +170,15 @@ function sciipRuntimeBusinessKeyPrefixExists690_(sheetName, businessKeyPrefix) {
   });
 }
 
-function sciipGetRuntimeRecordsByDate690_(sheetName, dateField, dateValue) {
+function sciipGetRuntimeRecordsByDate700_(sheetName, dateField, dateValue) {
   const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
   if (!records || records.length === 0) return [];
   return records.filter(function(record) {
-    return sciipNormalizeRuntimeDateValue690_(record[dateField]) === String(dateValue);
+    return sciipNormalizeRuntimeDateValue700_(record[dateField]) === String(dateValue);
   });
 }
 
-function sciipNormalizeRuntimeDateValue690_(value) {
+function sciipNormalizeRuntimeDateValue700_(value) {
   if (!value) return '';
   if (Object.prototype.toString.call(value) === '[object Date]') {
     return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
@@ -194,7 +192,7 @@ function sciipNormalizeRuntimeDateValue690_(value) {
   return text;
 }
 
-function sciipExtractFirstAvailable690_(record, fields) {
+function sciipExtractFirstAvailable700_(record, fields) {
   if (!record) return '';
   for (let i = 0; i < fields.length; i++) {
     const value = record[fields[i]];
@@ -205,7 +203,7 @@ function sciipExtractFirstAvailable690_(record, fields) {
   return '';
 }
 
-function sciipNormalizeMissionKey690_(value) {
+function sciipNormalizeMissionKey700_(value) {
   return String(value || 'UNKNOWN')
     .toUpperCase()
     .replace(/[^A-Z0-9]+/g, '_')
@@ -213,228 +211,258 @@ function sciipNormalizeMissionKey690_(value) {
     .substring(0, 80) || 'UNKNOWN';
 }
 
-function sciipCreateMonitoringSignals690_(args) {
+function sciipGenerateId700_(prefix) {
+  const safePrefix = String(prefix || 'ID').toUpperCase();
+  return safePrefix + '|' + Utilities.getUuid();
+}
+
+function sciipCreateAutonomousActionRoutes700_(args) {
   const now = new Date();
 
-  const rows = args.monitoringRequirements.map(monitoring => {
-    const monitoringId = sciipExtractFirstAvailable690_(monitoring, [
+  const rows = args.monitoringSignals.map(signal => {
+    const monitoringSignalId = sciipExtractFirstAvailable700_(signal, [
+      'Monitoring_Signal_ID'
+    ]);
+
+    const monitoringId = sciipExtractFirstAvailable700_(signal, [
       'Monitoring_ID'
     ]);
 
-    const scenarioId = sciipExtractFirstAvailable690_(monitoring, [
+    const scenarioId = sciipExtractFirstAvailable700_(signal, [
       'Scenario_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable690_(monitoring, [
+    const hypothesisId = sciipExtractFirstAvailable700_(signal, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable690_(monitoring, [
+    const hypothesisType = sciipExtractFirstAvailable700_(signal, [
       'Hypothesis_Type'
     ]);
 
-    const signalCategory = sciipExtractFirstAvailable690_(monitoring, [
+    const signalCategory = sciipExtractFirstAvailable700_(signal, [
       'Signal_Category'
     ]);
 
-    const monitoringType = sciipExtractFirstAvailable690_(monitoring, [
-      'Monitoring_Type'
+    const detectedSignalType = sciipExtractFirstAvailable700_(signal, [
+      'Detected_Signal_Type'
+    ]);
+
+    const recommendedActionRoute = sciipExtractFirstAvailable700_(signal, [
+      'Recommended_Action_Route'
     ]);
 
     const profile =
-      sciipInferMonitoringSignalProfile690_(monitoring);
+      sciipInferAutonomousActionRouteProfile700_(signal);
 
     const rowKey =
-      `${args.businessKey}|${profile.detectedSignalType}|${sciipNormalizeMissionKey690_(monitoringId || scenarioId || hypothesisId || profile.detectedSignalTitle)}`;
+      `${args.businessKey}|${profile.actionRouteType}|${sciipNormalizeMissionKey700_(monitoringSignalId || monitoringId || scenarioId || hypothesisId || profile.actionRouteTitle)}`;
 
     return [
-      sciipGenerateId_('MSG'),
+      sciipGenerateId700_('ART'),
       rowKey,
-      args.signalDate,
+      args.routeDate,
+      monitoringSignalId,
       monitoringId,
       scenarioId,
       hypothesisId,
       hypothesisType,
       signalCategory,
-      monitoringType,
-      profile.detectedSignalType,
-      profile.detectedSignalTitle,
-      profile.detectedSignalStatement,
-      profile.detectionBasis,
-      profile.triggerCondition,
-      profile.triggerState,
-      profile.escalationReadiness,
-      profile.recommendedActionRoute,
-      profile.signalConfidence,
-      profile.signalPriority,
-      'DETECTED_MONITORING_SIGNAL',
-      `SCENARIO_MONITORING:${monitoringId}`,
+      detectedSignalType,
+      recommendedActionRoute,
+      profile.actionRouteType,
+      profile.actionRouteTitle,
+      profile.actionRouteObjective,
+      profile.destinationWorkflow,
+      profile.routingReason,
+      profile.routingPriority,
+      profile.escalationStatus,
+      'PENDING_ROUTE_REVIEW',
+      `MONITORING_SIGNALS:${monitoringSignalId}`,
       'ACTIVE',
       now.toISOString(),
       args.processor
     ];
   });
 
-  return sciipDeduplicateMonitoringSignalRows690_(rows);
+  return sciipDeduplicateAutonomousActionRoutingRows700_(rows);
 }
 
-function sciipInferMonitoringSignalProfile690_(monitoring) {
-  const hypothesisType = sciipExtractFirstAvailable690_(monitoring, [
+function sciipInferAutonomousActionRouteProfile700_(signal) {
+  const hypothesisType = sciipExtractFirstAvailable700_(signal, [
     'Hypothesis_Type'
   ]);
 
-  const signalCategory = sciipExtractFirstAvailable690_(monitoring, [
+  const signalCategory = sciipExtractFirstAvailable700_(signal, [
     'Signal_Category'
   ]);
 
-  const monitoringType = sciipExtractFirstAvailable690_(monitoring, [
-    'Monitoring_Type'
+  const detectedSignalType = sciipExtractFirstAvailable700_(signal, [
+    'Detected_Signal_Type'
   ]);
 
-  const monitoringTitle = sciipExtractFirstAvailable690_(monitoring, [
-    'Monitoring_Title'
+  const detectedSignalStatement = sciipExtractFirstAvailable700_(signal, [
+    'Detected_Signal_Statement'
   ]);
 
-  const monitoringObjective = sciipExtractFirstAvailable690_(monitoring, [
-    'Monitoring_Objective'
+  const detectionBasis = sciipExtractFirstAvailable700_(signal, [
+    'Detection_Basis'
   ]);
 
-  const triggerCondition = sciipExtractFirstAvailable690_(monitoring, [
-    'Trigger_Condition'
+  const triggerState = sciipExtractFirstAvailable700_(signal, [
+    'Trigger_State'
   ]);
 
-  const earlyIndicators = sciipExtractFirstAvailable690_(monitoring, [
-    'Early_Indicators'
+  const escalationReadiness = sciipExtractFirstAvailable700_(signal, [
+    'Escalation_Readiness'
   ]);
 
-  const escalationCondition = sciipExtractFirstAvailable690_(monitoring, [
-    'Escalation_Condition'
+  const recommendedActionRoute = sciipExtractFirstAvailable700_(signal, [
+    'Recommended_Action_Route'
   ]);
 
-  const recommendedResponse = sciipExtractFirstAvailable690_(monitoring, [
-    'Recommended_Response'
-  ]);
+  const signalConfidence =
+    sciipExtractFirstAvailable700_(signal, [
+      'Signal_Confidence'
+    ]) || 'LOW';
 
-  const monitoringPriority =
-    sciipExtractFirstAvailable690_(monitoring, [
-      'Monitoring_Priority'
+  const signalPriority =
+    sciipExtractFirstAvailable700_(signal, [
+      'Signal_Priority'
     ]) || 'MEDIUM';
 
-  let detectedSignalType = 'EXPECTED_MONITORING_SIGNAL';
-  let detectedSignalTitle = `Monitoring signal: ${monitoringTitle || signalCategory || 'general signal'}`;
-  let triggerState = 'WATCHING';
-  let escalationReadiness = 'NOT_READY';
-  let recommendedActionRoute = 'CONTINUE_MONITORING';
-  let signalConfidence = monitoringPriority === 'HIGH' ? 'MEDIUM' : 'LOW';
-  let signalPriority = monitoringPriority;
+  let actionRouteType = 'MONITORING_CONTINUATION_ROUTE';
+  let actionRouteTitle = 'Continue monitoring route';
+  let actionRouteObjective =
+    'Continue monitoring the signal until stronger evidence or trigger conditions appear.';
+  let destinationWorkflow = 'SCENARIO_MONITORING';
+  let escalationStatus = 'NOT_ESCALATED';
+  let routingPriority = signalPriority;
 
-  const monitoringTypeText = String(monitoringType || '').toUpperCase();
+  const routeText = String(recommendedActionRoute || '').toUpperCase();
+  const signalText = String(detectedSignalType || '').toUpperCase();
+  const escalationText = String(escalationReadiness || '').toUpperCase();
 
-  if (monitoringTypeText.includes('REINFORCED')) {
-    detectedSignalType = 'REINFORCED_PATTERN_SIGNAL';
-    triggerState = 'WATCHING_FOR_REPEAT_CONFIRMATION';
-    escalationReadiness = 'READY_IF_REPEATED';
-    recommendedActionRoute = 'ROUTE_TO_INTELLIGENCE_REQUIREMENT_IF_CONFIRMED';
-    signalPriority = 'HIGH';
+  if (
+    routeText.includes('OPERATOR_REVIEW') ||
+    signalText.includes('OPERATOR_REVIEW') ||
+    escalationText.includes('OPERATOR')
+  ) {
+    actionRouteType = 'OPERATOR_REVIEW_ROUTE';
+    actionRouteTitle = 'Operator review route';
+    actionRouteObjective =
+      'Route signal to operator review before autonomous confidence, graph, signal weight, or processor behavior changes are made.';
+    destinationWorkflow = 'OPERATOR_CONSOLE';
+    escalationStatus = 'ESCALATED_TO_OPERATOR_REVIEW';
+    routingPriority = 'HIGH';
   }
 
-  if (monitoringTypeText.includes('WEAKENED')) {
-    detectedSignalType = 'WEAKENED_PATTERN_SIGNAL';
-    triggerState = 'WATCHING_FOR_STRONGER_CORROBORATION';
-    escalationReadiness = 'NOT_READY';
-    recommendedActionRoute = 'REQUIRE_STRONGER_EVIDENCE_BEFORE_ESCALATION';
+  if (
+    routeText.includes('INTELLIGENCE_REQUIREMENT') ||
+    routeText.includes('INTELLIGENCE')
+  ) {
+    actionRouteType = 'INTELLIGENCE_REQUIREMENT_ROUTE';
+    actionRouteTitle = 'Intelligence requirement route';
+    actionRouteObjective =
+      'Route signal into a new or prioritized intelligence requirement for further research and validation.';
+    destinationWorkflow = 'INTELLIGENCE_REQUIREMENTS';
+    escalationStatus = 'ESCALATED_TO_INTELLIGENCE_REQUIREMENT';
   }
 
-  if (monitoringTypeText.includes('OPERATOR_REVIEW')) {
-    detectedSignalType = 'OPERATOR_REVIEW_SIGNAL';
-    triggerState = 'REVIEW_REQUIRED_IF_CONFLICT_REPEATS';
-    escalationReadiness = 'READY_FOR_OPERATOR_REVIEW';
-    recommendedActionRoute = 'ROUTE_TO_OPERATOR_REVIEW';
-    signalConfidence = 'MEDIUM';
-    signalPriority = 'HIGH';
+  if (
+    routeText.includes('PROPERTY_REVIEW') ||
+    hypothesisType === 'PROPERTY_HYPOTHESIS'
+  ) {
+    actionRouteType = 'PROPERTY_REVIEW_ROUTE';
+    actionRouteTitle = 'Property review route';
+    actionRouteObjective =
+      'Route signal into property review for asset facts, GIS data, ownership, tenant activity, availability, and comparable evidence.';
+    destinationWorkflow = 'PROPERTY_REVIEW_QUEUE';
   }
 
-  if (monitoringTypeText.includes('STABILITY')) {
-    detectedSignalType = 'STABILITY_SIGNAL';
-    triggerState = 'BASELINE_MONITORING';
-    escalationReadiness = 'NOT_READY';
-    recommendedActionRoute = 'CONTINUE_BASELINE_MONITORING';
-    signalPriority = 'LOW';
+  if (
+    routeText.includes('COMPANY_RESEARCH') ||
+    hypothesisType === 'COMPANY_HYPOTHESIS'
+  ) {
+    actionRouteType = 'COMPANY_RESEARCH_ROUTE';
+    actionRouteTitle = 'Company research route';
+    actionRouteObjective =
+      'Route signal into company research for funding, hiring, permits, supplier/OEM relationships, occupier movement, and real estate demand evidence.';
+    destinationWorkflow = 'COMPANY_RESEARCH_QUEUE';
   }
 
-  if (hypothesisType === 'PROPERTY_HYPOTHESIS') {
-    detectedSignalType = `PROPERTY_${detectedSignalType}`;
-    detectedSignalTitle = 'Property monitoring signal';
-    recommendedActionRoute =
-      'ROUTE_TO_PROPERTY_REVIEW_IF_TRIGGERED';
+  if (
+    routeText.includes('RISK') ||
+    hypothesisType === 'RISK_HYPOTHESIS'
+  ) {
+    actionRouteType = 'RISK_REVIEW_ROUTE';
+    actionRouteTitle = 'Risk review route';
+    actionRouteObjective =
+      'Route signal into risk review, counterevidence collection, severity assessment, and potential alerting.';
+    destinationWorkflow = 'RISK_REVIEW_QUEUE';
+    escalationStatus = 'ESCALATED_TO_RISK_REVIEW';
+    routingPriority = 'HIGH';
   }
 
-  if (hypothesisType === 'COMPANY_HYPOTHESIS') {
-    detectedSignalType = `COMPANY_${detectedSignalType}`;
-    detectedSignalTitle = 'Company monitoring signal';
-    recommendedActionRoute =
-      'ROUTE_TO_COMPANY_RESEARCH_IF_TRIGGERED';
+  if (
+    routeText.includes('OPPORTUNITY') ||
+    hypothesisType === 'OPPORTUNITY_HYPOTHESIS'
+  ) {
+    actionRouteType = 'OPPORTUNITY_REVIEW_ROUTE';
+    actionRouteTitle = 'Opportunity review route';
+    actionRouteObjective =
+      'Route signal into opportunity review, target validation, timing review, and possible action recommendation.';
+    destinationWorkflow = 'OPPORTUNITY_REVIEW_QUEUE';
+    escalationStatus = 'ESCALATED_TO_OPPORTUNITY_REVIEW';
+    routingPriority = 'HIGH';
   }
 
-  if (hypothesisType === 'RISK_HYPOTHESIS') {
-    detectedSignalType = `RISK_${detectedSignalType}`;
-    detectedSignalTitle = 'Risk monitoring signal';
-    escalationReadiness = 'READY_FOR_RISK_REVIEW';
-    recommendedActionRoute =
-      'ROUTE_TO_RISK_REVIEW_OR_ALERTING';
-    signalPriority = 'HIGH';
-    signalConfidence = signalConfidence === 'LOW' ? 'MEDIUM' : signalConfidence;
+  if (
+    routeText.includes('SYSTEM_IMPROVEMENT') ||
+    hypothesisType === 'OPERATING_SYSTEM_HYPOTHESIS'
+  ) {
+    actionRouteType = 'SYSTEM_IMPROVEMENT_ROUTE';
+    actionRouteTitle = 'System improvement route';
+    actionRouteObjective =
+      'Route signal into processor improvement, schema review, workflow automation, or graph completeness review.';
+    destinationWorkflow = 'SYSTEM_IMPROVEMENT_QUEUE';
   }
 
-  if (hypothesisType === 'OPPORTUNITY_HYPOTHESIS') {
-    detectedSignalType = `OPPORTUNITY_${detectedSignalType}`;
-    detectedSignalTitle = 'Opportunity monitoring signal';
-    escalationReadiness = 'READY_FOR_OPPORTUNITY_REVIEW';
-    recommendedActionRoute =
-      'ROUTE_TO_OPPORTUNITY_REVIEW_OR_ACTION_RECOMMENDATION';
-    signalPriority = 'HIGH';
-    signalConfidence = signalConfidence === 'LOW' ? 'MEDIUM' : signalConfidence;
+  if (
+    routeText.includes('CONTINUE') ||
+    routeText.includes('BASELINE')
+  ) {
+    actionRouteType = 'MONITORING_CONTINUATION_ROUTE';
+    actionRouteTitle = 'Continue monitoring route';
+    actionRouteObjective =
+      'Keep this signal under active monitoring without escalation until stronger evidence appears.';
+    destinationWorkflow = 'SCENARIO_MONITORING';
+    escalationStatus = 'NOT_ESCALATED';
   }
 
-  if (hypothesisType === 'OPERATING_SYSTEM_HYPOTHESIS') {
-    detectedSignalType = `SYSTEM_${detectedSignalType}`;
-    detectedSignalTitle = 'Operating system monitoring signal';
-    recommendedActionRoute =
-      'ROUTE_TO_SYSTEM_IMPROVEMENT_REVIEW';
-  }
-
-  const detectionBasis = [
-    `Monitoring type: ${monitoringType || 'UNKNOWN'}.`,
+  const routingReason = [
+    `Detected signal type: ${detectedSignalType || 'UNKNOWN'}.`,
     `Signal category: ${signalCategory || 'UNKNOWN'}.`,
-    `Monitoring objective: ${monitoringObjective || 'No monitoring objective recorded.'}`,
-    `Early indicators: ${earlyIndicators || 'No early indicators recorded.'}`,
-    `Escalation condition: ${escalationCondition || 'No escalation condition recorded.'}`,
-    `Recommended response: ${recommendedResponse || 'No recommended response recorded.'}`
-  ].join('\n');
-
-  const detectedSignalStatement = [
-    'SCIIP generated a monitoring signal from an active scenario monitoring requirement.',
-    `Detected signal type: ${detectedSignalType}.`,
-    `Trigger state: ${triggerState}.`,
-    `Escalation readiness: ${escalationReadiness}.`,
-    `Recommended action route: ${recommendedActionRoute}.`
+    `Trigger state: ${triggerState || 'UNKNOWN'}.`,
+    `Escalation readiness: ${escalationReadiness || 'UNKNOWN'}.`,
+    `Recommended action route: ${recommendedActionRoute || 'UNKNOWN'}.`,
+    `Signal confidence: ${signalConfidence}.`,
+    `Detection basis: ${detectionBasis || 'No detection basis recorded.'}`,
+    `Signal statement: ${detectedSignalStatement || 'No signal statement recorded.'}`
   ].join('\n');
 
   return {
-    detectedSignalType,
-    detectedSignalTitle,
-    detectedSignalStatement,
-    detectionBasis,
-    triggerCondition,
-    triggerState,
-    escalationReadiness,
-    recommendedActionRoute,
-    signalConfidence,
-    signalPriority
+    actionRouteType,
+    actionRouteTitle,
+    actionRouteObjective,
+    destinationWorkflow,
+    routingReason,
+    routingPriority,
+    escalationStatus
   };
 }
 
-function sciipDeduplicateMonitoringSignalRows690_(rows) {
+function sciipDeduplicateAutonomousActionRoutingRows700_(rows) {
   const seen = {};
   const deduped = [];
 
@@ -450,13 +478,12 @@ function sciipDeduplicateMonitoringSignalRows690_(rows) {
   return deduped;
 }
 
-
-function sciipTestMonitoringSignalDetectionProcessor() {
+function sciipTestAutonomousActionRoutingProcessor() {
   const result =
-    sciipRunMonitoringSignalDetectionProcessor();
+    sciipRunAutonomousActionRoutingProcessor();
 
   Logger.log(JSON.stringify({
-    test: 'sciipTestMonitoringSignalDetectionProcessor',
+    test: 'sciipTestAutonomousActionRoutingProcessor',
     result: result
   }));
 
