@@ -1,4 +1,95 @@
 /*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 1040_AutonomousProcessorExecutionSummaryProcessor
+ *
+ * Migration note:
+ * Preserves original processor business logic by executing
+ * the original implementation inside SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipRunAutonomousProcessorExecutionSummaryProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: '1040_AutonomousProcessorExecutionSummaryProcessor',
+    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_SUMMARY_BUILD',
+    sourceSheet: '',
+    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_SUMMARYS',
+    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_SUMMARYS_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: 0,
+        outputCount: 0,
+        summary: 'Runtime migration wrapper payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: '1040_AutonomousProcessorExecutionSummaryProcessor',
+          preservedLegacyImplementation: true
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      var errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      var legacyResult = sciipRunAutonomousProcessorExecutionSummaryProcessorLegacy1040_();
+      return sciipWrapLegacyRuntimeResult1040_(legacyResult, context, transaction);
+    }
+  });
+}
+
+function sciipWrapLegacyRuntimeResult1040_(legacyResult, context, transaction) {
+  legacyResult = legacyResult || {};
+
+  var message = JSON.stringify({
+    migrationVersion: 'v5.3.2',
+    processorMigrated: true,
+    legacyResult: legacyResult,
+    transactionId: transaction.transactionId
+  });
+
+  var config = {
+    processor: context.processor,
+    businessKey: context.businessKey,
+    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
+    recordsUpdated: legacyResult.recordsUpdated || 0,
+    recordsRead: legacyResult.recordsRead || 0,
+    processed: legacyResult.processed || 0,
+    skippedDuplicate: legacyResult.skippedDuplicate || 0,
+    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
+    skippedValidation: legacyResult.skippedValidation || 0,
+    errors: legacyResult.errors || 0,
+    message: message
+  };
+
+  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
+  }
+
+  if (legacyResult.skippedDuplicate) {
+    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
+  }
+
+  if (legacyResult.status === 'ERROR') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
+  }
+
+  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
+}
+
+/*******************************************************
  * SCIIP_OS v4.1
  * 1040_AutonomousProcessorExecutionSummaryProcessor
  *******************************************************/
@@ -56,7 +147,7 @@ const SCIIP_1040_AUTONOMOUS_PROCESSOR_EXECUTION_SUMMARY = {
 /**
  * MAIN PROCESSOR
  */
-function sciipRunAutonomousProcessorExecutionSummaryProcessor() {
+function sciipRunAutonomousProcessorExecutionSummaryProcessorLegacy1040_() {
   const cfg = SCIIP_1040_AUTONOMOUS_PROCESSOR_EXECUTION_SUMMARY;
   const startedAt = new Date();
   const ss = sciipGetSpreadsheet_();
