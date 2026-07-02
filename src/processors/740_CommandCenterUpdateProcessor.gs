@@ -1,146 +1,234 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 740_CommandCenterUpdateProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - OPERATOR_BRIEFINGS
+ * OPERATOR_BRIEFINGS → COMMAND_CENTER_UPDATES
  *
- * Output:
- * - COMMAND_CENTER_UPDATES
- ************************************************************/
+ * Migration note:
+ * Preserves original 740 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const COMMAND_CENTER_UPDATES_SHEET =
-  'COMMAND_CENTER_UPDATES';
+function sciipGetCommandCenterUpdateProcessorName740_() {
+  return '740_CommandCenterUpdateProcessor';
+}
 
-const COMMAND_CENTER_UPDATES_HEADERS = [
-  'Command_Update_ID',
-  'Business_Key',
-  'Update_Date',
-  'Operator_Briefing_ID',
-  'Briefing_Title',
-  'Recommended_Operating_Posture',
-  'Priority_Assessment',
-  'Operator_Decision_Focus',
-  'Next_Best_Action',
-  'Update_Type',
-  'Update_Title',
-  'Command_Status',
-  'Command_Message',
-  'Primary_Focus',
-  'Required_Operator_Action',
-  'Visibility_Level',
-  'Update_Priority',
-  'Update_Status',
-  'Source_Record',
-  'Status',
-  'Created_At',
-  'Processor'
-];
+function sciipGetCommandCenterUpdatesHeaders740_() {
+  return [
+    'Command_Update_ID',
+    'Business_Key',
+    'Update_Date',
+    'Operator_Briefing_ID',
+    'Briefing_Title',
+    'Recommended_Operating_Posture',
+    'Priority_Assessment',
+    'Operator_Decision_Focus',
+    'Next_Best_Action',
+    'Update_Type',
+    'Update_Title',
+    'Command_Status',
+    'Command_Message',
+    'Primary_Focus',
+    'Required_Operator_Action',
+    'Visibility_Level',
+    'Update_Priority',
+    'Update_Status',
+    'Source_Record',
+    'Status',
+    'Created_At',
+    'Processor'
+  ];
+}
 
 function sciipEnsureCommandCenterUpdatesSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(COMMAND_CENTER_UPDATES_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(COMMAND_CENTER_UPDATES_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, COMMAND_CENTER_UPDATES_HEADERS.length)
-    .setValues([COMMAND_CENTER_UPDATES_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'COMMAND_CENTER_UPDATES',
+    sciipGetCommandCenterUpdatesHeaders740_()
+  );
 }
 
 function sciipRunCommandCenterUpdateProcessor() {
-  const processor = '740_CommandCenterUpdateProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetCommandCenterUpdateProcessorName740_(),
+    action: 'COMMAND_CENTER_UPDATE_BUILD',
+    sourceSheet: 'OPERATOR_BRIEFINGS',
+    targetSheet: 'COMMAND_CENTER_UPDATES',
+    ledgerSheet: 'COMMAND_CENTER_UPDATES_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureCommandCenterUpdatesSchema();
+    buildPayload: function(context, definition) {
+      const operatorBriefings = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('OPERATOR_BRIEFINGS');
 
-  const updateDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `COMMAND_CENTER_UPDATE|${updateDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: operatorBriefings.length,
+        outputCount: operatorBriefings.length ? 1 : 0,
+        summary: 'Command center update runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetCommandCenterUpdateProcessorName740_(),
+          inputSheets: ['OPERATOR_BRIEFINGS']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      commandCenterUpdatesCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const operatorBriefings = sciipGetRecordsByDate_(
-    'OPERATOR_BRIEFINGS',
-    'Briefing_Date',
-    updateDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureCommandCenterUpdatesSchema();
+      const updateDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const commandCenterUpdateBusinessKey = 'COMMAND_CENTER_UPDATE|' + updateDate;
 
-  if (operatorBriefings.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      operatorBriefingsReviewed: 0,
-      commandCenterUpdatesCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists740_(definition.targetSheet, commandCenterUpdateBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetCommandCenterUpdateProcessorName740_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            operatorBriefingsReviewed: 0,
+            commandCenterUpdatesCreated: 0,
+            skippedDuplicate: 1,
+            commandCenterUpdateBusinessKey: commandCenterUpdateBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const update =
-    sciipCreateCommandCenterUpdate_({
-      businessKey,
-      updateDate,
-      operatorBriefing: operatorBriefings[0],
-      processor
-    });
+      const operatorBriefings = sciipGetRuntimeRecordsByDate740_(
+        'OPERATOR_BRIEFINGS',
+        'Briefing_Date',
+        updateDate
+      );
 
-  outputSheet.appendRow(update);
+      if (operatorBriefings.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetCommandCenterUpdateProcessorName740_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            operatorBriefingsReviewed: 0,
+            commandCenterUpdatesCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    operatorBriefingsReviewed: operatorBriefings.length,
-    commandCenterUpdatesCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
+      const update = sciipCreateCommandCenterUpdate740_({
+        businessKey: commandCenterUpdateBusinessKey,
+        updateDate: updateDate,
+        operatorBriefing: operatorBriefings[0],
+        processor: sciipGetCommandCenterUpdateProcessorName740_()
+      });
 
-  Logger.log(JSON.stringify(result));
-  return result;
+      outputSheet.appendRow(update);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetCommandCenterUpdateProcessorName740_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: operatorBriefings.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          operatorBriefingsReviewed: operatorBriefings.length,
+          commandCenterUpdatesCreated: 1,
+          skippedDuplicate: 0,
+          commandCenterUpdateBusinessKey: commandCenterUpdateBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
 }
 
-function sciipCreateCommandCenterUpdate_(args) {
+function sciipRuntimeBusinessKeyPrefixExists740_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate740_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue740_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue740_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable740_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipGenerateId740_(prefix) {
+  const safePrefix = String(prefix || 'ID').toUpperCase();
+  return safePrefix + '|' + Utilities.getUuid();
+}
+
+function sciipCreateCommandCenterUpdate740_(args) {
   const now = new Date();
 
   const briefing = args.operatorBriefing;
 
-  const operatorBriefingId = sciipExtractFirstAvailable_(briefing, [
+  const operatorBriefingId = sciipExtractFirstAvailable740_(briefing, [
     'Operator_Briefing_ID'
   ]);
 
-  const profile =
-    sciipInferCommandCenterUpdateProfile_(briefing);
+  const profile = sciipInferCommandCenterUpdateProfile740_(briefing);
 
   return [
-    sciipGenerateId_('CCU'),
+    sciipGenerateId740_('CCU'),
     args.businessKey,
     args.updateDate,
     operatorBriefingId,
-    sciipExtractFirstAvailable_(briefing, ['Briefing_Title']),
-    sciipExtractFirstAvailable_(briefing, ['Recommended_Operating_Posture']),
-    sciipExtractFirstAvailable_(briefing, ['Priority_Assessment']),
-    sciipExtractFirstAvailable_(briefing, ['Operator_Decision_Focus']),
-    sciipExtractFirstAvailable_(briefing, ['Next_Best_Action']),
+    sciipExtractFirstAvailable740_(briefing, ['Briefing_Title']),
+    sciipExtractFirstAvailable740_(briefing, ['Recommended_Operating_Posture']),
+    sciipExtractFirstAvailable740_(briefing, ['Priority_Assessment']),
+    sciipExtractFirstAvailable740_(briefing, ['Operator_Decision_Focus']),
+    sciipExtractFirstAvailable740_(briefing, ['Next_Best_Action']),
     profile.updateType,
     profile.updateTitle,
     profile.commandStatus,
@@ -150,35 +238,35 @@ function sciipCreateCommandCenterUpdate_(args) {
     profile.visibilityLevel,
     profile.updatePriority,
     'PUBLISHED_TO_COMMAND_CENTER',
-    `OPERATOR_BRIEFINGS:${operatorBriefingId}`,
+    'OPERATOR_BRIEFINGS:' + operatorBriefingId,
     'ACTIVE',
     now.toISOString(),
     args.processor
   ];
 }
 
-function sciipInferCommandCenterUpdateProfile_(briefing) {
-  const briefingTitle = sciipExtractFirstAvailable_(briefing, [
+function sciipInferCommandCenterUpdateProfile740_(briefing) {
+  const briefingTitle = sciipExtractFirstAvailable740_(briefing, [
     'Briefing_Title'
   ]);
 
-  const operatingPosture = sciipExtractFirstAvailable_(briefing, [
+  const operatingPosture = sciipExtractFirstAvailable740_(briefing, [
     'Recommended_Operating_Posture'
   ]);
 
-  const priorityAssessment = sciipExtractFirstAvailable_(briefing, [
+  const priorityAssessment = sciipExtractFirstAvailable740_(briefing, [
     'Priority_Assessment'
   ]);
 
-  const operatorDecisionFocus = sciipExtractFirstAvailable_(briefing, [
+  const operatorDecisionFocus = sciipExtractFirstAvailable740_(briefing, [
     'Operator_Decision_Focus'
   ]);
 
-  const commandCenterMessage = sciipExtractFirstAvailable_(briefing, [
+  const commandCenterMessage = sciipExtractFirstAvailable740_(briefing, [
     'Command_Center_Message'
   ]);
 
-  const nextBestAction = sciipExtractFirstAvailable_(briefing, [
+  const nextBestAction = sciipExtractFirstAvailable740_(briefing, [
     'Next_Best_Action'
   ]);
 
@@ -235,32 +323,31 @@ function sciipInferCommandCenterUpdateProfile_(briefing) {
   const commandMessage = [
     commandCenterMessage || 'SCIIP generated a command center update from the operator briefing.',
     '',
-    `Command status: ${commandStatus}.`,
-    `Operating posture: ${operatingPosture || 'UNKNOWN'}.`,
-    `Priority assessment: ${priorityAssessment || 'No priority assessment recorded.'}`,
-    `Operator decision focus: ${operatorDecisionFocus || 'No decision focus recorded.'}`,
-    `Next best action: ${requiredOperatorAction}`
+    'Command status: ' + commandStatus + '.',
+    'Operating posture: ' + (operatingPosture || 'UNKNOWN') + '.',
+    'Priority assessment: ' + (priorityAssessment || 'No priority assessment recorded.'),
+    'Operator decision focus: ' + (operatorDecisionFocus || 'No decision focus recorded.'),
+    'Next best action: ' + requiredOperatorAction
   ].join('\n');
 
   return {
-    updateType,
-    updateTitle,
-    commandStatus,
-    commandMessage,
-    primaryFocus,
-    requiredOperatorAction,
-    visibilityLevel,
-    updatePriority
+    updateType: updateType,
+    updateTitle: updateTitle,
+    commandStatus: commandStatus,
+    commandMessage: commandMessage,
+    primaryFocus: primaryFocus,
+    requiredOperatorAction: requiredOperatorAction,
+    visibilityLevel: visibilityLevel,
+    updatePriority: updatePriority
   };
 }
 
 function sciipTestCommandCenterUpdateProcessor() {
-  const result =
-    sciipRunCommandCenterUpdateProcessor();
+  const result = sciipRunCommandCenterUpdateProcessor();
 
   Logger.log(JSON.stringify({
     test: 'sciipTestCommandCenterUpdateProcessor',
-    result
+    result: result
   }));
 
   return result;
