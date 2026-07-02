@@ -145,8 +145,8 @@ function sciipRunAutonomousProcessorExecutionControlProcessorLegacy1000_() {
   const outputSheet = sciipEnsureAutonomousProcessorExecutionControlSheet_();
 
   const resolvedControlDate =
-    sciipResolveLatestProcessingDate_(cfg.INPUT_SHEET, cfg.INPUT_DATE_COLUMN)
-    || sciipFormatDateKey_(startedAt);
+    sciipResolveLatestProcessingDate1000_(cfg.INPUT_SHEET, cfg.INPUT_DATE_COLUMN)
+    || sciipFormatDateKey1000_(startedAt);
 
   const businessKey =
     'AUTONOMOUS_PROCESSOR_EXECUTION_CONTROL|' + resolvedControlDate;
@@ -345,16 +345,40 @@ function sciipNormalizeDateKey1000_(value) {
   if (!value) return '';
 
   if (Object.prototype.toString.call(value) === '[object Date]') {
-    return sciipFormatDateKey_(value);
+    return sciipFormatDateKey1000_(value);
   }
 
   const text = String(value).trim();
   if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
 
   const parsed = new Date(text);
-  if (!isNaN(parsed.getTime())) return sciipFormatDateKey_(parsed);
+  if (!isNaN(parsed.getTime())) return sciipFormatDateKey1000_(parsed);
 
   return text;
+}
+
+function sciipFormatDateKey1000_(value) {
+  return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+}
+
+function sciipResolveLatestProcessingDate1000_(sheetName, dateField) {
+  const ss = sciipGetSpreadsheet_();
+  const sheet = ss.getSheetByName(sheetName);
+  if (!sheet || sheet.getLastRow() < 2) return null;
+
+  const records = sciipReadSheetObjects1000_(sheet);
+  const dates = records
+    .map(function(record) {
+      return sciipNormalizeDateKey1000_(record[dateField]);
+    })
+    .filter(function(value) {
+      return value !== '';
+    });
+
+  if (!dates.length) return null;
+
+  dates.sort();
+  return dates[dates.length - 1];
 }
 
 function sciipAggregateExecutionReadinessRows1000_(rows) {
