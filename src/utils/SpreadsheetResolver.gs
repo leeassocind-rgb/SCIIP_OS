@@ -66,3 +66,22 @@ function sciipFormatDateKey_(date) {
 
   return String(date).trim();
 }
+
+function sciipBusinessKeyPrefixExists_(sheet, businessKeyPrefix) {
+  if (!sheet || !businessKeyPrefix) return false;
+
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return false;
+
+  const headers = values[0].map(function(header) {
+    return String(header).trim();
+  });
+
+  const businessKeyIndex = headers.indexOf('Business_Key');
+  if (businessKeyIndex === -1) return false;
+
+  return values.slice(1).some(function(row) {
+    const key = String(row[businessKeyIndex] || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
