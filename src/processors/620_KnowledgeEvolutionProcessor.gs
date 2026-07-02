@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 620_KnowledgeEvolutionProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - VALIDATED_LEARNINGS
+ * VALIDATED_LEARNINGS → KNOWLEDGE_EVOLUTION
  *
- * Output:
- * - KNOWLEDGE_EVOLUTION
- ************************************************************/
+ * Migration note:
+ * Preserves original 620 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const KNOWLEDGE_EVOLUTION_SHEET =
-  'KNOWLEDGE_EVOLUTION';
+const KNOWLEDGE_EVOLUTION_PROCESSOR = '620_KnowledgeEvolutionProcessor';
+const KNOWLEDGE_EVOLUTION_SHEET = 'KNOWLEDGE_EVOLUTION';
 
 const KNOWLEDGE_EVOLUTION_HEADERS = [
   'Evolution_ID',
@@ -39,115 +39,207 @@ const KNOWLEDGE_EVOLUTION_HEADERS = [
 ];
 
 function sciipEnsureKnowledgeEvolutionSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(KNOWLEDGE_EVOLUTION_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(KNOWLEDGE_EVOLUTION_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, KNOWLEDGE_EVOLUTION_HEADERS.length)
-    .setValues([KNOWLEDGE_EVOLUTION_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    KNOWLEDGE_EVOLUTION_SHEET,
+    KNOWLEDGE_EVOLUTION_HEADERS
+  );
 }
 
 function sciipRunKnowledgeEvolutionProcessor() {
-  const processor = '620_KnowledgeEvolutionProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: KNOWLEDGE_EVOLUTION_PROCESSOR,
+    action: 'KNOWLEDGE_EVOLUTION_BUILD',
+    sourceSheet: 'VALIDATED_LEARNINGS',
+    targetSheet: KNOWLEDGE_EVOLUTION_SHEET,
+    ledgerSheet: 'KNOWLEDGE_EVOLUTION_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureKnowledgeEvolutionSchema();
+    buildPayload: function(context, definition) {
+      const learnings = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('VALIDATED_LEARNINGS');
 
-  const evolutionDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `KNOWLEDGE_EVOLUTION|${evolutionDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: learnings.length,
+        outputCount: learnings.length || 1,
+        summary: 'Knowledge evolution runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: KNOWLEDGE_EVOLUTION_PROCESSOR,
+          inputSheets: ['VALIDATED_LEARNINGS']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      knowledgeEvolutionsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const learnings = sciipGetRecordsByDate_(
-    'VALIDATED_LEARNINGS',
-    'Learning_Date',
-    evolutionDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureKnowledgeEvolutionSchema();
+      const evolutionDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const evolutionBusinessKey = 'KNOWLEDGE_EVOLUTION|' + evolutionDate;
 
-  if (learnings.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      learningsReviewed: 0,
-      knowledgeEvolutionsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists620_(definition.targetSheet, evolutionBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: KNOWLEDGE_EVOLUTION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            knowledgeEvolutionsCreated: 0,
+            skippedDuplicate: 1,
+            evolutionBusinessKey: evolutionBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const evolutions = sciipCreateKnowledgeEvolutions_({
-    businessKey,
-    evolutionDate,
-    learnings,
-    processor
+      const learnings = sciipGetRuntimeRecordsByDate620_(
+        'VALIDATED_LEARNINGS',
+        'Learning_Date',
+        evolutionDate
+      );
+
+      if (learnings.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: KNOWLEDGE_EVOLUTION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            learningsReviewed: 0,
+            knowledgeEvolutionsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const evolutions = sciipCreateKnowledgeEvolutions620_({
+        businessKey: evolutionBusinessKey,
+        evolutionDate: evolutionDate,
+        learnings: learnings,
+        processor: KNOWLEDGE_EVOLUTION_PROCESSOR
+      });
+
+      evolutions.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: KNOWLEDGE_EVOLUTION_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: evolutions.length,
+        recordsRead: learnings.length,
+        processed: evolutions.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          learningsReviewed: learnings.length,
+          knowledgeEvolutionsCreated: evolutions.length,
+          skippedDuplicate: 0,
+          evolutionBusinessKey: evolutionBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  evolutions.forEach(row => outputSheet.appendRow(row));
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    learningsReviewed: learnings.length,
-    knowledgeEvolutionsCreated: evolutions.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
 }
 
-function sciipCreateKnowledgeEvolutions_(args) {
+function sciipRuntimeBusinessKeyPrefixExists620_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate620_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue620_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue620_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable620_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey620_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipCreateKnowledgeEvolutions620_(args) {
   const now = new Date();
 
-  const rows = args.learnings.map(learning => {
-    const learningId = sciipExtractFirstAvailable_(learning, [
+  const rows = args.learnings.map(function(learning) {
+    const learningId = sciipExtractFirstAvailable620_(learning, [
       'Learning_ID'
     ]);
 
-    const validationDecisionId = sciipExtractFirstAvailable_(learning, [
+    const validationDecisionId = sciipExtractFirstAvailable620_(learning, [
       'Validation_Decision_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable_(learning, [
+    const hypothesisId = sciipExtractFirstAvailable620_(learning, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(learning, [
+    const hypothesisType = sciipExtractFirstAvailable620_(learning, [
       'Hypothesis_Type'
     ]);
 
-    const learningType = sciipExtractFirstAvailable_(learning, [
+    const learningType = sciipExtractFirstAvailable620_(learning, [
       'Learning_Type'
     ]);
 
     const profile =
-      sciipInferKnowledgeEvolutionProfile_(learning);
+      sciipInferKnowledgeEvolutionProfile620_(learning);
 
     const rowKey =
-      `${args.businessKey}|${learningType}|${sciipNormalizeMissionKey_(learningId || validationDecisionId || hypothesisId || profile.evolutionTitle)}`;
+      args.businessKey + '|' + learningType + '|' +
+      sciipNormalizeMissionKey620_(learningId || validationDecisionId || hypothesisId || profile.evolutionTitle);
 
     return [
       sciipGenerateId_('KNE'),
@@ -169,52 +261,52 @@ function sciipCreateKnowledgeEvolutions_(args) {
       profile.evolutionRationale,
       profile.evolutionPriority,
       'PROPOSED',
-      `VALIDATED_LEARNINGS:${learningId}`,
+      'VALIDATED_LEARNINGS:' + learningId,
       'ACTIVE',
       now.toISOString(),
       args.processor
     ];
   });
 
-  return sciipDeduplicateKnowledgeEvolutionRows_(rows);
+  return sciipDeduplicateKnowledgeEvolutionRows620_(rows);
 }
 
-function sciipInferKnowledgeEvolutionProfile_(learning) {
-  const hypothesisType = sciipExtractFirstAvailable_(learning, [
+function sciipInferKnowledgeEvolutionProfile620_(learning) {
+  const hypothesisType = sciipExtractFirstAvailable620_(learning, [
     'Hypothesis_Type'
   ]);
 
-  const learningType = sciipExtractFirstAvailable_(learning, [
+  const learningType = sciipExtractFirstAvailable620_(learning, [
     'Learning_Type'
   ]);
 
-  const validationDecision = sciipExtractFirstAvailable_(learning, [
+  const validationDecision = sciipExtractFirstAvailable620_(learning, [
     'Validation_Decision'
   ]);
 
-  const whatSciipLearned = sciipExtractFirstAvailable_(learning, [
+  const whatSciipLearned = sciipExtractFirstAvailable620_(learning, [
     'What_SCIIP_Learned'
   ]);
 
-  const graphRecommendation = sciipExtractFirstAvailable_(learning, [
+  const graphRecommendation = sciipExtractFirstAvailable620_(learning, [
     'Graph_Update_Recommendation'
   ]);
 
-  const processorRecommendation = sciipExtractFirstAvailable_(learning, [
+  const processorRecommendation = sciipExtractFirstAvailable620_(learning, [
     'Processor_Update_Recommendation'
   ]);
 
-  const futureSignalWeighting = sciipExtractFirstAvailable_(learning, [
+  const futureSignalWeighting = sciipExtractFirstAvailable620_(learning, [
     'Future_Signal_Weighting'
   ]);
 
   const learningConfidence =
-    sciipExtractFirstAvailable_(learning, [
+    sciipExtractFirstAvailable620_(learning, [
       'Learning_Confidence'
     ]) || 'LOW';
 
   let evolutionType = 'GENERAL_KNOWLEDGE_EVOLUTION';
-  let evolutionTitle = `Knowledge evolution from ${learningType || 'validated learning'}`;
+  let evolutionTitle = 'Knowledge evolution from ' + (learningType || 'validated learning');
   let graphUpdateAction =
     graphRecommendation || 'Preserve learning and source linkage in the knowledge graph.';
   let entityConfidenceAdjustment = 'NO_CHANGE';
@@ -279,29 +371,29 @@ function sciipInferKnowledgeEvolutionProfile_(learning) {
   }
 
   if (hypothesisType === 'PROPERTY_HYPOTHESIS') {
-    evolutionType = `PROPERTY_${evolutionType}`;
+    evolutionType = 'PROPERTY_' + evolutionType;
     evolutionTitle = 'Property knowledge evolution';
   }
 
   if (hypothesisType === 'COMPANY_HYPOTHESIS') {
-    evolutionType = `COMPANY_${evolutionType}`;
+    evolutionType = 'COMPANY_' + evolutionType;
     evolutionTitle = 'Company knowledge evolution';
   }
 
   if (hypothesisType === 'RISK_HYPOTHESIS') {
-    evolutionType = `RISK_${evolutionType}`;
+    evolutionType = 'RISK_' + evolutionType;
     evolutionTitle = 'Risk knowledge evolution';
     evolutionPriority = 'HIGH';
   }
 
   if (hypothesisType === 'OPPORTUNITY_HYPOTHESIS') {
-    evolutionType = `OPPORTUNITY_${evolutionType}`;
+    evolutionType = 'OPPORTUNITY_' + evolutionType;
     evolutionTitle = 'Opportunity knowledge evolution';
     evolutionPriority = 'HIGH';
   }
 
   if (hypothesisType === 'OPERATING_SYSTEM_HYPOTHESIS') {
-    evolutionType = `SYSTEM_${evolutionType}`;
+    evolutionType = 'SYSTEM_' + evolutionType;
     evolutionTitle = 'Operating system knowledge evolution';
     processorEvolutionAction =
       processorRecommendation ||
@@ -309,33 +401,33 @@ function sciipInferKnowledgeEvolutionProfile_(learning) {
   }
 
   const evolutionRationale = [
-    `Validation decision: ${validationDecision || 'UNKNOWN'}.`,
-    `Learning type: ${learningType || 'UNKNOWN'}.`,
-    `What SCIIP learned: ${whatSciipLearned || 'No learning statement recorded.'}`,
-    `Graph recommendation: ${graphUpdateAction}`,
-    `Processor recommendation: ${processorEvolutionAction}`,
-    `Future signal weighting: ${signalWeightAdjustment}`
+    'Validation decision: ' + (validationDecision || 'UNKNOWN') + '.',
+    'Learning type: ' + (learningType || 'UNKNOWN') + '.',
+    'What SCIIP learned: ' + (whatSciipLearned || 'No learning statement recorded.'),
+    'Graph recommendation: ' + graphUpdateAction,
+    'Processor recommendation: ' + processorEvolutionAction,
+    'Future signal weighting: ' + signalWeightAdjustment
   ].join('\n');
 
   return {
-    evolutionType,
-    evolutionTitle,
-    graphUpdateAction,
-    entityConfidenceAdjustment,
-    relationshipStrengthAdjustment,
-    signalWeightAdjustment,
-    processorEvolutionAction,
-    reasoningImprovement,
-    evolutionRationale,
-    evolutionPriority
+    evolutionType: evolutionType,
+    evolutionTitle: evolutionTitle,
+    graphUpdateAction: graphUpdateAction,
+    entityConfidenceAdjustment: entityConfidenceAdjustment,
+    relationshipStrengthAdjustment: relationshipStrengthAdjustment,
+    signalWeightAdjustment: signalWeightAdjustment,
+    processorEvolutionAction: processorEvolutionAction,
+    reasoningImprovement: reasoningImprovement,
+    evolutionRationale: evolutionRationale,
+    evolutionPriority: evolutionPriority
   };
 }
 
-function sciipDeduplicateKnowledgeEvolutionRows_(rows) {
+function sciipDeduplicateKnowledgeEvolutionRows620_(rows) {
   const seen = {};
   const deduped = [];
 
-  rows.forEach(row => {
+  rows.forEach(function(row) {
     const businessKey = row[1];
 
     if (!seen[businessKey]) {
@@ -353,7 +445,7 @@ function sciipTestKnowledgeEvolutionProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestKnowledgeEvolutionProcessor',
-    result
+    result: result
   }));
 
   return result;
