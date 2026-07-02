@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 670_PredictiveScenarioProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - AUTONOMOUS_REASONING
+ * AUTONOMOUS_REASONING → PREDICTIVE_SCENARIOS
  *
- * Output:
- * - PREDICTIVE_SCENARIOS
- ************************************************************/
+ * Migration note:
+ * Preserves original 670 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const PREDICTIVE_SCENARIOS_SHEET =
-  'PREDICTIVE_SCENARIOS';
+const PREDICTIVE_SCENARIO_PROCESSOR = '670_PredictiveScenarioProcessor';
+const PREDICTIVE_SCENARIOS_SHEET = 'PREDICTIVE_SCENARIOS';
 
 const PREDICTIVE_SCENARIOS_HEADERS = [
   'Scenario_ID',
@@ -42,119 +42,210 @@ const PREDICTIVE_SCENARIOS_HEADERS = [
 ];
 
 function sciipEnsurePredictiveScenariosSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(PREDICTIVE_SCENARIOS_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(PREDICTIVE_SCENARIOS_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, PREDICTIVE_SCENARIOS_HEADERS.length)
-    .setValues([PREDICTIVE_SCENARIOS_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    PREDICTIVE_SCENARIOS_SHEET,
+    PREDICTIVE_SCENARIOS_HEADERS
+  );
 }
 
 function sciipRunPredictiveScenarioProcessor() {
-  const processor = '670_PredictiveScenarioProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: PREDICTIVE_SCENARIO_PROCESSOR,
+    action: 'PREDICTIVE_SCENARIO_BUILD',
+    sourceSheet: 'AUTONOMOUS_REASONING',
+    targetSheet: PREDICTIVE_SCENARIOS_SHEET,
+    ledgerSheet: 'PREDICTIVE_SCENARIOS_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsurePredictiveScenariosSchema();
+    buildPayload: function(context, definition) {
+      const reasoningOutputs = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_REASONING');
 
-  const scenarioDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `PREDICTIVE_SCENARIO|${scenarioDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: reasoningOutputs.length,
+        outputCount: reasoningOutputs.length || 1,
+        summary: 'Predictive scenario runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: PREDICTIVE_SCENARIO_PROCESSOR,
+          inputSheets: ['AUTONOMOUS_REASONING']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      scenariosCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const reasoningOutputs = sciipGetRecordsByDate_(
-    'AUTONOMOUS_REASONING',
-    'Reasoning_Date',
-    scenarioDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsurePredictiveScenariosSchema();
+      const scenarioDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const scenarioBusinessKey = 'PREDICTIVE_SCENARIO|' + scenarioDate;
 
-  if (reasoningOutputs.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      reasoningOutputsReviewed: 0,
-      scenariosCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists670_(definition.targetSheet, scenarioBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: PREDICTIVE_SCENARIO_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            scenariosCreated: 0,
+            skippedDuplicate: 1,
+            scenarioBusinessKey: scenarioBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const scenarios = sciipCreatePredictiveScenarios_({
-    businessKey,
-    scenarioDate,
-    reasoningOutputs,
-    processor
+      const reasoningOutputs = sciipGetRuntimeRecordsByDate670_(
+        'AUTONOMOUS_REASONING',
+        'Reasoning_Date',
+        scenarioDate
+      );
+
+      if (reasoningOutputs.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: PREDICTIVE_SCENARIO_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            reasoningOutputsReviewed: 0,
+            scenariosCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const scenarios = sciipCreatePredictiveScenarios670_({
+        businessKey: scenarioBusinessKey,
+        scenarioDate: scenarioDate,
+        reasoningOutputs: reasoningOutputs,
+        processor: PREDICTIVE_SCENARIO_PROCESSOR
+      });
+
+      scenarios.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: PREDICTIVE_SCENARIO_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: scenarios.length,
+        recordsRead: reasoningOutputs.length,
+        processed: scenarios.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          reasoningOutputsReviewed: reasoningOutputs.length,
+          scenariosCreated: scenarios.length,
+          skippedDuplicate: 0,
+          scenarioBusinessKey: scenarioBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  scenarios.forEach(row => outputSheet.appendRow(row));
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    reasoningOutputsReviewed: reasoningOutputs.length,
-    scenariosCreated: scenarios.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
 }
 
-function sciipCreatePredictiveScenarios_(args) {
+function sciipRuntimeBusinessKeyPrefixExists670_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate670_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue670_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue670_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable670_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey670_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipCreatePredictiveScenarios670_(args) {
   const now = new Date();
 
-  const rows = args.reasoningOutputs.map(reasoning => {
-    const reasoningId = sciipExtractFirstAvailable_(reasoning, [
+  const rows = args.reasoningOutputs.map(function(reasoning) {
+    const reasoningId = sciipExtractFirstAvailable670_(reasoning, [
       'Reasoning_ID'
     ]);
 
-    const memoryId = sciipExtractFirstAvailable_(reasoning, [
+    const memoryId = sciipExtractFirstAvailable670_(reasoning, [
       'Memory_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable_(reasoning, [
+    const hypothesisId = sciipExtractFirstAvailable670_(reasoning, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(reasoning, [
+    const hypothesisType = sciipExtractFirstAvailable670_(reasoning, [
       'Hypothesis_Type'
     ]);
 
-    const signalCategory = sciipExtractFirstAvailable_(reasoning, [
+    const signalCategory = sciipExtractFirstAvailable670_(reasoning, [
       'Signal_Category'
     ]);
 
-    const reasoningType = sciipExtractFirstAvailable_(reasoning, [
+    const reasoningType = sciipExtractFirstAvailable670_(reasoning, [
       'Reasoning_Type'
     ]);
 
     const profile =
-      sciipInferPredictiveScenarioProfile_(reasoning);
+      sciipInferPredictiveScenarioProfile670_(reasoning);
 
     const rowKey =
-      `${args.businessKey}|${profile.scenarioType}|${sciipNormalizeMissionKey_(reasoningId || memoryId || hypothesisId || profile.scenarioTitle)}`;
+      args.businessKey + '|' + profile.scenarioType + '|' + sciipNormalizeMissionKey670_(reasoningId || memoryId || hypothesisId || profile.scenarioTitle);
 
     return [
       sciipGenerateId_('SCN'),
@@ -179,56 +270,56 @@ function sciipCreatePredictiveScenarios_(args) {
       profile.monitoringAction,
       profile.scenarioConfidence,
       'ACTIVE_SCENARIO',
-      `AUTONOMOUS_REASONING:${reasoningId}`,
+      'AUTONOMOUS_REASONING:' + reasoningId,
       'ACTIVE',
       now.toISOString(),
       args.processor
     ];
   });
 
-  return sciipDeduplicatePredictiveScenarioRows_(rows);
+  return sciipDeduplicatePredictiveScenarioRows670_(rows);
 }
 
-function sciipInferPredictiveScenarioProfile_(reasoning) {
-  const hypothesisType = sciipExtractFirstAvailable_(reasoning, [
+function sciipInferPredictiveScenarioProfile670_(reasoning) {
+  const hypothesisType = sciipExtractFirstAvailable670_(reasoning, [
     'Hypothesis_Type'
   ]);
 
-  const signalCategory = sciipExtractFirstAvailable_(reasoning, [
+  const signalCategory = sciipExtractFirstAvailable670_(reasoning, [
     'Signal_Category'
   ]);
 
-  const reasoningType = sciipExtractFirstAvailable_(reasoning, [
+  const reasoningType = sciipExtractFirstAvailable670_(reasoning, [
     'Reasoning_Type'
   ]);
 
-  const strategicInterpretation = sciipExtractFirstAvailable_(reasoning, [
+  const strategicInterpretation = sciipExtractFirstAvailable670_(reasoning, [
     'Strategic_Interpretation'
   ]);
 
-  const futureImplication = sciipExtractFirstAvailable_(reasoning, [
+  const futureImplication = sciipExtractFirstAvailable670_(reasoning, [
     'Future_Implication'
   ]);
 
-  const recommendedIntelligenceAction = sciipExtractFirstAvailable_(reasoning, [
+  const recommendedIntelligenceAction = sciipExtractFirstAvailable670_(reasoning, [
     'Recommended_Intelligence_Action'
   ]);
 
-  const recommendedOperatingAction = sciipExtractFirstAvailable_(reasoning, [
+  const recommendedOperatingAction = sciipExtractFirstAvailable670_(reasoning, [
     'Recommended_Operating_Action'
   ]);
 
-  const nextStrategicQuestion = sciipExtractFirstAvailable_(reasoning, [
+  const nextStrategicQuestion = sciipExtractFirstAvailable670_(reasoning, [
     'Next_Strategic_Question'
   ]);
 
   const reasoningConfidence =
-    sciipExtractFirstAvailable_(reasoning, [
+    sciipExtractFirstAvailable670_(reasoning, [
       'Reasoning_Confidence'
     ]) || 'LOW';
 
   let scenarioType = 'GENERAL_MARKET_SCENARIO';
-  let scenarioTitle = `Predictive scenario: ${signalCategory || 'general signal'}`;
+  let scenarioTitle = 'Predictive scenario: ' + (signalCategory || 'general signal');
   let scenarioDriver =
     signalCategory || 'General SCIIP intelligence signal';
   let expectedDirection = 'UNCERTAIN';
@@ -313,7 +404,7 @@ function sciipInferPredictiveScenarioProfile_(reasoning) {
   if (hypothesisType === 'RISK_HYPOTHESIS') {
     scenarioTitle = 'Risk predictive scenario';
     scenarioDriver = 'Risk intelligence signal';
-    scenarioType = `RISK_${scenarioType}`;
+    scenarioType = 'RISK_' + scenarioType;
     probabilityAssessment =
       probabilityAssessment === 'REQUIRES_REVIEW' ? probabilityAssessment : 'POSSIBLE';
     strategicImplication =
@@ -328,7 +419,7 @@ function sciipInferPredictiveScenarioProfile_(reasoning) {
   if (hypothesisType === 'OPPORTUNITY_HYPOTHESIS') {
     scenarioTitle = 'Opportunity predictive scenario';
     scenarioDriver = 'Opportunity intelligence signal';
-    scenarioType = `OPPORTUNITY_${scenarioType}`;
+    scenarioType = 'OPPORTUNITY_' + scenarioType;
     strategicImplication =
       'This scenario may indicate an actionable opportunity if demand, timing, ownership fit, pricing, and target relevance are confirmed.';
     operatingImplication =
@@ -341,7 +432,7 @@ function sciipInferPredictiveScenarioProfile_(reasoning) {
   if (hypothesisType === 'OPERATING_SYSTEM_HYPOTHESIS') {
     scenarioTitle = 'Operating system predictive scenario';
     scenarioDriver = 'SCIIP operating-system signal';
-    scenarioType = `SYSTEM_${scenarioType}`;
+    scenarioType = 'SYSTEM_' + scenarioType;
     marketImplication =
       'Market implication is indirect; the scenario primarily affects SCIIP reasoning quality and operating performance.';
     operatingImplication =
@@ -351,35 +442,35 @@ function sciipInferPredictiveScenarioProfile_(reasoning) {
   }
 
   const scenarioStatement = [
-    `SCIIP generated a forward-looking scenario from autonomous reasoning.`,
-    `Reasoning type: ${reasoningType || 'UNKNOWN'}.`,
-    `Signal category: ${signalCategory || 'UNKNOWN'}.`,
-    `Strategic interpretation: ${strategicInterpretation || 'No strategic interpretation recorded.'}`,
-    `Future implication: ${futureImplication || 'No future implication recorded.'}`,
-    `Next strategic question: ${nextStrategicQuestion || 'No next strategic question recorded.'}`
+    'SCIIP generated a forward-looking scenario from autonomous reasoning.',
+    'Reasoning type: ' + (reasoningType || 'UNKNOWN') + '.',
+    'Signal category: ' + (signalCategory || 'UNKNOWN') + '.',
+    'Strategic interpretation: ' + (strategicInterpretation || 'No strategic interpretation recorded.'),
+    'Future implication: ' + (futureImplication || 'No future implication recorded.'),
+    'Next strategic question: ' + (nextStrategicQuestion || 'No next strategic question recorded.')
   ].join('\n');
 
   return {
-    scenarioType,
-    scenarioTitle,
-    scenarioStatement,
-    scenarioDriver,
-    expectedDirection,
-    probabilityAssessment,
-    strategicImplication,
-    marketImplication,
-    operatingImplication,
-    earlyIndicators,
-    monitoringAction,
-    scenarioConfidence
+    scenarioType: scenarioType,
+    scenarioTitle: scenarioTitle,
+    scenarioStatement: scenarioStatement,
+    scenarioDriver: scenarioDriver,
+    expectedDirection: expectedDirection,
+    probabilityAssessment: probabilityAssessment,
+    strategicImplication: strategicImplication,
+    marketImplication: marketImplication,
+    operatingImplication: operatingImplication,
+    earlyIndicators: earlyIndicators,
+    monitoringAction: monitoringAction,
+    scenarioConfidence: scenarioConfidence
   };
 }
 
-function sciipDeduplicatePredictiveScenarioRows_(rows) {
+function sciipDeduplicatePredictiveScenarioRows670_(rows) {
   const seen = {};
   const deduped = [];
 
-  rows.forEach(row => {
+  rows.forEach(function(row) {
     const businessKey = row[1];
 
     if (!seen[businessKey]) {
@@ -397,7 +488,7 @@ function sciipTestPredictiveScenarioProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestPredictiveScenarioProcessor',
-    result
+    result: result
   }));
 
   return result;
