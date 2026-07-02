@@ -1,16 +1,16 @@
-/************************************************************
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
  * 640_AutonomousModelCalibrationProcessor
- * SCIIP_OS v4.1
  *
- * Input:
- * - SIGNAL_WEIGHT_OPTIMIZATION
+ * SIGNAL_WEIGHT_OPTIMIZATION → AUTONOMOUS_MODEL_CALIBRATION
  *
- * Output:
- * - AUTONOMOUS_MODEL_CALIBRATION
- ************************************************************/
+ * Migration note:
+ * Preserves original 640 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
 
-const AUTONOMOUS_MODEL_CALIBRATION_SHEET =
-  'AUTONOMOUS_MODEL_CALIBRATION';
+const AUTONOMOUS_MODEL_CALIBRATION_PROCESSOR = '640_AutonomousModelCalibrationProcessor';
+const AUTONOMOUS_MODEL_CALIBRATION_SHEET = 'AUTONOMOUS_MODEL_CALIBRATION';
 
 const AUTONOMOUS_MODEL_CALIBRATION_HEADERS = [
   'Calibration_ID',
@@ -39,119 +39,210 @@ const AUTONOMOUS_MODEL_CALIBRATION_HEADERS = [
 ];
 
 function sciipEnsureAutonomousModelCalibrationSchema() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(AUTONOMOUS_MODEL_CALIBRATION_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(AUTONOMOUS_MODEL_CALIBRATION_SHEET);
-  }
-
-  sheet.getRange(1, 1, 1, AUTONOMOUS_MODEL_CALIBRATION_HEADERS.length)
-    .setValues([AUTONOMOUS_MODEL_CALIBRATION_HEADERS]);
-
-  sheet.setFrozenRows(1);
-  return sheet;
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    AUTONOMOUS_MODEL_CALIBRATION_SHEET,
+    AUTONOMOUS_MODEL_CALIBRATION_HEADERS
+  );
 }
 
 function sciipRunAutonomousModelCalibrationProcessor() {
-  const processor = '640_AutonomousModelCalibrationProcessor';
-  const startedAt = new Date();
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: AUTONOMOUS_MODEL_CALIBRATION_PROCESSOR,
+    action: 'AUTONOMOUS_MODEL_CALIBRATION_BUILD',
+    sourceSheet: 'SIGNAL_WEIGHT_OPTIMIZATION',
+    targetSheet: AUTONOMOUS_MODEL_CALIBRATION_SHEET,
+    ledgerSheet: 'AUTONOMOUS_MODEL_CALIBRATION_RUNTIME_LEDGER',
 
-  const outputSheet =
-    sciipEnsureAutonomousModelCalibrationSchema();
+    buildPayload: function(context, definition) {
+      const signalWeights = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('SIGNAL_WEIGHT_OPTIMIZATION');
 
-  const calibrationDate = sciipFormatDateKey_(startedAt);
-  const businessKey =
-    `AUTONOMOUS_MODEL_CALIBRATION|${calibrationDate}`;
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: signalWeights.length,
+        outputCount: signalWeights.length || 1,
+        summary: 'Autonomous model calibration runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: AUTONOMOUS_MODEL_CALIBRATION_PROCESSOR,
+          inputSheets: ['SIGNAL_WEIGHT_OPTIMIZATION']
+        }
+      });
+    },
 
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      calibrationsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
 
-  const signalWeights = sciipGetRecordsByDate_(
-    'SIGNAL_WEIGHT_OPTIMIZATION',
-    'Optimization_Date',
-    calibrationDate
-  );
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousModelCalibrationSchema();
+      const calibrationDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const calibrationBusinessKey = 'AUTONOMOUS_MODEL_CALIBRATION|' + calibrationDate;
 
-  if (signalWeights.length === 0) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      signalWeightsReviewed: 0,
-      calibrationsCreated: 0,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
+      if (sciipRuntimeBusinessKeyPrefixExists640_(definition.targetSheet, calibrationBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: AUTONOMOUS_MODEL_CALIBRATION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            calibrationsCreated: 0,
+            skippedDuplicate: 1,
+            calibrationBusinessKey: calibrationBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
 
-  const calibrations = sciipCreateAutonomousModelCalibrations_({
-    businessKey,
-    calibrationDate,
-    signalWeights,
-    processor
+      const signalWeights = sciipGetRuntimeRecordsByDate640_(
+        'SIGNAL_WEIGHT_OPTIMIZATION',
+        'Optimization_Date',
+        calibrationDate
+      );
+
+      if (signalWeights.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: AUTONOMOUS_MODEL_CALIBRATION_PROCESSOR,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            signalWeightsReviewed: 0,
+            calibrationsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const calibrations = sciipCreateAutonomousModelCalibrations640_({
+        businessKey: calibrationBusinessKey,
+        calibrationDate: calibrationDate,
+        signalWeights: signalWeights,
+        processor: AUTONOMOUS_MODEL_CALIBRATION_PROCESSOR
+      });
+
+      calibrations.forEach(function(row) {
+        outputSheet.appendRow(row);
+      });
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: AUTONOMOUS_MODEL_CALIBRATION_PROCESSOR,
+        businessKey: context.businessKey,
+        recordsCreated: calibrations.length,
+        recordsRead: signalWeights.length,
+        processed: calibrations.length,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          signalWeightsReviewed: signalWeights.length,
+          calibrationsCreated: calibrations.length,
+          skippedDuplicate: 0,
+          calibrationBusinessKey: calibrationBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
   });
-
-  calibrations.forEach(row => outputSheet.appendRow(row));
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    signalWeightsReviewed: signalWeights.length,
-    calibrationsCreated: calibrations.length,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: new Date().toISOString(),
-    durationMs: new Date() - startedAt
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
 }
 
-function sciipCreateAutonomousModelCalibrations_(args) {
+function sciipRuntimeBusinessKeyPrefixExists640_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate640_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue640_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue640_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable640_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeMissionKey640_(value) {
+  return String(value || 'UNKNOWN')
+    .toUpperCase()
+    .replace(/[^A-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .substring(0, 80) || 'UNKNOWN';
+}
+
+function sciipCreateAutonomousModelCalibrations640_(args) {
   const now = new Date();
 
-  const rows = args.signalWeights.map(signalWeight => {
-    const signalWeightId = sciipExtractFirstAvailable_(signalWeight, [
+  const rows = args.signalWeights.map(function(signalWeight) {
+    const signalWeightId = sciipExtractFirstAvailable640_(signalWeight, [
       'Signal_Weight_ID'
     ]);
 
-    const evolutionId = sciipExtractFirstAvailable_(signalWeight, [
+    const evolutionId = sciipExtractFirstAvailable640_(signalWeight, [
       'Evolution_ID'
     ]);
 
-    const learningId = sciipExtractFirstAvailable_(signalWeight, [
+    const learningId = sciipExtractFirstAvailable640_(signalWeight, [
       'Learning_ID'
     ]);
 
-    const hypothesisId = sciipExtractFirstAvailable_(signalWeight, [
+    const hypothesisId = sciipExtractFirstAvailable640_(signalWeight, [
       'Hypothesis_ID'
     ]);
 
-    const hypothesisType = sciipExtractFirstAvailable_(signalWeight, [
+    const hypothesisType = sciipExtractFirstAvailable640_(signalWeight, [
       'Hypothesis_Type'
     ]);
 
-    const signalCategory = sciipExtractFirstAvailable_(signalWeight, [
+    const signalCategory = sciipExtractFirstAvailable640_(signalWeight, [
       'Signal_Category'
     ]);
 
     const profile =
-      sciipInferAutonomousModelCalibrationProfile_(signalWeight);
+      sciipInferAutonomousModelCalibrationProfile640_(signalWeight);
 
     const rowKey =
-      `${args.businessKey}|${signalCategory}|${sciipNormalizeMissionKey_(signalWeightId || evolutionId || learningId || hypothesisId || profile.calibrationType)}`;
+      args.businessKey + '|' + signalCategory + '|' + sciipNormalizeMissionKey640_(signalWeightId || evolutionId || learningId || hypothesisId || profile.calibrationType);
 
     return [
       sciipGenerateId_('CAL'),
@@ -173,53 +264,53 @@ function sciipCreateAutonomousModelCalibrations_(args) {
       profile.expectedModelEffect,
       'PROPOSED',
       profile.calibrationPriority,
-      `SIGNAL_WEIGHT_OPTIMIZATION:${signalWeightId}`,
+      'SIGNAL_WEIGHT_OPTIMIZATION:' + signalWeightId,
       'ACTIVE',
       now.toISOString(),
       args.processor
     ];
   });
 
-  return sciipDeduplicateAutonomousModelCalibrationRows_(rows);
+  return sciipDeduplicateAutonomousModelCalibrationRows640_(rows);
 }
 
-function sciipInferAutonomousModelCalibrationProfile_(signalWeight) {
-  const hypothesisType = sciipExtractFirstAvailable_(signalWeight, [
+function sciipInferAutonomousModelCalibrationProfile640_(signalWeight) {
+  const hypothesisType = sciipExtractFirstAvailable640_(signalWeight, [
     'Hypothesis_Type'
   ]);
 
-  const signalCategory = sciipExtractFirstAvailable_(signalWeight, [
+  const signalCategory = sciipExtractFirstAvailable640_(signalWeight, [
     'Signal_Category'
   ]);
 
   const affectedProcessor =
-    sciipExtractFirstAvailable_(signalWeight, [
+    sciipExtractFirstAvailable640_(signalWeight, [
       'Affected_Processor'
     ]) || '560_HypothesisGenerationProcessor';
 
   const affectedGraphObject =
-    sciipExtractFirstAvailable_(signalWeight, [
+    sciipExtractFirstAvailable640_(signalWeight, [
       'Affected_Graph_Object'
     ]) || 'MARKET_INTELLIGENCE_GRAPH';
 
-  const recommendedWeightAction = sciipExtractFirstAvailable_(signalWeight, [
+  const recommendedWeightAction = sciipExtractFirstAvailable640_(signalWeight, [
     'Recommended_Weight_Action'
   ]);
 
-  const recommendedWeightDirection = sciipExtractFirstAvailable_(signalWeight, [
+  const recommendedWeightDirection = sciipExtractFirstAvailable640_(signalWeight, [
     'Recommended_Weight_Direction'
   ]);
 
-  const recommendedWeightMagnitude = sciipExtractFirstAvailable_(signalWeight, [
+  const recommendedWeightMagnitude = sciipExtractFirstAvailable640_(signalWeight, [
     'Recommended_Weight_Magnitude'
   ]);
 
-  const optimizationRationale = sciipExtractFirstAvailable_(signalWeight, [
+  const optimizationRationale = sciipExtractFirstAvailable640_(signalWeight, [
     'Optimization_Rationale'
   ]);
 
   const optimizationPriority =
-    sciipExtractFirstAvailable_(signalWeight, [
+    sciipExtractFirstAvailable640_(signalWeight, [
       'Optimization_Priority'
     ]) || 'MEDIUM';
 
@@ -300,34 +391,34 @@ function sciipInferAutonomousModelCalibrationProfile_(signalWeight) {
   }
 
   const calibrationRationale = [
-    `Signal category: ${signalCategory || 'UNKNOWN'}.`,
-    `Hypothesis type: ${hypothesisType || 'UNKNOWN'}.`,
-    `Affected processor: ${affectedProcessor}.`,
-    `Affected graph object: ${affectedGraphObject}.`,
-    `Recommended weight action: ${recommendedWeightAction || 'UNKNOWN'}.`,
-    `Recommended direction: ${recommendedWeightDirection || 'UNKNOWN'}.`,
-    `Recommended magnitude: ${recommendedWeightMagnitude || 'UNKNOWN'}.`,
-    `Optimization rationale: ${optimizationRationale || 'No rationale recorded.'}`
+    'Signal category: ' + (signalCategory || 'UNKNOWN') + '.',
+    'Hypothesis type: ' + (hypothesisType || 'UNKNOWN') + '.',
+    'Affected processor: ' + affectedProcessor + '.',
+    'Affected graph object: ' + affectedGraphObject + '.',
+    'Recommended weight action: ' + (recommendedWeightAction || 'UNKNOWN') + '.',
+    'Recommended direction: ' + (recommendedWeightDirection || 'UNKNOWN') + '.',
+    'Recommended magnitude: ' + (recommendedWeightMagnitude || 'UNKNOWN') + '.',
+    'Optimization rationale: ' + (optimizationRationale || 'No rationale recorded.')
   ].join('\n');
 
   return {
-    affectedProcessor,
-    affectedGraphObject,
-    calibrationType,
-    calibrationAction,
-    calibrationDirection,
-    calibrationMagnitude,
-    calibrationRationale,
-    expectedModelEffect,
-    calibrationPriority
+    affectedProcessor: affectedProcessor,
+    affectedGraphObject: affectedGraphObject,
+    calibrationType: calibrationType,
+    calibrationAction: calibrationAction,
+    calibrationDirection: calibrationDirection,
+    calibrationMagnitude: calibrationMagnitude,
+    calibrationRationale: calibrationRationale,
+    expectedModelEffect: expectedModelEffect,
+    calibrationPriority: calibrationPriority
   };
 }
 
-function sciipDeduplicateAutonomousModelCalibrationRows_(rows) {
+function sciipDeduplicateAutonomousModelCalibrationRows640_(rows) {
   const seen = {};
   const deduped = [];
 
-  rows.forEach(row => {
+  rows.forEach(function(row) {
     const businessKey = row[1];
 
     if (!seen[businessKey]) {
@@ -345,7 +436,7 @@ function sciipTestAutonomousModelCalibrationProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestAutonomousModelCalibrationProcessor',
-    result
+    result: result
   }));
 
   return result;
