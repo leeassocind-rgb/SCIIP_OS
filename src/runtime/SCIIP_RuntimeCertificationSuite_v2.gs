@@ -67,8 +67,10 @@ function sciipRunRuntimeCertificationSuiteV2() {
     completedAt: new Date().toISOString()
   };
 
-  Logger.log(JSON.stringify(summary, null, 2));
-  return summary;
+  sciipRecordSystemCertification(summary);
+
+Logger.log(JSON.stringify(summary, null, 2));
+return summary;
 }
 
 function sciipRuntimeCertificationTest_(id, name) {
