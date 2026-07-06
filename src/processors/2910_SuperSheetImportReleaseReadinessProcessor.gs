@@ -1,175 +1,221 @@
 /*******************************************************
- * 2910_SuperSheetImportReleaseReadinessProcessor
- * SCIIP_OS v5.4 — SuperSheet Intake Firewall
+ * SCIIP_OS v5.4 SuperSheet Import Firewall
+ * 2910_SuperSheetImportReleaseGateProcessor
  *******************************************************/
 
-class SuperSheetImportReleaseReadinessProcessor extends SCIIP_RuntimeProcessorBase {
-  constructor() {
-    super({
-      processorId: '2910',
-      processorName: '2910_SuperSheetImportReleaseReadinessProcessor',
-      sourceSheetName: 'SUPERSHEET_IMPORT_SYSTEM_CERTIFICATION_LEDGER_SUMMARY',
-      targetSheetName: 'SUPERSHEET_IMPORT_RELEASE_READINESS',
-      businessKeyPrefix: 'SUPERSHEET_IMPORT_RELEASE_READINESS',
-      requiredHeaders: [
-        'business_key',
-        'readiness_date',
-        'release_readiness_status',
-        'system_certification_status',
-        'source_sheet',
-        'target_sheet',
-        'transaction_id',
-        'runtime_payload',
-        'created_at'
-      ]
-    });
-  }
+function sciipGet2910ProcessorName_() {
+  return '2910_SuperSheetImportReleaseGate';
+}
 
-  process() {
-    const transaction = this.createTransaction();
-    const now = new Date();
-    const readinessDate = SCIIP_DateUtilities.formatDateKey(now);
+function sciipGet2910SourceSheet_() {
+  return 'SUPERSHEET_IMPORT_SYSTEM_CERTIFICATION_LEDGER_SUMMARY';
+}
 
-    const sourceSheet = SCIIP_SheetUtilities.getOrCreateSheet(
-      this.sourceSheetName,
-      [
-        'business_key',
-        'certification_date',
-        'import_system_certification_status',
-        'source_sheet',
-        'target_sheet',
-        'transaction_id',
-        'runtime_payload',
-        'created_at'
-      ]
-    );
+function sciipGet2910TargetSheet_() {
+  return 'SUPERSHEET_IMPORT_RELEASE_GATE';
+}
 
-    const targetSheet = SCIIP_SheetUtilities.getOrCreateSheet(
-      this.targetSheetName,
-      this.requiredHeaders
-    );
+function sciipGet2910Action_() {
+  return 'SUPERSHEET_IMPORT_RELEASE_GATE';
+}
 
-    const sourceRows = SCIIP_SheetUtilities.getDataRows(sourceSheet);
+function sciipGet2910Headers_() {
+  return [
+    'Release_Gate_ID',
+    'Business_Key',
+    'Gate_Date',
+    'Source_Sheet',
+    'Source_Record_Count',
+    'Release_Gate_Status',
+    'Release_Posture',
+    'Blocking_Reason',
+    'Summary',
+    'Next_Action',
+    'Created_At',
+    'Processor'
+  ];
+}
 
-    if (!sourceRows || sourceRows.length === 0) {
-      return this.runtimeResult({
-        processor: this.processorName,
-        status: 'SKIPPED_NO_INPUTS',
-        businessKey: `${this.businessKeyPrefix}|${readinessDate}`,
-        recordsCreated: 0,
-        recordsUpdated: 0,
-        recordsRead: 0,
-        processed: 0,
-        skippedDuplicate: 0,
-        skippedNoInputs: 1,
-        skippedValidation: 0,
-        errors: 0,
+function sciipEnsure2910TargetSheet_() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    sciipGet2910TargetSheet_(),
+    sciipGet2910Headers_()
+  );
+}
+
+function sciipRun2910_SuperSheetImportReleaseGateProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGet2910ProcessorName_(),
+    action: sciipGet2910Action_(),
+    sourceSheet: sciipGet2910SourceSheet_(),
+    targetSheet: sciipGet2910TargetSheet_(),
+    ledgerSheet: 'SUPERSHEET_IMPORT_RELEASE_GATE_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const sourceRecords = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet) || [];
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: sourceRecords.length,
+        outputCount: sourceRecords.length ? 1 : 0,
+        summary: 'SuperSheet import release gate runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.4',
+          inputSheets: [definition.sourceSheet]
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.sourceSheet) errors.push('Definition missing sourceSheet.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const targetSheet = sciipEnsure2910TargetSheet_();
+      const sourceRecords = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(definition.sourceSheet) || [];
+
+      if (!sourceRecords.length) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGet2910ProcessorName_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            releaseGateStatus: 'SKIPPED_NO_INPUTS',
+            sourceSheet: definition.sourceSheet,
+            targetSheet: definition.targetSheet,
+            transactionId: transaction.transactionId,
+            nextAction: 'Run 2900_SuperSheetImportSystemCertificationLedgerProcessor after 2890 creates system certification records.'
+          })
+        });
+      }
+
+      const gateDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const gateBusinessKey = 'SUPERSHEET_IMPORT_RELEASE_GATE|' + gateDate;
+
+      if (sciip2910BusinessKeyExists_(definition.targetSheet, gateBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGet2910ProcessorName_(),
+          businessKey: context.businessKey,
+          recordsRead: sourceRecords.length,
+          processed: 0,
+          message: JSON.stringify({
+            releaseGateStatus: 'DUPLICATE_SKIPPED',
+            sourceSheet: definition.sourceSheet,
+            targetSheet: definition.targetSheet,
+            gateBusinessKey: gateBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const posture = sciip2910ResolveReleaseGatePosture_(sourceRecords);
+
+      targetSheet.appendRow([
+        'SUPERSHEET_IMPORT_RELEASE_GATE_' + Utilities.getUuid(),
+        gateBusinessKey,
+        gateDate,
+        definition.sourceSheet,
+        sourceRecords.length,
+        posture.status,
+        posture.posture,
+        posture.blockingReason,
+        posture.summary,
+        posture.nextAction,
+        new Date().toISOString(),
+        sciipGet2910ProcessorName_()
+      ]);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGet2910ProcessorName_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: sourceRecords.length,
+        processed: 1,
         message: JSON.stringify({
-          releaseReadinessStatus: 'SKIPPED_NO_INPUTS',
-          sourceSheet: this.sourceSheetName,
-          targetSheet: this.targetSheetName,
-          nextAction: 'Run after 2890 and 2900 once SuperSheet import system certification records exist.'
+          releaseGateStatus: posture.status,
+          releasePosture: posture.posture,
+          blockingReason: posture.blockingReason,
+          sourceRecordsReviewed: sourceRecords.length,
+          gateBusinessKey: gateBusinessKey,
+          transactionId: transaction.transactionId,
+          nextProcessor: '2920_SuperSheetImportReleaseGateLedgerProcessor'
         })
       });
     }
+  });
+}
 
-    const latestCertification = sourceRows[sourceRows.length - 1];
-    const systemCertificationStatus =
-      latestCertification.import_system_certification_status ||
-      latestCertification.system_certification_status ||
-      'UNKNOWN';
+function sciip2910BusinessKeyExists_(sheetName, businessKey) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName) || [];
+  return records.some(function(record) {
+    return String(record.Business_Key || '').trim() === businessKey;
+  });
+}
 
-    const readinessStatus =
-      systemCertificationStatus === 'CERTIFIED'
-        ? 'READY_FOR_RELEASE'
-        : 'NOT_READY_FOR_RELEASE';
+function sciip2910ResolveReleaseGatePosture_(records) {
+  const latest = records[records.length - 1] || {};
+  const statusText = Object.keys(latest).map(function(key) {
+    return String(latest[key] || '').toUpperCase();
+  }).join(' ');
 
-    const businessKey = `${this.businessKeyPrefix}|${readinessDate}`;
-
-    if (SCIIP_BusinessKeyUtilities.businessKeyExists(targetSheet, businessKey)) {
-      return this.runtimeResult({
-        processor: this.processorName,
-        status: 'SUCCESS',
-        businessKey,
-        recordsCreated: 0,
-        recordsUpdated: 0,
-        recordsRead: sourceRows.length,
-        processed: 0,
-        skippedDuplicate: 1,
-        skippedNoInputs: 0,
-        skippedValidation: 0,
-        errors: 0,
-        message: JSON.stringify({
-          releaseReadinessStatus: readinessStatus,
-          skippedDuplicate: true,
-          sourceSheet: this.sourceSheetName,
-          targetSheet: this.targetSheetName
-        })
-      });
-    }
-
-    const runtimePayload = {
-      processor: this.processorName,
-      readinessDate,
-      releaseReadinessStatus: readinessStatus,
-      systemCertificationStatus,
-      sourceSheet: this.sourceSheetName,
-      targetSheet: this.targetSheetName,
-      transactionId: transaction.transactionId,
-      nextAction:
-        readinessStatus === 'READY_FOR_RELEASE'
-          ? 'Proceed to SuperSheet import release authorization.'
-          : 'Hold release until system certification is CERTIFIED.'
+  if (
+    statusText.indexOf('SYSTEM_CERTIFICATION_LEDGER_CERTIFIED') !== -1 ||
+    statusText.indexOf('IMPORT_READY') !== -1
+  ) {
+    return {
+      status: 'RELEASE_GATE_OPEN',
+      posture: 'IMPORT_RELEASE_READY',
+      blockingReason: '',
+      summary: 'SuperSheet import system certification ledger is certified and ready for release.',
+      nextAction: 'Proceed to release gate ledger summary.'
     };
-
-    SCIIP_SheetUtilities.appendObjectRow(targetSheet, {
-      business_key: businessKey,
-      readiness_date: readinessDate,
-      release_readiness_status: readinessStatus,
-      system_certification_status: systemCertificationStatus,
-      source_sheet: this.sourceSheetName,
-      target_sheet: this.targetSheetName,
-      transaction_id: transaction.transactionId,
-      runtime_payload: JSON.stringify(runtimePayload),
-      created_at: now.toISOString()
-    });
-
-    return this.runtimeResult({
-      processor: this.processorName,
-      status: 'SUCCESS',
-      businessKey,
-      recordsCreated: 1,
-      recordsUpdated: 0,
-      recordsRead: sourceRows.length,
-      processed: 1,
-      skippedDuplicate: 0,
-      skippedNoInputs: 0,
-      skippedValidation: readinessStatus === 'READY_FOR_RELEASE' ? 0 : 1,
-      errors: 0,
-      message: JSON.stringify(runtimePayload)
-    });
   }
+
+  if (
+    statusText.indexOf('FAIL') !== -1 ||
+    statusText.indexOf('BLOCK') !== -1 ||
+    statusText.indexOf('IMPORT_NOT_READY') !== -1
+  ) {
+    return {
+      status: 'RELEASE_GATE_BLOCKED',
+      posture: 'IMPORT_RELEASE_BLOCKED',
+      blockingReason: 'System certification ledger indicates failed or blocking conditions.',
+      summary: 'SuperSheet import release is blocked pending review.',
+      nextAction: 'Review upstream certification failures before release.'
+    };
+  }
+
+  return {
+    status: 'RELEASE_GATE_REVIEW_REQUIRED',
+    posture: 'IMPORT_RELEASE_REVIEW_REQUIRED',
+    blockingReason: 'System certification ledger did not produce a fully certified release posture.',
+    summary: 'SuperSheet import release requires review before proceeding.',
+    nextAction: 'Review system certification ledger summary before release.'
+  };
 }
 
 /*******************************************************
- * Entry Point
+ * Test Function
  *******************************************************/
 
-function run2910_SuperSheetImportReleaseReadinessProcessor() {
-  const processor = new SuperSheetImportReleaseReadinessProcessor();
-  return processor.process();
-}
-
-/*******************************************************
- * Standalone Test
- *******************************************************/
-
-function sciipTest2910_SuperSheetImportReleaseReadinessProcessor() {
-  const result = run2910_SuperSheetImportReleaseReadinessProcessor();
+function sciipTest2910_SuperSheetImportReleaseGateProcessor() {
+  const result = sciipRun2910_SuperSheetImportReleaseGateProcessor();
 
   Logger.log(JSON.stringify({
-    test: 'sciipTest2910_SuperSheetImportReleaseReadinessProcessor',
-    result
+    test: 'sciipTest2910_SuperSheetImportReleaseGateProcessor',
+    result: result
   }));
 
   return result;
