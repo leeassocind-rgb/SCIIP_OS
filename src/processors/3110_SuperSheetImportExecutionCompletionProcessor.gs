@@ -5,31 +5,36 @@
 
 function run3110_SuperSheetImportExecutionCompletionProcessor() {
   return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processorId: '3110',
-    processorName: '3110_SuperSheetImportExecutionCompletionProcessor',
+    processor: '3110_SuperSheetImportExecutionCompletionProcessor',
+    action: 'BUILD_SUPERSHEET_IMPORT_EXECUTION_COMPLETIONS',
 
-    sourceSheetName: 'SUPERSHEET_IMPORT_EXECUTION_STATUS_LEDGER_SUMMARY',
-    targetSheetName: 'SUPERSHEET_IMPORT_EXECUTION_COMPLETIONS',
-
-    targetHeaders: [
-      'business_key',
-      'completion_date',
-      'source_sheet',
-      'target_sheet',
-      'execution_status',
-      'completion_status',
-      'completion_payload',
-      'transaction_id',
-      'created_at'
-    ],
-
-    process: function(ctx) {
+    execute: function(runtime) {
+      const sourceSheet = 'SUPERSHEET_IMPORT_EXECUTION_STATUS_LEDGER_SUMMARY';
+      const targetSheet = 'SUPERSHEET_IMPORT_EXECUTION_COMPLETIONS';
       const today = SCIIP_DateUtilities.getTodayIsoDate();
-      const sourceRows = ctx.readSourceRows();
+
+      const targetHeaders = [
+        'business_key',
+        'completion_date',
+        'source_sheet',
+        'target_sheet',
+        'execution_status',
+        'completion_status',
+        'completion_payload',
+        'transaction_id',
+        'created_at'
+      ];
+
+      SCIIP_SheetUtilities.ensureSheet(targetSheet, targetHeaders);
+
+      const sourceRows = SCIIP_SheetUtilities.getRowsAsObjects(sourceSheet);
 
       if (!sourceRows || sourceRows.length === 0) {
-        return ctx.runtimeResult({
+        return {
+          processor: '3110_SuperSheetImportExecutionCompletionProcessor',
           status: 'SKIPPED_NO_INPUTS',
+          businessKey:
+            '3110_SUPERSHEETIMPORTEXECUTIONCOMPLETION|' + targetSheet + '|' + today,
           recordsCreated: 0,
           recordsUpdated: 0,
           recordsRead: 0,
@@ -38,17 +43,15 @@ function run3110_SuperSheetImportExecutionCompletionProcessor() {
           skippedNoInputs: 0,
           skippedValidation: 0,
           errors: 0,
-          businessKey:
-            '3110_SUPERSHEETIMPORTEXECUTIONCOMPLETION|SUPERSHEET_IMPORT_EXECUTION_COMPLETIONS|' + today,
           message: JSON.stringify({
             executionCompletionStatus: 'SKIPPED_NO_INPUTS',
-            sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_STATUS_LEDGER_SUMMARY',
-            targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_COMPLETIONS',
-            transactionId: ctx.transactionId,
+            sourceSheet: sourceSheet,
+            targetSheet: targetSheet,
+            transactionId: runtime.transactionId,
             nextAction:
               'Run 3100_SuperSheetImportExecutionStatusLedgerProcessor after execution status records are available.'
           })
-        });
+        };
       }
 
       let created = 0;
@@ -72,7 +75,7 @@ function run3110_SuperSheetImportExecutionCompletionProcessor() {
           today + '|' +
           executionStatus;
 
-        if (ctx.businessKeyExists(businessKey)) {
+        if (SCIIP_BusinessKeyUtilities.businessKeyExists(targetSheet, businessKey)) {
           skippedDuplicate++;
           return;
         }
@@ -80,31 +83,34 @@ function run3110_SuperSheetImportExecutionCompletionProcessor() {
         const payload = {
           executionCompletionStatus: 'COMPLETED',
           upstreamExecutionStatus: executionStatus,
-          sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_STATUS_LEDGER_SUMMARY',
-          targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_COMPLETIONS',
-          transactionId: ctx.transactionId,
+          sourceSheet: sourceSheet,
+          targetSheet: targetSheet,
+          transactionId: runtime.transactionId,
           completedAt: new Date().toISOString(),
           nextAction:
-            'Advance to SuperSheet import execution archival, reconciliation, or knowledge graph ingestion processor.'
+            'Run 3120_SuperSheetImportExecutionCompletionLedgerProcessor.'
         };
 
-        ctx.appendTargetRow({
+        SCIIP_SheetUtilities.appendObjectRow(targetSheet, {
           business_key: businessKey,
           completion_date: today,
-          source_sheet: 'SUPERSHEET_IMPORT_EXECUTION_STATUS_LEDGER_SUMMARY',
-          target_sheet: 'SUPERSHEET_IMPORT_EXECUTION_COMPLETIONS',
+          source_sheet: sourceSheet,
+          target_sheet: targetSheet,
           execution_status: executionStatus,
           completion_status: 'COMPLETED',
           completion_payload: JSON.stringify(payload),
-          transaction_id: ctx.transactionId,
+          transaction_id: runtime.transactionId,
           created_at: new Date().toISOString()
         });
 
         created++;
       });
 
-      return ctx.runtimeResult({
+      return {
+        processor: '3110_SuperSheetImportExecutionCompletionProcessor',
         status: created > 0 ? 'SUCCESS' : 'SKIPPED_NO_INPUTS',
+        businessKey:
+          '3110_SUPERSHEETIMPORTEXECUTIONCOMPLETION|' + targetSheet + '|' + today,
         recordsCreated: created,
         recordsUpdated: 0,
         recordsRead: sourceRows.length,
@@ -113,20 +119,18 @@ function run3110_SuperSheetImportExecutionCompletionProcessor() {
         skippedNoInputs: created === 0 ? 1 : 0,
         skippedValidation: skippedValidation,
         errors: 0,
-        businessKey:
-          '3110_SUPERSHEETIMPORTEXECUTIONCOMPLETION|SUPERSHEET_IMPORT_EXECUTION_COMPLETIONS|' + today,
         message: JSON.stringify({
           executionCompletionStatus: created > 0 ? 'SUCCESS' : 'SKIPPED_NO_INPUTS',
-          sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_STATUS_LEDGER_SUMMARY',
-          targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_COMPLETIONS',
-          transactionId: ctx.transactionId,
+          sourceSheet: sourceSheet,
+          targetSheet: targetSheet,
+          transactionId: runtime.transactionId,
           recordsCreated: created,
           skippedDuplicate: skippedDuplicate,
           skippedValidation: skippedValidation,
           nextAction:
             'Run 3120_SuperSheetImportExecutionCompletionLedgerProcessor.'
         })
-      });
+      };
     }
   });
 }
