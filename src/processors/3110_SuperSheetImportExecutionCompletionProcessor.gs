@@ -11,11 +11,13 @@ function run3110_SuperSheetImportExecutionCompletionProcessor() {
     execute: function(runtime) {
       const sourceSheet = 'SUPERSHEET_IMPORT_EXECUTION_STATUS_LEDGER_SUMMARY';
       const targetSheet = 'SUPERSHEET_IMPORT_EXECUTION_COMPLETIONS';
+
 const today = Utilities.formatDate(
   new Date(),
   Session.getScriptTimeZone(),
   'yyyy-MM-dd'
 );
+
       const targetHeaders = [
         'business_key',
         'completion_date',
