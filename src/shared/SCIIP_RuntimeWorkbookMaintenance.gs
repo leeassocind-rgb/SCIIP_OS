@@ -1,8 +1,7 @@
-function sciipCompactWorkbookGrid_() {
+function sciipCompactWorkbookGrid() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheets = ss.getSheets();
 
-  sheets.forEach(function(sheet) {
+  ss.getSheets().forEach(function(sheet) {
     const lastRow = Math.max(sheet.getLastRow(), 1);
     const lastCol = Math.max(sheet.getLastColumn(), 1);
 
@@ -18,5 +17,5 @@ function sciipCompactWorkbookGrid_() {
     }
   });
 
-  Logger.log('Workbook grid compacted.');
+  Logger.log('SCIIP workbook grid compacted.');
 }
