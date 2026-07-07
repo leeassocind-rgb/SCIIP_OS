@@ -1170,3 +1170,343 @@ function sciipTest3620_SuperSheetImportExecutionProductionOperationsContinuityLe
   }));
   return result;
 }
+
+/*******************************************************
+ * SCIIP_OS v5.4
+ * Production Operations Continuity / Production Runtime Continuity Batch
+ * Processors: 3630-3700
+ *
+ * Dependency:
+ * Requires the validated helper function from 3420-3610 batch:
+ *   sciipPatch3420_3610Run_(config)
+ *
+ * Paste this below the validated 3420-3620 batch file.
+ *******************************************************/
+
+function sciipRun3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3630_SuperSheetImportExecutionProductionOperationsContinuityCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUT',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'continuityId',
+      'continuityStatus',
+      'productionOperationsContinuityCloseoutStatus',
+      'closeoutDate',
+      'closeoutScope',
+      'closeoutResult',
+      'closeoutSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONSCONTINUITYCLOSEOUT_READY',
+    summary: 'Supersheetimportexecutionproductionoperationscontinuitycloseout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3630 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_LEDGER_SUMMARY.',
+    nextProcessor: '3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor'
+  });
+}
+
+function run3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor() {
+  return sciipRun3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor();
+}
+
+function sciipTest3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor() {
+  var result = sciipRun3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3640_SuperSheetImportExecutionProductionOperationsContinuityArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'continuityId',
+      'continuityStatus',
+      'productionOperationsContinuityArchiveStatus',
+      'archiveDate',
+      'archiveScope',
+      'archiveResult',
+      'archiveSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONSCONTINUITYARCHIVE_READY',
+    summary: 'Supersheetimportexecutionproductionoperationscontinuityarchive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3640 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS.',
+    nextProcessor: '3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor'
+  });
+}
+
+function run3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor() {
+  return sciipRun3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor();
+}
+
+function sciipTest3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor() {
+  var result = sciipRun3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliation',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_RECONCILIATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_RECONCILIATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_RECONCILIATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'continuityId',
+      'continuityStatus',
+      'productionOperationsContinuityReconciliationStatus',
+      'reconciliationDate',
+      'reconciliationScope',
+      'reconciliationResult',
+      'reconciliationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONSCONTINUITYRECONCILIATION_READY',
+    summary: 'Supersheetimportexecutionproductionoperationscontinuityreconciliation runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3650 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_ARCHIVE.',
+    nextProcessor: '3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor'
+  });
+}
+
+function run3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor() {
+  return sciipRun3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor();
+}
+
+function sciipTest3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor() {
+  var result = sciipRun3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3660_SuperSheetImportExecutionProductionOperationsContinuityCompletion',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_COMPLETION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_RECONCILIATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_COMPLETION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_COMPLETION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'continuityId',
+      'continuityStatus',
+      'productionOperationsContinuityCompletionStatus',
+      'completionDate',
+      'completionScope',
+      'completionResult',
+      'completionSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONSCONTINUITYCOMPLETION_READY',
+    summary: 'Supersheetimportexecutionproductionoperationscontinuitycompletion runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3660 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_RECONCILIATION.',
+    nextProcessor: '3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor'
+  });
+}
+
+function run3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor() {
+  return sciipRun3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor();
+}
+
+function sciipTest3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor() {
+  var result = sciipRun3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3670_SuperSheetImportExecutionProductionRuntimeContinuity',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_COMPLETION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityStatus',
+      'continuityDate',
+      'continuityScope',
+      'continuityResult',
+      'continuitySummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITY_READY',
+    summary: 'Supersheetimportexecutionproductionruntimecontinuity runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3670 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_COMPLETION.',
+    nextProcessor: '3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor'
+  });
+}
+
+function run3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor() {
+  return sciipRun3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor();
+}
+
+function sciipTest3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor() {
+  var result = sciipRun3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3680_SuperSheetImportExecutionProductionRuntimeContinuityLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYLEDGER_READY',
+    summary: 'Supersheetimportexecutionproductionruntimecontinuityledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3680 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY.',
+    nextProcessor: '3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor'
+  });
+}
+
+function run3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor() {
+  return sciipRun3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor();
+}
+
+function sciipTest3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor() {
+  var result = sciipRun3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUT',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityCloseoutStatus',
+      'closeoutDate',
+      'closeoutScope',
+      'closeoutResult',
+      'closeoutSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYCLOSEOUT_READY',
+    summary: 'Supersheetimportexecutionproductionruntimecontinuitycloseout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3690 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_LEDGER_SUMMARY.',
+    nextProcessor: '3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor'
+  });
+}
+
+function run3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor() {
+  return sciipRun3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor();
+}
+
+function sciipTest3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor() {
+  var result = sciipRun3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3700_SuperSheetImportExecutionProductionRuntimeContinuityArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityArchiveStatus',
+      'archiveDate',
+      'archiveScope',
+      'archiveResult',
+      'archiveSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYARCHIVE_READY',
+    summary: 'Supersheetimportexecutionproductionruntimecontinuityarchive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3700 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUTS.',
+    nextProcessor: '3710_SuperSheetImportExecutionProductionRuntimeContinuityReconciliationProcessor'
+  });
+}
+
+function run3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor() {
+  return sciipRun3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor();
+}
+
+function sciipTest3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor() {
+  var result = sciipRun3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
