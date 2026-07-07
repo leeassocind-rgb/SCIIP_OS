@@ -10112,8 +10112,8 @@ function sciipTest5790_SuperSheetImportExecutionAutonomousProductionRuntimeAsset
 function sciipRun5800_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceLedgerProcessor() {
   return sciipPatch3420_3610Run_({
     processor: '5800_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceLedger',
-    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE_LEDGER_SUMMARY',
-    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE',
+    action: 'AUTO_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE_LEDGER_SUMMARY',
+    sourceSheet: 'AUTO_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE_LEDGER_SUMMARY',
     targetSheet: 'AUTO_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE_LEDGER_SUMMARY',
     ledgerSheet: 'AUTO_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE_RUNTIME_LEDGER',
     headers: [
