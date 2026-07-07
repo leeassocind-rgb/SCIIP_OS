@@ -3606,3 +3606,406 @@ function sciipTest4200_SuperSheetImportExecutionAutonomousProductionRuntimeIntel
   }));
   return result;
 }
+
+/***************************************
+ * SCIIP_OS v5.4 / Runtime v5.2
+ * 4210–4300 Autonomous Production Runtime Decisioning Batch
+ *
+ * Purpose:
+ * Extends SCIIP_OS from Autonomous Production Runtime Intelligence
+ * into Autonomous Production Runtime Decisioning certification and acceptance.
+ *
+ * Requires:
+ * - SCIIP_RUNTIME_PROCESSOR_BASE v5.2
+ * - sciipPatch3420_3610Run_ helper from the validated 3420–3610 batch
+ ***************************************/
+
+function sciipRun4210_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4210_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioning',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_INTELLIGENCE_ACCEPTANCE_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'status',
+      'stageDate',
+      'stageScope',
+      'stageResult',
+      'stageSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_READY',
+    summary: 'Autonomous Production Runtime Decisioning runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4210 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_INTELLIGENCE_ACCEPTANCE_LEDGER_SUMMARY.',
+    nextProcessor: '4220_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningLedgerProcessor'
+  });
+}
+
+function run4210_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningProcessor() {
+  return sciipRun4210_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningProcessor();
+}
+
+function sciipTest4210_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningProcessor() {
+  var result = sciipRun4210_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4210_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun4220_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4220_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'status',
+      'stageDate',
+      'stageScope',
+      'stageResult',
+      'stageSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_LEDGER_READY',
+    summary: 'Autonomous Production Runtime Decisioning Ledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4220 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING.',
+    nextProcessor: '4230_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCloseoutProcessor'
+  });
+}
+
+function run4220_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningLedgerProcessor() {
+  return sciipRun4220_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningLedgerProcessor();
+}
+
+function sciipTest4220_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningLedgerProcessor() {
+  var result = sciipRun4220_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4220_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun4230_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4230_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'status',
+      'stageDate',
+      'stageScope',
+      'stageResult',
+      'stageSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CLOSEOUT_READY',
+    summary: 'Autonomous Production Runtime Decisioning Closeout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4230 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_LEDGER_SUMMARY.',
+    nextProcessor: '4240_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningArchiveProcessor'
+  });
+}
+
+function run4230_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCloseoutProcessor() {
+  return sciipRun4230_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCloseoutProcessor();
+}
+
+function sciipTest4230_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCloseoutProcessor() {
+  var result = sciipRun4230_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4230_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun4240_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4240_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'status',
+      'stageDate',
+      'stageScope',
+      'stageResult',
+      'stageSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ARCHIVE_READY',
+    summary: 'Autonomous Production Runtime Decisioning Archive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4240 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CLOSEOUTS.',
+    nextProcessor: '4250_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningReconciliationProcessor'
+  });
+}
+
+function run4240_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningArchiveProcessor() {
+  return sciipRun4240_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningArchiveProcessor();
+}
+
+function sciipTest4240_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningArchiveProcessor() {
+  var result = sciipRun4240_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4240_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun4250_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningReconciliationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4250_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningReconciliation',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_RECONCILIATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_RECONCILIATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_RECONCILIATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'status',
+      'stageDate',
+      'stageScope',
+      'stageResult',
+      'stageSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_RECONCILIATION_READY',
+    summary: 'Autonomous Production Runtime Decisioning Reconciliation runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4250 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ARCHIVE.',
+    nextProcessor: '4260_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCompletionProcessor'
+  });
+}
+
+function run4250_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningReconciliationProcessor() {
+  return sciipRun4250_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningReconciliationProcessor();
+}
+
+function sciipTest4250_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningReconciliationProcessor() {
+  var result = sciipRun4250_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningReconciliationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4250_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningReconciliationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun4260_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCompletionProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4260_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCompletion',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_COMPLETION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_RECONCILIATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_COMPLETION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_COMPLETION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'status',
+      'stageDate',
+      'stageScope',
+      'stageResult',
+      'stageSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_COMPLETION_READY',
+    summary: 'Autonomous Production Runtime Decisioning Completion runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4260 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_RECONCILIATION.',
+    nextProcessor: '4270_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationProcessor'
+  });
+}
+
+function run4260_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCompletionProcessor() {
+  return sciipRun4260_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCompletionProcessor();
+}
+
+function sciipTest4260_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCompletionProcessor() {
+  var result = sciipRun4260_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCompletionProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4260_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCompletionProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun4270_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4270_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertification',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_COMPLETION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'status',
+      'stageDate',
+      'stageScope',
+      'stageResult',
+      'stageSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION_READY',
+    summary: 'Autonomous Production Runtime Decisioning Certification runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4270 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_COMPLETION.',
+    nextProcessor: '4280_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationLedgerProcessor'
+  });
+}
+
+function run4270_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationProcessor() {
+  return sciipRun4270_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationProcessor();
+}
+
+function sciipTest4270_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationProcessor() {
+  var result = sciipRun4270_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4270_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun4280_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4280_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'status',
+      'stageDate',
+      'stageScope',
+      'stageResult',
+      'stageSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION_LEDGER_READY',
+    summary: 'Autonomous Production Runtime Decisioning Certification Ledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4280 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION.',
+    nextProcessor: '4290_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceProcessor'
+  });
+}
+
+function run4280_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationLedgerProcessor() {
+  return sciipRun4280_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationLedgerProcessor();
+}
+
+function sciipTest4280_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationLedgerProcessor() {
+  var result = sciipRun4280_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4280_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningCertificationLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun4290_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4290_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptance',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ACCEPTANCE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ACCEPTANCE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ACCEPTANCE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'status',
+      'stageDate',
+      'stageScope',
+      'stageResult',
+      'stageSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ACCEPTANCE_READY',
+    summary: 'Autonomous Production Runtime Decisioning Acceptance runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4290 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_CERTIFICATION_LEDGER_SUMMARY.',
+    nextProcessor: '4300_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceLedgerProcessor'
+  });
+}
+
+function run4290_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceProcessor() {
+  return sciipRun4290_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceProcessor();
+}
+
+function sciipTest4290_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceProcessor() {
+  var result = sciipRun4290_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4290_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun4300_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4300_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ACCEPTANCE_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ACCEPTANCE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ACCEPTANCE_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ACCEPTANCE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'status',
+      'stageDate',
+      'stageScope',
+      'stageResult',
+      'stageSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ACCEPTANCE_LEDGER_READY',
+    summary: 'Autonomous Production Runtime Decisioning Acceptance Ledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4300 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_DECISIONING_ACCEPTANCE.',
+    nextProcessor: '4310_SuperSheetImportExecutionAutonomousProductionRuntimeOrchestrationProcessor'
+  });
+}
+
+function run4300_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceLedgerProcessor() {
+  return sciipRun4300_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceLedgerProcessor();
+}
+
+function sciipTest4300_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceLedgerProcessor() {
+  var result = sciipRun4300_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4300_SuperSheetImportExecutionAutonomousProductionRuntimeDecisioningAcceptanceLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
