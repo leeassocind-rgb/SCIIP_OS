@@ -9738,3 +9738,412 @@ function sciipTest5700_SuperSheetImportExecutionAutonomousProductionRuntimeKnowl
   }));
   return result;
 }
+
+/***************************************
+ * SCIIP_OS v5.4 / Runtime v5.2
+ * Batch: 5710–5800
+ * Autonomous Production Runtime Asset Intelligence
+ *
+ * Paste below the validated 3420–5700 batch files.
+ * Requires helper: sciipPatch3420_3610Run_
+ ***************************************/
+
+
+function sciipRun5710_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5710_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligence',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_KNOWLEDGE_GRAPH_ACCEPTANCE_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeAssetIntelligenceId',
+      'autonomousProductionRuntimeAssetIntelligenceStatus',
+      'autonomousProductionRuntimeAssetIntelligenceResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMEASSETINTELLIGENCEREADY',
+    summary: 'Autonomous Production Runtime Asset Intelligence runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5710 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_KNOWLEDGE_GRAPH_ACCEPTANCE_LEDGER_SUMMARY.',
+    nextProcessor: '5720_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceLedgerProcessor'
+  });
+}
+
+function run5710_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceProcessor() {
+  return sciipRun5710_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceProcessor();
+}
+
+function sciipTest5710_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceProcessor() {
+  var result = sciipRun5710_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5710_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5720_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5720_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeAssetIntelligenceLedgerId',
+      'autonomousProductionRuntimeAssetIntelligenceLedgerStatus',
+      'autonomousProductionRuntimeAssetIntelligenceLedgerResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMEASSETINTELLIGENCELEDGERREADY',
+    summary: 'Autonomous Production Runtime Asset Intelligence Ledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5720 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE.',
+    nextProcessor: '5730_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCloseoutProcessor'
+  });
+}
+
+function run5720_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceLedgerProcessor() {
+  return sciipRun5720_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceLedgerProcessor();
+}
+
+function sciipTest5720_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceLedgerProcessor() {
+  var result = sciipRun5720_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5720_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5730_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5730_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeAssetIntelligenceCloseoutId',
+      'autonomousProductionRuntimeAssetIntelligenceCloseoutStatus',
+      'autonomousProductionRuntimeAssetIntelligenceCloseoutResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMEASSETINTELLIGENCECLOSEOUTREADY',
+    summary: 'Autonomous Production Runtime Asset Intelligence Closeout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5730 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_LEDGER_SUMMARY.',
+    nextProcessor: '5740_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceArchiveProcessor'
+  });
+}
+
+function run5730_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCloseoutProcessor() {
+  return sciipRun5730_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCloseoutProcessor();
+}
+
+function sciipTest5730_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCloseoutProcessor() {
+  var result = sciipRun5730_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5730_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5740_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5740_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeAssetIntelligenceArchiveId',
+      'autonomousProductionRuntimeAssetIntelligenceArchiveStatus',
+      'autonomousProductionRuntimeAssetIntelligenceArchiveResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMEASSETINTELLIGENCEARCHIVEREADY',
+    summary: 'Autonomous Production Runtime Asset Intelligence Archive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5740 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CLOSEOUTS.',
+    nextProcessor: '5750_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceReconciliationProcessor'
+  });
+}
+
+function run5740_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceArchiveProcessor() {
+  return sciipRun5740_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceArchiveProcessor();
+}
+
+function sciipTest5740_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceArchiveProcessor() {
+  var result = sciipRun5740_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5740_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5750_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceReconciliationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5750_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceReconciliation',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_RECONCILIATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_RECONCILIATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_RECONCILIATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeAssetIntelligenceReconciliationId',
+      'autonomousProductionRuntimeAssetIntelligenceReconciliationStatus',
+      'autonomousProductionRuntimeAssetIntelligenceReconciliationResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMEASSETINTELLIGENCERECONCILIATIONREADY',
+    summary: 'Autonomous Production Runtime Asset Intelligence Reconciliation runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5750 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ARCHIVE.',
+    nextProcessor: '5760_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCompletionProcessor'
+  });
+}
+
+function run5750_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceReconciliationProcessor() {
+  return sciipRun5750_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceReconciliationProcessor();
+}
+
+function sciipTest5750_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceReconciliationProcessor() {
+  var result = sciipRun5750_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceReconciliationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5750_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceReconciliationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5760_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCompletionProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5760_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCompletion',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_COMPLETION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_RECONCILIATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_COMPLETION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_COMPLETION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeAssetIntelligenceCompletionId',
+      'autonomousProductionRuntimeAssetIntelligenceCompletionStatus',
+      'autonomousProductionRuntimeAssetIntelligenceCompletionResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMEASSETINTELLIGENCECOMPLETIONREADY',
+    summary: 'Autonomous Production Runtime Asset Intelligence Completion runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5760 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_RECONCILIATION.',
+    nextProcessor: '5770_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationProcessor'
+  });
+}
+
+function run5760_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCompletionProcessor() {
+  return sciipRun5760_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCompletionProcessor();
+}
+
+function sciipTest5760_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCompletionProcessor() {
+  var result = sciipRun5760_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCompletionProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5760_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCompletionProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5770_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5770_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertification',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CERTIFICATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_COMPLETION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CERTIFICATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CERTIFICATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeAssetIntelligenceCertificationId',
+      'autonomousProductionRuntimeAssetIntelligenceCertificationStatus',
+      'autonomousProductionRuntimeAssetIntelligenceCertificationResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMEASSETINTELLIGENCECERTIFICATIONREADY',
+    summary: 'Autonomous Production Runtime Asset Intelligence Certification runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5770 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_COMPLETION.',
+    nextProcessor: '5780_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationLedgerProcessor'
+  });
+}
+
+function run5770_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationProcessor() {
+  return sciipRun5770_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationProcessor();
+}
+
+function sciipTest5770_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationProcessor() {
+  var result = sciipRun5770_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5770_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5780_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5780_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CERTIFICATION_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CERTIFICATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CERTIFICATION_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CERTIFICATION_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeAssetIntelligenceCertificationLedgerId',
+      'autonomousProductionRuntimeAssetIntelligenceCertificationLedgerStatus',
+      'autonomousProductionRuntimeAssetIntelligenceCertificationLedgerResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMEASSETINTELLIGENCECERTIFICATIONLEDGERREADY',
+    summary: 'Autonomous Production Runtime Asset Intelligence Certification Ledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5780 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CERTIFICATION.',
+    nextProcessor: '5790_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceProcessor'
+  });
+}
+
+function run5780_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationLedgerProcessor() {
+  return sciipRun5780_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationLedgerProcessor();
+}
+
+function sciipTest5780_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationLedgerProcessor() {
+  var result = sciipRun5780_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5780_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceCertificationLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5790_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5790_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptance',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CERTIFICATION_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeAssetIntelligenceAcceptanceId',
+      'autonomousProductionRuntimeAssetIntelligenceAcceptanceStatus',
+      'autonomousProductionRuntimeAssetIntelligenceAcceptanceResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMEASSETINTELLIGENCEACCEPTANCEREADY',
+    summary: 'Autonomous Production Runtime Asset Intelligence Acceptance runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5790 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_CERTIFICATION_LEDGER_SUMMARY.',
+    nextProcessor: '5800_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceLedgerProcessor'
+  });
+}
+
+function run5790_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceProcessor() {
+  return sciipRun5790_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceProcessor();
+}
+
+function sciipTest5790_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceProcessor() {
+  var result = sciipRun5790_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5790_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5800_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5800_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeAssetIntelligenceAcceptanceLedgerId',
+      'autonomousProductionRuntimeAssetIntelligenceAcceptanceLedgerStatus',
+      'autonomousProductionRuntimeAssetIntelligenceAcceptanceLedgerResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMEASSETINTELLIGENCEACCEPTANCELEDGERREADY',
+    summary: 'Autonomous Production Runtime Asset Intelligence Acceptance Ledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5800 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_ASSET_INTELLIGENCE_ACCEPTANCE.',
+    nextProcessor: '5810_SuperSheetImportExecutionAutonomousProductionRuntimeGISIntelligenceProcessor'
+  });
+}
+
+function run5800_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceLedgerProcessor() {
+  return sciipRun5800_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceLedgerProcessor();
+}
+
+function sciipTest5800_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceLedgerProcessor() {
+  var result = sciipRun5800_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5800_SuperSheetImportExecutionAutonomousProductionRuntimeAssetIntelligenceAcceptanceLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
