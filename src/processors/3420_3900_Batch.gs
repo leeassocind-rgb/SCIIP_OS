@@ -3152,26 +3152,38 @@ function sciipTest4090_SuperSheetImportExecutionAutonomousProductionRuntimeOptim
 function sciipRun4100_SuperSheetImportExecutionAutonomousProductionRuntimeOptimizationAcceptanceLedgerProcessor() {
   return sciipPatch3420_3610Run_({
     processor: '4100_SuperSheetImportExecutionAutonomousProductionRuntimeOptimizationAcceptanceLedger',
-    action: 'AUTONOMOUS_PRODUCTION_RUNTIME_OPTIMIZATION_ACCEPTANCE_LEDGER',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_OPTIMIZATION_ACCEPTANCE_LEDGER_SUMMARY',
+
     sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_OPTIMIZATION_ACCEPTANCE',
+
     targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_OPTIMIZATION_ACCEPTANCE_LEDGER_SUMMARY',
+
     ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_OPTIMIZATION_ACCEPTANCE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+
     headers: [
       'businessKey',
       'transactionId',
       'sourceBusinessKey',
-      'status',
-      'stageDate',
-      'stageScope',
-      'stageResult',
-      'stageSummary',
+      'optimizationAcceptanceId',
+      'optimizationAcceptanceStatus',
+      'optimizationAcceptanceLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
       'frameworkVersion',
       'createdAt'
     ],
-    status: 'AUTONOMOUS_PRODUCTION_RUNTIME_OPTIMIZATION_ACCEPTANCE_LEDGER_READY',
+
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMEOPTIMIZATIONACCEPTANCELEDGER_READY',
+
     summary: 'Autonomous Production Runtime Optimization Acceptance Ledger runtime processor completed.',
-    noInputNextAction: 'Run upstream processor before 4100 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_OPTIMIZATION_ACCEPTANCE.',
-    nextProcessor: '4110_SuperSheetImportExecutionAutonomousProductionRuntimeOrchestrationProcessor'
+
+    noInputNextAction:
+      'Run upstream processor before 4100 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_OPTIMIZATION_ACCEPTANCE.',
+
+    nextProcessor:
+      '4110_SuperSheetImportExecutionAutonomousProductionRuntimeIntelligenceProcessor'
   });
 }
 
@@ -3180,10 +3192,14 @@ function run4100_SuperSheetImportExecutionAutonomousProductionRuntimeOptimizatio
 }
 
 function sciipTest4100_SuperSheetImportExecutionAutonomousProductionRuntimeOptimizationAcceptanceLedgerProcessor() {
-  var result = sciipRun4100_SuperSheetImportExecutionAutonomousProductionRuntimeOptimizationAcceptanceLedgerProcessor();
+  var result =
+    sciipRun4100_SuperSheetImportExecutionAutonomousProductionRuntimeOptimizationAcceptanceLedgerProcessor();
+
   Logger.log(JSON.stringify({
-    test: 'sciipTest4100_SuperSheetImportExecutionAutonomousProductionRuntimeOptimizationAcceptanceLedgerProcessor',
+    test:
+      'sciipTest4100_SuperSheetImportExecutionAutonomousProductionRuntimeOptimizationAcceptanceLedgerProcessor',
     result: result
   }));
+
   return result;
 }
