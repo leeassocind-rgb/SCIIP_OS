@@ -2353,3 +2353,425 @@ function sciipTest3900_SuperSheetImportExecutionProductionRuntimeGovernanceAccep
   }));
   return result;
 }
+
+/*******************************************************
+ * SCIIP_OS v5.4
+ * Production Runtime Control Plane Batch
+ * Processors: 3910-4000
+ *
+ * Dependency:
+ * Requires the validated helper function from 3420-3610 batch:
+ *   sciipPatch3420_3610Run_(config)
+ *
+ * Paste this below the validated 3420-3900 batch files.
+ *******************************************************/
+function sciipRun3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3910_SuperSheetImportExecutionProductionRuntimeControlPlane',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneStatus',
+      'controlPlaneDate',
+      'controlPlaneScope',
+      'controlPlaneResult',
+      'controlPlaneSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANE_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplane runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3910 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE_LEDGER_SUMMARY.',
+    nextProcessor: '3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor'
+  });
+}
+
+function run3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor() {
+  return sciipRun3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor();
+}
+
+function sciipTest3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor() {
+  var result = sciipRun3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANELEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplaneledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3920 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE.',
+    nextProcessor: '3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor'
+  });
+}
+
+function run3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor() {
+  return sciipRun3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor();
+}
+
+function sciipTest3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor() {
+  var result = sciipRun3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneCloseoutStatus',
+      'closeoutDate',
+      'closeoutScope',
+      'closeoutResult',
+      'closeoutSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANECLOSEOUT_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanecloseout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3930 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_LEDGER_SUMMARY.',
+    nextProcessor: '3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor'
+  });
+}
+
+function run3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor() {
+  return sciipRun3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor();
+}
+
+function sciipTest3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor() {
+  var result = sciipRun3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneArchiveStatus',
+      'archiveDate',
+      'archiveScope',
+      'archiveResult',
+      'archiveSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANEARCHIVE_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanearchive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3940 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CLOSEOUTS.',
+    nextProcessor: '3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor'
+  });
+}
+
+function run3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor() {
+  return sciipRun3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor();
+}
+
+function sciipTest3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor() {
+  var result = sciipRun3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliation',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RECONCILIATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RECONCILIATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RECONCILIATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneReconciliationStatus',
+      'reconciliationDate',
+      'reconciliationScope',
+      'reconciliationResult',
+      'reconciliationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANERECONCILIATION_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanereconciliation runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3950 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ARCHIVE.',
+    nextProcessor: '3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor'
+  });
+}
+
+function run3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor() {
+  return sciipRun3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor();
+}
+
+function sciipTest3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor() {
+  var result = sciipRun3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletion',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_COMPLETION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RECONCILIATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_COMPLETION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_COMPLETION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneCompletionStatus',
+      'completionDate',
+      'completionScope',
+      'completionResult',
+      'completionSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANECOMPLETION_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanecompletion runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3960 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RECONCILIATION.',
+    nextProcessor: '3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor'
+  });
+}
+
+function run3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor() {
+  return sciipRun3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor();
+}
+
+function sciipTest3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor() {
+  var result = sciipRun3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertification',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_COMPLETION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneCertificationStatus',
+      'certificationDate',
+      'certificationScope',
+      'certificationResult',
+      'certificationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANECERTIFICATION_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanecertification runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3970 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_COMPLETION.',
+    nextProcessor: '3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor'
+  });
+}
+
+function run3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor() {
+  return sciipRun3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor();
+}
+
+function sciipTest3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor() {
+  var result = sciipRun3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneCertificationLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANECERTIFICATIONLEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanecertificationledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3980 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION.',
+    nextProcessor: '3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor'
+  });
+}
+
+function run3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor() {
+  return sciipRun3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor();
+}
+
+function sciipTest3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor() {
+  var result = sciipRun3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptance',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneAcceptanceStatus',
+      'acceptanceDate',
+      'acceptanceScope',
+      'acceptanceResult',
+      'acceptanceSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANEACCEPTANCE_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplaneacceptance runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3990 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_LEDGER_SUMMARY.',
+    nextProcessor: '4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor'
+  });
+}
+
+function run3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor() {
+  return sciipRun3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor();
+}
+
+function sciipTest3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor() {
+  var result = sciipRun3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneAcceptanceLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANEACCEPTANCELEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplaneacceptanceledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4000 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE.',
+    nextProcessor: '4010_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor'
+  });
+}
+
+function run4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor() {
+  return sciipRun4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor();
+}
+
+function sciipTest4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor() {
+  var result = sciipRun4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
