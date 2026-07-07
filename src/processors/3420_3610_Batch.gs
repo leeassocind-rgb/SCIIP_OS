@@ -1129,3 +1129,44 @@ function sciipTest3610_SuperSheetImportExecutionProductionOperationsContinuityPr
   }));
   return result;
 }
+
+function sciipRun3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3620_SuperSheetImportExecutionProductionOperationsContinuityLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'continuityId',
+      'continuityStatus',
+      'productionOperationsContinuityLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONSCONTINUITYLEDGER_READY',
+    summary: 'Supersheetimportexecutionproductionoperationscontinuityledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3620 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY.',
+    nextProcessor: '3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor'
+  });
+}
+
+function run3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor() {
+  return sciipRun3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor();
+}
+
+function sciipTest3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor() {
+  var result = sciipRun3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
