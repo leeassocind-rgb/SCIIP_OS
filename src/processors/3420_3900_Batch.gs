@@ -8102,3 +8102,412 @@ function sciipTest5300_SuperSheetImportExecutionAutonomousProductionRuntimeContr
   }));
   return result;
 }
+
+/***************************************
+ * SCIIP_OS v5.4 / Runtime v5.2
+ * Batch: 5310–5400
+ * Autonomous Production Runtime Scheduling
+ *
+ * Paste below the validated 3420–5300 batch files.
+ * Requires helper: sciipPatch3420_3610Run_
+ ***************************************/
+
+
+function sciipRun5310_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5310_SuperSheetImportExecutionAutonomousProductionRuntimeScheduling',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_CONTROL_ACCEPTANCE_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeSchedulingId',
+      'autonomousProductionRuntimeSchedulingStatus',
+      'autonomousProductionRuntimeSchedulingResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMESCHEDULINGREADY',
+    summary: 'Autonomous Production Runtime Scheduling runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5310 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_CONTROL_ACCEPTANCE_LEDGER_SUMMARY.',
+    nextProcessor: '5320_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingLedgerProcessor'
+  });
+}
+
+function run5310_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingProcessor() {
+  return sciipRun5310_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingProcessor();
+}
+
+function sciipTest5310_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingProcessor() {
+  var result = sciipRun5310_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5310_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5320_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5320_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeSchedulingLedgerId',
+      'autonomousProductionRuntimeSchedulingLedgerStatus',
+      'autonomousProductionRuntimeSchedulingLedgerResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMESCHEDULINGLEDGERREADY',
+    summary: 'Autonomous Production Runtime Scheduling Ledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5320 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING.',
+    nextProcessor: '5330_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCloseoutProcessor'
+  });
+}
+
+function run5320_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingLedgerProcessor() {
+  return sciipRun5320_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingLedgerProcessor();
+}
+
+function sciipTest5320_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingLedgerProcessor() {
+  var result = sciipRun5320_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5320_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5330_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5330_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeSchedulingCloseoutId',
+      'autonomousProductionRuntimeSchedulingCloseoutStatus',
+      'autonomousProductionRuntimeSchedulingCloseoutResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMESCHEDULINGCLOSEOUTREADY',
+    summary: 'Autonomous Production Runtime Scheduling Closeout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5330 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_LEDGER_SUMMARY.',
+    nextProcessor: '5340_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingArchiveProcessor'
+  });
+}
+
+function run5330_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCloseoutProcessor() {
+  return sciipRun5330_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCloseoutProcessor();
+}
+
+function sciipTest5330_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCloseoutProcessor() {
+  var result = sciipRun5330_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5330_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5340_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5340_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeSchedulingArchiveId',
+      'autonomousProductionRuntimeSchedulingArchiveStatus',
+      'autonomousProductionRuntimeSchedulingArchiveResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMESCHEDULINGARCHIVEREADY',
+    summary: 'Autonomous Production Runtime Scheduling Archive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5340 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CLOSEOUTS.',
+    nextProcessor: '5350_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingReconciliationProcessor'
+  });
+}
+
+function run5340_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingArchiveProcessor() {
+  return sciipRun5340_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingArchiveProcessor();
+}
+
+function sciipTest5340_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingArchiveProcessor() {
+  var result = sciipRun5340_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5340_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5350_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingReconciliationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5350_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingReconciliation',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_RECONCILIATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_RECONCILIATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_RECONCILIATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeSchedulingReconciliationId',
+      'autonomousProductionRuntimeSchedulingReconciliationStatus',
+      'autonomousProductionRuntimeSchedulingReconciliationResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMESCHEDULINGRECONCILIATIONREADY',
+    summary: 'Autonomous Production Runtime Scheduling Reconciliation runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5350 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ARCHIVE.',
+    nextProcessor: '5360_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCompletionProcessor'
+  });
+}
+
+function run5350_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingReconciliationProcessor() {
+  return sciipRun5350_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingReconciliationProcessor();
+}
+
+function sciipTest5350_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingReconciliationProcessor() {
+  var result = sciipRun5350_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingReconciliationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5350_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingReconciliationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5360_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCompletionProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5360_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCompletion',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_COMPLETION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_RECONCILIATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_COMPLETION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_COMPLETION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeSchedulingCompletionId',
+      'autonomousProductionRuntimeSchedulingCompletionStatus',
+      'autonomousProductionRuntimeSchedulingCompletionResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMESCHEDULINGCOMPLETIONREADY',
+    summary: 'Autonomous Production Runtime Scheduling Completion runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5360 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_RECONCILIATION.',
+    nextProcessor: '5370_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationProcessor'
+  });
+}
+
+function run5360_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCompletionProcessor() {
+  return sciipRun5360_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCompletionProcessor();
+}
+
+function sciipTest5360_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCompletionProcessor() {
+  var result = sciipRun5360_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCompletionProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5360_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCompletionProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5370_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5370_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertification',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CERTIFICATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_COMPLETION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CERTIFICATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CERTIFICATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeSchedulingCertificationId',
+      'autonomousProductionRuntimeSchedulingCertificationStatus',
+      'autonomousProductionRuntimeSchedulingCertificationResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMESCHEDULINGCERTIFICATIONREADY',
+    summary: 'Autonomous Production Runtime Scheduling Certification runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5370 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_COMPLETION.',
+    nextProcessor: '5380_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationLedgerProcessor'
+  });
+}
+
+function run5370_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationProcessor() {
+  return sciipRun5370_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationProcessor();
+}
+
+function sciipTest5370_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationProcessor() {
+  var result = sciipRun5370_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5370_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5380_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5380_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CERTIFICATION_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CERTIFICATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CERTIFICATION_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CERTIFICATION_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeSchedulingCertificationLedgerId',
+      'autonomousProductionRuntimeSchedulingCertificationLedgerStatus',
+      'autonomousProductionRuntimeSchedulingCertificationLedgerResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMESCHEDULINGCERTIFICATIONLEDGERREADY',
+    summary: 'Autonomous Production Runtime Scheduling Certification Ledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5380 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CERTIFICATION.',
+    nextProcessor: '5390_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceProcessor'
+  });
+}
+
+function run5380_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationLedgerProcessor() {
+  return sciipRun5380_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationLedgerProcessor();
+}
+
+function sciipTest5380_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationLedgerProcessor() {
+  var result = sciipRun5380_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5380_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingCertificationLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5390_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5390_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptance',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ACCEPTANCE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CERTIFICATION_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ACCEPTANCE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ACCEPTANCE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeSchedulingAcceptanceId',
+      'autonomousProductionRuntimeSchedulingAcceptanceStatus',
+      'autonomousProductionRuntimeSchedulingAcceptanceResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMESCHEDULINGACCEPTANCEREADY',
+    summary: 'Autonomous Production Runtime Scheduling Acceptance runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5390 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_CERTIFICATION_LEDGER_SUMMARY.',
+    nextProcessor: '5400_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceLedgerProcessor'
+  });
+}
+
+function run5390_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceProcessor() {
+  return sciipRun5390_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceProcessor();
+}
+
+function sciipTest5390_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceProcessor() {
+  var result = sciipRun5390_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5390_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun5400_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '5400_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ACCEPTANCE_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ACCEPTANCE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ACCEPTANCE_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ACCEPTANCE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'autonomousProductionRuntimeSchedulingAcceptanceLedgerId',
+      'autonomousProductionRuntimeSchedulingAcceptanceLedgerStatus',
+      'autonomousProductionRuntimeSchedulingAcceptanceLedgerResult',
+      'runtimeScope',
+      'runtimeSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONAUTONOMOUSPRODUCTIONRUNTIMESCHEDULINGACCEPTANCELEDGERREADY',
+    summary: 'Autonomous Production Runtime Scheduling Acceptance Ledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 5400 so records exist in SUPERSHEET_IMPORT_EXECUTION_AUTONOMOUS_PRODUCTION_RUNTIME_SCHEDULING_ACCEPTANCE.',
+    nextProcessor: '5410_SuperSheetImportExecutionAutonomousProductionRuntimeOptimizationProcessor'
+  });
+}
+
+function run5400_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceLedgerProcessor() {
+  return sciipRun5400_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceLedgerProcessor();
+}
+
+function sciipTest5400_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceLedgerProcessor() {
+  var result = sciipRun5400_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest5400_SuperSheetImportExecutionAutonomousProductionRuntimeSchedulingAcceptanceLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
