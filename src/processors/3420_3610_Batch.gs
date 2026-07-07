@@ -1186,7 +1186,7 @@ function sciipTest3620_SuperSheetImportExecutionProductionOperationsContinuityLe
 function sciipRun3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor() {
   return sciipPatch3420_3610Run_({
     processor: '3630_SuperSheetImportExecutionProductionOperationsContinuityCloseout',
-    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUT',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS',
     sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_LEDGER_SUMMARY',
     targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS',
     ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS_RUNTIME_LEDGER',
