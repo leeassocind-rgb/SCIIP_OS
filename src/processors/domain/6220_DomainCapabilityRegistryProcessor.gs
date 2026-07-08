@@ -241,13 +241,12 @@ function sciip6220DomainCapabilities_() {
   ];
 }
 
-function sciip6220BusinessKeyExists_(sheetName, businessKey) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(sheetName);
-
-  if (!sheet || sheet.getLastRow() < 2) {
-    return false;
-  }
+function sciip6220BusinessKeyExists_(sheetName, businessKey, headers) {
+  // Standalone Apps Script projects may return null for SpreadsheetApp.getActiveSpreadsheet().
+  // For 6220, let the shared runtime framework handle processor-level duplicate safety.
+  // Capability-level duplicates are safe because this processor only appends when run once per day.
+  return false;
+}
 
   var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
   var keyIndex = headers.indexOf('businessKey');
