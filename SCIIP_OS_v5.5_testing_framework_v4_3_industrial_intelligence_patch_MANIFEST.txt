@@ -1,0 +1,10 @@
+SCIIP_OS v5.5 Testing Framework v4.3 Industrial Intelligence Patch
+
+This patch overwrites:
+src/tests/suites/IndustrialIntelligenceExecutionSuite.gs
+
+It provides explicit test wrappers:
+- sciipTestRange6960_7050()
+- sciipTestBatch6960_7050_IndustrialIntelligenceExecution()
+
+The wrappers run 6960-7050 directly and do not rely on discovery metadata.

@@ -1,0 +1,13 @@
+SCIIP_OS v5.5 Industrial Intelligence Execution 6960-7050
+6960 IndustrialIntelligenceExecutionReadiness
+6970 MarketContextIntelligence
+6980 AssetIntelligenceEnrichment
+6990 IdentityIntelligenceEnrichment
+7000 GraphIntelligenceEnrichment
+7010 GISIntelligenceEnrichment
+7020 CrossDomainIntelligenceFusion
+7030 IntelligenceValidation
+7040 IntelligenceCertification
+7050 IntelligenceAcceptance
+
+Includes explicit Testing Framework v4.x wrappers: sciipTestRange6960_7050 and sciipTestBatch6960_7050_IndustrialIntelligenceExecution.
