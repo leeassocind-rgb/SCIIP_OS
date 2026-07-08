@@ -1,0 +1,25 @@
+SCIIP_OS v5.5 — Execution Intelligence / Autonomous Orchestration 7360–7450
+
+Files:
+- src/processors/intelligence/execution/7360_7450_ExecutionIntelligenceOrchestrationShared.gs
+- src/processors/intelligence/execution/7360_ExecutionIntelligenceReadinessProcessor.gs
+- src/processors/intelligence/execution/7370_ExecutionPlanAssemblyProcessor.gs
+- src/processors/intelligence/execution/7380_WorkflowOrchestrationProcessor.gs
+- src/processors/intelligence/execution/7390_TaskPrioritizationProcessor.gs
+- src/processors/intelligence/execution/7400_ExecutionResourceAllocationProcessor.gs
+- src/processors/intelligence/execution/7410_ExecutionDependencyMappingProcessor.gs
+- src/processors/intelligence/execution/7420_ExecutionMonitoringIntelligenceProcessor.gs
+- src/processors/intelligence/execution/7430_ExecutionValidationProcessor.gs
+- src/processors/intelligence/execution/7440_ExecutionCertificationProcessor.gs
+- src/processors/intelligence/execution/7450_ExecutionAcceptanceProcessor.gs
+- src/tests/SCIIP_TestingFramework_v4_ExecutionIntelligence_7360_7450_Patch.gs
+
+Testing:
+sciipTestRange7360_7450_ExecutionIntelligenceOrchestration()
+
+Explicit range wrapper:
+SCIIP_TEST.runRange(7360, 7450)
+
+Push:
+unzip -o ~/Downloads/SCIIP_OS_v5_5_7360_7450_Execution_Intelligence_Orchestration_Patch.zip
+clasp push
