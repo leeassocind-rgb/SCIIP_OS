@@ -2,7 +2,7 @@
  * SCIIP_OS v5.5
  * File: SCIIP_TestFramework_v4.gs
  *
- * SCIIP Testing Framework v4.0
+ * SCIIP Testing Framework v4.2
  *
  * Purpose:
  * Registry-free dynamic test execution for SCIIP_OS processors.
@@ -22,7 +22,7 @@
 
 var SCIIP_TEST = (typeof SCIIP_TEST !== 'undefined') ? SCIIP_TEST : {};
 
-SCIIP_TEST.VERSION = 'v4.0';
+SCIIP_TEST.VERSION = 'v4.2';
 
 SCIIP_TEST.SUFFIX_CANDIDATES_BY_NUMBER = {
   6210: ['DomainCapabilityExpansionReadinessProcessor'],
@@ -96,6 +96,18 @@ SCIIP_TEST.SUFFIX_CANDIDATES_BY_NUMBER = {
   6830: ['GraphLedgerProcessor'],
   6840: ['GraphExecutionCertificationProcessor'],
   6850: ['GraphAcceptanceProcessor']
+,
+  6860: ['GISExecutionReadinessProcessor'],
+  6870: ['CoordinateResolutionProcessor'],
+  6880: ['SpatialGeometryCreationProcessor'],
+  6890: ['ParcelBindingProcessor'],
+  6900: ['JurisdictionBindingProcessor'],
+  6910: ['SpatialRelationshipGenerationProcessor'],
+  6920: ['GISValidationProcessor'],
+  6930: ['GISLedgerProcessor'],
+  6940: ['GISExecutionCertificationProcessor'],
+  6950: ['GISAcceptanceProcessor']
+
 };
 
 SCIIP_TEST.SUITES = {
@@ -105,7 +117,8 @@ SCIIP_TEST.SUITES = {
   AssetRegistryExecution: { start: 6480, end: 6550, subsystem: 'asset' },
   AssetDataExecution: { start: 6560, end: 6650, subsystem: 'asset' },
   IdentityExecution: { start: 6660, end: 6750, subsystem: 'identity' },
-  GraphExecution: { start: 6760, end: 6850, subsystem: 'graph' }
+  GraphExecution: { start: 6760, end: 6850, subsystem: 'graph' },
+  GISExecution: { start: 6860, end: 6950, subsystem: 'gis' }
 };
 
 SCIIP_TEST.getGlobal_ = function() {
