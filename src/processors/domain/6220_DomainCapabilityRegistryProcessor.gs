@@ -247,25 +247,3 @@ function sciip6220BusinessKeyExists_(sheetName, businessKey, headers) {
   // Capability-level duplicates are safe because this processor only appends when run once per day.
   return false;
 }
-
-  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  var keyIndex = headers.indexOf('businessKey');
-
-  if (keyIndex < 0) {
-    keyIndex = headers.indexOf('Business_Key');
-  }
-
-  if (keyIndex < 0) {
-    return false;
-  }
-
-  var values = sheet.getRange(2, keyIndex + 1, sheet.getLastRow() - 1, 1).getValues();
-
-  for (var i = 0; i < values.length; i++) {
-    if (String(values[i][0]) === String(businessKey)) {
-      return true;
-    }
-  }
-
-  return false;
-}
