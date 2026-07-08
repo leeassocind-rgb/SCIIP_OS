@@ -1,0 +1,25 @@
+SCIIP_OS v5.5 — Decision Intelligence Execution 7260–7350
+
+Files:
+- src/processors/intelligence/execution/7260_7350_DecisionIntelligenceExecutionShared.gs
+- src/processors/intelligence/execution/7260_DecisionIntelligenceReadinessProcessor.gs
+- src/processors/intelligence/execution/7270_DecisionContextAssemblyProcessor.gs
+- src/processors/intelligence/execution/7280_MultiScenarioAnalysisProcessor.gs
+- src/processors/intelligence/execution/7290_DecisionOptimizationProcessor.gs
+- src/processors/intelligence/execution/7300_CapitalAllocationDecisionProcessor.gs
+- src/processors/intelligence/execution/7310_AcquisitionDecisionEngineProcessor.gs
+- src/processors/intelligence/execution/7320_DispositionDecisionEngineProcessor.gs
+- src/processors/intelligence/execution/7330_DecisionValidationProcessor.gs
+- src/processors/intelligence/execution/7340_DecisionCertificationProcessor.gs
+- src/processors/intelligence/execution/7350_DecisionAcceptanceProcessor.gs
+- src/tests/SCIIP_TestingFramework_v4_DecisionIntelligence_7260_7350_Patch.gs
+
+Testing:
+sciipTestRange7260_7350_DecisionIntelligenceExecution()
+
+Explicit range wrapper:
+SCIIP_TEST.runRange(7260, 7350)
+
+Push:
+unzip -o ~/Downloads/SCIIP_OS_v5_5_7260_7350_Decision_Intelligence_Execution_Patch.zip
+clasp push
