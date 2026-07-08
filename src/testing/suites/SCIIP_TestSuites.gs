@@ -25,3 +25,16 @@ function sciipTestSuiteAssetRegistryExecution() {
 function sciipTestSuiteAssetDataExecution() {
   return SCIIP_TEST.runSuite('AssetDataExecution');
 }
+
+
+function sciipTestSuiteIdentityExecution() {
+  return SCIIP_TEST.runSuite('IdentityExecution');
+}
+
+function sciipTestRange6660_6750() {
+  return SCIIP_TEST.runRange(6660, 6750);
+}
+
+function sciipTestBatch6660_6750_IdentityExecution() {
+  return SCIIP_TEST.runSuite('IdentityExecution');
+}

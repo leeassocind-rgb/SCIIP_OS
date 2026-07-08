@@ -9,7 +9,7 @@
 
 var SCIIP_TEST_REGISTRY = SCIIP_TEST_REGISTRY || {};
 
-SCIIP_TEST_REGISTRY.VERSION = 'v3.0';
+SCIIP_TEST_REGISTRY.VERSION = 'v3.1';
 
 SCIIP_TEST_REGISTRY.TESTS = [
   { number: 6210, subsystem: 'domain', suite: 'DomainFoundation', processor: '6210_DomainCapabilityExpansionReadiness', testFunction: 'sciipTest6210_DomainCapabilityExpansionReadinessProcessor' },
@@ -61,6 +61,18 @@ SCIIP_TEST_REGISTRY.TESTS = [
   { number: 6630, subsystem: 'asset', suite: 'AssetDataExecution', processor: '6630_AssetGISBinding', testFunction: 'sciipTest6630_AssetGISBindingProcessor' },
   { number: 6640, subsystem: 'asset', suite: 'AssetDataExecution', processor: '6640_AssetExecutionCertification', testFunction: 'sciipTest6640_AssetExecutionCertificationProcessor' },
   { number: 6650, subsystem: 'asset', suite: 'AssetDataExecution', processor: '6650_AssetAcceptance', testFunction: 'sciipTest6650_AssetAcceptanceProcessor' }
+,
+  { number: 6660, subsystem: 'identity', suite: 'IdentityExecution', processor: '6660_IdentityExecutionReadiness', testFunction: 'sciipTest6660_IdentityExecutionReadinessProcessor' },
+  { number: 6670, subsystem: 'identity', suite: 'IdentityExecution', processor: '6670_IdentityCandidateImport', testFunction: 'sciipTest6670_IdentityCandidateImportProcessor' },
+  { number: 6680, subsystem: 'identity', suite: 'IdentityExecution', processor: '6680_IdentityAliasResolution', testFunction: 'sciipTest6680_IdentityAliasResolutionProcessor' },
+  { number: 6690, subsystem: 'identity', suite: 'IdentityExecution', processor: '6690_ParentAddressResolution', testFunction: 'sciipTest6690_ParentAddressResolutionProcessor' },
+  { number: 6700, subsystem: 'identity', suite: 'IdentityExecution', processor: '6700_CanonicalIdentityCreation', testFunction: 'sciipTest6700_CanonicalIdentityCreationProcessor' },
+  { number: 6710, subsystem: 'identity', suite: 'IdentityExecution', processor: '6710_IdentityRelationshipBinding', testFunction: 'sciipTest6710_IdentityRelationshipBindingProcessor' },
+  { number: 6720, subsystem: 'identity', suite: 'IdentityExecution', processor: '6720_IdentityEventGeneration', testFunction: 'sciipTest6720_IdentityEventGenerationProcessor' },
+  { number: 6730, subsystem: 'identity', suite: 'IdentityExecution', processor: '6730_IdentityGraphBinding', testFunction: 'sciipTest6730_IdentityGraphBindingProcessor' },
+  { number: 6740, subsystem: 'identity', suite: 'IdentityExecution', processor: '6740_IdentityExecutionCertification', testFunction: 'sciipTest6740_IdentityExecutionCertificationProcessor' },
+  { number: 6750, subsystem: 'identity', suite: 'IdentityExecution', processor: '6750_IdentityAcceptance', testFunction: 'sciipTest6750_IdentityAcceptanceProcessor' }
+
 ];
 
 SCIIP_TEST_REGISTRY.normalizeKey = function(value) {
@@ -94,7 +106,7 @@ SCIIP_TEST_REGISTRY.byNumbers = function(processorNumbers) {
 SCIIP_TEST_REGISTRY.bySuite = function(suiteName) {
   var key = SCIIP_TEST_REGISTRY.normalizeKey(suiteName);
   if (key === 'domainregression' || key === 'regression' || key === 'all') {
-    return SCIIP_TEST_REGISTRY.byRange(6210, 6650);
+    return SCIIP_TEST_REGISTRY.byRange(6210, 6750);
   }
   return SCIIP_TEST_REGISTRY.all().filter(function(test) {
     return SCIIP_TEST_REGISTRY.normalizeKey(test.suite) === key;
