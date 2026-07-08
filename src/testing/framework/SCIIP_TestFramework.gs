@@ -1,54 +1,16 @@
 /**
- * SCIIP_OS v5.5 / Testing Framework v1
+ * SCIIP_OS v5.5 / Testing Framework v3
  * File: SCIIP_TestFramework.gs
  *
  * Purpose:
- * Provides a first-class testing namespace for SCIIP_OS processor validation.
- * This framework is intentionally separate from production processors.
+ * Reusable SCIIP_OS processor test framework with registry-based range,
+ * suite, subsystem, explicit-number execution, and ad hoc function lists.
  */
 
 var SCIIP_TEST = SCIIP_TEST || {};
 
-SCIIP_TEST.VERSION = 'v1.0';
+SCIIP_TEST.VERSION = 'v3.0';
 SCIIP_TEST.FRAMEWORK = 'SCIIP_TEST_FRAMEWORK';
-
-SCIIP_TEST.runFunction = function(functionName) {
-  var startedAt = new Date();
-
-  try {
-    if (!functionName || typeof functionName !== 'string') {
-      return SCIIP_TEST_RESULT_FACTORY.failure({
-        functionName: functionName || 'UNKNOWN',
-        error: 'Missing or invalid test function name.',
-        startedAt: startedAt
-      });
-    }
-
-    var fn = this.resolveFunction(functionName);
-
-    if (typeof fn !== 'function') {
-      return SCIIP_TEST_RESULT_FACTORY.failure({
-        functionName: functionName,
-        error: 'Test function not found: ' + functionName,
-        startedAt: startedAt
-      });
-    }
-
-    var processorResult = fn();
-
-    return SCIIP_TEST_RESULT_FACTORY.fromProcessorResult({
-      functionName: functionName,
-      processorResult: processorResult,
-      startedAt: startedAt
-    });
-  } catch (err) {
-    return SCIIP_TEST_RESULT_FACTORY.failure({
-      functionName: functionName,
-      error: err && err.stack ? err.stack : String(err),
-      startedAt: startedAt
-    });
-  }
-};
 
 SCIIP_TEST.resolveFunction = function(functionName) {
   try {
@@ -58,39 +20,123 @@ SCIIP_TEST.resolveFunction = function(functionName) {
   }
 };
 
-SCIIP_TEST.runList = function(functionNames, suiteName) {
+SCIIP_TEST.runFunction = function(functionName, metadata) {
+  var startedAt = new Date();
+  var meta = metadata || {};
+
+  try {
+    if (!functionName || typeof functionName !== 'string') {
+      return SCIIP_TEST_RESULT_FACTORY.failure({
+        functionName: functionName || 'UNKNOWN',
+        processorNumber: meta.number,
+        processor: meta.processor,
+        suite: meta.suite,
+        subsystem: meta.subsystem,
+        error: 'Missing or invalid test function name.',
+        startedAt: startedAt
+      });
+    }
+
+    var fn = SCIIP_TEST.resolveFunction(functionName);
+
+    if (typeof fn !== 'function') {
+      return SCIIP_TEST_RESULT_FACTORY.failure({
+        functionName: functionName,
+        processorNumber: meta.number,
+        processor: meta.processor,
+        suite: meta.suite,
+        subsystem: meta.subsystem,
+        error: 'Test function not found: ' + functionName,
+        startedAt: startedAt
+      });
+    }
+
+    var processorResult = fn();
+
+    return SCIIP_TEST_RESULT_FACTORY.fromProcessorResult({
+      functionName: functionName,
+      processorNumber: meta.number,
+      processor: meta.processor,
+      suite: meta.suite,
+      subsystem: meta.subsystem,
+      processorResult: processorResult,
+      startedAt: startedAt
+    });
+  } catch (err) {
+    return SCIIP_TEST_RESULT_FACTORY.failure({
+      functionName: functionName,
+      processorNumber: meta.number,
+      processor: meta.processor,
+      suite: meta.suite,
+      subsystem: meta.subsystem,
+      error: err && err.stack ? err.stack : String(err),
+      startedAt: startedAt
+    });
+  }
+};
+
+SCIIP_TEST.runTests = function(tests, suiteName) {
   var startedAt = new Date();
   var results = [];
 
-  (functionNames || []).forEach(function(functionName) {
-    results.push(SCIIP_TEST.runFunction(functionName));
+  (tests || []).forEach(function(test) {
+    results.push(SCIIP_TEST.runFunction(test.testFunction, test));
   });
 
   return SCIIP_TEST_RESULT_FACTORY.suite({
-    suiteName: suiteName || 'SCIIP_TEST_LIST',
+    suiteName: suiteName || 'SCIIP_TEST_SUITE',
     results: results,
     startedAt: startedAt
   });
 };
 
+SCIIP_TEST.runList = function(functionNames, suiteName) {
+  var tests = (functionNames || []).map(function(functionName) {
+    return { testFunction: functionName };
+  });
+  return SCIIP_TEST.runTests(tests, suiteName || 'SCIIP_TEST_LIST');
+};
+
 SCIIP_TEST.runRange = function(startProcessorNumber, endProcessorNumber) {
-  var suite = SCIIP_TEST_SUITES.getRangeSuite(startProcessorNumber, endProcessorNumber);
-  return SCIIP_TEST.runList(suite.tests, suite.name);
+  var tests = SCIIP_TEST_REGISTRY.byRange(startProcessorNumber, endProcessorNumber);
+  return SCIIP_TEST.runTests(tests, 'ProcessorRange_' + startProcessorNumber + '_' + endProcessorNumber);
+};
+
+SCIIP_TEST.runProcessors = function(processorNumbers) {
+  var tests = SCIIP_TEST_REGISTRY.byNumbers(processorNumbers || []);
+  return SCIIP_TEST.runTests(tests, 'ProcessorList_' + (processorNumbers || []).join('_'));
 };
 
 SCIIP_TEST.runSuite = function(suiteName) {
-  var suite = SCIIP_TEST_SUITES.getSuite(suiteName);
-  return SCIIP_TEST.runList(suite.tests, suite.name);
+  var tests = SCIIP_TEST_REGISTRY.bySuite(suiteName);
+  return SCIIP_TEST.runTests(tests, suiteName || 'SCIIP_TEST_SUITE');
 };
 
-SCIIP_TEST.runDomainFoundation = function() {
-  return SCIIP_TEST.runSuite('DomainFoundation');
+SCIIP_TEST.runSubsystem = function(subsystemName) {
+  var tests = SCIIP_TEST_REGISTRY.bySubsystem(subsystemName);
+  return SCIIP_TEST.runTests(tests, 'Subsystem_' + subsystemName);
 };
 
-SCIIP_TEST.runDomainExecutionReadiness = function() {
-  return SCIIP_TEST.runSuite('DomainExecutionReadiness');
-};
+SCIIP_TEST.runDomainFoundation = function() { return SCIIP_TEST.runSuite('DomainFoundation'); };
+SCIIP_TEST.runDomainExecutionReadiness = function() { return SCIIP_TEST.runSuite('DomainExecutionReadiness'); };
+SCIIP_TEST.runAssetRegistryExecutionReadiness = function() { return SCIIP_TEST.runSuite('AssetRegistryExecutionReadiness'); };
+SCIIP_TEST.runAssetRegistryExecution = function() { return SCIIP_TEST.runSuite('AssetRegistryExecution'); };
+SCIIP_TEST.runAssetDataExecution = function() { return SCIIP_TEST.runSuite('AssetDataExecution'); };
+SCIIP_TEST.runRegression = function() { return SCIIP_TEST.runSuite('DomainRegression'); };
+SCIIP_TEST.describe = function() { return SCIIP_TEST_REGISTRY.describe(); };
 
-SCIIP_TEST.runRegression = function() {
-  return SCIIP_TEST.runSuite('DomainRegression');
-};
+function sciipTestFrameworkRegistryReport() {
+  return SCIIP_TEST.describe();
+}
+
+function sciipTestRange6560_6650() {
+  return SCIIP_TEST.runRange(6560, 6650);
+}
+
+function sciipTestBatch6560_6650_AssetDataExecution() {
+  return SCIIP_TEST.runSuite('AssetDataExecution');
+}
+
+function sciipTestSubsystemAsset() {
+  return SCIIP_TEST.runSubsystem('asset');
+}
