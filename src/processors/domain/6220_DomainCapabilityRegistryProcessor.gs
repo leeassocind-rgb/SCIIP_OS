@@ -108,7 +108,7 @@ function sciipRun6220_DomainCapabilityRegistryProcessor() {
       capabilities.forEach(function(capability) {
         var rowBusinessKey = context.businessKey + '|' + capability.id;
 
-        if (sciip6220BusinessKeyExists_(definition.targetSheet, rowBusinessKey)) {
+        if (sciip6220BusinessKeyExists_(definition.targetSheet, rowBusinessKey, targetHeaders)) {
           skippedDuplicate += 1;
           return;
         }
@@ -242,8 +242,24 @@ function sciip6220DomainCapabilities_() {
 }
 
 function sciip6220BusinessKeyExists_(sheetName, businessKey, headers) {
-  // Standalone Apps Script projects may return null for SpreadsheetApp.getActiveSpreadsheet().
-  // For 6220, let the shared runtime framework handle processor-level duplicate safety.
-  // Capability-level duplicates are safe because this processor only appends when run once per day.
+  // Use the shared runtime sheet factory only. Do not call SpreadsheetApp.getActiveSpreadsheet(),
+  // because standalone Apps Script projects can return null for active spreadsheet.
+  if (typeof SCIIP_RUNTIME_SHEET_FACTORY === 'undefined' || !SCIIP_RUNTIME_SHEET_FACTORY) {
+    return false;
+  }
+
+  if (typeof SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey === 'function') {
+    return !!SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey(sheetName, businessKey);
+  }
+
+  if (typeof SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords === 'function') {
+    var records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName) || [];
+
+    for (var i = records.length - 1; i >= 0; i--) {
+      if (String(records[i].businessKey) === String(businessKey)) return true;
+      if (String(records[i].Business_Key) === String(businessKey)) return true;
+    }
+  }
+
   return false;
 }
