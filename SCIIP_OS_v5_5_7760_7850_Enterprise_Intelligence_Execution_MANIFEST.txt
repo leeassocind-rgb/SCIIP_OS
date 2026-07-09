@@ -1,0 +1,11 @@
+SCIIP_OS v5.5 — Enterprise Intelligence Execution 7760–7850
+
+Testing:
+sciipTestRange7760_7850_EnterpriseIntelligenceExecution()
+
+Explicit range wrapper:
+SCIIP_TEST.runRange(7760, 7850)
+
+Push:
+unzip -o ~/Downloads/SCIIP_OS_v5_5_7760_7850_Enterprise_Intelligence_Execution_Patch.zip
+clasp push
