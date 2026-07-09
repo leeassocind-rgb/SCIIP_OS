@@ -1,0 +1,11 @@
+SCIIP_OS v5.5 — Autonomous Operations Execution 7560–7650
+
+Testing:
+sciipTestRange7560_7650_AutonomousOperationsExecution()
+
+Explicit range wrapper:
+SCIIP_TEST.runRange(7560, 7650)
+
+Push:
+unzip -o ~/Downloads/SCIIP_OS_v5_5_7560_7650_Autonomous_Operations_Execution_Patch.zip
+clasp push
