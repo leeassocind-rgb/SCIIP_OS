@@ -1,0 +1,11 @@
+SCIIP_OS v5.5 — Adaptive Intelligence Execution 7660–7750
+
+Testing:
+sciipTestRange7660_7750_AdaptiveIntelligenceExecution()
+
+Explicit range wrapper:
+SCIIP_TEST.runRange(7660, 7750)
+
+Push:
+unzip -o ~/Downloads/SCIIP_OS_v5_5_7660_7750_Adaptive_Intelligence_Execution_Patch.zip
+clasp push
