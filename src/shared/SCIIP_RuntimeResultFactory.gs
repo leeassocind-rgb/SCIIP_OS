@@ -10,7 +10,6 @@
  * This reduces duplicated result construction across future processors.
  */
 
-var SCIIP_RUNTIME = SCIIP_RUNTIME || {};
 var SCIIP_RUNTIME_RESULT_FACTORY = SCIIP_RUNTIME_RESULT_FACTORY || {};
 
 SCIIP_RUNTIME_RESULT_FACTORY.VERSION = 'v5.2';
@@ -75,14 +74,6 @@ SCIIP_RUNTIME_RESULT_FACTORY.error = function(config) {
   config.errors = config.errors || 1;
   config.recordsCreated = 0;
   config.message = config.message || 'Runtime error occurred.';
-  return SCIIP_RUNTIME_RESULT_FACTORY.create(config);
-};
-
-/**
- * Backward-compatible runtime hook.
- * Allows existing SCIIP_RUNTIME.result(config) calls to use the factory.
- */
-SCIIP_RUNTIME.result = function(config) {
   return SCIIP_RUNTIME_RESULT_FACTORY.create(config);
 };
 

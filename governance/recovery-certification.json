@@ -1,0 +1,43 @@
+{
+  "framework": "SCIIP_RECOVERY_CERTIFICATION",
+  "version": "v6.1-phase7b",
+  "status": "PASSED",
+  "certifiedAt": "2026-07-14T14:51:26.165Z",
+  "recoverableFiles": 11801,
+  "rtoSeconds": 0.229,
+  "rpoMinutes": 0,
+  "checks": {
+    "requiredPaths": {
+      "ok": true,
+      "missing": []
+    },
+    "recoverableInventory": {
+      "ok": true,
+      "count": 11801,
+      "minimum": 10000
+    },
+    "restoreRoundTrip": {
+      "ok": true,
+      "detail": {
+        "status": "PASSED",
+        "checkpoint": "SCIIP_OS_checkpoint_20260714T145126Z.tar.gz",
+        "hashVerified": true
+      }
+    },
+    "rto": {
+      "ok": true,
+      "seconds": 0.229,
+      "maximum": 30
+    },
+    "rpo": {
+      "ok": true,
+      "minutes": 0,
+      "maximum": 60
+    },
+    "backendRunbook": {
+      "ok": true
+    }
+  },
+  "failures": [],
+  "certificateId": "6BA7326E98536EA0FFC5E79C"
+}

@@ -1,0 +1,4 @@
+function sciipRun23930_StorageIntegrationOptimizationRiskAnalysisProcessor(){
+  return SCIIP_STORAGE_INTEGRATION_OPTIMIZATION_BACKEND.executeIntegrationOptimizationPlan({processorNumber:23930,processorName:'StorageIntegrationOptimizationRiskAnalysis',statusField:'storageIntegrationOptimizationRiskAnalysisStatus',component:'Storage Integration Optimization Execution',backendLayer:'Storage Integration Optimization',sourceSheet:'STORAGE_INTEGRATION_OPTIMIZATION_COVERAGE_ASSESSMENT',targetSheet:'STORAGE_INTEGRATION_OPTIMIZATION_RISK_ANALYSIS',nextAction:'Run 23940_StorageIntegrationOptimizationPlanningProcessor after this processor completes.'});
+}
+function sciipTest23930_StorageIntegrationOptimizationRiskAnalysisProcessor(){var result=sciipRun23930_StorageIntegrationOptimizationRiskAnalysisProcessor();console.log(JSON.stringify({test:'sciipTest23930_StorageIntegrationOptimizationRiskAnalysisProcessor',result:result}));return result;}

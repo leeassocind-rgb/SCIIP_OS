@@ -11,7 +11,6 @@
  * logging, execution, result creation, and error handling.
  */
 
-var SCIIP_RUNTIME = SCIIP_RUNTIME || {};
 var SCIIP_RUNTIME_PROCESSOR_BASE = SCIIP_RUNTIME_PROCESSOR_BASE || {};
 
 SCIIP_RUNTIME_PROCESSOR_BASE.VERSION = 'v5.2';
@@ -214,13 +213,6 @@ SCIIP_RUNTIME_PROCESSOR_BASE.run = function(config) {
       return result;
     }
   });
-};
-
-/**
- * Backward-compatible runtime hook.
- */
-SCIIP_RUNTIME.runBaseProcessor = function(config) {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run(config);
 };
 
 /**

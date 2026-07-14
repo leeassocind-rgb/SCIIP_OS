@@ -1,0 +1,4 @@
+function sciipRun24410_StoragePlatformResiliencePolicyRegistryProcessor(){
+  return SCIIP_STORAGE_PLATFORM_RESILIENCE_BACKEND.executePlatformResiliencePlan({processorNumber:24410,processorName:'StoragePlatformResiliencePolicyRegistry',statusField:'storagePlatformResiliencePolicyRegistryStatus',component:'Storage Platform Resilience Execution',backendLayer:'Storage Platform Resilience',sourceSheet:'STORAGE_PLATFORM_RESILIENCE_READINESS',targetSheet:'STORAGE_PLATFORM_RESILIENCE_POLICY_REGISTRY',nextAction:'Run 24420_StoragePlatformResilienceCoverageAssessmentProcessor after this processor completes.'});
+}
+function sciipTest24410_StoragePlatformResiliencePolicyRegistryProcessor(){var result=sciipRun24410_StoragePlatformResiliencePolicyRegistryProcessor();console.log(JSON.stringify({test:'sciipTest24410_StoragePlatformResiliencePolicyRegistryProcessor',result:result}));return result;}

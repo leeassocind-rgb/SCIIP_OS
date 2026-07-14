@@ -1,0 +1,4 @@
+function sciipRun24210_StoragePlatformMonitoringPolicyRegistryProcessor(){
+  return SCIIP_STORAGE_PLATFORM_MONITORING_BACKEND.executePlatformMonitoringPlan({processorNumber:24210,processorName:'StoragePlatformMonitoringPolicyRegistry',statusField:'storagePlatformMonitoringPolicyRegistryStatus',component:'Storage Platform Monitoring Execution',backendLayer:'Storage Platform Monitoring',sourceSheet:'STORAGE_PLATFORM_MONITORING_READINESS',targetSheet:'STORAGE_PLATFORM_MONITORING_POLICY_REGISTRY',nextAction:'Run 24220_StoragePlatformMonitoringCoverageAssessmentProcessor after this processor completes.'});
+}
+function sciipTest24210_StoragePlatformMonitoringPolicyRegistryProcessor(){var result=sciipRun24210_StoragePlatformMonitoringPolicyRegistryProcessor();console.log(JSON.stringify({test:'sciipTest24210_StoragePlatformMonitoringPolicyRegistryProcessor',result:result}));return result;}

@@ -1,0 +1,4 @@
+function sciipRun24840_StoragePlatformGovernancePlanningProcessor(){
+  return SCIIP_STORAGE_PLATFORM_GOVERNANCE_BACKEND.executePlatformGovernancePlan({processorNumber:24840,processorName:'StoragePlatformGovernancePlanning',statusField:'storagePlatformGovernancePlanningStatus',component:'Storage Platform Governance Execution',backendLayer:'Storage Platform Governance',sourceSheet:'STORAGE_PLATFORM_GOVERNANCE_RISK_ANALYSIS',targetSheet:'STORAGE_PLATFORM_GOVERNANCE_PLANNING',nextAction:'Run 24850_StoragePlatformGovernanceExecutionProcessor after this processor completes.'});
+}
+function sciipTest24840_StoragePlatformGovernancePlanningProcessor(){var result=sciipRun24840_StoragePlatformGovernancePlanningProcessor();console.log(JSON.stringify({test:'sciipTest24840_StoragePlatformGovernancePlanningProcessor',result:result}));return result;}

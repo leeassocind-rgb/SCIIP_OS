@@ -1,0 +1,4 @@
+function sciipRun23710_StorageIntegrationCompliancePolicyRegistryProcessor(){
+  return SCIIP_STORAGE_INTEGRATION_COMPLIANCE_BACKEND.executeIntegrationCompliancePlan({processorNumber:23710,processorName:'StorageIntegrationCompliancePolicyRegistry',statusField:'storageIntegrationCompliancePolicyRegistryStatus',component:'Storage Integration Compliance Execution',backendLayer:'Storage Integration Compliance',sourceSheet:'STORAGE_INTEGRATION_COMPLIANCE_READINESS',targetSheet:'STORAGE_INTEGRATION_COMPLIANCE_POLICY_REGISTRY',nextAction:'Run 23720_StorageIntegrationComplianceCoverageAssessmentProcessor after this processor completes.'});
+}
+function sciipTest23710_StorageIntegrationCompliancePolicyRegistryProcessor(){var result=sciipRun23710_StorageIntegrationCompliancePolicyRegistryProcessor();console.log(JSON.stringify({test:'sciipTest23710_StorageIntegrationCompliancePolicyRegistryProcessor',result:result}));return result;}

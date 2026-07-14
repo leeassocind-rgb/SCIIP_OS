@@ -10,7 +10,6 @@
  * Supports INFO, WARN, ERROR, DEBUG, and AUDIT log levels.
  */
 
-var SCIIP_RUNTIME = SCIIP_RUNTIME || {};
 var SCIIP_RUNTIME_LOGGING = SCIIP_RUNTIME_LOGGING || {};
 
 SCIIP_RUNTIME_LOGGING.VERSION = 'v5.2';
@@ -108,33 +107,6 @@ SCIIP_RUNTIME_LOGGING.fromError = function(context, error, payload) {
         ? error.message
         : String(error || 'Unknown runtime error.')
   });
-};
-
-/**
- * Backward-compatible runtime hook.
- */
-SCIIP_RUNTIME.log = function(config) {
-  return SCIIP_RUNTIME_LOGGING.write(config);
-};
-
-SCIIP_RUNTIME.logInfo = function(config) {
-  return SCIIP_RUNTIME_LOGGING.info(config);
-};
-
-SCIIP_RUNTIME.logWarn = function(config) {
-  return SCIIP_RUNTIME_LOGGING.warn(config);
-};
-
-SCIIP_RUNTIME.logErrorEvent = function(config) {
-  return SCIIP_RUNTIME_LOGGING.error(config);
-};
-
-SCIIP_RUNTIME.logDebug = function(config) {
-  return SCIIP_RUNTIME_LOGGING.debug(config);
-};
-
-SCIIP_RUNTIME.logAudit = function(config) {
-  return SCIIP_RUNTIME_LOGGING.audit(config);
 };
 
 /**

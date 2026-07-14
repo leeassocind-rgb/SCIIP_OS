@@ -1,0 +1,13 @@
+{
+  "name": "sciip-os",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Southern California Industrial Intelligence Platform",
+  "scripts": {
+    "audit": "node tools/audit.js",
+    "architecture": "node tools/architecture.js",
+    "architecture:report": "node tools/sciip-architecture-gate.js",
+    "architecture:baseline": "node tools/sciip-architecture-gate.js --write-baseline",
+    "architecture:strict": "node tools/sciip-architecture-gate.js --strict"
+  }
+}

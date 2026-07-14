@@ -1,6 +1,6 @@
 /**
  * SCIIP_OS v5.5 — Enterprise Intelligence Execution explicit Testing Framework v4 patch.
- * Never call SCIIP_TEST.runRange() without explicit arguments.
+ * Every public range wrapper passes explicit start and end arguments.
  */
 function sciipTest7760() { return sciipTest7760_EnterpriseIntelligenceReadinessProcessor(); }
 function sciipTest7770() { return sciipTest7770_EnterpriseKnowledgeSynchronizationProcessor(); }

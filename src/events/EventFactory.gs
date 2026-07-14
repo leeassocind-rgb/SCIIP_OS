@@ -94,38 +94,9 @@ function sciipCreateAndRecordEvent(
 }
 
 /**
- * Validates event type.
- *
- * Uses centralized vocabulary registry.
- *
- * @param {string} eventType
+ * Event type validation and enumeration are provided by
+ * src/config/SCIIP_VOCABULARY.gs.
  */
-function sciipValidateEventType(
-  eventType
-) {
-
-  if (
-    !Object.values(
-      SCIIP.VOCABULARY.EVENT_TYPES
-    ).includes(eventType)
-  ) {
-
-    throw new Error(
-      'Invalid Event Type: ' +
-      eventType
-    );
-  }
-}
-
-/**
- * Returns all event types.
- *
- * @returns {Object}
- */
-function sciipGetEventTypes() {
-
-  return SCIIP.VOCABULARY.EVENT_TYPES;
-}
 
 /**
  * Returns event factory statistics.

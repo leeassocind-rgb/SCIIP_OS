@@ -1,0 +1,4 @@
+function sciipRun24160_StorageIntegrationPlatformAcceptanceLedgerProcessor(){
+  return SCIIP_STORAGE_INTEGRATION_PLATFORM_ACCEPTANCE_BACKEND.executeIntegrationPlatformAcceptancePlan({processorNumber:24160,processorName:'StorageIntegrationPlatformAcceptanceLedger',statusField:'storageIntegrationPlatformAcceptanceLedgerStatus',component:'Storage Integration Platform Acceptance Execution',backendLayer:'Storage Integration Platform Acceptance',sourceSheet:'STORAGE_INTEGRATION_PLATFORM_ACCEPTANCE_EXECUTION',targetSheet:'STORAGE_INTEGRATION_PLATFORM_ACCEPTANCE_LEDGER',nextAction:'Run 24170_StorageIntegrationPlatformAcceptanceValidationProcessor after this processor completes.'});
+}
+function sciipTest24160_StorageIntegrationPlatformAcceptanceLedgerProcessor(){var result=sciipRun24160_StorageIntegrationPlatformAcceptanceLedgerProcessor();console.log(JSON.stringify({test:'sciipTest24160_StorageIntegrationPlatformAcceptanceLedgerProcessor',result:result}));return result;}

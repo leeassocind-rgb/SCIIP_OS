@@ -1,0 +1,4 @@
+function sciipRun25120_StoragePlatformCertificationCoverageAssessmentProcessor(){
+  return SCIIP_STORAGE_PLATFORM_CERTIFICATION_BACKEND.executePlatformCertificationPlan({processorNumber:25120,processorName:'StoragePlatformCertificationCoverageAssessment',statusField:'storagePlatformCertificationCoverageAssessmentStatus',component:'Storage Platform Certification Execution',backendLayer:'Storage Platform Certification',sourceSheet:'STORAGE_PLATFORM_CERTIFICATION_POLICY_REGISTRY',targetSheet:'STORAGE_PLATFORM_CERTIFICATION_COVERAGE_ASSESSMENT',nextAction:'Run 25130_StoragePlatformCertificationRiskAnalysisProcessor after this processor completes.'});
+}
+function sciipTest25120_StoragePlatformCertificationCoverageAssessmentProcessor(){var result=sciipRun25120_StoragePlatformCertificationCoverageAssessmentProcessor();console.log(JSON.stringify({test:'sciipTest25120_StoragePlatformCertificationCoverageAssessmentProcessor',result:result}));return result;}

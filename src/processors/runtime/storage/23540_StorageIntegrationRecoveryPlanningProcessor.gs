@@ -1,0 +1,4 @@
+function sciipRun23540_StorageIntegrationRecoveryPlanningProcessor(){
+  return SCIIP_STORAGE_INTEGRATION_RECOVERY_BACKEND.executeIntegrationRecoveryPlan({processorNumber:23540,processorName:'StorageIntegrationRecoveryPlanning',statusField:'storageIntegrationRecoveryPlanningStatus',component:'Storage Integration Recovery Execution',backendLayer:'Storage Integration Recovery',sourceSheet:'STORAGE_INTEGRATION_RECOVERY_RISK_ANALYSIS',targetSheet:'STORAGE_INTEGRATION_RECOVERY_PLANNING',nextAction:'Run 23550_StorageIntegrationRecoveryExecutionProcessor after this processor completes.'});
+}
+function sciipTest23540_StorageIntegrationRecoveryPlanningProcessor(){var result=sciipRun23540_StorageIntegrationRecoveryPlanningProcessor();console.log(JSON.stringify({test:'sciipTest23540_StorageIntegrationRecoveryPlanningProcessor',result:result}));return result;}

@@ -11,7 +11,6 @@
  * business key, status, and compact payloads.
  */
 
-var SCIIP_RUNTIME = SCIIP_RUNTIME || {};
 var SCIIP_RUNTIME_TRANSACTION_MANAGER =
   SCIIP_RUNTIME_TRANSACTION_MANAGER || {};
 
@@ -191,17 +190,6 @@ SCIIP_RUNTIME_TRANSACTION_MANAGER.run = function(context, payload, executor) {
 
     throw err;
   }
-};
-
-/**
- * Backward-compatible runtime hook.
- */
-SCIIP_RUNTIME.runTransaction = function(context, payload, executor) {
-  return SCIIP_RUNTIME_TRANSACTION_MANAGER.run(
-    context,
-    payload,
-    executor
-  );
 };
 
 /**

@@ -1,0 +1,4 @@
+function sciipRun24740_StoragePlatformCompliancePlanningProcessor(){
+  return SCIIP_STORAGE_PLATFORM_COMPLIANCE_BACKEND.executePlatformCompliancePlan({processorNumber:24740,processorName:'StoragePlatformCompliancePlanning',statusField:'storagePlatformCompliancePlanningStatus',component:'Storage Platform Compliance Execution',backendLayer:'Storage Platform Compliance',sourceSheet:'STORAGE_PLATFORM_COMPLIANCE_RISK_ANALYSIS',targetSheet:'STORAGE_PLATFORM_COMPLIANCE_PLANNING',nextAction:'Run 24750_StoragePlatformComplianceExecutionProcessor after this processor completes.'});
+}
+function sciipTest24740_StoragePlatformCompliancePlanningProcessor(){var result=sciipRun24740_StoragePlatformCompliancePlanningProcessor();console.log(JSON.stringify({test:'sciipTest24740_StoragePlatformCompliancePlanningProcessor',result:result}));return result;}

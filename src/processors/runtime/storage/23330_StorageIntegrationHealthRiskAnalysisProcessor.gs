@@ -1,0 +1,4 @@
+function sciipRun23330_StorageIntegrationHealthRiskAnalysisProcessor(){
+  return SCIIP_STORAGE_INTEGRATION_HEALTH_BACKEND.executeIntegrationHealthPlan({processorNumber:23330,processorName:'StorageIntegrationHealthRiskAnalysis',statusField:'storageIntegrationHealthRiskAnalysisStatus',component:'Storage Integration Health Execution',backendLayer:'Storage Integration Health',sourceSheet:'STORAGE_INTEGRATION_HEALTH_COVERAGE_ASSESSMENT',targetSheet:'STORAGE_INTEGRATION_HEALTH_RISK_ANALYSIS',nextAction:'Run 23340_StorageIntegrationHealthPlanningProcessor after this processor completes.'});
+}
+function sciipTest23330_StorageIntegrationHealthRiskAnalysisProcessor(){var result=sciipRun23330_StorageIntegrationHealthRiskAnalysisProcessor();console.log(JSON.stringify({test:'sciipTest23330_StorageIntegrationHealthRiskAnalysisProcessor',result:result}));return result;}

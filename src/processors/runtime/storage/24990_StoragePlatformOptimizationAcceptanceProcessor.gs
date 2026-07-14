@@ -1,0 +1,4 @@
+function sciipRun24990_StoragePlatformOptimizationAcceptanceProcessor(){
+  return SCIIP_STORAGE_PLATFORM_OPTIMIZATION_BACKEND.executePlatformOptimizationPlan({processorNumber:24990,processorName:'StoragePlatformOptimizationAcceptance',statusField:'storagePlatformOptimizationAcceptanceStatus',component:'Storage Platform Optimization Execution',backendLayer:'Storage Platform Optimization',sourceSheet:'STORAGE_PLATFORM_OPTIMIZATION_CERTIFICATION',targetSheet:'STORAGE_PLATFORM_OPTIMIZATION_ACCEPTANCE',nextAction:'Storage Platform Optimization Execution accepted through 24990.'});
+}
+function sciipTest24990_StoragePlatformOptimizationAcceptanceProcessor(){var result=sciipRun24990_StoragePlatformOptimizationAcceptanceProcessor();console.log(JSON.stringify({test:'sciipTest24990_StoragePlatformOptimizationAcceptanceProcessor',result:result}));return result;}

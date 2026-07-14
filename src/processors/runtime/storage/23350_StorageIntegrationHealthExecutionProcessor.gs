@@ -1,0 +1,4 @@
+function sciipRun23350_StorageIntegrationHealthExecutionProcessor(){
+  return SCIIP_STORAGE_INTEGRATION_HEALTH_BACKEND.executeIntegrationHealthPlan({processorNumber:23350,processorName:'StorageIntegrationHealthExecution',statusField:'storageIntegrationHealthExecutionStatus',component:'Storage Integration Health Execution',backendLayer:'Storage Integration Health',sourceSheet:'STORAGE_INTEGRATION_HEALTH_PLANNING',targetSheet:'STORAGE_INTEGRATION_HEALTH_EXECUTION',nextAction:'Run 23360_StorageIntegrationHealthLedgerProcessor after this processor completes.'});
+}
+function sciipTest23350_StorageIntegrationHealthExecutionProcessor(){var result=sciipRun23350_StorageIntegrationHealthExecutionProcessor();console.log(JSON.stringify({test:'sciipTest23350_StorageIntegrationHealthExecutionProcessor',result:result}));return result;}

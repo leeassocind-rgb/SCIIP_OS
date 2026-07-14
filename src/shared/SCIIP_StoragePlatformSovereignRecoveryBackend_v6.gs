@@ -1,0 +1,11 @@
+var SCIIP_STORAGE_PLATFORM_SOVEREIGN_RECOVERY_BACKEND=(function(){
+  var ns={};ns.VERSION='v6.0';ns.MODE='STORAGE_PLATFORM_SOVEREIGN_RECOVERY_PLANNING';ns.WORKBOOK_CELL_LIMIT=10000000;
+  ns.getActiveSpreadsheetSafe=function(){try{return SpreadsheetApp.getActiveSpreadsheet()||null;}catch(e){return null;}};
+  ns.getWorkbookCellCount=function(ss){if(!ss)return ns.WORKBOOK_CELL_LIMIT;try{var sh=ss.getSheets(),t=0;for(var i=0;i<sh.length;i++)t+=sh[i].getMaxRows()*sh[i].getMaxColumns();return t;}catch(e){return ns.WORKBOOK_CELL_LIMIT;}};
+  ns.getCapacityState=function(){var ss=ns.getActiveSpreadsheetSafe(),c=ns.getWorkbookCellCount(ss);return{hasActiveSpreadsheet:!!ss,workbookCells:c,workbookCellLimit:ns.WORKBOOK_CELL_LIMIT,atOrAboveLimit:c>=ns.WORKBOOK_CELL_LIMIT,mode:ns.MODE};};
+  ns.dateKey=function(){return Utilities.formatDate(new Date(),Session.getScriptTimeZone(),'yyyy-MM-dd');};
+  ns.buildBusinessKey=function(c){return c.processorNumber+'_'+c.processorName.toUpperCase()+'|EXECUTE_'+c.processorName.toUpperCase()+'|'+ns.dateKey();};
+  ns.buildTransactionId=function(c){return 'TXN|'+c.processorNumber+'_'+c.processorName.toUpperCase()+'|'+c.targetSheet+'|'+ns.dateKey()+'|'+new Date().getTime();};
+  ns.executePlatformSovereignRecoveryPlan=function(c){var p={};p[c.statusField]='SKIPPED_NO_INPUTS';p.storageVersion=ns.VERSION;p.storageMode=ns.MODE;p.component=c.component;p.backendLayer=c.backendLayer;p.sourceSheet=c.sourceSheet;p.targetSheet=c.targetSheet;p.transactionId=ns.buildTransactionId(c);p.nextAction=c.nextAction;p.capacityState=ns.getCapacityState();p.message='Storage Platform Sovereign Recovery Execution v6.0 processor validated in capacity-safe planning mode. No unsafe workbook write was attempted.';return{processor:c.processorNumber+'_'+c.processorName,status:'SKIPPED_NO_INPUTS',businessKey:ns.buildBusinessKey(c),recordsCreated:0,recordsUpdated:0,recordsRead:0,processed:0,skippedDuplicate:0,skippedNoInputs:1,skippedValidation:0,errors:0,message:JSON.stringify(p),frameworkVersion:'v6.0',completedAt:new Date().toISOString()};};
+  return ns;
+})();

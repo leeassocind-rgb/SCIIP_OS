@@ -11,7 +11,6 @@
  * processor/action/date/business-key/spreadsheet metadata.
  */
 
-var SCIIP_RUNTIME = SCIIP_RUNTIME || {};
 var SCIIP_RUNTIME_CONTEXT = SCIIP_RUNTIME_CONTEXT || {};
 
 SCIIP_RUNTIME_CONTEXT.VERSION = 'v5.2';
@@ -111,13 +110,6 @@ SCIIP_RUNTIME_CONTEXT.validate = function(context) {
     valid: errors.length === 0,
     errors: errors
   };
-};
-
-/**
- * Backward-compatible runtime hook.
- */
-SCIIP_RUNTIME.createContext = function(config) {
-  return SCIIP_RUNTIME_CONTEXT.create(config);
 };
 
 /**

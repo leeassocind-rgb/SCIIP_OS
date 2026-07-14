@@ -1,0 +1,4 @@
+function sciipRun23980_StorageIntegrationOptimizationCertificationProcessor(){
+  return SCIIP_STORAGE_INTEGRATION_OPTIMIZATION_BACKEND.executeIntegrationOptimizationPlan({processorNumber:23980,processorName:'StorageIntegrationOptimizationCertification',statusField:'storageIntegrationOptimizationCertificationStatus',component:'Storage Integration Optimization Execution',backendLayer:'Storage Integration Optimization',sourceSheet:'STORAGE_INTEGRATION_OPTIMIZATION_VALIDATION',targetSheet:'STORAGE_INTEGRATION_OPTIMIZATION_CERTIFICATION',nextAction:'Run 23990_StorageIntegrationOptimizationAcceptanceProcessor after this processor completes.'});
+}
+function sciipTest23980_StorageIntegrationOptimizationCertificationProcessor(){var result=sciipRun23980_StorageIntegrationOptimizationCertificationProcessor();console.log(JSON.stringify({test:'sciipTest23980_StorageIntegrationOptimizationCertificationProcessor',result:result}));return result;}

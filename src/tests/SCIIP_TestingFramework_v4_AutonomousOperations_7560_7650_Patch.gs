@@ -1,6 +1,6 @@
 /**
  * SCIIP_OS v5.5 — Autonomous Operations Execution explicit Testing Framework v4 patch.
- * Never call SCIIP_TEST.runRange() without explicit arguments.
+ * Every public range wrapper passes explicit start and end arguments.
  */
 function sciipTest7560() { return sciipTest7560_AutonomousOperationsReadinessProcessor(); }
 function sciipTest7570() { return sciipTest7570_AutonomousTaskGenerationProcessor(); }

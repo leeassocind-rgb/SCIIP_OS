@@ -1,0 +1,4 @@
+function sciipRun24540_StoragePlatformRecoveryPlanningProcessor(){
+  return SCIIP_STORAGE_PLATFORM_RECOVERY_BACKEND.executePlatformRecoveryPlan({processorNumber:24540,processorName:'StoragePlatformRecoveryPlanning',statusField:'storagePlatformRecoveryPlanningStatus',component:'Storage Platform Recovery Execution',backendLayer:'Storage Platform Recovery',sourceSheet:'STORAGE_PLATFORM_RECOVERY_RISK_ANALYSIS',targetSheet:'STORAGE_PLATFORM_RECOVERY_PLANNING',nextAction:'Run 24550_StoragePlatformRecoveryExecutionProcessor after this processor completes.'});
+}
+function sciipTest24540_StoragePlatformRecoveryPlanningProcessor(){var result=sciipRun24540_StoragePlatformRecoveryPlanningProcessor();console.log(JSON.stringify({test:'sciipTest24540_StoragePlatformRecoveryPlanningProcessor',result:result}));return result;}

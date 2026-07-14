@@ -11,7 +11,6 @@
  * oversized JSON payloads.
  */
 
-var SCIIP_RUNTIME = SCIIP_RUNTIME || {};
 var SCIIP_RUNTIME_PAYLOAD_FACTORY = SCIIP_RUNTIME_PAYLOAD_FACTORY || {};
 
 SCIIP_RUNTIME_PAYLOAD_FACTORY.VERSION = 'v5.2';
@@ -109,14 +108,6 @@ SCIIP_RUNTIME_PAYLOAD_FACTORY.empty = function(config) {
       noInputs: true
     }
   });
-};
-
-/**
- * Backward-compatible runtime hook.
- * Allows SCIIP_RUNTIME.compactPayload(payload) to use the payload factory.
- */
-SCIIP_RUNTIME.compactPayload = function(payload) {
-  return SCIIP_RUNTIME_PAYLOAD_FACTORY.compact(payload);
 };
 
 /**

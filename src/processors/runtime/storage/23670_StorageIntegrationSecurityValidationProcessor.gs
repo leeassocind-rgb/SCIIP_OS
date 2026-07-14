@@ -1,0 +1,4 @@
+function sciipRun23670_StorageIntegrationSecurityValidationProcessor(){
+  return SCIIP_STORAGE_INTEGRATION_SECURITY_BACKEND.executeIntegrationSecurityPlan({processorNumber:23670,processorName:'StorageIntegrationSecurityValidation',statusField:'storageIntegrationSecurityValidationStatus',component:'Storage Integration Security Execution',backendLayer:'Storage Integration Security',sourceSheet:'STORAGE_INTEGRATION_SECURITY_LEDGER',targetSheet:'STORAGE_INTEGRATION_SECURITY_VALIDATION',nextAction:'Run 23680_StorageIntegrationSecurityCertificationProcessor after this processor completes.'});
+}
+function sciipTest23670_StorageIntegrationSecurityValidationProcessor(){var result=sciipRun23670_StorageIntegrationSecurityValidationProcessor();console.log(JSON.stringify({test:'sciipTest23670_StorageIntegrationSecurityValidationProcessor',result:result}));return result;}

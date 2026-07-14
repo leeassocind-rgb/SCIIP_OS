@@ -1,0 +1,23 @@
+{
+  "name": "sciip-os",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Southern California Industrial Intelligence Platform",
+  "scripts": {
+    "audit": "node tools/audit.js",
+    "architecture": "node tools/architecture.js",
+    "architecture:report": "node tools/sciip-architecture-gate.js",
+    "architecture:baseline": "node tools/sciip-architecture-gate.js --write-baseline",
+    "architecture:strict": "node tools/sciip-architecture-gate.js --strict",
+    "architecture:governance": "node tools/sciip-architecture-governance.js",
+    "architecture:scope-test": "node tools/tests/sciip-architecture-governance-scope-test.js",
+    "architecture:validate": "npm run architecture:scope-test && npm run architecture:governance",
+    "governance:repository": "node tools/sciip-repository-governance.js",
+    "governance:test": "node tools/tests/sciip-repository-governance-phase5-test.js",
+    "governance:ci": "npm run architecture:scope-test && npm run governance:repository",
+    "certification:foundation": "node tools/sciip-production-certification.js --profile=foundation",
+    "certification:production": "node tools/sciip-production-certification.js --profile=production",
+    "certification:test": "node tools/tests/sciip-production-certification-phase6-test.js",
+    "release:gate": "npm run governance:ci && npm run certification:foundation"
+  }
+}

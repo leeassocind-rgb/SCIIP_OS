@@ -1,0 +1,272 @@
+{
+  "framework": "SCIIP_PRODUCTION_READINESS_CERTIFICATION",
+  "version": "v6.1-phase6",
+  "profile": "foundation",
+  "status": "FOUNDATION_CERTIFIED",
+  "certifiedAt": "2026-07-14T11:22:49.173Z",
+  "node": "20.20.2",
+  "requiredDomains": [
+    "runtime",
+    "storage",
+    "gis",
+    "knowledgeGraph",
+    "ai",
+    "identity",
+    "security",
+    "deployment"
+  ],
+  "deferredDomains": [
+    "ui",
+    "api",
+    "performance",
+    "recovery"
+  ],
+  "blockers": [],
+  "domains": {
+    "runtime": {
+      "name": "Runtime",
+      "status": "CERTIFIED",
+      "checks": [
+        {
+          "name": "architecture-governance",
+          "ok": true,
+          "detail": "passed"
+        },
+        {
+          "name": "repository-governance",
+          "ok": true,
+          "detail": "passed"
+        },
+        {
+          "name": "canonical-runtime-namespace",
+          "ok": true
+        },
+        {
+          "name": "service-container",
+          "ok": true
+        }
+      ],
+      "failures": []
+    },
+    "storage": {
+      "name": "Storage",
+      "status": "CERTIFIED",
+      "checks": [
+        {
+          "name": "storage-runtime",
+          "ok": true
+        },
+        {
+          "name": "storage-backend",
+          "ok": true
+        },
+        {
+          "name": "backend-contract",
+          "ok": true
+        },
+        {
+          "name": "no-direct-storage-writes",
+          "ok": true
+        }
+      ],
+      "failures": []
+    },
+    "gis": {
+      "name": "GIS",
+      "status": "CERTIFIED",
+      "checks": [
+        {
+          "name": "gis-service",
+          "ok": true
+        },
+        {
+          "name": "gis-engine",
+          "ok": true
+        },
+        {
+          "name": "gis-processors",
+          "ok": true
+        }
+      ],
+      "failures": []
+    },
+    "knowledgeGraph": {
+      "name": "Knowledge Graph",
+      "status": "CERTIFIED",
+      "checks": [
+        {
+          "name": "graph-service",
+          "ok": true
+        },
+        {
+          "name": "graph-node-service",
+          "ok": true
+        },
+        {
+          "name": "graph-edge-service",
+          "ok": true
+        },
+        {
+          "name": "graph-processors",
+          "ok": true
+        }
+      ],
+      "failures": []
+    },
+    "ai": {
+      "name": "AI",
+      "status": "CERTIFIED",
+      "checks": [
+        {
+          "name": "intelligence-core",
+          "ok": true
+        },
+        {
+          "name": "intelligence-processors",
+          "ok": true
+        },
+        {
+          "name": "ai-service-boundary",
+          "ok": true
+        }
+      ],
+      "failures": []
+    },
+    "identity": {
+      "name": "Identity",
+      "status": "CERTIFIED",
+      "checks": [
+        {
+          "name": "identity-service",
+          "ok": true
+        },
+        {
+          "name": "identity-core",
+          "ok": true
+        },
+        {
+          "name": "identity-processors",
+          "ok": true
+        }
+      ],
+      "failures": []
+    },
+    "ui": {
+      "name": "UI",
+      "status": "DEFERRED",
+      "checks": [
+        {
+          "name": "ui-assets",
+          "ok": false,
+          "detail": "0 HTML files"
+        },
+        {
+          "name": "ui-entrypoint",
+          "ok": false
+        }
+      ],
+      "failures": [
+        "ui-assets",
+        "ui-entrypoint"
+      ]
+    },
+    "api": {
+      "name": "API",
+      "status": "DEFERRED",
+      "checks": [
+        {
+          "name": "api-entrypoint",
+          "ok": false
+        },
+        {
+          "name": "api-contract",
+          "ok": false
+        }
+      ],
+      "failures": [
+        "api-entrypoint",
+        "api-contract"
+      ]
+    },
+    "security": {
+      "name": "Security",
+      "status": "CERTIFIED",
+      "checks": [
+        {
+          "name": "no-obvious-secrets",
+          "ok": true,
+          "detail": []
+        },
+        {
+          "name": "manifest",
+          "ok": true
+        },
+        {
+          "name": "governance-enforced",
+          "ok": true
+        }
+      ],
+      "failures": []
+    },
+    "deployment": {
+      "name": "Deployment",
+      "status": "CERTIFIED",
+      "checks": [
+        {
+          "name": "clasp-project",
+          "ok": true
+        },
+        {
+          "name": "apps-script-manifest",
+          "ok": true
+        },
+        {
+          "name": "ci-workflow",
+          "ok": true
+        }
+      ],
+      "failures": []
+    },
+    "performance": {
+      "name": "Performance",
+      "status": "DEFERRED",
+      "checks": [
+        {
+          "name": "benchmark-runner",
+          "ok": false
+        },
+        {
+          "name": "performance-baseline",
+          "ok": false
+        }
+      ],
+      "failures": [
+        "benchmark-runner",
+        "performance-baseline"
+      ]
+    },
+    "recovery": {
+      "name": "Recovery",
+      "status": "DEFERRED",
+      "checks": [
+        {
+          "name": "checkpoint-script",
+          "ok": true
+        },
+        {
+          "name": "recovery-runbook",
+          "ok": false
+        },
+        {
+          "name": "restore-test",
+          "ok": false
+        }
+      ],
+      "failures": [
+        "recovery-runbook",
+        "restore-test"
+      ]
+    }
+  },
+  "certificateId": "A0A6855519ABF058319E4990"
+}

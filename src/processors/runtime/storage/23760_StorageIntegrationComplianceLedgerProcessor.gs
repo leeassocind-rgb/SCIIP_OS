@@ -1,0 +1,4 @@
+function sciipRun23760_StorageIntegrationComplianceLedgerProcessor(){
+  return SCIIP_STORAGE_INTEGRATION_COMPLIANCE_BACKEND.executeIntegrationCompliancePlan({processorNumber:23760,processorName:'StorageIntegrationComplianceLedger',statusField:'storageIntegrationComplianceLedgerStatus',component:'Storage Integration Compliance Execution',backendLayer:'Storage Integration Compliance',sourceSheet:'STORAGE_INTEGRATION_COMPLIANCE_EXECUTION',targetSheet:'STORAGE_INTEGRATION_COMPLIANCE_LEDGER',nextAction:'Run 23770_StorageIntegrationComplianceValidationProcessor after this processor completes.'});
+}
+function sciipTest23760_StorageIntegrationComplianceLedgerProcessor(){var result=sciipRun23760_StorageIntegrationComplianceLedgerProcessor();console.log(JSON.stringify({test:'sciipTest23760_StorageIntegrationComplianceLedgerProcessor',result:result}));return result;}

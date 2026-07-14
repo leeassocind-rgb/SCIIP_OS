@@ -1,0 +1,4 @@
+function sciipRun25020_StoragePlatformAutonomyCoverageAssessmentProcessor(){
+  return SCIIP_STORAGE_PLATFORM_AUTONOMY_BACKEND.executePlatformAutonomyPlan({processorNumber:25020,processorName:'StoragePlatformAutonomyCoverageAssessment',statusField:'storagePlatformAutonomyCoverageAssessmentStatus',component:'Storage Platform Autonomy Execution',backendLayer:'Storage Platform Autonomy',sourceSheet:'STORAGE_PLATFORM_AUTONOMY_POLICY_REGISTRY',targetSheet:'STORAGE_PLATFORM_AUTONOMY_COVERAGE_ASSESSMENT',nextAction:'Run 25030_StoragePlatformAutonomyRiskAnalysisProcessor after this processor completes.'});
+}
+function sciipTest25020_StoragePlatformAutonomyCoverageAssessmentProcessor(){var result=sciipRun25020_StoragePlatformAutonomyCoverageAssessmentProcessor();console.log(JSON.stringify({test:'sciipTest25020_StoragePlatformAutonomyCoverageAssessmentProcessor',result:result}));return result;}

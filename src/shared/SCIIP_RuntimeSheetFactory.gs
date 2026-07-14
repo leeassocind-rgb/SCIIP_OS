@@ -10,7 +10,6 @@
  * header validation, row appends, and latest-record retrieval.
  */
 
-var SCIIP_RUNTIME = SCIIP_RUNTIME || {};
 var SCIIP_RUNTIME_SHEET_FACTORY = SCIIP_RUNTIME_SHEET_FACTORY || {};
 
 SCIIP_RUNTIME_SHEET_FACTORY.VERSION = 'v5.2';
@@ -175,17 +174,6 @@ SCIIP_RUNTIME_SHEET_FACTORY.findByBusinessKey = function(sheetName, businessKey)
   }
 
   return null;
-};
-
-/**
- * Backward-compatible runtime hooks.
- */
-SCIIP_RUNTIME.getSpreadsheet = function() {
-  return SCIIP_RUNTIME_SHEET_FACTORY.getSpreadsheet();
-};
-
-SCIIP_RUNTIME.ensureSheet = function(sheetName, headers) {
-  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(sheetName, headers);
 };
 
 /**

@@ -1,0 +1,4 @@
+function sciipRun24920_StoragePlatformOptimizationCoverageAssessmentProcessor(){
+  return SCIIP_STORAGE_PLATFORM_OPTIMIZATION_BACKEND.executePlatformOptimizationPlan({processorNumber:24920,processorName:'StoragePlatformOptimizationCoverageAssessment',statusField:'storagePlatformOptimizationCoverageAssessmentStatus',component:'Storage Platform Optimization Execution',backendLayer:'Storage Platform Optimization',sourceSheet:'STORAGE_PLATFORM_OPTIMIZATION_POLICY_REGISTRY',targetSheet:'STORAGE_PLATFORM_OPTIMIZATION_COVERAGE_ASSESSMENT',nextAction:'Run 24930_StoragePlatformOptimizationRiskAnalysisProcessor after this processor completes.'});
+}
+function sciipTest24920_StoragePlatformOptimizationCoverageAssessmentProcessor(){var result=sciipRun24920_StoragePlatformOptimizationCoverageAssessmentProcessor();console.log(JSON.stringify({test:'sciipTest24920_StoragePlatformOptimizationCoverageAssessmentProcessor',result:result}));return result;}

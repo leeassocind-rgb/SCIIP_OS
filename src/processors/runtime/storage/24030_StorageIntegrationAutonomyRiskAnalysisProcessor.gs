@@ -1,0 +1,4 @@
+function sciipRun24030_StorageIntegrationAutonomyRiskAnalysisProcessor(){
+  return SCIIP_STORAGE_INTEGRATION_AUTONOMY_BACKEND.executeIntegrationAutonomyPlan({processorNumber:24030,processorName:'StorageIntegrationAutonomyRiskAnalysis',statusField:'storageIntegrationAutonomyRiskAnalysisStatus',component:'Storage Integration Autonomy Execution',backendLayer:'Storage Integration Autonomy',sourceSheet:'STORAGE_INTEGRATION_AUTONOMY_COVERAGE_ASSESSMENT',targetSheet:'STORAGE_INTEGRATION_AUTONOMY_RISK_ANALYSIS',nextAction:'Run 24040_StorageIntegrationAutonomyPlanningProcessor after this processor completes.'});
+}
+function sciipTest24030_StorageIntegrationAutonomyRiskAnalysisProcessor(){var result=sciipRun24030_StorageIntegrationAutonomyRiskAnalysisProcessor();console.log(JSON.stringify({test:'sciipTest24030_StorageIntegrationAutonomyRiskAnalysisProcessor',result:result}));return result;}

@@ -1,0 +1,4 @@
+function sciipRun24320_StoragePlatformHealthCoverageAssessmentProcessor(){
+  return SCIIP_STORAGE_PLATFORM_HEALTH_BACKEND.executePlatformHealthPlan({processorNumber:24320,processorName:'StoragePlatformHealthCoverageAssessment',statusField:'storagePlatformHealthCoverageAssessmentStatus',component:'Storage Platform Health Execution',backendLayer:'Storage Platform Health',sourceSheet:'STORAGE_PLATFORM_HEALTH_POLICY_REGISTRY',targetSheet:'STORAGE_PLATFORM_HEALTH_COVERAGE_ASSESSMENT',nextAction:'Run 24330_StoragePlatformHealthRiskAnalysisProcessor after this processor completes.'});
+}
+function sciipTest24320_StoragePlatformHealthCoverageAssessmentProcessor(){var result=sciipRun24320_StoragePlatformHealthCoverageAssessmentProcessor();console.log(JSON.stringify({test:'sciipTest24320_StoragePlatformHealthCoverageAssessmentProcessor',result:result}));return result;}

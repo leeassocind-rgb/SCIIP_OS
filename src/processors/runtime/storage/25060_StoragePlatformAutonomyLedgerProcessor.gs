@@ -1,0 +1,4 @@
+function sciipRun25060_StoragePlatformAutonomyLedgerProcessor(){
+  return SCIIP_STORAGE_PLATFORM_AUTONOMY_BACKEND.executePlatformAutonomyPlan({processorNumber:25060,processorName:'StoragePlatformAutonomyLedger',statusField:'storagePlatformAutonomyLedgerStatus',component:'Storage Platform Autonomy Execution',backendLayer:'Storage Platform Autonomy',sourceSheet:'STORAGE_PLATFORM_AUTONOMY_EXECUTION',targetSheet:'STORAGE_PLATFORM_AUTONOMY_LEDGER',nextAction:'Run 25070_StoragePlatformAutonomyValidationProcessor after this processor completes.'});
+}
+function sciipTest25060_StoragePlatformAutonomyLedgerProcessor(){var result=sciipRun25060_StoragePlatformAutonomyLedgerProcessor();console.log(JSON.stringify({test:'sciipTest25060_StoragePlatformAutonomyLedgerProcessor',result:result}));return result;}

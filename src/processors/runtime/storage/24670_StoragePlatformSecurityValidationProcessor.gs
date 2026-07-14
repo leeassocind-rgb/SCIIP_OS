@@ -1,0 +1,4 @@
+function sciipRun24670_StoragePlatformSecurityValidationProcessor(){
+  return SCIIP_STORAGE_PLATFORM_SECURITY_BACKEND.executePlatformSecurityPlan({processorNumber:24670,processorName:'StoragePlatformSecurityValidation',statusField:'storagePlatformSecurityValidationStatus',component:'Storage Platform Security Execution',backendLayer:'Storage Platform Security',sourceSheet:'STORAGE_PLATFORM_SECURITY_LEDGER',targetSheet:'STORAGE_PLATFORM_SECURITY_VALIDATION',nextAction:'Run 24680_StoragePlatformSecurityCertificationProcessor after this processor completes.'});
+}
+function sciipTest24670_StoragePlatformSecurityValidationProcessor(){var result=sciipRun24670_StoragePlatformSecurityValidationProcessor();console.log(JSON.stringify({test:'sciipTest24670_StoragePlatformSecurityValidationProcessor',result:result}));return result;}

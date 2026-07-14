@@ -4,7 +4,6 @@
  * File: SCIIP_RuntimeCommon.gs
  */
 
-var SCIIP_RUNTIME = SCIIP_RUNTIME || {};
 
 SCIIP_RUNTIME.VERSION = 'v5.2';
 

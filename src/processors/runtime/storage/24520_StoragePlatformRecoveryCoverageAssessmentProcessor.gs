@@ -1,0 +1,4 @@
+function sciipRun24520_StoragePlatformRecoveryCoverageAssessmentProcessor(){
+  return SCIIP_STORAGE_PLATFORM_RECOVERY_BACKEND.executePlatformRecoveryPlan({processorNumber:24520,processorName:'StoragePlatformRecoveryCoverageAssessment',statusField:'storagePlatformRecoveryCoverageAssessmentStatus',component:'Storage Platform Recovery Execution',backendLayer:'Storage Platform Recovery',sourceSheet:'STORAGE_PLATFORM_RECOVERY_POLICY_REGISTRY',targetSheet:'STORAGE_PLATFORM_RECOVERY_COVERAGE_ASSESSMENT',nextAction:'Run 24530_StoragePlatformRecoveryRiskAnalysisProcessor after this processor completes.'});
+}
+function sciipTest24520_StoragePlatformRecoveryCoverageAssessmentProcessor(){var result=sciipRun24520_StoragePlatformRecoveryCoverageAssessmentProcessor();console.log(JSON.stringify({test:'sciipTest24520_StoragePlatformRecoveryCoverageAssessmentProcessor',result:result}));return result;}
