@@ -1,0 +1,5 @@
+/** SCIIP_OS v7.0 Sprint 13 — Company Expansion Intelligence. */
+var SCIIP_COMPANY_EXPANSION_INTELLIGENCE=(function(){'use strict';
+function evaluate(company){company=company||{};var signals=company.signals||[],score=Number(company.growthScore||0)*.35;var weights={FUNDING:20,HIRING:15,FACILITY_SEARCH:30,CONTRACT_AWARD:20,PATENT:8,EXECUTIVE_HIRE:7};signals.forEach(function(s){score+=(weights[String(s.type||'').toUpperCase()]||5)*Number(s.confidence==null?1:s.confidence);});score=Math.round(Math.min(100,score)*100)/100;var est=Number(company.estimatedSpaceNeedSf||company.locationNeedSf||0);if(!est&&score>=60)est=100000;return {companyId:String(company.id||company.name||'UNKNOWN'),name:String(company.name||company.id||'Unknown'),score:score,priority:score>=70?'HIGH':score>=45?'MEDIUM':'LOW',estimatedSpaceNeedSf:est,signals:signals.slice(),evidence:(company.evidence||[]).slice()};}
+function rank(companies){var rows=(companies||[]).map(evaluate).sort(function(a,b){return b.score-a.score;});return {companies:rows,top:rows[0]||null};}
+return {evaluate:evaluate,rank:rank};})();

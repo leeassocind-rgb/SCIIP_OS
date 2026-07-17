@@ -1,0 +1,11 @@
+/** SCIIP_OS v7.0 Integration Sprint 3C — market digital twin. */
+var SCIIP_MARKET_TWIN=(function(){
+  'use strict';var VERSION='v7.0-integration-sprint-3c',markets={},observations=[];
+  function clone_(v){return v==null?v:JSON.parse(JSON.stringify(v));}function now_(){return new Date().toISOString();}
+  function define(market){market=market||{};var id=String(market.id||market.marketId||'').trim();if(!id)throw new Error('MARKET_ID_REQUIRED');if(!markets[id])markets[id]={id:id,label:market.label||market.name||id,geography:clone_(market.geography||{}),indicators:{},observationCount:0,createdAt:now_(),updatedAt:now_()};return clone_(markets[id]);}
+  function observe(request){request=request||{};var market=markets[request.marketId];if(!market)throw new Error('MARKET_NOT_FOUND');var name=String(request.indicator||'').trim();if(!name)throw new Error('MARKET_INDICATOR_REQUIRED');var value=Number(request.value);if(!isFinite(value))throw new Error('MARKET_VALUE_INVALID');var obs={id:'market-observation-'+(observations.length+1),marketId:market.id,indicator:name,value:value,unit:request.unit||null,period:request.period||now_().slice(0,10),source:request.source||'SCIIP_OS',timestamp:now_()};observations.push(obs);market.indicators[name]={value:value,unit:obs.unit,period:obs.period,source:obs.source,updatedAt:obs.timestamp};market.observationCount++;market.updatedAt=obs.timestamp;return clone_(obs);}
+  function trend(marketId,indicator){var rows=observations.filter(function(o){return o.marketId===marketId&&o.indicator===indicator;});var direction='STABLE',change=0;if(rows.length>1){change=rows[rows.length-1].value-rows[0].value;direction=change>0?'UP':change<0?'DOWN':'STABLE';}return {marketId:marketId,indicator:indicator,direction:direction,change:change,observations:clone_(rows)};}
+  function get(id){return clone_(markets[id]||null);}function snapshot(){return {version:VERSION,status:'AVAILABLE',markets:clone_(markets),observations:clone_(observations),marketCount:Object.keys(markets).length,observationCount:observations.length};}function reset(){markets={};observations=[];return true;}
+  return {VERSION:VERSION,define:define,observe:observe,trend:trend,get:get,snapshot:snapshot,reset:reset};
+})();
+function sciipMarketTwinSnapshotV7(){return SCIIP_MARKET_TWIN.snapshot();}

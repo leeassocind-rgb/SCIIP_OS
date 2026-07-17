@@ -1,0 +1,22 @@
+name: SCIIP v7 Sprint 20 Certification
+on:
+  push:
+    paths:
+      - 'src/applications/development-feasibility-entitlement-intelligence/**'
+      - 'src/tests/SCIIP_TestingFramework_v7_IntegrationSprint20.gs'
+      - 'tools/tests/sciip-integration-sprint20-test.js'
+  pull_request:
+    paths:
+      - 'src/applications/development-feasibility-entitlement-intelligence/**'
+      - 'src/tests/SCIIP_TestingFramework_v7_IntegrationSprint20.gs'
+      - 'tools/tests/sciip-integration-sprint20-test.js'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm run test:sprint20
+      - run: npm run deployment:compile

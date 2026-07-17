@@ -1,0 +1,1 @@
+{"version":"v7.0-alpha.1","requiredFiles":["src/ui/SCIIP_AIWorkspace.gs","src/ui/SCIIP_AIWorkspace_Tests.gs","src/ui/SCIIP_AIWorkspace_Styles.html"],"requiredCapabilities":["prompt-validation","context-grounding","structured-evidence","safe-fallback","no-false-model-claim"]}

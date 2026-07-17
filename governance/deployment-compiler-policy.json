@@ -1,0 +1,21 @@
+{
+  "version": "v7.0-compiler-v2",
+  "outputDir": "dist/apps-script",
+  "maxBundleBytes": 950000,
+  "maxDeploymentFiles": 108,
+  "incremental": true,
+  "domains": [
+    {"name":"00_bootstrap","patterns":["src/config/**","src/shared/000_*.gs","src/shared/001_*.gs","src/shared/002_*.gs","src/shared/003_*.gs"]},
+    {"name":"01_runtime","patterns":["src/shared/SCIIP_Runtime*.gs","src/processors/foundation/**"]},
+    {"name":"02_storage","patterns":["src/shared/SCIIP_Storage*.gs","src/processors/runtime/storage/**"]},
+    {"name":"03_identity","patterns":["src/identity/**","src/processors/identity/**"]},
+    {"name":"04_graph","patterns":["src/graph/**","src/processors/graph/**"]},
+    {"name":"05_gis","patterns":["src/gis/**","src/processors/gis/**"]},
+    {"name":"06_ai","patterns":["src/intelligence/**","src/processors/intelligence/**"]},
+    {"name":"07_api","patterns":["src/api/**"]},
+    {"name":"08_ui","patterns":["src/ui/**"]},
+    {"name":"09_tests","patterns":["src/tests/**","src/testing/**"]},
+    {"name":"10_events","patterns":["src/events/**"]},
+    {"name":"11_other","patterns":["src/**/*.gs"]}
+  ]
+}

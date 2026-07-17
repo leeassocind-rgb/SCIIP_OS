@@ -1,0 +1,33 @@
+<style>
+.gis-toolbar{display:grid;grid-template-columns:minmax(220px,1.5fr) minmax(150px,.7fr) minmax(150px,.7fr) auto;gap:12px;align-items:end;margin:16px 0}
+.gis-toolbar label{display:grid;gap:6px;font-size:12px;font-weight:700;color:var(--muted)}
+.gis-toolbar input,.gis-toolbar select{width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:var(--surface);color:var(--text)}
+.gis-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-bottom:12px}
+.gis-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(300px,.8fr);gap:16px;min-height:560px}
+.gis-map{position:relative;min-height:560px;border:1px solid var(--border);border-radius:18px;overflow:hidden;background:linear-gradient(145deg,rgba(18,42,70,.95),rgba(8,22,38,.98))}
+.gis-map-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:48px 48px}
+.gis-map svg{position:absolute;inset:0;width:100%;height:100%}
+.gis-marker{cursor:pointer;filter:drop-shadow(0 2px 4px rgba(0,0,0,.35));transition:transform .15s ease}
+.gis-marker:hover,.gis-marker:focus{transform:scale(1.18);outline:none}
+.gis-marker circle{stroke:#fff;stroke-width:2}
+.gis-marker[data-layer="Properties"] circle{fill:#38bdf8}
+.gis-marker[data-layer="Markets"] circle{fill:#f59e0b}
+.gis-marker[data-layer="Companies"] circle{fill:#22c55e}
+.gis-marker[data-layer="Graph Nodes"] circle{fill:#a78bfa}
+.gis-map-label{fill:#fff;font-size:10px;font-weight:700;paint-order:stroke;stroke:#071521;stroke-width:3px;stroke-linejoin:round}
+.gis-detail{border:1px solid var(--border);border-radius:18px;background:var(--surface);padding:20px;overflow:auto}
+.gis-detail h2{margin:4px 0 8px;font-size:22px}
+.gis-detail p{color:var(--muted);line-height:1.5}
+.gis-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+.gis-stat{border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--surface-2)}
+.gis-stat span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.gis-stat strong{display:block;margin-top:5px;word-break:break-word}
+.gis-layer-list{display:grid;gap:8px;margin-top:16px}
+.gis-layer-item{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+.gis-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:8px;background:#38bdf8}
+.gis-dot.Markets{background:#f59e0b}.gis-dot.Companies{background:#22c55e}.gis-dot.Graph-Nodes{background:#a78bfa}
+.gis-empty{min-height:520px;display:grid;place-items:center;text-align:center;color:var(--muted)}
+@media(max-width:900px){.gis-toolbar{grid-template-columns:1fr 1fr}.gis-layout{grid-template-columns:1fr}.gis-map{min-height:460px}.gis-detail{min-height:260px}}
+@media(max-width:620px){.gis-toolbar{grid-template-columns:1fr}.gis-map{min-height:380px}.gis-stat-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.gis-marker{transition:none}}
+</style>

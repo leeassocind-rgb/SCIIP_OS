@@ -1,0 +1,4 @@
+/** SCIIP_OS v7.0 Sprint 13 — Market Intelligence Workspace. */
+var SCIIP_MARKET_INTELLIGENCE_WORKSPACE=(function(){'use strict';
+function build(data){data=data||{};return {workspace:{id:'market-opportunity-intelligence',label:'Market Intelligence & Opportunity Discovery',sections:{marketHealth:data.marketHealth||[],expansionCompanies:data.expansionCompanies||[],opportunityPipeline:data.opportunityPipeline||[],propertyMatches:data.propertyMatches||[],riskIndicators:data.riskIndicators||[],competitiveActivity:data.competitiveActivity||[],recommendations:data.recommendations||[],executiveBriefing:data.executiveBriefing||{}}},generatedAt:new Date().toISOString()};}
+return {build:build};})();

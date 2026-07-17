@@ -1,0 +1,3 @@
+var SCIIP_CRITICAL_PATH_ENGINE=(function(){'use strict';
+function analyze(input){var tasks=(input&&input.tasks)||[];var active=tasks.filter(function(t){return t.status!=='COMPLETED';}).sort(function(a,b){return Number(b.effort||0)-Number(a.effort||0);});var path=active.slice(0,Math.min(3,active.length));return {status:'AVAILABLE',criticalPath:path.map(function(t){return t.taskId;}),duration:path.reduce(function(s,t){return s+Number(t.effort||0);},0),bottlenecks:active.filter(function(t){return t.status==='BLOCKED'||Number(t.effort||0)>=8;}).map(function(t){return t.taskId;})};}
+return {analyze:analyze};})();

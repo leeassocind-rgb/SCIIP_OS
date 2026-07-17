@@ -1,0 +1,3 @@
+var SCIIP_S34_PROGRAM_SCORECARD=(function(){'use strict';
+function calculate(input){var p=input.portfolio||{},d=input.dependencies||{},s=input.schedule||{};var done=(p.initiatives||[]).filter(function(i){return i.status==='COMPLETED';}).length,total=Number(p.initiativeCount||0);var completion=total?Math.round(done/total*10000)/100:100;var health=Math.round((completion*.45+Math.max(0,100-Number(d.blockedCount||0)*20)*.35+Math.max(0,100-Math.max(0,Number(s.makespan||0)-30))*.2)*100)/100;return {status:'AVAILABLE',completionPct:completion,blocked:d.blockedCount,makespan:s.makespan,programHealth:health};}
+return {calculate:calculate};})();

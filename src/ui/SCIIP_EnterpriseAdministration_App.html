@@ -1,0 +1,58 @@
+<script>
+(function () {
+  'use strict';
+
+  function esc(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function renderAdmin(snapshot) {
+    var root = document.getElementById('sciip-enterprise-administration');
+    if (!root) return;
+
+    var summary = (snapshot.summary || []).map(function (item) {
+      return '<article class="sciip-admin-card">' +
+        '<span>' + esc(item.label) + '</span>' +
+        '<strong>' + esc(item.value) + '</strong>' +
+      '</article>';
+    }).join('');
+
+    var services = ((snapshot.services || {}).services || []).map(function (service) {
+      return '<tr><td>' + esc(service.name) + '</td><td>' + esc(service.status) + '</td></tr>';
+    }).join('');
+
+    var diagnostics = ((snapshot.diagnostics || {}).checks || []).map(function (check) {
+      return '<li><span>' + esc(check.label) + '</span><strong>' +
+        (check.ok ? 'AVAILABLE' : 'UNAVAILABLE') + '</strong></li>';
+    }).join('');
+
+    root.innerHTML =
+      '<section class="sciip-admin-header">' +
+        '<div><p class="eyebrow">Enterprise Administration</p>' +
+        '<h2>System Control & Governance</h2>' +
+        '<p>Read-only operational view of services, certification, governance, deployment, and session boundaries.</p></div>' +
+        '<span class="sciip-admin-status">' + esc(snapshot.status) + '</span>' +
+      '</section>' +
+      '<section class="sciip-admin-grid">' + summary + '</section>' +
+      '<section class="sciip-admin-columns">' +
+        '<article class="sciip-admin-panel"><h3>Diagnostics</h3><ul>' + diagnostics + '</ul></article>' +
+        '<article class="sciip-admin-panel"><h3>Deployment</h3>' +
+          '<dl><dt>Branch</dt><dd>' + esc(snapshot.deployment.branch) + '</dd>' +
+          '<dt>Compiler</dt><dd>' + esc(snapshot.deployment.compiler) + '</dd>' +
+          '<dt>Deployment files</dt><dd>' + esc(snapshot.deployment.deploymentFiles) + '</dd>' +
+          '<dt>Reduction</dt><dd>' + esc(snapshot.deployment.reductionPercent) + '%</dd></dl>' +
+        '</article>' +
+      '</section>' +
+      '<section class="sciip-admin-panel"><h3>Registered Services</h3>' +
+        '<table><thead><tr><th>Service</th><th>Status</th></tr></thead><tbody>' +
+        (services || '<tr><td colspan="2">No explicit service snapshot is available in this context.</td></tr>') +
+        '</tbody></table></section>';
+  }
+
+  window.SCIIP_ENTERPRISE_ADMIN_UI = {
+    render: renderAdmin
+  };
+})();
+</script>

@@ -1,0 +1,3 @@
+var SCIIP_S34_SCHEDULE_OPTIMIZATION_ENGINE=(function(){'use strict';
+function optimize(input){var initiatives=(input&&input.initiatives)||[];var start=Number((input&&input.startDay)||1),day=start,rows=[];initiatives.slice().sort(function(a,b){return Number(b.priority||0)-Number(a.priority||0);}).forEach(function(i){var duration=Math.max(1,Number(i.duration||1));rows.push({initiativeId:i.initiativeId,startDay:day,endDay:day+duration-1,duration:duration,priority:Number(i.priority||0)});day+=duration;});return {status:'OPTIMIZED',schedule:rows,startDay:start,endDay:rows.length?rows[rows.length-1].endDay:start,makespan:Math.max(0,day-start)};}
+return {optimize:optimize};})();

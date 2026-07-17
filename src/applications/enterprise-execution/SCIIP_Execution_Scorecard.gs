@@ -1,0 +1,3 @@
+var SCIIP_EXECUTION_SCORECARD=(function(){'use strict';
+function calculate(input){var tasks=(input&&input.tasks)||[];var done=tasks.filter(function(t){return t.status==='COMPLETED';}).length;var blocked=tasks.filter(function(t){return t.status==='BLOCKED';}).length;var velocity=Number((input&&input.velocity)||0);var health=Math.max(0,Math.min(100,Math.round(((tasks.length?done/tasks.length:0)*50+velocity*.5-blocked*5)*100)/100));return {status:'AVAILABLE',taskCompletion:tasks.length?Math.round(done/tasks.length*10000)/100:0,blocked:blocked,velocity:velocity,executionHealth:health};}
+return {calculate:calculate};})();

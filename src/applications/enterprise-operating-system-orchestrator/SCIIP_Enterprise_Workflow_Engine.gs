@@ -1,0 +1,6 @@
+var SCIIP_ENTERPRISE_WORKFLOW_ENGINE=(function(){'use strict';
+var runs={};function reset(){runs={};}
+function start(i){i=i||{};var id=i.workflowId||('workflow-'+(Object.keys(runs).length+1));if(runs[id])return {status:'DUPLICATE',workflow:runs[id]};var w={workflowId:id,name:i.name||'Enterprise Lifecycle',state:'DISCOVERED',context:i.context||{},steps:[],history:[],approvals:[],attempts:{},createdAt:new Date().toISOString()};runs[id]=w;return {status:'CREATED',workflow:w};}
+function advance(id,to,payload){var w=runs[id];if(!w)return {status:'NOT_FOUND'};var t=SCIIP_WORKFLOW_STATE_MACHINE.transition(w,to,{payload:payload||{}});if(t.status!=='TRANSITIONED')return t;runs[id]=t.instance;runs[id].steps.push({state:to,payload:payload||{},completedAt:new Date().toISOString()});return {status:'ADVANCED',workflow:runs[id]};}
+function fail(id,step,error,maxRetries){var w=runs[id];if(!w)return {status:'NOT_FOUND'};w.attempts[step]=(w.attempts[step]||0)+1;var retry=w.attempts[step]<=Number(maxRetries||0);return {status:retry?'RETRY_SCHEDULED':'FAILED',attempt:w.attempts[step],retry:retry,error:String(error||'UNKNOWN')};}
+function get(id){return runs[id]||null;}return {reset:reset,start:start,advance:advance,fail:fail,get:get};})();

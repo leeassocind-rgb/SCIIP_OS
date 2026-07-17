@@ -1,0 +1,6 @@
+/** SCIIP_OS v7.0 Sprint 8 — event-sourced real-time state projections. */
+var SCIIP_REAL_TIME_STATE_PROJECTION=(function(){'use strict';var VERSION='v7.0-integration-sprint-8.0',state={},offset=0;
+function reset(){state={};offset=0;}
+function apply(event){var id=String((event.payload&&(event.payload.entityId||event.payload.id))||event.partition||'enterprise'),current=state[id]||{entityId:id,version:0,data:{}};var patch=event.payload&&event.payload.state?event.payload.state:(event.payload||{});for(var k in patch)if(patch.hasOwnProperty(k)&&k!=='entityId'&&k!=='id')current.data[k]=patch[k];current.version++;current.lastEventId=event.eventId;current.updatedAt=event.occurredAt;state[id]=current;offset=Math.max(offset,Number(event.sequence||offset+1));return current;}
+function replay(events){for(var i=0;i<(events||[]).length;i++)apply(events[i]);return snapshot();}
+function snapshot(){var copy={};for(var k in state)if(state.hasOwnProperty(k))copy[k]=state[k];return {status:'AVAILABLE',offset:offset,entities:copy,count:Object.keys(copy).length};} return {VERSION:VERSION,reset:reset,apply:apply,replay:replay,snapshot:snapshot};})();

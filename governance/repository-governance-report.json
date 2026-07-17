@@ -2,7 +2,7 @@
   "status": "PASSED",
   "policyVersion": "v6.1-phase5",
   "node": "20.20.2",
-  "files": 11714,
+  "files": 11717,
   "storageProcessorFiles": 9640,
   "storageRuntimeAdoption": 10,
   "directStorageWrites": 0,

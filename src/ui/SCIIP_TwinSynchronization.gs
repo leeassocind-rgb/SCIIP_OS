@@ -1,0 +1,12 @@
+/** SCIIP_OS v7.0 Integration Sprint 3C — cross-domain twin synchronization. */
+var SCIIP_TWIN_SYNCHRONIZATION=(function(){
+  'use strict';var VERSION='v7.0-integration-sprint-3c',subscriptionId=null,lastSync=null;
+  function clone_(v){return v==null?v:JSON.parse(JSON.stringify(v));}function now_(){return new Date().toISOString();}
+  function propertyFromSelection_(selected){if(!selected)return null;var data=selected.data||selected;return {twinId:selected.id||data.propertyId||data.id,entityType:'PROPERTY',label:selected.label||data.address||data.label,status:data.status||'UNKNOWN',city:data.city||'',marketId:data.marketId||null,buildingSf:data.buildingSf||data.sf||0,landAcres:data.landAcres||data.acres||0,powerAmps:data.powerAmps||0,latitude:data.latitude,longitude:data.longitude,source:data.source||'SCIIP_APP_STATE'};}
+  function synchronizeState(state){state=state||((typeof SCIIP_APP_STATE!=='undefined')?SCIIP_APP_STATE.snapshot():{});var selected=state.selectedProperty,twin=propertyFromSelection_(selected),result={status:'NO_CONTEXT',twin:null,workspace:state.currentWorkspace||null,synchronizedAt:now_()};if(twin&&twin.twinId){var existing=SCIIP_DIGITAL_TWIN_REGISTRY.get(twin.twinId);var operation=existing?SCIIP_DIGITAL_TWIN_REGISTRY.update(twin.twinId,twin,{reason:'STATE_SYNCHRONIZATION'}):SCIIP_DIGITAL_TWIN_REGISTRY.register(twin,{reason:'STATE_SYNCHRONIZATION'});result.status=existing?'UPDATED':'CREATED';result.twin=operation.twin;}lastSync=clone_(result);return result;}
+  function wire(){if(subscriptionId)return {status:'WIRED',subscriptionId:subscriptionId};if(typeof SCIIP_APP_STATE==='undefined')return {status:'PARTIAL',subscriptionId:null};subscriptionId=SCIIP_APP_STATE.subscribe(function(change){var keys=change.changedKeys||[];if(keys.indexOf('selectedProperty')!==-1||keys.indexOf('currentWorkspace')!==-1)synchronizeState(change.state);});return {status:'WIRED',subscriptionId:subscriptionId};}
+  function unwire(){if(subscriptionId&&typeof SCIIP_APP_STATE!=='undefined')SCIIP_APP_STATE.unsubscribe(subscriptionId);subscriptionId=null;return true;}
+  function snapshot(){return {version:VERSION,status:subscriptionId?'WIRED':'UNWIRED',subscriptionId:subscriptionId,lastSync:clone_(lastSync)};}
+  return {VERSION:VERSION,wire:wire,unwire:unwire,synchronizeState:synchronizeState,snapshot:snapshot};
+})();
+function sciipSynchronizeDigitalTwinV7(){return SCIIP_TWIN_SYNCHRONIZATION.synchronizeState();}

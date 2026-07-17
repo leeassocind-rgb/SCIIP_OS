@@ -156,7 +156,9 @@ var SCIIP_API = (function () {
 })();
 
 function doGet(e) {
-  return SCIIP_API.dispatch('GET', e);
+  var path = e && e.pathInfo ? String(e.pathInfo) : '';
+  if (path.indexOf('api/') === 0 || (e && e.parameter && e.parameter.api === '1')) return SCIIP_API.dispatch('GET', e);
+  return SCIIP_APPLICATION.render(e || {});
 }
 
 function doPost(e) {

@@ -1,0 +1,5 @@
+/** Governed commit and rollback entrypoints. */
+var SCIIP_IDP_COMMIT_EXECUTION_V7 = SCIIP_IDP_COMMIT_EXECUTION_V7 || {};
+SCIIP_IDP_COMMIT_EXECUTION_V7.executePlan=function(plan,actor,adapter){adapter=adapter||SCIIP_IDP_RELEASE3_PERSISTENCE_V7;var key=SCIIP_IDP_TRANSACTION_V7.executionKey(plan);if(adapter.hasExecutionKey(key))return {status:'DUPLICATE_SAFE',executionKey:key,planId:plan.planId};var lock=typeof LockService!=='undefined'?LockService.getDocumentLock():null;if(lock)lock.waitLock(30000);try{if(adapter.hasExecutionKey(key))return {status:'DUPLICATE_SAFE',executionKey:key,planId:plan.planId};var x=SCIIP_IDP_TRANSACTION_V7.compile(plan,actor);adapter.persistExecution(x,'COMPLETED');return {status:'COMMITTED',execution:x,summary:x.summary};}finally{if(lock)lock.releaseLock();}};
+SCIIP_IDP_COMMIT_EXECUTION_V7.executePlanById=function(planId,actor){return SCIIP_IDP_COMMIT_EXECUTION_V7.executePlan(SCIIP_IDP_RELEASE3_PERSISTENCE_V7.loadPlan(planId),actor||Session.getActiveUser().getEmail()||'UNKNOWN');};
+function sciipExecuteIndustrialDataCommitPlan(planId){return SCIIP_IDP_COMMIT_EXECUTION_V7.executePlanById(planId);}

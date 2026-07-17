@@ -1,0 +1,12 @@
+<script>
+(function(){
+  'use strict';
+  function call_(name,args,ok){if(!window.google||!google.script||!google.script.run)return;var runner=google.script.run.withSuccessHandler(ok||function(){}).withFailureHandler(function(error){console.error('SCIIP context integrity',error);});runner[name].apply(runner,args||[]);}
+  window.SCIIP_CONTEXT_INTEGRITY_CLIENT={
+    refresh:function(callback){call_('sciipContextIntegritySnapshotV7',[],callback);},
+    reconcile:function(strategy,callback){call_('sciipContextIntegrityReconcileV7',[strategy||'CLEAR_STALE'],callback);},
+    acknowledge:function(id,callback){call_('sciipNotificationAcknowledgeV7',[id],callback);},
+    dismiss:function(id,callback){call_('sciipNotificationDismissV7',[id],callback);}
+  };
+})();
+</script>

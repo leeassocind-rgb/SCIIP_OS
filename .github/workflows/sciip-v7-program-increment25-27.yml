@@ -1,0 +1,17 @@
+name: SCIIP v7 Program Increment 25-27
+on:
+  push:
+    branches: [v7.0-sciip-desktop]
+  pull_request:
+    branches: [v7.0-sciip-desktop]
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci --ignore-scripts
+      - run: npm run test:pi25-27
+      - run: npm run deployment:compile

@@ -1,0 +1,12 @@
+name: SCIIP v7 Integration Sprint 2A
+on: [push, pull_request]
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '20'}
+      - run: node tools/tests/sciip-integration-sprint2a-test.js
+      - run: npm run deployment:compile:test
+      - run: npm run architecture:validate

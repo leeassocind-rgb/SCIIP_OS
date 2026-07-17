@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),path=require('path');
+const root=path.resolve(__dirname,'../../src/applications/industrial-data-platform');
+const files=['SCIIP_IDP_Release3_Core.gs','SCIIP_IDP_Transaction_Engine.gs','SCIIP_IDP_Rollback_Engine.gs','SCIIP_IDP_Commit_Execution_Service.gs','SCIIP_IDP_Commit_Workspace.gs'];
+const ctx={console,Date,Math,JSON,Object,Array,String,Number,isFinite};vm.createContext(ctx);files.forEach(f=>vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx,{filename:f}));
+const plan={planId:'PLAN-NODE',jobId:'IMPORT-NODE',rollbackToken:'RB-NODE',commitExecutable:true,operations:[{operationId:'OP-1',recordId:'REC-1',businessKey:'2125 w lowell|rialto|ca|1',operationType:'CREATE_PROPERTY',before:null,after:{address:'2125 W Lowell',city:'Rialto',state:'CA',owner:'Prologis',tenant:'Amazon',latitude:34.1,longitude:-117.3},changes:[]}]};
+const x=ctx.SCIIP_IDP_TRANSACTION_V7.compile(plan,'node','2026-07-17T00:00:00.000Z');
+const mem={keys:{},hasExecutionKey(k){return !!this.keys[k]},persistExecution(v){this.keys[v.executionKey]=1;this.saved=v}};
+const a=ctx.SCIIP_IDP_COMMIT_EXECUTION_V7.executePlan(plan,'node',mem),b=ctx.SCIIP_IDP_COMMIT_EXECUTION_V7.executePlan(plan,'node',mem),r=ctx.SCIIP_IDP_ROLLBACK_V7.compile(plan,x,'node','2026-07-17T01:00:00.000Z');
+const checks=[x.events.length===1,x.current.length===1,x.graph.length===2,x.gis.length===1,x.search.length===1,a.status==='COMMITTED',b.status==='DUPLICATE_SAFE',r.current[0].lifecycleState==='ARCHIVED'];
+if(checks.some(v=>!v))throw new Error('Release 3 regression failed: '+JSON.stringify(checks));
+console.log(JSON.stringify({framework:'SCIIP_EPIC_1_RELEASE_3_NODE_TEST',status:'PASSED',testsRun:checks.length,result:{events:x.events.length,graphEdges:x.graph.length,gisFeatures:x.gis.length,idempotent:true,rollbackState:r.current[0].lifecycleState}},null,2));
