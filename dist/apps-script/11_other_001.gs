@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 11_other_001.gs
- * sources: 287
- * generated: 2026-07-17T18:48:57.466Z
+ * sources: 291
+ * generated: 2026-07-17T18:54:19.867Z
  */
 var SCIIP_ASSET_ADMINISTRATION_APPLICATION=(function(){'use strict';var VERSION='v7.0-integration-sprint-16.0';function definition(){return {id:'asset-onboarding-lease-administration-intelligence',name:'Asset Onboarding & Lease Administration Intelligence',version:VERSION,dependencies:['transaction-execution-closing-intelligence'],services:['asset-administration-application'],queries:['asset-administration-query'],events:['ASSET_ONBOARDED','LEASE_OBLIGATION_UPDATED','CRITICAL_DATE_ALERTED'],stateBindings:['assetAdministration','leaseObligations','criticalDates'],workspaces:['asset-onboarding-lease-administration'],tests:['sciipTestV7IntegrationSprint16'],liveHandler:'sciipAssetAdministrationHeartbeatV7',queryHandler:'sciipAssetAdministrationQueryV7'};}function run(r){r=r||{};var asset=SCIIP_ASSET_ONBOARDING_REGISTRY.register(r.asset||{}).asset,obligations=SCIIP_LEASE_OBLIGATION_ENGINE.evaluate(r.obligations||[]),criticalDates=SCIIP_CRITICAL_DATE_ENGINE.analyze(r.criticalDates||[],r.asOf),economics=SCIIP_OCCUPANCY_ECONOMICS_ENGINE.analyze(r.economics||{}),workspace=SCIIP_ASSET_ADMINISTRATION_WORKSPACE.build({asset:asset,lease:r.lease||{},obligations:obligations,criticalDates:criticalDates,occupancyEconomics:economics,documents:r.documents||[],alerts:(criticalDates.alerts||[]).concat(obligations.obligations.filter(function(x){return x.overdue;})),executiveSummary:{status:obligations.status,criticalDateStatus:criticalDates.status,position:economics.position,markToMarket:economics.markToMarket}});return {version:VERSION,status:'COMPLETED',asset:asset,obligations:obligations,criticalDates:criticalDates,occupancyEconomics:economics,workspace:workspace};}function names(s,ks){var raw=[];for(var i=0;i<ks.length;i++)if(s&&s[ks[i]]!=null){raw=s[ks[i]];break;}if(Array.isArray(raw))return raw.map(function(x){return typeof x==='string'?x:String((x&&(x.name||x.id))||'');});return raw&&typeof raw==='object'?Object.keys(raw):[];}function wire(){var o={status:'PARTIAL',registry:false,assembly:false,queryRegistered:false,liveServiceRegistered:false,sharedState:typeof SCIIP_APP_STATE!=='undefined',eventBus:typeof SCIIP_APP_EVENTS!=='undefined',registrationMode:[]};try{o.registry=SCIIP_PLATFORM_REGISTRY.register(definition()).status!=='CONFLICT';}catch(e){}try{o.assembly=SCIIP_PLATFORM_SELF_ASSEMBLY.assemble({source:'SPRINT_16'}).status!=='FAILED';if(o.assembly)o.registrationMode.push('SELF_ASSEMBLY');}catch(e2){}var qs=typeof SCIIP_QUERY_ENGINE!=='undefined'&&SCIIP_QUERY_ENGINE.snapshot?SCIIP_QUERY_ENGINE.snapshot():{},ls=typeof SCIIP_LIVE_RUNTIME!=='undefined'&&SCIIP_LIVE_RUNTIME.snapshot?SCIIP_LIVE_RUNTIME.snapshot():{};o.queryRegistered=names(qs,['registeredQueries','queries','registry']).indexOf('asset-administration-query')!==-1;o.liveServiceRegistered=names(ls,['services','registry']).indexOf('asset-administration-application')!==-1;if(!o.queryRegistered&&typeof SCIIP_QUERY_ENGINE!=='undefined'&&SCIIP_QUERY_ENGINE.register){SCIIP_QUERY_ENGINE.register('asset-administration-query',sciipAssetAdministrationQueryV7,{capability:definition().id});o.queryRegistered=true;o.registrationMode.push('QUERY_FALLBACK');}if(!o.liveServiceRegistered&&typeof SCIIP_LIVE_RUNTIME!=='undefined'&&SCIIP_LIVE_RUNTIME.register){SCIIP_LIVE_RUNTIME.register('asset-administration-application',sciipAssetAdministrationHeartbeatV7,{capability:definition().id});o.liveServiceRegistered=true;o.registrationMode.push('LIVE_FALLBACK');}if(o.registry&&o.assembly&&o.queryRegistered&&o.liveServiceRegistered&&o.sharedState&&o.eventBus)o.status='WIRED';return o;}return {VERSION:VERSION,run:run,wire:wire,platformDefinition:definition};})();function sciipAssetAdministrationQueryV7(r){return SCIIP_ASSET_ADMINISTRATION_APPLICATION.run(r||{});}function sciipAssetAdministrationHeartbeatV7(){return {status:'AVAILABLE',version:'v7.0-integration-sprint-16.0',workspace:'asset-onboarding-lease-administration',generatedAt:new Date().toISOString()};}
 
@@ -1804,6 +1804,64 @@ var SCIIP_AUTONOMOUS_OPPORTUNITY_PERSISTENCE=(function(){
 }());
 
 
+/** Sprint 13 application descriptor and orchestration. */
+var SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION_APPLICATION=(function(){
+  'use strict';
+  function descriptor(){return {id:'enterprise-portfolio-strategy-capital-allocation',version:SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION.VERSION,workspace:'executive-opportunity-command',northStar:['analyze','manage','act','one-trusted-platform'],dependencies:['epic3-sprint12'],reviewRequired:true,autonomousCapitalDeployment:false,destructiveCommitEnabled:false};}
+  function run(input){input=input||{};var allocation=SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION.allocate(input.actions||[],input.constraints||{});return {descriptor:descriptor(),allocation:allocation,scenarios:SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION.scenarios(input.actions||[],input.constraints||{}),mapPoints:SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION.mapProjection(allocation),summary:SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION.portfolioSummary(allocation)};}
+  return {descriptor:descriptor,run:run};
+}());
+
+
+/** SCIIP_OS v7.0 — Epic 3 Sprint 13: Enterprise Portfolio Strategy and Capital Allocation */
+var SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION=(function(){
+  'use strict';
+  var VERSION='v7.0-epic3-sprint13.0';
+  function text(v){return v===null||v===undefined?'':String(v).trim();}
+  function upper(v){return text(v).toUpperCase();}
+  function num(v,d){v=Number(v);return isFinite(v)?v:(d||0);}
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function round(v){return Math.round(v*100)/100;}
+  function hash(s){var h=2166136261,i;for(i=0;i<s.length;i++){h^=s.charCodeAt(i);h+=(h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24);}return ('00000000'+(h>>>0).toString(16).toUpperCase()).slice(-8);}
+  function normalizeAction(a){
+    var capital=Math.max(0,num(a.capitalRequired,0)), expected=Math.max(0,num(a.expectedValue,0));
+    var confidence=clamp(num(a.confidence,50),0,100), market=clamp(num(a.marketScore,50),0,100), execution=clamp(num(a.executionHealth,50),0,100), evidence=clamp(num(a.evidenceQuality,0),0,100), risk=clamp(num(a.riskScore,50),0,100), strategic=clamp(num(a.strategicFit,50),0,100);
+    var returnScore=capital?clamp(expected/capital*50,0,100):0;
+    var score=round(strategic*.22+market*.18+confidence*.16+execution*.14+evidence*.12+returnScore*.18-risk*.20);
+    return {actionId:text(a.actionId||('ACT-'+hash(text(a.opportunityId)+'|'+text(a.assetId)+'|'+upper(a.actionType)))),opportunityId:text(a.opportunityId),assetId:text(a.assetId),market:upper(a.market||'UNKNOWN'),assetType:upper(a.assetType||'UNKNOWN'),actionType:upper(a.actionType||'REVIEW'),capitalRequired:capital,expectedValue:expected,confidence:confidence,marketScore:market,executionHealth:execution,evidenceQuality:evidence,riskScore:risk,strategicFit:strategic,returnScore:round(returnScore),priorityScore:clamp(score,0,100),latitude:a.latitude===null||a.latitude===undefined?null:num(a.latitude,0),longitude:a.longitude===null||a.longitude===undefined?null:num(a.longitude,0),evidenceIds:(a.evidenceIds||[]).map(text).filter(Boolean),requiresHumanApproval:true,autonomousCapitalDeployment:false,destructiveCommitEnabled:false};
+  }
+  function rank(actions,policy){
+    policy=policy||{};var minEvidence=num(policy.minimumEvidenceQuality,60),minConfidence=num(policy.minimumConfidence,60),rows=(actions||[]).map(normalizeAction),eligible=[],rejected=[];
+    rows.forEach(function(r){var reasons=[];if(r.capitalRequired<=0)reasons.push('CAPITAL_REQUIRED');if(r.evidenceQuality<minEvidence)reasons.push('INSUFFICIENT_EVIDENCE');if(r.confidence<minConfidence)reasons.push('LOW_CONFIDENCE');if(!r.evidenceIds.length)reasons.push('EVIDENCE_IDS_REQUIRED');if(reasons.length)rejected.push({action:r,reasons:reasons});else eligible.push(r);});
+    eligible.sort(function(a,b){return b.priorityScore-a.priorityScore||a.capitalRequired-b.capitalRequired||a.actionId.localeCompare(b.actionId);});
+    return {eligible:eligible,rejected:rejected,policy:{minimumEvidenceQuality:minEvidence,minimumConfidence:minConfidence},reviewRequired:true};
+  }
+  function allocate(actions,constraints){
+    constraints=constraints||{};var ranked=rank(actions,constraints),budget=Math.max(0,num(constraints.totalCapital,0)),marketCaps=constraints.marketCaps||{},assetCaps=constraints.assetTypeCaps||{},used=0,selected=[],deferred=[],marketUse={},assetUse={};
+    ranked.eligible.forEach(function(a){var marketCap=marketCaps[a.market]===undefined?budget:num(marketCaps[a.market],budget),assetCap=assetCaps[a.assetType]===undefined?budget:num(assetCaps[a.assetType],budget),reason='';if(used+a.capitalRequired>budget)reason='TOTAL_CAPITAL_CONSTRAINT';else if((marketUse[a.market]||0)+a.capitalRequired>marketCap)reason='MARKET_CAP_CONSTRAINT';else if((assetUse[a.assetType]||0)+a.capitalRequired>assetCap)reason='ASSET_TYPE_CAP_CONSTRAINT';if(reason){deferred.push({action:a,reason:reason});return;}selected.push(a);used+=a.capitalRequired;marketUse[a.market]=(marketUse[a.market]||0)+a.capitalRequired;assetUse[a.assetType]=(assetUse[a.assetType]||0)+a.capitalRequired;});
+    return {allocationId:'ALLOC-'+hash(JSON.stringify(selected.map(function(a){return a.actionId;}))+'|'+budget),selected:selected,deferred:deferred,rejected:ranked.rejected,totalCapital:budget,allocatedCapital:used,remainingCapital:round(budget-used),marketAllocation:marketUse,assetTypeAllocation:assetUse,status:selected.length?'PENDING_APPROVAL':'NO_ACTIONS_SELECTED',requiresHumanApproval:true,autonomousCapitalDeployment:false,destructiveCommitEnabled:false};
+  }
+  function scenarios(actions,constraints){
+    var base=constraints||{},conservative=Object.assign({},base,{minimumEvidenceQuality:Math.max(75,num(base.minimumEvidenceQuality,60)),minimumConfidence:Math.max(75,num(base.minimumConfidence,60)),totalCapital:num(base.totalCapital,0)*.75}),growth=Object.assign({},base,{minimumEvidenceQuality:Math.max(60,num(base.minimumEvidenceQuality,60)),minimumConfidence:Math.max(60,num(base.minimumConfidence,60)),totalCapital:num(base.totalCapital,0)*1.15});
+    return [{scenarioId:'CONSERVATIVE',result:allocate(actions,conservative)},{scenarioId:'BALANCED',result:allocate(actions,base)},{scenarioId:'GROWTH',result:allocate(actions,growth)}];
+  }
+  function approve(allocation,decision){decision=decision||{};if(!allocation)return {status:'REJECTED',reason:'ALLOCATION_REQUIRED'};if(upper(decision.action)!=='APPROVE')return {status:'REJECTED',reason:'EXPLICIT_APPROVAL_REQUIRED'};if(!text(decision.approvedBy))return {status:'REJECTED',reason:'APPROVER_REQUIRED'};return {eventId:'CAP-'+hash(allocation.allocationId+'|'+decision.approvedBy+'|'+text(decision.approvedAt)),eventType:'CAPITAL_ALLOCATION_APPROVED',allocationId:allocation.allocationId,approvedCapital:allocation.allocatedCapital,approvedActionIds:allocation.selected.map(function(a){return a.actionId;}),approvedBy:text(decision.approvedBy),approvedAt:decision.approvedAt||new Date().toISOString(),status:'APPROVED_NOT_DEPLOYED',deploymentRequiresControlledWorkflow:true,autonomousCapitalDeployment:false,appendOnly:true};}
+  function mapProjection(allocation){return (allocation&&allocation.selected||[]).filter(function(a){return a.latitude!==null&&a.longitude!==null;}).map(function(a){return {actionId:a.actionId,assetId:a.assetId,latitude:a.latitude,longitude:a.longitude,priorityScore:a.priorityScore,capitalRequired:a.capitalRequired,market:a.market};});}
+  function portfolioSummary(allocation){var rows=allocation&&allocation.selected||[];return {selectedActions:rows.length,allocatedCapital:allocation?allocation.allocatedCapital:0,remainingCapital:allocation?allocation.remainingCapital:0,weightedPriorityScore:rows.length?round(rows.reduce(function(n,a){return n+a.priorityScore*a.capitalRequired;},0)/Math.max(1,rows.reduce(function(n,a){return n+a.capitalRequired;},0))):0,markets:Object.keys(allocation&&allocation.marketAllocation||{}).length,assetTypes:Object.keys(allocation&&allocation.assetTypeAllocation||{}).length,reviewRequired:true,autonomousCapitalDeployment:false};}
+  return {VERSION:VERSION,normalizeAction:normalizeAction,rank:rank,allocate:allocate,scenarios:scenarios,approve:approve,mapProjection:mapProjection,portfolioSummary:portfolioSummary};
+}());
+
+
+/** Sprint 13 append-only persistence adapter. */
+var SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION_PERSISTENCE=(function(){
+  'use strict';var memory=[];
+  function append(events){var added=0;(events||[]).forEach(function(e){var key=String(e.eventId||e.allocationId||'');if(!key)return;if(memory.some(function(x){return String(x.eventId||x.allocationId||'')===key;}))return;memory.push(JSON.parse(JSON.stringify(e)));added++;});return {appended:added,total:memory.length,appendOnly:true};}
+  function list(){return JSON.parse(JSON.stringify(memory));}
+  function clearForTest(){memory=[];}
+  return {append:append,list:list,clearForTest:clearForTest};
+}());
+
+
 /** SCIIP_OS v7.0 — Epic 3 Sprint 7 Application Descriptor */
 var SCIIP_ENTERPRISE_RELATIONSHIP_GRAPH_APPLICATION = (function () {
   'use strict';
@@ -2177,6 +2235,33 @@ function sciipTestV7Epic3Sprint12(){
   var app=SCIIP_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE_APPLICATION.run({feedback:feedback,policy:{minimumSampleSize:3},decisions:[{proposalId:learning.proposals[0].proposalId,action:'APPROVE',approvedBy:'EXEC-1'}]});ok('Application assembly',app.portfolio.totalOutcomes===4&&app.approvals.length===1&&app.workspace==='executive-opportunity-command');
   var store=SCIIP_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE_PERSISTENCE.memory(),p1=SCIIP_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE_PERSISTENCE.persist(store,normalized.concat(learning.proposals).concat([approved])),p2=SCIIP_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE_PERSISTENCE.persist(store,normalized.concat(learning.proposals).concat([approved]));ok('Append-only duplicate safety',p1.appended===6&&p2.duplicates===6);
   return {framework:'SCIIP_V7_EPIC_3_SPRINT_12_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE',version:'v7.0-epic3-sprint12.0',status:failures.length?'FAILED':'PASSED',testsRun:tests,failures:failures,result:{feedbackRecords:normalized.length,cohorts:cohorts.length,learningProposals:learning.proposals.length,approvedProposals:1,persistedEvents:store.all().length,workspace:'executive-opportunity-command',reviewRequired:true,automaticModelMutation:false,destructiveCommitEnabled:false,autonomousExecution:false}};
+}
+
+
+/** SCIIP_OS v7 Epic 3 Sprint 13 certification. */
+function sciipTestV7Epic3Sprint13(){
+  var failures=[],tests=0;function ok(name,condition){tests++;if(!condition)failures.push(name);}
+  var actions=[
+    {actionId:'A-1',opportunityId:'O-1',assetId:'P-1',market:'INLAND EMPIRE',assetType:'INDUSTRIAL',actionType:'ACQUIRE',capitalRequired:4000000,expectedValue:5600000,confidence:88,marketScore:85,executionHealth:82,evidenceQuality:92,riskScore:25,strategicFit:94,evidenceIds:['E-1','E-2'],latitude:34.1,longitude:-117.4},
+    {actionId:'A-2',opportunityId:'O-2',assetId:'P-2',market:'SOUTH BAY',assetType:'INDUSTRIAL',actionType:'LEASE',capitalRequired:2500000,expectedValue:3400000,confidence:81,marketScore:78,executionHealth:75,evidenceQuality:86,riskScore:32,strategicFit:88,evidenceIds:['E-3'],latitude:33.8,longitude:-118.2},
+    {actionId:'A-3',opportunityId:'O-3',assetId:'P-3',market:'INLAND EMPIRE',assetType:'LAND',actionType:'DEVELOP',capitalRequired:5000000,expectedValue:7000000,confidence:58,marketScore:80,executionHealth:70,evidenceQuality:55,riskScore:50,strategicFit:84,evidenceIds:[]}
+  ];
+  var ranked=SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION.rank(actions,{minimumEvidenceQuality:60,minimumConfidence:60});
+  ok('governed ranking',ranked.eligible.length===2&&ranked.rejected.length===1&&ranked.eligible[0].actionId==='A-1');
+  var allocation=SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION.allocate(actions,{totalCapital:6500000,minimumEvidenceQuality:60,minimumConfidence:60,marketCaps:{'INLAND EMPIRE':4500000,'SOUTH BAY':3000000}});
+  ok('capital constraints',allocation.selected.length===2&&allocation.allocatedCapital===6500000&&allocation.remainingCapital===0);
+  var scenarios=SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION.scenarios(actions,{totalCapital:6500000,minimumEvidenceQuality:60,minimumConfidence:60});
+  ok('scenario comparison',scenarios.length===3&&scenarios[1].scenarioId==='BALANCED');
+  var rejectedApproval=SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION.approve(allocation,{action:'APPROVE'});
+  ok('approver gate',rejectedApproval.status==='REJECTED');
+  var approval=SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION.approve(allocation,{action:'APPROVE',approvedBy:'EXEC-1',approvedAt:'2026-07-17T12:00:00Z'});
+  ok('controlled approval',approval.status==='APPROVED_NOT_DEPLOYED'&&approval.autonomousCapitalDeployment===false);
+  SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION_PERSISTENCE.clearForTest();var persisted=SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION_PERSISTENCE.append([allocation,approval,approval]);
+  ok('append-only duplicate safety',persisted.appended===2&&persisted.total===2);
+  var app=SCIIP_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION_APPLICATION.run({actions:actions,constraints:{totalCapital:6500000,minimumEvidenceQuality:60,minimumConfidence:60}});
+  ok('workspace GIS integration',app.mapPoints.length===2&&app.descriptor.workspace==='executive-opportunity-command');
+  ok('North Star governance',app.descriptor.northStar.length===4&&app.descriptor.destructiveCommitEnabled===false&&app.summary.reviewRequired===true);
+  return {framework:'SCIIP_V7_EPIC_3_SPRINT_13_ENTERPRISE_PORTFOLIO_STRATEGY_CAPITAL_ALLOCATION',version:'v7.0-epic3-sprint13.0',status:failures.length?'FAILED':'PASSED',testsRun:tests,failures:failures,result:{eligibleActions:ranked.eligible.length,rejectedActions:ranked.rejected.length,selectedActions:allocation.selected.length,allocatedCapital:allocation.allocatedCapital,scenarios:scenarios.length,mapPoints:app.mapPoints.length,persistedEvents:persisted.total,workspace:app.descriptor.workspace,reviewRequired:true,autonomousCapitalDeployment:false,destructiveCommitEnabled:false}};
 }
 
 

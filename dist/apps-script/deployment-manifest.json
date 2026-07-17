@@ -1,8 +1,8 @@
 {
   "status": "PASSED",
   "version": "v7.0-compiler-v2",
-  "sourceFiles": 12142,
-  "sourceGsFiles": 12121,
+  "sourceFiles": 12146,
+  "sourceGsFiles": 12125,
   "sourceHtmlFiles": 17,
   "bundleFiles": 31,
   "deploymentFiles": 49,
@@ -24,7 +24,7 @@
         "src/shared/003_SCIIP_ServiceContainer.gs"
       ],
       "bytes": 35488,
-      "sha256": "1fb5ed2cdccf72df212a59e541c6008f88cf7d5ab42732671c4d249c2cafac42"
+      "sha256": "8a232e04d4a9c3ec698a5ab5d3633cf00086adbde1d67f5618f868943ab7ff90"
     },
     {
       "file": "01_runtime_001.gs",
@@ -76,7 +76,7 @@
         "src/shared/SCIIP_RuntimeWorkbookMaintenance.gs"
       ],
       "bytes": 354372,
-      "sha256": "ba07ac1baed28203de136bc6c7fdd21fbed746d71b982684978f5dfeb1659376"
+      "sha256": "8f393466bb15227bbc83a378b2fa07bc07e1dad67dd57817efd78df7ff66cc63"
     },
     {
       "file": "02_storage_001.gs",
@@ -983,7 +983,7 @@
         "src/processors/runtime/storage/12580_ArchiveCertificationProcessor.gs"
       ],
       "bytes": 951548,
-      "sha256": "71b8cd9876ce6594db07b7a4bc29abeefeff97b2b2b3c2c34243a335cfdb4cb8"
+      "sha256": "83049f92a5724ef781399e2ec3554db92bc83053ff23940469412986881c427c"
     },
     {
       "file": "02_storage_002.gs",
@@ -2115,7 +2115,7 @@
         "src/processors/runtime/storage/23820_StorageIntegrationGovernanceCoverageAssessmentProcessor.gs"
       ],
       "bytes": 951978,
-      "sha256": "fd0437ab1153872b1f4dd647b6837aa8d6e4d21b71b43e1a8bb5d33c516933ee"
+      "sha256": "4547d01b135a1d4d3e41785eb9a50ceb96c4281ffff576ba0d62a7effd39bfb0"
     },
     {
       "file": "02_storage_003.gs",
@@ -3015,7 +3015,7 @@
         "src/processors/runtime/storage/32740_StoragePlatformEnterpriseEngineeringPlanningProcessor.gs"
       ],
       "bytes": 951098,
-      "sha256": "2a396e49295cb717e47ff7a8bea73dd44c7ffaade87cc29dbf9e34c35c93e6c7"
+      "sha256": "95b59619e292d555955207cb66b9149887ca94f4c4f8cbe9e2b91f6e40cd4e67"
     },
     {
       "file": "02_storage_004.gs",
@@ -3950,7 +3950,7 @@
         "src/processors/runtime/storage/42010_StoragePlatformGlobalFinancialManagementPolicyRegistryProcessor.gs"
       ],
       "bytes": 951017,
-      "sha256": "887c05c7a83458ee19b552fbbd753d08b91d28f12368cdf289d8d1c1c32271bd"
+      "sha256": "c770284f307d789fc14af3028fc1415e605afa18168f3113d37b2250ffd8f620"
     },
     {
       "file": "02_storage_005.gs",
@@ -4912,7 +4912,7 @@
         "src/processors/runtime/storage/51550_StoragePlatformInterregionalChangeManagementExecutionProcessor.gs"
       ],
       "bytes": 951959,
-      "sha256": "6bfdaed7ae6089df00666c90d1494ab0ca096747ea89d3aca5be89036429b37c"
+      "sha256": "a8977afc416cb39b571648b80c5e39d87a577c287a0f137954b049bb62827086"
     },
     {
       "file": "02_storage_006.gs",
@@ -5849,7 +5849,7 @@
         "src/processors/runtime/storage/60840_StoragePlatformCrossPlatformGovernancePlanningProcessor.gs"
       ],
       "bytes": 951839,
-      "sha256": "d5f669bc27c2e35d38deb4bd593f39580a2edd84347e7a321a98754df0624713"
+      "sha256": "b6d5fb025944a4d7cd3bde1dc73e4d6b7f61ac1b1f3801ea73cba1b0d6dc7805"
     },
     {
       "file": "02_storage_007.gs",
@@ -6752,7 +6752,7 @@
         "src/processors/runtime/storage/69790_StoragePlatformUniversalStorageIndustrializationAcceptanceProcessor.gs"
       ],
       "bytes": 950871,
-      "sha256": "96f7c3478ef07363c9674c6eb1bbad1800b87b5b22145a661d59482771643271"
+      "sha256": "cbbf1990474ef614d7ca052cbd3e9bc9bdea42565c4a14222f4fb6a8c4c09d0b"
     },
     {
       "file": "02_storage_008.gs",
@@ -7614,7 +7614,7 @@
         "src/processors/runtime/storage/78330_StoragePlatformUniversalCompletionHealthRiskAnalysisProcessor.gs"
       ],
       "bytes": 951435,
-      "sha256": "98ff0a664837527c636b45bd1927b6393c373c6aeb20f7a28f84aae8a1e85cfd"
+      "sha256": "7f194aece11072543c013531b69cd327ca8db28c4c382e0c0ac77ae5ca60b3c9"
     },
     {
       "file": "02_storage_009.gs",
@@ -8520,7 +8520,7 @@
         "src/processors/runtime/storage/87310_StoragePlatformPermanentHistoryMobilityPolicyRegistryProcessor.gs"
       ],
       "bytes": 951244,
-      "sha256": "0fae9f3fbe6fee9479d281d5e647140d635ac419485c09c915c295b1a8156b5c"
+      "sha256": "ee0705dc901ff55350b0601377c8959fe74f72bd9805ba29e69abbd30c87d305"
     },
     {
       "file": "02_storage_010.gs",
@@ -9417,7 +9417,7 @@
         "src/processors/runtime/storage/96200_StoragePlatformProcessorDrivenStorageMonitoringReadinessProcessor.gs"
       ],
       "bytes": 950710,
-      "sha256": "5446ff474e795241dc61b53ddc4a8d2a4a009ec768945aaa8bd91fb76b8c7d8b"
+      "sha256": "5c26788870cd38a3a5d513591e4534250fea55f5eeba444b474b42c7e2a023d3"
     },
     {
       "file": "02_storage_011.gs",
@@ -10027,7 +10027,7 @@
         "src/shared/SCIIP_StoragePlatformEnterpriseAssuranceBackend_v6.gs"
       ],
       "bytes": 949241,
-      "sha256": "76b0de8e3ef6b967434e328ed9d37ffb285a9cee667b110e7ac6460718a5a7f1"
+      "sha256": "83568f11589d5e7221fbfdb4d9676c62028c4a877b2d0d9eff5addf83be9af12"
     },
     {
       "file": "02_storage_012.gs",
@@ -10466,7 +10466,7 @@
         "src/shared/SCIIP_StoragePlatformProcessorDrivenStorageAcceptanceBackend_v6.gs"
       ],
       "bytes": 950388,
-      "sha256": "3490ead5244d9c0d70ea82de9d03a8384b7591700eecb8e2a9ecbed55baecf0b"
+      "sha256": "e0e3a0b6ec5a15760bf318f318e1bd257780e0060673198a54d8a7c0a4b06610"
     },
     {
       "file": "02_storage_013.gs",
@@ -10763,7 +10763,7 @@
         "src/shared/SCIIP_StorageWorkloadPlacementBackend_v6.gs"
       ],
       "bytes": 649040,
-      "sha256": "1bef8d59f86726f09d1651d9cfc813b43ccc0bb18299732385993d4ac9da3dbc"
+      "sha256": "213a0e2ef84a53f6cfe5abfab46b5294bf014c816838d9c8ad53fe5f612a431a"
     },
     {
       "file": "03_identity_001.gs",
@@ -10785,7 +10785,7 @@
         "src/processors/identity/execution/6750_IdentityAcceptanceProcessor.gs"
       ],
       "bytes": 79534,
-      "sha256": "5b88b729a58b01e34b2bf0e8411c4e987f9b5bd14aac8a866980c0c98ab3cdb4"
+      "sha256": "a5febc48aa7466fe448c9a10ef61fe01bb4f001474694da29476e6fece6d6268"
     },
     {
       "file": "04_graph_001.gs",
@@ -10807,7 +10807,7 @@
         "src/processors/graph/execution/6850_GraphAcceptanceProcessor.gs"
       ],
       "bytes": 77012,
-      "sha256": "906bc888ada4dfb60c0f23659d3837d92e31571e1ef68e1cca3fddcd6da6edd1"
+      "sha256": "f8ffd26027918013db84ee7388864367f39485a0ca2d0c4fd0c2e6e8089db5c2"
     },
     {
       "file": "05_gis_001.gs",
@@ -10826,7 +10826,7 @@
         "src/processors/gis/execution/6950_GISAcceptanceProcessor.gs"
       ],
       "bytes": 68546,
-      "sha256": "93ef7d5c79772fea78b6498e23b072b795c804dee011425a28cd3333c4a02905"
+      "sha256": "b11999a2663ed33fbf6a2447dc20b04ffc2f1d5b4e41805fb3e9d81059c211c6"
     },
     {
       "file": "06_ai_001.gs",
@@ -11318,7 +11318,7 @@
         "src/processors/intelligence/execution/9540_EnterpriseTransformationCertificationProcessor.gs"
       ],
       "bytes": 950113,
-      "sha256": "afe19263936dc09bf5e8955a46b1277ced8166f0871f3eb09d9f4fe1b262c3de"
+      "sha256": "8992463173d5dfcc01e0c38f8ff2b87c1daae4e5bc92b36c1e9606dacdc4b28c"
     },
     {
       "file": "06_ai_002.gs",
@@ -11377,7 +11377,7 @@
         "src/processors/intelligence/executive/7060_7150_ExecutiveIntelligenceExecutionShared.gs"
       ],
       "bytes": 87387,
-      "sha256": "820b17dc285044ded3addfb9a0b140acf6390f735115531278361ab0a77c89b1"
+      "sha256": "13ed7dbde3979ef399457849961de32923af73c2ee54dcca3c6555a453f276d2"
     },
     {
       "file": "07_api_001.gs",
@@ -11388,7 +11388,7 @@
         "src/api/SCIIP_API_Tests.gs"
       ],
       "bytes": 7380,
-      "sha256": "53e6437df9f34a8ffebd177cebd0a5c018d332c4e4d7bfc24bc7f8aa9f0b71ff"
+      "sha256": "8e1ece241a9f52b2d99ebb9e1c83336b67fcb3ca518ead1ca929c9e4cb878839"
     },
     {
       "file": "08_ui_001.gs",
@@ -11527,7 +11527,7 @@
         "src/ui/integration/SCIIP_Temporal_Graph_Engine.gs"
       ],
       "bytes": 370204,
-      "sha256": "b5947a24c646b51743b6769e7f90b8d207cc85e2f552fdf3b1e2cdd27207f864"
+      "sha256": "f236d29f4f4c419f052455e4760e311d9743977680ad3e2b34c562a1e071c95a"
     },
     {
       "file": "09_tests_001.gs",
@@ -11642,7 +11642,7 @@
         "src/tests/SCIIP_TestingFramework_v4_StorageExecution_68200_78190_1000ProcessorPatch.gs"
       ],
       "bytes": 875469,
-      "sha256": "49f7cb7e3bb6d328f79a5a30eac7290ee5245fd0947ce8c5fe7d3309200c1160"
+      "sha256": "124230747ba996dd49ee0848ae5163b1b6594d4edda6b188af58409e2bb9a756"
     },
     {
       "file": "09_tests_002.gs",
@@ -11712,7 +11712,7 @@
         "src/tests/suites/IndustrialIntelligenceExecutionSuite.gs"
       ],
       "bytes": 525467,
-      "sha256": "0ec859b3b3e80df8bfa477677db2955e43954007ca8e50ebce285bf22bfc0aeb"
+      "sha256": "2a720e838f58267a59c58c936f49152646922a126c102457e6194a8ac9b464e3"
     },
     {
       "file": "10_events_001.gs",
@@ -11722,7 +11722,7 @@
         "src/events/EventStore.gs"
       ],
       "bytes": 4416,
-      "sha256": "d2b0615aff803d0856fdcc087dc8377c2b84742a6e671a86721008aca91a59a5"
+      "sha256": "c7932f9f2e2a157eccd37197b2f849449f5d7a877ec55b31fb80572652ba6933"
     },
     {
       "file": "11_other_001.gs",
@@ -11921,12 +11921,16 @@
         "src/applications/relationship-intelligence/SCIIP_Autonomous_Opportunity_Discovery_Application.gs",
         "src/applications/relationship-intelligence/SCIIP_Autonomous_Opportunity_Discovery_Engine.gs",
         "src/applications/relationship-intelligence/SCIIP_Autonomous_Opportunity_Discovery_Persistence.gs",
+        "src/applications/relationship-intelligence/SCIIP_Enterprise_Portfolio_Strategy_Capital_Allocation_Application.gs",
+        "src/applications/relationship-intelligence/SCIIP_Enterprise_Portfolio_Strategy_Capital_Allocation_Engine.gs",
+        "src/applications/relationship-intelligence/SCIIP_Enterprise_Portfolio_Strategy_Capital_Allocation_Persistence.gs",
         "src/applications/relationship-intelligence/SCIIP_Enterprise_Relationship_Graph_Application.gs",
         "src/applications/relationship-intelligence/SCIIP_Enterprise_Relationship_Graph_Engine.gs",
         "src/applications/relationship-intelligence/SCIIP_Enterprise_Relationship_Graph_Persistence.gs",
         "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint10_Tests.gs",
         "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint11_Tests.gs",
         "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint12_Tests.gs",
+        "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint13_Tests.gs",
         "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint5_Tests.gs",
         "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint6_Tests.gs",
         "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint7_Tests.gs",
@@ -12016,8 +12020,8 @@
         "src/processors/domain/6370_DomainExecutionHandoffProcessor.gs",
         "src/processors/domain/6380_DomainExecutionAcceptanceProcessor.gs"
       ],
-      "bytes": 891701,
-      "sha256": "64c43eff4cee307f4770998e0d66c5fd01ff306ff777266d582345ad0a1fdbe7"
+      "bytes": 904443,
+      "sha256": "19f13c4f6738a8f5248a2681ca4bd481ce62b1707daae5acfe227f68fd1e2a75"
     },
     {
       "file": "11_other_002.gs",
@@ -12046,7 +12050,7 @@
         "src/processors/runtime/framework/1150_AutonomousProcessorExecutionRunStateLedgerProcessor.gs"
       ],
       "bytes": 944249,
-      "sha256": "0c29617db41bf6a06fa162d011919263d173d8ffa2ac93f588927a536eb9303f"
+      "sha256": "11794249077e1de108b0c97558e2b9739fb0e78d9e7221433e984c23b2d0b3a0"
     },
     {
       "file": "11_other_003.gs",
@@ -12119,7 +12123,7 @@
         "src/processors/runtime/framework/1800_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemMapProcessor.gs"
       ],
       "bytes": 947322,
-      "sha256": "2e8ed5378756d3002760c65b2a859e280653236c7cdccd39bb0c482d0f3be2ca"
+      "sha256": "e9be8f495d0756739e0f79915fc90137707931a8075d53d1aa600d776934104c"
     },
     {
       "file": "11_other_004.gs",
@@ -12222,7 +12226,7 @@
         "src/processors/runtime/supersheet/2970_SuperSheetImportExecutionHandoffProcessor.gs"
       ],
       "bytes": 944360,
-      "sha256": "fc1ee6a849d99a0f86ec1f4d75bf591b66f73eec8d6cb6b5698da8447e934e50"
+      "sha256": "461e99fd55621b7be2bb628fd19342ea2bb856bafc3dbaef9583a58b32fe618c"
     },
     {
       "file": "11_other_005.gs",
@@ -12316,7 +12320,7 @@
         "src/processors/runtime/supersheet/710_ActionQueueProcessor.gs"
       ],
       "bytes": 945507,
-      "sha256": "85d346b7df13ba5ebe16977c3aa718b6d4dbe3bceea96e4652d9b170761323ca"
+      "sha256": "970b7c3c6b269f2d6c43d0f2d3fafa6a05277803d04f5c2d78bea1265f1af66b"
     },
     {
       "file": "11_other_006.gs",
@@ -12378,7 +12382,7 @@
         "src/utils/SpreadsheetResolver.gs"
       ],
       "bytes": 314811,
-      "sha256": "befba20e3175ab301195846b5bf388f8704c46e81a4755f598bc758e957c6f4c"
+      "sha256": "01ec6c789dd0ef40c6e8b7d7f0f80061e3e24a3c6047e8f15de0afed7b9d41f6"
     }
   ]
 }
