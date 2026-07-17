@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 02_storage_006.gs
  * sources: 929
- * generated: 2026-07-17T18:05:06.318Z
+ * generated: 2026-07-17T18:10:18.256Z
  */
 function sciipRun51560_StoragePlatformInterregionalChangeManagementLedgerProcessor(){return SCIIP_STORAGE_PLATFORM_INTERREGIONAL_CHANGE_MANAGEMENT_BACKEND.executePlatformInterregionalChangeManagementPlan({processorNumber:51560,processorName:'StoragePlatformInterregionalChangeManagementLedger',statusField:'storagePlatformInterregionalChangeManagementLedgerStatus',component:'Storage Platform Interregional Change Management Execution',backendLayer:'Storage Platform Interregional Change Management',sourceSheet:'STORAGE_PLATFORM_INTERREGIONAL_CHANGE_MANAGEMENT_EXECUTION',targetSheet:'STORAGE_PLATFORM_INTERREGIONAL_CHANGE_MANAGEMENT_LEDGER',nextAction:'Run 51570_StoragePlatformInterregionalChangeManagementValidationProcessor after this processor completes.'});}
 function sciipTest51560_StoragePlatformInterregionalChangeManagementLedgerProcessor(){var r=sciipRun51560_StoragePlatformInterregionalChangeManagementLedgerProcessor();console.log(JSON.stringify({test:'sciipTest51560_StoragePlatformInterregionalChangeManagementLedgerProcessor',result:r}));return r;}

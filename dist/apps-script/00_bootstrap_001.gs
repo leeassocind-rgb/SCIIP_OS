@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 00_bootstrap_001.gs
  * sources: 7
- * generated: 2026-07-17T18:05:05.291Z
+ * generated: 2026-07-17T18:10:17.245Z
  */
 /* =========================================================
    SCIIP_OS v3.0 — CONFIG

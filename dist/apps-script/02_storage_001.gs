@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 02_storage_001.gs
  * sources: 899
- * generated: 2026-07-17T18:05:05.499Z
+ * generated: 2026-07-17T18:10:17.452Z
  */
 function sciipRun100000_StoragePlatformRuntimeStorageAutonomyReadinessProcessor(){return SCIIP_STORAGE_PLATFORM_RUNTIME_STORAGE_AUTONOMY_BACKEND.executePlatformRuntimeStorageAutonomyPlan({processorNumber:100000,processorName:'StoragePlatformRuntimeStorageAutonomyReadiness',statusField:'storagePlatformRuntimeStorageAutonomyReadinessStatus',component:'Storage Platform Runtime Storage Autonomy Execution',backendLayer:'Storage Platform Runtime Storage Autonomy',sourceSheet:'STORAGE_PLATFORM_RUNTIME_STORAGE_OPTIMIZATION_ACCEPTANCE',targetSheet:'STORAGE_PLATFORM_RUNTIME_STORAGE_AUTONOMY_READINESS',nextAction:'Run 100010_StoragePlatformRuntimeStorageAutonomyPolicyRegistryProcessor after this processor completes.'});}
 function sciipTest100000_StoragePlatformRuntimeStorageAutonomyReadinessProcessor(){var r=sciipRun100000_StoragePlatformRuntimeStorageAutonomyReadinessProcessor();console.log(JSON.stringify({test:'sciipTest100000_StoragePlatformRuntimeStorageAutonomyReadinessProcessor',result:r}));return r;}

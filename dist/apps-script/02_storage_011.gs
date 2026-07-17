@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 02_storage_011.gs
  * sources: 602
- * generated: 2026-07-17T18:05:06.820Z
+ * generated: 2026-07-17T18:10:18.778Z
  */
 function sciipRun96210_StoragePlatformProcessorDrivenStorageMonitoringPolicyRegistryProcessor(){return SCIIP_STORAGE_PLATFORM_PROCESSOR_DRIVEN_STORAGE_MONITORING_BACKEND.executePlatformProcessorDrivenStorageMonitoringPlan({processorNumber:96210,processorName:'StoragePlatformProcessorDrivenStorageMonitoringPolicyRegistry',statusField:'storagePlatformProcessorDrivenStorageMonitoringPolicyRegistryStatus',component:'Storage Platform Processor Driven Storage Monitoring Execution',backendLayer:'Storage Platform Processor Driven Storage Monitoring',sourceSheet:'STORAGE_PLATFORM_PROCESSOR_DRIVEN_STORAGE_MONITORING_READINESS',targetSheet:'STORAGE_PLATFORM_PROCESSOR_DRIVEN_STORAGE_MONITORING_POLICY_REGISTRY',nextAction:'Run 96220_StoragePlatformProcessorDrivenStorageMonitoringCoverageAssessmentProcessor after this processor completes.'});}
 function sciipTest96210_StoragePlatformProcessorDrivenStorageMonitoringPolicyRegistryProcessor(){var r=sciipRun96210_StoragePlatformProcessorDrivenStorageMonitoringPolicyRegistryProcessor();console.log(JSON.stringify({test:'sciipTest96210_StoragePlatformProcessorDrivenStorageMonitoringPolicyRegistryProcessor',result:r}));return r;}
