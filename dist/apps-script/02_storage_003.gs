@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 02_storage_003.gs
  * sources: 892
- * generated: 2026-07-17T18:43:21.875Z
+ * generated: 2026-07-17T18:48:56.339Z
  */
 function sciipRun23830_StorageIntegrationGovernanceRiskAnalysisProcessor(){
   return SCIIP_STORAGE_INTEGRATION_GOVERNANCE_BACKEND.executeIntegrationGovernancePlan({processorNumber:23830,processorName:'StorageIntegrationGovernanceRiskAnalysis',statusField:'storageIntegrationGovernanceRiskAnalysisStatus',component:'Storage Integration Governance Execution',backendLayer:'Storage Integration Governance',sourceSheet:'STORAGE_INTEGRATION_GOVERNANCE_COVERAGE_ASSESSMENT',targetSheet:'STORAGE_INTEGRATION_GOVERNANCE_RISK_ANALYSIS',nextAction:'Run 23840_StorageIntegrationGovernancePlanningProcessor after this processor completes.'});

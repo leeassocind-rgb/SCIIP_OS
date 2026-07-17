@@ -1,0 +1,30 @@
+{
+  "framework": "SCIIP_V7_EPIC_3_SPRINT_12_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE",
+  "version": "v7.0-epic3-sprint12.0",
+  "northStar": "SCIIP_OS is the operating system for industrial real estate. It ingests market data, preserves history, connects knowledge, powers GIS, and enables professionals to analyze, manage, and act from one trusted platform.",
+  "dependsOn": "Epic 3 Sprint 11",
+  "capabilities": [
+    "PRESERVES_HISTORY",
+    "CONNECTS_KNOWLEDGE",
+    "ANALYZE",
+    "MANAGE",
+    "ACT",
+    "ONE_TRUSTED_PLATFORM"
+  ],
+  "controls": {
+    "reviewRequired": true,
+    "automaticModelMutation": false,
+    "destructiveCommitEnabled": false,
+    "autonomousExecution": false
+  },
+  "files": [
+    "src/applications/relationship-intelligence/SCIIP_Adaptive_Opportunity_Learning_Portfolio_Intelligence_Engine.gs",
+    "src/applications/relationship-intelligence/SCIIP_Adaptive_Opportunity_Learning_Portfolio_Intelligence_Application.gs",
+    "src/applications/relationship-intelligence/SCIIP_Adaptive_Opportunity_Learning_Portfolio_Intelligence_Persistence.gs",
+    "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint12_Tests.gs",
+    "tools/tests/sciip-epic3-sprint12-test.js",
+    ".github/workflows/sciip-v7-epic3-sprint12.yml",
+    "manifests/SCIIP_V7_EPIC3_SPRINT12_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE.json",
+    "docs/releases/SCIIP_V7_EPIC3_SPRINT12_README.md"
+  ]
+}

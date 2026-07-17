@@ -1,0 +1,7 @@
+/** Sprint 12 application facade and North Star declaration. */
+var SCIIP_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE_APPLICATION=(function(){
+  'use strict';
+  var NORTH_STAR='SCIIP_OS is the operating system for industrial real estate. It ingests market data, preserves history, connects knowledge, powers GIS, and enables professionals to analyze, manage, and act from one trusted platform.';
+  function run(input){input=input||{};var learning=SCIIP_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE.learn(input.feedback||[],input.policy||{}),approvals=[];(input.decisions||[]).forEach(function(d){var p=learning.proposals.filter(function(x){return x.proposalId===d.proposalId;})[0];var a=SCIIP_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE.approve(p,d);if(a.status!=='REJECTED')approvals.push(a);});return {version:SCIIP_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE.VERSION,northStar:NORTH_STAR,capabilities:['PRESERVES_HISTORY','CONNECTS_KNOWLEDGE','ANALYZE','MANAGE','ACT','ONE_TRUSTED_PLATFORM'],feedback:learning.records,cohorts:learning.cohorts,proposals:learning.proposals,approvals:approvals,portfolio:SCIIP_ADAPTIVE_OPPORTUNITY_LEARNING_PORTFOLIO_INTELLIGENCE.portfolio(input.feedback||[]),workspace:'executive-opportunity-command',reviewRequired:true,automaticModelMutation:false,destructiveCommitEnabled:false,autonomousExecution:false};}
+  return {NORTH_STAR:NORTH_STAR,run:run};
+}());
