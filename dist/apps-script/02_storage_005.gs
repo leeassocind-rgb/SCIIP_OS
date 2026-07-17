@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 02_storage_005.gs
  * sources: 954
- * generated: 2026-07-17T17:22:39.397Z
+ * generated: 2026-07-17T17:34:23.820Z
  */
 function sciipRun42020_StoragePlatformGlobalFinancialManagementCoverageAssessmentProcessor(){return SCIIP_STORAGE_PLATFORM_GLOBAL_FINANCIAL_MANAGEMENT_BACKEND.executePlatformGlobalFinancialManagementPlan({processorNumber:42020,processorName:'StoragePlatformGlobalFinancialManagementCoverageAssessment',statusField:'storagePlatformGlobalFinancialManagementCoverageAssessmentStatus',component:'Storage Platform Global Financial Management Execution',backendLayer:'Storage Platform Global Financial Management',sourceSheet:'STORAGE_PLATFORM_GLOBAL_FINANCIAL_MANAGEMENT_POLICY_REGISTRY',targetSheet:'STORAGE_PLATFORM_GLOBAL_FINANCIAL_MANAGEMENT_COVERAGE_ASSESSMENT',nextAction:'Run 42030_StoragePlatformGlobalFinancialManagementRiskAnalysisProcessor after this processor completes.'});}
 function sciipTest42020_StoragePlatformGlobalFinancialManagementCoverageAssessmentProcessor(){var r=sciipRun42020_StoragePlatformGlobalFinancialManagementCoverageAssessmentProcessor();console.log(JSON.stringify({test:'sciipTest42020_StoragePlatformGlobalFinancialManagementCoverageAssessmentProcessor',result:r}));return r;}

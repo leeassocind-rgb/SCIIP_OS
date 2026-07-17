@@ -71,6 +71,7 @@
     "test:sprint35": "node tools/tests/sciip-program-increment34-36-test.js",
     "test:sprint36": "node tools/tests/sciip-program-increment34-36-test.js",
     "test:pi34-36": "node tools/tests/sciip-program-increment34-36-test.js",
-    "test:epic3:sprint5": "node tools/tests/sciip-epic3-sprint5-test.js"
+    "test:epic3:sprint5": "node tools/tests/sciip-epic3-sprint5-test.js",
+    "test:epic3:sprint6": "node tools/tests/sciip-epic3-sprint6-test.js"
   }
 }
