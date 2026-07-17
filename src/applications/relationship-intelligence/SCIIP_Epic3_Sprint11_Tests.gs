@@ -1,0 +1,15 @@
+/** Sprint 11 Apps Script certification. */
+function sciipTestV7Epic3Sprint11(){
+  var failures=[],tests=0;function ok(name,value){tests++;if(!value)failures.push(name);}
+  var now='2026-07-17T18:00:00.000Z';
+  var plan={id:'PLAN-1',opportunityId:'OPP-1',status:'IN_PROGRESS',tasks:[{id:'T1',status:'COMPLETED',dueAt:'2026-07-14T18:00:00.000Z'},{id:'T2',status:'PENDING',dueAt:'2026-07-16T18:00:00.000Z'},{id:'T3',status:'PENDING',dueAt:'2026-07-19T18:00:00.000Z'},{id:'T4',status:'BLOCKED',dueAt:'2026-07-30T18:00:00.000Z'}],exceptions:[]};
+  var monitor=SCIIP_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE.monitor(plan,{now:now,evidence:[{status:'ACCEPTED',quality:90},{status:'ACCEPTED',quality:70}]});ok('Execution telemetry',monitor.progressPct===25&&monitor.lateTasks===1&&monitor.atRiskTasks===1);
+  ok('Attention status',monitor.status==='ATTENTION_REQUIRED');
+  var quality=SCIIP_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE.assessEvidence([{status:'ACCEPTED',quality:90,weight:2},{status:'REJECTED',quality:100,weight:1}]);ok('Evidence quality',quality.score===60&&quality.rejected===1);
+  var incomplete=SCIIP_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE.recordOutcome(plan,{type:'LEASE_SIGNED',actualValue:100},{expectedValue:100});ok('Completed plan gate',incomplete.status==='REJECTED');
+  var completed=JSON.parse(JSON.stringify(plan));completed.status='COMPLETED';completed.tasks.forEach(function(t){t.status='COMPLETED';});var outcome=SCIIP_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE.recordOutcome(completed,{type:'LEASE_SIGNED',status:'REALIZED',actualValue:110,occurredAt:now,evidenceIds:['EV-1']},{expectedValue:100});ok('Outcome intelligence',outcome.status==='ACCEPTED'&&outcome.event.variancePct===10);
+  var signal=SCIIP_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE.feedback({id:'OPP-1',score:80},outcome.event,{healthScore:90});ok('Closed-loop feedback',signal.adjustedScore>80&&signal.automaticModelMutation===false);
+  var app=SCIIP_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE_APPLICATION.run({plans:[plan],now:now,evidenceByPlan:{'PLAN-1':[{status:'ACCEPTED',quality:85}]}});ok('Application assembly',app.monitoring.length===1&&app.portfolio.total===1);
+  var store=SCIIP_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE_PERSISTENCE.memory(),p1=SCIIP_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE_PERSISTENCE.persist(store,[monitor,outcome.event]),p2=SCIIP_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE_PERSISTENCE.persist(store,[monitor,outcome.event]);ok('Append-only duplicate safety',p1.appended===2&&p2.duplicates===2);
+  return {framework:'SCIIP_V7_EPIC_3_SPRINT_11_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE',version:'v7.0-epic3-sprint11.0',status:failures.length?'FAILED':'PASSED',testsRun:tests,failures:failures,result:{monitoringRecords:app.monitoring.length,healthScore:monitor.healthScore,lateTasks:monitor.lateTasks,atRiskTasks:monitor.atRiskTasks,evidenceQuality:quality.score,outcomes:1,feedbackSignals:1,historyEvents:store.all().length,workspace:'executive-opportunity-command',reviewRequired:true,destructiveCommitEnabled:false,autonomousExecution:false}};
+}
