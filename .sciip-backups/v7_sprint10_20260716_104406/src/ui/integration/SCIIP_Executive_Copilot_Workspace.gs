@@ -1,0 +1,3 @@
+/** SCIIP_OS v7.0 Sprint 7 — executive copilot workspace. */
+var SCIIP_EXECUTIVE_COPILOT_WORKSPACE=(function(){'use strict';var VERSION='v7.0-integration-sprint-7.0';
+function build(req){req=req||{};return {status:'AVAILABLE',workspace:{id:'executive-copilot',label:'Executive Copilot',sections:{conversation:{prompt:req.prompt||'',response:req.response||''},operationalContext:req.operationalContext||{},missions:req.missions||[],agents:req.agents||[],recommendations:req.recommendations||[],decisions:req.decisions||[],approvals:req.approvals||[],explanations:req.explanations||[]}},version:VERSION,generatedAt:new Date().toISOString()};} return {VERSION:VERSION,build:build};})();

@@ -1,0 +1,9 @@
+tools/tests/sciip-integration-sprint23-test.js
+.github/workflows/sciip-v7-integration-sprint23.yml
+src/tests/SCIIP_TestingFramework_v7_IntegrationSprint23.gs
+src/applications/enterprise-command/SCIIP_Cross_Domain_Intelligence.gs
+src/applications/enterprise-command/SCIIP_Enterprise_Command_Application.gs
+src/applications/enterprise-command/SCIIP_Enterprise_Health_Engine.gs
+src/applications/enterprise-command/SCIIP_Executive_Command_Center.gs
+src/applications/enterprise-command/SCIIP_Command_Engine.gs
+src/applications/enterprise-command/SCIIP_Enterprise_Recommendation_Engine.gs

@@ -1,0 +1,8 @@
+src/ui/SCIIP_AutonomousMarketMonitor.gs
+src/ui/SCIIP_AutonomousIndustrialScoring.gs
+src/ui/SCIIP_AutonomousMatchingAndSelection.gs
+src/ui/SCIIP_AutonomousExecutiveBriefing.gs
+src/ui/SCIIP_Integration_Sprint5A_Wiring.gs
+src/ui/SCIIP_Integration_Sprint5A_Tests.gs
+tools/tests/sciip-integration-sprint5a-test.js
+.github/workflows/sciip-v7-integration-sprint5a.yml

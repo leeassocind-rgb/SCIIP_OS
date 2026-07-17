@@ -1,0 +1,89 @@
+{
+  "patch": "SCIIP_OS_v7_0_Integration_Sprint_1_Shared_State_And_Events",
+  "version": "v7.0-integration-sprint-1",
+  "branch": "v7.0-sciip-desktop",
+  "baseline": "v6.1-production-ready",
+  "createdAt": "2026-07-14T21:32:11.685059+00:00",
+  "noNewProcessors": true,
+  "deploymentCommand": "npm run deployment:push",
+  "files": [
+    {
+      "path": "src/ui/SCIIP_AppState.gs",
+      "action": "ADD",
+      "sha256": "09ae1ff8a1020992c3da7b42efe55c813d025ba32b74d62090026009903ae90f",
+      "bytes": 3217
+    },
+    {
+      "path": "src/ui/SCIIP_AppEvents.gs",
+      "action": "ADD",
+      "sha256": "2f8fcb8522b484de905c533a1906034c4cc20a9eff852e08a765882b6d2064e4",
+      "bytes": 2292
+    },
+    {
+      "path": "src/ui/SCIIP_AppIntegration.gs",
+      "action": "ADD",
+      "sha256": "91a5d0c11bcc4cd0f2f38a41b974ce8bd39b840891c6080ea6e4db0e7e3d1210",
+      "bytes": 4797
+    },
+    {
+      "path": "src/ui/SCIIP_Integration_Tests.gs",
+      "action": "ADD",
+      "sha256": "1bc0d73e6ce37193e7b14559f1bc8b140d5fa80fcd86bb1bb1aab5340f8bda63",
+      "bytes": 2529
+    },
+    {
+      "path": "src/ui/SCIIP_IntegrationClient.html",
+      "action": "ADD",
+      "sha256": "75a23970972ff869d88d2bb066164d375b7fea7949fc5722ace8bcf3dc26ebb1",
+      "bytes": 5799
+    },
+    {
+      "path": "src/ui/SCIIP_Integration_Styles.html",
+      "action": "ADD",
+      "sha256": "016efd569185a5b63300af365b79e52046d0d45848920ff7532537f82c9bbdf8",
+      "bytes": 1272
+    },
+    {
+      "path": "src/ui/SCIIP_UI_Shell.html",
+      "action": "REPLACE",
+      "sha256": "b87551d65e266870e3ad3c9aa2a7a1e5b59632dfb30e13caffd87dca682c0d4c",
+      "bytes": 2735
+    },
+    {
+      "path": "src/ui/SCIIP_Desktop.gs",
+      "action": "REPLACE",
+      "sha256": "4e354400c2ec37405d26e58bff8d1cfb1a390546da0ddfd96e8eaf20b8cec372",
+      "bytes": 5890
+    },
+    {
+      "path": "src/ui/SCIIP_MobileUI.gs",
+      "action": "REPLACE",
+      "sha256": "5a5ba4a10289592ba7f89f97b80dd12046d9a28c2e99e1f921c117c9f8800b9a",
+      "bytes": 2091
+    },
+    {
+      "path": "tools/tests/sciip-integration-sprint1-v7-test.js",
+      "action": "ADD",
+      "sha256": "57ede4ce524f794951eb9b2d40b1e5c6e87b6d2b0e58fe766c1d4ab287e13d64",
+      "bytes": 1846
+    },
+    {
+      "path": ".github/workflows/sciip-integration-sprint1.yml",
+      "action": "ADD",
+      "sha256": "d8570b6800394bdc0ff315f79a44a83ab7017dd4e2ddc2f90b9f1b0e8e8d900d",
+      "bytes": 408
+    },
+    {
+      "path": "docs/SCIIP_V7_INTEGRATION_SPRINT_1.md",
+      "action": "ADD",
+      "sha256": "81d4beb41ccb72a5860ece141f3da018b7b975f15308a1cfa6e0fbb026e627cf",
+      "bytes": 965
+    },
+    {
+      "path": "package.json",
+      "action": "REPLACE",
+      "sha256": "65cf86f4ffbec1b90efa6295c544da5d48aae42df3798a50c81c5e35c5337e3a",
+      "bytes": 2714
+    }
+  ]
+}

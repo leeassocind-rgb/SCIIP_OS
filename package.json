@@ -79,6 +79,7 @@
     "test:epic3:sprint10": "node tools/tests/sciip-epic3-sprint10-test.js",
     "test:epic3:sprint11": "node tools/tests/sciip-epic3-sprint11-test.js",
     "test:epic3:sprint12": "node tools/tests/sciip-epic3-sprint12-test.js",
-    "test:epic3:sprint13": "node tools/tests/sciip-epic3-sprint13-test.js"
+    "test:epic3:sprint13": "node tools/tests/sciip-epic3-sprint13-test.js",
+    "test:epic3:sprint14": "node tools/tests/sciip-epic3-sprint14-test.js"
   }
 }

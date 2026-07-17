@@ -1,0 +1,20 @@
+name: SCIIP v7 Integration Sprint 3B
+on:
+  push:
+    paths:
+      - 'src/ui/SCIIP_Workflow*.gs'
+      - 'src/ui/SCIIP_ApprovalEngine.gs'
+      - 'src/ui/SCIIP_TaskRouter.gs'
+      - 'src/ui/SCIIP_Integration_Sprint3B_*.gs'
+      - 'tools/tests/sciip-integration-sprint3b-test.js'
+  pull_request:
+  workflow_dispatch:
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tools/tests/sciip-integration-sprint3b-test.js

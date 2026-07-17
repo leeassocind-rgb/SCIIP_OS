@@ -1,0 +1,15 @@
+const fs=require('fs');
+const path=require('path');
+const root=path.resolve(__dirname,'../..','..');
+const wiring=fs.readFileSync(path.join(root,'src/ui/SCIIP_Integration_Sprint3A_Wiring.gs'),'utf8');
+const engine=fs.readFileSync(path.join(root,'src/ui/SCIIP_IntelligenceEngine.gs'),'utf8');
+const tests=fs.readFileSync(path.join(root,'src/ui/SCIIP_Integration_Sprint3A_Tests.gs'),'utf8');
+const failures=[];
+if(!wiring.includes("PENDING_DEPENDENCIES"))failures.push('load-order retry status missing');
+if(!wiring.includes("queryPresent_"))failures.push('query idempotency check missing');
+if(!wiring.includes("livePresent_"))failures.push('live-service idempotency check missing');
+if(!engine.includes("ensureWiring_"))failures.push('runtime wiring retry missing');
+if(!tests.includes("SCIIP_SPRINT3A_WIRING.wire()"))failures.push('explicit wiring regression missing');
+const output={framework:'SCIIP_V7_SPRINT3A_SERVICE_WIRING_HOTFIX_NODE_TEST',version:'v7.0-integration-sprint-3a.2',status:failures.length?'FAILED':'PASSED',failures};
+console.log(JSON.stringify(output));
+if(failures.length)process.exit(1);

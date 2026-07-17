@@ -1,0 +1,3 @@
+/** SCIIP_OS v7.0 Sprint 8 — live operations workspace model. */
+var SCIIP_LIVE_OPERATIONS_WORKSPACE=(function(){'use strict';var VERSION='v7.0-integration-sprint-8.0';
+function build(input){input=input||{};return {status:'AVAILABLE',version:VERSION,workspace:{id:'live-operations',label:'Live Operations',sections:{streamHealth:input.streamHealth||{},throughput:input.throughput||{},latency:input.latency||{},liveState:input.liveState||{},signals:input.signals||[],alerts:input.alerts||[],agentActivity:input.agentActivity||[],eventTimeline:input.eventTimeline||[]}},generatedAt:new Date().toISOString()};}return {VERSION:VERSION,build:build};})();

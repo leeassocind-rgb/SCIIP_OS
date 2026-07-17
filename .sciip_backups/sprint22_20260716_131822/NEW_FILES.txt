@@ -1,0 +1,10 @@
+tools/tests/sciip-integration-sprint22-test.js
+.github/workflows/sciip-v7-integration-sprint22.yml
+src/tests/SCIIP_TestingFramework_v7_IntegrationSprint22.gs
+src/applications/enterprise-operating-system-orchestrator/SCIIP_Cross_Application_Coordinator.gs
+src/applications/enterprise-operating-system-orchestrator/SCIIP_Enterprise_Operating_System_Orchestrator_Application.gs
+src/applications/enterprise-operating-system-orchestrator/SCIIP_Enterprise_Operations_Workspace.gs
+src/applications/enterprise-operating-system-orchestrator/SCIIP_Enterprise_Timeline.gs
+src/applications/enterprise-operating-system-orchestrator/SCIIP_Workflow_State_Machine.gs
+src/applications/enterprise-operating-system-orchestrator/SCIIP_Approval_Orchestrator.gs
+src/applications/enterprise-operating-system-orchestrator/SCIIP_Enterprise_Workflow_Engine.gs

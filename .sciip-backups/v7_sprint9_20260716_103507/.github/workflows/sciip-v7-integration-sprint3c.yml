@@ -1,0 +1,22 @@
+name: SCIIP v7 Integration Sprint 3C
+on:
+  push:
+    paths:
+      - 'src/ui/SCIIP_DigitalTwinRegistry.gs'
+      - 'src/ui/SCIIP_MarketTwin.gs'
+      - 'src/ui/SCIIP_PortfolioIntelligence.gs'
+      - 'src/ui/SCIIP_TwinSynchronization.gs'
+      - 'src/ui/SCIIP_OperationalTwinView.gs'
+      - 'src/ui/SCIIP_Integration_Sprint3C_*.gs'
+      - 'tools/tests/sciip-integration-sprint3c-test.js'
+  pull_request:
+  workflow_dispatch:
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tools/tests/sciip-integration-sprint3c-test.js

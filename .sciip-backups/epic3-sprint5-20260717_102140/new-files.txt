@@ -1,0 +1,9 @@
+src/applications/relationship-intelligence/SCIIP_Relationship_Intelligence_Engine.gs
+src/applications/relationship-intelligence/SCIIP_Relationship_Intelligence_Persistence.gs
+src/applications/relationship-intelligence/SCIIP_Relationship_Intelligence_AI_Bridge.gs
+src/applications/relationship-intelligence/SCIIP_Relationship_Intelligence_Application.gs
+src/applications/relationship-intelligence/SCIIP_Epic3_Sprint5_Tests.gs
+tools/tests/sciip-epic3-sprint5-test.js
+.github/workflows/sciip-v7-epic3-sprint5.yml
+manifests/SCIIP_V7_EPIC3_SPRINT5_RELATIONSHIP_INTELLIGENCE.json
+docs/releases/SCIIP_V7_EPIC3_SPRINT5_README.md

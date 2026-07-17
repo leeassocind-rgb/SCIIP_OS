@@ -1,0 +1,10 @@
+tools/tests/sciip-integration-sprint20-test.js
+.github/workflows/sciip-v7-integration-sprint20.yml
+src/tests/SCIIP_TestingFramework_v7_IntegrationSprint20.gs
+src/applications/development-feasibility-entitlement-intelligence/SCIIP_Utility_Capacity_Engine.gs
+src/applications/development-feasibility-entitlement-intelligence/SCIIP_Development_Feasibility_Application.gs
+src/applications/development-feasibility-entitlement-intelligence/SCIIP_Development_Feasibility_Workspace.gs
+src/applications/development-feasibility-entitlement-intelligence/SCIIP_Entitlement_Path_Engine.gs
+src/applications/development-feasibility-entitlement-intelligence/SCIIP_Land_Use_Feasibility_Engine.gs
+src/applications/development-feasibility-entitlement-intelligence/SCIIP_Development_Site_Registry.gs
+src/applications/development-feasibility-entitlement-intelligence/SCIIP_Development_Feasibility_Engine.gs

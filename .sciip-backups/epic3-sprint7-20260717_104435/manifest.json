@@ -1,0 +1,38 @@
+{
+  "framework": "SCIIP_V7_EPIC_3_SPRINT_7_ENTERPRISE_RELATIONSHIP_GRAPH",
+  "version": "v7.0-epic3-sprint7.0",
+  "deliveryMode": "INCREMENTAL_PATCH",
+  "dependsOn": [
+    "SCIIP_V7_EPIC_3_SPRINT_5_RELATIONSHIP_INTELLIGENCE",
+    "SCIIP_V7_EPIC_3_SPRINT_6_NETWORK_INTELLIGENCE"
+  ],
+  "targetRepository": "~/Desktop/SCIIP_OS",
+  "files": [
+    "src/applications/relationship-intelligence/SCIIP_Enterprise_Relationship_Graph_Engine.gs",
+    "src/applications/relationship-intelligence/SCIIP_Enterprise_Relationship_Graph_Application.gs",
+    "src/applications/relationship-intelligence/SCIIP_Enterprise_Relationship_Graph_Persistence.gs",
+    "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint7_Tests.gs",
+    "tools/tests/sciip-epic3-sprint7-test.js",
+    ".github/workflows/sciip-v7-epic3-sprint7.yml",
+    "manifests/SCIIP_V7_EPIC3_SPRINT7_ENTERPRISE_RELATIONSHIP_GRAPH.json",
+    "docs/releases/SCIIP_V7_EPIC3_SPRINT7_README.md"
+  ],
+  "packageJsonScript": {
+    "test:epic3:sprint7": "node tools/tests/sciip-epic3-sprint7-test.js"
+  },
+  "northStar": {
+    "advances": [
+      "PRESERVES_HISTORY",
+      "CONNECTS_KNOWLEDGE",
+      "POWERS_GIS",
+      "ANALYZE",
+      "ONE_TRUSTED_PLATFORM"
+    ]
+  },
+  "governance": {
+    "backupBeforeWrite": true,
+    "rollbackIncluded": true,
+    "destructiveCommitEnabled": false,
+    "reviewRequired": true
+  }
+}

@@ -1,0 +1,12 @@
+name: SCIIP v7 Sprint 8 Certification
+on: [push, pull_request]
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm run test:sprint8
+      - run: npm run deployment:compile

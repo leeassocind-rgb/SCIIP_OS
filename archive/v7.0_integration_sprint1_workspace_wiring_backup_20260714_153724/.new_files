@@ -1,0 +1,3 @@
+src/ui/SCIIP_WorkspaceSynchronization.gs
+tools/tests/sciip-integration-sprint1-workspace-wiring-v7-test.js
+.github/workflows/sciip-v7-integration-sprint1-workspace-wiring.yml

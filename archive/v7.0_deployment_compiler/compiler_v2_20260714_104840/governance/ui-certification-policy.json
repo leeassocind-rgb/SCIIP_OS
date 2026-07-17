@@ -1,0 +1,12 @@
+{
+  "version":"v6.1-phase7d",
+  "requiredFiles":[
+    "src/ui/SCIIP_UI_Foundation.gs",
+    "src/ui/SCIIP_UI_Shell.html",
+    "src/ui/SCIIP_UI_Styles.html",
+    "src/ui/SCIIP_UI_App.html",
+    "src/ui/SCIIP_UI_Tests.gs"
+  ],
+  "minimumViews":6,
+  "requiredFeatures":["applicationShell","navigation","apiBinding","authenticationHandoff","responsive","accessibility","loadingState","errorState","emptyState"]
+}

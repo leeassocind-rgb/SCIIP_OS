@@ -1,0 +1,8 @@
+src/ui/SCIIP_PlatformRegistry.gs
+src/ui/SCIIP_PlatformAdapters.gs
+src/ui/SCIIP_PlatformSelfAssembly.gs
+src/ui/SCIIP_PlatformCertifier.gs
+src/ui/SCIIP_Integration_Sprint4B_Wiring.gs
+src/ui/SCIIP_Integration_Sprint4B_Tests.gs
+tools/tests/sciip-integration-sprint4b-test.js
+.github/workflows/sciip-v7-integration-sprint4b.yml

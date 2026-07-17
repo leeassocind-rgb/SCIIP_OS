@@ -1,0 +1,22 @@
+{
+  "version": "v6.1-phase5",
+  "nodeMajor": 20,
+  "processorFilenamePattern": "^\\d+_[A-Za-z0-9_]+Processor\\.gs$",
+  "processorFilenameExemptions": [
+    "src/processors/foundation/ProcessorRegistry.gs",
+    "src/processors/foundation/ProcessorRunner.gs"
+  ],
+  "requiredFiles": [
+    "src/shared/000_SCIIP_RuntimeNamespace.gs",
+    "src/shared/001_SCIIP_StorageRuntime.gs",
+    "src/shared/002_SCIIP_StorageBackend.gs",
+    "src/shared/003_SCIIP_ServiceContainer.gs",
+    "tools/sciip-architecture-governance.js"
+  ],
+  "minimumStorageRuntimeAdoption": 10,
+  "maximumDirectStorageWrites": 0,
+  "maximumDuplicateGlobals": 0,
+  "maximumPublicFunctionConflicts": 0,
+  "maximumSyntaxErrors": 0,
+  "maximumDuplicateProcessorNumbers": 0
+}

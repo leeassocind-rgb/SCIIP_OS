@@ -1,0 +1,9 @@
+src/ui/SCIIP_CapabilityBuilder.gs
+src/ui/SCIIP_UnifiedScoringAnalytics.gs
+src/ui/SCIIP_IndustrialKnowledgeEngine.gs
+src/ui/SCIIP_IndustrialIntelligenceEngines.gs
+src/ui/SCIIP_IndustrialIntelligenceWorkspace.gs
+src/ui/SCIIP_Integration_Sprint4A_Wiring.gs
+src/ui/SCIIP_Integration_Sprint4A_Tests.gs
+tools/tests/sciip-integration-sprint4a-test.js
+.github/workflows/sciip-v7-integration-sprint4a.yml
