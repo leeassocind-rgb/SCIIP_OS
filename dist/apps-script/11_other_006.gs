@@ -1,7 +1,3279 @@
 /** SCIIP_OS compiled bundle: 11_other_006.gs
- * sources: 43
- * generated: 2026-07-17T17:34:24.962Z
+ * sources: 54
+ * generated: 2026-07-17T17:45:10.652Z
  */
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 720_ActionDigestProcessor
+ *
+ * ACTION_QUEUE → ACTION_DIGESTS
+ *
+ * Migration note:
+ * Preserves original 720 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipGetActionDigestProcessorName720_() {
+  return '720_ActionDigestProcessor';
+}
+
+function sciipGetActionDigestHeaders720_() {
+  return [
+    'Action_Digest_ID',
+    'Business_Key',
+    'Digest_Date',
+    'Actions_Reviewed',
+    'High_Priority_Count',
+    'Medium_Priority_Count',
+    'Low_Priority_Count',
+    'Due_Now_Count',
+    'Operator_Review_Count',
+    'Risk_Action_Count',
+    'Opportunity_Action_Count',
+    'Property_Action_Count',
+    'Company_Action_Count',
+    'System_Action_Count',
+    'Digest_Title',
+    'Digest_Summary',
+    'Top_Action_Focus',
+    'Recommended_Operator_Response',
+    'Digest_Status',
+    'Status',
+    'Created_At',
+    'Processor'
+  ];
+}
+
+function sciipEnsureActionDigestsSchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'ACTION_DIGESTS',
+    sciipGetActionDigestHeaders720_()
+  );
+}
+
+function sciipRunActionDigestProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetActionDigestProcessorName720_(),
+    action: 'ACTION_DIGEST_BUILD',
+    sourceSheet: 'ACTION_QUEUE',
+    targetSheet: 'ACTION_DIGESTS',
+    ledgerSheet: 'ACTION_DIGESTS_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const actionItems = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('ACTION_QUEUE');
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: actionItems.length,
+        outputCount: actionItems.length ? 1 : 0,
+        summary: 'Action digest runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetActionDigestProcessorName720_(),
+          inputSheets: ['ACTION_QUEUE']
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureActionDigestsSchema();
+      const digestDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const actionDigestBusinessKey = 'ACTION_DIGEST|' + digestDate;
+
+      if (sciipRuntimeBusinessKeyPrefixExists720_(definition.targetSheet, actionDigestBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetActionDigestProcessorName720_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            actionsReviewed: 0,
+            actionDigestsCreated: 0,
+            skippedDuplicate: 1,
+            actionDigestBusinessKey: actionDigestBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const actionItems = sciipGetRuntimeRecordsByDate720_(
+        'ACTION_QUEUE',
+        'Queue_Date',
+        digestDate
+      );
+
+      if (actionItems.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetActionDigestProcessorName720_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            actionsReviewed: 0,
+            actionDigestsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const digest = sciipCreateActionDigest720_({
+        businessKey: actionDigestBusinessKey,
+        digestDate: digestDate,
+        actionItems: actionItems,
+        processor: sciipGetActionDigestProcessorName720_()
+      });
+
+      outputSheet.appendRow(digest);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetActionDigestProcessorName720_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: actionItems.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          actionsReviewed: actionItems.length,
+          actionDigestsCreated: 1,
+          skippedDuplicate: 0,
+          actionDigestBusinessKey: actionDigestBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipRuntimeBusinessKeyPrefixExists720_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate720_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue720_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue720_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable720_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipGenerateId720_(prefix) {
+  const safePrefix = String(prefix || 'ID').toUpperCase();
+  return safePrefix + '|' + Utilities.getUuid();
+}
+
+function sciipCreateActionDigest720_(args) {
+  const now = new Date();
+
+  const profile = sciipInferActionDigestProfile720_(args.actionItems);
+
+  return [
+    sciipGenerateId720_('ADG'),
+    args.businessKey,
+    args.digestDate,
+    args.actionItems.length,
+    profile.highPriorityCount,
+    profile.mediumPriorityCount,
+    profile.lowPriorityCount,
+    profile.dueNowCount,
+    profile.operatorReviewCount,
+    profile.riskActionCount,
+    profile.opportunityActionCount,
+    profile.propertyActionCount,
+    profile.companyActionCount,
+    profile.systemActionCount,
+    profile.digestTitle,
+    profile.digestSummary,
+    profile.topActionFocus,
+    profile.recommendedOperatorResponse,
+    'GENERATED',
+    'ACTIVE',
+    now.toISOString(),
+    args.processor
+  ];
+}
+
+function sciipInferActionDigestProfile720_(actionItems) {
+  let highPriorityCount = 0;
+  let mediumPriorityCount = 0;
+  let lowPriorityCount = 0;
+  let dueNowCount = 0;
+  let operatorReviewCount = 0;
+  let riskActionCount = 0;
+  let opportunityActionCount = 0;
+  let propertyActionCount = 0;
+  let companyActionCount = 0;
+  let systemActionCount = 0;
+
+  const topItems = [];
+
+  actionItems.forEach(function(item) {
+    const priority = String(
+      sciipExtractFirstAvailable720_(item, ['Priority'])
+    ).toUpperCase();
+
+    const dueStatus = String(
+      sciipExtractFirstAvailable720_(item, ['Due_Status'])
+    ).toUpperCase();
+
+    const actionType = String(
+      sciipExtractFirstAvailable720_(item, ['Action_Item_Type'])
+    ).toUpperCase();
+
+    const title = sciipExtractFirstAvailable720_(item, [
+      'Action_Title'
+    ]);
+
+    const objective = sciipExtractFirstAvailable720_(item, [
+      'Action_Objective'
+    ]);
+
+    if (priority === 'HIGH') highPriorityCount++;
+    else if (priority === 'LOW') lowPriorityCount++;
+    else mediumPriorityCount++;
+
+    if (dueStatus === 'DUE_NOW') dueNowCount++;
+
+    if (actionType.indexOf('OPERATOR') !== -1) operatorReviewCount++;
+    if (actionType.indexOf('RISK') !== -1) riskActionCount++;
+    if (actionType.indexOf('OPPORTUNITY') !== -1) opportunityActionCount++;
+    if (actionType.indexOf('PROPERTY') !== -1) propertyActionCount++;
+    if (actionType.indexOf('COMPANY') !== -1) companyActionCount++;
+    if (actionType.indexOf('SYSTEM') !== -1) systemActionCount++;
+
+    if (
+      priority === 'HIGH' ||
+      dueStatus === 'DUE_NOW' ||
+      actionType.indexOf('RISK') !== -1 ||
+      actionType.indexOf('OPPORTUNITY') !== -1 ||
+      actionType.indexOf('OPERATOR') !== -1
+    ) {
+      topItems.push(
+        '- ' + (title || actionType) + ': ' + (objective || 'No objective recorded.')
+      );
+    }
+  });
+
+  let digestTitle = 'Daily Action Digest';
+  let topActionFocus =
+    'Review queued action items and prioritize high-priority or due-now work.';
+  let recommendedOperatorResponse =
+    'Review the action queue, complete high-priority items first, and update queue status after review.';
+
+  if (dueNowCount > 0 || highPriorityCount > 0) {
+    digestTitle = 'Daily Action Digest — High Priority Review Required';
+    topActionFocus =
+      'High-priority or due-now action items require operator attention.';
+    recommendedOperatorResponse =
+      'Start with due-now and high-priority action items, especially risk, opportunity, and operator-review routes.';
+  }
+
+  if (riskActionCount > 0) {
+    topActionFocus =
+      'Risk-related actions are present and should be reviewed for severity, affected entities, timing, and mitigation path.';
+  }
+
+  if (opportunityActionCount > 0 && riskActionCount === 0) {
+    topActionFocus =
+      'Opportunity-related actions are present and should be reviewed for timing, target fit, ownership fit, and actionability.';
+  }
+
+  if (operatorReviewCount > 0) {
+    recommendedOperatorResponse =
+      'Resolve operator-review items before SCIIP applies autonomous confidence, weighting, graph, or processor changes.';
+  }
+
+  const digestSummary = [
+    'SCIIP reviewed ' + actionItems.length + ' queued action item(s).',
+    'Priority mix: ' + highPriorityCount + ' high, ' + mediumPriorityCount + ' medium, ' + lowPriorityCount + ' low.',
+    'Due now: ' + dueNowCount + '.',
+    'Workflow mix: ' + operatorReviewCount + ' operator review, ' + riskActionCount + ' risk, ' + opportunityActionCount + ' opportunity, ' + propertyActionCount + ' property, ' + companyActionCount + ' company, ' + systemActionCount + ' system.',
+    '',
+    'Top action items:',
+    topItems.length ? topItems.join('\n') : '- No high-priority action items identified.'
+  ].join('\n');
+
+  return {
+    highPriorityCount: highPriorityCount,
+    mediumPriorityCount: mediumPriorityCount,
+    lowPriorityCount: lowPriorityCount,
+    dueNowCount: dueNowCount,
+    operatorReviewCount: operatorReviewCount,
+    riskActionCount: riskActionCount,
+    opportunityActionCount: opportunityActionCount,
+    propertyActionCount: propertyActionCount,
+    companyActionCount: companyActionCount,
+    systemActionCount: systemActionCount,
+    digestTitle: digestTitle,
+    digestSummary: digestSummary,
+    topActionFocus: topActionFocus,
+    recommendedOperatorResponse: recommendedOperatorResponse
+  };
+}
+
+function sciipTestActionDigestProcessor() {
+  const result = sciipRunActionDigestProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestActionDigestProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 730_OperatorBriefingProcessor
+ *
+ * ACTION_DIGESTS → OPERATOR_BRIEFINGS
+ *
+ * Migration note:
+ * Preserves original 730 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipGetOperatorBriefingProcessorName730_() {
+  return '730_OperatorBriefingProcessor';
+}
+
+function sciipGetOperatorBriefingsHeaders730_() {
+  return [
+    'Operator_Briefing_ID',
+    'Business_Key',
+    'Briefing_Date',
+    'Action_Digest_ID',
+    'Actions_Reviewed',
+    'High_Priority_Count',
+    'Due_Now_Count',
+    'Operator_Review_Count',
+    'Risk_Action_Count',
+    'Opportunity_Action_Count',
+    'Briefing_Title',
+    'Executive_Brief',
+    'Priority_Assessment',
+    'Operator_Decision_Focus',
+    'Recommended_Operating_Posture',
+    'Command_Center_Message',
+    'Next_Best_Action',
+    'Briefing_Status',
+    'Source_Record',
+    'Status',
+    'Created_At',
+    'Processor'
+  ];
+}
+
+function sciipEnsureOperatorBriefingsSchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'OPERATOR_BRIEFINGS',
+    sciipGetOperatorBriefingsHeaders730_()
+  );
+}
+
+function sciipRunOperatorBriefingProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetOperatorBriefingProcessorName730_(),
+    action: 'OPERATOR_BRIEFING_BUILD',
+    sourceSheet: 'ACTION_DIGESTS',
+    targetSheet: 'OPERATOR_BRIEFINGS',
+    ledgerSheet: 'OPERATOR_BRIEFINGS_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const actionDigests = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('ACTION_DIGESTS');
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: actionDigests.length,
+        outputCount: actionDigests.length ? 1 : 0,
+        summary: 'Operator briefing runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetOperatorBriefingProcessorName730_(),
+          inputSheets: ['ACTION_DIGESTS']
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureOperatorBriefingsSchema();
+      const briefingDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const operatorBriefingBusinessKey = 'OPERATOR_BRIEFING|' + briefingDate;
+
+      if (sciipRuntimeBusinessKeyPrefixExists730_(definition.targetSheet, operatorBriefingBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetOperatorBriefingProcessorName730_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            actionDigestsReviewed: 0,
+            operatorBriefingsCreated: 0,
+            skippedDuplicate: 1,
+            operatorBriefingBusinessKey: operatorBriefingBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const actionDigests = sciipGetRuntimeRecordsByDate730_(
+        'ACTION_DIGESTS',
+        'Digest_Date',
+        briefingDate
+      );
+
+      if (actionDigests.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetOperatorBriefingProcessorName730_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            actionDigestsReviewed: 0,
+            operatorBriefingsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const briefing = sciipCreateOperatorBriefing730_({
+        businessKey: operatorBriefingBusinessKey,
+        briefingDate: briefingDate,
+        actionDigest: actionDigests[0],
+        processor: sciipGetOperatorBriefingProcessorName730_()
+      });
+
+      outputSheet.appendRow(briefing);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetOperatorBriefingProcessorName730_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: actionDigests.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          actionDigestsReviewed: actionDigests.length,
+          operatorBriefingsCreated: 1,
+          skippedDuplicate: 0,
+          operatorBriefingBusinessKey: operatorBriefingBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipRuntimeBusinessKeyPrefixExists730_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate730_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue730_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue730_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable730_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipGenerateId730_(prefix) {
+  const safePrefix = String(prefix || 'ID').toUpperCase();
+  return safePrefix + '|' + Utilities.getUuid();
+}
+
+function sciipCreateOperatorBriefing730_(args) {
+  const now = new Date();
+  const digest = args.actionDigest;
+
+  const actionDigestId = sciipExtractFirstAvailable730_(digest, [
+    'Action_Digest_ID'
+  ]);
+
+  const profile = sciipInferOperatorBriefingProfile730_(digest);
+
+  return [
+    sciipGenerateId730_('OBR'),
+    args.businessKey,
+    args.briefingDate,
+    actionDigestId,
+    sciipExtractFirstAvailable730_(digest, ['Actions_Reviewed']),
+    sciipExtractFirstAvailable730_(digest, ['High_Priority_Count']),
+    sciipExtractFirstAvailable730_(digest, ['Due_Now_Count']),
+    sciipExtractFirstAvailable730_(digest, ['Operator_Review_Count']),
+    sciipExtractFirstAvailable730_(digest, ['Risk_Action_Count']),
+    sciipExtractFirstAvailable730_(digest, ['Opportunity_Action_Count']),
+    profile.briefingTitle,
+    profile.executiveBrief,
+    profile.priorityAssessment,
+    profile.operatorDecisionFocus,
+    profile.recommendedOperatingPosture,
+    profile.commandCenterMessage,
+    profile.nextBestAction,
+    'GENERATED',
+    'ACTION_DIGESTS:' + actionDigestId,
+    'ACTIVE',
+    now.toISOString(),
+    args.processor
+  ];
+}
+
+function sciipInferOperatorBriefingProfile730_(digest) {
+  const actionsReviewed = Number(
+    sciipExtractFirstAvailable730_(digest, ['Actions_Reviewed']) || 0
+  );
+
+  const highPriorityCount = Number(
+    sciipExtractFirstAvailable730_(digest, ['High_Priority_Count']) || 0
+  );
+
+  const dueNowCount = Number(
+    sciipExtractFirstAvailable730_(digest, ['Due_Now_Count']) || 0
+  );
+
+  const operatorReviewCount = Number(
+    sciipExtractFirstAvailable730_(digest, ['Operator_Review_Count']) || 0
+  );
+
+  const riskActionCount = Number(
+    sciipExtractFirstAvailable730_(digest, ['Risk_Action_Count']) || 0
+  );
+
+  const opportunityActionCount = Number(
+    sciipExtractFirstAvailable730_(digest, ['Opportunity_Action_Count']) || 0
+  );
+
+  const digestSummary = sciipExtractFirstAvailable730_(digest, [
+    'Digest_Summary'
+  ]);
+
+  const topActionFocus = sciipExtractFirstAvailable730_(digest, [
+    'Top_Action_Focus'
+  ]);
+
+  const recommendedOperatorResponse = sciipExtractFirstAvailable730_(digest, [
+    'Recommended_Operator_Response'
+  ]);
+
+  let briefingTitle = 'SCIIP Operator Briefing';
+  let priorityAssessment =
+    'Normal operating posture. Review queued actions in priority order.';
+  let operatorDecisionFocus =
+    'Determine whether any queued actions require manual review, escalation, or additional evidence.';
+  let recommendedOperatingPosture =
+    'CONTINUE_NORMAL_OPERATIONS';
+  let commandCenterMessage =
+    'SCIIP has generated an operator briefing from the daily action digest.';
+  let nextBestAction =
+    'Review the action queue and update action statuses after completion.';
+
+  if (highPriorityCount > 0 || dueNowCount > 0) {
+    briefingTitle = 'SCIIP Operator Briefing — Priority Actions Required';
+    priorityAssessment =
+      highPriorityCount + ' high-priority action(s) and ' + dueNowCount + ' due-now action(s) require attention.';
+    recommendedOperatingPosture =
+      'PRIORITY_REVIEW_MODE';
+    nextBestAction =
+      'Review due-now and high-priority action items before lower-priority monitoring items.';
+  }
+
+  if (operatorReviewCount > 0) {
+    operatorDecisionFocus =
+      'Operator-review items must be resolved before SCIIP applies autonomous graph confidence, signal weighting, calibration, or processor behavior changes.';
+    recommendedOperatingPosture =
+      'OPERATOR_GOVERNANCE_MODE';
+    nextBestAction =
+      'Resolve operator-review items first, then proceed to risk, opportunity, property, company, or system queues.';
+  }
+
+  if (riskActionCount > 0) {
+    priorityAssessment =
+      'Risk-related action items are present and should be reviewed for severity, timing, affected entities, and mitigation path.';
+    recommendedOperatingPosture =
+      'RISK_REVIEW_MODE';
+  }
+
+  if (opportunityActionCount > 0 && riskActionCount === 0) {
+    priorityAssessment =
+      'Opportunity-related action items are present and should be reviewed for timing, target fit, ownership fit, pricing gap, and actionability.';
+    recommendedOperatingPosture =
+      'OPPORTUNITY_REVIEW_MODE';
+  }
+
+  const executiveBrief = [
+    'SCIIP reviewed ' + actionsReviewed + ' action item(s) from the daily action digest.',
+    'High-priority: ' + highPriorityCount + '. Due now: ' + dueNowCount + '. Operator review: ' + operatorReviewCount + '.',
+    'Risk actions: ' + riskActionCount + '. Opportunity actions: ' + opportunityActionCount + '.',
+    '',
+    'Digest focus: ' + (topActionFocus || 'No focus recorded.'),
+    '',
+    'Recommended response: ' + (recommendedOperatorResponse || 'No response recorded.'),
+    '',
+    'Digest summary:\n' + (digestSummary || 'No digest summary recorded.')
+  ].join('\n');
+
+  commandCenterMessage = [
+    commandCenterMessage,
+    'Operating posture: ' + recommendedOperatingPosture + '.',
+    'Operating posture: ' + recommendedOperatingPosture + '.',
+    'Decision focus: ' + operatorDecisionFocus,
+    'Next best action: ' + nextBestAction
+  ].join('\n');
+
+  return {
+    briefingTitle: briefingTitle,
+    executiveBrief: executiveBrief,
+    priorityAssessment: priorityAssessment,
+    operatorDecisionFocus: operatorDecisionFocus,
+    recommendedOperatingPosture: recommendedOperatingPosture,
+    commandCenterMessage: commandCenterMessage,
+    nextBestAction: nextBestAction
+  };
+}
+
+function sciipTestOperatorBriefingProcessor() {
+  const result = sciipRunOperatorBriefingProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestOperatorBriefingProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 740_CommandCenterUpdateProcessor
+ *
+ * OPERATOR_BRIEFINGS → COMMAND_CENTER_UPDATES
+ *
+ * Migration note:
+ * Preserves original 740 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipGetCommandCenterUpdateProcessorName740_() {
+  return '740_CommandCenterUpdateProcessor';
+}
+
+function sciipGetCommandCenterUpdatesHeaders740_() {
+  return [
+    'Command_Update_ID',
+    'Business_Key',
+    'Update_Date',
+    'Operator_Briefing_ID',
+    'Briefing_Title',
+    'Recommended_Operating_Posture',
+    'Priority_Assessment',
+    'Operator_Decision_Focus',
+    'Next_Best_Action',
+    'Update_Type',
+    'Update_Title',
+    'Command_Status',
+    'Command_Message',
+    'Primary_Focus',
+    'Required_Operator_Action',
+    'Visibility_Level',
+    'Update_Priority',
+    'Update_Status',
+    'Source_Record',
+    'Status',
+    'Created_At',
+    'Processor'
+  ];
+}
+
+function sciipEnsureCommandCenterUpdatesSchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'COMMAND_CENTER_UPDATES',
+    sciipGetCommandCenterUpdatesHeaders740_()
+  );
+}
+
+function sciipRunCommandCenterUpdateProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetCommandCenterUpdateProcessorName740_(),
+    action: 'COMMAND_CENTER_UPDATE_BUILD',
+    sourceSheet: 'OPERATOR_BRIEFINGS',
+    targetSheet: 'COMMAND_CENTER_UPDATES',
+    ledgerSheet: 'COMMAND_CENTER_UPDATES_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const operatorBriefings = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('OPERATOR_BRIEFINGS');
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: operatorBriefings.length,
+        outputCount: operatorBriefings.length ? 1 : 0,
+        summary: 'Command center update runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetCommandCenterUpdateProcessorName740_(),
+          inputSheets: ['OPERATOR_BRIEFINGS']
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureCommandCenterUpdatesSchema();
+      const updateDate = context.dateKey || SCIIP_RUNTIME.getDateKey({});
+      const commandCenterUpdateBusinessKey = 'COMMAND_CENTER_UPDATE|' + updateDate;
+
+      if (sciipRuntimeBusinessKeyPrefixExists740_(definition.targetSheet, commandCenterUpdateBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetCommandCenterUpdateProcessorName740_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            operatorBriefingsReviewed: 0,
+            commandCenterUpdatesCreated: 0,
+            skippedDuplicate: 1,
+            commandCenterUpdateBusinessKey: commandCenterUpdateBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const operatorBriefings = sciipGetRuntimeRecordsByDate740_(
+        'OPERATOR_BRIEFINGS',
+        'Briefing_Date',
+        updateDate
+      );
+
+      if (operatorBriefings.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetCommandCenterUpdateProcessorName740_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            operatorBriefingsReviewed: 0,
+            commandCenterUpdatesCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const update = sciipCreateCommandCenterUpdate740_({
+        businessKey: commandCenterUpdateBusinessKey,
+        updateDate: updateDate,
+        operatorBriefing: operatorBriefings[0],
+        processor: sciipGetCommandCenterUpdateProcessorName740_()
+      });
+
+      outputSheet.appendRow(update);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetCommandCenterUpdateProcessorName740_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: operatorBriefings.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          operatorBriefingsReviewed: operatorBriefings.length,
+          commandCenterUpdatesCreated: 1,
+          skippedDuplicate: 0,
+          commandCenterUpdateBusinessKey: commandCenterUpdateBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipRuntimeBusinessKeyPrefixExists740_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate740_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue740_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipNormalizeRuntimeDateValue740_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipExtractFirstAvailable740_(record, fields) {
+  if (!record) return '';
+  for (let i = 0; i < fields.length; i++) {
+    const value = record[fields[i]];
+    if (value !== null && value !== undefined && String(value).trim() !== '') {
+      return String(value).trim();
+    }
+  }
+  return '';
+}
+
+function sciipGenerateId740_(prefix) {
+  const safePrefix = String(prefix || 'ID').toUpperCase();
+  return safePrefix + '|' + Utilities.getUuid();
+}
+
+function sciipCreateCommandCenterUpdate740_(args) {
+  const now = new Date();
+
+  const briefing = args.operatorBriefing;
+
+  const operatorBriefingId = sciipExtractFirstAvailable740_(briefing, [
+    'Operator_Briefing_ID'
+  ]);
+
+  const profile = sciipInferCommandCenterUpdateProfile740_(briefing);
+
+  return [
+    sciipGenerateId740_('CCU'),
+    args.businessKey,
+    args.updateDate,
+    operatorBriefingId,
+    sciipExtractFirstAvailable740_(briefing, ['Briefing_Title']),
+    sciipExtractFirstAvailable740_(briefing, ['Recommended_Operating_Posture']),
+    sciipExtractFirstAvailable740_(briefing, ['Priority_Assessment']),
+    sciipExtractFirstAvailable740_(briefing, ['Operator_Decision_Focus']),
+    sciipExtractFirstAvailable740_(briefing, ['Next_Best_Action']),
+    profile.updateType,
+    profile.updateTitle,
+    profile.commandStatus,
+    profile.commandMessage,
+    profile.primaryFocus,
+    profile.requiredOperatorAction,
+    profile.visibilityLevel,
+    profile.updatePriority,
+    'PUBLISHED_TO_COMMAND_CENTER',
+    'OPERATOR_BRIEFINGS:' + operatorBriefingId,
+    'ACTIVE',
+    now.toISOString(),
+    args.processor
+  ];
+}
+
+function sciipInferCommandCenterUpdateProfile740_(briefing) {
+  const briefingTitle = sciipExtractFirstAvailable740_(briefing, [
+    'Briefing_Title'
+  ]);
+
+  const operatingPosture = sciipExtractFirstAvailable740_(briefing, [
+    'Recommended_Operating_Posture'
+  ]);
+
+  const priorityAssessment = sciipExtractFirstAvailable740_(briefing, [
+    'Priority_Assessment'
+  ]);
+
+  const operatorDecisionFocus = sciipExtractFirstAvailable740_(briefing, [
+    'Operator_Decision_Focus'
+  ]);
+
+  const commandCenterMessage = sciipExtractFirstAvailable740_(briefing, [
+    'Command_Center_Message'
+  ]);
+
+  const nextBestAction = sciipExtractFirstAvailable740_(briefing, [
+    'Next_Best_Action'
+  ]);
+
+  let updateType = 'STANDARD_COMMAND_UPDATE';
+  let updateTitle = briefingTitle || 'SCIIP Command Center Update';
+  let commandStatus = 'NORMAL';
+  let primaryFocus =
+    'Review current action queue and continue normal SCIIP operations.';
+  let requiredOperatorAction =
+    nextBestAction || 'Review command center update and action queue.';
+  let visibilityLevel = 'OPERATOR';
+  let updatePriority = 'MEDIUM';
+
+  const postureText = String(operatingPosture || '').toUpperCase();
+
+  if (postureText.includes('PRIORITY_REVIEW')) {
+    updateType = 'PRIORITY_COMMAND_UPDATE';
+    commandStatus = 'PRIORITY_REVIEW_REQUIRED';
+    primaryFocus =
+      'High-priority or due-now action items require operator attention.';
+    updatePriority = 'HIGH';
+  }
+
+  if (postureText.includes('OPERATOR_GOVERNANCE')) {
+    updateType = 'GOVERNANCE_COMMAND_UPDATE';
+    commandStatus = 'OPERATOR_GOVERNANCE_REQUIRED';
+    primaryFocus =
+      'Operator-review items must be resolved before SCIIP changes confidence, weights, graph structure, or processor behavior.';
+    updatePriority = 'HIGH';
+  }
+
+  if (postureText.includes('RISK_REVIEW')) {
+    updateType = 'RISK_COMMAND_UPDATE';
+    commandStatus = 'RISK_REVIEW_REQUIRED';
+    primaryFocus =
+      'Risk-related actions require review for severity, timing, affected entities, and mitigation path.';
+    updatePriority = 'HIGH';
+  }
+
+  if (postureText.includes('OPPORTUNITY_REVIEW')) {
+    updateType = 'OPPORTUNITY_COMMAND_UPDATE';
+    commandStatus = 'OPPORTUNITY_REVIEW_REQUIRED';
+    primaryFocus =
+      'Opportunity-related actions require review for timing, target fit, ownership fit, pricing gap, and actionability.';
+    updatePriority = 'HIGH';
+  }
+
+  if (postureText.includes('CONTINUE_NORMAL')) {
+    updateType = 'NORMAL_COMMAND_UPDATE';
+    commandStatus = 'NORMAL_OPERATIONS';
+    updatePriority = 'MEDIUM';
+  }
+
+  const commandMessage = [
+    commandCenterMessage || 'SCIIP generated a command center update from the operator briefing.',
+    '',
+    'Command status: ' + commandStatus + '.',
+    'Operating posture: ' + (operatingPosture || 'UNKNOWN') + '.',
+    'Priority assessment: ' + (priorityAssessment || 'No priority assessment recorded.'),
+    'Operator decision focus: ' + (operatorDecisionFocus || 'No decision focus recorded.'),
+    'Next best action: ' + requiredOperatorAction
+  ].join('\n');
+
+  return {
+    updateType: updateType,
+    updateTitle: updateTitle,
+    commandStatus: commandStatus,
+    commandMessage: commandMessage,
+    primaryFocus: primaryFocus,
+    requiredOperatorAction: requiredOperatorAction,
+    visibilityLevel: visibilityLevel,
+    updatePriority: updatePriority
+  };
+}
+
+function sciipTestCommandCenterUpdateProcessor() {
+  const result = sciipRunCommandCenterUpdateProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestCommandCenterUpdateProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 750_AutonomousOpsDigestProcessor
+ *
+ * COMMAND_CENTER_UPDATES → AUTONOMOUS_OPS_DIGESTS
+ *
+ * Migration note:
+ * Preserves original 750 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipGetAutonomousOpsDigestProcessorName750_() {
+  return '750_AutonomousOpsDigestProcessor';
+}
+
+function sciipGetAutonomousOpsDigestsHeaders750_() {
+  return [
+    'Digest_ID',
+    'Business_Key',
+    'Digest_Date',
+    'Source_Sheet',
+    'Source_Record_Count',
+    'Digest_Title',
+    'Digest_Text',
+    'Created_At',
+    'Processor'
+  ];
+}
+
+function sciipEnsureAutonomousOpsDigestSchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'AUTONOMOUS_OPS_DIGESTS',
+    sciipGetAutonomousOpsDigestsHeaders750_()
+  );
+}
+
+function sciipRunAutonomousOpsDigestProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetAutonomousOpsDigestProcessorName750_(),
+    action: 'AUTONOMOUS_OPS_DIGEST_BUILD',
+    sourceSheet: 'COMMAND_CENTER_UPDATES',
+    targetSheet: 'AUTONOMOUS_OPS_DIGESTS',
+    ledgerSheet: 'AUTONOMOUS_OPS_DIGESTS_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const commandCenterUpdates = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('COMMAND_CENTER_UPDATES');
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: commandCenterUpdates.length,
+        outputCount: commandCenterUpdates.length ? 1 : 0,
+        summary: 'Autonomous operations digest runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetAutonomousOpsDigestProcessorName750_(),
+          inputSheets: ['COMMAND_CENTER_UPDATES']
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousOpsDigestSchema();
+      const digestDate =
+        sciipResolveLatestRuntimeProcessingDate750_('COMMAND_CENTER_UPDATES', 'Update_Date') ||
+        context.dateKey ||
+        SCIIP_RUNTIME.getDateKey({});
+
+      const autonomousOpsDigestBusinessKey = 'AUTONOMOUS_OPS_DIGEST|' + digestDate;
+
+      if (sciipRuntimeBusinessKeyPrefixExists750_(definition.targetSheet, autonomousOpsDigestBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetAutonomousOpsDigestProcessorName750_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            commandCenterUpdatesReviewed: 0,
+            autonomousOpsDigestsCreated: 0,
+            skippedDuplicate: 1,
+            autonomousOpsDigestBusinessKey: autonomousOpsDigestBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const commandCenterUpdates = sciipGetRuntimeRecordsByDate750_(
+        'COMMAND_CENTER_UPDATES',
+        'Update_Date',
+        digestDate
+      );
+
+      if (commandCenterUpdates.length === 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetAutonomousOpsDigestProcessorName750_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            commandCenterUpdatesReviewed: 0,
+            autonomousOpsDigestsCreated: 0,
+            skippedNoInputs: 1,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const digest = sciipCreateAutonomousOpsDigest750_({
+        businessKey: autonomousOpsDigestBusinessKey,
+        digestDate: digestDate,
+        sourceRows: commandCenterUpdates,
+        processor: sciipGetAutonomousOpsDigestProcessorName750_()
+      });
+
+      outputSheet.appendRow(digest);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetAutonomousOpsDigestProcessorName750_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: commandCenterUpdates.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          commandCenterUpdatesReviewed: commandCenterUpdates.length,
+          autonomousOpsDigestsCreated: 1,
+          skippedDuplicate: 0,
+          autonomousOpsDigestBusinessKey: autonomousOpsDigestBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipRuntimeBusinessKeyPrefixExists750_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate750_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue750_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipResolveLatestRuntimeProcessingDate750_(sheetName, dateField) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return null;
+
+  const dates = records
+    .map(function(record) {
+      return sciipNormalizeRuntimeDateValue750_(record[dateField]);
+    })
+    .filter(function(value) {
+      return value !== '';
+    });
+
+  if (dates.length === 0) return null;
+
+  dates.sort();
+  return dates[dates.length - 1];
+}
+
+function sciipNormalizeRuntimeDateValue750_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipCreateAutonomousOpsDigest750_(args) {
+  return [
+    sciipGenerateId750_('AUTONOMOUS_OPS_DIGEST'),
+    args.businessKey,
+    args.digestDate,
+    'COMMAND_CENTER_UPDATES',
+    args.sourceRows.length,
+    'Autonomous Operations Digest — ' + args.digestDate,
+    sciipCreateAutonomousOpsDigestText750_(args.digestDate, args.sourceRows),
+    new Date().toISOString(),
+    args.processor
+  ];
+}
+
+function sciipCreateAutonomousOpsDigestText750_(digestDate, sourceRows) {
+  const lines = [];
+
+  lines.push('Autonomous Operations Digest for ' + digestDate);
+  lines.push('');
+  lines.push('Source Records Reviewed: ' + sourceRows.length);
+  lines.push('');
+
+  sourceRows.forEach(function(row, index) {
+    lines.push('Update ' + (index + 1) + ':');
+
+    const preferredFields = [
+      'Update_Title',
+      'Update_Text',
+      'Command_Update',
+      'Summary',
+      'Status',
+      'Processor',
+      'Business_Key'
+    ];
+
+    preferredFields.forEach(function(field) {
+      if (row[field]) {
+        lines.push(field + ': ' + row[field]);
+      }
+    });
+
+    lines.push('');
+  });
+
+  return lines.join('\n').trim();
+}
+
+function sciipGenerateId750_(prefix) {
+  const safePrefix = String(prefix || 'ID').toUpperCase();
+  return safePrefix + '|' + Utilities.getUuid();
+}
+
+function sciipTestAutonomousOpsDigestProcessor() {
+  const result = sciipRunAutonomousOpsDigestProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousOpsDigestProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 760_AutonomousOpsLearningProcessor
+ *
+ * AUTONOMOUS_OPS_DIGESTS → AUTONOMOUS_OPS_LEARNINGS
+ *
+ * Migration note:
+ * Preserves original 760 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipGetAutonomousOpsLearningProcessorName760_() {
+  return '760_AutonomousOpsLearningProcessor';
+}
+
+function sciipGetAutonomousOpsLearningsHeaders760_() {
+  return [
+    'Learning_ID',
+    'Business_Key',
+    'Learning_Date',
+    'Source_Sheet',
+    'Source_Record_Count',
+    'Learning_Title',
+    'Operational_Learning',
+    'Recommended_Adjustment',
+    'Confidence',
+    'Created_At',
+    'Processor'
+  ];
+}
+
+function sciipEnsureAutonomousOpsLearningSchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'AUTONOMOUS_OPS_LEARNINGS',
+    sciipGetAutonomousOpsLearningsHeaders760_()
+  );
+}
+
+function sciipRunAutonomousOpsLearningProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetAutonomousOpsLearningProcessorName760_(),
+    action: 'AUTONOMOUS_OPS_LEARNING_BUILD',
+    sourceSheet: 'AUTONOMOUS_OPS_DIGESTS',
+    targetSheet: 'AUTONOMOUS_OPS_LEARNINGS',
+    ledgerSheet: 'AUTONOMOUS_OPS_LEARNINGS_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const autonomousOpsDigests = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_OPS_DIGESTS');
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: autonomousOpsDigests.length,
+        outputCount: autonomousOpsDigests.length ? 1 : 0,
+        summary: 'Autonomous operations learning runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetAutonomousOpsLearningProcessorName760_(),
+          inputSheets: ['AUTONOMOUS_OPS_DIGESTS']
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousOpsLearningSchema();
+      const learningDate =
+        sciipResolveLatestRuntimeProcessingDate760_('AUTONOMOUS_OPS_DIGESTS', 'Digest_Date') ||
+        context.dateKey ||
+        SCIIP_RUNTIME.getDateKey({});
+
+      const autonomousOpsLearningBusinessKey = 'AUTONOMOUS_OPS_LEARNING|' + learningDate;
+
+      if (sciipRuntimeBusinessKeyPrefixExists760_(definition.targetSheet, autonomousOpsLearningBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetAutonomousOpsLearningProcessorName760_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousOpsDigestsReviewed: 0,
+            autonomousOpsLearningsCreated: 0,
+            skippedDuplicate: 1,
+            autonomousOpsLearningBusinessKey: autonomousOpsLearningBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const autonomousOpsDigests = sciipGetRuntimeRecordsByDate760_(
+        'AUTONOMOUS_OPS_DIGESTS',
+        'Digest_Date',
+        learningDate
+      );
+
+      if (!autonomousOpsDigests.length) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetAutonomousOpsLearningProcessorName760_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousOpsDigestsReviewed: 0,
+            autonomousOpsLearningsCreated: 0,
+            skippedNoInputs: 1,
+            learningDate: learningDate,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const learning = sciipCreateAutonomousOpsLearning760_({
+        businessKey: autonomousOpsLearningBusinessKey,
+        learningDate: learningDate,
+        sourceRows: autonomousOpsDigests,
+        processor: sciipGetAutonomousOpsLearningProcessorName760_()
+      });
+
+      outputSheet.appendRow(learning);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetAutonomousOpsLearningProcessorName760_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: autonomousOpsDigests.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          autonomousOpsDigestsReviewed: autonomousOpsDigests.length,
+          autonomousOpsLearningsCreated: 1,
+          skippedDuplicate: 0,
+          autonomousOpsLearningBusinessKey: autonomousOpsLearningBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipRuntimeBusinessKeyPrefixExists760_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate760_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue760_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipResolveLatestRuntimeProcessingDate760_(sheetName, dateField) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return null;
+
+  const dates = records
+    .map(function(record) {
+      return sciipNormalizeRuntimeDateValue760_(record[dateField]);
+    })
+    .filter(function(value) {
+      return value !== '';
+    });
+
+  if (dates.length === 0) return null;
+
+  dates.sort();
+  return dates[dates.length - 1];
+}
+
+function sciipNormalizeRuntimeDateValue760_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipCreateAutonomousOpsLearning760_(args) {
+  return [
+    sciipGenerateId760_('AUTONOMOUS_OPS_LEARNING'),
+    args.businessKey,
+    args.learningDate,
+    'AUTONOMOUS_OPS_DIGESTS',
+    args.sourceRows.length,
+    'Autonomous Operations Learning — ' + args.learningDate,
+    sciipCreateAutonomousOpsLearningText760_(args.sourceRows),
+    sciipCreateAutonomousOpsAdjustmentText760_(args.sourceRows),
+    args.sourceRows.length > 0 ? 'MEDIUM' : 'LOW',
+    new Date().toISOString(),
+    args.processor
+  ];
+}
+
+function sciipCreateAutonomousOpsLearningText760_(sourceRows) {
+  const digestCount = sourceRows.length;
+
+  const totalSourceRecords = sourceRows.reduce(function(sum, row) {
+    const count = Number(row.Source_Record_Count || 0);
+    return sum + count;
+  }, 0);
+
+  return [
+    'SCIIP completed an autonomous operations digest cycle using ' + digestCount + ' digest record(s).',
+    'The operating loop reviewed ' + totalSourceRecords + ' upstream command center update record(s).',
+    'The system successfully converted operational activity into durable learning history.'
+  ].join(' ');
+}
+
+function sciipCreateAutonomousOpsAdjustmentText760_(sourceRows) {
+  if (!sourceRows.length) {
+    return 'No adjustment recommended because no source digest records were available.';
+  }
+
+  return [
+    'Continue routing completed autonomous operating loops into durable learning records.',
+    'Use these learnings to support future memory consolidation, reasoning calibration, and strategic feedback processors.'
+  ].join(' ');
+}
+
+function sciipGenerateId760_(prefix) {
+  return prefix + '_' + Utilities.getUuid();
+}
+
+/*******************************************************
+ * Test Function
+ *******************************************************/
+
+function sciipTestAutonomousOpsLearningProcessor() {
+  const result = sciipRunAutonomousOpsLearningProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousOpsLearningProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 770_AutonomousImprovementPlanProcessor
+ *
+ * AUTONOMOUS_OPS_LEARNINGS → AUTONOMOUS_IMPROVEMENT_PLANS
+ *
+ * Migration note:
+ * Preserves original 770 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipGetAutonomousImprovementPlanProcessorName770_() {
+  return '770_AutonomousImprovementPlanProcessor';
+}
+
+function sciipGetAutonomousImprovementPlanHeaders770_() {
+  return [
+    'Improvement_Plan_ID',
+    'Business_Key',
+    'Plan_Date',
+    'Source_Sheet',
+    'Source_Record_Count',
+    'Plan_Title',
+    'Improvement_Objective',
+    'Improvement_Actions',
+    'Expected_System_Impact',
+    'Priority',
+    'Status',
+    'Created_At',
+    'Processor'
+  ];
+}
+
+function sciipEnsureAutonomousImprovementPlanSchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'AUTONOMOUS_IMPROVEMENT_PLANS',
+    sciipGetAutonomousImprovementPlanHeaders770_()
+  );
+}
+
+function sciipRunAutonomousImprovementPlanProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetAutonomousImprovementPlanProcessorName770_(),
+    action: 'AUTONOMOUS_IMPROVEMENT_PLAN_BUILD',
+    sourceSheet: 'AUTONOMOUS_OPS_LEARNINGS',
+    targetSheet: 'AUTONOMOUS_IMPROVEMENT_PLANS',
+    ledgerSheet: 'AUTONOMOUS_IMPROVEMENT_PLANS_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const autonomousOpsLearnings = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_OPS_LEARNINGS');
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: autonomousOpsLearnings.length,
+        outputCount: autonomousOpsLearnings.length ? 1 : 0,
+        summary: 'Autonomous improvement plan runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetAutonomousImprovementPlanProcessorName770_(),
+          inputSheets: ['AUTONOMOUS_OPS_LEARNINGS']
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousImprovementPlanSchema();
+      const planDate =
+        sciipResolveLatestRuntimeProcessingDate770_('AUTONOMOUS_OPS_LEARNINGS', 'Learning_Date') ||
+        context.dateKey ||
+        SCIIP_RUNTIME.getDateKey({});
+
+      const autonomousImprovementPlanBusinessKey = 'AUTONOMOUS_IMPROVEMENT_PLAN|' + planDate;
+
+      if (sciipRuntimeBusinessKeyPrefixExists770_(definition.targetSheet, autonomousImprovementPlanBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetAutonomousImprovementPlanProcessorName770_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousOpsLearningsReviewed: 0,
+            autonomousImprovementPlansCreated: 0,
+            skippedDuplicate: 1,
+            autonomousImprovementPlanBusinessKey: autonomousImprovementPlanBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const autonomousOpsLearnings = sciipGetRuntimeRecordsByDate770_(
+        'AUTONOMOUS_OPS_LEARNINGS',
+        'Learning_Date',
+        planDate
+      );
+
+      if (!autonomousOpsLearnings.length) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetAutonomousImprovementPlanProcessorName770_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousOpsLearningsReviewed: 0,
+            autonomousImprovementPlansCreated: 0,
+            skippedNoInputs: 1,
+            planDate: planDate,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const plan = sciipCreateAutonomousImprovementPlan770_({
+        businessKey: autonomousImprovementPlanBusinessKey,
+        planDate: planDate,
+        sourceRows: autonomousOpsLearnings,
+        processor: sciipGetAutonomousImprovementPlanProcessorName770_()
+      });
+
+      outputSheet.appendRow(plan);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetAutonomousImprovementPlanProcessorName770_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: autonomousOpsLearnings.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          autonomousOpsLearningsReviewed: autonomousOpsLearnings.length,
+          autonomousImprovementPlansCreated: 1,
+          skippedDuplicate: 0,
+          autonomousImprovementPlanBusinessKey: autonomousImprovementPlanBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipRuntimeBusinessKeyPrefixExists770_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate770_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue770_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipResolveLatestRuntimeProcessingDate770_(sheetName, dateField) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return null;
+
+  const dates = records
+    .map(function(record) {
+      return sciipNormalizeRuntimeDateValue770_(record[dateField]);
+    })
+    .filter(function(value) {
+      return value !== '';
+    });
+
+  if (dates.length === 0) return null;
+
+  dates.sort();
+  return dates[dates.length - 1];
+}
+
+function sciipNormalizeRuntimeDateValue770_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipCreateAutonomousImprovementPlan770_(args) {
+  return [
+    sciipGenerateId770_('AUTONOMOUS_IMPROVEMENT_PLAN'),
+    args.businessKey,
+    args.planDate,
+    'AUTONOMOUS_OPS_LEARNINGS',
+    args.sourceRows.length,
+    'Autonomous Improvement Plan — ' + args.planDate,
+    sciipCreateAutonomousImprovementObjective770_(args.sourceRows),
+    sciipCreateAutonomousImprovementActions770_(args.sourceRows),
+    sciipCreateAutonomousImprovementImpact770_(args.sourceRows),
+    'MEDIUM',
+    'PROPOSED',
+    new Date().toISOString(),
+    args.processor
+  ];
+}
+
+function sciipCreateAutonomousImprovementObjective770_(sourceRows) {
+  return [
+    'Convert ' + sourceRows.length + ' autonomous operations learning record(s) into an actionable improvement plan.',
+    'Strengthen SCIIP_OS by ensuring operational feedback becomes permanent system improvement history.'
+  ].join(' ');
+}
+
+function sciipCreateAutonomousImprovementActions770_(sourceRows) {
+  const actions = [
+    'Review autonomous learning records for recurring system patterns.',
+    'Identify whether routing, digesting, memory consolidation, or reasoning calibration should be adjusted.',
+    'Preserve the improvement recommendation as a durable operating-system record.',
+    'Make the improvement plan available to downstream prioritization and execution processors.'
+  ];
+
+  return actions.join('\n');
+}
+
+function sciipCreateAutonomousImprovementImpact770_(sourceRows) {
+  return [
+    'Expected impact is improved autonomous loop closure, stronger processor accountability, and better continuity between system activity, learning, and execution.',
+    'This plan was generated from ' + sourceRows.length + ' validated upstream learning record(s).'
+  ].join(' ');
+}
+
+function sciipGenerateId770_(prefix) {
+  return prefix + '_' + Utilities.getUuid();
+}
+
+/*******************************************************
+ * Test Function
+ *******************************************************/
+
+function sciipTestAutonomousImprovementPlanProcessor() {
+  const result = sciipRunAutonomousImprovementPlanProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousImprovementPlanProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 780_AutonomousImprovementTaskProcessor
+ *
+ * AUTONOMOUS_IMPROVEMENT_PLANS → AUTONOMOUS_IMPROVEMENT_TASKS
+ *
+ * Migration note:
+ * Preserves original 780 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipGetAutonomousImprovementTaskProcessorName780_() {
+  return '780_AutonomousImprovementTaskProcessor';
+}
+
+function sciipGetAutonomousImprovementTaskHeaders780_() {
+  return [
+    'Task_ID',
+    'Business_Key',
+    'Task_Date',
+    'Source_Sheet',
+    'Source_Record_Count',
+    'Task_Title',
+    'Task_Description',
+    'Task_Type',
+    'Priority',
+    'Status',
+    'Execution_Owner',
+    'Created_At',
+    'Processor'
+  ];
+}
+
+function sciipEnsureAutonomousImprovementTaskSchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'AUTONOMOUS_IMPROVEMENT_TASKS',
+    sciipGetAutonomousImprovementTaskHeaders780_()
+  );
+}
+
+function sciipRunAutonomousImprovementTaskProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetAutonomousImprovementTaskProcessorName780_(),
+    action: 'AUTONOMOUS_IMPROVEMENT_TASK_BUILD',
+    sourceSheet: 'AUTONOMOUS_IMPROVEMENT_PLANS',
+    targetSheet: 'AUTONOMOUS_IMPROVEMENT_TASKS',
+    ledgerSheet: 'AUTONOMOUS_IMPROVEMENT_TASKS_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const autonomousImprovementPlans = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_IMPROVEMENT_PLANS');
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: autonomousImprovementPlans.length,
+        outputCount: autonomousImprovementPlans.length ? 1 : 0,
+        summary: 'Autonomous improvement task runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetAutonomousImprovementTaskProcessorName780_(),
+          inputSheets: ['AUTONOMOUS_IMPROVEMENT_PLANS']
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousImprovementTaskSchema();
+      const taskDate =
+        sciipResolveLatestRuntimeProcessingDate780_('AUTONOMOUS_IMPROVEMENT_PLANS', 'Plan_Date') ||
+        context.dateKey ||
+        SCIIP_RUNTIME.getDateKey({});
+
+      const autonomousImprovementTaskBusinessKey = 'AUTONOMOUS_IMPROVEMENT_TASK|' + taskDate;
+
+      if (sciipRuntimeBusinessKeyPrefixExists780_(definition.targetSheet, autonomousImprovementTaskBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetAutonomousImprovementTaskProcessorName780_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementPlansReviewed: 0,
+            autonomousImprovementTasksCreated: 0,
+            skippedDuplicate: 1,
+            autonomousImprovementTaskBusinessKey: autonomousImprovementTaskBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const autonomousImprovementPlans = sciipGetRuntimeRecordsByDate780_(
+        'AUTONOMOUS_IMPROVEMENT_PLANS',
+        'Plan_Date',
+        taskDate
+      );
+
+      if (!autonomousImprovementPlans.length) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetAutonomousImprovementTaskProcessorName780_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementPlansReviewed: 0,
+            autonomousImprovementTasksCreated: 0,
+            skippedNoInputs: 1,
+            taskDate: taskDate,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const task = sciipCreateAutonomousImprovementTask780_({
+        businessKey: autonomousImprovementTaskBusinessKey,
+        taskDate: taskDate,
+        sourceRows: autonomousImprovementPlans,
+        processor: sciipGetAutonomousImprovementTaskProcessorName780_()
+      });
+
+      outputSheet.appendRow(task);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetAutonomousImprovementTaskProcessorName780_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: autonomousImprovementPlans.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          autonomousImprovementPlansReviewed: autonomousImprovementPlans.length,
+          autonomousImprovementTasksCreated: 1,
+          skippedDuplicate: 0,
+          autonomousImprovementTaskBusinessKey: autonomousImprovementTaskBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipRuntimeBusinessKeyPrefixExists780_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate780_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue780_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipResolveLatestRuntimeProcessingDate780_(sheetName, dateField) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return null;
+
+  const dates = records
+    .map(function(record) {
+      return sciipNormalizeRuntimeDateValue780_(record[dateField]);
+    })
+    .filter(function(value) {
+      return value !== '';
+    });
+
+  if (dates.length === 0) return null;
+
+  dates.sort();
+  return dates[dates.length - 1];
+}
+
+function sciipNormalizeRuntimeDateValue780_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipCreateAutonomousImprovementTask780_(args) {
+  return [
+    sciipGenerateId780_('AUTONOMOUS_IMPROVEMENT_TASK'),
+    args.businessKey,
+    args.taskDate,
+    'AUTONOMOUS_IMPROVEMENT_PLANS',
+    args.sourceRows.length,
+    'Execute Autonomous Improvement Plan — ' + args.taskDate,
+    sciipCreateAutonomousImprovementTaskDescription780_(args.sourceRows),
+    'AUTONOMOUS_SYSTEM_IMPROVEMENT',
+    sciipResolveAutonomousImprovementTaskPriority780_(args.sourceRows),
+    'PENDING',
+    'SCIIP_OS',
+    new Date().toISOString(),
+    args.processor
+  ];
+}
+
+function sciipCreateAutonomousImprovementTaskDescription780_(sourceRows) {
+  return [
+    'Create an execution task from ' + sourceRows.length + ' autonomous improvement plan record(s).',
+    'Review the proposed improvement objective, actions, and expected system impact.',
+    'Route the improvement into downstream execution tracking so SCIIP_OS can close the loop from learning to action.'
+  ].join(' ');
+}
+
+function sciipResolveAutonomousImprovementTaskPriority780_(sourceRows) {
+  const hasHighPriorityPlan = sourceRows.some(function(row) {
+    return String(row.Priority || '').trim().toUpperCase() === 'HIGH';
+  });
+
+  return hasHighPriorityPlan ? 'HIGH' : 'MEDIUM';
+}
+
+function sciipGenerateId780_(prefix) {
+  return prefix + '_' + Utilities.getUuid();
+}
+
+/*******************************************************
+ * Test Function
+ *******************************************************/
+
+function sciipTestAutonomousImprovementTaskProcessor() {
+  const result = sciipRunAutonomousImprovementTaskProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousImprovementTaskProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 790_AutonomousImprovementExecutionProcessor
+ *
+ * AUTONOMOUS_IMPROVEMENT_TASKS → AUTONOMOUS_IMPROVEMENT_EXECUTIONS
+ *
+ * Migration note:
+ * Preserves original 790 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipGetAutonomousImprovementExecutionProcessorName790_() {
+  return '790_AutonomousImprovementExecutionProcessor';
+}
+
+function sciipGetAutonomousImprovementExecutionHeaders790_() {
+  return [
+    'Execution_ID',
+    'Business_Key',
+    'Execution_Date',
+    'Source_Sheet',
+    'Source_Record_Count',
+    'Execution_Title',
+    'Execution_Summary',
+    'Execution_Status',
+    'Execution_Result',
+    'Next_Action',
+    'Created_At',
+    'Processor'
+  ];
+}
+
+function sciipEnsureAutonomousImprovementExecutionSchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'AUTONOMOUS_IMPROVEMENT_EXECUTIONS',
+    sciipGetAutonomousImprovementExecutionHeaders790_()
+  );
+}
+
+function sciipRunAutonomousImprovementExecutionProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetAutonomousImprovementExecutionProcessorName790_(),
+    action: 'AUTONOMOUS_IMPROVEMENT_EXECUTION_BUILD',
+    sourceSheet: 'AUTONOMOUS_IMPROVEMENT_TASKS',
+    targetSheet: 'AUTONOMOUS_IMPROVEMENT_EXECUTIONS',
+    ledgerSheet: 'AUTONOMOUS_IMPROVEMENT_EXECUTIONS_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const autonomousImprovementTasks = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_IMPROVEMENT_TASKS');
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: autonomousImprovementTasks.length,
+        outputCount: autonomousImprovementTasks.length ? 1 : 0,
+        summary: 'Autonomous improvement execution runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetAutonomousImprovementExecutionProcessorName790_(),
+          inputSheets: ['AUTONOMOUS_IMPROVEMENT_TASKS']
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousImprovementExecutionSchema();
+      const executionDate =
+        sciipResolveLatestRuntimeProcessingDate790_('AUTONOMOUS_IMPROVEMENT_TASKS', 'Task_Date') ||
+        context.dateKey ||
+        SCIIP_RUNTIME.getDateKey({});
+
+      const autonomousImprovementExecutionBusinessKey = 'AUTONOMOUS_IMPROVEMENT_EXECUTION|' + executionDate;
+
+      if (sciipRuntimeBusinessKeyPrefixExists790_(definition.targetSheet, autonomousImprovementExecutionBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetAutonomousImprovementExecutionProcessorName790_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementTasksReviewed: 0,
+            autonomousImprovementExecutionsCreated: 0,
+            skippedDuplicate: 1,
+            autonomousImprovementExecutionBusinessKey: autonomousImprovementExecutionBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const autonomousImprovementTasks = sciipGetRuntimeRecordsByDate790_(
+        'AUTONOMOUS_IMPROVEMENT_TASKS',
+        'Task_Date',
+        executionDate
+      );
+
+      if (!autonomousImprovementTasks.length) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetAutonomousImprovementExecutionProcessorName790_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementTasksReviewed: 0,
+            autonomousImprovementExecutionsCreated: 0,
+            skippedNoInputs: 1,
+            executionDate: executionDate,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const execution = sciipCreateAutonomousImprovementExecution790_({
+        businessKey: autonomousImprovementExecutionBusinessKey,
+        executionDate: executionDate,
+        sourceRows: autonomousImprovementTasks,
+        processor: sciipGetAutonomousImprovementExecutionProcessorName790_()
+      });
+
+      outputSheet.appendRow(execution);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetAutonomousImprovementExecutionProcessorName790_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: autonomousImprovementTasks.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          autonomousImprovementTasksReviewed: autonomousImprovementTasks.length,
+          autonomousImprovementExecutionsCreated: 1,
+          skippedDuplicate: 0,
+          autonomousImprovementExecutionBusinessKey: autonomousImprovementExecutionBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipRuntimeBusinessKeyPrefixExists790_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate790_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue790_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipResolveLatestRuntimeProcessingDate790_(sheetName, dateField) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return null;
+
+  const dates = records
+    .map(function(record) {
+      return sciipNormalizeRuntimeDateValue790_(record[dateField]);
+    })
+    .filter(function(value) {
+      return value !== '';
+    });
+
+  if (dates.length === 0) return null;
+
+  dates.sort();
+  return dates[dates.length - 1];
+}
+
+function sciipNormalizeRuntimeDateValue790_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipCreateAutonomousImprovementExecution790_(args) {
+  return [
+    sciipGenerateId790_('AUTONOMOUS_IMPROVEMENT_EXECUTION'),
+    args.businessKey,
+    args.executionDate,
+    'AUTONOMOUS_IMPROVEMENT_TASKS',
+    args.sourceRows.length,
+    'Autonomous Improvement Execution — ' + args.executionDate,
+    sciipCreateAutonomousImprovementExecutionSummary790_(args.sourceRows),
+    'RECORDED',
+    sciipCreateAutonomousImprovementExecutionResult790_(args.sourceRows),
+    sciipCreateAutonomousImprovementExecutionNextAction790_(args.sourceRows),
+    new Date().toISOString(),
+    args.processor
+  ];
+}
+
+function sciipCreateAutonomousImprovementExecutionSummary790_(sourceRows) {
+  return [
+    'SCIIP_OS recorded execution tracking for ' + sourceRows.length + ' autonomous improvement task record(s).',
+    'This preserves the transition from proposed system improvement into an execution-stage operating record.'
+  ].join(' ');
+}
+
+function sciipCreateAutonomousImprovementExecutionResult790_(sourceRows) {
+  const pendingCount = sourceRows.filter(function(row) {
+    return String(row.Status || '').trim().toUpperCase() === 'PENDING';
+  }).length;
+
+  return [
+    pendingCount + ' source task record(s) were pending at execution-record creation.',
+    'Execution has been recorded for downstream monitoring and outcome learning.'
+  ].join(' ');
+}
+
+function sciipCreateAutonomousImprovementExecutionNextAction790_(sourceRows) {
+  return [
+    'Monitor execution outcome.',
+    'Route completed execution records into autonomous improvement outcome learning.',
+    'Preserve result history without overwriting the original improvement task.'
+  ].join(' ');
+}
+
+function sciipGenerateId790_(prefix) {
+  return prefix + '_' + Utilities.getUuid();
+}
+
+/*******************************************************
+ * Test Function
+ *******************************************************/
+
+function sciipTestAutonomousImprovementExecutionProcessor() {
+  const result = sciipRunAutonomousImprovementExecutionProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousImprovementExecutionProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 800_AutonomousImprovementOutcomeProcessor
+ *
+ * AUTONOMOUS_IMPROVEMENT_EXECUTIONS → AUTONOMOUS_IMPROVEMENT_OUTCOMES
+ *
+ * Migration note:
+ * Preserves original 800 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipGetAutonomousImprovementOutcomeProcessorName800_() {
+  return '800_AutonomousImprovementOutcomeProcessor';
+}
+
+function sciipGetAutonomousImprovementOutcomeHeaders800_() {
+  return [
+    'Outcome_ID',
+    'Business_Key',
+    'Outcome_Date',
+    'Source_Sheet',
+    'Source_Record_Count',
+    'Outcome_Title',
+    'Outcome_Summary',
+    'Learning_Captured',
+    'System_Adjustment_Recommendation',
+    'Outcome_Status',
+    'Confidence',
+    'Created_At',
+    'Processor'
+  ];
+}
+
+function sciipEnsureAutonomousImprovementOutcomeSchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'AUTONOMOUS_IMPROVEMENT_OUTCOMES',
+    sciipGetAutonomousImprovementOutcomeHeaders800_()
+  );
+}
+
+function sciipRunAutonomousImprovementOutcomeProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetAutonomousImprovementOutcomeProcessorName800_(),
+    action: 'AUTONOMOUS_IMPROVEMENT_OUTCOME_BUILD',
+    sourceSheet: 'AUTONOMOUS_IMPROVEMENT_EXECUTIONS',
+    targetSheet: 'AUTONOMOUS_IMPROVEMENT_OUTCOMES',
+    ledgerSheet: 'AUTONOMOUS_IMPROVEMENT_OUTCOMES_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const autonomousImprovementExecutions = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_IMPROVEMENT_EXECUTIONS');
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: autonomousImprovementExecutions.length,
+        outputCount: autonomousImprovementExecutions.length ? 1 : 0,
+        summary: 'Autonomous improvement outcome runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetAutonomousImprovementOutcomeProcessorName800_(),
+          inputSheets: ['AUTONOMOUS_IMPROVEMENT_EXECUTIONS']
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousImprovementOutcomeSchema();
+      const outcomeDate =
+        sciipResolveLatestRuntimeProcessingDate800_('AUTONOMOUS_IMPROVEMENT_EXECUTIONS', 'Execution_Date') ||
+        context.dateKey ||
+        SCIIP_RUNTIME.getDateKey({});
+
+      const autonomousImprovementOutcomeBusinessKey = 'AUTONOMOUS_IMPROVEMENT_OUTCOME|' + outcomeDate;
+
+      if (sciipRuntimeBusinessKeyPrefixExists800_(definition.targetSheet, autonomousImprovementOutcomeBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetAutonomousImprovementOutcomeProcessorName800_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementExecutionsReviewed: 0,
+            autonomousImprovementOutcomesCreated: 0,
+            skippedDuplicate: 1,
+            autonomousImprovementOutcomeBusinessKey: autonomousImprovementOutcomeBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const autonomousImprovementExecutions = sciipGetRuntimeRecordsByDate800_(
+        'AUTONOMOUS_IMPROVEMENT_EXECUTIONS',
+        'Execution_Date',
+        outcomeDate
+      );
+
+      if (!autonomousImprovementExecutions.length) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetAutonomousImprovementOutcomeProcessorName800_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementExecutionsReviewed: 0,
+            autonomousImprovementOutcomesCreated: 0,
+            skippedNoInputs: 1,
+            outcomeDate: outcomeDate,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const outcome = sciipCreateAutonomousImprovementOutcome800_({
+        businessKey: autonomousImprovementOutcomeBusinessKey,
+        outcomeDate: outcomeDate,
+        sourceRows: autonomousImprovementExecutions,
+        processor: sciipGetAutonomousImprovementOutcomeProcessorName800_()
+      });
+
+      outputSheet.appendRow(outcome);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetAutonomousImprovementOutcomeProcessorName800_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: autonomousImprovementExecutions.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          autonomousImprovementExecutionsReviewed: autonomousImprovementExecutions.length,
+          autonomousImprovementOutcomesCreated: 1,
+          skippedDuplicate: 0,
+          autonomousImprovementOutcomeBusinessKey: autonomousImprovementOutcomeBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipRuntimeBusinessKeyPrefixExists800_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate800_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue800_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipResolveLatestRuntimeProcessingDate800_(sheetName, dateField) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return null;
+
+  const dates = records
+    .map(function(record) {
+      return sciipNormalizeRuntimeDateValue800_(record[dateField]);
+    })
+    .filter(function(value) {
+      return value !== '';
+    });
+
+  if (dates.length === 0) return null;
+
+  dates.sort();
+  return dates[dates.length - 1];
+}
+
+function sciipNormalizeRuntimeDateValue800_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipCreateAutonomousImprovementOutcome800_(args) {
+  return [
+    sciipGenerateId800_('AUTONOMOUS_IMPROVEMENT_OUTCOME'),
+    args.businessKey,
+    args.outcomeDate,
+    'AUTONOMOUS_IMPROVEMENT_EXECUTIONS',
+    args.sourceRows.length,
+    'Autonomous Improvement Outcome — ' + args.outcomeDate,
+    sciipCreateAutonomousImprovementOutcomeSummary800_(args.sourceRows),
+    sciipCreateAutonomousImprovementOutcomeLearning800_(args.sourceRows),
+    sciipCreateAutonomousImprovementOutcomeRecommendation800_(args.sourceRows),
+    'CAPTURED',
+    sciipResolveAutonomousImprovementOutcomeConfidence800_(args.sourceRows),
+    new Date().toISOString(),
+    args.processor
+  ];
+}
+
+function sciipCreateAutonomousImprovementOutcomeSummary800_(sourceRows) {
+  return [
+    'SCIIP_OS captured outcome learning from ' + sourceRows.length + ' autonomous improvement execution record(s).',
+    'This completes the improvement loop from learning, to plan, to task, to execution, to outcome history.'
+  ].join(' ');
+}
+
+function sciipCreateAutonomousImprovementOutcomeLearning800_(sourceRows) {
+  const recordedCount = sourceRows.filter(function(row) {
+    return String(row.Execution_Status || '').trim().toUpperCase() === 'RECORDED';
+  }).length;
+
+  return [
+    recordedCount + ' execution record(s) reached RECORDED status.',
+    'The system successfully preserved execution-stage activity as permanent downstream learning.',
+    'Future processors can now use this outcome layer to improve calibration, prioritization, and autonomous routing.'
+  ].join(' ');
+}
+
+function sciipCreateAutonomousImprovementOutcomeRecommendation800_(sourceRows) {
+  return [
+    'Continue using latest completed processing dates for downstream autonomous processors.',
+    'Preserve all improvement-loop outputs as event-sourced history.',
+    'Route captured outcomes into future strategic memory consolidation and model calibration processors.'
+  ].join(' ');
+}
+
+function sciipResolveAutonomousImprovementOutcomeConfidence800_(sourceRows) {
+  if (!sourceRows.length) return 'LOW';
+
+  const hasRecordedExecution = sourceRows.some(function(row) {
+    return String(row.Execution_Status || '').trim().toUpperCase() === 'RECORDED';
+  });
+
+  return hasRecordedExecution ? 'MEDIUM' : 'LOW';
+}
+
+function sciipGenerateId800_(prefix) {
+  return prefix + '_' + Utilities.getUuid();
+}
+
+/*******************************************************
+ * Test Function
+ *******************************************************/
+
+function sciipTestAutonomousImprovementOutcomeProcessor() {
+  const result = sciipRunAutonomousImprovementOutcomeProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousImprovementOutcomeProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 810_AutonomousImprovementMemoryProcessor
+ *
+ * AUTONOMOUS_IMPROVEMENT_OUTCOMES → AUTONOMOUS_IMPROVEMENT_MEMORY
+ *
+ * Migration note:
+ * Preserves original 810 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipGetAutonomousImprovementMemoryProcessorName810_() {
+  return '810_AutonomousImprovementMemoryProcessor';
+}
+
+function sciipGetAutonomousImprovementMemoryHeaders810_() {
+  return [
+    'Memory_ID',
+    'Business_Key',
+    'Memory_Date',
+    'Source_Sheet',
+    'Source_Record_Count',
+    'Memory_Title',
+    'Memory_Type',
+    'Memory_Summary',
+    'Reusable_Learning',
+    'Future_Use_Case',
+    'Confidence',
+    'Created_At',
+    'Processor'
+  ];
+}
+
+function sciipEnsureAutonomousImprovementMemorySchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'AUTONOMOUS_IMPROVEMENT_MEMORY',
+    sciipGetAutonomousImprovementMemoryHeaders810_()
+  );
+}
+
+function sciipRunAutonomousImprovementMemoryProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetAutonomousImprovementMemoryProcessorName810_(),
+    action: 'AUTONOMOUS_IMPROVEMENT_MEMORY_BUILD',
+    sourceSheet: 'AUTONOMOUS_IMPROVEMENT_OUTCOMES',
+    targetSheet: 'AUTONOMOUS_IMPROVEMENT_MEMORY',
+    ledgerSheet: 'AUTONOMOUS_IMPROVEMENT_MEMORY_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const autonomousImprovementOutcomes = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_IMPROVEMENT_OUTCOMES');
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: autonomousImprovementOutcomes.length,
+        outputCount: autonomousImprovementOutcomes.length ? 1 : 0,
+        summary: 'Autonomous improvement memory runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetAutonomousImprovementMemoryProcessorName810_(),
+          inputSheets: ['AUTONOMOUS_IMPROVEMENT_OUTCOMES']
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousImprovementMemorySchema();
+      const memoryDate =
+        sciipResolveLatestRuntimeProcessingDate810_('AUTONOMOUS_IMPROVEMENT_OUTCOMES', 'Outcome_Date') ||
+        context.dateKey ||
+        SCIIP_RUNTIME.getDateKey({});
+
+      const autonomousImprovementMemoryBusinessKey = 'AUTONOMOUS_IMPROVEMENT_MEMORY|' + memoryDate;
+
+      if (sciipRuntimeBusinessKeyPrefixExists810_(definition.targetSheet, autonomousImprovementMemoryBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetAutonomousImprovementMemoryProcessorName810_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementOutcomesReviewed: 0,
+            autonomousImprovementMemoryCreated: 0,
+            skippedDuplicate: 1,
+            autonomousImprovementMemoryBusinessKey: autonomousImprovementMemoryBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const autonomousImprovementOutcomes = sciipGetRuntimeRecordsByDate810_(
+        'AUTONOMOUS_IMPROVEMENT_OUTCOMES',
+        'Outcome_Date',
+        memoryDate
+      );
+
+      if (!autonomousImprovementOutcomes.length) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetAutonomousImprovementMemoryProcessorName810_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementOutcomesReviewed: 0,
+            autonomousImprovementMemoryCreated: 0,
+            skippedNoInputs: 1,
+            memoryDate: memoryDate,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const memory = sciipCreateAutonomousImprovementMemory810_({
+        businessKey: autonomousImprovementMemoryBusinessKey,
+        memoryDate: memoryDate,
+        sourceRows: autonomousImprovementOutcomes,
+        processor: sciipGetAutonomousImprovementMemoryProcessorName810_()
+      });
+
+      outputSheet.appendRow(memory);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetAutonomousImprovementMemoryProcessorName810_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: autonomousImprovementOutcomes.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          autonomousImprovementOutcomesReviewed: autonomousImprovementOutcomes.length,
+          autonomousImprovementMemoryCreated: 1,
+          skippedDuplicate: 0,
+          autonomousImprovementMemoryBusinessKey: autonomousImprovementMemoryBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipRuntimeBusinessKeyPrefixExists810_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate810_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue810_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipResolveLatestRuntimeProcessingDate810_(sheetName, dateField) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return null;
+
+  const dates = records
+    .map(function(record) {
+      return sciipNormalizeRuntimeDateValue810_(record[dateField]);
+    })
+    .filter(function(value) {
+      return value !== '';
+    });
+
+  if (dates.length === 0) return null;
+
+  dates.sort();
+  return dates[dates.length - 1];
+}
+
+function sciipNormalizeRuntimeDateValue810_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipCreateAutonomousImprovementMemory810_(args) {
+  return [
+    sciipGenerateId810_('AUTONOMOUS_IMPROVEMENT_MEMORY'),
+    args.businessKey,
+    args.memoryDate,
+    'AUTONOMOUS_IMPROVEMENT_OUTCOMES',
+    args.sourceRows.length,
+    'Autonomous Improvement Memory — ' + args.memoryDate,
+    'AUTONOMOUS_OPERATING_LOOP_LEARNING',
+    sciipCreateAutonomousImprovementMemorySummary810_(args.sourceRows),
+    sciipCreateAutonomousImprovementReusableLearning810_(args.sourceRows),
+    sciipCreateAutonomousImprovementFutureUseCase810_(args.sourceRows),
+    sciipResolveAutonomousImprovementMemoryConfidence810_(args.sourceRows),
+    new Date().toISOString(),
+    args.processor
+  ];
+}
+
+function sciipCreateAutonomousImprovementMemorySummary810_(sourceRows) {
+  return [
+    'SCIIP_OS converted ' + sourceRows.length + ' autonomous improvement outcome record(s) into durable system memory.',
+    'The system preserved the full loop from operations, learning, improvement planning, task creation, execution tracking, outcome capture, and memory consolidation.'
+  ].join(' ');
+}
+
+function sciipCreateAutonomousImprovementReusableLearning810_(sourceRows) {
+  return [
+    'Downstream processors should consume the latest completed processing date from upstream sheets instead of assuming the current execution date.',
+    'Idempotent business keys must preserve one durable record per processing batch.',
+    'Autonomous improvement loops should terminate in reusable memory so future processors can avoid repeating known failures.'
+  ].join(' ');
+}
+
+function sciipCreateAutonomousImprovementFutureUseCase810_(sourceRows) {
+  return [
+    'Use this memory when designing future autonomous processors.',
+    'Use this memory when diagnosing SKIPPED_NO_INPUTS caused by date mismatch.',
+    'Use this memory when routing completed operating-loop outcomes into calibration, prioritization, or strategic reasoning layers.'
+  ].join(' ');
+}
+
+function sciipResolveAutonomousImprovementMemoryConfidence810_(sourceRows) {
+  if (!sourceRows.length) return 'LOW';
+
+  const hasCapturedOutcome = sourceRows.some(function(row) {
+    return String(row.Outcome_Status || '').trim().toUpperCase() === 'CAPTURED';
+  });
+
+  return hasCapturedOutcome ? 'HIGH' : 'MEDIUM';
+}
+
+function sciipGenerateId810_(prefix) {
+  return prefix + '_' + Utilities.getUuid();
+}
+
+/*******************************************************
+ * Test Function
+ *******************************************************/
+
+function sciipTestAutonomousImprovementMemoryProcessor() {
+  const result = sciipRunAutonomousImprovementMemoryProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousImprovementMemoryProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 820_AutonomousCalibrationSignalProcessor
+ *
+ * AUTONOMOUS_IMPROVEMENT_MEMORY → AUTONOMOUS_CALIBRATION_SIGNALS
+ *
+ * Migration note:
+ * Preserves original 820 business logic and migrates
+ * execution to SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipGetAutonomousCalibrationSignalProcessorName820_() {
+  return '820_AutonomousCalibrationSignalProcessor';
+}
+
+function sciipGetAutonomousCalibrationSignalHeaders820_() {
+  return [
+    'Calibration_Signal_ID',
+    'Business_Key',
+    'Signal_Date',
+    'Source_Sheet',
+    'Source_Record_Count',
+    'Signal_Title',
+    'Signal_Type',
+    'Calibration_Finding',
+    'Calibration_Recommendation',
+    'Affected_System_Area',
+    'Priority',
+    'Confidence',
+    'Created_At',
+    'Processor'
+  ];
+}
+
+function sciipEnsureAutonomousCalibrationSignalSchema() {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(
+    'AUTONOMOUS_CALIBRATION_SIGNALS',
+    sciipGetAutonomousCalibrationSignalHeaders820_()
+  );
+}
+
+function sciipRunAutonomousCalibrationSignalProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: sciipGetAutonomousCalibrationSignalProcessorName820_(),
+    action: 'AUTONOMOUS_CALIBRATION_SIGNAL_BUILD',
+    sourceSheet: 'AUTONOMOUS_IMPROVEMENT_MEMORY',
+    targetSheet: 'AUTONOMOUS_CALIBRATION_SIGNALS',
+    ledgerSheet: 'AUTONOMOUS_CALIBRATION_SIGNALS_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      const autonomousImprovementMemory = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords('AUTONOMOUS_IMPROVEMENT_MEMORY');
+
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: autonomousImprovementMemory.length,
+        outputCount: autonomousImprovementMemory.length ? 1 : 0,
+        summary: 'Autonomous calibration signal runtime payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: sciipGetAutonomousCalibrationSignalProcessorName820_(),
+          inputSheets: ['AUTONOMOUS_IMPROVEMENT_MEMORY']
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      const errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      const outputSheet = sciipEnsureAutonomousCalibrationSignalSchema();
+      const signalDate =
+        sciipResolveLatestRuntimeProcessingDate820_('AUTONOMOUS_IMPROVEMENT_MEMORY', 'Memory_Date') ||
+        context.dateKey ||
+        SCIIP_RUNTIME.getDateKey({});
+
+      const autonomousCalibrationSignalBusinessKey = 'AUTONOMOUS_CALIBRATION_SIGNAL|' + signalDate;
+
+      if (sciipRuntimeBusinessKeyPrefixExists820_(definition.targetSheet, autonomousCalibrationSignalBusinessKey)) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: sciipGetAutonomousCalibrationSignalProcessorName820_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementMemoryReviewed: 0,
+            autonomousCalibrationSignalsCreated: 0,
+            skippedDuplicate: 1,
+            autonomousCalibrationSignalBusinessKey: autonomousCalibrationSignalBusinessKey,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const autonomousImprovementMemory = sciipGetRuntimeRecordsByDate820_(
+        'AUTONOMOUS_IMPROVEMENT_MEMORY',
+        'Memory_Date',
+        signalDate
+      );
+
+      if (!autonomousImprovementMemory.length) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: sciipGetAutonomousCalibrationSignalProcessorName820_(),
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            migrationVersion: 'v5.3.2',
+            processorMigrated: true,
+            autonomousImprovementMemoryReviewed: 0,
+            autonomousCalibrationSignalsCreated: 0,
+            skippedNoInputs: 1,
+            signalDate: signalDate,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      const signal = sciipCreateAutonomousCalibrationSignal820_({
+        businessKey: autonomousCalibrationSignalBusinessKey,
+        signalDate: signalDate,
+        sourceRows: autonomousImprovementMemory,
+        processor: sciipGetAutonomousCalibrationSignalProcessorName820_()
+      });
+
+      outputSheet.appendRow(signal);
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: sciipGetAutonomousCalibrationSignalProcessorName820_(),
+        businessKey: context.businessKey,
+        recordsCreated: 1,
+        recordsRead: autonomousImprovementMemory.length,
+        processed: 1,
+        skippedDuplicate: 0,
+        message: JSON.stringify({
+          migrationVersion: 'v5.3.2',
+          processorMigrated: true,
+          autonomousImprovementMemoryReviewed: autonomousImprovementMemory.length,
+          autonomousCalibrationSignalsCreated: 1,
+          skippedDuplicate: 0,
+          autonomousCalibrationSignalBusinessKey: autonomousCalibrationSignalBusinessKey,
+          transactionId: transaction.transactionId
+        })
+      });
+    }
+  });
+}
+
+function sciipRuntimeBusinessKeyPrefixExists820_(sheetName, businessKeyPrefix) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return false;
+  return records.some(function(record) {
+    const key = String(record.Business_Key || '').trim();
+    return key === businessKeyPrefix || key.indexOf(businessKeyPrefix + '|') === 0;
+  });
+}
+
+function sciipGetRuntimeRecordsByDate820_(sheetName, dateField, dateValue) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return [];
+  return records.filter(function(record) {
+    return sciipNormalizeRuntimeDateValue820_(record[dateField]) === String(dateValue);
+  });
+}
+
+function sciipResolveLatestRuntimeProcessingDate820_(sheetName, dateField) {
+  const records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName);
+  if (!records || records.length === 0) return null;
+
+  const dates = records
+    .map(function(record) {
+      return sciipNormalizeRuntimeDateValue820_(record[dateField]);
+    })
+    .filter(function(value) {
+      return value !== '';
+    });
+
+  if (dates.length === 0) return null;
+
+  dates.sort();
+  return dates[dates.length - 1];
+}
+
+function sciipNormalizeRuntimeDateValue820_(value) {
+  if (!value) return '';
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  const text = String(value).trim();
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  }
+  return text;
+}
+
+function sciipCreateAutonomousCalibrationSignal820_(args) {
+  return [
+    sciipGenerateId820_('AUTONOMOUS_CALIBRATION_SIGNAL'),
+    args.businessKey,
+    args.signalDate,
+    'AUTONOMOUS_IMPROVEMENT_MEMORY',
+    args.sourceRows.length,
+    'Autonomous Calibration Signal — ' + args.signalDate,
+    'PROCESSING_DATE_STANDARD',
+    sciipCreateAutonomousCalibrationFinding820_(args.sourceRows),
+    sciipCreateAutonomousCalibrationRecommendation820_(args.sourceRows),
+    'DOWNSTREAM_PROCESSOR_DATE_RESOLUTION',
+    'HIGH',
+    sciipResolveAutonomousCalibrationSignalConfidence820_(args.sourceRows),
+    new Date().toISOString(),
+    args.processor
+  ];
+}
+
+function sciipCreateAutonomousCalibrationFinding820_(sourceRows) {
+  return [
+    'SCIIP_OS reviewed ' + sourceRows.length + ' autonomous improvement memory record(s).',
+    'The durable memory confirms that downstream processors must resolve the latest completed upstream processing date instead of assuming the current execution date.',
+    'This prevents false SKIPPED_NO_INPUTS results when processors run after midnight or on a later calendar date.'
+  ].join(' ');
+}
+
+function sciipCreateAutonomousCalibrationRecommendation820_(sourceRows) {
+  return [
+    'Adopt sciipResolveLatestProcessingDate_(sheetName, dateColumnName) as the standard date resolver for downstream processors.',
+    'Use the resolved upstream date in business keys, source-row filters, and test expectations.',
+    'Continue using sciipBusinessKeyPrefixExists_() for multi-row or batch-oriented processors.'
+  ].join(' ');
+}
+
+function sciipResolveAutonomousCalibrationSignalConfidence820_(sourceRows) {
+  if (!sourceRows.length) return 'LOW';
+
+  const hasHighMemory = sourceRows.some(function(row) {
+    return String(row.Confidence || '').trim().toUpperCase() === 'HIGH';
+  });
+
+  return hasHighMemory ? 'HIGH' : 'MEDIUM';
+}
+
+function sciipGenerateId820_(prefix) {
+  return prefix + '_' + Utilities.getUuid();
+}
+
+/*******************************************************
+ * Test Function
+ *******************************************************/
+
+function sciipTestAutonomousCalibrationSignalProcessor() {
+  const result = sciipRunAutonomousCalibrationSignalProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousCalibrationSignalProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+
 /*******************************************************
  * SCIIP_OS v5.3.2 Runtime Migration
  * 830_AutonomousCalibrationDecisionProcessor

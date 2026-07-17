@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 07_api_001.gs
  * sources: 3
- * generated: 2026-07-17T17:34:24.713Z
+ * generated: 2026-07-17T17:45:10.375Z
  */
 /** Public contract metadata used by certification and future clients. */
 var SCIIP_API_CONTRACT = Object.freeze({

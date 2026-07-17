@@ -1,7 +1,3890 @@
 /** SCIIP_OS compiled bundle: 11_other_003.gs
- * sources: 68
- * generated: 2026-07-17T17:34:24.901Z
+ * sources: 65
+ * generated: 2026-07-17T17:45:10.584Z
  */
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 1160_AutonomousProcessorExecutionRunStateDigestProcessor
+ *
+ * Migration note:
+ * Preserves original processor business logic by executing
+ * the original implementation inside SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipRunAutonomousProcessorExecutionRunStateDigestProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: '1160_AutonomousProcessorExecutionRunStateDigestProcessor',
+    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_BUILD',
+    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_LEDGER',
+    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST',
+    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: 0,
+        outputCount: 0,
+        summary: 'Runtime migration wrapper payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: '1160_AutonomousProcessorExecutionRunStateDigestProcessor',
+          preservedLegacyImplementation: true
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      var errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateDigestProcessorLegacy1160_();
+      return sciipWrapLegacyRuntimeResult1160_(legacyResult, context, transaction);
+    }
+  });
+}
+
+function sciipWrapLegacyRuntimeResult1160_(legacyResult, context, transaction) {
+  legacyResult = legacyResult || {};
+
+  var message = JSON.stringify({
+    migrationVersion: 'v5.3.2',
+    processorMigrated: true,
+    legacyResult: legacyResult,
+    transactionId: transaction.transactionId
+  });
+
+  var config = {
+    processor: context.processor,
+    businessKey: context.businessKey,
+    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
+    recordsUpdated: legacyResult.recordsUpdated || 0,
+    recordsRead: legacyResult.recordsRead || 0,
+    processed: legacyResult.processed || 0,
+    skippedDuplicate: legacyResult.skippedDuplicate || 0,
+    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
+    skippedValidation: legacyResult.skippedValidation || 0,
+    errors: legacyResult.errors || 0,
+    message: message
+  };
+
+  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
+  }
+
+  if (legacyResult.skippedDuplicate) {
+    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
+  }
+
+  if (legacyResult.status === 'ERROR') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
+  }
+
+  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
+}
+
+/*******************************************************
+ * SCIIP_OS v4.1
+ * 1160_AutonomousProcessorExecutionRunStateDigestProcessor
+ *******************************************************/
+
+const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_PROCESSOR = '1160_AutonomousProcessorExecutionRunStateDigestProcessor';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_LEDGER';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_DATE_COLUMN = 'Run_State_Date';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_HEADERS = [
+  'Digest_ID',
+  'Business_Key',
+  'Run_State_Date',
+  'Digest_Type',
+  'Operational_State',
+  'Operational_Interpretation',
+  'Governance_Posture',
+  'Orchestration_Posture',
+  'Dashboard_Posture',
+  'Decisioning_Posture',
+  'Ledger_Entries_Reviewed',
+  'Unique_Processors_Observed',
+  'Healthy_Count',
+  'Warning_Count',
+  'Blocked_Count',
+  'Failed_Count',
+  'Skipped_Count',
+  'Duplicate_Count',
+  'Latest_Processor',
+  'Latest_Status',
+  'Latest_Business_Key',
+  'Latest_Completed_At',
+  'Digest_Summary_JSON',
+  'Source_Sheet',
+  'Source_Date_Column',
+  'Processor',
+  'Created_At'
+];
+
+/**
+ * Main processor.
+ */
+function sciipRunAutonomousProcessorExecutionRunStateDigestProcessorLegacy1160_() {
+  const startedAt = new Date();
+  const ss = sciipGetSpreadsheet_();
+
+  const inputSheet = ss.getSheetByName(SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_SHEET);
+  if (!inputSheet) {
+    throw new Error('Missing input sheet: ' + SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_SHEET);
+  }
+
+  const outputSheet = sciipEnsureAutonomousProcessorExecutionRunStateDigestSheet_();
+
+  const resolvedRunStateDate =
+    sciipResolveLatestProcessingDate_(
+      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_SHEET,
+      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_DATE_COLUMN
+    ) || sciipFormatDateKey_(startedAt);
+
+  const businessKey =
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST|' + resolvedRunStateDate;
+
+  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_PROCESSOR,
+      status: 'SUCCESS',
+      autonomousProcessorExecutionRunStateDigestsCreated: 0,
+      skippedDuplicate: 1,
+      businessKey: businessKey,
+      completedAt: new Date().toISOString()
+    };
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const ledgerRows =
+    sciipReadAutonomousProcessorExecutionRunStateLedgerRows_(inputSheet);
+
+  const sourceRows =
+    sciipFilterAutonomousProcessorExecutionRunStateLedgerRowsByDate_(
+      ledgerRows,
+      resolvedRunStateDate
+    );
+
+  if (!sourceRows.length) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_PROCESSOR,
+      status: 'SKIPPED_NO_INPUTS',
+      autonomousProcessorExecutionRunStateDigestsCreated: 0,
+      skippedDuplicate: 0,
+      businessKey: businessKey,
+      resolvedRunStateDate: resolvedRunStateDate,
+      completedAt: new Date().toISOString()
+    };
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const digest =
+    sciipBuildAutonomousProcessorExecutionRunStateDigest_(
+      sourceRows,
+      resolvedRunStateDate,
+      businessKey,
+      startedAt
+    );
+
+  outputSheet.appendRow(digest);
+
+  const result = {
+    processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_PROCESSOR,
+    status: 'SUCCESS',
+    autonomousProcessorExecutionRunStateDigestsCreated: 1,
+    skippedDuplicate: 0,
+    businessKey: businessKey,
+    resolvedRunStateDate: resolvedRunStateDate,
+    ledgerEntriesReviewed: sourceRows.length,
+    completedAt: new Date().toISOString()
+  };
+
+  Logger.log(JSON.stringify(result));
+  return result;
+}
+
+/**
+ * Factory: output sheet.
+ */
+function sciipEnsureAutonomousProcessorExecutionRunStateDigestSheet_() {
+  const ss = sciipGetSpreadsheet_();
+  let sheet = ss.getSheetByName(SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_SHEET);
+
+  if (!sheet) {
+    sheet = ss.insertSheet(SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_SHEET);
+  }
+
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_HEADERS);
+  }
+
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const missing = SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_HEADERS.filter(function(h) {
+    return headers.indexOf(h) === -1;
+  });
+
+  if (missing.length) {
+    sheet.getRange(1, headers.length + 1, 1, missing.length).setValues([missing]);
+  }
+
+  return sheet;
+}
+
+/**
+ * Factory: digest row.
+ */
+function sciipBuildAutonomousProcessorExecutionRunStateDigest_(
+  rows,
+  resolvedRunStateDate,
+  businessKey,
+  startedAt
+) {
+  const aggregate =
+    sciipAggregateAutonomousProcessorExecutionRunStateLedger_(rows);
+
+  const latest =
+    sciipResolveLatestAutonomousProcessorExecutionRunStateLedgerRow_(rows);
+
+  const operationalState =
+    sciipResolveAutonomousProcessorExecutionRunStateOperationalState_(aggregate);
+
+  const interpretation =
+    sciipResolveAutonomousProcessorExecutionRunStateInterpretation_(
+      operationalState,
+      aggregate
+    );
+
+  const governancePosture =
+    sciipResolveAutonomousProcessorExecutionRunStateGovernancePosture_(
+      operationalState,
+      aggregate
+    );
+
+  const orchestrationPosture =
+    sciipResolveAutonomousProcessorExecutionRunStateOrchestrationPosture_(
+      operationalState,
+      aggregate
+    );
+
+  const dashboardPosture =
+    sciipResolveAutonomousProcessorExecutionRunStateDashboardPosture_(
+      operationalState,
+      aggregate
+    );
+
+  const decisioningPosture =
+    sciipResolveAutonomousProcessorExecutionRunStateDecisioningPosture_(
+      operationalState,
+      aggregate
+    );
+
+  const digestId =
+    'APRSD_' + Utilities.getUuid();
+
+  const summaryJson = JSON.stringify({
+    runStateDate: resolvedRunStateDate,
+    operationalState: operationalState,
+    governancePosture: governancePosture,
+    orchestrationPosture: orchestrationPosture,
+    dashboardPosture: dashboardPosture,
+    decisioningPosture: decisioningPosture,
+    aggregate: aggregate,
+    latest: latest
+  });
+
+  return [
+    digestId,
+    businessKey,
+    resolvedRunStateDate,
+    'DAILY_AUTONOMOUS_RUN_STATE_DIGEST',
+    operationalState,
+    interpretation,
+    governancePosture,
+    orchestrationPosture,
+    dashboardPosture,
+    decisioningPosture,
+    aggregate.ledgerEntriesReviewed,
+    aggregate.uniqueProcessorsObserved,
+    aggregate.healthyCount,
+    aggregate.warningCount,
+    aggregate.blockedCount,
+    aggregate.failedCount,
+    aggregate.skippedCount,
+    aggregate.duplicateCount,
+    latest.processor || '',
+    latest.status || '',
+    latest.businessKey || '',
+    latest.completedAt || '',
+    summaryJson,
+    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_SHEET,
+    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_DATE_COLUMN,
+    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_PROCESSOR,
+    startedAt.toISOString()
+  ];
+}
+
+/**
+ * Aggregation logic.
+ */
+function sciipAggregateAutonomousProcessorExecutionRunStateLedger_(rows) {
+  const processors = {};
+  let healthy = 0;
+  let warning = 0;
+  let blocked = 0;
+  let failed = 0;
+  let skipped = 0;
+  let duplicate = 0;
+
+  rows.forEach(function(row) {
+    const processor = sciipGetRunStateLedgerValue_(row, [
+      'Processor',
+      'processor',
+      'Processor_Name'
+    ]);
+
+    if (processor) processors[processor] = true;
+
+    const status = String(sciipGetRunStateLedgerValue_(row, [
+      'Status',
+      'status',
+      'Run_State',
+      'Operational_State'
+    ]) || '').toUpperCase();
+
+    const skippedDuplicate = String(sciipGetRunStateLedgerValue_(row, [
+      'Skipped_Duplicate',
+      'skippedDuplicate'
+    ]) || '');
+
+    if (status.indexOf('FAIL') !== -1 || status.indexOf('ERROR') !== -1) {
+      failed++;
+    } else if (status.indexOf('BLOCK') !== -1) {
+      blocked++;
+    } else if (status.indexOf('WARN') !== -1) {
+      warning++;
+    } else if (status.indexOf('SKIPPED') !== -1) {
+      skipped++;
+    } else {
+      healthy++;
+    }
+
+    if (skippedDuplicate === '1' || skippedDuplicate.toUpperCase() === 'TRUE') {
+      duplicate++;
+    }
+  });
+
+  return {
+    ledgerEntriesReviewed: rows.length,
+    uniqueProcessorsObserved: Object.keys(processors).length,
+    healthyCount: healthy,
+    warningCount: warning,
+    blockedCount: blocked,
+    failedCount: failed,
+    skippedCount: skipped,
+    duplicateCount: duplicate
+  };
+}
+
+/**
+ * Resolver logic.
+ */
+function sciipResolveAutonomousProcessorExecutionRunStateOperationalState_(aggregate) {
+  if (aggregate.failedCount > 0) return 'FAILED_ATTENTION_REQUIRED';
+  if (aggregate.blockedCount > 0) return 'BLOCKED';
+  if (aggregate.warningCount > 0) return 'OPERATIONAL_WITH_WARNINGS';
+  if (aggregate.ledgerEntriesReviewed === aggregate.duplicateCount) return 'IDEMPOTENT_STABLE';
+  return 'OPERATIONAL';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateInterpretation_(state, aggregate) {
+  if (state === 'FAILED_ATTENTION_REQUIRED') {
+    return 'One or more autonomous run state ledger entries indicate failure; governance review should prioritize failed processors before further promotion.';
+  }
+
+  if (state === 'BLOCKED') {
+    return 'Autonomous execution is blocked by one or more run state conditions and should not be advanced without review.';
+  }
+
+  if (state === 'OPERATIONAL_WITH_WARNINGS') {
+    return 'Autonomous execution is functioning but contains warning signals that should be visible to dashboards and governance.';
+  }
+
+  if (state === 'IDEMPOTENT_STABLE') {
+    return 'Run state ledger is stable and duplicate-protected; no new material state changes were detected for this processing date.';
+  }
+
+  return 'Autonomous run state is operational and suitable for downstream orchestration, dashboards, governance, and future decisioning.';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateGovernancePosture_(state) {
+  if (state === 'FAILED_ATTENTION_REQUIRED') return 'REVIEW_REQUIRED';
+  if (state === 'BLOCKED') return 'ESCALATE';
+  if (state === 'OPERATIONAL_WITH_WARNINGS') return 'MONITOR';
+  return 'NORMAL';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateOrchestrationPosture_(state) {
+  if (state === 'FAILED_ATTENTION_REQUIRED') return 'PAUSE_PROMOTION';
+  if (state === 'BLOCKED') return 'HOLD_DISPATCH';
+  if (state === 'OPERATIONAL_WITH_WARNINGS') return 'ALLOW_WITH_MONITORING';
+  return 'ALLOW';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateDashboardPosture_(state) {
+  if (state === 'FAILED_ATTENTION_REQUIRED') return 'SHOW_CRITICAL';
+  if (state === 'BLOCKED') return 'SHOW_BLOCKED';
+  if (state === 'OPERATIONAL_WITH_WARNINGS') return 'SHOW_WARNING';
+  return 'SHOW_HEALTHY';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateDecisioningPosture_(state) {
+  if (state === 'FAILED_ATTENTION_REQUIRED') return 'DO_NOT_AUTONOMOUSLY_ADVANCE';
+  if (state === 'BLOCKED') return 'REQUIRE_HUMAN_REVIEW';
+  if (state === 'OPERATIONAL_WITH_WARNINGS') return 'ADVANCE_WITH_CAUTION';
+  return 'ADVANCE';
+}
+
+/**
+ * Row helpers.
+ */
+function sciipReadAutonomousProcessorExecutionRunStateLedgerRows_(sheet) {
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return [];
+
+  const headers = values[0].map(String);
+
+  return values.slice(1).map(function(row) {
+    const obj = {};
+    headers.forEach(function(header, i) {
+      obj[header] = row[i];
+    });
+    return obj;
+  });
+}
+
+function sciipFilterAutonomousProcessorExecutionRunStateLedgerRowsByDate_(
+  rows,
+  resolvedDate
+) {
+  return rows.filter(function(row) {
+    const rawDate = sciipGetRunStateLedgerValue_(row, [
+      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_DATE_COLUMN,
+      'Processing_Date',
+      'Run_Date',
+      'Ledger_Date',
+      'Date',
+      'Created_At',
+      'completedAt',
+      'Completed_At'
+    ]);
+
+    return sciipNormalizeRunStateDigestDateKey_(rawDate) === resolvedDate;
+  });
+}
+
+function sciipResolveLatestAutonomousProcessorExecutionRunStateLedgerRow_(rows) {
+  if (!rows.length) return {};
+
+  const sorted = rows.slice().sort(function(a, b) {
+    const aDate = new Date(sciipGetRunStateLedgerValue_(a, [
+      'Completed_At',
+      'completedAt',
+      'Created_At',
+      'createdAt'
+    ]) || 0).getTime();
+
+    const bDate = new Date(sciipGetRunStateLedgerValue_(b, [
+      'Completed_At',
+      'completedAt',
+      'Created_At',
+      'createdAt'
+    ]) || 0).getTime();
+
+    return bDate - aDate;
+  });
+
+  const latest = sorted[0];
+
+  return {
+    processor: sciipGetRunStateLedgerValue_(latest, [
+      'Processor',
+      'processor',
+      'Processor_Name'
+    ]),
+    status: sciipGetRunStateLedgerValue_(latest, [
+      'Status',
+      'status',
+      'Run_State',
+      'Operational_State'
+    ]),
+    businessKey: sciipGetRunStateLedgerValue_(latest, [
+      'Business_Key',
+      'businessKey'
+    ]),
+    completedAt: sciipGetRunStateLedgerValue_(latest, [
+      'Completed_At',
+      'completedAt',
+      'Created_At',
+      'createdAt'
+    ])
+  };
+}
+
+function sciipGetRunStateLedgerValue_(row, aliases) {
+  for (let i = 0; i < aliases.length; i++) {
+    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
+      return row[aliases[i]];
+    }
+  }
+  return '';
+}
+
+function sciipNormalizeRunStateDigestDateKey_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return sciipFormatDateKey_(value);
+  }
+
+  const text = String(value);
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    return text;
+  }
+
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return sciipFormatDateKey_(parsed);
+  }
+
+  return text;
+}
+
+/**
+ * Standalone test.
+ */
+function sciipTestAutonomousProcessorExecutionRunStateDigestProcessor() {
+  const result =
+    sciipRunAutonomousProcessorExecutionRunStateDigestProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousProcessorExecutionRunStateDigestProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 1170_AutonomousProcessorExecutionRunStateDigestLedgerProcessor
+ *
+ * Migration note:
+ * Preserves original processor business logic by executing
+ * the original implementation inside SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipRunAutonomousProcessorExecutionRunStateDigestLedgerProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: '1170_AutonomousProcessorExecutionRunStateDigestLedgerProcessor',
+    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER_BUILD',
+    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST',
+    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER',
+    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: 0,
+        outputCount: 0,
+        summary: 'Runtime migration wrapper payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: '1170_AutonomousProcessorExecutionRunStateDigestLedgerProcessor',
+          preservedLegacyImplementation: true
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      var errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateDigestLedgerProcessorLegacy1170_();
+      return sciipWrapLegacyRuntimeResult1170_(legacyResult, context, transaction);
+    }
+  });
+}
+
+function sciipWrapLegacyRuntimeResult1170_(legacyResult, context, transaction) {
+  legacyResult = legacyResult || {};
+
+  var message = JSON.stringify({
+    migrationVersion: 'v5.3.2',
+    processorMigrated: true,
+    legacyResult: legacyResult,
+    transactionId: transaction.transactionId
+  });
+
+  var config = {
+    processor: context.processor,
+    businessKey: context.businessKey,
+    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
+    recordsUpdated: legacyResult.recordsUpdated || 0,
+    recordsRead: legacyResult.recordsRead || 0,
+    processed: legacyResult.processed || 0,
+    skippedDuplicate: legacyResult.skippedDuplicate || 0,
+    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
+    skippedValidation: legacyResult.skippedValidation || 0,
+    errors: legacyResult.errors || 0,
+    message: message
+  };
+
+  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
+  }
+
+  if (legacyResult.skippedDuplicate) {
+    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
+  }
+
+  if (legacyResult.status === 'ERROR') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
+  }
+
+  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
+}
+
+/*******************************************************
+ * SCIIP_OS v4.1
+ * 1170_AutonomousProcessorExecutionRunStateDigestLedgerProcessor
+ *******************************************************/
+
+const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_PROCESSOR =
+  '1170_AutonomousProcessorExecutionRunStateDigestLedgerProcessor';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_DATE_COLUMN =
+  'Run_State_Date';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_HEADERS = [
+  'Ledger_Entry_ID',
+  'Business_Key',
+  'Run_State_Date',
+  'Digest_ID',
+  'Digest_Type',
+  'Operational_State',
+  'Governance_Posture',
+  'Orchestration_Posture',
+  'Dashboard_Posture',
+  'Decisioning_Posture',
+  'Operational_Interpretation',
+  'Ledger_Entries_Reviewed',
+  'Unique_Processors_Observed',
+  'Healthy_Count',
+  'Warning_Count',
+  'Blocked_Count',
+  'Failed_Count',
+  'Skipped_Count',
+  'Duplicate_Count',
+  'Latest_Processor',
+  'Latest_Status',
+  'Latest_Business_Key',
+  'Latest_Completed_At',
+  'Ledger_Summary_JSON',
+  'Source_Business_Key',
+  'Source_Sheet',
+  'Source_Date_Column',
+  'Processor',
+  'Created_At'
+];
+
+/**
+ * Main processor.
+ */
+function sciipRunAutonomousProcessorExecutionRunStateDigestLedgerProcessorLegacy1170_() {
+  const startedAt = new Date();
+  const ss = sciipGetSpreadsheet_();
+
+  const inputSheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_SHEET
+  );
+
+  if (!inputSheet) {
+    throw new Error(
+      'Missing input sheet: ' +
+      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_SHEET
+    );
+  }
+
+  const outputSheet =
+    sciipEnsureAutonomousProcessorExecutionRunStateDigestLedgerSheet_();
+
+  const resolvedRunStateDate =
+    sciipResolveLatestProcessingDate_(
+      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_SHEET,
+      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_DATE_COLUMN
+    ) || sciipFormatDateKey_(startedAt);
+
+  const businessKey =
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER|' +
+    resolvedRunStateDate;
+
+  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_PROCESSOR,
+      status: 'SUCCESS',
+      autonomousProcessorExecutionRunStateDigestLedgerEntriesCreated: 0,
+      skippedDuplicate: 1,
+      businessKey: businessKey,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const digestRows =
+    sciipReadAutonomousProcessorExecutionRunStateDigestRows_(inputSheet);
+
+  const sourceRows =
+    sciipFilterAutonomousProcessorExecutionRunStateDigestRowsByDate_(
+      digestRows,
+      resolvedRunStateDate
+    );
+
+  if (!sourceRows.length) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_PROCESSOR,
+      status: 'SKIPPED_NO_INPUTS',
+      autonomousProcessorExecutionRunStateDigestLedgerEntriesCreated: 0,
+      skippedDuplicate: 0,
+      businessKey: businessKey,
+      resolvedRunStateDate: resolvedRunStateDate,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const latestDigest =
+    sciipResolveLatestAutonomousProcessorExecutionRunStateDigestRow_(
+      sourceRows
+    );
+
+  const ledgerRow =
+    sciipBuildAutonomousProcessorExecutionRunStateDigestLedgerEntry_(
+      latestDigest,
+      resolvedRunStateDate,
+      businessKey,
+      startedAt
+    );
+
+  outputSheet.appendRow(ledgerRow);
+
+  const result = {
+    processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_PROCESSOR,
+    status: 'SUCCESS',
+    autonomousProcessorExecutionRunStateDigestLedgerEntriesCreated: 1,
+    skippedDuplicate: 0,
+    businessKey: businessKey,
+    resolvedRunStateDate: resolvedRunStateDate,
+    completedAt: new Date().toISOString()
+  };
+
+  Logger.log(JSON.stringify(result));
+  return result;
+}
+
+/**
+ * Factory: output sheet.
+ */
+function sciipEnsureAutonomousProcessorExecutionRunStateDigestLedgerSheet_() {
+  const ss = sciipGetSpreadsheet_();
+  let sheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_SHEET
+  );
+
+  if (!sheet) {
+    sheet = ss.insertSheet(
+      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_SHEET
+    );
+  }
+
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(
+      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_HEADERS
+    );
+  }
+
+  const headers =
+    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  const missing =
+    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_HEADERS.filter(function(h) {
+      return headers.indexOf(h) === -1;
+    });
+
+  if (missing.length) {
+    sheet
+      .getRange(1, headers.length + 1, 1, missing.length)
+      .setValues([missing]);
+  }
+
+  return sheet;
+}
+
+/**
+ * Factory: ledger entry row.
+ */
+function sciipBuildAutonomousProcessorExecutionRunStateDigestLedgerEntry_(
+  digest,
+  resolvedRunStateDate,
+  businessKey,
+  startedAt
+) {
+  const ledgerEntryId = 'APRSDL_' + Utilities.getUuid();
+
+  const summary = {
+    runStateDate: resolvedRunStateDate,
+    digestId: sciipGetRunStateDigestValue_(digest, ['Digest_ID']),
+    operationalState: sciipGetRunStateDigestValue_(digest, ['Operational_State']),
+    governancePosture: sciipGetRunStateDigestValue_(digest, ['Governance_Posture']),
+    orchestrationPosture: sciipGetRunStateDigestValue_(digest, ['Orchestration_Posture']),
+    dashboardPosture: sciipGetRunStateDigestValue_(digest, ['Dashboard_Posture']),
+    decisioningPosture: sciipGetRunStateDigestValue_(digest, ['Decisioning_Posture']),
+    sourceBusinessKey: sciipGetRunStateDigestValue_(digest, ['Business_Key'])
+  };
+
+  return [
+    ledgerEntryId,
+    businessKey,
+    resolvedRunStateDate,
+    sciipGetRunStateDigestValue_(digest, ['Digest_ID']),
+    sciipGetRunStateDigestValue_(digest, ['Digest_Type']),
+    sciipGetRunStateDigestValue_(digest, ['Operational_State']),
+    sciipGetRunStateDigestValue_(digest, ['Governance_Posture']),
+    sciipGetRunStateDigestValue_(digest, ['Orchestration_Posture']),
+    sciipGetRunStateDigestValue_(digest, ['Dashboard_Posture']),
+    sciipGetRunStateDigestValue_(digest, ['Decisioning_Posture']),
+    sciipGetRunStateDigestValue_(digest, ['Operational_Interpretation']),
+    sciipGetRunStateDigestValue_(digest, ['Ledger_Entries_Reviewed']),
+    sciipGetRunStateDigestValue_(digest, ['Unique_Processors_Observed']),
+    sciipGetRunStateDigestValue_(digest, ['Healthy_Count']),
+    sciipGetRunStateDigestValue_(digest, ['Warning_Count']),
+    sciipGetRunStateDigestValue_(digest, ['Blocked_Count']),
+    sciipGetRunStateDigestValue_(digest, ['Failed_Count']),
+    sciipGetRunStateDigestValue_(digest, ['Skipped_Count']),
+    sciipGetRunStateDigestValue_(digest, ['Duplicate_Count']),
+    sciipGetRunStateDigestValue_(digest, ['Latest_Processor']),
+    sciipGetRunStateDigestValue_(digest, ['Latest_Status']),
+    sciipGetRunStateDigestValue_(digest, ['Latest_Business_Key']),
+    sciipGetRunStateDigestValue_(digest, ['Latest_Completed_At']),
+    JSON.stringify(summary),
+    sciipGetRunStateDigestValue_(digest, ['Business_Key']),
+    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_SHEET,
+    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_DATE_COLUMN,
+    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_PROCESSOR,
+    startedAt.toISOString()
+  ];
+}
+
+/**
+ * Reader logic.
+ */
+function sciipReadAutonomousProcessorExecutionRunStateDigestRows_(sheet) {
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return [];
+
+  const headers = values[0].map(String);
+
+  return values.slice(1).map(function(row) {
+    const obj = {};
+    headers.forEach(function(header, i) {
+      obj[header] = row[i];
+    });
+    return obj;
+  });
+}
+
+/**
+ * Resolver logic.
+ */
+function sciipFilterAutonomousProcessorExecutionRunStateDigestRowsByDate_(
+  rows,
+  resolvedDate
+) {
+  return rows.filter(function(row) {
+    const rawDate = sciipGetRunStateDigestValue_(row, [
+      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_DATE_COLUMN,
+      'Processing_Date',
+      'Run_Date',
+      'Digest_Date',
+      'Created_At',
+      'createdAt'
+    ]);
+
+    return sciipNormalizeRunStateDigestLedgerDateKey_(rawDate) === resolvedDate;
+  });
+}
+
+function sciipResolveLatestAutonomousProcessorExecutionRunStateDigestRow_(rows) {
+  if (!rows.length) return {};
+
+  const sorted = rows.slice().sort(function(a, b) {
+    const aDate = new Date(
+      sciipGetRunStateDigestValue_(a, ['Created_At', 'createdAt']) || 0
+    ).getTime();
+
+    const bDate = new Date(
+      sciipGetRunStateDigestValue_(b, ['Created_At', 'createdAt']) || 0
+    ).getTime();
+
+    return bDate - aDate;
+  });
+
+  return sorted[0];
+}
+
+function sciipGetRunStateDigestValue_(row, aliases) {
+  for (let i = 0; i < aliases.length; i++) {
+    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
+      return row[aliases[i]];
+    }
+  }
+
+  return '';
+}
+
+function sciipNormalizeRunStateDigestLedgerDateKey_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return sciipFormatDateKey_(value);
+  }
+
+  const text = String(value);
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    return text;
+  }
+
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return sciipFormatDateKey_(parsed);
+  }
+
+  return text;
+}
+
+/**
+ * Standalone test.
+ */
+function sciipTestAutonomousProcessorExecutionRunStateDigestLedgerProcessor() {
+  const result =
+    sciipRunAutonomousProcessorExecutionRunStateDigestLedgerProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousProcessorExecutionRunStateDigestLedgerProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 1180_AutonomousProcessorExecutionRunStateSignalProcessor
+ *
+ * Migration note:
+ * Preserves original processor business logic by executing
+ * the original implementation inside SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipRunAutonomousProcessorExecutionRunStateSignalProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: '1180_AutonomousProcessorExecutionRunStateSignalProcessor',
+    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_BUILD',
+    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER',
+    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL',
+    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: 0,
+        outputCount: 0,
+        summary: 'Runtime migration wrapper payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: '1180_AutonomousProcessorExecutionRunStateSignalProcessor',
+          preservedLegacyImplementation: true
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      var errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateSignalProcessorLegacy1180_();
+      return sciipWrapLegacyRuntimeResult1180_(legacyResult, context, transaction);
+    }
+  });
+}
+
+function sciipWrapLegacyRuntimeResult1180_(legacyResult, context, transaction) {
+  legacyResult = legacyResult || {};
+
+  var message = JSON.stringify({
+    migrationVersion: 'v5.3.2',
+    processorMigrated: true,
+    legacyResult: legacyResult,
+    transactionId: transaction.transactionId
+  });
+
+  var config = {
+    processor: context.processor,
+    businessKey: context.businessKey,
+    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
+    recordsUpdated: legacyResult.recordsUpdated || 0,
+    recordsRead: legacyResult.recordsRead || 0,
+    processed: legacyResult.processed || 0,
+    skippedDuplicate: legacyResult.skippedDuplicate || 0,
+    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
+    skippedValidation: legacyResult.skippedValidation || 0,
+    errors: legacyResult.errors || 0,
+    message: message
+  };
+
+  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
+  }
+
+  if (legacyResult.skippedDuplicate) {
+    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
+  }
+
+  if (legacyResult.status === 'ERROR') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
+  }
+
+  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
+}
+
+/*******************************************************
+ * SCIIP_OS v4.1
+ * 1180_AutonomousProcessorExecutionRunStateSignalProcessor
+ *******************************************************/
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_PROCESSOR =
+  '1180_AutonomousProcessorExecutionRunStateSignalProcessor';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_DATE_COLUMN =
+  'Run_State_Date';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_HEADERS = [
+  'Signal_ID',
+  'Business_Key',
+  'Run_State_Date',
+  'Signal_Type',
+  'Signal_Category',
+  'Signal_Severity',
+  'Signal_Status',
+  'Signal_Message',
+  'Operational_State',
+  'Governance_Posture',
+  'Orchestration_Posture',
+  'Dashboard_Posture',
+  'Decisioning_Posture',
+  'Recommended_Action',
+  'Autonomous_Action_Allowed',
+  'Human_Review_Required',
+  'Ledger_Entries_Reviewed',
+  'Unique_Processors_Observed',
+  'Healthy_Count',
+  'Warning_Count',
+  'Blocked_Count',
+  'Failed_Count',
+  'Skipped_Count',
+  'Duplicate_Count',
+  'Source_Ledger_Entry_ID',
+  'Source_Business_Key',
+  'Source_Sheet',
+  'Source_Date_Column',
+  'Signal_Summary_JSON',
+  'Processor',
+  'Created_At'
+];
+
+/**
+ * Main processor.
+ */
+function sciipRunAutonomousProcessorExecutionRunStateSignalProcessorLegacy1180_() {
+  const startedAt = new Date();
+  const ss = sciipGetSpreadsheet_();
+
+  const inputSheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_SHEET
+  );
+
+  if (!inputSheet) {
+    throw new Error(
+      'Missing input sheet: ' +
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_SHEET
+    );
+  }
+
+  const outputSheet =
+    sciipEnsureAutonomousProcessorExecutionRunStateSignalSheet_();
+
+  const resolvedRunStateDate =
+    sciipResolveLatestProcessingDate_(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_SHEET,
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_DATE_COLUMN
+    ) || sciipFormatDateKey_(startedAt);
+
+  const businessKey =
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL|' +
+    resolvedRunStateDate;
+
+  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_PROCESSOR,
+      status: 'SUCCESS',
+      autonomousProcessorExecutionRunStateSignalsCreated: 0,
+      skippedDuplicate: 1,
+      businessKey: businessKey,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const ledgerRows =
+    sciipReadAutonomousProcessorExecutionRunStateSignalInputRows_(inputSheet);
+
+  const sourceRows =
+    sciipFilterAutonomousProcessorExecutionRunStateSignalRowsByDate_(
+      ledgerRows,
+      resolvedRunStateDate
+    );
+
+  if (!sourceRows.length) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_PROCESSOR,
+      status: 'SKIPPED_NO_INPUTS',
+      autonomousProcessorExecutionRunStateSignalsCreated: 0,
+      skippedDuplicate: 0,
+      businessKey: businessKey,
+      resolvedRunStateDate: resolvedRunStateDate,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const latestLedgerEntry =
+    sciipResolveLatestAutonomousProcessorExecutionRunStateSignalInputRow_(
+      sourceRows
+    );
+
+  const signalRow =
+    sciipBuildAutonomousProcessorExecutionRunStateSignal_(
+      latestLedgerEntry,
+      resolvedRunStateDate,
+      businessKey,
+      startedAt
+    );
+
+  outputSheet.appendRow(signalRow);
+
+  const result = {
+    processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_PROCESSOR,
+    status: 'SUCCESS',
+    autonomousProcessorExecutionRunStateSignalsCreated: 1,
+    skippedDuplicate: 0,
+    businessKey: businessKey,
+    resolvedRunStateDate: resolvedRunStateDate,
+    completedAt: new Date().toISOString()
+  };
+
+  Logger.log(JSON.stringify(result));
+  return result;
+}
+
+/**
+ * Factory: output sheet.
+ */
+function sciipEnsureAutonomousProcessorExecutionRunStateSignalSheet_() {
+  const ss = sciipGetSpreadsheet_();
+  let sheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_SHEET
+  );
+
+  if (!sheet) {
+    sheet = ss.insertSheet(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_SHEET
+    );
+  }
+
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_HEADERS
+    );
+  }
+
+  const headers =
+    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  const missing =
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_HEADERS.filter(function(h) {
+      return headers.indexOf(h) === -1;
+    });
+
+  if (missing.length) {
+    sheet
+      .getRange(1, headers.length + 1, 1, missing.length)
+      .setValues([missing]);
+  }
+
+  return sheet;
+}
+
+/**
+ * Factory: signal row.
+ */
+function sciipBuildAutonomousProcessorExecutionRunStateSignal_(
+  ledgerEntry,
+  resolvedRunStateDate,
+  businessKey,
+  startedAt
+) {
+  const operationalState =
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Operational_State']);
+
+  const governancePosture =
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Governance_Posture']);
+
+  const orchestrationPosture =
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Orchestration_Posture']);
+
+  const dashboardPosture =
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Dashboard_Posture']);
+
+  const decisioningPosture =
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Decisioning_Posture']);
+
+  const severity =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalSeverity_(
+      operationalState,
+      governancePosture,
+      orchestrationPosture,
+      decisioningPosture
+    );
+
+  const category =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalCategory_(
+      operationalState,
+      severity
+    );
+
+  const status =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalStatus_(severity);
+
+  const recommendedAction =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalRecommendedAction_(
+      operationalState,
+      governancePosture,
+      orchestrationPosture,
+      decisioningPosture
+    );
+
+  const autonomousActionAllowed =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalAutonomousAllowed_(
+      decisioningPosture
+    );
+
+  const humanReviewRequired =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalHumanReviewRequired_(
+      governancePosture,
+      decisioningPosture
+    );
+
+  const message =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalMessage_(
+      operationalState,
+      severity,
+      recommendedAction
+    );
+
+  const signalId = 'APRSS_' + Utilities.getUuid();
+
+  const summary = {
+    runStateDate: resolvedRunStateDate,
+    signalType: 'AUTONOMOUS_RUN_STATE_SIGNAL',
+    signalCategory: category,
+    signalSeverity: severity,
+    signalStatus: status,
+    operationalState: operationalState,
+    governancePosture: governancePosture,
+    orchestrationPosture: orchestrationPosture,
+    dashboardPosture: dashboardPosture,
+    decisioningPosture: decisioningPosture,
+    recommendedAction: recommendedAction,
+    autonomousActionAllowed: autonomousActionAllowed,
+    humanReviewRequired: humanReviewRequired,
+    sourceLedgerEntryId: sciipGetRunStateSignalInputValue_(ledgerEntry, [
+      'Ledger_Entry_ID'
+    ]),
+    sourceBusinessKey: sciipGetRunStateSignalInputValue_(ledgerEntry, [
+      'Business_Key'
+    ])
+  };
+
+  return [
+    signalId,
+    businessKey,
+    resolvedRunStateDate,
+    'AUTONOMOUS_RUN_STATE_SIGNAL',
+    category,
+    severity,
+    status,
+    message,
+    operationalState,
+    governancePosture,
+    orchestrationPosture,
+    dashboardPosture,
+    decisioningPosture,
+    recommendedAction,
+    autonomousActionAllowed,
+    humanReviewRequired,
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Ledger_Entries_Reviewed']),
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Unique_Processors_Observed']),
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Healthy_Count']),
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Warning_Count']),
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Blocked_Count']),
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Failed_Count']),
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Skipped_Count']),
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Duplicate_Count']),
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Ledger_Entry_ID']),
+    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Business_Key']),
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_SHEET,
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_DATE_COLUMN,
+    JSON.stringify(summary),
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_PROCESSOR,
+    startedAt.toISOString()
+  ];
+}
+
+/**
+ * Signal resolver logic.
+ */
+function sciipResolveAutonomousProcessorExecutionRunStateSignalSeverity_(
+  operationalState,
+  governancePosture,
+  orchestrationPosture,
+  decisioningPosture
+) {
+  const state = String(operationalState || '').toUpperCase();
+  const governance = String(governancePosture || '').toUpperCase();
+  const orchestration = String(orchestrationPosture || '').toUpperCase();
+  const decisioning = String(decisioningPosture || '').toUpperCase();
+
+  if (
+    state.indexOf('FAILED') !== -1 ||
+    governance === 'REVIEW_REQUIRED' ||
+    decisioning === 'DO_NOT_AUTONOMOUSLY_ADVANCE'
+  ) {
+    return 'CRITICAL';
+  }
+
+  if (
+    state === 'BLOCKED' ||
+    governance === 'ESCALATE' ||
+    orchestration === 'HOLD_DISPATCH' ||
+    decisioning === 'REQUIRE_HUMAN_REVIEW'
+  ) {
+    return 'HIGH';
+  }
+
+  if (
+    state.indexOf('WARNING') !== -1 ||
+    governance === 'MONITOR' ||
+    orchestration === 'ALLOW_WITH_MONITORING' ||
+    decisioning === 'ADVANCE_WITH_CAUTION'
+  ) {
+    return 'MEDIUM';
+  }
+
+  return 'LOW';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalCategory_(
+  operationalState,
+  severity
+) {
+  const state = String(operationalState || '').toUpperCase();
+
+  if (severity === 'CRITICAL') return 'RUN_STATE_FAILURE';
+  if (severity === 'HIGH') return 'RUN_STATE_BLOCKER';
+  if (state === 'IDEMPOTENT_STABLE') return 'RUN_STATE_STABILITY';
+  if (severity === 'MEDIUM') return 'RUN_STATE_WARNING';
+  return 'RUN_STATE_HEALTH';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalStatus_(severity) {
+  if (severity === 'CRITICAL') return 'ACTIVE_CRITICAL';
+  if (severity === 'HIGH') return 'ACTIVE_HIGH';
+  if (severity === 'MEDIUM') return 'ACTIVE_MONITOR';
+  return 'ACTIVE_HEALTHY';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalRecommendedAction_(
+  operationalState,
+  governancePosture,
+  orchestrationPosture,
+  decisioningPosture
+) {
+  const state = String(operationalState || '').toUpperCase();
+  const governance = String(governancePosture || '').toUpperCase();
+  const orchestration = String(orchestrationPosture || '').toUpperCase();
+  const decisioning = String(decisioningPosture || '').toUpperCase();
+
+  if (
+    state.indexOf('FAILED') !== -1 ||
+    governance === 'REVIEW_REQUIRED' ||
+    decisioning === 'DO_NOT_AUTONOMOUSLY_ADVANCE'
+  ) {
+    return 'PAUSE_AUTONOMOUS_ADVANCEMENT_AND_REVIEW_FAILURES';
+  }
+
+  if (
+    state === 'BLOCKED' ||
+    governance === 'ESCALATE' ||
+    orchestration === 'HOLD_DISPATCH' ||
+    decisioning === 'REQUIRE_HUMAN_REVIEW'
+  ) {
+    return 'HOLD_DISPATCH_AND_REQUIRE_HUMAN_REVIEW';
+  }
+
+  if (
+    state.indexOf('WARNING') !== -1 ||
+    governance === 'MONITOR' ||
+    orchestration === 'ALLOW_WITH_MONITORING' ||
+    decisioning === 'ADVANCE_WITH_CAUTION'
+  ) {
+    return 'ALLOW_DOWNSTREAM_PROCESSING_WITH_MONITORING';
+  }
+
+  return 'ALLOW_DOWNSTREAM_PROCESSING';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalAutonomousAllowed_(
+  decisioningPosture
+) {
+  const decisioning = String(decisioningPosture || '').toUpperCase();
+
+  if (
+    decisioning === 'DO_NOT_AUTONOMOUSLY_ADVANCE' ||
+    decisioning === 'REQUIRE_HUMAN_REVIEW'
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalHumanReviewRequired_(
+  governancePosture,
+  decisioningPosture
+) {
+  const governance = String(governancePosture || '').toUpperCase();
+  const decisioning = String(decisioningPosture || '').toUpperCase();
+
+  if (
+    governance === 'REVIEW_REQUIRED' ||
+    governance === 'ESCALATE' ||
+    decisioning === 'DO_NOT_AUTONOMOUSLY_ADVANCE' ||
+    decisioning === 'REQUIRE_HUMAN_REVIEW'
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalMessage_(
+  operationalState,
+  severity,
+  recommendedAction
+) {
+  return (
+    'Autonomous run state signal resolved as ' +
+    severity +
+    ' from operational state ' +
+    operationalState +
+    '. Recommended action: ' +
+    recommendedAction +
+    '.'
+  );
+}
+
+/**
+ * Reader logic.
+ */
+function sciipReadAutonomousProcessorExecutionRunStateSignalInputRows_(sheet) {
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return [];
+
+  const headers = values[0].map(String);
+
+  return values.slice(1).map(function(row) {
+    const obj = {};
+    headers.forEach(function(header, i) {
+      obj[header] = row[i];
+    });
+    return obj;
+  });
+}
+
+/**
+ * Resolver logic.
+ */
+function sciipFilterAutonomousProcessorExecutionRunStateSignalRowsByDate_(
+  rows,
+  resolvedDate
+) {
+  return rows.filter(function(row) {
+    const rawDate = sciipGetRunStateSignalInputValue_(row, [
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_DATE_COLUMN,
+      'Processing_Date',
+      'Run_Date',
+      'Digest_Date',
+      'Ledger_Date',
+      'Created_At',
+      'createdAt'
+    ]);
+
+    return sciipNormalizeRunStateSignalDateKey_(rawDate) === resolvedDate;
+  });
+}
+
+function sciipResolveLatestAutonomousProcessorExecutionRunStateSignalInputRow_(
+  rows
+) {
+  if (!rows.length) return {};
+
+  const sorted = rows.slice().sort(function(a, b) {
+    const aDate = new Date(
+      sciipGetRunStateSignalInputValue_(a, ['Created_At', 'createdAt']) || 0
+    ).getTime();
+
+    const bDate = new Date(
+      sciipGetRunStateSignalInputValue_(b, ['Created_At', 'createdAt']) || 0
+    ).getTime();
+
+    return bDate - aDate;
+  });
+
+  return sorted[0];
+}
+
+function sciipGetRunStateSignalInputValue_(row, aliases) {
+  for (let i = 0; i < aliases.length; i++) {
+    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
+      return row[aliases[i]];
+    }
+  }
+
+  return '';
+}
+
+function sciipNormalizeRunStateSignalDateKey_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return sciipFormatDateKey_(value);
+  }
+
+  const text = String(value);
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    return text;
+  }
+
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return sciipFormatDateKey_(parsed);
+  }
+
+  return text;
+}
+
+/**
+ * Standalone test.
+ */
+function sciipTestAutonomousProcessorExecutionRunStateSignalProcessor() {
+  const result =
+    sciipRunAutonomousProcessorExecutionRunStateSignalProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousProcessorExecutionRunStateSignalProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 1190_AutonomousProcessorExecutionRunStateSignalLedgerProcessor
+ *
+ * Migration note:
+ * Preserves original processor business logic by executing
+ * the original implementation inside SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipRunAutonomousProcessorExecutionRunStateSignalLedgerProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: '1190_AutonomousProcessorExecutionRunStateSignalLedgerProcessor',
+    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER_BUILD',
+    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL',
+    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER',
+    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: 0,
+        outputCount: 0,
+        summary: 'Runtime migration wrapper payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: '1190_AutonomousProcessorExecutionRunStateSignalLedgerProcessor',
+          preservedLegacyImplementation: true
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      var errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateSignalLedgerProcessorLegacy1190_();
+      return sciipWrapLegacyRuntimeResult1190_(legacyResult, context, transaction);
+    }
+  });
+}
+
+function sciipWrapLegacyRuntimeResult1190_(legacyResult, context, transaction) {
+  legacyResult = legacyResult || {};
+
+  var message = JSON.stringify({
+    migrationVersion: 'v5.3.2',
+    processorMigrated: true,
+    legacyResult: legacyResult,
+    transactionId: transaction.transactionId
+  });
+
+  var config = {
+    processor: context.processor,
+    businessKey: context.businessKey,
+    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
+    recordsUpdated: legacyResult.recordsUpdated || 0,
+    recordsRead: legacyResult.recordsRead || 0,
+    processed: legacyResult.processed || 0,
+    skippedDuplicate: legacyResult.skippedDuplicate || 0,
+    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
+    skippedValidation: legacyResult.skippedValidation || 0,
+    errors: legacyResult.errors || 0,
+    message: message
+  };
+
+  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
+  }
+
+  if (legacyResult.skippedDuplicate) {
+    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
+  }
+
+  if (legacyResult.status === 'ERROR') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
+  }
+
+  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
+}
+
+/*******************************************************
+ * SCIIP_OS v4.1
+ * 1190_AutonomousProcessorExecutionRunStateSignalLedgerProcessor
+ *******************************************************/
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_PROCESSOR =
+  '1190_AutonomousProcessorExecutionRunStateSignalLedgerProcessor';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_DATE_COLUMN =
+  'Run_State_Date';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_HEADERS = [
+  'Ledger_Entry_ID',
+  'Business_Key',
+  'Run_State_Date',
+  'Signal_ID',
+  'Signal_Type',
+  'Signal_Category',
+  'Signal_Severity',
+  'Signal_Status',
+  'Signal_Message',
+  'Operational_State',
+  'Governance_Posture',
+  'Orchestration_Posture',
+  'Dashboard_Posture',
+  'Decisioning_Posture',
+  'Recommended_Action',
+  'Autonomous_Action_Allowed',
+  'Human_Review_Required',
+  'Ledger_Entries_Reviewed',
+  'Unique_Processors_Observed',
+  'Healthy_Count',
+  'Warning_Count',
+  'Blocked_Count',
+  'Failed_Count',
+  'Skipped_Count',
+  'Duplicate_Count',
+  'Source_Ledger_Entry_ID',
+  'Source_Business_Key',
+  'Source_Signal_Business_Key',
+  'Source_Sheet',
+  'Source_Date_Column',
+  'Ledger_Summary_JSON',
+  'Processor',
+  'Created_At'
+];
+
+/**
+ * Main processor.
+ */
+function sciipRunAutonomousProcessorExecutionRunStateSignalLedgerProcessorLegacy1190_() {
+  const startedAt = new Date();
+  const ss = sciipGetSpreadsheet_();
+
+  const inputSheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_SHEET
+  );
+
+  if (!inputSheet) {
+    throw new Error(
+      'Missing input sheet: ' +
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_SHEET
+    );
+  }
+
+  const outputSheet =
+    sciipEnsureAutonomousProcessorExecutionRunStateSignalLedgerSheet_();
+
+  const resolvedRunStateDate =
+    sciipResolveLatestProcessingDate_(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_SHEET,
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_DATE_COLUMN
+    ) || sciipFormatDateKey_(startedAt);
+
+  const businessKey =
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER|' +
+    resolvedRunStateDate;
+
+  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_PROCESSOR,
+      status: 'SUCCESS',
+      autonomousProcessorExecutionRunStateSignalLedgerEntriesCreated: 0,
+      skippedDuplicate: 1,
+      businessKey: businessKey,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const signalRows =
+    sciipReadAutonomousProcessorExecutionRunStateSignalLedgerInputRows_(
+      inputSheet
+    );
+
+  const sourceRows =
+    sciipFilterAutonomousProcessorExecutionRunStateSignalLedgerRowsByDate_(
+      signalRows,
+      resolvedRunStateDate
+    );
+
+  if (!sourceRows.length) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_PROCESSOR,
+      status: 'SKIPPED_NO_INPUTS',
+      autonomousProcessorExecutionRunStateSignalLedgerEntriesCreated: 0,
+      skippedDuplicate: 0,
+      businessKey: businessKey,
+      resolvedRunStateDate: resolvedRunStateDate,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const latestSignal =
+    sciipResolveLatestAutonomousProcessorExecutionRunStateSignalLedgerInputRow_(
+      sourceRows
+    );
+
+  const ledgerRow =
+    sciipBuildAutonomousProcessorExecutionRunStateSignalLedgerEntry_(
+      latestSignal,
+      resolvedRunStateDate,
+      businessKey,
+      startedAt
+    );
+
+  outputSheet.appendRow(ledgerRow);
+
+  const result = {
+    processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_PROCESSOR,
+    status: 'SUCCESS',
+    autonomousProcessorExecutionRunStateSignalLedgerEntriesCreated: 1,
+    skippedDuplicate: 0,
+    businessKey: businessKey,
+    resolvedRunStateDate: resolvedRunStateDate,
+    completedAt: new Date().toISOString()
+  };
+
+  Logger.log(JSON.stringify(result));
+  return result;
+}
+
+/**
+ * Factory: output sheet.
+ */
+function sciipEnsureAutonomousProcessorExecutionRunStateSignalLedgerSheet_() {
+  const ss = sciipGetSpreadsheet_();
+  let sheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_SHEET
+  );
+
+  if (!sheet) {
+    sheet = ss.insertSheet(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_SHEET
+    );
+  }
+
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_HEADERS
+    );
+  }
+
+  const headers =
+    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  const missing =
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_HEADERS.filter(function(h) {
+      return headers.indexOf(h) === -1;
+    });
+
+  if (missing.length) {
+    sheet
+      .getRange(1, headers.length + 1, 1, missing.length)
+      .setValues([missing]);
+  }
+
+  return sheet;
+}
+
+/**
+ * Factory: ledger entry.
+ */
+function sciipBuildAutonomousProcessorExecutionRunStateSignalLedgerEntry_(
+  signal,
+  resolvedRunStateDate,
+  businessKey,
+  startedAt
+) {
+  const ledgerEntryId = 'APRSSL_' + Utilities.getUuid();
+
+  const summary = {
+    runStateDate: resolvedRunStateDate,
+    signalId: sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_ID']),
+    signalType: sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Type']),
+    signalCategory: sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Category']),
+    signalSeverity: sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Severity']),
+    signalStatus: sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Status']),
+    operationalState: sciipGetRunStateSignalLedgerInputValue_(signal, ['Operational_State']),
+    governancePosture: sciipGetRunStateSignalLedgerInputValue_(signal, ['Governance_Posture']),
+    orchestrationPosture: sciipGetRunStateSignalLedgerInputValue_(signal, ['Orchestration_Posture']),
+    dashboardPosture: sciipGetRunStateSignalLedgerInputValue_(signal, ['Dashboard_Posture']),
+    decisioningPosture: sciipGetRunStateSignalLedgerInputValue_(signal, ['Decisioning_Posture']),
+    recommendedAction: sciipGetRunStateSignalLedgerInputValue_(signal, ['Recommended_Action']),
+    autonomousActionAllowed: sciipGetRunStateSignalLedgerInputValue_(signal, ['Autonomous_Action_Allowed']),
+    humanReviewRequired: sciipGetRunStateSignalLedgerInputValue_(signal, ['Human_Review_Required']),
+    sourceLedgerEntryId: sciipGetRunStateSignalLedgerInputValue_(signal, ['Source_Ledger_Entry_ID']),
+    sourceBusinessKey: sciipGetRunStateSignalLedgerInputValue_(signal, ['Source_Business_Key']),
+    sourceSignalBusinessKey: sciipGetRunStateSignalLedgerInputValue_(signal, ['Business_Key'])
+  };
+
+  return [
+    ledgerEntryId,
+    businessKey,
+    resolvedRunStateDate,
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_ID']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Type']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Category']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Severity']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Status']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Message']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Operational_State']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Governance_Posture']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Orchestration_Posture']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Dashboard_Posture']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Decisioning_Posture']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Recommended_Action']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Autonomous_Action_Allowed']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Human_Review_Required']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Ledger_Entries_Reviewed']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Unique_Processors_Observed']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Healthy_Count']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Warning_Count']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Blocked_Count']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Failed_Count']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Skipped_Count']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Duplicate_Count']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Source_Ledger_Entry_ID']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Source_Business_Key']),
+    sciipGetRunStateSignalLedgerInputValue_(signal, ['Business_Key']),
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_SHEET,
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_DATE_COLUMN,
+    JSON.stringify(summary),
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_PROCESSOR,
+    startedAt.toISOString()
+  ];
+}
+
+/**
+ * Reader logic.
+ */
+function sciipReadAutonomousProcessorExecutionRunStateSignalLedgerInputRows_(
+  sheet
+) {
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return [];
+
+  const headers = values[0].map(String);
+
+  return values.slice(1).map(function(row) {
+    const obj = {};
+    headers.forEach(function(header, i) {
+      obj[header] = row[i];
+    });
+    return obj;
+  });
+}
+
+/**
+ * Resolver logic.
+ */
+function sciipFilterAutonomousProcessorExecutionRunStateSignalLedgerRowsByDate_(
+  rows,
+  resolvedDate
+) {
+  return rows.filter(function(row) {
+    const rawDate = sciipGetRunStateSignalLedgerInputValue_(row, [
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_DATE_COLUMN,
+      'Processing_Date',
+      'Run_Date',
+      'Signal_Date',
+      'Created_At',
+      'createdAt'
+    ]);
+
+    return sciipNormalizeRunStateSignalLedgerDateKey_(rawDate) === resolvedDate;
+  });
+}
+
+function sciipResolveLatestAutonomousProcessorExecutionRunStateSignalLedgerInputRow_(
+  rows
+) {
+  if (!rows.length) return {};
+
+  const sorted = rows.slice().sort(function(a, b) {
+    const aDate = new Date(
+      sciipGetRunStateSignalLedgerInputValue_(a, ['Created_At', 'createdAt']) || 0
+    ).getTime();
+
+    const bDate = new Date(
+      sciipGetRunStateSignalLedgerInputValue_(b, ['Created_At', 'createdAt']) || 0
+    ).getTime();
+
+    return bDate - aDate;
+  });
+
+  return sorted[0];
+}
+
+function sciipGetRunStateSignalLedgerInputValue_(row, aliases) {
+  for (let i = 0; i < aliases.length; i++) {
+    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
+      return row[aliases[i]];
+    }
+  }
+
+  return '';
+}
+
+function sciipNormalizeRunStateSignalLedgerDateKey_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return sciipFormatDateKey_(value);
+  }
+
+  const text = String(value);
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    return text;
+  }
+
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return sciipFormatDateKey_(parsed);
+  }
+
+  return text;
+}
+
+/**
+ * Standalone test.
+ */
+function sciipTestAutonomousProcessorExecutionRunStateSignalLedgerProcessor() {
+  const result =
+    sciipRunAutonomousProcessorExecutionRunStateSignalLedgerProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousProcessorExecutionRunStateSignalLedgerProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 1200_AutonomousProcessorExecutionRunStateSignalDigestProcessor
+ *
+ * Migration note:
+ * Preserves original processor business logic by executing
+ * the original implementation inside SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipRunAutonomousProcessorExecutionRunStateSignalDigestProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: '1200_AutonomousProcessorExecutionRunStateSignalDigestProcessor',
+    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_BUILD',
+    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER',
+    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST',
+    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: 0,
+        outputCount: 0,
+        summary: 'Runtime migration wrapper payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: '1200_AutonomousProcessorExecutionRunStateSignalDigestProcessor',
+          preservedLegacyImplementation: true
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      var errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateSignalDigestProcessorLegacy1200_();
+      return sciipWrapLegacyRuntimeResult1200_(legacyResult, context, transaction);
+    }
+  });
+}
+
+function sciipWrapLegacyRuntimeResult1200_(legacyResult, context, transaction) {
+  legacyResult = legacyResult || {};
+
+  var message = JSON.stringify({
+    migrationVersion: 'v5.3.2',
+    processorMigrated: true,
+    legacyResult: legacyResult,
+    transactionId: transaction.transactionId
+  });
+
+  var config = {
+    processor: context.processor,
+    businessKey: context.businessKey,
+    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
+    recordsUpdated: legacyResult.recordsUpdated || 0,
+    recordsRead: legacyResult.recordsRead || 0,
+    processed: legacyResult.processed || 0,
+    skippedDuplicate: legacyResult.skippedDuplicate || 0,
+    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
+    skippedValidation: legacyResult.skippedValidation || 0,
+    errors: legacyResult.errors || 0,
+    message: message
+  };
+
+  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
+  }
+
+  if (legacyResult.skippedDuplicate) {
+    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
+  }
+
+  if (legacyResult.status === 'ERROR') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
+  }
+
+  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
+}
+
+/*******************************************************
+ * SCIIP_OS v4.1
+ * 1200_AutonomousProcessorExecutionRunStateSignalDigestProcessor
+ *******************************************************/
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_PROCESSOR =
+  '1200_AutonomousProcessorExecutionRunStateSignalDigestProcessor';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_DATE_COLUMN =
+  'Run_State_Date';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_HEADERS = [
+  'Digest_ID',
+  'Business_Key',
+  'Run_State_Date',
+  'Digest_Type',
+  'Signal_Posture',
+  'Digest_Severity',
+  'Digest_Status',
+  'Digest_Message',
+  'Governance_Posture',
+  'Orchestration_Posture',
+  'Dashboard_Posture',
+  'Decisioning_Posture',
+  'Recommended_Action',
+  'Autonomous_Action_Allowed',
+  'Human_Review_Required',
+  'Signals_Reviewed',
+  'Critical_Signal_Count',
+  'High_Signal_Count',
+  'Medium_Signal_Count',
+  'Low_Signal_Count',
+  'Latest_Signal_ID',
+  'Latest_Signal_Category',
+  'Latest_Signal_Severity',
+  'Latest_Signal_Status',
+  'Latest_Operational_State',
+  'Latest_Source_Business_Key',
+  'Digest_Summary_JSON',
+  'Source_Sheet',
+  'Source_Date_Column',
+  'Processor',
+  'Created_At'
+];
+
+/**
+ * Main processor.
+ */
+function sciipRunAutonomousProcessorExecutionRunStateSignalDigestProcessorLegacy1200_() {
+  const startedAt = new Date();
+  const ss = sciipGetSpreadsheet_();
+
+  const inputSheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_SHEET
+  );
+
+  if (!inputSheet) {
+    throw new Error(
+      'Missing input sheet: ' +
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_SHEET
+    );
+  }
+
+  const outputSheet =
+    sciipEnsureAutonomousProcessorExecutionRunStateSignalDigestSheet_();
+
+  const resolvedRunStateDate =
+    sciipResolveLatestProcessingDate_(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_SHEET,
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_DATE_COLUMN
+    ) || sciipFormatDateKey_(startedAt);
+
+  const businessKey =
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST|' +
+    resolvedRunStateDate;
+
+  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_PROCESSOR,
+      status: 'SUCCESS',
+      autonomousProcessorExecutionRunStateSignalDigestsCreated: 0,
+      skippedDuplicate: 1,
+      businessKey: businessKey,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const signalLedgerRows =
+    sciipReadAutonomousProcessorExecutionRunStateSignalDigestInputRows_(
+      inputSheet
+    );
+
+  const sourceRows =
+    sciipFilterAutonomousProcessorExecutionRunStateSignalDigestRowsByDate_(
+      signalLedgerRows,
+      resolvedRunStateDate
+    );
+
+  if (!sourceRows.length) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_PROCESSOR,
+      status: 'SKIPPED_NO_INPUTS',
+      autonomousProcessorExecutionRunStateSignalDigestsCreated: 0,
+      skippedDuplicate: 0,
+      businessKey: businessKey,
+      resolvedRunStateDate: resolvedRunStateDate,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const digestRow =
+    sciipBuildAutonomousProcessorExecutionRunStateSignalDigest_(
+      sourceRows,
+      resolvedRunStateDate,
+      businessKey,
+      startedAt
+    );
+
+  outputSheet.appendRow(digestRow);
+
+  const result = {
+    processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_PROCESSOR,
+    status: 'SUCCESS',
+    autonomousProcessorExecutionRunStateSignalDigestsCreated: 1,
+    skippedDuplicate: 0,
+    businessKey: businessKey,
+    resolvedRunStateDate: resolvedRunStateDate,
+    signalsReviewed: sourceRows.length,
+    completedAt: new Date().toISOString()
+  };
+
+  Logger.log(JSON.stringify(result));
+  return result;
+}
+
+/**
+ * Factory: output sheet.
+ */
+function sciipEnsureAutonomousProcessorExecutionRunStateSignalDigestSheet_() {
+  const ss = sciipGetSpreadsheet_();
+  let sheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_SHEET
+  );
+
+  if (!sheet) {
+    sheet = ss.insertSheet(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_SHEET
+    );
+  }
+
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_HEADERS
+    );
+  }
+
+  const headers =
+    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  const missing =
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_HEADERS.filter(function(h) {
+      return headers.indexOf(h) === -1;
+    });
+
+  if (missing.length) {
+    sheet
+      .getRange(1, headers.length + 1, 1, missing.length)
+      .setValues([missing]);
+  }
+
+  return sheet;
+}
+
+/**
+ * Factory: digest row.
+ */
+function sciipBuildAutonomousProcessorExecutionRunStateSignalDigest_(
+  rows,
+  resolvedRunStateDate,
+  businessKey,
+  startedAt
+) {
+  const aggregate =
+    sciipAggregateAutonomousProcessorExecutionRunStateSignalLedger_(rows);
+
+  const latestSignal =
+    sciipResolveLatestAutonomousProcessorExecutionRunStateSignalDigestInputRow_(
+      rows
+    );
+
+  const signalPosture =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestPosture_(
+      aggregate
+    );
+
+  const digestSeverity =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestSeverity_(
+      aggregate
+    );
+
+  const digestStatus =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestStatus_(
+      digestSeverity,
+      signalPosture
+    );
+
+  const governancePosture =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestGovernancePosture_(
+      aggregate,
+      latestSignal
+    );
+
+  const orchestrationPosture =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestOrchestrationPosture_(
+      aggregate,
+      latestSignal
+    );
+
+  const dashboardPosture =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestDashboardPosture_(
+      digestSeverity
+    );
+
+  const decisioningPosture =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestDecisioningPosture_(
+      aggregate,
+      latestSignal
+    );
+
+  const recommendedAction =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestRecommendedAction_(
+      digestSeverity,
+      signalPosture
+    );
+
+  const autonomousAllowed =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestAutonomousAllowed_(
+      aggregate
+    );
+
+  const humanReviewRequired =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestHumanReviewRequired_(
+      aggregate
+    );
+
+  const digestMessage =
+    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestMessage_(
+      signalPosture,
+      digestSeverity,
+      recommendedAction,
+      aggregate
+    );
+
+  const digestId = 'APRSSD_' + Utilities.getUuid();
+
+  const summary = {
+    runStateDate: resolvedRunStateDate,
+    digestType: 'AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST',
+    signalPosture: signalPosture,
+    digestSeverity: digestSeverity,
+    digestStatus: digestStatus,
+    governancePosture: governancePosture,
+    orchestrationPosture: orchestrationPosture,
+    dashboardPosture: dashboardPosture,
+    decisioningPosture: decisioningPosture,
+    recommendedAction: recommendedAction,
+    autonomousActionAllowed: autonomousAllowed,
+    humanReviewRequired: humanReviewRequired,
+    aggregate: aggregate,
+    latestSignal: {
+      signalId: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_ID']),
+      signalCategory: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Category']),
+      signalSeverity: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Severity']),
+      signalStatus: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Status']),
+      operationalState: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Operational_State']),
+      sourceBusinessKey: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Source_Business_Key'])
+    }
+  };
+
+  return [
+    digestId,
+    businessKey,
+    resolvedRunStateDate,
+    'AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST',
+    signalPosture,
+    digestSeverity,
+    digestStatus,
+    digestMessage,
+    governancePosture,
+    orchestrationPosture,
+    dashboardPosture,
+    decisioningPosture,
+    recommendedAction,
+    autonomousAllowed,
+    humanReviewRequired,
+    aggregate.signalsReviewed,
+    aggregate.criticalSignalCount,
+    aggregate.highSignalCount,
+    aggregate.mediumSignalCount,
+    aggregate.lowSignalCount,
+    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_ID']),
+    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Category']),
+    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Severity']),
+    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Status']),
+    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Operational_State']),
+    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Source_Business_Key']),
+    JSON.stringify(summary),
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_SHEET,
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_DATE_COLUMN,
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_PROCESSOR,
+    startedAt.toISOString()
+  ];
+}
+
+/**
+ * Aggregation logic.
+ */
+function sciipAggregateAutonomousProcessorExecutionRunStateSignalLedger_(rows) {
+  let critical = 0;
+  let high = 0;
+  let medium = 0;
+  let low = 0;
+  let humanReview = 0;
+  let autonomousBlocked = 0;
+
+  rows.forEach(function(row) {
+    const severity = String(
+      sciipGetRunStateSignalDigestInputValue_(row, ['Signal_Severity'])
+    ).toUpperCase();
+
+    if (severity === 'CRITICAL') critical++;
+    else if (severity === 'HIGH') high++;
+    else if (severity === 'MEDIUM') medium++;
+    else low++;
+
+    const requiresReview = String(
+      sciipGetRunStateSignalDigestInputValue_(row, ['Human_Review_Required'])
+    ).toUpperCase();
+
+    const autonomousAllowed = String(
+      sciipGetRunStateSignalDigestInputValue_(row, ['Autonomous_Action_Allowed'])
+    ).toUpperCase();
+
+    if (requiresReview === 'TRUE') humanReview++;
+    if (autonomousAllowed === 'FALSE') autonomousBlocked++;
+  });
+
+  return {
+    signalsReviewed: rows.length,
+    criticalSignalCount: critical,
+    highSignalCount: high,
+    mediumSignalCount: medium,
+    lowSignalCount: low,
+    humanReviewRequiredCount: humanReview,
+    autonomousBlockedCount: autonomousBlocked
+  };
+}
+
+/**
+ * Resolver logic.
+ */
+function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestPosture_(
+  aggregate
+) {
+  if (aggregate.criticalSignalCount > 0) return 'CRITICAL_SIGNAL_ACTIVE';
+  if (aggregate.highSignalCount > 0) return 'HIGH_SIGNAL_ACTIVE';
+  if (aggregate.mediumSignalCount > 0) return 'MONITORING_SIGNAL_ACTIVE';
+  return 'HEALTHY_SIGNAL_ACTIVE';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestSeverity_(
+  aggregate
+) {
+  if (aggregate.criticalSignalCount > 0) return 'CRITICAL';
+  if (aggregate.highSignalCount > 0) return 'HIGH';
+  if (aggregate.mediumSignalCount > 0) return 'MEDIUM';
+  return 'LOW';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestStatus_(
+  severity,
+  posture
+) {
+  if (severity === 'CRITICAL') return 'ACTIVE_CRITICAL_DIGEST';
+  if (severity === 'HIGH') return 'ACTIVE_HIGH_DIGEST';
+  if (severity === 'MEDIUM') return 'ACTIVE_MONITOR_DIGEST';
+  return 'ACTIVE_HEALTHY_DIGEST';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestGovernancePosture_(
+  aggregate,
+  latestSignal
+) {
+  if (aggregate.criticalSignalCount > 0) return 'REVIEW_REQUIRED';
+  if (aggregate.highSignalCount > 0) return 'ESCALATE';
+  if (aggregate.mediumSignalCount > 0) return 'MONITOR';
+
+  return sciipGetRunStateSignalDigestInputValue_(latestSignal, [
+    'Governance_Posture'
+  ]) || 'NORMAL';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestOrchestrationPosture_(
+  aggregate,
+  latestSignal
+) {
+  if (aggregate.criticalSignalCount > 0) return 'PAUSE_PROMOTION';
+  if (aggregate.highSignalCount > 0) return 'HOLD_DISPATCH';
+  if (aggregate.mediumSignalCount > 0) return 'ALLOW_WITH_MONITORING';
+
+  return sciipGetRunStateSignalDigestInputValue_(latestSignal, [
+    'Orchestration_Posture'
+  ]) || 'ALLOW';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestDashboardPosture_(
+  severity
+) {
+  if (severity === 'CRITICAL') return 'SHOW_CRITICAL';
+  if (severity === 'HIGH') return 'SHOW_BLOCKED';
+  if (severity === 'MEDIUM') return 'SHOW_WARNING';
+  return 'SHOW_HEALTHY';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestDecisioningPosture_(
+  aggregate,
+  latestSignal
+) {
+  if (aggregate.criticalSignalCount > 0) return 'DO_NOT_AUTONOMOUSLY_ADVANCE';
+  if (aggregate.highSignalCount > 0) return 'REQUIRE_HUMAN_REVIEW';
+  if (aggregate.mediumSignalCount > 0) return 'ADVANCE_WITH_CAUTION';
+
+  return sciipGetRunStateSignalDigestInputValue_(latestSignal, [
+    'Decisioning_Posture'
+  ]) || 'ADVANCE';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestRecommendedAction_(
+  severity,
+  posture
+) {
+  if (severity === 'CRITICAL') {
+    return 'PAUSE_AUTONOMOUS_ADVANCEMENT_AND_REVIEW_CRITICAL_SIGNALS';
+  }
+
+  if (severity === 'HIGH') {
+    return 'HOLD_DISPATCH_AND_REVIEW_HIGH_SEVERITY_SIGNALS';
+  }
+
+  if (severity === 'MEDIUM') {
+    return 'ALLOW_DOWNSTREAM_PROCESSING_WITH_SIGNAL_MONITORING';
+  }
+
+  return 'ALLOW_DOWNSTREAM_PROCESSING';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestAutonomousAllowed_(
+  aggregate
+) {
+  return aggregate.autonomousBlockedCount === 0;
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestHumanReviewRequired_(
+  aggregate
+) {
+  return aggregate.humanReviewRequiredCount > 0;
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestMessage_(
+  signalPosture,
+  digestSeverity,
+  recommendedAction,
+  aggregate
+) {
+  return (
+    'Run state signal digest resolved as ' +
+    digestSeverity +
+    ' with posture ' +
+    signalPosture +
+    '. Signals reviewed: ' +
+    aggregate.signalsReviewed +
+    '. Recommended action: ' +
+    recommendedAction +
+    '.'
+  );
+}
+
+/**
+ * Reader logic.
+ */
+function sciipReadAutonomousProcessorExecutionRunStateSignalDigestInputRows_(
+  sheet
+) {
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return [];
+
+  const headers = values[0].map(String);
+
+  return values.slice(1).map(function(row) {
+    const obj = {};
+    headers.forEach(function(header, i) {
+      obj[header] = row[i];
+    });
+    return obj;
+  });
+}
+
+function sciipFilterAutonomousProcessorExecutionRunStateSignalDigestRowsByDate_(
+  rows,
+  resolvedDate
+) {
+  return rows.filter(function(row) {
+    const rawDate = sciipGetRunStateSignalDigestInputValue_(row, [
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_DATE_COLUMN,
+      'Processing_Date',
+      'Run_Date',
+      'Signal_Date',
+      'Ledger_Date',
+      'Created_At',
+      'createdAt'
+    ]);
+
+    return sciipNormalizeRunStateSignalDigestDateKey_(rawDate) === resolvedDate;
+  });
+}
+
+function sciipResolveLatestAutonomousProcessorExecutionRunStateSignalDigestInputRow_(
+  rows
+) {
+  if (!rows.length) return {};
+
+  const sorted = rows.slice().sort(function(a, b) {
+    const aDate = new Date(
+      sciipGetRunStateSignalDigestInputValue_(a, ['Created_At', 'createdAt']) || 0
+    ).getTime();
+
+    const bDate = new Date(
+      sciipGetRunStateSignalDigestInputValue_(b, ['Created_At', 'createdAt']) || 0
+    ).getTime();
+
+    return bDate - aDate;
+  });
+
+  return sorted[0];
+}
+
+function sciipGetRunStateSignalDigestInputValue_(row, aliases) {
+  for (let i = 0; i < aliases.length; i++) {
+    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
+      return row[aliases[i]];
+    }
+  }
+
+  return '';
+}
+
+function sciipNormalizeRunStateSignalDigestDateKey_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return sciipFormatDateKey_(value);
+  }
+
+  const text = String(value);
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    return text;
+  }
+
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return sciipFormatDateKey_(parsed);
+  }
+
+  return text;
+}
+
+/**
+ * Standalone test.
+ */
+function sciipTestAutonomousProcessorExecutionRunStateSignalDigestProcessor() {
+  const result =
+    sciipRunAutonomousProcessorExecutionRunStateSignalDigestProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousProcessorExecutionRunStateSignalDigestProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 1210_AutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor
+ *
+ * Migration note:
+ * Preserves original processor business logic by executing
+ * the original implementation inside SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipRunAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: '1210_AutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor',
+    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER_BUILD',
+    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST',
+    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER',
+    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: 0,
+        outputCount: 0,
+        summary: 'Runtime migration wrapper payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: '1210_AutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor',
+          preservedLegacyImplementation: true
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      var errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessorLegacy1210_();
+      return sciipWrapLegacyRuntimeResult1210_(legacyResult, context, transaction);
+    }
+  });
+}
+
+function sciipWrapLegacyRuntimeResult1210_(legacyResult, context, transaction) {
+  legacyResult = legacyResult || {};
+
+  var message = JSON.stringify({
+    migrationVersion: 'v5.3.2',
+    processorMigrated: true,
+    legacyResult: legacyResult,
+    transactionId: transaction.transactionId
+  });
+
+  var config = {
+    processor: context.processor,
+    businessKey: context.businessKey,
+    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
+    recordsUpdated: legacyResult.recordsUpdated || 0,
+    recordsRead: legacyResult.recordsRead || 0,
+    processed: legacyResult.processed || 0,
+    skippedDuplicate: legacyResult.skippedDuplicate || 0,
+    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
+    skippedValidation: legacyResult.skippedValidation || 0,
+    errors: legacyResult.errors || 0,
+    message: message
+  };
+
+  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
+  }
+
+  if (legacyResult.skippedDuplicate) {
+    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
+  }
+
+  if (legacyResult.status === 'ERROR') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
+  }
+
+  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
+}
+
+/*******************************************************
+ * SCIIP_OS v4.1
+ * 1210_AutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor
+ *******************************************************/
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_PROCESSOR =
+  '1210_AutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_DATE_COLUMN =
+  'Run_State_Date';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_HEADERS = [
+  'Ledger_Entry_ID',
+  'Business_Key',
+  'Run_State_Date',
+  'Digest_ID',
+  'Digest_Type',
+  'Signal_Posture',
+  'Digest_Severity',
+  'Digest_Status',
+  'Digest_Message',
+  'Governance_Posture',
+  'Orchestration_Posture',
+  'Dashboard_Posture',
+  'Decisioning_Posture',
+  'Recommended_Action',
+  'Autonomous_Action_Allowed',
+  'Human_Review_Required',
+  'Signals_Reviewed',
+  'Critical_Signal_Count',
+  'High_Signal_Count',
+  'Medium_Signal_Count',
+  'Low_Signal_Count',
+  'Latest_Signal_ID',
+  'Latest_Signal_Category',
+  'Latest_Signal_Severity',
+  'Latest_Signal_Status',
+  'Latest_Operational_State',
+  'Latest_Source_Business_Key',
+  'Source_Digest_Business_Key',
+  'Source_Sheet',
+  'Source_Date_Column',
+  'Ledger_Summary_JSON',
+  'Processor',
+  'Created_At'
+];
+
+/**
+ * Main processor.
+ */
+function sciipRunAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessorLegacy1210_() {
+  const startedAt = new Date();
+  const ss = sciipGetSpreadsheet_();
+
+  const inputSheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_SHEET
+  );
+
+  if (!inputSheet) {
+    throw new Error(
+      'Missing input sheet: ' +
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_SHEET
+    );
+  }
+
+  const outputSheet =
+    sciipEnsureAutonomousProcessorExecutionRunStateSignalDigestLedgerSheet_();
+
+  const resolvedRunStateDate =
+    sciipResolveLatestProcessingDate_(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_SHEET,
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_DATE_COLUMN
+    ) || sciipFormatDateKey_(startedAt);
+
+  const businessKey =
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER|' +
+    resolvedRunStateDate;
+
+  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_PROCESSOR,
+      status: 'SUCCESS',
+      autonomousProcessorExecutionRunStateSignalDigestLedgerEntriesCreated: 0,
+      skippedDuplicate: 1,
+      businessKey: businessKey,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const digestRows =
+    sciipReadAutonomousProcessorExecutionRunStateSignalDigestLedgerInputRows_(
+      inputSheet
+    );
+
+  const sourceRows =
+    sciipFilterAutonomousProcessorExecutionRunStateSignalDigestLedgerRowsByDate_(
+      digestRows,
+      resolvedRunStateDate
+    );
+
+  if (!sourceRows.length) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_PROCESSOR,
+      status: 'SKIPPED_NO_INPUTS',
+      autonomousProcessorExecutionRunStateSignalDigestLedgerEntriesCreated: 0,
+      skippedDuplicate: 0,
+      businessKey: businessKey,
+      resolvedRunStateDate: resolvedRunStateDate,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const latestDigest =
+    sciipResolveLatestAutonomousProcessorExecutionRunStateSignalDigestLedgerInputRow_(
+      sourceRows
+    );
+
+  const ledgerRow =
+    sciipBuildAutonomousProcessorExecutionRunStateSignalDigestLedgerEntry_(
+      latestDigest,
+      resolvedRunStateDate,
+      businessKey,
+      startedAt
+    );
+
+  outputSheet.appendRow(ledgerRow);
+
+  const result = {
+    processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_PROCESSOR,
+    status: 'SUCCESS',
+    autonomousProcessorExecutionRunStateSignalDigestLedgerEntriesCreated: 1,
+    skippedDuplicate: 0,
+    businessKey: businessKey,
+    resolvedRunStateDate: resolvedRunStateDate,
+    completedAt: new Date().toISOString()
+  };
+
+  Logger.log(JSON.stringify(result));
+  return result;
+}
+
+/**
+ * Factory: output sheet.
+ */
+function sciipEnsureAutonomousProcessorExecutionRunStateSignalDigestLedgerSheet_() {
+  const ss = sciipGetSpreadsheet_();
+  let sheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_SHEET
+  );
+
+  if (!sheet) {
+    sheet = ss.insertSheet(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_SHEET
+    );
+  }
+
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_HEADERS
+    );
+  }
+
+  const headers =
+    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  const missing =
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_HEADERS.filter(
+      function(h) {
+        return headers.indexOf(h) === -1;
+      }
+    );
+
+  if (missing.length) {
+    sheet
+      .getRange(1, headers.length + 1, 1, missing.length)
+      .setValues([missing]);
+  }
+
+  return sheet;
+}
+
+/**
+ * Factory: ledger entry.
+ */
+function sciipBuildAutonomousProcessorExecutionRunStateSignalDigestLedgerEntry_(
+  digest,
+  resolvedRunStateDate,
+  businessKey,
+  startedAt
+) {
+  const ledgerEntryId = 'APRSSDL_' + Utilities.getUuid();
+
+  const summary = {
+    runStateDate: resolvedRunStateDate,
+    digestId: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_ID']),
+    digestType: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Type']),
+    signalPosture: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Signal_Posture']),
+    digestSeverity: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Severity']),
+    digestStatus: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Status']),
+    governancePosture: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Governance_Posture']),
+    orchestrationPosture: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Orchestration_Posture']),
+    dashboardPosture: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Dashboard_Posture']),
+    decisioningPosture: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Decisioning_Posture']),
+    recommendedAction: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Recommended_Action']),
+    autonomousActionAllowed: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Autonomous_Action_Allowed']),
+    humanReviewRequired: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Human_Review_Required']),
+    signalsReviewed: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Signals_Reviewed']),
+    sourceDigestBusinessKey: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Business_Key'])
+  };
+
+  return [
+    ledgerEntryId,
+    businessKey,
+    resolvedRunStateDate,
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_ID']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Type']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Signal_Posture']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Severity']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Status']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Message']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Governance_Posture']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Orchestration_Posture']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Dashboard_Posture']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Decisioning_Posture']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Recommended_Action']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Autonomous_Action_Allowed']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Human_Review_Required']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Signals_Reviewed']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Critical_Signal_Count']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['High_Signal_Count']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Medium_Signal_Count']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Low_Signal_Count']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Signal_ID']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Signal_Category']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Signal_Severity']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Signal_Status']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Operational_State']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Source_Business_Key']),
+    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Business_Key']),
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_SHEET,
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_DATE_COLUMN,
+    JSON.stringify(summary),
+    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_PROCESSOR,
+    startedAt.toISOString()
+  ];
+}
+
+/**
+ * Reader logic.
+ */
+function sciipReadAutonomousProcessorExecutionRunStateSignalDigestLedgerInputRows_(
+  sheet
+) {
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return [];
+
+  const headers = values[0].map(String);
+
+  return values.slice(1).map(function(row) {
+    const obj = {};
+    headers.forEach(function(header, i) {
+      obj[header] = row[i];
+    });
+    return obj;
+  });
+}
+
+/**
+ * Resolver logic.
+ */
+function sciipFilterAutonomousProcessorExecutionRunStateSignalDigestLedgerRowsByDate_(
+  rows,
+  resolvedDate
+) {
+  return rows.filter(function(row) {
+    const rawDate = sciipGetRunStateSignalDigestLedgerInputValue_(row, [
+      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_DATE_COLUMN,
+      'Processing_Date',
+      'Run_Date',
+      'Digest_Date',
+      'Signal_Date',
+      'Created_At',
+      'createdAt'
+    ]);
+
+    return sciipNormalizeRunStateSignalDigestLedgerDateKey_(rawDate) === resolvedDate;
+  });
+}
+
+function sciipResolveLatestAutonomousProcessorExecutionRunStateSignalDigestLedgerInputRow_(
+  rows
+) {
+  if (!rows.length) return {};
+
+  const sorted = rows.slice().sort(function(a, b) {
+    const aDate = new Date(
+      sciipGetRunStateSignalDigestLedgerInputValue_(a, ['Created_At', 'createdAt']) || 0
+    ).getTime();
+
+    const bDate = new Date(
+      sciipGetRunStateSignalDigestLedgerInputValue_(b, ['Created_At', 'createdAt']) || 0
+    ).getTime();
+
+    return bDate - aDate;
+  });
+
+  return sorted[0];
+}
+
+function sciipGetRunStateSignalDigestLedgerInputValue_(row, aliases) {
+  for (let i = 0; i < aliases.length; i++) {
+    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
+      return row[aliases[i]];
+    }
+  }
+
+  return '';
+}
+
+function sciipNormalizeRunStateSignalDigestLedgerDateKey_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return sciipFormatDateKey_(value);
+  }
+
+  const text = String(value);
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    return text;
+  }
+
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return sciipFormatDateKey_(parsed);
+  }
+
+  return text;
+}
+
+/**
+ * Standalone test.
+ */
+function sciipTestAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor() {
+  const result =
+    sciipRunAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
+/*******************************************************
+ * SCIIP_OS v5.3.2 Runtime Migration
+ * 1220_AutonomousProcessorExecutionRunStateCommandCenterProcessor
+ *
+ * Migration note:
+ * Preserves original processor business logic by executing
+ * the original implementation inside SCIIP_RuntimeProcessorBase.
+ *******************************************************/
+
+function sciipRunAutonomousProcessorExecutionRunStateCommandCenterProcessor() {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: '1220_AutonomousProcessorExecutionRunStateCommandCenterProcessor',
+    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_COMMAND_CENTER_BUILD',
+    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER',
+    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_COMMAND_CENTER',
+    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_COMMAND_CENTER_RUNTIME_LEDGER',
+
+    buildPayload: function(context, definition) {
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: 0,
+        outputCount: 0,
+        summary: 'Runtime migration wrapper payload created.',
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.3.2',
+          originalProcessor: '1220_AutonomousProcessorExecutionRunStateCommandCenterProcessor',
+          preservedLegacyImplementation: true
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      var errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateCommandCenterProcessorLegacy1220_();
+      return sciipWrapLegacyRuntimeResult1220_(legacyResult, context, transaction);
+    }
+  });
+}
+
+function sciipWrapLegacyRuntimeResult1220_(legacyResult, context, transaction) {
+  legacyResult = legacyResult || {};
+
+  var message = JSON.stringify({
+    migrationVersion: 'v5.3.2',
+    processorMigrated: true,
+    legacyResult: legacyResult,
+    transactionId: transaction.transactionId
+  });
+
+  var config = {
+    processor: context.processor,
+    businessKey: context.businessKey,
+    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
+    recordsUpdated: legacyResult.recordsUpdated || 0,
+    recordsRead: legacyResult.recordsRead || 0,
+    processed: legacyResult.processed || 0,
+    skippedDuplicate: legacyResult.skippedDuplicate || 0,
+    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
+    skippedValidation: legacyResult.skippedValidation || 0,
+    errors: legacyResult.errors || 0,
+    message: message
+  };
+
+  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
+  }
+
+  if (legacyResult.skippedDuplicate) {
+    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
+  }
+
+  if (legacyResult.status === 'ERROR') {
+    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
+  }
+
+  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
+}
+
+/*******************************************************
+ * SCIIP_OS v4.1
+ * 1220_AutonomousProcessorExecutionRunStateCommandCenterProcessor
+ *******************************************************/
+
+const SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_PROCESSOR =
+  '1220_AutonomousProcessorExecutionRunStateCommandCenterProcessor';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_SHEET =
+  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_COMMAND_CENTER';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_DATE_COLUMN =
+  'Run_State_Date';
+
+const SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_HEADERS = [
+  'Command_Center_Record_ID',
+  'Business_Key',
+  'Run_State_Date',
+  'Command_Center_Type',
+  'Command_Center_Status',
+  'Display_Severity',
+  'Display_Posture',
+  'Display_Message',
+  'Dashboard_Posture',
+  'Governance_Posture',
+  'Orchestration_Posture',
+  'Decisioning_Posture',
+  'Recommended_Action',
+  'Autonomous_Action_Allowed',
+  'Human_Review_Required',
+  'Signals_Reviewed',
+  'Critical_Signal_Count',
+  'High_Signal_Count',
+  'Medium_Signal_Count',
+  'Low_Signal_Count',
+  'Latest_Signal_ID',
+  'Latest_Signal_Category',
+  'Latest_Signal_Severity',
+  'Latest_Signal_Status',
+  'Latest_Operational_State',
+  'Source_Ledger_Entry_ID',
+  'Source_Digest_ID',
+  'Source_Business_Key',
+  'Source_Sheet',
+  'Source_Date_Column',
+  'Command_Center_JSON',
+  'Processor',
+  'Created_At'
+];
+
+/**
+ * Main processor.
+ */
+function sciipRunAutonomousProcessorExecutionRunStateCommandCenterProcessorLegacy1220_() {
+  const startedAt = new Date();
+  const ss = sciipGetSpreadsheet_();
+
+  const inputSheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_SHEET
+  );
+
+  if (!inputSheet) {
+    throw new Error(
+      'Missing input sheet: ' +
+      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_SHEET
+    );
+  }
+
+  const outputSheet =
+    sciipEnsureAutonomousProcessorExecutionRunStateCommandCenterSheet_();
+
+  const resolvedRunStateDate =
+    sciipResolveLatestProcessingDate_(
+      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_SHEET,
+      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_DATE_COLUMN
+    ) || sciipFormatDateKey_(startedAt);
+
+  const businessKey =
+    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_COMMAND_CENTER|' +
+    resolvedRunStateDate;
+
+  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_PROCESSOR,
+      status: 'SUCCESS',
+      autonomousProcessorExecutionRunStateCommandCenterRecordsCreated: 0,
+      skippedDuplicate: 1,
+      businessKey: businessKey,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const ledgerRows =
+    sciipReadAutonomousProcessorExecutionRunStateCommandCenterInputRows_(
+      inputSheet
+    );
+
+  const sourceRows =
+    sciipFilterAutonomousProcessorExecutionRunStateCommandCenterRowsByDate_(
+      ledgerRows,
+      resolvedRunStateDate
+    );
+
+  if (!sourceRows.length) {
+    const result = {
+      processor: SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_PROCESSOR,
+      status: 'SKIPPED_NO_INPUTS',
+      autonomousProcessorExecutionRunStateCommandCenterRecordsCreated: 0,
+      skippedDuplicate: 0,
+      businessKey: businessKey,
+      resolvedRunStateDate: resolvedRunStateDate,
+      completedAt: new Date().toISOString()
+    };
+
+    Logger.log(JSON.stringify(result));
+    return result;
+  }
+
+  const latestLedgerRow =
+    sciipResolveLatestAutonomousProcessorExecutionRunStateCommandCenterInputRow_(
+      sourceRows
+    );
+
+  const commandCenterRow =
+    sciipBuildAutonomousProcessorExecutionRunStateCommandCenterRecord_(
+      latestLedgerRow,
+      resolvedRunStateDate,
+      businessKey,
+      startedAt
+    );
+
+  outputSheet.appendRow(commandCenterRow);
+
+  const result = {
+    processor: SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_PROCESSOR,
+    status: 'SUCCESS',
+    autonomousProcessorExecutionRunStateCommandCenterRecordsCreated: 1,
+    skippedDuplicate: 0,
+    businessKey: businessKey,
+    resolvedRunStateDate: resolvedRunStateDate,
+    completedAt: new Date().toISOString()
+  };
+
+  Logger.log(JSON.stringify(result));
+  return result;
+}
+
+/**
+ * Factory: output sheet.
+ */
+function sciipEnsureAutonomousProcessorExecutionRunStateCommandCenterSheet_() {
+  const ss = sciipGetSpreadsheet_();
+  let sheet = ss.getSheetByName(
+    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_SHEET
+  );
+
+  if (!sheet) {
+    sheet = ss.insertSheet(
+      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_SHEET
+    );
+  }
+
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(
+      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_HEADERS
+    );
+  }
+
+  const headers =
+    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  const missing =
+    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_HEADERS.filter(function(h) {
+      return headers.indexOf(h) === -1;
+    });
+
+  if (missing.length) {
+    sheet
+      .getRange(1, headers.length + 1, 1, missing.length)
+      .setValues([missing]);
+  }
+
+  return sheet;
+}
+
+/**
+ * Factory: command-center record.
+ */
+function sciipBuildAutonomousProcessorExecutionRunStateCommandCenterRecord_(
+  ledgerRow,
+  resolvedRunStateDate,
+  businessKey,
+  startedAt
+) {
+  const displaySeverity =
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Digest_Severity']);
+
+  const signalPosture =
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Signal_Posture']);
+
+  const dashboardPosture =
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Dashboard_Posture']);
+
+  const governancePosture =
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Governance_Posture']);
+
+  const orchestrationPosture =
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Orchestration_Posture']);
+
+  const decisioningPosture =
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Decisioning_Posture']);
+
+  const recommendedAction =
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Recommended_Action']);
+
+  const commandCenterStatus =
+    sciipResolveAutonomousProcessorExecutionRunStateCommandCenterStatus_(
+      displaySeverity,
+      governancePosture,
+      decisioningPosture
+    );
+
+  const displayPosture =
+    sciipResolveAutonomousProcessorExecutionRunStateCommandCenterDisplayPosture_(
+      displaySeverity,
+      signalPosture
+    );
+
+  const displayMessage =
+    sciipResolveAutonomousProcessorExecutionRunStateCommandCenterDisplayMessage_(
+      commandCenterStatus,
+      displaySeverity,
+      signalPosture,
+      recommendedAction
+    );
+
+  const recordId = 'APRSCC_' + Utilities.getUuid();
+
+  const commandCenterJson = {
+    runStateDate: resolvedRunStateDate,
+    commandCenterType: 'AUTONOMOUS_RUN_STATE_COMMAND_CENTER',
+    commandCenterStatus: commandCenterStatus,
+    displaySeverity: displaySeverity,
+    displayPosture: displayPosture,
+    dashboardPosture: dashboardPosture,
+    governancePosture: governancePosture,
+    orchestrationPosture: orchestrationPosture,
+    decisioningPosture: decisioningPosture,
+    recommendedAction: recommendedAction,
+    autonomousActionAllowed: sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
+      'Autonomous_Action_Allowed'
+    ]),
+    humanReviewRequired: sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
+      'Human_Review_Required'
+    ]),
+    sourceLedgerEntryId: sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
+      'Ledger_Entry_ID'
+    ]),
+    sourceDigestId: sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
+      'Digest_ID'
+    ]),
+    sourceBusinessKey: sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
+      'Business_Key'
+    ])
+  };
+
+  return [
+    recordId,
+    businessKey,
+    resolvedRunStateDate,
+    'AUTONOMOUS_RUN_STATE_COMMAND_CENTER',
+    commandCenterStatus,
+    displaySeverity,
+    displayPosture,
+    displayMessage,
+    dashboardPosture,
+    governancePosture,
+    orchestrationPosture,
+    decisioningPosture,
+    recommendedAction,
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
+      'Autonomous_Action_Allowed'
+    ]),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
+      'Human_Review_Required'
+    ]),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Signals_Reviewed']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Critical_Signal_Count']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['High_Signal_Count']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Medium_Signal_Count']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Low_Signal_Count']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Latest_Signal_ID']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Latest_Signal_Category']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Latest_Signal_Severity']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Latest_Signal_Status']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Latest_Operational_State']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Ledger_Entry_ID']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Digest_ID']),
+    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Business_Key']),
+    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_SHEET,
+    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_DATE_COLUMN,
+    JSON.stringify(commandCenterJson),
+    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_PROCESSOR,
+    startedAt.toISOString()
+  ];
+}
+
+/**
+ * Command-center resolver logic.
+ */
+function sciipResolveAutonomousProcessorExecutionRunStateCommandCenterStatus_(
+  displaySeverity,
+  governancePosture,
+  decisioningPosture
+) {
+  const severity = String(displaySeverity || '').toUpperCase();
+  const governance = String(governancePosture || '').toUpperCase();
+  const decisioning = String(decisioningPosture || '').toUpperCase();
+
+  if (
+    severity === 'CRITICAL' ||
+    governance === 'REVIEW_REQUIRED' ||
+    decisioning === 'DO_NOT_AUTONOMOUSLY_ADVANCE'
+  ) {
+    return 'COMMAND_CENTER_CRITICAL';
+  }
+
+  if (
+    severity === 'HIGH' ||
+    governance === 'ESCALATE' ||
+    decisioning === 'REQUIRE_HUMAN_REVIEW'
+  ) {
+    return 'COMMAND_CENTER_ATTENTION_REQUIRED';
+  }
+
+  if (severity === 'MEDIUM') {
+    return 'COMMAND_CENTER_MONITOR';
+  }
+
+  return 'COMMAND_CENTER_HEALTHY';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateCommandCenterDisplayPosture_(
+  displaySeverity,
+  signalPosture
+) {
+  const severity = String(displaySeverity || '').toUpperCase();
+
+  if (severity === 'CRITICAL') return 'Critical autonomous run state signal active';
+  if (severity === 'HIGH') return 'High-priority autonomous run state signal active';
+  if (severity === 'MEDIUM') return 'Autonomous run state requires monitoring';
+
+  return 'Autonomous run state healthy';
+}
+
+function sciipResolveAutonomousProcessorExecutionRunStateCommandCenterDisplayMessage_(
+  commandCenterStatus,
+  displaySeverity,
+  signalPosture,
+  recommendedAction
+) {
+  return (
+    commandCenterStatus +
+    ': Run state signal digest is ' +
+    displaySeverity +
+    ' with posture ' +
+    signalPosture +
+    '. Recommended action: ' +
+    recommendedAction +
+    '.'
+  );
+}
+
+/**
+ * Reader logic.
+ */
+function sciipReadAutonomousProcessorExecutionRunStateCommandCenterInputRows_(
+  sheet
+) {
+  const values = sheet.getDataRange().getValues();
+  if (values.length < 2) return [];
+
+  const headers = values[0].map(String);
+
+  return values.slice(1).map(function(row) {
+    const obj = {};
+    headers.forEach(function(header, i) {
+      obj[header] = row[i];
+    });
+    return obj;
+  });
+}
+
+/**
+ * Resolver logic.
+ */
+function sciipFilterAutonomousProcessorExecutionRunStateCommandCenterRowsByDate_(
+  rows,
+  resolvedDate
+) {
+  return rows.filter(function(row) {
+    const rawDate = sciipGetRunStateCommandCenterInputValue_(row, [
+      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_DATE_COLUMN,
+      'Processing_Date',
+      'Run_Date',
+      'Digest_Date',
+      'Signal_Date',
+      'Created_At',
+      'createdAt'
+    ]);
+
+    return sciipNormalizeRunStateCommandCenterDateKey_(rawDate) === resolvedDate;
+  });
+}
+
+function sciipResolveLatestAutonomousProcessorExecutionRunStateCommandCenterInputRow_(
+  rows
+) {
+  if (!rows.length) return {};
+
+  const sorted = rows.slice().sort(function(a, b) {
+    const aDate = new Date(
+      sciipGetRunStateCommandCenterInputValue_(a, [
+        'Created_At',
+        'createdAt'
+      ]) || 0
+    ).getTime();
+
+    const bDate = new Date(
+      sciipGetRunStateCommandCenterInputValue_(b, [
+        'Created_At',
+        'createdAt'
+      ]) || 0
+    ).getTime();
+
+    return bDate - aDate;
+  });
+
+  return sorted[0];
+}
+
+function sciipGetRunStateCommandCenterInputValue_(row, aliases) {
+  for (let i = 0; i < aliases.length; i++) {
+    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
+      return row[aliases[i]];
+    }
+  }
+
+  return '';
+}
+
+function sciipNormalizeRunStateCommandCenterDateKey_(value) {
+  if (!value) return '';
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return sciipFormatDateKey_(value);
+  }
+
+  const text = String(value);
+
+  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+    return text;
+  }
+
+  const parsed = new Date(text);
+  if (!isNaN(parsed.getTime())) {
+    return sciipFormatDateKey_(parsed);
+  }
+
+  return text;
+}
+
+/**
+ * Standalone test.
+ */
+function sciipTestAutonomousProcessorExecutionRunStateCommandCenterProcessor() {
+  const result =
+    sciipRunAutonomousProcessorExecutionRunStateCommandCenterProcessor();
+
+  Logger.log(JSON.stringify({
+    test: 'sciipTestAutonomousProcessorExecutionRunStateCommandCenterProcessor',
+    result: result
+  }));
+
+  return result;
+}
+
 /*******************************************************
  * SCIIP_OS v5.3.2 Runtime Migration
  * 1230_AutonomousProcessorExecutionRunStateCommandCenterLedgerProcessor
@@ -24259,3100 +28142,6 @@ function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureRevi
     JSON.stringify({
       test:
         'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemMapProcessor',
-      result
-    })
-  );
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1810_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1810_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_INDEX_BUILD',
-    sourceSheet: '',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_INDEXS',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_INDEXS_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1810_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessorLegacy1810_();
-      return sciipWrapLegacyRuntimeResult1810_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1810_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/************************************************************
- * SCIIP_OS v5.0 Architecture Review Track
- * 1810_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessor
- ************************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessorLegacy1810_() {
-  const processor =
-    '1810_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessor';
-
-  const ss = sciipGetSpreadsheet_();
-  const dateKey = sciipNormalizeProcessingDateKey_();
-
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_MAP',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'systemMapScope',
-      'systemMapName',
-      'systemMapStatus',
-      'systemMapSummary',
-      'mappedNodeType',
-      'mappedNodeKey',
-      'mappedNodeLabel',
-      'mappedRelationshipType',
-      'mappedRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'systemMapPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const indexSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_INDEX',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'systemIndexScope',
-      'systemIndexName',
-      'systemIndexStatus',
-      'systemIndexSummary',
-      'indexedSystemMapBusinessKey',
-      'indexedNodeType',
-      'indexedNodeKey',
-      'indexedNodeLabel',
-      'indexedRelationshipType',
-      'indexedRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'systemIndexPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_INDEX|' +
-    dateKey;
-
-  if (sciipSheetBusinessKeyExists_(indexSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexesCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
-
-  if (!sourceRecord) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexesCreated: 0,
-      skippedDuplicate: 0,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const now = new Date();
-
-  const compactSourcePayload = {
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.systemMapStatus || sourceRecord.sourceStatus || '',
-    systemMapScope: sourceRecord.systemMapScope || '',
-    systemMapName: sourceRecord.systemMapName || '',
-    mappedNodeType: sourceRecord.mappedNodeType || '',
-    mappedNodeKey: sourceRecord.mappedNodeKey || '',
-    mappedNodeLabel: sourceRecord.mappedNodeLabel || '',
-    mappedRelationshipType: sourceRecord.mappedRelationshipType || '',
-    mappedRelationshipTargetKey: sourceRecord.mappedRelationshipTargetKey || '',
-    reviewTrack: sourceRecord.reviewTrack || '',
-    currentVersion: sourceRecord.currentVersion || '',
-    targetVersion: sourceRecord.targetVersion || '',
-    createdAt: sourceRecord.createdAt || ''
-  };
-
-  const systemIndexPayload = {
-    systemIndexType: 'ARCHITECTURE_REVIEW_SYSTEM_INDEX',
-    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
-    sourceSystemMapBusinessKey: sourceRecord.businessKey || '',
-    indexedNodeType:
-      sourceRecord.mappedNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    indexedNodeKey:
-      sourceRecord.mappedNodeKey || '',
-    indexedNodeLabel:
-      sourceRecord.mappedNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    indexedRelationshipType:
-      sourceRecord.mappedRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    indexedRelationshipTargetKey:
-      sourceRecord.mappedRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    architectureReviewScope:
-      sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    architecturePrinciple:
-      sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    systemIndexStatus: 'ACTIVE',
-    reviewTrack:
-      sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion:
-      sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    targetVersion:
-      sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    createdAt: now.toISOString()
-  };
-
-  indexSheet.appendRow([
-    businessKey,
-    dateKey,
-    processor,
-    sourceRecord.businessKey || '',
-    sourceRecord.processor || '',
-    sourceRecord.systemMapStatus || sourceRecord.sourceStatus || '',
-    'SCIIP_OS_ARCHITECTURE_REVIEW_SYSTEM_INDEX',
-    'SCIIP_OS v5.0 Architecture Review System Index',
-    'ACTIVE',
-    'Architecture review system map indexed into SCIIP_OS architecture review system index.',
-    sourceRecord.businessKey || '',
-    sourceRecord.mappedNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    sourceRecord.mappedNodeKey || '',
-    sourceRecord.mappedNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    sourceRecord.mappedRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    sourceRecord.mappedRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    sourceRecord.architectureFinding ||
-      'Architecture review records are first-class SCIIP_OS knowledge assets.',
-    sourceRecord.architectureRecommendation ||
-      'Preserve architecture-review records as indexed platform memory for future continuity processors.',
-    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    JSON.stringify(systemIndexPayload),
-    JSON.stringify(compactSourcePayload),
-    now.toISOString()
-  ]);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexesCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: now.toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessor();
-
-  Logger.log(
-    JSON.stringify({
-      test:
-        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessor',
-      result
-    })
-  );
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1820_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1820_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_REGISTRY_BUILD',
-    sourceSheet: '',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_REGISTRYS',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_REGISTRYS_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1820_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessorLegacy1820_();
-      return sciipWrapLegacyRuntimeResult1820_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1820_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/************************************************************
- * SCIIP_OS v5.0 Architecture Review Track
- * 1820_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessor
- ************************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessorLegacy1820_() {
-  const processor =
-    '1820_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessor';
-
-  const ss = sciipGetSpreadsheet_();
-  const dateKey = sciipNormalizeProcessingDateKey_();
-
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_INDEX',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'systemIndexScope',
-      'systemIndexName',
-      'systemIndexStatus',
-      'systemIndexSummary',
-      'indexedSystemMapBusinessKey',
-      'indexedNodeType',
-      'indexedNodeKey',
-      'indexedNodeLabel',
-      'indexedRelationshipType',
-      'indexedRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'systemIndexPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const registrySheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_REGISTRY',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'systemRegistryScope',
-      'systemRegistryName',
-      'systemRegistryStatus',
-      'systemRegistrySummary',
-      'registeredSystemIndexBusinessKey',
-      'registeredNodeType',
-      'registeredNodeKey',
-      'registeredNodeLabel',
-      'registeredRelationshipType',
-      'registeredRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'systemRegistryPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_REGISTRY|' +
-    dateKey;
-
-  if (sciipSheetBusinessKeyExists_(registrySheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistriesCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
-
-  if (!sourceRecord) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistriesCreated: 0,
-      skippedDuplicate: 0,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const now = new Date();
-
-  const compactSourcePayload = {
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.systemIndexStatus || sourceRecord.sourceStatus || '',
-    systemIndexScope: sourceRecord.systemIndexScope || '',
-    systemIndexName: sourceRecord.systemIndexName || '',
-    indexedNodeType: sourceRecord.indexedNodeType || '',
-    indexedNodeKey: sourceRecord.indexedNodeKey || '',
-    indexedNodeLabel: sourceRecord.indexedNodeLabel || '',
-    indexedRelationshipType: sourceRecord.indexedRelationshipType || '',
-    indexedRelationshipTargetKey: sourceRecord.indexedRelationshipTargetKey || '',
-    reviewTrack: sourceRecord.reviewTrack || '',
-    currentVersion: sourceRecord.currentVersion || '',
-    targetVersion: sourceRecord.targetVersion || '',
-    createdAt: sourceRecord.createdAt || ''
-  };
-
-  const registryPayload = {
-    systemRegistryType: 'ARCHITECTURE_REVIEW_SYSTEM_REGISTRY',
-    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
-    sourceSystemIndexBusinessKey: sourceRecord.businessKey || '',
-    registeredNodeType:
-      sourceRecord.indexedNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    registeredNodeKey:
-      sourceRecord.indexedNodeKey || '',
-    registeredNodeLabel:
-      sourceRecord.indexedNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    registeredRelationshipType:
-      sourceRecord.indexedRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    registeredRelationshipTargetKey:
-      sourceRecord.indexedRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    architectureReviewScope:
-      sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    architecturePrinciple:
-      sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    systemRegistryStatus: 'REGISTERED',
-    reviewTrack:
-      sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion:
-      sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    targetVersion:
-      sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    createdAt: now.toISOString()
-  };
-
-  registrySheet.appendRow([
-    businessKey,
-    dateKey,
-    processor,
-    sourceRecord.businessKey || '',
-    sourceRecord.processor || '',
-    sourceRecord.systemIndexStatus || sourceRecord.sourceStatus || '',
-    'SCIIP_OS_ARCHITECTURE_REVIEW_SYSTEM_REGISTRY',
-    'SCIIP_OS v5.0 Architecture Review System Registry',
-    'REGISTERED',
-    'Architecture review system index registered into SCIIP_OS architecture review system registry.',
-    sourceRecord.businessKey || '',
-    sourceRecord.indexedNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    sourceRecord.indexedNodeKey || '',
-    sourceRecord.indexedNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    sourceRecord.indexedRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    sourceRecord.indexedRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    sourceRecord.architectureFinding ||
-      'Architecture review records are first-class SCIIP_OS knowledge assets.',
-    sourceRecord.architectureRecommendation ||
-      'Register architecture-review memory for downstream continuity and autonomous planning processors.',
-    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    JSON.stringify(registryPayload),
-    JSON.stringify(compactSourcePayload),
-    now.toISOString()
-  ]);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistriesCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: now.toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessor();
-
-  Logger.log(
-    JSON.stringify({
-      test:
-        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessor',
-      result
-    })
-  );
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1830_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1830_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_STATE_BUILD',
-    sourceSheet: '',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_STATES',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_STATES_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1830_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessorLegacy1830_();
-      return sciipWrapLegacyRuntimeResult1830_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1830_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/************************************************************
- * SCIIP_OS v5.0 Architecture Review Track
- * 1830_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessor
- ************************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessorLegacy1830_() {
-  const processor =
-    '1830_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessor';
-
-  const ss = sciipGetSpreadsheet_();
-  const dateKey = sciipNormalizeProcessingDateKey_();
-
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_REGISTRY',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'systemRegistryScope',
-      'systemRegistryName',
-      'systemRegistryStatus',
-      'systemRegistrySummary',
-      'registeredSystemIndexBusinessKey',
-      'registeredNodeType',
-      'registeredNodeKey',
-      'registeredNodeLabel',
-      'registeredRelationshipType',
-      'registeredRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'systemRegistryPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const stateSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_STATE',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'systemStateScope',
-      'systemStateName',
-      'systemStateStatus',
-      'systemStateSummary',
-      'stateSourceRegistryBusinessKey',
-      'stateNodeType',
-      'stateNodeKey',
-      'stateNodeLabel',
-      'stateRelationshipType',
-      'stateRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'systemStatePayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_STATE|' +
-    dateKey;
-
-  if (sciipSheetBusinessKeyExists_(stateSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStatesCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
-
-  if (!sourceRecord) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStatesCreated: 0,
-      skippedDuplicate: 0,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const now = new Date();
-
-  const compactSourcePayload = {
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.systemRegistryStatus || sourceRecord.sourceStatus || '',
-    systemRegistryScope: sourceRecord.systemRegistryScope || '',
-    systemRegistryName: sourceRecord.systemRegistryName || '',
-    registeredNodeType: sourceRecord.registeredNodeType || '',
-    registeredNodeKey: sourceRecord.registeredNodeKey || '',
-    registeredNodeLabel: sourceRecord.registeredNodeLabel || '',
-    registeredRelationshipType: sourceRecord.registeredRelationshipType || '',
-    registeredRelationshipTargetKey: sourceRecord.registeredRelationshipTargetKey || '',
-    reviewTrack: sourceRecord.reviewTrack || '',
-    currentVersion: sourceRecord.currentVersion || '',
-    targetVersion: sourceRecord.targetVersion || '',
-    createdAt: sourceRecord.createdAt || ''
-  };
-
-  const statePayload = {
-    systemStateType: 'ARCHITECTURE_REVIEW_SYSTEM_STATE',
-    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
-    sourceSystemRegistryBusinessKey: sourceRecord.businessKey || '',
-    stateNodeType:
-      sourceRecord.registeredNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    stateNodeKey:
-      sourceRecord.registeredNodeKey || '',
-    stateNodeLabel:
-      sourceRecord.registeredNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    stateRelationshipType:
-      sourceRecord.registeredRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    stateRelationshipTargetKey:
-      sourceRecord.registeredRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    architectureReviewScope:
-      sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    architecturePrinciple:
-      sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    systemStateStatus: 'CURRENT',
-    reviewTrack:
-      sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion:
-      sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    targetVersion:
-      sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    createdAt: now.toISOString()
-  };
-
-  stateSheet.appendRow([
-    businessKey,
-    dateKey,
-    processor,
-    sourceRecord.businessKey || '',
-    sourceRecord.processor || '',
-    sourceRecord.systemRegistryStatus || sourceRecord.sourceStatus || '',
-    'SCIIP_OS_ARCHITECTURE_REVIEW_SYSTEM_STATE',
-    'SCIIP_OS v5.0 Architecture Review System State',
-    'CURRENT',
-    'Architecture review system registry promoted into current SCIIP_OS architecture review system state.',
-    sourceRecord.businessKey || '',
-    sourceRecord.registeredNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    sourceRecord.registeredNodeKey || '',
-    sourceRecord.registeredNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    sourceRecord.registeredRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    sourceRecord.registeredRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    sourceRecord.architectureFinding ||
-      'Architecture review records are first-class SCIIP_OS knowledge assets.',
-    sourceRecord.architectureRecommendation ||
-      'Maintain architecture-review memory as current system state for downstream continuity processors.',
-    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    JSON.stringify(statePayload),
-    JSON.stringify(compactSourcePayload),
-    now.toISOString()
-  ]);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStatesCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: now.toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessor();
-
-  Logger.log(
-    JSON.stringify({
-      test:
-        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessor',
-      result
-    })
-  );
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1840_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1840_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SNAPSHOT_BUILD',
-    sourceSheet: '',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SNAPSHOTS',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SNAPSHOTS_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1840_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotProcessorLegacy1840_();
-      return sciipWrapLegacyRuntimeResult1840_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1840_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/************************************************************
- * SCIIP_OS v5.0 Architecture Review Track
- * 1840_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotProcessor
- ************************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotProcessorLegacy1840_() {
-  const processor =
-    '1840_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotProcessor';
-
-  const ss = sciipGetSpreadsheet_();
-  const dateKey = sciipNormalizeProcessingDateKey_();
-
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SYSTEM_STATE',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'systemStateScope',
-      'systemStateName',
-      'systemStateStatus',
-      'systemStateSummary',
-      'stateSourceRegistryBusinessKey',
-      'stateNodeType',
-      'stateNodeKey',
-      'stateNodeLabel',
-      'stateRelationshipType',
-      'stateRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'systemStatePayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const snapshotSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SNAPSHOT',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'snapshotScope',
-      'snapshotName',
-      'snapshotStatus',
-      'snapshotSummary',
-      'snapshotSourceStateBusinessKey',
-      'snapshotNodeType',
-      'snapshotNodeKey',
-      'snapshotNodeLabel',
-      'snapshotRelationshipType',
-      'snapshotRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'snapshotPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SNAPSHOT|' +
-    dateKey;
-
-  if (sciipSheetBusinessKeyExists_(snapshotSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
-
-  if (!sourceRecord) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotsCreated: 0,
-      skippedDuplicate: 0,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const now = new Date();
-
-  const compactSourcePayload = {
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.systemStateStatus || sourceRecord.sourceStatus || '',
-    systemStateScope: sourceRecord.systemStateScope || '',
-    systemStateName: sourceRecord.systemStateName || '',
-    stateNodeType: sourceRecord.stateNodeType || '',
-    stateNodeKey: sourceRecord.stateNodeKey || '',
-    stateNodeLabel: sourceRecord.stateNodeLabel || '',
-    stateRelationshipType: sourceRecord.stateRelationshipType || '',
-    stateRelationshipTargetKey: sourceRecord.stateRelationshipTargetKey || '',
-    reviewTrack: sourceRecord.reviewTrack || '',
-    currentVersion: sourceRecord.currentVersion || '',
-    targetVersion: sourceRecord.targetVersion || '',
-    createdAt: sourceRecord.createdAt || ''
-  };
-
-  const snapshotPayload = {
-    snapshotType: 'ARCHITECTURE_REVIEW_SNAPSHOT',
-    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
-    sourceSystemStateBusinessKey: sourceRecord.businessKey || '',
-    snapshotNodeType:
-      sourceRecord.stateNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    snapshotNodeKey:
-      sourceRecord.stateNodeKey || '',
-    snapshotNodeLabel:
-      sourceRecord.stateNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    snapshotRelationshipType:
-      sourceRecord.stateRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    snapshotRelationshipTargetKey:
-      sourceRecord.stateRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    architectureReviewScope:
-      sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    architecturePrinciple:
-      sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    snapshotStatus: 'CAPTURED',
-    reviewTrack:
-      sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion:
-      sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    targetVersion:
-      sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    capturedAt: now.toISOString()
-  };
-
-  snapshotSheet.appendRow([
-    businessKey,
-    dateKey,
-    processor,
-    sourceRecord.businessKey || '',
-    sourceRecord.processor || '',
-    sourceRecord.systemStateStatus || sourceRecord.sourceStatus || '',
-    'SCIIP_OS_ARCHITECTURE_REVIEW_SNAPSHOT',
-    'SCIIP_OS v5.0 Architecture Review Snapshot',
-    'CAPTURED',
-    'Current architecture review system state captured as a permanent architecture-review snapshot.',
-    sourceRecord.businessKey || '',
-    sourceRecord.stateNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    sourceRecord.stateNodeKey || '',
-    sourceRecord.stateNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    sourceRecord.stateRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    sourceRecord.stateRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    sourceRecord.architectureFinding ||
-      'Architecture review records are first-class SCIIP_OS knowledge assets.',
-    sourceRecord.architectureRecommendation ||
-      'Use captured architecture-review snapshots as stable references for downstream continuity processors.',
-    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    JSON.stringify(snapshotPayload),
-    JSON.stringify(compactSourcePayload),
-    now.toISOString()
-  ]);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: now.toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotProcessor();
-
-  Logger.log(
-    JSON.stringify({
-      test:
-        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewSnapshotProcessor',
-      result
-    })
-  );
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1850_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1850_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_MIRROR_BUILD',
-    sourceSheet: '',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_MIRRORS',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_MIRRORS_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1850_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorProcessorLegacy1850_();
-      return sciipWrapLegacyRuntimeResult1850_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1850_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/************************************************************
- * SCIIP_OS v5.0 Architecture Review Track
- * 1850_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorProcessor
- ************************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorProcessorLegacy1850_() {
-  const processor =
-    '1850_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorProcessor';
-
-  const ss = sciipGetSpreadsheet_();
-  const dateKey = sciipNormalizeProcessingDateKey_();
-
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_SNAPSHOT',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'snapshotScope',
-      'snapshotName',
-      'snapshotStatus',
-      'snapshotSummary',
-      'snapshotSourceStateBusinessKey',
-      'snapshotNodeType',
-      'snapshotNodeKey',
-      'snapshotNodeLabel',
-      'snapshotRelationshipType',
-      'snapshotRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'snapshotPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const mirrorSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_MIRROR',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'mirrorScope',
-      'mirrorName',
-      'mirrorStatus',
-      'mirrorSummary',
-      'mirrorSourceSnapshotBusinessKey',
-      'mirrorNodeType',
-      'mirrorNodeKey',
-      'mirrorNodeLabel',
-      'mirrorRelationshipType',
-      'mirrorRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'mirrorPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_MIRROR|' +
-    dateKey;
-
-  if (sciipSheetBusinessKeyExists_(mirrorSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
-
-  if (!sourceRecord) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorsCreated: 0,
-      skippedDuplicate: 0,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const now = new Date();
-
-  const compactSourcePayload = {
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.snapshotStatus || sourceRecord.sourceStatus || '',
-    snapshotScope: sourceRecord.snapshotScope || '',
-    snapshotName: sourceRecord.snapshotName || '',
-    snapshotNodeType: sourceRecord.snapshotNodeType || '',
-    snapshotNodeKey: sourceRecord.snapshotNodeKey || '',
-    snapshotNodeLabel: sourceRecord.snapshotNodeLabel || '',
-    snapshotRelationshipType: sourceRecord.snapshotRelationshipType || '',
-    snapshotRelationshipTargetKey: sourceRecord.snapshotRelationshipTargetKey || '',
-    reviewTrack: sourceRecord.reviewTrack || '',
-    currentVersion: sourceRecord.currentVersion || '',
-    targetVersion: sourceRecord.targetVersion || '',
-    createdAt: sourceRecord.createdAt || ''
-  };
-
-  const mirrorPayload = {
-    mirrorType: 'ARCHITECTURE_REVIEW_MIRROR',
-    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
-    sourceSnapshotBusinessKey: sourceRecord.businessKey || '',
-    mirrorNodeType:
-      sourceRecord.snapshotNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    mirrorNodeKey:
-      sourceRecord.snapshotNodeKey || '',
-    mirrorNodeLabel:
-      sourceRecord.snapshotNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    mirrorRelationshipType:
-      sourceRecord.snapshotRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    mirrorRelationshipTargetKey:
-      sourceRecord.snapshotRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    architectureReviewScope:
-      sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    architecturePrinciple:
-      sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    mirrorStatus: 'MIRRORED',
-    reviewTrack:
-      sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion:
-      sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    targetVersion:
-      sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    mirroredAt: now.toISOString()
-  };
-
-  mirrorSheet.appendRow([
-    businessKey,
-    dateKey,
-    processor,
-    sourceRecord.businessKey || '',
-    sourceRecord.processor || '',
-    sourceRecord.snapshotStatus || sourceRecord.sourceStatus || '',
-    'SCIIP_OS_ARCHITECTURE_REVIEW_MIRROR',
-    'SCIIP_OS v5.0 Architecture Review Mirror',
-    'MIRRORED',
-    'Architecture review snapshot mirrored into durable architecture-review mirror state.',
-    sourceRecord.businessKey || '',
-    sourceRecord.snapshotNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    sourceRecord.snapshotNodeKey || '',
-    sourceRecord.snapshotNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    sourceRecord.snapshotRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    sourceRecord.snapshotRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    sourceRecord.architectureFinding ||
-      'Architecture review records are first-class SCIIP_OS knowledge assets.',
-    sourceRecord.architectureRecommendation ||
-      'Mirror architecture-review snapshots to preserve redundant continuity references.',
-    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    JSON.stringify(mirrorPayload),
-    JSON.stringify(compactSourcePayload),
-    now.toISOString()
-  ]);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: now.toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorProcessor();
-
-  Logger.log(
-    JSON.stringify({
-      test:
-        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewMirrorProcessor',
-      result
-    })
-  );
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1860_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicaProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicaProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1860_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicaProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_REPLICA_BUILD',
-    sourceSheet: '',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_REPLICAS',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_REPLICAS_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1860_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicaProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicaProcessorLegacy1860_();
-      return sciipWrapLegacyRuntimeResult1860_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1860_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/************************************************************
- * SCIIP_OS v5.0 Architecture Review Track
- * 1860_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicaProcessor
- ************************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicaProcessorLegacy1860_() {
-  const processor =
-    '1860_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicaProcessor';
-
-  const ss = sciipGetSpreadsheet_();
-  const dateKey = sciipNormalizeProcessingDateKey_();
-
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_MIRROR',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'mirrorScope',
-      'mirrorName',
-      'mirrorStatus',
-      'mirrorSummary',
-      'mirrorSourceSnapshotBusinessKey',
-      'mirrorNodeType',
-      'mirrorNodeKey',
-      'mirrorNodeLabel',
-      'mirrorRelationshipType',
-      'mirrorRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'mirrorPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const replicaSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_REPLICA',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'replicaScope',
-      'replicaName',
-      'replicaStatus',
-      'replicaSummary',
-      'replicaSourceMirrorBusinessKey',
-      'replicaNodeType',
-      'replicaNodeKey',
-      'replicaNodeLabel',
-      'replicaRelationshipType',
-      'replicaRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'replicaPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_REPLICA|' +
-    dateKey;
-
-  if (sciipSheetBusinessKeyExists_(replicaSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicasCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
-
-  if (!sourceRecord) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicasCreated: 0,
-      skippedDuplicate: 0,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const now = new Date();
-
-  const compactSourcePayload = {
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.mirrorStatus || sourceRecord.sourceStatus || '',
-    mirrorScope: sourceRecord.mirrorScope || '',
-    mirrorName: sourceRecord.mirrorName || '',
-    mirrorNodeType: sourceRecord.mirrorNodeType || '',
-    mirrorNodeKey: sourceRecord.mirrorNodeKey || '',
-    mirrorNodeLabel: sourceRecord.mirrorNodeLabel || '',
-    mirrorRelationshipType: sourceRecord.mirrorRelationshipType || '',
-    mirrorRelationshipTargetKey: sourceRecord.mirrorRelationshipTargetKey || '',
-    reviewTrack: sourceRecord.reviewTrack || '',
-    currentVersion: sourceRecord.currentVersion || '',
-    targetVersion: sourceRecord.targetVersion || '',
-    createdAt: sourceRecord.createdAt || ''
-  };
-
-  const replicaPayload = {
-    replicaType: 'ARCHITECTURE_REVIEW_REPLICA',
-    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
-    sourceMirrorBusinessKey: sourceRecord.businessKey || '',
-    replicaNodeType:
-      sourceRecord.mirrorNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    replicaNodeKey:
-      sourceRecord.mirrorNodeKey || '',
-    replicaNodeLabel:
-      sourceRecord.mirrorNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    replicaRelationshipType:
-      sourceRecord.mirrorRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    replicaRelationshipTargetKey:
-      sourceRecord.mirrorRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    architectureReviewScope:
-      sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    architecturePrinciple:
-      sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    replicaStatus: 'REPLICATED',
-    reviewTrack:
-      sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion:
-      sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    targetVersion:
-      sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    replicatedAt: now.toISOString()
-  };
-
-  replicaSheet.appendRow([
-    businessKey,
-    dateKey,
-    processor,
-    sourceRecord.businessKey || '',
-    sourceRecord.processor || '',
-    sourceRecord.mirrorStatus || sourceRecord.sourceStatus || '',
-    'SCIIP_OS_ARCHITECTURE_REVIEW_REPLICA',
-    'SCIIP_OS v5.0 Architecture Review Replica',
-    'REPLICATED',
-    'Architecture review mirror replicated into durable architecture-review replica state.',
-    sourceRecord.businessKey || '',
-    sourceRecord.mirrorNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    sourceRecord.mirrorNodeKey || '',
-    sourceRecord.mirrorNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    sourceRecord.mirrorRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    sourceRecord.mirrorRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    sourceRecord.architectureFinding ||
-      'Architecture review records are first-class SCIIP_OS knowledge assets.',
-    sourceRecord.architectureRecommendation ||
-      'Replicate architecture-review mirrors to preserve resilient continuity references.',
-    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    JSON.stringify(replicaPayload),
-    JSON.stringify(compactSourcePayload),
-    now.toISOString()
-  ]);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicasCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: now.toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicaProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicaProcessor();
-
-  Logger.log(
-    JSON.stringify({
-      test:
-        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewReplicaProcessor',
-      result
-    })
-  );
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1870_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1870_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINT_BUILD',
-    sourceSheet: '',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINTS',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINTS_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1870_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointProcessorLegacy1870_();
-      return sciipWrapLegacyRuntimeResult1870_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1870_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/************************************************************
- * SCIIP_OS v5.0 Architecture Review Track
- * 1870_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointProcessor
- ************************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointProcessorLegacy1870_() {
-  const processor =
-    '1870_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointProcessor';
-
-  const ss = sciipGetSpreadsheet_();
-  const dateKey = sciipNormalizeProcessingDateKey_();
-
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_REPLICA',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'replicaScope',
-      'replicaName',
-      'replicaStatus',
-      'replicaSummary',
-      'replicaSourceMirrorBusinessKey',
-      'replicaNodeType',
-      'replicaNodeKey',
-      'replicaNodeLabel',
-      'replicaRelationshipType',
-      'replicaRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'replicaPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const checkpointSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINT',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'checkpointScope',
-      'checkpointName',
-      'checkpointStatus',
-      'checkpointSummary',
-      'checkpointSourceReplicaBusinessKey',
-      'checkpointNodeType',
-      'checkpointNodeKey',
-      'checkpointNodeLabel',
-      'checkpointRelationshipType',
-      'checkpointRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'checkpointPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINT|' +
-    dateKey;
-
-  if (sciipSheetBusinessKeyExists_(checkpointSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
-
-  if (!sourceRecord) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointsCreated: 0,
-      skippedDuplicate: 0,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const now = new Date();
-
-  const compactSourcePayload = {
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.replicaStatus || sourceRecord.sourceStatus || '',
-    replicaScope: sourceRecord.replicaScope || '',
-    replicaName: sourceRecord.replicaName || '',
-    replicaNodeType: sourceRecord.replicaNodeType || '',
-    replicaNodeKey: sourceRecord.replicaNodeKey || '',
-    replicaNodeLabel: sourceRecord.replicaNodeLabel || '',
-    replicaRelationshipType: sourceRecord.replicaRelationshipType || '',
-    replicaRelationshipTargetKey: sourceRecord.replicaRelationshipTargetKey || '',
-    reviewTrack: sourceRecord.reviewTrack || '',
-    currentVersion: sourceRecord.currentVersion || '',
-    targetVersion: sourceRecord.targetVersion || '',
-    createdAt: sourceRecord.createdAt || ''
-  };
-
-  const checkpointPayload = {
-    checkpointType: 'ARCHITECTURE_REVIEW_CHECKPOINT',
-    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
-    sourceReplicaBusinessKey: sourceRecord.businessKey || '',
-    checkpointNodeType:
-      sourceRecord.replicaNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    checkpointNodeKey:
-      sourceRecord.replicaNodeKey || '',
-    checkpointNodeLabel:
-      sourceRecord.replicaNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    checkpointRelationshipType:
-      sourceRecord.replicaRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    checkpointRelationshipTargetKey:
-      sourceRecord.replicaRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    architectureReviewScope:
-      sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    architecturePrinciple:
-      sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    checkpointStatus: 'CHECKPOINTED',
-    reviewTrack:
-      sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion:
-      sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    targetVersion:
-      sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    checkpointedAt: now.toISOString()
-  };
-
-  checkpointSheet.appendRow([
-    businessKey,
-    dateKey,
-    processor,
-    sourceRecord.businessKey || '',
-    sourceRecord.processor || '',
-    sourceRecord.replicaStatus || sourceRecord.sourceStatus || '',
-    'SCIIP_OS_ARCHITECTURE_REVIEW_CHECKPOINT',
-    'SCIIP_OS v5.0 Architecture Review Checkpoint',
-    'CHECKPOINTED',
-    'Architecture review replica checkpointed as a durable continuity reference.',
-    sourceRecord.businessKey || '',
-    sourceRecord.replicaNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    sourceRecord.replicaNodeKey || '',
-    sourceRecord.replicaNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    sourceRecord.replicaRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    sourceRecord.replicaRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    sourceRecord.architectureFinding ||
-      'Architecture review records are first-class SCIIP_OS knowledge assets.',
-    sourceRecord.architectureRecommendation ||
-      'Checkpoint architecture-review replicas as durable references for downstream continuity processors.',
-    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    JSON.stringify(checkpointPayload),
-    JSON.stringify(compactSourcePayload),
-    now.toISOString()
-  ]);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: now.toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointProcessor();
-
-  Logger.log(
-    JSON.stringify({
-      test:
-        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointProcessor',
-      result
-    })
-  );
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1880_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgerProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgerProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1880_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgerProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINT_LEDGER_BUILD',
-    sourceSheet: '',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINT_LEDGERS',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINT_LEDGERS_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1880_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgerProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgerProcessorLegacy1880_();
-      return sciipWrapLegacyRuntimeResult1880_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1880_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/************************************************************
- * SCIIP_OS v5.0 Architecture Review Track
- * 1880_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgerProcessor
- ************************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgerProcessorLegacy1880_() {
-  const processor =
-    '1880_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgerProcessor';
-
-  const ss = sciipGetSpreadsheet_();
-  const dateKey = sciipNormalizeProcessingDateKey_();
-
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINT',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'checkpointScope',
-      'checkpointName',
-      'checkpointStatus',
-      'checkpointSummary',
-      'checkpointSourceReplicaBusinessKey',
-      'checkpointNodeType',
-      'checkpointNodeKey',
-      'checkpointNodeLabel',
-      'checkpointRelationshipType',
-      'checkpointRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'checkpointPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const ledgerSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINT_LEDGER',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'checkpointLedgerScope',
-      'checkpointLedgerName',
-      'checkpointLedgerStatus',
-      'checkpointLedgerSummary',
-      'ledgeredCheckpointBusinessKey',
-      'ledgeredNodeType',
-      'ledgeredNodeKey',
-      'ledgeredNodeLabel',
-      'ledgeredRelationshipType',
-      'ledgeredRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'checkpointLedgerPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINT_LEDGER|' +
-    dateKey;
-
-  if (sciipSheetBusinessKeyExists_(ledgerSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgersCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
-
-  if (!sourceRecord) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgersCreated: 0,
-      skippedDuplicate: 0,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const now = new Date();
-
-  const compactSourcePayload = {
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.checkpointStatus || sourceRecord.sourceStatus || '',
-    checkpointScope: sourceRecord.checkpointScope || '',
-    checkpointName: sourceRecord.checkpointName || '',
-    checkpointNodeType: sourceRecord.checkpointNodeType || '',
-    checkpointNodeKey: sourceRecord.checkpointNodeKey || '',
-    checkpointNodeLabel: sourceRecord.checkpointNodeLabel || '',
-    checkpointRelationshipType: sourceRecord.checkpointRelationshipType || '',
-    checkpointRelationshipTargetKey: sourceRecord.checkpointRelationshipTargetKey || '',
-    reviewTrack: sourceRecord.reviewTrack || '',
-    currentVersion: sourceRecord.currentVersion || '',
-    targetVersion: sourceRecord.targetVersion || '',
-    createdAt: sourceRecord.createdAt || ''
-  };
-
-  const checkpointLedgerPayload = {
-    checkpointLedgerType: 'ARCHITECTURE_REVIEW_CHECKPOINT_LEDGER',
-    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
-    sourceCheckpointBusinessKey: sourceRecord.businessKey || '',
-    ledgeredNodeType:
-      sourceRecord.checkpointNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    ledgeredNodeKey:
-      sourceRecord.checkpointNodeKey || '',
-    ledgeredNodeLabel:
-      sourceRecord.checkpointNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    ledgeredRelationshipType:
-      sourceRecord.checkpointRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    ledgeredRelationshipTargetKey:
-      sourceRecord.checkpointRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    architectureReviewScope:
-      sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    architecturePrinciple:
-      sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    checkpointLedgerStatus: 'LEDGERED',
-    reviewTrack:
-      sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion:
-      sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    targetVersion:
-      sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    ledgeredAt: now.toISOString()
-  };
-
-  ledgerSheet.appendRow([
-    businessKey,
-    dateKey,
-    processor,
-    sourceRecord.businessKey || '',
-    sourceRecord.processor || '',
-    sourceRecord.checkpointStatus || sourceRecord.sourceStatus || '',
-    'SCIIP_OS_ARCHITECTURE_REVIEW_CHECKPOINT_LEDGER',
-    'SCIIP_OS v5.0 Architecture Review Checkpoint Ledger',
-    'LEDGERED',
-    'Architecture review checkpoint written into permanent checkpoint ledger history.',
-    sourceRecord.businessKey || '',
-    sourceRecord.checkpointNodeType || 'ARCHITECTURE_REVIEW_KNOWLEDGE_NODE',
-    sourceRecord.checkpointNodeKey || '',
-    sourceRecord.checkpointNodeLabel || 'SCIIP_OS v5.0 Architecture Review Memory',
-    sourceRecord.checkpointRelationshipType || 'DERIVED_FROM_ARCHITECTURE_REVIEW_ARCHIVE',
-    sourceRecord.checkpointRelationshipTargetKey || sourceRecord.sourceBusinessKey || '',
-    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    sourceRecord.architectureFinding ||
-      'Architecture review records are first-class SCIIP_OS knowledge assets.',
-    sourceRecord.architectureRecommendation ||
-      'Maintain architecture-review checkpoint ledgers as permanent audit history for downstream platform evolution.',
-    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    JSON.stringify(checkpointLedgerPayload),
-    JSON.stringify(compactSourcePayload),
-    now.toISOString()
-  ]);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgersCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: now.toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgerProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgerProcessor();
-
-  Logger.log(
-    JSON.stringify({
-      test:
-        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCheckpointLedgerProcessor',
-      result
-    })
-  );
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1890_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1890_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_VALIDATION_BUILD',
-    sourceSheet: '',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_VALIDATIONS',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_VALIDATIONS_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1890_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationProcessorLegacy1890_();
-      return sciipWrapLegacyRuntimeResult1890_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1890_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/************************************************************
- * SCIIP_OS v5.0 Architecture Review Track
- * 1890_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationProcessor
- *
- * Consumes:
- * AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINT_LEDGER
- *
- * Produces:
- * AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_VALIDATION
- ************************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationProcessorLegacy1890_() {
-
-  const processor =
-    '1890_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationProcessor';
-
-  const ss = sciipGetSpreadsheet_();
-  const dateKey = sciipNormalizeProcessingDateKey_();
-
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CHECKPOINT_LEDGER',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'checkpointLedgerScope',
-      'checkpointLedgerName',
-      'checkpointLedgerStatus',
-      'checkpointLedgerSummary',
-      'ledgeredCheckpointBusinessKey',
-      'ledgeredNodeType',
-      'ledgeredNodeKey',
-      'ledgeredNodeLabel',
-      'ledgeredRelationshipType',
-      'ledgeredRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'checkpointLedgerPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const validationSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_VALIDATION',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'validationScope',
-      'validationName',
-      'validationStatus',
-      'validationSummary',
-      'validationResult',
-      'validatedBusinessKey',
-      'validatedNodeType',
-      'validatedNodeKey',
-      'validatedNodeLabel',
-      'validatedRelationshipType',
-      'validatedRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'validationPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_VALIDATION|' +
-    dateKey;
-
-  if (sciipSheetBusinessKeyExists_(validationSheet, businessKey)) {
-
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
-
-  if (!sourceRecord) {
-
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationsCreated: 0,
-      skippedDuplicate: 0,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const now = new Date();
-
-  const compactSourcePayload = {
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.checkpointLedgerStatus || sourceRecord.sourceStatus || '',
-    checkpointLedgerScope: sourceRecord.checkpointLedgerScope || '',
-    checkpointLedgerName: sourceRecord.checkpointLedgerName || '',
-    ledgeredNodeType: sourceRecord.ledgeredNodeType || '',
-    ledgeredNodeKey: sourceRecord.ledgeredNodeKey || '',
-    ledgeredNodeLabel: sourceRecord.ledgeredNodeLabel || '',
-    reviewTrack: sourceRecord.reviewTrack || '',
-    currentVersion: sourceRecord.currentVersion || '',
-    targetVersion: sourceRecord.targetVersion || '',
-    createdAt: sourceRecord.createdAt || ''
-  };
-
-  const validationPayload = {
-    validationType: 'ARCHITECTURE_REVIEW_VALIDATION',
-    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
-    validationResult: 'PASSED',
-    sourceCheckpointLedgerBusinessKey: sourceRecord.businessKey || '',
-    validatedBusinessKey: sourceRecord.ledgeredCheckpointBusinessKey || '',
-    validatedNodeType: sourceRecord.ledgeredNodeType || '',
-    validatedNodeKey: sourceRecord.ledgeredNodeKey || '',
-    validatedNodeLabel: sourceRecord.ledgeredNodeLabel || '',
-    reviewTrack: sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion: sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    targetVersion: sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    validatedAt: now.toISOString()
-  };
-
-  validationSheet.appendRow([
-    businessKey,
-    dateKey,
-    processor,
-    sourceRecord.businessKey || '',
-    sourceRecord.processor || '',
-    sourceRecord.checkpointLedgerStatus || sourceRecord.sourceStatus || '',
-    'SCIIP_OS_ARCHITECTURE_REVIEW_VALIDATION',
-    'SCIIP_OS v5.0 Architecture Review Validation',
-    'VALIDATED',
-    'Architecture Review checkpoint ledger successfully validated.',
-    'PASSED',
-    sourceRecord.ledgeredCheckpointBusinessKey || '',
-    sourceRecord.ledgeredNodeType || '',
-    sourceRecord.ledgeredNodeKey || '',
-    sourceRecord.ledgeredNodeLabel || '',
-    sourceRecord.ledgeredRelationshipType || '',
-    sourceRecord.ledgeredRelationshipTargetKey || '',
-    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    sourceRecord.architecturePrinciple || '',
-    sourceRecord.architectureFinding || '',
-    sourceRecord.architectureRecommendation || '',
-    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    JSON.stringify(validationPayload),
-    JSON.stringify(compactSourcePayload),
-    now.toISOString()
-  ]);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: now.toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationProcessor() {
-
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationProcessor();
-
-  Logger.log(JSON.stringify({
-    test:
-      'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewValidationProcessor',
-    result
-  }));
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1900_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1900_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CERTIFICATION_BUILD',
-    sourceSheet: '',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CERTIFICATIONS',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CERTIFICATIONS_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1900_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationProcessorLegacy1900_();
-      return sciipWrapLegacyRuntimeResult1900_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1900_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/************************************************************
- * SCIIP_OS v5.0 Architecture Review Track
- * 1900_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationProcessor
- ************************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationProcessorLegacy1900_() {
-  const processor =
-    '1900_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationProcessor';
-
-  const ss = sciipGetSpreadsheet_();
-  const dateKey = sciipNormalizeProcessingDateKey_();
-
-  const sourceSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_VALIDATION',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'validationScope',
-      'validationName',
-      'validationStatus',
-      'validationSummary',
-      'validationResult',
-      'validatedBusinessKey',
-      'validatedNodeType',
-      'validatedNodeKey',
-      'validatedNodeLabel',
-      'validatedRelationshipType',
-      'validatedRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'validationPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const certificationSheet = sciipEnsureSheetWithHeaders_(
-    ss,
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CERTIFICATION',
-    [
-      'businessKey',
-      'dateKey',
-      'processor',
-      'sourceBusinessKey',
-      'sourceProcessor',
-      'sourceStatus',
-      'certificationScope',
-      'certificationName',
-      'certificationStatus',
-      'certificationSummary',
-      'certificationResult',
-      'certifiedBusinessKey',
-      'certifiedNodeType',
-      'certifiedNodeKey',
-      'certifiedNodeLabel',
-      'certifiedRelationshipType',
-      'certifiedRelationshipTargetKey',
-      'architectureReviewScope',
-      'architecturePrinciple',
-      'architectureFinding',
-      'architectureRecommendation',
-      'reviewTrack',
-      'currentVersion',
-      'targetVersion',
-      'certificationPayloadJson',
-      'sourcePayloadJson',
-      'createdAt'
-    ]
-  );
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY_ARCHITECTURE_REVIEW_CERTIFICATION|' +
-    dateKey;
-
-  if (sciipSheetBusinessKeyExists_(certificationSheet, businessKey)) {
-    const result = {
-      processor,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const sourceRecord = sciipLatestRecordFromSheet_(sourceSheet);
-
-  if (!sourceRecord) {
-    const result = {
-      processor,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationsCreated: 0,
-      skippedDuplicate: 0,
-      businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const now = new Date();
-
-  const validationResult = sourceRecord.validationResult || 'PASSED';
-  const certificationResult =
-    String(validationResult).toUpperCase() === 'PASSED' ? 'CERTIFIED' : 'NOT_CERTIFIED';
-
-  const compactSourcePayload = {
-    sourceBusinessKey: sourceRecord.businessKey || '',
-    sourceProcessor: sourceRecord.processor || '',
-    sourceStatus: sourceRecord.validationStatus || sourceRecord.sourceStatus || '',
-    validationResult,
-    validatedBusinessKey: sourceRecord.validatedBusinessKey || '',
-    validatedNodeType: sourceRecord.validatedNodeType || '',
-    validatedNodeKey: sourceRecord.validatedNodeKey || '',
-    validatedNodeLabel: sourceRecord.validatedNodeLabel || '',
-    reviewTrack: sourceRecord.reviewTrack || '',
-    currentVersion: sourceRecord.currentVersion || '',
-    targetVersion: sourceRecord.targetVersion || '',
-    createdAt: sourceRecord.createdAt || ''
-  };
-
-  const certificationPayload = {
-    certificationType: 'ARCHITECTURE_REVIEW_CERTIFICATION',
-    continuityScope: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_CONTINUITY',
-    sourceValidationBusinessKey: sourceRecord.businessKey || '',
-    validationResult,
-    certificationResult,
-    certifiedBusinessKey: sourceRecord.validatedBusinessKey || '',
-    certifiedNodeType: sourceRecord.validatedNodeType || '',
-    certifiedNodeKey: sourceRecord.validatedNodeKey || '',
-    certifiedNodeLabel: sourceRecord.validatedNodeLabel || '',
-    architectureReviewScope:
-      sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    architecturePrinciple:
-      sourceRecord.architecturePrinciple ||
-      'EVENT_SOURCED_KNOWLEDGE_GRAPH_NATIVE_PLATFORM_MEMORY',
-    reviewTrack: sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    currentVersion: sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    targetVersion: sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    certifiedAt: now.toISOString()
-  };
-
-  certificationSheet.appendRow([
-    businessKey,
-    dateKey,
-    processor,
-    sourceRecord.businessKey || '',
-    sourceRecord.processor || '',
-    sourceRecord.validationStatus || sourceRecord.sourceStatus || '',
-    'SCIIP_OS_ARCHITECTURE_REVIEW_CERTIFICATION',
-    'SCIIP_OS v5.0 Architecture Review Certification',
-    certificationResult,
-    'Architecture Review validation certified for downstream platform evolution.',
-    certificationResult,
-    sourceRecord.validatedBusinessKey || '',
-    sourceRecord.validatedNodeType || '',
-    sourceRecord.validatedNodeKey || '',
-    sourceRecord.validatedNodeLabel || '',
-    sourceRecord.validatedRelationshipType || '',
-    sourceRecord.validatedRelationshipTargetKey || '',
-    sourceRecord.architectureReviewScope || 'SCIIP_OS_ARCHITECTURE',
-    sourceRecord.architecturePrinciple || '',
-    sourceRecord.architectureFinding || '',
-    sourceRecord.architectureRecommendation || '',
-    sourceRecord.reviewTrack || 'V5_ARCHITECTURE_REVIEW',
-    sourceRecord.currentVersion || 'SCIIP_OS v4.1',
-    sourceRecord.targetVersion || 'SCIIP_OS v5.0',
-    JSON.stringify(certificationPayload),
-    JSON.stringify(compactSourcePayload),
-    now.toISOString()
-  ]);
-
-  const result = {
-    processor,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey,
-    completedAt: now.toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-function sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationProcessor();
-
-  Logger.log(
-    JSON.stringify({
-      test:
-        'sciipTestAutonomousProcessorExecutionRunStateContinuityArchitectureReviewCertificationProcessor',
       result
     })
   );

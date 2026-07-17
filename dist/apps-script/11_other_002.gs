@@ -1,7 +1,2785 @@
 /** SCIIP_OS compiled bundle: 11_other_002.gs
- * sources: 27
- * generated: 2026-07-17T17:34:24.880Z
+ * sources: 21
+ * generated: 2026-07-17T17:45:10.564Z
  */
+/*******************************************************
+ * SCIIP_OS v5.4 Runtime v5.2 Compatibility Patch
+ * Corrected processors 3420-3610
+ *
+ * Paste this file only after removing/replacing the old
+ * 3420-3610 processor files to avoid duplicate functions.
+ *******************************************************/
+
+function sciipPatch3420_3610GetDateKey_() {
+  if (typeof SCIIP_RUNTIME !== 'undefined' && SCIIP_RUNTIME.getDateKey) {
+    return SCIIP_RUNTIME.getDateKey({});
+  }
+  return Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
+}
+
+function sciipPatch3420_3610NormalizeKey_(value) {
+  return String(value || '').trim();
+}
+
+function sciipPatch3420_3610ReadSourceRecords_(sheetName) {
+  return SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName) || [];
+}
+
+function sciipPatch3420_3610BusinessKeyExists_(sheetName, businessKey) {
+  var records = SCIIP_RUNTIME_SHEET_FACTORY.getAllRecords(sheetName) || [];
+  var targetKey = sciipPatch3420_3610NormalizeKey_(businessKey);
+  return records.some(function(record) {
+    return sciipPatch3420_3610NormalizeKey_(
+      record.businessKey ||
+      record.Business_Key ||
+      record.BUSINESS_KEY ||
+      record.business_key
+    ) === targetKey;
+  });
+}
+
+function sciipPatch3420_3610SourceBusinessKey_(record, fallback) {
+  return sciipPatch3420_3610NormalizeKey_(
+    record.businessKey ||
+    record.Business_Key ||
+    record.BUSINESS_KEY ||
+    record.business_key ||
+    record.sourceBusinessKey ||
+    record.Source_Business_Key ||
+    fallback
+  );
+}
+
+function sciipPatch3420_3610StatusFromRecord_(record, fallback) {
+  return sciipPatch3420_3610NormalizeKey_(
+    record.status ||
+    record.Status ||
+    record.Certification_Status ||
+    record.certificationStatus ||
+    record.productionCertificationStatus ||
+    record.Continuity_Status ||
+    fallback
+  );
+}
+
+function sciipPatch3420_3610BuildRow_(headers, config, record, index, context, transaction, businessKey) {
+  var now = new Date().toISOString();
+  var sourceBusinessKey = sciipPatch3420_3610SourceBusinessKey_(record, context.businessKey + '|' + index);
+  var sourceStatus = sciipPatch3420_3610StatusFromRecord_(record, config.status);
+  var row = {};
+  var payloadSummary = {
+    processor: config.processor,
+    action: config.action,
+    sourceSheet: config.sourceSheet,
+    targetSheet: config.targetSheet,
+    sourceBusinessKey: sourceBusinessKey,
+    status: sourceStatus,
+    transactionId: transaction.transactionId,
+    createdAt: now
+  };
+
+  headers.forEach(function(header) {
+    switch (header) {
+      case 'businessKey':
+      case 'Business_Key':
+        row[header] = businessKey;
+        break;
+      case 'transactionId':
+      case 'Transaction_ID':
+        row[header] = transaction.transactionId;
+        break;
+      case 'sourceBusinessKey':
+      case 'Source_Business_Key':
+        row[header] = sourceBusinessKey;
+        break;
+      case 'Source_Sheet':
+        row[header] = config.sourceSheet;
+        break;
+      case 'Target_Sheet':
+        row[header] = config.targetSheet;
+        break;
+      case 'Source_Record_Count':
+        row[header] = config.inputCount || 0;
+        break;
+      case 'Runtime_Payload_JSON':
+        row[header] = JSON.stringify(payloadSummary);
+        break;
+      case 'Runtime_Result_JSON':
+        row[header] = JSON.stringify({ status: 'SUCCESS', processor: config.processor });
+        break;
+      case 'frameworkVersion':
+        row[header] = 'v5.2';
+        break;
+      case 'createdAt':
+      case 'Created_At':
+        row[header] = now;
+        break;
+      case 'Processor':
+        row[header] = config.processor;
+        break;
+      case 'Continuity_ID':
+        row[header] = 'PRODUCTION_OPERATIONS_CONTINUITY_' + Utilities.getUuid();
+        break;
+      case 'Continuity_Status':
+        row[header] = sourceStatus || 'PRODUCTION_OPERATIONS_CONTINUITY_CONFIRMED';
+        break;
+      case 'Continuity_Message':
+        row[header] = config.summary;
+        break;
+      default:
+        row[header] = record[header] || record[header.charAt(0).toUpperCase() + header.slice(1)] || sourceStatus || config.status;
+    }
+  });
+
+  return row;
+}
+
+function sciipPatch3420_3610Run_(config) {
+  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
+    processor: config.processor,
+    action: config.action,
+    sourceSheet: config.sourceSheet,
+    targetSheet: config.targetSheet,
+    ledgerSheet: config.ledgerSheet,
+
+    buildPayload: function(context, definition) {
+      var sourceRecords = sciipPatch3420_3610ReadSourceRecords_(definition.sourceSheet);
+      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
+        processor: context.processor,
+        action: context.action,
+        businessKey: context.businessKey,
+        sourceSheet: definition.sourceSheet,
+        targetSheet: definition.targetSheet,
+        ledgerSheet: definition.ledgerSheet,
+        inputCount: sourceRecords.length,
+        outputCount: sourceRecords.length,
+        summary: config.summary,
+        refs: {
+          context: SCIIP_RUNTIME_CONTEXT.compact(context),
+          migrationVersion: 'v5.4',
+          inputSheets: [definition.sourceSheet]
+        }
+      });
+    },
+
+    validate: function(payload, context, definition) {
+      var errors = [];
+      if (!payload.businessKey) errors.push('Payload missing businessKey.');
+      if (!context.businessKey) errors.push('Context missing businessKey.');
+      if (!definition.sourceSheet) errors.push('Definition missing sourceSheet.');
+      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
+      return { valid: errors.length === 0, errors: errors };
+    },
+
+    execute: function(payload, context, transaction, definition) {
+      var targetSheet = SCIIP_RUNTIME_SHEET_FACTORY.getOrCreateSheet(definition.targetSheet, config.headers);
+      var sourceRecords = sciipPatch3420_3610ReadSourceRecords_(definition.sourceSheet);
+      var dateKey = sciipPatch3420_3610GetDateKey_();
+
+      if (!sourceRecords.length) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs({
+          processor: config.processor,
+          businessKey: context.businessKey,
+          recordsRead: 0,
+          processed: 0,
+          message: JSON.stringify({
+            status: 'SKIPPED_NO_INPUTS',
+            sourceSheet: definition.sourceSheet,
+            targetSheet: definition.targetSheet,
+            transactionId: transaction.transactionId,
+            nextAction: config.noInputNextAction
+          })
+        });
+      }
+
+      var created = 0;
+      var skippedDuplicate = 0;
+      var prefix = String(config.processor).replace(/[^A-Z0-9]/gi, '').toUpperCase();
+
+      sourceRecords.forEach(function(record, index) {
+        var sourceBusinessKey = sciipPatch3420_3610SourceBusinessKey_(record, context.businessKey + '|' + index);
+        var rowBusinessKey = prefix + '|' + sourceBusinessKey + '|' + dateKey;
+
+        if (sciipPatch3420_3610BusinessKeyExists_(definition.targetSheet, rowBusinessKey)) {
+          skippedDuplicate += 1;
+          return;
+        }
+
+        var row = sciipPatch3420_3610BuildRow_(config.headers, {
+          processor: config.processor,
+          action: config.action,
+          sourceSheet: definition.sourceSheet,
+          targetSheet: definition.targetSheet,
+          inputCount: sourceRecords.length,
+          status: config.status,
+          summary: config.summary
+        }, record, index, context, transaction, rowBusinessKey);
+
+        SCIIP_RUNTIME_SHEET_FACTORY.appendObject(definition.targetSheet, config.headers, row);
+        created += 1;
+      });
+
+      if (!created && skippedDuplicate > 0) {
+        return SCIIP_RUNTIME_RESULT_FACTORY.duplicate({
+          processor: config.processor,
+          businessKey: context.businessKey,
+          recordsRead: sourceRecords.length,
+          processed: 0,
+          message: JSON.stringify({
+            status: 'DUPLICATE_SKIPPED',
+            sourceSheet: definition.sourceSheet,
+            targetSheet: definition.targetSheet,
+            skippedDuplicate: skippedDuplicate,
+            transactionId: transaction.transactionId
+          })
+        });
+      }
+
+      return SCIIP_RUNTIME_RESULT_FACTORY.success({
+        processor: config.processor,
+        businessKey: context.businessKey,
+        recordsCreated: created,
+        recordsRead: sourceRecords.length,
+        processed: created,
+        message: JSON.stringify({
+          status: config.status,
+          sourceRecordsReviewed: sourceRecords.length,
+          recordsCreated: created,
+          skippedDuplicate: skippedDuplicate,
+          transactionId: transaction.transactionId,
+          nextProcessor: config.nextProcessor
+        })
+      });
+    }
+  });
+}
+
+
+function sciipRun3420_SuperSheetImportExecutionProductionCertificationLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3420_SuperSheetImportExecutionProductionCertificationLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATIONS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionCertificationStatus',
+      'certificationDate',
+      'certificationScope',
+      'certificationResult',
+      'certificationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONCERTIFICATIONLEDGER_READY',
+    summary: 'Supersheetimportexecutionproductioncertificationledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3420 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATIONS.',
+    nextProcessor: '3430_SuperSheetImportExecutionProductionCertificationCloseoutProcessor'
+  });
+}
+
+function run3420_SuperSheetImportExecutionProductionCertificationLedgerProcessor() {
+  return sciipRun3420_SuperSheetImportExecutionProductionCertificationLedgerProcessor();
+}
+
+function sciipTest3420_SuperSheetImportExecutionProductionCertificationLedgerProcessor() {
+  var result = sciipRun3420_SuperSheetImportExecutionProductionCertificationLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3420_SuperSheetImportExecutionProductionCertificationLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3430_SuperSheetImportExecutionProductionCertificationCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3430_SuperSheetImportExecutionProductionCertificationCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionCertificationCloseoutId',
+      'productionCertificationCloseoutStatus',
+      'closeoutDate',
+      'closeoutScope',
+      'closeoutResult',
+      'closeoutSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONCERTIFICATIONCLOSEOUT_READY',
+    summary: 'Supersheetimportexecutionproductioncertificationcloseout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3430 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_LEDGER_SUMMARY.',
+    nextProcessor: '3440_SuperSheetImportExecutionProductionCertificationArchiveProcessor'
+  });
+}
+
+function run3430_SuperSheetImportExecutionProductionCertificationCloseoutProcessor() {
+  return sciipRun3430_SuperSheetImportExecutionProductionCertificationCloseoutProcessor();
+}
+
+function sciipTest3430_SuperSheetImportExecutionProductionCertificationCloseoutProcessor() {
+  var result = sciipRun3430_SuperSheetImportExecutionProductionCertificationCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3430_SuperSheetImportExecutionProductionCertificationCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3440_SuperSheetImportExecutionProductionCertificationArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3440_SuperSheetImportExecutionProductionCertificationArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionCertificationCloseoutId',
+      'productionCertificationArchiveId',
+      'productionCertificationArchiveStatus',
+      'archiveDate',
+      'archiveScope',
+      'archiveResult',
+      'archiveSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONCERTIFICATIONARCHIVE_READY',
+    summary: 'Supersheetimportexecutionproductioncertificationarchive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3440 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_CLOSEOUTS.',
+    nextProcessor: '3450_SuperSheetImportExecutionProductionCertificationReconciliationProcessor'
+  });
+}
+
+function run3440_SuperSheetImportExecutionProductionCertificationArchiveProcessor() {
+  return sciipRun3440_SuperSheetImportExecutionProductionCertificationArchiveProcessor();
+}
+
+function sciipTest3440_SuperSheetImportExecutionProductionCertificationArchiveProcessor() {
+  var result = sciipRun3440_SuperSheetImportExecutionProductionCertificationArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3440_SuperSheetImportExecutionProductionCertificationArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3450_SuperSheetImportExecutionProductionCertificationReconciliationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3450_SuperSheetImportExecutionProductionCertificationReconciliation',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_RECONCILIATIONS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_RECONCILIATIONS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_RECONCILIATIONS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionCertificationArchiveId',
+      'productionCertificationReconciliationId',
+      'productionCertificationReconciliationStatus',
+      'reconciliationDate',
+      'reconciliationScope',
+      'reconciliationResult',
+      'reconciliationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONCERTIFICATIONRECONCILIATION_READY',
+    summary: 'Supersheetimportexecutionproductioncertificationreconciliation runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3450 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_ARCHIVE.',
+    nextProcessor: '3460_SuperSheetImportExecutionProductionCertificationCompletionProcessor'
+  });
+}
+
+function run3450_SuperSheetImportExecutionProductionCertificationReconciliationProcessor() {
+  return sciipRun3450_SuperSheetImportExecutionProductionCertificationReconciliationProcessor();
+}
+
+function sciipTest3450_SuperSheetImportExecutionProductionCertificationReconciliationProcessor() {
+  var result = sciipRun3450_SuperSheetImportExecutionProductionCertificationReconciliationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3450_SuperSheetImportExecutionProductionCertificationReconciliationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3460_SuperSheetImportExecutionProductionCertificationCompletionProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3460_SuperSheetImportExecutionProductionCertificationCompletion',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_COMPLETIONS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_RECONCILIATIONS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_COMPLETIONS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_COMPLETIONS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionCertificationReconciliationId',
+      'productionCertificationCompletionId',
+      'productionCertificationCompletionStatus',
+      'completionDate',
+      'completionScope',
+      'completionResult',
+      'completionSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONCERTIFICATIONCOMPLETION_READY',
+    summary: 'Supersheetimportexecutionproductioncertificationcompletion runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3460 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_RECONCILIATIONS.',
+    nextProcessor: '3470_SuperSheetImportExecutionProductionFrameworkHandoffProcessor'
+  });
+}
+
+function run3460_SuperSheetImportExecutionProductionCertificationCompletionProcessor() {
+  return sciipRun3460_SuperSheetImportExecutionProductionCertificationCompletionProcessor();
+}
+
+function sciipTest3460_SuperSheetImportExecutionProductionCertificationCompletionProcessor() {
+  var result = sciipRun3460_SuperSheetImportExecutionProductionCertificationCompletionProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3460_SuperSheetImportExecutionProductionCertificationCompletionProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3470_SuperSheetImportExecutionProductionFrameworkHandoffProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3470_SuperSheetImportExecutionProductionFrameworkHandoff',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_HANDOFFS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_COMPLETIONS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_HANDOFFS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_HANDOFFS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionCertificationCompletionId',
+      'productionFrameworkHandoffId',
+      'productionFrameworkHandoffStatus',
+      'handoffDate',
+      'handoffScope',
+      'handoffResult',
+      'handoffSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONFRAMEWORKHANDOFF_READY',
+    summary: 'Supersheetimportexecutionproductionframeworkhandoff runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3470 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_CERTIFICATION_COMPLETIONS.',
+    nextProcessor: '3480_SuperSheetImportExecutionProductionFrameworkAcceptanceProcessor'
+  });
+}
+
+function run3470_SuperSheetImportExecutionProductionFrameworkHandoffProcessor() {
+  return sciipRun3470_SuperSheetImportExecutionProductionFrameworkHandoffProcessor();
+}
+
+function sciipTest3470_SuperSheetImportExecutionProductionFrameworkHandoffProcessor() {
+  var result = sciipRun3470_SuperSheetImportExecutionProductionFrameworkHandoffProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3470_SuperSheetImportExecutionProductionFrameworkHandoffProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3480_SuperSheetImportExecutionProductionFrameworkAcceptanceProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3480_SuperSheetImportExecutionProductionFrameworkAcceptance',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACCEPTANCES',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_HANDOFFS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACCEPTANCES',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACCEPTANCES_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkHandoffId',
+      'productionFrameworkAcceptanceId',
+      'productionFrameworkAcceptanceStatus',
+      'acceptanceDate',
+      'acceptanceScope',
+      'acceptanceResult',
+      'acceptanceSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONFRAMEWORKACCEPTANCE_READY',
+    summary: 'Supersheetimportexecutionproductionframeworkacceptance runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3480 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_HANDOFFS.',
+    nextProcessor: '3490_SuperSheetImportExecutionProductionFrameworkActivationProcessor'
+  });
+}
+
+function run3480_SuperSheetImportExecutionProductionFrameworkAcceptanceProcessor() {
+  return sciipRun3480_SuperSheetImportExecutionProductionFrameworkAcceptanceProcessor();
+}
+
+function sciipTest3480_SuperSheetImportExecutionProductionFrameworkAcceptanceProcessor() {
+  var result = sciipRun3480_SuperSheetImportExecutionProductionFrameworkAcceptanceProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3480_SuperSheetImportExecutionProductionFrameworkAcceptanceProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3490_SuperSheetImportExecutionProductionFrameworkActivationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3490_SuperSheetImportExecutionProductionFrameworkActivation',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACTIVATIONS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACCEPTANCES',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACTIVATIONS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACTIVATIONS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkAcceptanceId',
+      'productionFrameworkActivationId',
+      'productionFrameworkActivationStatus',
+      'activationDate',
+      'activationScope',
+      'activationResult',
+      'activationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONFRAMEWORKACTIVATION_READY',
+    summary: 'Supersheetimportexecutionproductionframeworkactivation runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3490 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACCEPTANCES.',
+    nextProcessor: '3500_SuperSheetImportExecutionProductionFrameworkActivationLedgerProcessor'
+  });
+}
+
+function run3490_SuperSheetImportExecutionProductionFrameworkActivationProcessor() {
+  return sciipRun3490_SuperSheetImportExecutionProductionFrameworkActivationProcessor();
+}
+
+function sciipTest3490_SuperSheetImportExecutionProductionFrameworkActivationProcessor() {
+  var result = sciipRun3490_SuperSheetImportExecutionProductionFrameworkActivationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3490_SuperSheetImportExecutionProductionFrameworkActivationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3500_SuperSheetImportExecutionProductionFrameworkActivationLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3500_SuperSheetImportExecutionProductionFrameworkActivationLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACTIVATION_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACTIVATIONS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACTIVATION_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACTIVATION_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkActivationId',
+      'productionFrameworkActivationStatus',
+      'activationLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONFRAMEWORKACTIVATIONLEDGER_READY',
+    summary: 'Supersheetimportexecutionproductionframeworkactivationledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3500 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACTIVATIONS.',
+    nextProcessor: '3510_SuperSheetImportExecutionProductionOperationalMonitoringProcessor'
+  });
+}
+
+function run3500_SuperSheetImportExecutionProductionFrameworkActivationLedgerProcessor() {
+  return sciipRun3500_SuperSheetImportExecutionProductionFrameworkActivationLedgerProcessor();
+}
+
+function sciipTest3500_SuperSheetImportExecutionProductionFrameworkActivationLedgerProcessor() {
+  var result = sciipRun3500_SuperSheetImportExecutionProductionFrameworkActivationLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3500_SuperSheetImportExecutionProductionFrameworkActivationLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3510_SuperSheetImportExecutionProductionOperationalMonitoringProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3510_SuperSheetImportExecutionProductionOperationalMonitoring',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_MONITORING',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACTIVATION_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_MONITORING',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_MONITORING_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkActivationId',
+      'operationalMonitoringId',
+      'operationalMonitoringStatus',
+      'monitoringDate',
+      'monitoringScope',
+      'monitoringResult',
+      'monitoringSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONALMONITORING_READY',
+    summary: 'Supersheetimportexecutionproductionoperationalmonitoring runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3510 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_FRAMEWORK_ACTIVATION_LEDGER_SUMMARY.',
+    nextProcessor: '3520_SuperSheetImportExecutionProductionOperationalMonitoringLedgerProcessor'
+  });
+}
+
+function run3510_SuperSheetImportExecutionProductionOperationalMonitoringProcessor() {
+  return sciipRun3510_SuperSheetImportExecutionProductionOperationalMonitoringProcessor();
+}
+
+function sciipTest3510_SuperSheetImportExecutionProductionOperationalMonitoringProcessor() {
+  var result = sciipRun3510_SuperSheetImportExecutionProductionOperationalMonitoringProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3510_SuperSheetImportExecutionProductionOperationalMonitoringProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3520_SuperSheetImportExecutionProductionOperationalMonitoringLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3520_SuperSheetImportExecutionProductionOperationalMonitoringLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_MONITORING_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_MONITORING',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_MONITORING_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_MONITORING_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkActivationId',
+      'operationalMonitoringId',
+      'operationalMonitoringStatus',
+      'operationalMonitoringLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONALMONITORINGLEDGER_READY',
+    summary: 'Supersheetimportexecutionproductionoperationalmonitoringledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3520 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_MONITORING.',
+    nextProcessor: '3530_SuperSheetImportExecutionProductionHealthCertificationProcessor'
+  });
+}
+
+function run3520_SuperSheetImportExecutionProductionOperationalMonitoringLedgerProcessor() {
+  return sciipRun3520_SuperSheetImportExecutionProductionOperationalMonitoringLedgerProcessor();
+}
+
+function sciipTest3520_SuperSheetImportExecutionProductionOperationalMonitoringLedgerProcessor() {
+  var result = sciipRun3520_SuperSheetImportExecutionProductionOperationalMonitoringLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3520_SuperSheetImportExecutionProductionOperationalMonitoringLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3530_SuperSheetImportExecutionProductionHealthCertificationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3530_SuperSheetImportExecutionProductionHealthCertification',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CERTIFICATIONS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_MONITORING_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CERTIFICATIONS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CERTIFICATIONS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkActivationId',
+      'operationalMonitoringId',
+      'productionHealthCertificationId',
+      'productionHealthCertificationStatus',
+      'certificationDate',
+      'certificationScope',
+      'certificationResult',
+      'certificationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONHEALTHCERTIFICATION_READY',
+    summary: 'Supersheetimportexecutionproductionhealthcertification runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3530 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_MONITORING_LEDGER_SUMMARY.',
+    nextProcessor: '3540_SuperSheetImportExecutionProductionHealthCertificationLedgerProcessor'
+  });
+}
+
+function run3530_SuperSheetImportExecutionProductionHealthCertificationProcessor() {
+  return sciipRun3530_SuperSheetImportExecutionProductionHealthCertificationProcessor();
+}
+
+function sciipTest3530_SuperSheetImportExecutionProductionHealthCertificationProcessor() {
+  var result = sciipRun3530_SuperSheetImportExecutionProductionHealthCertificationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3530_SuperSheetImportExecutionProductionHealthCertificationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3540_SuperSheetImportExecutionProductionHealthCertificationLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3540_SuperSheetImportExecutionProductionHealthCertificationLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CERTIFICATION_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CERTIFICATIONS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CERTIFICATION_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CERTIFICATION_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkActivationId',
+      'operationalMonitoringId',
+      'productionHealthCertificationId',
+      'productionHealthCertificationStatus',
+      'productionHealthCertificationLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONHEALTHCERTIFICATIONLEDGER_READY',
+    summary: 'Supersheetimportexecutionproductionhealthcertificationledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3540 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CERTIFICATIONS.',
+    nextProcessor: '3550_SuperSheetImportExecutionProductionHealthCloseoutProcessor'
+  });
+}
+
+function run3540_SuperSheetImportExecutionProductionHealthCertificationLedgerProcessor() {
+  return sciipRun3540_SuperSheetImportExecutionProductionHealthCertificationLedgerProcessor();
+}
+
+function sciipTest3540_SuperSheetImportExecutionProductionHealthCertificationLedgerProcessor() {
+  var result = sciipRun3540_SuperSheetImportExecutionProductionHealthCertificationLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3540_SuperSheetImportExecutionProductionHealthCertificationLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3550_SuperSheetImportExecutionProductionHealthCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3550_SuperSheetImportExecutionProductionHealthCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CERTIFICATION_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkActivationId',
+      'operationalMonitoringId',
+      'productionHealthCertificationId',
+      'productionHealthCloseoutId',
+      'productionHealthCloseoutStatus',
+      'closeoutDate',
+      'closeoutScope',
+      'closeoutResult',
+      'closeoutSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONHEALTHCLOSEOUT_READY',
+    summary: 'Supersheetimportexecutionproductionhealthcloseout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3550 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CERTIFICATION_LEDGER_SUMMARY.',
+    nextProcessor: '3560_SuperSheetImportExecutionProductionHealthArchiveProcessor'
+  });
+}
+
+function run3550_SuperSheetImportExecutionProductionHealthCloseoutProcessor() {
+  return sciipRun3550_SuperSheetImportExecutionProductionHealthCloseoutProcessor();
+}
+
+function sciipTest3550_SuperSheetImportExecutionProductionHealthCloseoutProcessor() {
+  var result = sciipRun3550_SuperSheetImportExecutionProductionHealthCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3550_SuperSheetImportExecutionProductionHealthCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3560_SuperSheetImportExecutionProductionHealthArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3560_SuperSheetImportExecutionProductionHealthArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkActivationId',
+      'operationalMonitoringId',
+      'productionHealthCertificationId',
+      'productionHealthCloseoutId',
+      'productionHealthArchiveId',
+      'productionHealthArchiveStatus',
+      'archiveDate',
+      'archiveScope',
+      'archiveResult',
+      'archiveSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONHEALTHARCHIVE_READY',
+    summary: 'Supersheetimportexecutionproductionhealtharchive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3560 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_CLOSEOUTS.',
+    nextProcessor: '3570_SuperSheetImportExecutionProductionOperationalReadinessProcessor'
+  });
+}
+
+function run3560_SuperSheetImportExecutionProductionHealthArchiveProcessor() {
+  return sciipRun3560_SuperSheetImportExecutionProductionHealthArchiveProcessor();
+}
+
+function sciipTest3560_SuperSheetImportExecutionProductionHealthArchiveProcessor() {
+  var result = sciipRun3560_SuperSheetImportExecutionProductionHealthArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3560_SuperSheetImportExecutionProductionHealthArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3570_SuperSheetImportExecutionProductionOperationalReadinessProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3570_SuperSheetImportExecutionProductionOperationalReadiness',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkActivationId',
+      'operationalMonitoringId',
+      'productionHealthCertificationId',
+      'productionHealthArchiveId',
+      'productionOperationalReadinessId',
+      'productionOperationalReadinessStatus',
+      'readinessDate',
+      'readinessScope',
+      'readinessResult',
+      'readinessSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONALREADINESS_READY',
+    summary: 'Supersheetimportexecutionproductionoperationalreadiness runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3570 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_HEALTH_ARCHIVE.',
+    nextProcessor: '3580_SuperSheetImportExecutionProductionOperationalReadinessLedgerProcessor'
+  });
+}
+
+function run3570_SuperSheetImportExecutionProductionOperationalReadinessProcessor() {
+  return sciipRun3570_SuperSheetImportExecutionProductionOperationalReadinessProcessor();
+}
+
+function sciipTest3570_SuperSheetImportExecutionProductionOperationalReadinessProcessor() {
+  var result = sciipRun3570_SuperSheetImportExecutionProductionOperationalReadinessProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3570_SuperSheetImportExecutionProductionOperationalReadinessProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3580_SuperSheetImportExecutionProductionOperationalReadinessLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3580_SuperSheetImportExecutionProductionOperationalReadinessLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkActivationId',
+      'operationalMonitoringId',
+      'productionHealthCertificationId',
+      'productionHealthArchiveId',
+      'productionOperationalReadinessId',
+      'productionOperationalReadinessStatus',
+      'productionOperationalReadinessLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONALREADINESSLEDGER_READY',
+    summary: 'Supersheetimportexecutionproductionoperationalreadinessledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3580 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS.',
+    nextProcessor: '3590_SuperSheetImportExecutionProductionOperationalReadinessCloseoutProcessor'
+  });
+}
+
+function run3580_SuperSheetImportExecutionProductionOperationalReadinessLedgerProcessor() {
+  return sciipRun3580_SuperSheetImportExecutionProductionOperationalReadinessLedgerProcessor();
+}
+
+function sciipTest3580_SuperSheetImportExecutionProductionOperationalReadinessLedgerProcessor() {
+  var result = sciipRun3580_SuperSheetImportExecutionProductionOperationalReadinessLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3580_SuperSheetImportExecutionProductionOperationalReadinessLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3590_SuperSheetImportExecutionProductionOperationalReadinessCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3590_SuperSheetImportExecutionProductionOperationalReadinessCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkActivationId',
+      'operationalMonitoringId',
+      'productionHealthCertificationId',
+      'productionHealthArchiveId',
+      'productionOperationalReadinessId',
+      'productionOperationalReadinessCloseoutId',
+      'productionOperationalReadinessCloseoutStatus',
+      'closeoutDate',
+      'closeoutScope',
+      'closeoutResult',
+      'closeoutSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONALREADINESSCLOSEOUT_READY',
+    summary: 'Supersheetimportexecutionproductionoperationalreadinesscloseout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3590 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_LEDGER_SUMMARY.',
+    nextProcessor: '3600_SuperSheetImportExecutionProductionOperationalReadinessArchiveProcessor'
+  });
+}
+
+function run3590_SuperSheetImportExecutionProductionOperationalReadinessCloseoutProcessor() {
+  return sciipRun3590_SuperSheetImportExecutionProductionOperationalReadinessCloseoutProcessor();
+}
+
+function sciipTest3590_SuperSheetImportExecutionProductionOperationalReadinessCloseoutProcessor() {
+  var result = sciipRun3590_SuperSheetImportExecutionProductionOperationalReadinessCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3590_SuperSheetImportExecutionProductionOperationalReadinessCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3600_SuperSheetImportExecutionProductionOperationalReadinessArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3600_SuperSheetImportExecutionProductionOperationalReadinessArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'productionCertificationId',
+      'productionFrameworkActivationId',
+      'operationalMonitoringId',
+      'productionHealthCertificationId',
+      'productionHealthArchiveId',
+      'productionOperationalReadinessId',
+      'productionOperationalReadinessCloseoutId',
+      'productionOperationalReadinessArchiveId',
+      'productionOperationalReadinessArchiveStatus',
+      'archiveDate',
+      'archiveScope',
+      'archiveResult',
+      'archiveSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONALREADINESSARCHIVE_READY',
+    summary: 'Supersheetimportexecutionproductionoperationalreadinessarchive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3600 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_CLOSEOUTS.',
+    nextProcessor: '3610_SuperSheetImportExecutionProductionOperationsContinuityProcessor'
+  });
+}
+
+function run3600_SuperSheetImportExecutionProductionOperationalReadinessArchiveProcessor() {
+  return sciipRun3600_SuperSheetImportExecutionProductionOperationalReadinessArchiveProcessor();
+}
+
+function sciipTest3600_SuperSheetImportExecutionProductionOperationalReadinessArchiveProcessor() {
+  var result = sciipRun3600_SuperSheetImportExecutionProductionOperationalReadinessArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3600_SuperSheetImportExecutionProductionOperationalReadinessArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+
+function sciipRun3610_SuperSheetImportExecutionProductionOperationsContinuityProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3610_SuperSheetImportExecutionProductionOperationsContinuity',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_RUNTIME_LEDGER',
+    headers: [
+      'Business_Key',
+      'Continuity_ID',
+      'Continuity_Status',
+      'Source_Sheet',
+      'Target_Sheet',
+      'Source_Record_Count',
+      'Continuity_Message',
+      'Transaction_ID',
+      'Runtime_Payload_JSON',
+      'Runtime_Result_JSON',
+      'Created_At'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONSCONTINUITY_READY',
+    summary: 'Supersheetimportexecutionproductionoperationscontinuity runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3610 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONAL_READINESS_ARCHIVE.',
+    nextProcessor: '3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor'
+  });
+}
+
+function run3610_SuperSheetImportExecutionProductionOperationsContinuityProcessor() {
+  return sciipRun3610_SuperSheetImportExecutionProductionOperationsContinuityProcessor();
+}
+
+function sciipTest3610_SuperSheetImportExecutionProductionOperationsContinuityProcessor() {
+  var result = sciipRun3610_SuperSheetImportExecutionProductionOperationsContinuityProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3610_SuperSheetImportExecutionProductionOperationsContinuityProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3620_SuperSheetImportExecutionProductionOperationsContinuityLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'continuityId',
+      'continuityStatus',
+      'productionOperationsContinuityLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONSCONTINUITYLEDGER_READY',
+    summary: 'Supersheetimportexecutionproductionoperationscontinuityledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3620 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY.',
+    nextProcessor: '3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor'
+  });
+}
+
+function run3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor() {
+  return sciipRun3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor();
+}
+
+function sciipTest3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor() {
+  var result = sciipRun3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3620_SuperSheetImportExecutionProductionOperationsContinuityLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+/*******************************************************
+ * SCIIP_OS v5.4
+ * Production Operations Continuity / Production Runtime Continuity Batch
+ * Processors: 3630-3700
+ *
+ * Dependency:
+ * Requires the validated helper function from 3420-3610 batch:
+ *   sciipPatch3420_3610Run_(config)
+ *
+ * Paste this below the validated 3420-3620 batch file.
+ *******************************************************/
+
+function sciipRun3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3630_SuperSheetImportExecutionProductionOperationsContinuityCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'continuityId',
+      'continuityStatus',
+      'productionOperationsContinuityCloseoutStatus',
+      'closeoutDate',
+      'closeoutScope',
+      'closeoutResult',
+      'closeoutSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONSCONTINUITYCLOSEOUT_READY',
+    summary: 'Supersheetimportexecutionproductionoperationscontinuitycloseout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3630 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_LEDGER_SUMMARY.',
+    nextProcessor: '3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor'
+  });
+}
+
+function run3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor() {
+  return sciipRun3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor();
+}
+
+function sciipTest3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor() {
+  var result = sciipRun3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3630_SuperSheetImportExecutionProductionOperationsContinuityCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3640_SuperSheetImportExecutionProductionOperationsContinuityArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'continuityId',
+      'continuityStatus',
+      'productionOperationsContinuityArchiveStatus',
+      'archiveDate',
+      'archiveScope',
+      'archiveResult',
+      'archiveSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONSCONTINUITYARCHIVE_READY',
+    summary: 'Supersheetimportexecutionproductionoperationscontinuityarchive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3640 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_CLOSEOUTS.',
+    nextProcessor: '3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor'
+  });
+}
+
+function run3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor() {
+  return sciipRun3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor();
+}
+
+function sciipTest3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor() {
+  var result = sciipRun3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3640_SuperSheetImportExecutionProductionOperationsContinuityArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliation',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_RECONCILIATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_RECONCILIATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_RECONCILIATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'continuityId',
+      'continuityStatus',
+      'productionOperationsContinuityReconciliationStatus',
+      'reconciliationDate',
+      'reconciliationScope',
+      'reconciliationResult',
+      'reconciliationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONSCONTINUITYRECONCILIATION_READY',
+    summary: 'Supersheetimportexecutionproductionoperationscontinuityreconciliation runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3650 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_ARCHIVE.',
+    nextProcessor: '3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor'
+  });
+}
+
+function run3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor() {
+  return sciipRun3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor();
+}
+
+function sciipTest3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor() {
+  var result = sciipRun3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3650_SuperSheetImportExecutionProductionOperationsContinuityReconciliationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3660_SuperSheetImportExecutionProductionOperationsContinuityCompletion',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_COMPLETION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_RECONCILIATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_COMPLETION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_COMPLETION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'continuityId',
+      'continuityStatus',
+      'productionOperationsContinuityCompletionStatus',
+      'completionDate',
+      'completionScope',
+      'completionResult',
+      'completionSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONOPERATIONSCONTINUITYCOMPLETION_READY',
+    summary: 'Supersheetimportexecutionproductionoperationscontinuitycompletion runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3660 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_RECONCILIATION.',
+    nextProcessor: '3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor'
+  });
+}
+
+function run3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor() {
+  return sciipRun3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor();
+}
+
+function sciipTest3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor() {
+  var result = sciipRun3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3660_SuperSheetImportExecutionProductionOperationsContinuityCompletionProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3670_SuperSheetImportExecutionProductionRuntimeContinuity',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_COMPLETION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityStatus',
+      'continuityDate',
+      'continuityScope',
+      'continuityResult',
+      'continuitySummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITY_READY',
+    summary: 'Supersheetimportexecutionproductionruntimecontinuity runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3670 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_OPERATIONS_CONTINUITY_COMPLETION.',
+    nextProcessor: '3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor'
+  });
+}
+
+function run3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor() {
+  return sciipRun3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor();
+}
+
+function sciipTest3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor() {
+  var result = sciipRun3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3670_SuperSheetImportExecutionProductionRuntimeContinuityProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3680_SuperSheetImportExecutionProductionRuntimeContinuityLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYLEDGER_READY',
+    summary: 'Supersheetimportexecutionproductionruntimecontinuityledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3680 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY.',
+    nextProcessor: '3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor'
+  });
+}
+
+function run3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor() {
+  return sciipRun3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor();
+}
+
+function sciipTest3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor() {
+  var result = sciipRun3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3680_SuperSheetImportExecutionProductionRuntimeContinuityLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+/*** 3690: action corrected from SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUT to SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUTS ***/
+function sciipRun3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityCloseoutStatus',
+      'closeoutDate',
+      'closeoutScope',
+      'closeoutResult',
+      'closeoutSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYCLOSEOUT_READY',
+    summary: 'Supersheetimportexecutionproductionruntimecontinuitycloseout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3690 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_LEDGER_SUMMARY.',
+    nextProcessor: '3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor'
+  });
+}
+
+function run3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor() {
+  return sciipRun3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor();
+}
+
+function sciipTest3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor() {
+  var result = sciipRun3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3690_SuperSheetImportExecutionProductionRuntimeContinuityCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3700_SuperSheetImportExecutionProductionRuntimeContinuityArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityArchiveStatus',
+      'archiveDate',
+      'archiveScope',
+      'archiveResult',
+      'archiveSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYARCHIVE_READY',
+    summary: 'Supersheetimportexecutionproductionruntimecontinuityarchive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3700 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CLOSEOUTS.',
+    nextProcessor: '3710_SuperSheetImportExecutionProductionRuntimeContinuityReconciliationProcessor'
+  });
+}
+
+function run3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor() {
+  return sciipRun3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor();
+}
+
+function sciipTest3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor() {
+  var result = sciipRun3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3700_SuperSheetImportExecutionProductionRuntimeContinuityArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+/*******************************************************
+ * SCIIP_OS v5.4
+ * Production Runtime Continuity Certification / Acceptance Batch
+ * Processors: 3710-3800
+ *
+ * Dependency:
+ * Requires the validated helper function from 3420-3610 batch:
+ *   sciipPatch3420_3610Run_(config)
+ *
+ * Paste this below the validated 3420-3700 batch files.
+ *******************************************************/
+function sciipRun3710_SuperSheetImportExecutionProductionRuntimeContinuityReconciliationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3710_SuperSheetImportExecutionProductionRuntimeContinuityReconciliation',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_RECONCILIATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_RECONCILIATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_RECONCILIATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityReconciliationStatus',
+      'reconciliationDate',
+      'reconciliationScope',
+      'reconciliationResult',
+      'reconciliationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYRECONCILIATION_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontinuityreconciliation runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3710 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ARCHIVE.',
+    nextProcessor: '3720_SuperSheetImportExecutionProductionRuntimeContinuityCompletionProcessor'
+  });
+}
+
+function run3710_SuperSheetImportExecutionProductionRuntimeContinuityReconciliationProcessor() {
+  return sciipRun3710_SuperSheetImportExecutionProductionRuntimeContinuityReconciliationProcessor();
+}
+
+function sciipTest3710_SuperSheetImportExecutionProductionRuntimeContinuityReconciliationProcessor() {
+  var result = sciipRun3710_SuperSheetImportExecutionProductionRuntimeContinuityReconciliationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3710_SuperSheetImportExecutionProductionRuntimeContinuityReconciliationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3720_SuperSheetImportExecutionProductionRuntimeContinuityCompletionProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3720_SuperSheetImportExecutionProductionRuntimeContinuityCompletion',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_COMPLETION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_RECONCILIATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_COMPLETION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_COMPLETION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityCompletionStatus',
+      'completionDate',
+      'completionScope',
+      'completionResult',
+      'completionSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYCOMPLETION_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontinuitycompletion runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3720 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_RECONCILIATION.',
+    nextProcessor: '3730_SuperSheetImportExecutionProductionRuntimeContinuityCertificationProcessor'
+  });
+}
+
+function run3720_SuperSheetImportExecutionProductionRuntimeContinuityCompletionProcessor() {
+  return sciipRun3720_SuperSheetImportExecutionProductionRuntimeContinuityCompletionProcessor();
+}
+
+function sciipTest3720_SuperSheetImportExecutionProductionRuntimeContinuityCompletionProcessor() {
+  var result = sciipRun3720_SuperSheetImportExecutionProductionRuntimeContinuityCompletionProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3720_SuperSheetImportExecutionProductionRuntimeContinuityCompletionProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3730_SuperSheetImportExecutionProductionRuntimeContinuityCertificationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3730_SuperSheetImportExecutionProductionRuntimeContinuityCertification',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_COMPLETION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityCertificationStatus',
+      'certificationDate',
+      'certificationScope',
+      'certificationResult',
+      'certificationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYCERTIFICATION_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontinuitycertification runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3730 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_COMPLETION.',
+    nextProcessor: '3740_SuperSheetImportExecutionProductionRuntimeContinuityCertificationLedgerProcessor'
+  });
+}
+
+function run3730_SuperSheetImportExecutionProductionRuntimeContinuityCertificationProcessor() {
+  return sciipRun3730_SuperSheetImportExecutionProductionRuntimeContinuityCertificationProcessor();
+}
+
+function sciipTest3730_SuperSheetImportExecutionProductionRuntimeContinuityCertificationProcessor() {
+  var result = sciipRun3730_SuperSheetImportExecutionProductionRuntimeContinuityCertificationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3730_SuperSheetImportExecutionProductionRuntimeContinuityCertificationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3740_SuperSheetImportExecutionProductionRuntimeContinuityCertificationLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3740_SuperSheetImportExecutionProductionRuntimeContinuityCertificationLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityCertificationLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYCERTIFICATIONLEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontinuitycertificationledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3740 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION.',
+    nextProcessor: '3750_SuperSheetImportExecutionProductionRuntimeContinuityCertificationCloseoutProcessor'
+  });
+}
+
+function run3740_SuperSheetImportExecutionProductionRuntimeContinuityCertificationLedgerProcessor() {
+  return sciipRun3740_SuperSheetImportExecutionProductionRuntimeContinuityCertificationLedgerProcessor();
+}
+
+function sciipTest3740_SuperSheetImportExecutionProductionRuntimeContinuityCertificationLedgerProcessor() {
+  var result = sciipRun3740_SuperSheetImportExecutionProductionRuntimeContinuityCertificationLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3740_SuperSheetImportExecutionProductionRuntimeContinuityCertificationLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3750_SuperSheetImportExecutionProductionRuntimeContinuityCertificationCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3750_SuperSheetImportExecutionProductionRuntimeContinuityCertificationCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityCertificationCloseoutStatus',
+      'closeoutDate',
+      'closeoutScope',
+      'closeoutResult',
+      'closeoutSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYCERTIFICATIONCLOSEOUT_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontinuitycertificationcloseout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3750 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_LEDGER_SUMMARY.',
+    nextProcessor: '3760_SuperSheetImportExecutionProductionRuntimeContinuityCertificationArchiveProcessor'
+  });
+}
+
+function run3750_SuperSheetImportExecutionProductionRuntimeContinuityCertificationCloseoutProcessor() {
+  return sciipRun3750_SuperSheetImportExecutionProductionRuntimeContinuityCertificationCloseoutProcessor();
+}
+
+function sciipTest3750_SuperSheetImportExecutionProductionRuntimeContinuityCertificationCloseoutProcessor() {
+  var result = sciipRun3750_SuperSheetImportExecutionProductionRuntimeContinuityCertificationCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3750_SuperSheetImportExecutionProductionRuntimeContinuityCertificationCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3760_SuperSheetImportExecutionProductionRuntimeContinuityCertificationArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3760_SuperSheetImportExecutionProductionRuntimeContinuityCertificationArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityCertificationArchiveStatus',
+      'archiveDate',
+      'archiveScope',
+      'archiveResult',
+      'archiveSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYCERTIFICATIONARCHIVE_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontinuitycertificationarchive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3760 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_CLOSEOUTS.',
+    nextProcessor: '3770_SuperSheetImportExecutionProductionRuntimeContinuityFinalizationProcessor'
+  });
+}
+
+function run3760_SuperSheetImportExecutionProductionRuntimeContinuityCertificationArchiveProcessor() {
+  return sciipRun3760_SuperSheetImportExecutionProductionRuntimeContinuityCertificationArchiveProcessor();
+}
+
+function sciipTest3760_SuperSheetImportExecutionProductionRuntimeContinuityCertificationArchiveProcessor() {
+  var result = sciipRun3760_SuperSheetImportExecutionProductionRuntimeContinuityCertificationArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3760_SuperSheetImportExecutionProductionRuntimeContinuityCertificationArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3770_SuperSheetImportExecutionProductionRuntimeContinuityFinalizationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3770_SuperSheetImportExecutionProductionRuntimeContinuityFinalization',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_FINALIZATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_FINALIZATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_FINALIZATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityFinalizationStatus',
+      'finalizationDate',
+      'finalizationScope',
+      'finalizationResult',
+      'finalizationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYFINALIZATION_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontinuityfinalization runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3770 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_CERTIFICATION_ARCHIVE.',
+    nextProcessor: '3780_SuperSheetImportExecutionProductionRuntimeContinuityFinalLedgerProcessor'
+  });
+}
+
+function run3770_SuperSheetImportExecutionProductionRuntimeContinuityFinalizationProcessor() {
+  return sciipRun3770_SuperSheetImportExecutionProductionRuntimeContinuityFinalizationProcessor();
+}
+
+function sciipTest3770_SuperSheetImportExecutionProductionRuntimeContinuityFinalizationProcessor() {
+  var result = sciipRun3770_SuperSheetImportExecutionProductionRuntimeContinuityFinalizationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3770_SuperSheetImportExecutionProductionRuntimeContinuityFinalizationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3780_SuperSheetImportExecutionProductionRuntimeContinuityFinalLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3780_SuperSheetImportExecutionProductionRuntimeContinuityFinalLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_FINAL_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_FINALIZATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_FINAL_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_FINAL_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityFinalLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYFINALLEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontinuityfinalledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3780 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_FINALIZATION.',
+    nextProcessor: '3790_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceProcessor'
+  });
+}
+
+function run3780_SuperSheetImportExecutionProductionRuntimeContinuityFinalLedgerProcessor() {
+  return sciipRun3780_SuperSheetImportExecutionProductionRuntimeContinuityFinalLedgerProcessor();
+}
+
+function sciipTest3780_SuperSheetImportExecutionProductionRuntimeContinuityFinalLedgerProcessor() {
+  var result = sciipRun3780_SuperSheetImportExecutionProductionRuntimeContinuityFinalLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3780_SuperSheetImportExecutionProductionRuntimeContinuityFinalLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3790_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3790_SuperSheetImportExecutionProductionRuntimeContinuityAcceptance',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ACCEPTANCE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_FINAL_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ACCEPTANCE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ACCEPTANCE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityAcceptanceStatus',
+      'acceptanceDate',
+      'acceptanceScope',
+      'acceptanceResult',
+      'acceptanceSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYACCEPTANCE_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontinuityacceptance runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3790 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_FINAL_LEDGER_SUMMARY.',
+    nextProcessor: '3800_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceLedgerProcessor'
+  });
+}
+
+function run3790_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceProcessor() {
+  return sciipRun3790_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceProcessor();
+}
+
+function sciipTest3790_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceProcessor() {
+  var result = sciipRun3790_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3790_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3800_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3800_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ACCEPTANCE_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ACCEPTANCE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ACCEPTANCE_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ACCEPTANCE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeContinuityId',
+      'runtimeContinuityStatus',
+      'productionRuntimeContinuityAcceptanceLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTINUITYACCEPTANCELEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontinuityacceptanceledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3800 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ACCEPTANCE.',
+    nextProcessor: '3810_SuperSheetImportExecutionProductionRuntimeContinuityHandoffProcessor'
+  });
+}
+
+function run3800_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceLedgerProcessor() {
+  return sciipRun3800_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceLedgerProcessor();
+}
+
+function sciipTest3800_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceLedgerProcessor() {
+  var result = sciipRun3800_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3800_SuperSheetImportExecutionProductionRuntimeContinuityAcceptanceLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+/*******************************************************
+ * SCIIP_OS v5.4
+ * Production Runtime Governance Batch
+ * Processors: 3810-3900
+ *
+ * Dependency:
+ * Requires the validated helper function from 3420-3610 batch:
+ *   sciipPatch3420_3610Run_(config)
+ *
+ * Paste this below the validated 3420-3800 batch files.
+ *******************************************************/
+
+function sciipRun3810_SuperSheetImportExecutionProductionRuntimeGovernanceProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3810_SuperSheetImportExecutionProductionRuntimeGovernance',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ACCEPTANCE_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeGovernanceId',
+      'runtimeGovernanceStatus',
+      'productionRuntimeGovernanceStatus',
+      'governanceDate',
+      'governanceScope',
+      'governanceResult',
+      'governanceSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMEGOVERNANCE_READY',
+    summary: 'supersheetimportexecutionproductionruntimegovernance runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3810 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTINUITY_ACCEPTANCE_LEDGER_SUMMARY.',
+    nextProcessor: '3820_SuperSheetImportExecutionProductionRuntimeGovernanceLedgerProcessor'
+  });
+}
+
+function run3810_SuperSheetImportExecutionProductionRuntimeGovernanceProcessor() {
+  return sciipRun3810_SuperSheetImportExecutionProductionRuntimeGovernanceProcessor();
+}
+
+function sciipTest3810_SuperSheetImportExecutionProductionRuntimeGovernanceProcessor() {
+  var result = sciipRun3810_SuperSheetImportExecutionProductionRuntimeGovernanceProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3810_SuperSheetImportExecutionProductionRuntimeGovernanceProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3820_SuperSheetImportExecutionProductionRuntimeGovernanceLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3820_SuperSheetImportExecutionProductionRuntimeGovernanceLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeGovernanceId',
+      'runtimeGovernanceStatus',
+      'productionRuntimeGovernanceLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMEGOVERNANCELEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimegovernanceledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3820 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE.',
+    nextProcessor: '3830_SuperSheetImportExecutionProductionRuntimeGovernanceCloseoutProcessor'
+  });
+}
+
+function run3820_SuperSheetImportExecutionProductionRuntimeGovernanceLedgerProcessor() {
+  return sciipRun3820_SuperSheetImportExecutionProductionRuntimeGovernanceLedgerProcessor();
+}
+
+function sciipTest3820_SuperSheetImportExecutionProductionRuntimeGovernanceLedgerProcessor() {
+  var result = sciipRun3820_SuperSheetImportExecutionProductionRuntimeGovernanceLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3820_SuperSheetImportExecutionProductionRuntimeGovernanceLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3830_SuperSheetImportExecutionProductionRuntimeGovernanceCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3830_SuperSheetImportExecutionProductionRuntimeGovernanceCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeGovernanceId',
+      'runtimeGovernanceStatus',
+      'productionRuntimeGovernanceCloseoutStatus',
+      'closeoutDate',
+      'closeoutScope',
+      'closeoutResult',
+      'closeoutSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMEGOVERNANCECLOSEOUT_READY',
+    summary: 'supersheetimportexecutionproductionruntimegovernancecloseout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3830 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_LEDGER_SUMMARY.',
+    nextProcessor: '3840_SuperSheetImportExecutionProductionRuntimeGovernanceArchiveProcessor'
+  });
+}
+
+function run3830_SuperSheetImportExecutionProductionRuntimeGovernanceCloseoutProcessor() {
+  return sciipRun3830_SuperSheetImportExecutionProductionRuntimeGovernanceCloseoutProcessor();
+}
+
+function sciipTest3830_SuperSheetImportExecutionProductionRuntimeGovernanceCloseoutProcessor() {
+  var result = sciipRun3830_SuperSheetImportExecutionProductionRuntimeGovernanceCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3830_SuperSheetImportExecutionProductionRuntimeGovernanceCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3840_SuperSheetImportExecutionProductionRuntimeGovernanceArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3840_SuperSheetImportExecutionProductionRuntimeGovernanceArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeGovernanceId',
+      'runtimeGovernanceStatus',
+      'productionRuntimeGovernanceArchiveStatus',
+      'archiveDate',
+      'archiveScope',
+      'archiveResult',
+      'archiveSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMEGOVERNANCEARCHIVE_READY',
+    summary: 'supersheetimportexecutionproductionruntimegovernancearchive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3840 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CLOSEOUTS.',
+    nextProcessor: '3850_SuperSheetImportExecutionProductionRuntimeGovernanceReconciliationProcessor'
+  });
+}
+
+function run3840_SuperSheetImportExecutionProductionRuntimeGovernanceArchiveProcessor() {
+  return sciipRun3840_SuperSheetImportExecutionProductionRuntimeGovernanceArchiveProcessor();
+}
+
+function sciipTest3840_SuperSheetImportExecutionProductionRuntimeGovernanceArchiveProcessor() {
+  var result = sciipRun3840_SuperSheetImportExecutionProductionRuntimeGovernanceArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3840_SuperSheetImportExecutionProductionRuntimeGovernanceArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3850_SuperSheetImportExecutionProductionRuntimeGovernanceReconciliationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3850_SuperSheetImportExecutionProductionRuntimeGovernanceReconciliation',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_RECONCILIATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_RECONCILIATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_RECONCILIATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeGovernanceId',
+      'runtimeGovernanceStatus',
+      'productionRuntimeGovernanceReconciliationStatus',
+      'reconciliationDate',
+      'reconciliationScope',
+      'reconciliationResult',
+      'reconciliationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMEGOVERNANCERECONCILIATION_READY',
+    summary: 'supersheetimportexecutionproductionruntimegovernancereconciliation runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3850 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ARCHIVE.',
+    nextProcessor: '3860_SuperSheetImportExecutionProductionRuntimeGovernanceCompletionProcessor'
+  });
+}
+
+function run3850_SuperSheetImportExecutionProductionRuntimeGovernanceReconciliationProcessor() {
+  return sciipRun3850_SuperSheetImportExecutionProductionRuntimeGovernanceReconciliationProcessor();
+}
+
+function sciipTest3850_SuperSheetImportExecutionProductionRuntimeGovernanceReconciliationProcessor() {
+  var result = sciipRun3850_SuperSheetImportExecutionProductionRuntimeGovernanceReconciliationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3850_SuperSheetImportExecutionProductionRuntimeGovernanceReconciliationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3860_SuperSheetImportExecutionProductionRuntimeGovernanceCompletionProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3860_SuperSheetImportExecutionProductionRuntimeGovernanceCompletion',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_COMPLETION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_RECONCILIATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_COMPLETION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_COMPLETION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeGovernanceId',
+      'runtimeGovernanceStatus',
+      'productionRuntimeGovernanceCompletionStatus',
+      'completionDate',
+      'completionScope',
+      'completionResult',
+      'completionSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMEGOVERNANCECOMPLETION_READY',
+    summary: 'supersheetimportexecutionproductionruntimegovernancecompletion runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3860 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_RECONCILIATION.',
+    nextProcessor: '3870_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationProcessor'
+  });
+}
+
+function run3860_SuperSheetImportExecutionProductionRuntimeGovernanceCompletionProcessor() {
+  return sciipRun3860_SuperSheetImportExecutionProductionRuntimeGovernanceCompletionProcessor();
+}
+
+function sciipTest3860_SuperSheetImportExecutionProductionRuntimeGovernanceCompletionProcessor() {
+  var result = sciipRun3860_SuperSheetImportExecutionProductionRuntimeGovernanceCompletionProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3860_SuperSheetImportExecutionProductionRuntimeGovernanceCompletionProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3870_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3870_SuperSheetImportExecutionProductionRuntimeGovernanceCertification',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CERTIFICATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_COMPLETION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CERTIFICATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CERTIFICATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeGovernanceId',
+      'runtimeGovernanceStatus',
+      'productionRuntimeGovernanceCertificationStatus',
+      'certificationDate',
+      'certificationScope',
+      'certificationResult',
+      'certificationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMEGOVERNANCECERTIFICATION_READY',
+    summary: 'supersheetimportexecutionproductionruntimegovernancecertification runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3870 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_COMPLETION.',
+    nextProcessor: '3880_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationLedgerProcessor'
+  });
+}
+
+function run3870_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationProcessor() {
+  return sciipRun3870_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationProcessor();
+}
+
+function sciipTest3870_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationProcessor() {
+  var result = sciipRun3870_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3870_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3880_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3880_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CERTIFICATION_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CERTIFICATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CERTIFICATION_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CERTIFICATION_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeGovernanceId',
+      'runtimeGovernanceStatus',
+      'productionRuntimeGovernanceCertificationLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMEGOVERNANCECERTIFICATIONLEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimegovernancecertificationledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3880 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CERTIFICATION.',
+    nextProcessor: '3890_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceProcessor'
+  });
+}
+
+function run3880_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationLedgerProcessor() {
+  return sciipRun3880_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationLedgerProcessor();
+}
+
+function sciipTest3880_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationLedgerProcessor() {
+  var result = sciipRun3880_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3880_SuperSheetImportExecutionProductionRuntimeGovernanceCertificationLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3890_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3890_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptance',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CERTIFICATION_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeGovernanceId',
+      'runtimeGovernanceStatus',
+      'productionRuntimeGovernanceAcceptanceStatus',
+      'acceptanceDate',
+      'acceptanceScope',
+      'acceptanceResult',
+      'acceptanceSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMEGOVERNANCEACCEPTANCE_READY',
+    summary: 'supersheetimportexecutionproductionruntimegovernanceacceptance runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3890 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_CERTIFICATION_LEDGER_SUMMARY.',
+    nextProcessor: '3900_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceLedgerProcessor'
+  });
+}
+
+function run3890_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceProcessor() {
+  return sciipRun3890_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceProcessor();
+}
+
+function sciipTest3890_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceProcessor() {
+  var result = sciipRun3890_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3890_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3900_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3900_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeGovernanceId',
+      'runtimeGovernanceStatus',
+      'productionRuntimeGovernanceAcceptanceLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMEGOVERNANCEACCEPTANCELEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimegovernanceacceptanceledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3900 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE.',
+    nextProcessor: '3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor'
+  });
+}
+
+function run3900_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceLedgerProcessor() {
+  return sciipRun3900_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceLedgerProcessor();
+}
+
+function sciipTest3900_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceLedgerProcessor() {
+  var result = sciipRun3900_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3900_SuperSheetImportExecutionProductionRuntimeGovernanceAcceptanceLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+/*******************************************************
+ * SCIIP_OS v5.4
+ * Production Runtime Control Plane Batch
+ * Processors: 3910-4000
+ *
+ * Dependency:
+ * Requires the validated helper function from 3420-3610 batch:
+ *   sciipPatch3420_3610Run_(config)
+ *
+ * Paste this below the validated 3420-3900 batch files.
+ *******************************************************/
+function sciipRun3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3910_SuperSheetImportExecutionProductionRuntimeControlPlane',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneStatus',
+      'controlPlaneDate',
+      'controlPlaneScope',
+      'controlPlaneResult',
+      'controlPlaneSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANE_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplane runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3910 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_GOVERNANCE_ACCEPTANCE_LEDGER_SUMMARY.',
+    nextProcessor: '3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor'
+  });
+}
+
+function run3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor() {
+  return sciipRun3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor();
+}
+
+function sciipTest3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor() {
+  var result = sciipRun3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3910_SuperSheetImportExecutionProductionRuntimeControlPlaneProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANELEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplaneledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3920 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE.',
+    nextProcessor: '3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor'
+  });
+}
+
+function run3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor() {
+  return sciipRun3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor();
+}
+
+function sciipTest3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor() {
+  var result = sciipRun3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3920_SuperSheetImportExecutionProductionRuntimeControlPlaneLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseout',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CLOSEOUTS',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CLOSEOUTS',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CLOSEOUTS_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneCloseoutStatus',
+      'closeoutDate',
+      'closeoutScope',
+      'closeoutResult',
+      'closeoutSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANECLOSEOUT_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanecloseout runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3930 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_LEDGER_SUMMARY.',
+    nextProcessor: '3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor'
+  });
+}
+
+function run3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor() {
+  return sciipRun3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor();
+}
+
+function sciipTest3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor() {
+  var result = sciipRun3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3930_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchive',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ARCHIVE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CLOSEOUTS',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ARCHIVE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ARCHIVE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneArchiveStatus',
+      'archiveDate',
+      'archiveScope',
+      'archiveResult',
+      'archiveSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANEARCHIVE_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanearchive runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3940 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CLOSEOUTS.',
+    nextProcessor: '3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor'
+  });
+}
+
+function run3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor() {
+  return sciipRun3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor();
+}
+
+function sciipTest3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor() {
+  var result = sciipRun3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3940_SuperSheetImportExecutionProductionRuntimeControlPlaneArchiveProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliation',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RECONCILIATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ARCHIVE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RECONCILIATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RECONCILIATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneReconciliationStatus',
+      'reconciliationDate',
+      'reconciliationScope',
+      'reconciliationResult',
+      'reconciliationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANERECONCILIATION_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanereconciliation runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3950 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ARCHIVE.',
+    nextProcessor: '3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor'
+  });
+}
+
+function run3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor() {
+  return sciipRun3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor();
+}
+
+function sciipTest3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor() {
+  var result = sciipRun3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3950_SuperSheetImportExecutionProductionRuntimeControlPlaneReconciliationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletion',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_COMPLETION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RECONCILIATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_COMPLETION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_COMPLETION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneCompletionStatus',
+      'completionDate',
+      'completionScope',
+      'completionResult',
+      'completionSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANECOMPLETION_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanecompletion runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3960 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_RECONCILIATION.',
+    nextProcessor: '3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor'
+  });
+}
+
+function run3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor() {
+  return sciipRun3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor();
+}
+
+function sciipTest3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor() {
+  var result = sciipRun3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3960_SuperSheetImportExecutionProductionRuntimeControlPlaneCompletionProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertification',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_COMPLETION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneCertificationStatus',
+      'certificationDate',
+      'certificationScope',
+      'certificationResult',
+      'certificationSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANECERTIFICATION_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanecertification runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3970 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_COMPLETION.',
+    nextProcessor: '3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor'
+  });
+}
+
+function run3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor() {
+  return sciipRun3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor();
+}
+
+function sciipTest3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor() {
+  var result = sciipRun3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3970_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneCertificationLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANECERTIFICATIONLEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplanecertificationledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3980 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION.',
+    nextProcessor: '3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor'
+  });
+}
+
+function run3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor() {
+  return sciipRun3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor();
+}
+
+function sciipTest3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor() {
+  var result = sciipRun3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3980_SuperSheetImportExecutionProductionRuntimeControlPlaneCertificationLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptance',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_LEDGER_SUMMARY',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneAcceptanceStatus',
+      'acceptanceDate',
+      'acceptanceScope',
+      'acceptanceResult',
+      'acceptanceSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANEACCEPTANCE_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplaneacceptance runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 3990 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_CERTIFICATION_LEDGER_SUMMARY.',
+    nextProcessor: '4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor'
+  });
+}
+
+function run3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor() {
+  return sciipRun3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor();
+}
+
+function sciipTest3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor() {
+  var result = sciipRun3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest3990_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceProcessor',
+    result: result
+  }));
+  return result;
+}
+
+function sciipRun4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor() {
+  return sciipPatch3420_3610Run_({
+    processor: '4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedger',
+    action: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE_LEDGER_SUMMARY',
+    sourceSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE',
+    targetSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE_LEDGER_SUMMARY',
+    ledgerSheet: 'SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE_LEDGER_SUMMARY_RUNTIME_LEDGER',
+    headers: [
+      'businessKey',
+      'transactionId',
+      'sourceBusinessKey',
+      'runtimeControlPlaneId',
+      'runtimeControlPlaneStatus',
+      'productionRuntimeControlPlaneAcceptanceLedgerStatus',
+      'ledgerDate',
+      'ledgerScope',
+      'ledgerResult',
+      'ledgerSummary',
+      'frameworkVersion',
+      'createdAt'
+    ],
+    status: 'SUPERSHEETIMPORTEXECUTIONPRODUCTIONRUNTIMECONTROLPLANEACCEPTANCELEDGER_READY',
+    summary: 'supersheetimportexecutionproductionruntimecontrolplaneacceptanceledger runtime processor completed.',
+    noInputNextAction: 'Run upstream processor before 4000 so records exist in SUPERSHEET_IMPORT_EXECUTION_PRODUCTION_RUNTIME_CONTROL_PLANE_ACCEPTANCE.',
+    nextProcessor: '4010_SuperSheetImportExecutionProductionRuntimeControlPlaneCloseoutProcessor'
+  });
+}
+
+function run4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor() {
+  return sciipRun4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor();
+}
+
+function sciipTest4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor() {
+  var result = sciipRun4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor();
+  Logger.log(JSON.stringify({
+    test: 'sciipTest4000_SuperSheetImportExecutionProductionRuntimeControlPlaneAcceptanceLedgerProcessor',
+    result: result
+  }));
+  return result;
+}
+
 /***************************************
  * SCIIP_OS v5.4 / Runtime v5.2
  * 4010–4100 Autonomous Production Runtime Operations Batch
@@ -19111,3889 +21889,6 @@ function sciipTestAutonomousProcessorExecutionRunStateLedgerProcessor() {
 
   Logger.log(JSON.stringify({
     test: 'sciipTestAutonomousProcessorExecutionRunStateLedgerProcessor',
-    result: result
-  }));
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1160_AutonomousProcessorExecutionRunStateDigestProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateDigestProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1160_AutonomousProcessorExecutionRunStateDigestProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_BUILD',
-    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_LEDGER',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1160_AutonomousProcessorExecutionRunStateDigestProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateDigestProcessorLegacy1160_();
-      return sciipWrapLegacyRuntimeResult1160_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1160_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/*******************************************************
- * SCIIP_OS v4.1
- * 1160_AutonomousProcessorExecutionRunStateDigestProcessor
- *******************************************************/
-
-const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_PROCESSOR = '1160_AutonomousProcessorExecutionRunStateDigestProcessor';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_LEDGER';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_DATE_COLUMN = 'Run_State_Date';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_HEADERS = [
-  'Digest_ID',
-  'Business_Key',
-  'Run_State_Date',
-  'Digest_Type',
-  'Operational_State',
-  'Operational_Interpretation',
-  'Governance_Posture',
-  'Orchestration_Posture',
-  'Dashboard_Posture',
-  'Decisioning_Posture',
-  'Ledger_Entries_Reviewed',
-  'Unique_Processors_Observed',
-  'Healthy_Count',
-  'Warning_Count',
-  'Blocked_Count',
-  'Failed_Count',
-  'Skipped_Count',
-  'Duplicate_Count',
-  'Latest_Processor',
-  'Latest_Status',
-  'Latest_Business_Key',
-  'Latest_Completed_At',
-  'Digest_Summary_JSON',
-  'Source_Sheet',
-  'Source_Date_Column',
-  'Processor',
-  'Created_At'
-];
-
-/**
- * Main processor.
- */
-function sciipRunAutonomousProcessorExecutionRunStateDigestProcessorLegacy1160_() {
-  const startedAt = new Date();
-  const ss = sciipGetSpreadsheet_();
-
-  const inputSheet = ss.getSheetByName(SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_SHEET);
-  if (!inputSheet) {
-    throw new Error('Missing input sheet: ' + SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_SHEET);
-  }
-
-  const outputSheet = sciipEnsureAutonomousProcessorExecutionRunStateDigestSheet_();
-
-  const resolvedRunStateDate =
-    sciipResolveLatestProcessingDate_(
-      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_SHEET,
-      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_DATE_COLUMN
-    ) || sciipFormatDateKey_(startedAt);
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST|' + resolvedRunStateDate;
-
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_PROCESSOR,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateDigestsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey: businessKey,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const ledgerRows =
-    sciipReadAutonomousProcessorExecutionRunStateLedgerRows_(inputSheet);
-
-  const sourceRows =
-    sciipFilterAutonomousProcessorExecutionRunStateLedgerRowsByDate_(
-      ledgerRows,
-      resolvedRunStateDate
-    );
-
-  if (!sourceRows.length) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_PROCESSOR,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateDigestsCreated: 0,
-      skippedDuplicate: 0,
-      businessKey: businessKey,
-      resolvedRunStateDate: resolvedRunStateDate,
-      completedAt: new Date().toISOString()
-    };
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const digest =
-    sciipBuildAutonomousProcessorExecutionRunStateDigest_(
-      sourceRows,
-      resolvedRunStateDate,
-      businessKey,
-      startedAt
-    );
-
-  outputSheet.appendRow(digest);
-
-  const result = {
-    processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_PROCESSOR,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateDigestsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey: businessKey,
-    resolvedRunStateDate: resolvedRunStateDate,
-    ledgerEntriesReviewed: sourceRows.length,
-    completedAt: new Date().toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-/**
- * Factory: output sheet.
- */
-function sciipEnsureAutonomousProcessorExecutionRunStateDigestSheet_() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_SHEET);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_SHEET);
-  }
-
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_HEADERS);
-  }
-
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  const missing = SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_OUTPUT_HEADERS.filter(function(h) {
-    return headers.indexOf(h) === -1;
-  });
-
-  if (missing.length) {
-    sheet.getRange(1, headers.length + 1, 1, missing.length).setValues([missing]);
-  }
-
-  return sheet;
-}
-
-/**
- * Factory: digest row.
- */
-function sciipBuildAutonomousProcessorExecutionRunStateDigest_(
-  rows,
-  resolvedRunStateDate,
-  businessKey,
-  startedAt
-) {
-  const aggregate =
-    sciipAggregateAutonomousProcessorExecutionRunStateLedger_(rows);
-
-  const latest =
-    sciipResolveLatestAutonomousProcessorExecutionRunStateLedgerRow_(rows);
-
-  const operationalState =
-    sciipResolveAutonomousProcessorExecutionRunStateOperationalState_(aggregate);
-
-  const interpretation =
-    sciipResolveAutonomousProcessorExecutionRunStateInterpretation_(
-      operationalState,
-      aggregate
-    );
-
-  const governancePosture =
-    sciipResolveAutonomousProcessorExecutionRunStateGovernancePosture_(
-      operationalState,
-      aggregate
-    );
-
-  const orchestrationPosture =
-    sciipResolveAutonomousProcessorExecutionRunStateOrchestrationPosture_(
-      operationalState,
-      aggregate
-    );
-
-  const dashboardPosture =
-    sciipResolveAutonomousProcessorExecutionRunStateDashboardPosture_(
-      operationalState,
-      aggregate
-    );
-
-  const decisioningPosture =
-    sciipResolveAutonomousProcessorExecutionRunStateDecisioningPosture_(
-      operationalState,
-      aggregate
-    );
-
-  const digestId =
-    'APRSD_' + Utilities.getUuid();
-
-  const summaryJson = JSON.stringify({
-    runStateDate: resolvedRunStateDate,
-    operationalState: operationalState,
-    governancePosture: governancePosture,
-    orchestrationPosture: orchestrationPosture,
-    dashboardPosture: dashboardPosture,
-    decisioningPosture: decisioningPosture,
-    aggregate: aggregate,
-    latest: latest
-  });
-
-  return [
-    digestId,
-    businessKey,
-    resolvedRunStateDate,
-    'DAILY_AUTONOMOUS_RUN_STATE_DIGEST',
-    operationalState,
-    interpretation,
-    governancePosture,
-    orchestrationPosture,
-    dashboardPosture,
-    decisioningPosture,
-    aggregate.ledgerEntriesReviewed,
-    aggregate.uniqueProcessorsObserved,
-    aggregate.healthyCount,
-    aggregate.warningCount,
-    aggregate.blockedCount,
-    aggregate.failedCount,
-    aggregate.skippedCount,
-    aggregate.duplicateCount,
-    latest.processor || '',
-    latest.status || '',
-    latest.businessKey || '',
-    latest.completedAt || '',
-    summaryJson,
-    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_SHEET,
-    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_DATE_COLUMN,
-    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_PROCESSOR,
-    startedAt.toISOString()
-  ];
-}
-
-/**
- * Aggregation logic.
- */
-function sciipAggregateAutonomousProcessorExecutionRunStateLedger_(rows) {
-  const processors = {};
-  let healthy = 0;
-  let warning = 0;
-  let blocked = 0;
-  let failed = 0;
-  let skipped = 0;
-  let duplicate = 0;
-
-  rows.forEach(function(row) {
-    const processor = sciipGetRunStateLedgerValue_(row, [
-      'Processor',
-      'processor',
-      'Processor_Name'
-    ]);
-
-    if (processor) processors[processor] = true;
-
-    const status = String(sciipGetRunStateLedgerValue_(row, [
-      'Status',
-      'status',
-      'Run_State',
-      'Operational_State'
-    ]) || '').toUpperCase();
-
-    const skippedDuplicate = String(sciipGetRunStateLedgerValue_(row, [
-      'Skipped_Duplicate',
-      'skippedDuplicate'
-    ]) || '');
-
-    if (status.indexOf('FAIL') !== -1 || status.indexOf('ERROR') !== -1) {
-      failed++;
-    } else if (status.indexOf('BLOCK') !== -1) {
-      blocked++;
-    } else if (status.indexOf('WARN') !== -1) {
-      warning++;
-    } else if (status.indexOf('SKIPPED') !== -1) {
-      skipped++;
-    } else {
-      healthy++;
-    }
-
-    if (skippedDuplicate === '1' || skippedDuplicate.toUpperCase() === 'TRUE') {
-      duplicate++;
-    }
-  });
-
-  return {
-    ledgerEntriesReviewed: rows.length,
-    uniqueProcessorsObserved: Object.keys(processors).length,
-    healthyCount: healthy,
-    warningCount: warning,
-    blockedCount: blocked,
-    failedCount: failed,
-    skippedCount: skipped,
-    duplicateCount: duplicate
-  };
-}
-
-/**
- * Resolver logic.
- */
-function sciipResolveAutonomousProcessorExecutionRunStateOperationalState_(aggregate) {
-  if (aggregate.failedCount > 0) return 'FAILED_ATTENTION_REQUIRED';
-  if (aggregate.blockedCount > 0) return 'BLOCKED';
-  if (aggregate.warningCount > 0) return 'OPERATIONAL_WITH_WARNINGS';
-  if (aggregate.ledgerEntriesReviewed === aggregate.duplicateCount) return 'IDEMPOTENT_STABLE';
-  return 'OPERATIONAL';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateInterpretation_(state, aggregate) {
-  if (state === 'FAILED_ATTENTION_REQUIRED') {
-    return 'One or more autonomous run state ledger entries indicate failure; governance review should prioritize failed processors before further promotion.';
-  }
-
-  if (state === 'BLOCKED') {
-    return 'Autonomous execution is blocked by one or more run state conditions and should not be advanced without review.';
-  }
-
-  if (state === 'OPERATIONAL_WITH_WARNINGS') {
-    return 'Autonomous execution is functioning but contains warning signals that should be visible to dashboards and governance.';
-  }
-
-  if (state === 'IDEMPOTENT_STABLE') {
-    return 'Run state ledger is stable and duplicate-protected; no new material state changes were detected for this processing date.';
-  }
-
-  return 'Autonomous run state is operational and suitable for downstream orchestration, dashboards, governance, and future decisioning.';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateGovernancePosture_(state) {
-  if (state === 'FAILED_ATTENTION_REQUIRED') return 'REVIEW_REQUIRED';
-  if (state === 'BLOCKED') return 'ESCALATE';
-  if (state === 'OPERATIONAL_WITH_WARNINGS') return 'MONITOR';
-  return 'NORMAL';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateOrchestrationPosture_(state) {
-  if (state === 'FAILED_ATTENTION_REQUIRED') return 'PAUSE_PROMOTION';
-  if (state === 'BLOCKED') return 'HOLD_DISPATCH';
-  if (state === 'OPERATIONAL_WITH_WARNINGS') return 'ALLOW_WITH_MONITORING';
-  return 'ALLOW';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateDashboardPosture_(state) {
-  if (state === 'FAILED_ATTENTION_REQUIRED') return 'SHOW_CRITICAL';
-  if (state === 'BLOCKED') return 'SHOW_BLOCKED';
-  if (state === 'OPERATIONAL_WITH_WARNINGS') return 'SHOW_WARNING';
-  return 'SHOW_HEALTHY';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateDecisioningPosture_(state) {
-  if (state === 'FAILED_ATTENTION_REQUIRED') return 'DO_NOT_AUTONOMOUSLY_ADVANCE';
-  if (state === 'BLOCKED') return 'REQUIRE_HUMAN_REVIEW';
-  if (state === 'OPERATIONAL_WITH_WARNINGS') return 'ADVANCE_WITH_CAUTION';
-  return 'ADVANCE';
-}
-
-/**
- * Row helpers.
- */
-function sciipReadAutonomousProcessorExecutionRunStateLedgerRows_(sheet) {
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0].map(String);
-
-  return values.slice(1).map(function(row) {
-    const obj = {};
-    headers.forEach(function(header, i) {
-      obj[header] = row[i];
-    });
-    return obj;
-  });
-}
-
-function sciipFilterAutonomousProcessorExecutionRunStateLedgerRowsByDate_(
-  rows,
-  resolvedDate
-) {
-  return rows.filter(function(row) {
-    const rawDate = sciipGetRunStateLedgerValue_(row, [
-      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_INPUT_DATE_COLUMN,
-      'Processing_Date',
-      'Run_Date',
-      'Ledger_Date',
-      'Date',
-      'Created_At',
-      'completedAt',
-      'Completed_At'
-    ]);
-
-    return sciipNormalizeRunStateDigestDateKey_(rawDate) === resolvedDate;
-  });
-}
-
-function sciipResolveLatestAutonomousProcessorExecutionRunStateLedgerRow_(rows) {
-  if (!rows.length) return {};
-
-  const sorted = rows.slice().sort(function(a, b) {
-    const aDate = new Date(sciipGetRunStateLedgerValue_(a, [
-      'Completed_At',
-      'completedAt',
-      'Created_At',
-      'createdAt'
-    ]) || 0).getTime();
-
-    const bDate = new Date(sciipGetRunStateLedgerValue_(b, [
-      'Completed_At',
-      'completedAt',
-      'Created_At',
-      'createdAt'
-    ]) || 0).getTime();
-
-    return bDate - aDate;
-  });
-
-  const latest = sorted[0];
-
-  return {
-    processor: sciipGetRunStateLedgerValue_(latest, [
-      'Processor',
-      'processor',
-      'Processor_Name'
-    ]),
-    status: sciipGetRunStateLedgerValue_(latest, [
-      'Status',
-      'status',
-      'Run_State',
-      'Operational_State'
-    ]),
-    businessKey: sciipGetRunStateLedgerValue_(latest, [
-      'Business_Key',
-      'businessKey'
-    ]),
-    completedAt: sciipGetRunStateLedgerValue_(latest, [
-      'Completed_At',
-      'completedAt',
-      'Created_At',
-      'createdAt'
-    ])
-  };
-}
-
-function sciipGetRunStateLedgerValue_(row, aliases) {
-  for (let i = 0; i < aliases.length; i++) {
-    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
-      return row[aliases[i]];
-    }
-  }
-  return '';
-}
-
-function sciipNormalizeRunStateDigestDateKey_(value) {
-  if (!value) return '';
-
-  if (Object.prototype.toString.call(value) === '[object Date]') {
-    return sciipFormatDateKey_(value);
-  }
-
-  const text = String(value);
-
-  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
-    return text;
-  }
-
-  const parsed = new Date(text);
-  if (!isNaN(parsed.getTime())) {
-    return sciipFormatDateKey_(parsed);
-  }
-
-  return text;
-}
-
-/**
- * Standalone test.
- */
-function sciipTestAutonomousProcessorExecutionRunStateDigestProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateDigestProcessor();
-
-  Logger.log(JSON.stringify({
-    test: 'sciipTestAutonomousProcessorExecutionRunStateDigestProcessor',
-    result: result
-  }));
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1170_AutonomousProcessorExecutionRunStateDigestLedgerProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateDigestLedgerProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1170_AutonomousProcessorExecutionRunStateDigestLedgerProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER_BUILD',
-    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1170_AutonomousProcessorExecutionRunStateDigestLedgerProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateDigestLedgerProcessorLegacy1170_();
-      return sciipWrapLegacyRuntimeResult1170_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1170_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/*******************************************************
- * SCIIP_OS v4.1
- * 1170_AutonomousProcessorExecutionRunStateDigestLedgerProcessor
- *******************************************************/
-
-const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_PROCESSOR =
-  '1170_AutonomousProcessorExecutionRunStateDigestLedgerProcessor';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_DATE_COLUMN =
-  'Run_State_Date';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_HEADERS = [
-  'Ledger_Entry_ID',
-  'Business_Key',
-  'Run_State_Date',
-  'Digest_ID',
-  'Digest_Type',
-  'Operational_State',
-  'Governance_Posture',
-  'Orchestration_Posture',
-  'Dashboard_Posture',
-  'Decisioning_Posture',
-  'Operational_Interpretation',
-  'Ledger_Entries_Reviewed',
-  'Unique_Processors_Observed',
-  'Healthy_Count',
-  'Warning_Count',
-  'Blocked_Count',
-  'Failed_Count',
-  'Skipped_Count',
-  'Duplicate_Count',
-  'Latest_Processor',
-  'Latest_Status',
-  'Latest_Business_Key',
-  'Latest_Completed_At',
-  'Ledger_Summary_JSON',
-  'Source_Business_Key',
-  'Source_Sheet',
-  'Source_Date_Column',
-  'Processor',
-  'Created_At'
-];
-
-/**
- * Main processor.
- */
-function sciipRunAutonomousProcessorExecutionRunStateDigestLedgerProcessorLegacy1170_() {
-  const startedAt = new Date();
-  const ss = sciipGetSpreadsheet_();
-
-  const inputSheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_SHEET
-  );
-
-  if (!inputSheet) {
-    throw new Error(
-      'Missing input sheet: ' +
-      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_SHEET
-    );
-  }
-
-  const outputSheet =
-    sciipEnsureAutonomousProcessorExecutionRunStateDigestLedgerSheet_();
-
-  const resolvedRunStateDate =
-    sciipResolveLatestProcessingDate_(
-      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_SHEET,
-      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_DATE_COLUMN
-    ) || sciipFormatDateKey_(startedAt);
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER|' +
-    resolvedRunStateDate;
-
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_PROCESSOR,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateDigestLedgerEntriesCreated: 0,
-      skippedDuplicate: 1,
-      businessKey: businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const digestRows =
-    sciipReadAutonomousProcessorExecutionRunStateDigestRows_(inputSheet);
-
-  const sourceRows =
-    sciipFilterAutonomousProcessorExecutionRunStateDigestRowsByDate_(
-      digestRows,
-      resolvedRunStateDate
-    );
-
-  if (!sourceRows.length) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_PROCESSOR,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateDigestLedgerEntriesCreated: 0,
-      skippedDuplicate: 0,
-      businessKey: businessKey,
-      resolvedRunStateDate: resolvedRunStateDate,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const latestDigest =
-    sciipResolveLatestAutonomousProcessorExecutionRunStateDigestRow_(
-      sourceRows
-    );
-
-  const ledgerRow =
-    sciipBuildAutonomousProcessorExecutionRunStateDigestLedgerEntry_(
-      latestDigest,
-      resolvedRunStateDate,
-      businessKey,
-      startedAt
-    );
-
-  outputSheet.appendRow(ledgerRow);
-
-  const result = {
-    processor: SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_PROCESSOR,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateDigestLedgerEntriesCreated: 1,
-    skippedDuplicate: 0,
-    businessKey: businessKey,
-    resolvedRunStateDate: resolvedRunStateDate,
-    completedAt: new Date().toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-/**
- * Factory: output sheet.
- */
-function sciipEnsureAutonomousProcessorExecutionRunStateDigestLedgerSheet_() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_SHEET
-  );
-
-  if (!sheet) {
-    sheet = ss.insertSheet(
-      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_SHEET
-    );
-  }
-
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(
-      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_HEADERS
-    );
-  }
-
-  const headers =
-    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-
-  const missing =
-    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_OUTPUT_HEADERS.filter(function(h) {
-      return headers.indexOf(h) === -1;
-    });
-
-  if (missing.length) {
-    sheet
-      .getRange(1, headers.length + 1, 1, missing.length)
-      .setValues([missing]);
-  }
-
-  return sheet;
-}
-
-/**
- * Factory: ledger entry row.
- */
-function sciipBuildAutonomousProcessorExecutionRunStateDigestLedgerEntry_(
-  digest,
-  resolvedRunStateDate,
-  businessKey,
-  startedAt
-) {
-  const ledgerEntryId = 'APRSDL_' + Utilities.getUuid();
-
-  const summary = {
-    runStateDate: resolvedRunStateDate,
-    digestId: sciipGetRunStateDigestValue_(digest, ['Digest_ID']),
-    operationalState: sciipGetRunStateDigestValue_(digest, ['Operational_State']),
-    governancePosture: sciipGetRunStateDigestValue_(digest, ['Governance_Posture']),
-    orchestrationPosture: sciipGetRunStateDigestValue_(digest, ['Orchestration_Posture']),
-    dashboardPosture: sciipGetRunStateDigestValue_(digest, ['Dashboard_Posture']),
-    decisioningPosture: sciipGetRunStateDigestValue_(digest, ['Decisioning_Posture']),
-    sourceBusinessKey: sciipGetRunStateDigestValue_(digest, ['Business_Key'])
-  };
-
-  return [
-    ledgerEntryId,
-    businessKey,
-    resolvedRunStateDate,
-    sciipGetRunStateDigestValue_(digest, ['Digest_ID']),
-    sciipGetRunStateDigestValue_(digest, ['Digest_Type']),
-    sciipGetRunStateDigestValue_(digest, ['Operational_State']),
-    sciipGetRunStateDigestValue_(digest, ['Governance_Posture']),
-    sciipGetRunStateDigestValue_(digest, ['Orchestration_Posture']),
-    sciipGetRunStateDigestValue_(digest, ['Dashboard_Posture']),
-    sciipGetRunStateDigestValue_(digest, ['Decisioning_Posture']),
-    sciipGetRunStateDigestValue_(digest, ['Operational_Interpretation']),
-    sciipGetRunStateDigestValue_(digest, ['Ledger_Entries_Reviewed']),
-    sciipGetRunStateDigestValue_(digest, ['Unique_Processors_Observed']),
-    sciipGetRunStateDigestValue_(digest, ['Healthy_Count']),
-    sciipGetRunStateDigestValue_(digest, ['Warning_Count']),
-    sciipGetRunStateDigestValue_(digest, ['Blocked_Count']),
-    sciipGetRunStateDigestValue_(digest, ['Failed_Count']),
-    sciipGetRunStateDigestValue_(digest, ['Skipped_Count']),
-    sciipGetRunStateDigestValue_(digest, ['Duplicate_Count']),
-    sciipGetRunStateDigestValue_(digest, ['Latest_Processor']),
-    sciipGetRunStateDigestValue_(digest, ['Latest_Status']),
-    sciipGetRunStateDigestValue_(digest, ['Latest_Business_Key']),
-    sciipGetRunStateDigestValue_(digest, ['Latest_Completed_At']),
-    JSON.stringify(summary),
-    sciipGetRunStateDigestValue_(digest, ['Business_Key']),
-    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_SHEET,
-    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_DATE_COLUMN,
-    SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_PROCESSOR,
-    startedAt.toISOString()
-  ];
-}
-
-/**
- * Reader logic.
- */
-function sciipReadAutonomousProcessorExecutionRunStateDigestRows_(sheet) {
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0].map(String);
-
-  return values.slice(1).map(function(row) {
-    const obj = {};
-    headers.forEach(function(header, i) {
-      obj[header] = row[i];
-    });
-    return obj;
-  });
-}
-
-/**
- * Resolver logic.
- */
-function sciipFilterAutonomousProcessorExecutionRunStateDigestRowsByDate_(
-  rows,
-  resolvedDate
-) {
-  return rows.filter(function(row) {
-    const rawDate = sciipGetRunStateDigestValue_(row, [
-      SCIIP_AUTONOMOUS_RUN_STATE_DIGEST_LEDGER_INPUT_DATE_COLUMN,
-      'Processing_Date',
-      'Run_Date',
-      'Digest_Date',
-      'Created_At',
-      'createdAt'
-    ]);
-
-    return sciipNormalizeRunStateDigestLedgerDateKey_(rawDate) === resolvedDate;
-  });
-}
-
-function sciipResolveLatestAutonomousProcessorExecutionRunStateDigestRow_(rows) {
-  if (!rows.length) return {};
-
-  const sorted = rows.slice().sort(function(a, b) {
-    const aDate = new Date(
-      sciipGetRunStateDigestValue_(a, ['Created_At', 'createdAt']) || 0
-    ).getTime();
-
-    const bDate = new Date(
-      sciipGetRunStateDigestValue_(b, ['Created_At', 'createdAt']) || 0
-    ).getTime();
-
-    return bDate - aDate;
-  });
-
-  return sorted[0];
-}
-
-function sciipGetRunStateDigestValue_(row, aliases) {
-  for (let i = 0; i < aliases.length; i++) {
-    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
-      return row[aliases[i]];
-    }
-  }
-
-  return '';
-}
-
-function sciipNormalizeRunStateDigestLedgerDateKey_(value) {
-  if (!value) return '';
-
-  if (Object.prototype.toString.call(value) === '[object Date]') {
-    return sciipFormatDateKey_(value);
-  }
-
-  const text = String(value);
-
-  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
-    return text;
-  }
-
-  const parsed = new Date(text);
-  if (!isNaN(parsed.getTime())) {
-    return sciipFormatDateKey_(parsed);
-  }
-
-  return text;
-}
-
-/**
- * Standalone test.
- */
-function sciipTestAutonomousProcessorExecutionRunStateDigestLedgerProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateDigestLedgerProcessor();
-
-  Logger.log(JSON.stringify({
-    test: 'sciipTestAutonomousProcessorExecutionRunStateDigestLedgerProcessor',
-    result: result
-  }));
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1180_AutonomousProcessorExecutionRunStateSignalProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateSignalProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1180_AutonomousProcessorExecutionRunStateSignalProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_BUILD',
-    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1180_AutonomousProcessorExecutionRunStateSignalProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateSignalProcessorLegacy1180_();
-      return sciipWrapLegacyRuntimeResult1180_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1180_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/*******************************************************
- * SCIIP_OS v4.1
- * 1180_AutonomousProcessorExecutionRunStateSignalProcessor
- *******************************************************/
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_PROCESSOR =
-  '1180_AutonomousProcessorExecutionRunStateSignalProcessor';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_DIGEST_LEDGER';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_DATE_COLUMN =
-  'Run_State_Date';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_HEADERS = [
-  'Signal_ID',
-  'Business_Key',
-  'Run_State_Date',
-  'Signal_Type',
-  'Signal_Category',
-  'Signal_Severity',
-  'Signal_Status',
-  'Signal_Message',
-  'Operational_State',
-  'Governance_Posture',
-  'Orchestration_Posture',
-  'Dashboard_Posture',
-  'Decisioning_Posture',
-  'Recommended_Action',
-  'Autonomous_Action_Allowed',
-  'Human_Review_Required',
-  'Ledger_Entries_Reviewed',
-  'Unique_Processors_Observed',
-  'Healthy_Count',
-  'Warning_Count',
-  'Blocked_Count',
-  'Failed_Count',
-  'Skipped_Count',
-  'Duplicate_Count',
-  'Source_Ledger_Entry_ID',
-  'Source_Business_Key',
-  'Source_Sheet',
-  'Source_Date_Column',
-  'Signal_Summary_JSON',
-  'Processor',
-  'Created_At'
-];
-
-/**
- * Main processor.
- */
-function sciipRunAutonomousProcessorExecutionRunStateSignalProcessorLegacy1180_() {
-  const startedAt = new Date();
-  const ss = sciipGetSpreadsheet_();
-
-  const inputSheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_SHEET
-  );
-
-  if (!inputSheet) {
-    throw new Error(
-      'Missing input sheet: ' +
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_SHEET
-    );
-  }
-
-  const outputSheet =
-    sciipEnsureAutonomousProcessorExecutionRunStateSignalSheet_();
-
-  const resolvedRunStateDate =
-    sciipResolveLatestProcessingDate_(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_SHEET,
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_DATE_COLUMN
-    ) || sciipFormatDateKey_(startedAt);
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL|' +
-    resolvedRunStateDate;
-
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_PROCESSOR,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateSignalsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey: businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const ledgerRows =
-    sciipReadAutonomousProcessorExecutionRunStateSignalInputRows_(inputSheet);
-
-  const sourceRows =
-    sciipFilterAutonomousProcessorExecutionRunStateSignalRowsByDate_(
-      ledgerRows,
-      resolvedRunStateDate
-    );
-
-  if (!sourceRows.length) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_PROCESSOR,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateSignalsCreated: 0,
-      skippedDuplicate: 0,
-      businessKey: businessKey,
-      resolvedRunStateDate: resolvedRunStateDate,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const latestLedgerEntry =
-    sciipResolveLatestAutonomousProcessorExecutionRunStateSignalInputRow_(
-      sourceRows
-    );
-
-  const signalRow =
-    sciipBuildAutonomousProcessorExecutionRunStateSignal_(
-      latestLedgerEntry,
-      resolvedRunStateDate,
-      businessKey,
-      startedAt
-    );
-
-  outputSheet.appendRow(signalRow);
-
-  const result = {
-    processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_PROCESSOR,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateSignalsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey: businessKey,
-    resolvedRunStateDate: resolvedRunStateDate,
-    completedAt: new Date().toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-/**
- * Factory: output sheet.
- */
-function sciipEnsureAutonomousProcessorExecutionRunStateSignalSheet_() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_SHEET
-  );
-
-  if (!sheet) {
-    sheet = ss.insertSheet(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_SHEET
-    );
-  }
-
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_HEADERS
-    );
-  }
-
-  const headers =
-    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-
-  const missing =
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_OUTPUT_HEADERS.filter(function(h) {
-      return headers.indexOf(h) === -1;
-    });
-
-  if (missing.length) {
-    sheet
-      .getRange(1, headers.length + 1, 1, missing.length)
-      .setValues([missing]);
-  }
-
-  return sheet;
-}
-
-/**
- * Factory: signal row.
- */
-function sciipBuildAutonomousProcessorExecutionRunStateSignal_(
-  ledgerEntry,
-  resolvedRunStateDate,
-  businessKey,
-  startedAt
-) {
-  const operationalState =
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Operational_State']);
-
-  const governancePosture =
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Governance_Posture']);
-
-  const orchestrationPosture =
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Orchestration_Posture']);
-
-  const dashboardPosture =
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Dashboard_Posture']);
-
-  const decisioningPosture =
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Decisioning_Posture']);
-
-  const severity =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalSeverity_(
-      operationalState,
-      governancePosture,
-      orchestrationPosture,
-      decisioningPosture
-    );
-
-  const category =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalCategory_(
-      operationalState,
-      severity
-    );
-
-  const status =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalStatus_(severity);
-
-  const recommendedAction =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalRecommendedAction_(
-      operationalState,
-      governancePosture,
-      orchestrationPosture,
-      decisioningPosture
-    );
-
-  const autonomousActionAllowed =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalAutonomousAllowed_(
-      decisioningPosture
-    );
-
-  const humanReviewRequired =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalHumanReviewRequired_(
-      governancePosture,
-      decisioningPosture
-    );
-
-  const message =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalMessage_(
-      operationalState,
-      severity,
-      recommendedAction
-    );
-
-  const signalId = 'APRSS_' + Utilities.getUuid();
-
-  const summary = {
-    runStateDate: resolvedRunStateDate,
-    signalType: 'AUTONOMOUS_RUN_STATE_SIGNAL',
-    signalCategory: category,
-    signalSeverity: severity,
-    signalStatus: status,
-    operationalState: operationalState,
-    governancePosture: governancePosture,
-    orchestrationPosture: orchestrationPosture,
-    dashboardPosture: dashboardPosture,
-    decisioningPosture: decisioningPosture,
-    recommendedAction: recommendedAction,
-    autonomousActionAllowed: autonomousActionAllowed,
-    humanReviewRequired: humanReviewRequired,
-    sourceLedgerEntryId: sciipGetRunStateSignalInputValue_(ledgerEntry, [
-      'Ledger_Entry_ID'
-    ]),
-    sourceBusinessKey: sciipGetRunStateSignalInputValue_(ledgerEntry, [
-      'Business_Key'
-    ])
-  };
-
-  return [
-    signalId,
-    businessKey,
-    resolvedRunStateDate,
-    'AUTONOMOUS_RUN_STATE_SIGNAL',
-    category,
-    severity,
-    status,
-    message,
-    operationalState,
-    governancePosture,
-    orchestrationPosture,
-    dashboardPosture,
-    decisioningPosture,
-    recommendedAction,
-    autonomousActionAllowed,
-    humanReviewRequired,
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Ledger_Entries_Reviewed']),
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Unique_Processors_Observed']),
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Healthy_Count']),
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Warning_Count']),
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Blocked_Count']),
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Failed_Count']),
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Skipped_Count']),
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Duplicate_Count']),
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Ledger_Entry_ID']),
-    sciipGetRunStateSignalInputValue_(ledgerEntry, ['Business_Key']),
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_SHEET,
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_DATE_COLUMN,
-    JSON.stringify(summary),
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_PROCESSOR,
-    startedAt.toISOString()
-  ];
-}
-
-/**
- * Signal resolver logic.
- */
-function sciipResolveAutonomousProcessorExecutionRunStateSignalSeverity_(
-  operationalState,
-  governancePosture,
-  orchestrationPosture,
-  decisioningPosture
-) {
-  const state = String(operationalState || '').toUpperCase();
-  const governance = String(governancePosture || '').toUpperCase();
-  const orchestration = String(orchestrationPosture || '').toUpperCase();
-  const decisioning = String(decisioningPosture || '').toUpperCase();
-
-  if (
-    state.indexOf('FAILED') !== -1 ||
-    governance === 'REVIEW_REQUIRED' ||
-    decisioning === 'DO_NOT_AUTONOMOUSLY_ADVANCE'
-  ) {
-    return 'CRITICAL';
-  }
-
-  if (
-    state === 'BLOCKED' ||
-    governance === 'ESCALATE' ||
-    orchestration === 'HOLD_DISPATCH' ||
-    decisioning === 'REQUIRE_HUMAN_REVIEW'
-  ) {
-    return 'HIGH';
-  }
-
-  if (
-    state.indexOf('WARNING') !== -1 ||
-    governance === 'MONITOR' ||
-    orchestration === 'ALLOW_WITH_MONITORING' ||
-    decisioning === 'ADVANCE_WITH_CAUTION'
-  ) {
-    return 'MEDIUM';
-  }
-
-  return 'LOW';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalCategory_(
-  operationalState,
-  severity
-) {
-  const state = String(operationalState || '').toUpperCase();
-
-  if (severity === 'CRITICAL') return 'RUN_STATE_FAILURE';
-  if (severity === 'HIGH') return 'RUN_STATE_BLOCKER';
-  if (state === 'IDEMPOTENT_STABLE') return 'RUN_STATE_STABILITY';
-  if (severity === 'MEDIUM') return 'RUN_STATE_WARNING';
-  return 'RUN_STATE_HEALTH';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalStatus_(severity) {
-  if (severity === 'CRITICAL') return 'ACTIVE_CRITICAL';
-  if (severity === 'HIGH') return 'ACTIVE_HIGH';
-  if (severity === 'MEDIUM') return 'ACTIVE_MONITOR';
-  return 'ACTIVE_HEALTHY';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalRecommendedAction_(
-  operationalState,
-  governancePosture,
-  orchestrationPosture,
-  decisioningPosture
-) {
-  const state = String(operationalState || '').toUpperCase();
-  const governance = String(governancePosture || '').toUpperCase();
-  const orchestration = String(orchestrationPosture || '').toUpperCase();
-  const decisioning = String(decisioningPosture || '').toUpperCase();
-
-  if (
-    state.indexOf('FAILED') !== -1 ||
-    governance === 'REVIEW_REQUIRED' ||
-    decisioning === 'DO_NOT_AUTONOMOUSLY_ADVANCE'
-  ) {
-    return 'PAUSE_AUTONOMOUS_ADVANCEMENT_AND_REVIEW_FAILURES';
-  }
-
-  if (
-    state === 'BLOCKED' ||
-    governance === 'ESCALATE' ||
-    orchestration === 'HOLD_DISPATCH' ||
-    decisioning === 'REQUIRE_HUMAN_REVIEW'
-  ) {
-    return 'HOLD_DISPATCH_AND_REQUIRE_HUMAN_REVIEW';
-  }
-
-  if (
-    state.indexOf('WARNING') !== -1 ||
-    governance === 'MONITOR' ||
-    orchestration === 'ALLOW_WITH_MONITORING' ||
-    decisioning === 'ADVANCE_WITH_CAUTION'
-  ) {
-    return 'ALLOW_DOWNSTREAM_PROCESSING_WITH_MONITORING';
-  }
-
-  return 'ALLOW_DOWNSTREAM_PROCESSING';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalAutonomousAllowed_(
-  decisioningPosture
-) {
-  const decisioning = String(decisioningPosture || '').toUpperCase();
-
-  if (
-    decisioning === 'DO_NOT_AUTONOMOUSLY_ADVANCE' ||
-    decisioning === 'REQUIRE_HUMAN_REVIEW'
-  ) {
-    return false;
-  }
-
-  return true;
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalHumanReviewRequired_(
-  governancePosture,
-  decisioningPosture
-) {
-  const governance = String(governancePosture || '').toUpperCase();
-  const decisioning = String(decisioningPosture || '').toUpperCase();
-
-  if (
-    governance === 'REVIEW_REQUIRED' ||
-    governance === 'ESCALATE' ||
-    decisioning === 'DO_NOT_AUTONOMOUSLY_ADVANCE' ||
-    decisioning === 'REQUIRE_HUMAN_REVIEW'
-  ) {
-    return true;
-  }
-
-  return false;
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalMessage_(
-  operationalState,
-  severity,
-  recommendedAction
-) {
-  return (
-    'Autonomous run state signal resolved as ' +
-    severity +
-    ' from operational state ' +
-    operationalState +
-    '. Recommended action: ' +
-    recommendedAction +
-    '.'
-  );
-}
-
-/**
- * Reader logic.
- */
-function sciipReadAutonomousProcessorExecutionRunStateSignalInputRows_(sheet) {
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0].map(String);
-
-  return values.slice(1).map(function(row) {
-    const obj = {};
-    headers.forEach(function(header, i) {
-      obj[header] = row[i];
-    });
-    return obj;
-  });
-}
-
-/**
- * Resolver logic.
- */
-function sciipFilterAutonomousProcessorExecutionRunStateSignalRowsByDate_(
-  rows,
-  resolvedDate
-) {
-  return rows.filter(function(row) {
-    const rawDate = sciipGetRunStateSignalInputValue_(row, [
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_INPUT_DATE_COLUMN,
-      'Processing_Date',
-      'Run_Date',
-      'Digest_Date',
-      'Ledger_Date',
-      'Created_At',
-      'createdAt'
-    ]);
-
-    return sciipNormalizeRunStateSignalDateKey_(rawDate) === resolvedDate;
-  });
-}
-
-function sciipResolveLatestAutonomousProcessorExecutionRunStateSignalInputRow_(
-  rows
-) {
-  if (!rows.length) return {};
-
-  const sorted = rows.slice().sort(function(a, b) {
-    const aDate = new Date(
-      sciipGetRunStateSignalInputValue_(a, ['Created_At', 'createdAt']) || 0
-    ).getTime();
-
-    const bDate = new Date(
-      sciipGetRunStateSignalInputValue_(b, ['Created_At', 'createdAt']) || 0
-    ).getTime();
-
-    return bDate - aDate;
-  });
-
-  return sorted[0];
-}
-
-function sciipGetRunStateSignalInputValue_(row, aliases) {
-  for (let i = 0; i < aliases.length; i++) {
-    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
-      return row[aliases[i]];
-    }
-  }
-
-  return '';
-}
-
-function sciipNormalizeRunStateSignalDateKey_(value) {
-  if (!value) return '';
-
-  if (Object.prototype.toString.call(value) === '[object Date]') {
-    return sciipFormatDateKey_(value);
-  }
-
-  const text = String(value);
-
-  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
-    return text;
-  }
-
-  const parsed = new Date(text);
-  if (!isNaN(parsed.getTime())) {
-    return sciipFormatDateKey_(parsed);
-  }
-
-  return text;
-}
-
-/**
- * Standalone test.
- */
-function sciipTestAutonomousProcessorExecutionRunStateSignalProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateSignalProcessor();
-
-  Logger.log(JSON.stringify({
-    test: 'sciipTestAutonomousProcessorExecutionRunStateSignalProcessor',
-    result: result
-  }));
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1190_AutonomousProcessorExecutionRunStateSignalLedgerProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateSignalLedgerProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1190_AutonomousProcessorExecutionRunStateSignalLedgerProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER_BUILD',
-    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1190_AutonomousProcessorExecutionRunStateSignalLedgerProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateSignalLedgerProcessorLegacy1190_();
-      return sciipWrapLegacyRuntimeResult1190_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1190_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/*******************************************************
- * SCIIP_OS v4.1
- * 1190_AutonomousProcessorExecutionRunStateSignalLedgerProcessor
- *******************************************************/
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_PROCESSOR =
-  '1190_AutonomousProcessorExecutionRunStateSignalLedgerProcessor';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_DATE_COLUMN =
-  'Run_State_Date';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_HEADERS = [
-  'Ledger_Entry_ID',
-  'Business_Key',
-  'Run_State_Date',
-  'Signal_ID',
-  'Signal_Type',
-  'Signal_Category',
-  'Signal_Severity',
-  'Signal_Status',
-  'Signal_Message',
-  'Operational_State',
-  'Governance_Posture',
-  'Orchestration_Posture',
-  'Dashboard_Posture',
-  'Decisioning_Posture',
-  'Recommended_Action',
-  'Autonomous_Action_Allowed',
-  'Human_Review_Required',
-  'Ledger_Entries_Reviewed',
-  'Unique_Processors_Observed',
-  'Healthy_Count',
-  'Warning_Count',
-  'Blocked_Count',
-  'Failed_Count',
-  'Skipped_Count',
-  'Duplicate_Count',
-  'Source_Ledger_Entry_ID',
-  'Source_Business_Key',
-  'Source_Signal_Business_Key',
-  'Source_Sheet',
-  'Source_Date_Column',
-  'Ledger_Summary_JSON',
-  'Processor',
-  'Created_At'
-];
-
-/**
- * Main processor.
- */
-function sciipRunAutonomousProcessorExecutionRunStateSignalLedgerProcessorLegacy1190_() {
-  const startedAt = new Date();
-  const ss = sciipGetSpreadsheet_();
-
-  const inputSheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_SHEET
-  );
-
-  if (!inputSheet) {
-    throw new Error(
-      'Missing input sheet: ' +
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_SHEET
-    );
-  }
-
-  const outputSheet =
-    sciipEnsureAutonomousProcessorExecutionRunStateSignalLedgerSheet_();
-
-  const resolvedRunStateDate =
-    sciipResolveLatestProcessingDate_(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_SHEET,
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_DATE_COLUMN
-    ) || sciipFormatDateKey_(startedAt);
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER|' +
-    resolvedRunStateDate;
-
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_PROCESSOR,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateSignalLedgerEntriesCreated: 0,
-      skippedDuplicate: 1,
-      businessKey: businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const signalRows =
-    sciipReadAutonomousProcessorExecutionRunStateSignalLedgerInputRows_(
-      inputSheet
-    );
-
-  const sourceRows =
-    sciipFilterAutonomousProcessorExecutionRunStateSignalLedgerRowsByDate_(
-      signalRows,
-      resolvedRunStateDate
-    );
-
-  if (!sourceRows.length) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_PROCESSOR,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateSignalLedgerEntriesCreated: 0,
-      skippedDuplicate: 0,
-      businessKey: businessKey,
-      resolvedRunStateDate: resolvedRunStateDate,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const latestSignal =
-    sciipResolveLatestAutonomousProcessorExecutionRunStateSignalLedgerInputRow_(
-      sourceRows
-    );
-
-  const ledgerRow =
-    sciipBuildAutonomousProcessorExecutionRunStateSignalLedgerEntry_(
-      latestSignal,
-      resolvedRunStateDate,
-      businessKey,
-      startedAt
-    );
-
-  outputSheet.appendRow(ledgerRow);
-
-  const result = {
-    processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_PROCESSOR,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateSignalLedgerEntriesCreated: 1,
-    skippedDuplicate: 0,
-    businessKey: businessKey,
-    resolvedRunStateDate: resolvedRunStateDate,
-    completedAt: new Date().toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-/**
- * Factory: output sheet.
- */
-function sciipEnsureAutonomousProcessorExecutionRunStateSignalLedgerSheet_() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_SHEET
-  );
-
-  if (!sheet) {
-    sheet = ss.insertSheet(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_SHEET
-    );
-  }
-
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_HEADERS
-    );
-  }
-
-  const headers =
-    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-
-  const missing =
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_OUTPUT_HEADERS.filter(function(h) {
-      return headers.indexOf(h) === -1;
-    });
-
-  if (missing.length) {
-    sheet
-      .getRange(1, headers.length + 1, 1, missing.length)
-      .setValues([missing]);
-  }
-
-  return sheet;
-}
-
-/**
- * Factory: ledger entry.
- */
-function sciipBuildAutonomousProcessorExecutionRunStateSignalLedgerEntry_(
-  signal,
-  resolvedRunStateDate,
-  businessKey,
-  startedAt
-) {
-  const ledgerEntryId = 'APRSSL_' + Utilities.getUuid();
-
-  const summary = {
-    runStateDate: resolvedRunStateDate,
-    signalId: sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_ID']),
-    signalType: sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Type']),
-    signalCategory: sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Category']),
-    signalSeverity: sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Severity']),
-    signalStatus: sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Status']),
-    operationalState: sciipGetRunStateSignalLedgerInputValue_(signal, ['Operational_State']),
-    governancePosture: sciipGetRunStateSignalLedgerInputValue_(signal, ['Governance_Posture']),
-    orchestrationPosture: sciipGetRunStateSignalLedgerInputValue_(signal, ['Orchestration_Posture']),
-    dashboardPosture: sciipGetRunStateSignalLedgerInputValue_(signal, ['Dashboard_Posture']),
-    decisioningPosture: sciipGetRunStateSignalLedgerInputValue_(signal, ['Decisioning_Posture']),
-    recommendedAction: sciipGetRunStateSignalLedgerInputValue_(signal, ['Recommended_Action']),
-    autonomousActionAllowed: sciipGetRunStateSignalLedgerInputValue_(signal, ['Autonomous_Action_Allowed']),
-    humanReviewRequired: sciipGetRunStateSignalLedgerInputValue_(signal, ['Human_Review_Required']),
-    sourceLedgerEntryId: sciipGetRunStateSignalLedgerInputValue_(signal, ['Source_Ledger_Entry_ID']),
-    sourceBusinessKey: sciipGetRunStateSignalLedgerInputValue_(signal, ['Source_Business_Key']),
-    sourceSignalBusinessKey: sciipGetRunStateSignalLedgerInputValue_(signal, ['Business_Key'])
-  };
-
-  return [
-    ledgerEntryId,
-    businessKey,
-    resolvedRunStateDate,
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_ID']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Type']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Category']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Severity']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Status']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Signal_Message']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Operational_State']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Governance_Posture']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Orchestration_Posture']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Dashboard_Posture']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Decisioning_Posture']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Recommended_Action']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Autonomous_Action_Allowed']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Human_Review_Required']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Ledger_Entries_Reviewed']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Unique_Processors_Observed']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Healthy_Count']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Warning_Count']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Blocked_Count']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Failed_Count']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Skipped_Count']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Duplicate_Count']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Source_Ledger_Entry_ID']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Source_Business_Key']),
-    sciipGetRunStateSignalLedgerInputValue_(signal, ['Business_Key']),
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_SHEET,
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_DATE_COLUMN,
-    JSON.stringify(summary),
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_PROCESSOR,
-    startedAt.toISOString()
-  ];
-}
-
-/**
- * Reader logic.
- */
-function sciipReadAutonomousProcessorExecutionRunStateSignalLedgerInputRows_(
-  sheet
-) {
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0].map(String);
-
-  return values.slice(1).map(function(row) {
-    const obj = {};
-    headers.forEach(function(header, i) {
-      obj[header] = row[i];
-    });
-    return obj;
-  });
-}
-
-/**
- * Resolver logic.
- */
-function sciipFilterAutonomousProcessorExecutionRunStateSignalLedgerRowsByDate_(
-  rows,
-  resolvedDate
-) {
-  return rows.filter(function(row) {
-    const rawDate = sciipGetRunStateSignalLedgerInputValue_(row, [
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_LEDGER_INPUT_DATE_COLUMN,
-      'Processing_Date',
-      'Run_Date',
-      'Signal_Date',
-      'Created_At',
-      'createdAt'
-    ]);
-
-    return sciipNormalizeRunStateSignalLedgerDateKey_(rawDate) === resolvedDate;
-  });
-}
-
-function sciipResolveLatestAutonomousProcessorExecutionRunStateSignalLedgerInputRow_(
-  rows
-) {
-  if (!rows.length) return {};
-
-  const sorted = rows.slice().sort(function(a, b) {
-    const aDate = new Date(
-      sciipGetRunStateSignalLedgerInputValue_(a, ['Created_At', 'createdAt']) || 0
-    ).getTime();
-
-    const bDate = new Date(
-      sciipGetRunStateSignalLedgerInputValue_(b, ['Created_At', 'createdAt']) || 0
-    ).getTime();
-
-    return bDate - aDate;
-  });
-
-  return sorted[0];
-}
-
-function sciipGetRunStateSignalLedgerInputValue_(row, aliases) {
-  for (let i = 0; i < aliases.length; i++) {
-    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
-      return row[aliases[i]];
-    }
-  }
-
-  return '';
-}
-
-function sciipNormalizeRunStateSignalLedgerDateKey_(value) {
-  if (!value) return '';
-
-  if (Object.prototype.toString.call(value) === '[object Date]') {
-    return sciipFormatDateKey_(value);
-  }
-
-  const text = String(value);
-
-  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
-    return text;
-  }
-
-  const parsed = new Date(text);
-  if (!isNaN(parsed.getTime())) {
-    return sciipFormatDateKey_(parsed);
-  }
-
-  return text;
-}
-
-/**
- * Standalone test.
- */
-function sciipTestAutonomousProcessorExecutionRunStateSignalLedgerProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateSignalLedgerProcessor();
-
-  Logger.log(JSON.stringify({
-    test: 'sciipTestAutonomousProcessorExecutionRunStateSignalLedgerProcessor',
-    result: result
-  }));
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1200_AutonomousProcessorExecutionRunStateSignalDigestProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateSignalDigestProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1200_AutonomousProcessorExecutionRunStateSignalDigestProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_BUILD',
-    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1200_AutonomousProcessorExecutionRunStateSignalDigestProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateSignalDigestProcessorLegacy1200_();
-      return sciipWrapLegacyRuntimeResult1200_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1200_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/*******************************************************
- * SCIIP_OS v4.1
- * 1200_AutonomousProcessorExecutionRunStateSignalDigestProcessor
- *******************************************************/
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_PROCESSOR =
-  '1200_AutonomousProcessorExecutionRunStateSignalDigestProcessor';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_LEDGER';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_DATE_COLUMN =
-  'Run_State_Date';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_HEADERS = [
-  'Digest_ID',
-  'Business_Key',
-  'Run_State_Date',
-  'Digest_Type',
-  'Signal_Posture',
-  'Digest_Severity',
-  'Digest_Status',
-  'Digest_Message',
-  'Governance_Posture',
-  'Orchestration_Posture',
-  'Dashboard_Posture',
-  'Decisioning_Posture',
-  'Recommended_Action',
-  'Autonomous_Action_Allowed',
-  'Human_Review_Required',
-  'Signals_Reviewed',
-  'Critical_Signal_Count',
-  'High_Signal_Count',
-  'Medium_Signal_Count',
-  'Low_Signal_Count',
-  'Latest_Signal_ID',
-  'Latest_Signal_Category',
-  'Latest_Signal_Severity',
-  'Latest_Signal_Status',
-  'Latest_Operational_State',
-  'Latest_Source_Business_Key',
-  'Digest_Summary_JSON',
-  'Source_Sheet',
-  'Source_Date_Column',
-  'Processor',
-  'Created_At'
-];
-
-/**
- * Main processor.
- */
-function sciipRunAutonomousProcessorExecutionRunStateSignalDigestProcessorLegacy1200_() {
-  const startedAt = new Date();
-  const ss = sciipGetSpreadsheet_();
-
-  const inputSheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_SHEET
-  );
-
-  if (!inputSheet) {
-    throw new Error(
-      'Missing input sheet: ' +
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_SHEET
-    );
-  }
-
-  const outputSheet =
-    sciipEnsureAutonomousProcessorExecutionRunStateSignalDigestSheet_();
-
-  const resolvedRunStateDate =
-    sciipResolveLatestProcessingDate_(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_SHEET,
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_DATE_COLUMN
-    ) || sciipFormatDateKey_(startedAt);
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST|' +
-    resolvedRunStateDate;
-
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_PROCESSOR,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateSignalDigestsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey: businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const signalLedgerRows =
-    sciipReadAutonomousProcessorExecutionRunStateSignalDigestInputRows_(
-      inputSheet
-    );
-
-  const sourceRows =
-    sciipFilterAutonomousProcessorExecutionRunStateSignalDigestRowsByDate_(
-      signalLedgerRows,
-      resolvedRunStateDate
-    );
-
-  if (!sourceRows.length) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_PROCESSOR,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateSignalDigestsCreated: 0,
-      skippedDuplicate: 0,
-      businessKey: businessKey,
-      resolvedRunStateDate: resolvedRunStateDate,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const digestRow =
-    sciipBuildAutonomousProcessorExecutionRunStateSignalDigest_(
-      sourceRows,
-      resolvedRunStateDate,
-      businessKey,
-      startedAt
-    );
-
-  outputSheet.appendRow(digestRow);
-
-  const result = {
-    processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_PROCESSOR,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateSignalDigestsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey: businessKey,
-    resolvedRunStateDate: resolvedRunStateDate,
-    signalsReviewed: sourceRows.length,
-    completedAt: new Date().toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-/**
- * Factory: output sheet.
- */
-function sciipEnsureAutonomousProcessorExecutionRunStateSignalDigestSheet_() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_SHEET
-  );
-
-  if (!sheet) {
-    sheet = ss.insertSheet(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_SHEET
-    );
-  }
-
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_HEADERS
-    );
-  }
-
-  const headers =
-    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-
-  const missing =
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_OUTPUT_HEADERS.filter(function(h) {
-      return headers.indexOf(h) === -1;
-    });
-
-  if (missing.length) {
-    sheet
-      .getRange(1, headers.length + 1, 1, missing.length)
-      .setValues([missing]);
-  }
-
-  return sheet;
-}
-
-/**
- * Factory: digest row.
- */
-function sciipBuildAutonomousProcessorExecutionRunStateSignalDigest_(
-  rows,
-  resolvedRunStateDate,
-  businessKey,
-  startedAt
-) {
-  const aggregate =
-    sciipAggregateAutonomousProcessorExecutionRunStateSignalLedger_(rows);
-
-  const latestSignal =
-    sciipResolveLatestAutonomousProcessorExecutionRunStateSignalDigestInputRow_(
-      rows
-    );
-
-  const signalPosture =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestPosture_(
-      aggregate
-    );
-
-  const digestSeverity =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestSeverity_(
-      aggregate
-    );
-
-  const digestStatus =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestStatus_(
-      digestSeverity,
-      signalPosture
-    );
-
-  const governancePosture =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestGovernancePosture_(
-      aggregate,
-      latestSignal
-    );
-
-  const orchestrationPosture =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestOrchestrationPosture_(
-      aggregate,
-      latestSignal
-    );
-
-  const dashboardPosture =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestDashboardPosture_(
-      digestSeverity
-    );
-
-  const decisioningPosture =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestDecisioningPosture_(
-      aggregate,
-      latestSignal
-    );
-
-  const recommendedAction =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestRecommendedAction_(
-      digestSeverity,
-      signalPosture
-    );
-
-  const autonomousAllowed =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestAutonomousAllowed_(
-      aggregate
-    );
-
-  const humanReviewRequired =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestHumanReviewRequired_(
-      aggregate
-    );
-
-  const digestMessage =
-    sciipResolveAutonomousProcessorExecutionRunStateSignalDigestMessage_(
-      signalPosture,
-      digestSeverity,
-      recommendedAction,
-      aggregate
-    );
-
-  const digestId = 'APRSSD_' + Utilities.getUuid();
-
-  const summary = {
-    runStateDate: resolvedRunStateDate,
-    digestType: 'AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST',
-    signalPosture: signalPosture,
-    digestSeverity: digestSeverity,
-    digestStatus: digestStatus,
-    governancePosture: governancePosture,
-    orchestrationPosture: orchestrationPosture,
-    dashboardPosture: dashboardPosture,
-    decisioningPosture: decisioningPosture,
-    recommendedAction: recommendedAction,
-    autonomousActionAllowed: autonomousAllowed,
-    humanReviewRequired: humanReviewRequired,
-    aggregate: aggregate,
-    latestSignal: {
-      signalId: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_ID']),
-      signalCategory: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Category']),
-      signalSeverity: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Severity']),
-      signalStatus: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Status']),
-      operationalState: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Operational_State']),
-      sourceBusinessKey: sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Source_Business_Key'])
-    }
-  };
-
-  return [
-    digestId,
-    businessKey,
-    resolvedRunStateDate,
-    'AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST',
-    signalPosture,
-    digestSeverity,
-    digestStatus,
-    digestMessage,
-    governancePosture,
-    orchestrationPosture,
-    dashboardPosture,
-    decisioningPosture,
-    recommendedAction,
-    autonomousAllowed,
-    humanReviewRequired,
-    aggregate.signalsReviewed,
-    aggregate.criticalSignalCount,
-    aggregate.highSignalCount,
-    aggregate.mediumSignalCount,
-    aggregate.lowSignalCount,
-    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_ID']),
-    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Category']),
-    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Severity']),
-    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Signal_Status']),
-    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Operational_State']),
-    sciipGetRunStateSignalDigestInputValue_(latestSignal, ['Source_Business_Key']),
-    JSON.stringify(summary),
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_SHEET,
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_DATE_COLUMN,
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_PROCESSOR,
-    startedAt.toISOString()
-  ];
-}
-
-/**
- * Aggregation logic.
- */
-function sciipAggregateAutonomousProcessorExecutionRunStateSignalLedger_(rows) {
-  let critical = 0;
-  let high = 0;
-  let medium = 0;
-  let low = 0;
-  let humanReview = 0;
-  let autonomousBlocked = 0;
-
-  rows.forEach(function(row) {
-    const severity = String(
-      sciipGetRunStateSignalDigestInputValue_(row, ['Signal_Severity'])
-    ).toUpperCase();
-
-    if (severity === 'CRITICAL') critical++;
-    else if (severity === 'HIGH') high++;
-    else if (severity === 'MEDIUM') medium++;
-    else low++;
-
-    const requiresReview = String(
-      sciipGetRunStateSignalDigestInputValue_(row, ['Human_Review_Required'])
-    ).toUpperCase();
-
-    const autonomousAllowed = String(
-      sciipGetRunStateSignalDigestInputValue_(row, ['Autonomous_Action_Allowed'])
-    ).toUpperCase();
-
-    if (requiresReview === 'TRUE') humanReview++;
-    if (autonomousAllowed === 'FALSE') autonomousBlocked++;
-  });
-
-  return {
-    signalsReviewed: rows.length,
-    criticalSignalCount: critical,
-    highSignalCount: high,
-    mediumSignalCount: medium,
-    lowSignalCount: low,
-    humanReviewRequiredCount: humanReview,
-    autonomousBlockedCount: autonomousBlocked
-  };
-}
-
-/**
- * Resolver logic.
- */
-function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestPosture_(
-  aggregate
-) {
-  if (aggregate.criticalSignalCount > 0) return 'CRITICAL_SIGNAL_ACTIVE';
-  if (aggregate.highSignalCount > 0) return 'HIGH_SIGNAL_ACTIVE';
-  if (aggregate.mediumSignalCount > 0) return 'MONITORING_SIGNAL_ACTIVE';
-  return 'HEALTHY_SIGNAL_ACTIVE';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestSeverity_(
-  aggregate
-) {
-  if (aggregate.criticalSignalCount > 0) return 'CRITICAL';
-  if (aggregate.highSignalCount > 0) return 'HIGH';
-  if (aggregate.mediumSignalCount > 0) return 'MEDIUM';
-  return 'LOW';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestStatus_(
-  severity,
-  posture
-) {
-  if (severity === 'CRITICAL') return 'ACTIVE_CRITICAL_DIGEST';
-  if (severity === 'HIGH') return 'ACTIVE_HIGH_DIGEST';
-  if (severity === 'MEDIUM') return 'ACTIVE_MONITOR_DIGEST';
-  return 'ACTIVE_HEALTHY_DIGEST';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestGovernancePosture_(
-  aggregate,
-  latestSignal
-) {
-  if (aggregate.criticalSignalCount > 0) return 'REVIEW_REQUIRED';
-  if (aggregate.highSignalCount > 0) return 'ESCALATE';
-  if (aggregate.mediumSignalCount > 0) return 'MONITOR';
-
-  return sciipGetRunStateSignalDigestInputValue_(latestSignal, [
-    'Governance_Posture'
-  ]) || 'NORMAL';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestOrchestrationPosture_(
-  aggregate,
-  latestSignal
-) {
-  if (aggregate.criticalSignalCount > 0) return 'PAUSE_PROMOTION';
-  if (aggregate.highSignalCount > 0) return 'HOLD_DISPATCH';
-  if (aggregate.mediumSignalCount > 0) return 'ALLOW_WITH_MONITORING';
-
-  return sciipGetRunStateSignalDigestInputValue_(latestSignal, [
-    'Orchestration_Posture'
-  ]) || 'ALLOW';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestDashboardPosture_(
-  severity
-) {
-  if (severity === 'CRITICAL') return 'SHOW_CRITICAL';
-  if (severity === 'HIGH') return 'SHOW_BLOCKED';
-  if (severity === 'MEDIUM') return 'SHOW_WARNING';
-  return 'SHOW_HEALTHY';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestDecisioningPosture_(
-  aggregate,
-  latestSignal
-) {
-  if (aggregate.criticalSignalCount > 0) return 'DO_NOT_AUTONOMOUSLY_ADVANCE';
-  if (aggregate.highSignalCount > 0) return 'REQUIRE_HUMAN_REVIEW';
-  if (aggregate.mediumSignalCount > 0) return 'ADVANCE_WITH_CAUTION';
-
-  return sciipGetRunStateSignalDigestInputValue_(latestSignal, [
-    'Decisioning_Posture'
-  ]) || 'ADVANCE';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestRecommendedAction_(
-  severity,
-  posture
-) {
-  if (severity === 'CRITICAL') {
-    return 'PAUSE_AUTONOMOUS_ADVANCEMENT_AND_REVIEW_CRITICAL_SIGNALS';
-  }
-
-  if (severity === 'HIGH') {
-    return 'HOLD_DISPATCH_AND_REVIEW_HIGH_SEVERITY_SIGNALS';
-  }
-
-  if (severity === 'MEDIUM') {
-    return 'ALLOW_DOWNSTREAM_PROCESSING_WITH_SIGNAL_MONITORING';
-  }
-
-  return 'ALLOW_DOWNSTREAM_PROCESSING';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestAutonomousAllowed_(
-  aggregate
-) {
-  return aggregate.autonomousBlockedCount === 0;
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestHumanReviewRequired_(
-  aggregate
-) {
-  return aggregate.humanReviewRequiredCount > 0;
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateSignalDigestMessage_(
-  signalPosture,
-  digestSeverity,
-  recommendedAction,
-  aggregate
-) {
-  return (
-    'Run state signal digest resolved as ' +
-    digestSeverity +
-    ' with posture ' +
-    signalPosture +
-    '. Signals reviewed: ' +
-    aggregate.signalsReviewed +
-    '. Recommended action: ' +
-    recommendedAction +
-    '.'
-  );
-}
-
-/**
- * Reader logic.
- */
-function sciipReadAutonomousProcessorExecutionRunStateSignalDigestInputRows_(
-  sheet
-) {
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0].map(String);
-
-  return values.slice(1).map(function(row) {
-    const obj = {};
-    headers.forEach(function(header, i) {
-      obj[header] = row[i];
-    });
-    return obj;
-  });
-}
-
-function sciipFilterAutonomousProcessorExecutionRunStateSignalDigestRowsByDate_(
-  rows,
-  resolvedDate
-) {
-  return rows.filter(function(row) {
-    const rawDate = sciipGetRunStateSignalDigestInputValue_(row, [
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_INPUT_DATE_COLUMN,
-      'Processing_Date',
-      'Run_Date',
-      'Signal_Date',
-      'Ledger_Date',
-      'Created_At',
-      'createdAt'
-    ]);
-
-    return sciipNormalizeRunStateSignalDigestDateKey_(rawDate) === resolvedDate;
-  });
-}
-
-function sciipResolveLatestAutonomousProcessorExecutionRunStateSignalDigestInputRow_(
-  rows
-) {
-  if (!rows.length) return {};
-
-  const sorted = rows.slice().sort(function(a, b) {
-    const aDate = new Date(
-      sciipGetRunStateSignalDigestInputValue_(a, ['Created_At', 'createdAt']) || 0
-    ).getTime();
-
-    const bDate = new Date(
-      sciipGetRunStateSignalDigestInputValue_(b, ['Created_At', 'createdAt']) || 0
-    ).getTime();
-
-    return bDate - aDate;
-  });
-
-  return sorted[0];
-}
-
-function sciipGetRunStateSignalDigestInputValue_(row, aliases) {
-  for (let i = 0; i < aliases.length; i++) {
-    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
-      return row[aliases[i]];
-    }
-  }
-
-  return '';
-}
-
-function sciipNormalizeRunStateSignalDigestDateKey_(value) {
-  if (!value) return '';
-
-  if (Object.prototype.toString.call(value) === '[object Date]') {
-    return sciipFormatDateKey_(value);
-  }
-
-  const text = String(value);
-
-  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
-    return text;
-  }
-
-  const parsed = new Date(text);
-  if (!isNaN(parsed.getTime())) {
-    return sciipFormatDateKey_(parsed);
-  }
-
-  return text;
-}
-
-/**
- * Standalone test.
- */
-function sciipTestAutonomousProcessorExecutionRunStateSignalDigestProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateSignalDigestProcessor();
-
-  Logger.log(JSON.stringify({
-    test: 'sciipTestAutonomousProcessorExecutionRunStateSignalDigestProcessor',
-    result: result
-  }));
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1210_AutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1210_AutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER_BUILD',
-    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1210_AutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessorLegacy1210_();
-      return sciipWrapLegacyRuntimeResult1210_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1210_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/*******************************************************
- * SCIIP_OS v4.1
- * 1210_AutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor
- *******************************************************/
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_PROCESSOR =
-  '1210_AutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_DATE_COLUMN =
-  'Run_State_Date';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_HEADERS = [
-  'Ledger_Entry_ID',
-  'Business_Key',
-  'Run_State_Date',
-  'Digest_ID',
-  'Digest_Type',
-  'Signal_Posture',
-  'Digest_Severity',
-  'Digest_Status',
-  'Digest_Message',
-  'Governance_Posture',
-  'Orchestration_Posture',
-  'Dashboard_Posture',
-  'Decisioning_Posture',
-  'Recommended_Action',
-  'Autonomous_Action_Allowed',
-  'Human_Review_Required',
-  'Signals_Reviewed',
-  'Critical_Signal_Count',
-  'High_Signal_Count',
-  'Medium_Signal_Count',
-  'Low_Signal_Count',
-  'Latest_Signal_ID',
-  'Latest_Signal_Category',
-  'Latest_Signal_Severity',
-  'Latest_Signal_Status',
-  'Latest_Operational_State',
-  'Latest_Source_Business_Key',
-  'Source_Digest_Business_Key',
-  'Source_Sheet',
-  'Source_Date_Column',
-  'Ledger_Summary_JSON',
-  'Processor',
-  'Created_At'
-];
-
-/**
- * Main processor.
- */
-function sciipRunAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessorLegacy1210_() {
-  const startedAt = new Date();
-  const ss = sciipGetSpreadsheet_();
-
-  const inputSheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_SHEET
-  );
-
-  if (!inputSheet) {
-    throw new Error(
-      'Missing input sheet: ' +
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_SHEET
-    );
-  }
-
-  const outputSheet =
-    sciipEnsureAutonomousProcessorExecutionRunStateSignalDigestLedgerSheet_();
-
-  const resolvedRunStateDate =
-    sciipResolveLatestProcessingDate_(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_SHEET,
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_DATE_COLUMN
-    ) || sciipFormatDateKey_(startedAt);
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER|' +
-    resolvedRunStateDate;
-
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_PROCESSOR,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateSignalDigestLedgerEntriesCreated: 0,
-      skippedDuplicate: 1,
-      businessKey: businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const digestRows =
-    sciipReadAutonomousProcessorExecutionRunStateSignalDigestLedgerInputRows_(
-      inputSheet
-    );
-
-  const sourceRows =
-    sciipFilterAutonomousProcessorExecutionRunStateSignalDigestLedgerRowsByDate_(
-      digestRows,
-      resolvedRunStateDate
-    );
-
-  if (!sourceRows.length) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_PROCESSOR,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateSignalDigestLedgerEntriesCreated: 0,
-      skippedDuplicate: 0,
-      businessKey: businessKey,
-      resolvedRunStateDate: resolvedRunStateDate,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const latestDigest =
-    sciipResolveLatestAutonomousProcessorExecutionRunStateSignalDigestLedgerInputRow_(
-      sourceRows
-    );
-
-  const ledgerRow =
-    sciipBuildAutonomousProcessorExecutionRunStateSignalDigestLedgerEntry_(
-      latestDigest,
-      resolvedRunStateDate,
-      businessKey,
-      startedAt
-    );
-
-  outputSheet.appendRow(ledgerRow);
-
-  const result = {
-    processor: SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_PROCESSOR,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateSignalDigestLedgerEntriesCreated: 1,
-    skippedDuplicate: 0,
-    businessKey: businessKey,
-    resolvedRunStateDate: resolvedRunStateDate,
-    completedAt: new Date().toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-/**
- * Factory: output sheet.
- */
-function sciipEnsureAutonomousProcessorExecutionRunStateSignalDigestLedgerSheet_() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_SHEET
-  );
-
-  if (!sheet) {
-    sheet = ss.insertSheet(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_SHEET
-    );
-  }
-
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_HEADERS
-    );
-  }
-
-  const headers =
-    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-
-  const missing =
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_OUTPUT_HEADERS.filter(
-      function(h) {
-        return headers.indexOf(h) === -1;
-      }
-    );
-
-  if (missing.length) {
-    sheet
-      .getRange(1, headers.length + 1, 1, missing.length)
-      .setValues([missing]);
-  }
-
-  return sheet;
-}
-
-/**
- * Factory: ledger entry.
- */
-function sciipBuildAutonomousProcessorExecutionRunStateSignalDigestLedgerEntry_(
-  digest,
-  resolvedRunStateDate,
-  businessKey,
-  startedAt
-) {
-  const ledgerEntryId = 'APRSSDL_' + Utilities.getUuid();
-
-  const summary = {
-    runStateDate: resolvedRunStateDate,
-    digestId: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_ID']),
-    digestType: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Type']),
-    signalPosture: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Signal_Posture']),
-    digestSeverity: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Severity']),
-    digestStatus: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Status']),
-    governancePosture: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Governance_Posture']),
-    orchestrationPosture: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Orchestration_Posture']),
-    dashboardPosture: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Dashboard_Posture']),
-    decisioningPosture: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Decisioning_Posture']),
-    recommendedAction: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Recommended_Action']),
-    autonomousActionAllowed: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Autonomous_Action_Allowed']),
-    humanReviewRequired: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Human_Review_Required']),
-    signalsReviewed: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Signals_Reviewed']),
-    sourceDigestBusinessKey: sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Business_Key'])
-  };
-
-  return [
-    ledgerEntryId,
-    businessKey,
-    resolvedRunStateDate,
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_ID']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Type']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Signal_Posture']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Severity']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Status']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Digest_Message']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Governance_Posture']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Orchestration_Posture']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Dashboard_Posture']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Decisioning_Posture']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Recommended_Action']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Autonomous_Action_Allowed']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Human_Review_Required']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Signals_Reviewed']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Critical_Signal_Count']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['High_Signal_Count']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Medium_Signal_Count']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Low_Signal_Count']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Signal_ID']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Signal_Category']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Signal_Severity']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Signal_Status']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Operational_State']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Latest_Source_Business_Key']),
-    sciipGetRunStateSignalDigestLedgerInputValue_(digest, ['Business_Key']),
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_SHEET,
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_DATE_COLUMN,
-    JSON.stringify(summary),
-    SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_PROCESSOR,
-    startedAt.toISOString()
-  ];
-}
-
-/**
- * Reader logic.
- */
-function sciipReadAutonomousProcessorExecutionRunStateSignalDigestLedgerInputRows_(
-  sheet
-) {
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0].map(String);
-
-  return values.slice(1).map(function(row) {
-    const obj = {};
-    headers.forEach(function(header, i) {
-      obj[header] = row[i];
-    });
-    return obj;
-  });
-}
-
-/**
- * Resolver logic.
- */
-function sciipFilterAutonomousProcessorExecutionRunStateSignalDigestLedgerRowsByDate_(
-  rows,
-  resolvedDate
-) {
-  return rows.filter(function(row) {
-    const rawDate = sciipGetRunStateSignalDigestLedgerInputValue_(row, [
-      SCIIP_AUTONOMOUS_RUN_STATE_SIGNAL_DIGEST_LEDGER_INPUT_DATE_COLUMN,
-      'Processing_Date',
-      'Run_Date',
-      'Digest_Date',
-      'Signal_Date',
-      'Created_At',
-      'createdAt'
-    ]);
-
-    return sciipNormalizeRunStateSignalDigestLedgerDateKey_(rawDate) === resolvedDate;
-  });
-}
-
-function sciipResolveLatestAutonomousProcessorExecutionRunStateSignalDigestLedgerInputRow_(
-  rows
-) {
-  if (!rows.length) return {};
-
-  const sorted = rows.slice().sort(function(a, b) {
-    const aDate = new Date(
-      sciipGetRunStateSignalDigestLedgerInputValue_(a, ['Created_At', 'createdAt']) || 0
-    ).getTime();
-
-    const bDate = new Date(
-      sciipGetRunStateSignalDigestLedgerInputValue_(b, ['Created_At', 'createdAt']) || 0
-    ).getTime();
-
-    return bDate - aDate;
-  });
-
-  return sorted[0];
-}
-
-function sciipGetRunStateSignalDigestLedgerInputValue_(row, aliases) {
-  for (let i = 0; i < aliases.length; i++) {
-    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
-      return row[aliases[i]];
-    }
-  }
-
-  return '';
-}
-
-function sciipNormalizeRunStateSignalDigestLedgerDateKey_(value) {
-  if (!value) return '';
-
-  if (Object.prototype.toString.call(value) === '[object Date]') {
-    return sciipFormatDateKey_(value);
-  }
-
-  const text = String(value);
-
-  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
-    return text;
-  }
-
-  const parsed = new Date(text);
-  if (!isNaN(parsed.getTime())) {
-    return sciipFormatDateKey_(parsed);
-  }
-
-  return text;
-}
-
-/**
- * Standalone test.
- */
-function sciipTestAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor();
-
-  Logger.log(JSON.stringify({
-    test: 'sciipTestAutonomousProcessorExecutionRunStateSignalDigestLedgerProcessor',
-    result: result
-  }));
-
-  return result;
-}
-
-/*******************************************************
- * SCIIP_OS v5.3.2 Runtime Migration
- * 1220_AutonomousProcessorExecutionRunStateCommandCenterProcessor
- *
- * Migration note:
- * Preserves original processor business logic by executing
- * the original implementation inside SCIIP_RuntimeProcessorBase.
- *******************************************************/
-
-function sciipRunAutonomousProcessorExecutionRunStateCommandCenterProcessor() {
-  return SCIIP_RUNTIME_PROCESSOR_BASE.run({
-    processor: '1220_AutonomousProcessorExecutionRunStateCommandCenterProcessor',
-    action: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_COMMAND_CENTER_BUILD',
-    sourceSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER',
-    targetSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_COMMAND_CENTER',
-    ledgerSheet: 'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_COMMAND_CENTER_RUNTIME_LEDGER',
-
-    buildPayload: function(context, definition) {
-      return SCIIP_RUNTIME_PAYLOAD_FACTORY.create({
-        processor: context.processor,
-        action: context.action,
-        businessKey: context.businessKey,
-        sourceSheet: definition.sourceSheet,
-        targetSheet: definition.targetSheet,
-        ledgerSheet: definition.ledgerSheet,
-        inputCount: 0,
-        outputCount: 0,
-        summary: 'Runtime migration wrapper payload created.',
-        refs: {
-          context: SCIIP_RUNTIME_CONTEXT.compact(context),
-          migrationVersion: 'v5.3.2',
-          originalProcessor: '1220_AutonomousProcessorExecutionRunStateCommandCenterProcessor',
-          preservedLegacyImplementation: true
-        }
-      });
-    },
-
-    validate: function(payload, context, definition) {
-      var errors = [];
-      if (!payload.businessKey) errors.push('Payload missing businessKey.');
-      if (!context.businessKey) errors.push('Context missing businessKey.');
-      if (!definition.targetSheet) errors.push('Definition missing targetSheet.');
-      return { valid: errors.length === 0, errors: errors };
-    },
-
-    execute: function(payload, context, transaction, definition) {
-      var legacyResult = sciipRunAutonomousProcessorExecutionRunStateCommandCenterProcessorLegacy1220_();
-      return sciipWrapLegacyRuntimeResult1220_(legacyResult, context, transaction);
-    }
-  });
-}
-
-function sciipWrapLegacyRuntimeResult1220_(legacyResult, context, transaction) {
-  legacyResult = legacyResult || {};
-
-  var message = JSON.stringify({
-    migrationVersion: 'v5.3.2',
-    processorMigrated: true,
-    legacyResult: legacyResult,
-    transactionId: transaction.transactionId
-  });
-
-  var config = {
-    processor: context.processor,
-    businessKey: context.businessKey,
-    recordsCreated: legacyResult.recordsCreated || legacyResult.autonomousGovernanceMonitoringCreated || legacyResult.created || 0,
-    recordsUpdated: legacyResult.recordsUpdated || 0,
-    recordsRead: legacyResult.recordsRead || 0,
-    processed: legacyResult.processed || 0,
-    skippedDuplicate: legacyResult.skippedDuplicate || 0,
-    skippedNoInputs: legacyResult.skippedNoInputs || (legacyResult.status === 'SKIPPED_NO_INPUTS' ? 1 : 0),
-    skippedValidation: legacyResult.skippedValidation || 0,
-    errors: legacyResult.errors || 0,
-    message: message
-  };
-
-  if (legacyResult.status === 'SKIPPED_NO_INPUTS') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.skippedNoInputs(config);
-  }
-
-  if (legacyResult.skippedDuplicate) {
-    return SCIIP_RUNTIME_RESULT_FACTORY.duplicate(config);
-  }
-
-  if (legacyResult.status === 'ERROR') {
-    return SCIIP_RUNTIME_RESULT_FACTORY.error(config);
-  }
-
-  return SCIIP_RUNTIME_RESULT_FACTORY.success(config);
-}
-
-/*******************************************************
- * SCIIP_OS v4.1
- * 1220_AutonomousProcessorExecutionRunStateCommandCenterProcessor
- *******************************************************/
-
-const SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_PROCESSOR =
-  '1220_AutonomousProcessorExecutionRunStateCommandCenterProcessor';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_SIGNAL_DIGEST_LEDGER';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_SHEET =
-  'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_COMMAND_CENTER';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_DATE_COLUMN =
-  'Run_State_Date';
-
-const SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_HEADERS = [
-  'Command_Center_Record_ID',
-  'Business_Key',
-  'Run_State_Date',
-  'Command_Center_Type',
-  'Command_Center_Status',
-  'Display_Severity',
-  'Display_Posture',
-  'Display_Message',
-  'Dashboard_Posture',
-  'Governance_Posture',
-  'Orchestration_Posture',
-  'Decisioning_Posture',
-  'Recommended_Action',
-  'Autonomous_Action_Allowed',
-  'Human_Review_Required',
-  'Signals_Reviewed',
-  'Critical_Signal_Count',
-  'High_Signal_Count',
-  'Medium_Signal_Count',
-  'Low_Signal_Count',
-  'Latest_Signal_ID',
-  'Latest_Signal_Category',
-  'Latest_Signal_Severity',
-  'Latest_Signal_Status',
-  'Latest_Operational_State',
-  'Source_Ledger_Entry_ID',
-  'Source_Digest_ID',
-  'Source_Business_Key',
-  'Source_Sheet',
-  'Source_Date_Column',
-  'Command_Center_JSON',
-  'Processor',
-  'Created_At'
-];
-
-/**
- * Main processor.
- */
-function sciipRunAutonomousProcessorExecutionRunStateCommandCenterProcessorLegacy1220_() {
-  const startedAt = new Date();
-  const ss = sciipGetSpreadsheet_();
-
-  const inputSheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_SHEET
-  );
-
-  if (!inputSheet) {
-    throw new Error(
-      'Missing input sheet: ' +
-      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_SHEET
-    );
-  }
-
-  const outputSheet =
-    sciipEnsureAutonomousProcessorExecutionRunStateCommandCenterSheet_();
-
-  const resolvedRunStateDate =
-    sciipResolveLatestProcessingDate_(
-      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_SHEET,
-      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_DATE_COLUMN
-    ) || sciipFormatDateKey_(startedAt);
-
-  const businessKey =
-    'AUTONOMOUS_PROCESSOR_EXECUTION_RUN_STATE_COMMAND_CENTER|' +
-    resolvedRunStateDate;
-
-  if (sciipBusinessKeyPrefixExists_(outputSheet, businessKey)) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_PROCESSOR,
-      status: 'SUCCESS',
-      autonomousProcessorExecutionRunStateCommandCenterRecordsCreated: 0,
-      skippedDuplicate: 1,
-      businessKey: businessKey,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const ledgerRows =
-    sciipReadAutonomousProcessorExecutionRunStateCommandCenterInputRows_(
-      inputSheet
-    );
-
-  const sourceRows =
-    sciipFilterAutonomousProcessorExecutionRunStateCommandCenterRowsByDate_(
-      ledgerRows,
-      resolvedRunStateDate
-    );
-
-  if (!sourceRows.length) {
-    const result = {
-      processor: SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_PROCESSOR,
-      status: 'SKIPPED_NO_INPUTS',
-      autonomousProcessorExecutionRunStateCommandCenterRecordsCreated: 0,
-      skippedDuplicate: 0,
-      businessKey: businessKey,
-      resolvedRunStateDate: resolvedRunStateDate,
-      completedAt: new Date().toISOString()
-    };
-
-    Logger.log(JSON.stringify(result));
-    return result;
-  }
-
-  const latestLedgerRow =
-    sciipResolveLatestAutonomousProcessorExecutionRunStateCommandCenterInputRow_(
-      sourceRows
-    );
-
-  const commandCenterRow =
-    sciipBuildAutonomousProcessorExecutionRunStateCommandCenterRecord_(
-      latestLedgerRow,
-      resolvedRunStateDate,
-      businessKey,
-      startedAt
-    );
-
-  outputSheet.appendRow(commandCenterRow);
-
-  const result = {
-    processor: SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_PROCESSOR,
-    status: 'SUCCESS',
-    autonomousProcessorExecutionRunStateCommandCenterRecordsCreated: 1,
-    skippedDuplicate: 0,
-    businessKey: businessKey,
-    resolvedRunStateDate: resolvedRunStateDate,
-    completedAt: new Date().toISOString()
-  };
-
-  Logger.log(JSON.stringify(result));
-  return result;
-}
-
-/**
- * Factory: output sheet.
- */
-function sciipEnsureAutonomousProcessorExecutionRunStateCommandCenterSheet_() {
-  const ss = sciipGetSpreadsheet_();
-  let sheet = ss.getSheetByName(
-    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_SHEET
-  );
-
-  if (!sheet) {
-    sheet = ss.insertSheet(
-      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_SHEET
-    );
-  }
-
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(
-      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_HEADERS
-    );
-  }
-
-  const headers =
-    sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-
-  const missing =
-    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_OUTPUT_HEADERS.filter(function(h) {
-      return headers.indexOf(h) === -1;
-    });
-
-  if (missing.length) {
-    sheet
-      .getRange(1, headers.length + 1, 1, missing.length)
-      .setValues([missing]);
-  }
-
-  return sheet;
-}
-
-/**
- * Factory: command-center record.
- */
-function sciipBuildAutonomousProcessorExecutionRunStateCommandCenterRecord_(
-  ledgerRow,
-  resolvedRunStateDate,
-  businessKey,
-  startedAt
-) {
-  const displaySeverity =
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Digest_Severity']);
-
-  const signalPosture =
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Signal_Posture']);
-
-  const dashboardPosture =
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Dashboard_Posture']);
-
-  const governancePosture =
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Governance_Posture']);
-
-  const orchestrationPosture =
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Orchestration_Posture']);
-
-  const decisioningPosture =
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Decisioning_Posture']);
-
-  const recommendedAction =
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Recommended_Action']);
-
-  const commandCenterStatus =
-    sciipResolveAutonomousProcessorExecutionRunStateCommandCenterStatus_(
-      displaySeverity,
-      governancePosture,
-      decisioningPosture
-    );
-
-  const displayPosture =
-    sciipResolveAutonomousProcessorExecutionRunStateCommandCenterDisplayPosture_(
-      displaySeverity,
-      signalPosture
-    );
-
-  const displayMessage =
-    sciipResolveAutonomousProcessorExecutionRunStateCommandCenterDisplayMessage_(
-      commandCenterStatus,
-      displaySeverity,
-      signalPosture,
-      recommendedAction
-    );
-
-  const recordId = 'APRSCC_' + Utilities.getUuid();
-
-  const commandCenterJson = {
-    runStateDate: resolvedRunStateDate,
-    commandCenterType: 'AUTONOMOUS_RUN_STATE_COMMAND_CENTER',
-    commandCenterStatus: commandCenterStatus,
-    displaySeverity: displaySeverity,
-    displayPosture: displayPosture,
-    dashboardPosture: dashboardPosture,
-    governancePosture: governancePosture,
-    orchestrationPosture: orchestrationPosture,
-    decisioningPosture: decisioningPosture,
-    recommendedAction: recommendedAction,
-    autonomousActionAllowed: sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
-      'Autonomous_Action_Allowed'
-    ]),
-    humanReviewRequired: sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
-      'Human_Review_Required'
-    ]),
-    sourceLedgerEntryId: sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
-      'Ledger_Entry_ID'
-    ]),
-    sourceDigestId: sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
-      'Digest_ID'
-    ]),
-    sourceBusinessKey: sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
-      'Business_Key'
-    ])
-  };
-
-  return [
-    recordId,
-    businessKey,
-    resolvedRunStateDate,
-    'AUTONOMOUS_RUN_STATE_COMMAND_CENTER',
-    commandCenterStatus,
-    displaySeverity,
-    displayPosture,
-    displayMessage,
-    dashboardPosture,
-    governancePosture,
-    orchestrationPosture,
-    decisioningPosture,
-    recommendedAction,
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
-      'Autonomous_Action_Allowed'
-    ]),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, [
-      'Human_Review_Required'
-    ]),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Signals_Reviewed']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Critical_Signal_Count']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['High_Signal_Count']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Medium_Signal_Count']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Low_Signal_Count']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Latest_Signal_ID']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Latest_Signal_Category']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Latest_Signal_Severity']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Latest_Signal_Status']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Latest_Operational_State']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Ledger_Entry_ID']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Digest_ID']),
-    sciipGetRunStateCommandCenterInputValue_(ledgerRow, ['Business_Key']),
-    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_SHEET,
-    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_DATE_COLUMN,
-    JSON.stringify(commandCenterJson),
-    SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_PROCESSOR,
-    startedAt.toISOString()
-  ];
-}
-
-/**
- * Command-center resolver logic.
- */
-function sciipResolveAutonomousProcessorExecutionRunStateCommandCenterStatus_(
-  displaySeverity,
-  governancePosture,
-  decisioningPosture
-) {
-  const severity = String(displaySeverity || '').toUpperCase();
-  const governance = String(governancePosture || '').toUpperCase();
-  const decisioning = String(decisioningPosture || '').toUpperCase();
-
-  if (
-    severity === 'CRITICAL' ||
-    governance === 'REVIEW_REQUIRED' ||
-    decisioning === 'DO_NOT_AUTONOMOUSLY_ADVANCE'
-  ) {
-    return 'COMMAND_CENTER_CRITICAL';
-  }
-
-  if (
-    severity === 'HIGH' ||
-    governance === 'ESCALATE' ||
-    decisioning === 'REQUIRE_HUMAN_REVIEW'
-  ) {
-    return 'COMMAND_CENTER_ATTENTION_REQUIRED';
-  }
-
-  if (severity === 'MEDIUM') {
-    return 'COMMAND_CENTER_MONITOR';
-  }
-
-  return 'COMMAND_CENTER_HEALTHY';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateCommandCenterDisplayPosture_(
-  displaySeverity,
-  signalPosture
-) {
-  const severity = String(displaySeverity || '').toUpperCase();
-
-  if (severity === 'CRITICAL') return 'Critical autonomous run state signal active';
-  if (severity === 'HIGH') return 'High-priority autonomous run state signal active';
-  if (severity === 'MEDIUM') return 'Autonomous run state requires monitoring';
-
-  return 'Autonomous run state healthy';
-}
-
-function sciipResolveAutonomousProcessorExecutionRunStateCommandCenterDisplayMessage_(
-  commandCenterStatus,
-  displaySeverity,
-  signalPosture,
-  recommendedAction
-) {
-  return (
-    commandCenterStatus +
-    ': Run state signal digest is ' +
-    displaySeverity +
-    ' with posture ' +
-    signalPosture +
-    '. Recommended action: ' +
-    recommendedAction +
-    '.'
-  );
-}
-
-/**
- * Reader logic.
- */
-function sciipReadAutonomousProcessorExecutionRunStateCommandCenterInputRows_(
-  sheet
-) {
-  const values = sheet.getDataRange().getValues();
-  if (values.length < 2) return [];
-
-  const headers = values[0].map(String);
-
-  return values.slice(1).map(function(row) {
-    const obj = {};
-    headers.forEach(function(header, i) {
-      obj[header] = row[i];
-    });
-    return obj;
-  });
-}
-
-/**
- * Resolver logic.
- */
-function sciipFilterAutonomousProcessorExecutionRunStateCommandCenterRowsByDate_(
-  rows,
-  resolvedDate
-) {
-  return rows.filter(function(row) {
-    const rawDate = sciipGetRunStateCommandCenterInputValue_(row, [
-      SCIIP_AUTONOMOUS_RUN_STATE_COMMAND_CENTER_INPUT_DATE_COLUMN,
-      'Processing_Date',
-      'Run_Date',
-      'Digest_Date',
-      'Signal_Date',
-      'Created_At',
-      'createdAt'
-    ]);
-
-    return sciipNormalizeRunStateCommandCenterDateKey_(rawDate) === resolvedDate;
-  });
-}
-
-function sciipResolveLatestAutonomousProcessorExecutionRunStateCommandCenterInputRow_(
-  rows
-) {
-  if (!rows.length) return {};
-
-  const sorted = rows.slice().sort(function(a, b) {
-    const aDate = new Date(
-      sciipGetRunStateCommandCenterInputValue_(a, [
-        'Created_At',
-        'createdAt'
-      ]) || 0
-    ).getTime();
-
-    const bDate = new Date(
-      sciipGetRunStateCommandCenterInputValue_(b, [
-        'Created_At',
-        'createdAt'
-      ]) || 0
-    ).getTime();
-
-    return bDate - aDate;
-  });
-
-  return sorted[0];
-}
-
-function sciipGetRunStateCommandCenterInputValue_(row, aliases) {
-  for (let i = 0; i < aliases.length; i++) {
-    if (row.hasOwnProperty(aliases[i]) && row[aliases[i]] !== '') {
-      return row[aliases[i]];
-    }
-  }
-
-  return '';
-}
-
-function sciipNormalizeRunStateCommandCenterDateKey_(value) {
-  if (!value) return '';
-
-  if (Object.prototype.toString.call(value) === '[object Date]') {
-    return sciipFormatDateKey_(value);
-  }
-
-  const text = String(value);
-
-  if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
-    return text;
-  }
-
-  const parsed = new Date(text);
-  if (!isNaN(parsed.getTime())) {
-    return sciipFormatDateKey_(parsed);
-  }
-
-  return text;
-}
-
-/**
- * Standalone test.
- */
-function sciipTestAutonomousProcessorExecutionRunStateCommandCenterProcessor() {
-  const result =
-    sciipRunAutonomousProcessorExecutionRunStateCommandCenterProcessor();
-
-  Logger.log(JSON.stringify({
-    test: 'sciipTestAutonomousProcessorExecutionRunStateCommandCenterProcessor',
     result: result
   }));
 
