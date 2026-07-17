@@ -1,0 +1,29 @@
+{
+  "framework": "SCIIP_V7_EPIC_3_SPRINT_10_OPPORTUNITY_WORKFLOW_EXECUTION_CONTROL",
+  "version": "v7.0-epic3-sprint10.0",
+  "dependency": "SCIIP_V7_EPIC_3_SPRINT_9_EXECUTIVE_OPPORTUNITY_COMMAND_WORKSPACE",
+  "northStarCapabilities": [
+    "PRESERVES_HISTORY",
+    "CONNECTS_KNOWLEDGE",
+    "MANAGE",
+    "ACT",
+    "ONE_TRUSTED_PLATFORM"
+  ],
+  "files": [
+    "src/applications/relationship-intelligence/SCIIP_Opportunity_Workflow_Execution_Engine.gs",
+    "src/applications/relationship-intelligence/SCIIP_Opportunity_Workflow_Execution_Application.gs",
+    "src/applications/relationship-intelligence/SCIIP_Opportunity_Workflow_Execution_Persistence.gs",
+    "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint10_Tests.gs",
+    "tools/tests/sciip-epic3-sprint10-test.js",
+    ".github/workflows/sciip-v7-epic3-sprint10.yml",
+    "docs/releases/SCIIP_V7_EPIC3_SPRINT10_README.md",
+    "manifests/SCIIP_V7_EPIC3_SPRINT10_OPPORTUNITY_WORKFLOW_EXECUTION_CONTROL.json"
+  ],
+  "governance": {
+    "appendOnly": true,
+    "duplicateSafe": true,
+    "reviewRequired": true,
+    "destructiveCommitEnabled": false,
+    "autonomousExecution": false
+  }
+}

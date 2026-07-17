@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 11_other_001.gs
- * sources: 275
- * generated: 2026-07-17T18:10:19.210Z
+ * sources: 279
+ * generated: 2026-07-17T18:36:59.549Z
  */
 var SCIIP_ASSET_ADMINISTRATION_APPLICATION=(function(){'use strict';var VERSION='v7.0-integration-sprint-16.0';function definition(){return {id:'asset-onboarding-lease-administration-intelligence',name:'Asset Onboarding & Lease Administration Intelligence',version:VERSION,dependencies:['transaction-execution-closing-intelligence'],services:['asset-administration-application'],queries:['asset-administration-query'],events:['ASSET_ONBOARDED','LEASE_OBLIGATION_UPDATED','CRITICAL_DATE_ALERTED'],stateBindings:['assetAdministration','leaseObligations','criticalDates'],workspaces:['asset-onboarding-lease-administration'],tests:['sciipTestV7IntegrationSprint16'],liveHandler:'sciipAssetAdministrationHeartbeatV7',queryHandler:'sciipAssetAdministrationQueryV7'};}function run(r){r=r||{};var asset=SCIIP_ASSET_ONBOARDING_REGISTRY.register(r.asset||{}).asset,obligations=SCIIP_LEASE_OBLIGATION_ENGINE.evaluate(r.obligations||[]),criticalDates=SCIIP_CRITICAL_DATE_ENGINE.analyze(r.criticalDates||[],r.asOf),economics=SCIIP_OCCUPANCY_ECONOMICS_ENGINE.analyze(r.economics||{}),workspace=SCIIP_ASSET_ADMINISTRATION_WORKSPACE.build({asset:asset,lease:r.lease||{},obligations:obligations,criticalDates:criticalDates,occupancyEconomics:economics,documents:r.documents||[],alerts:(criticalDates.alerts||[]).concat(obligations.obligations.filter(function(x){return x.overdue;})),executiveSummary:{status:obligations.status,criticalDateStatus:criticalDates.status,position:economics.position,markToMarket:economics.markToMarket}});return {version:VERSION,status:'COMPLETED',asset:asset,obligations:obligations,criticalDates:criticalDates,occupancyEconomics:economics,workspace:workspace};}function names(s,ks){var raw=[];for(var i=0;i<ks.length;i++)if(s&&s[ks[i]]!=null){raw=s[ks[i]];break;}if(Array.isArray(raw))return raw.map(function(x){return typeof x==='string'?x:String((x&&(x.name||x.id))||'');});return raw&&typeof raw==='object'?Object.keys(raw):[];}function wire(){var o={status:'PARTIAL',registry:false,assembly:false,queryRegistered:false,liveServiceRegistered:false,sharedState:typeof SCIIP_APP_STATE!=='undefined',eventBus:typeof SCIIP_APP_EVENTS!=='undefined',registrationMode:[]};try{o.registry=SCIIP_PLATFORM_REGISTRY.register(definition()).status!=='CONFLICT';}catch(e){}try{o.assembly=SCIIP_PLATFORM_SELF_ASSEMBLY.assemble({source:'SPRINT_16'}).status!=='FAILED';if(o.assembly)o.registrationMode.push('SELF_ASSEMBLY');}catch(e2){}var qs=typeof SCIIP_QUERY_ENGINE!=='undefined'&&SCIIP_QUERY_ENGINE.snapshot?SCIIP_QUERY_ENGINE.snapshot():{},ls=typeof SCIIP_LIVE_RUNTIME!=='undefined'&&SCIIP_LIVE_RUNTIME.snapshot?SCIIP_LIVE_RUNTIME.snapshot():{};o.queryRegistered=names(qs,['registeredQueries','queries','registry']).indexOf('asset-administration-query')!==-1;o.liveServiceRegistered=names(ls,['services','registry']).indexOf('asset-administration-application')!==-1;if(!o.queryRegistered&&typeof SCIIP_QUERY_ENGINE!=='undefined'&&SCIIP_QUERY_ENGINE.register){SCIIP_QUERY_ENGINE.register('asset-administration-query',sciipAssetAdministrationQueryV7,{capability:definition().id});o.queryRegistered=true;o.registrationMode.push('QUERY_FALLBACK');}if(!o.liveServiceRegistered&&typeof SCIIP_LIVE_RUNTIME!=='undefined'&&SCIIP_LIVE_RUNTIME.register){SCIIP_LIVE_RUNTIME.register('asset-administration-application',sciipAssetAdministrationHeartbeatV7,{capability:definition().id});o.liveServiceRegistered=true;o.registrationMode.push('LIVE_FALLBACK');}if(o.registry&&o.assembly&&o.queryRegistered&&o.liveServiceRegistered&&o.sharedState&&o.eventBus)o.status='WIRED';return o;}return {VERSION:VERSION,run:run,wire:wire,platformDefinition:definition};})();function sciipAssetAdministrationQueryV7(r){return SCIIP_ASSET_ADMINISTRATION_APPLICATION.run(r||{});}function sciipAssetAdministrationHeartbeatV7(){return {status:'AVAILABLE',version:'v7.0-integration-sprint-16.0',workspace:'asset-onboarding-lease-administration',generatedAt:new Date().toISOString()};}
 
@@ -2087,6 +2087,23 @@ var SCIIP_ENTERPRISE_RELATIONSHIP_GRAPH_PERSISTENCE=(function(){
 function sciipPersistEnterpriseRelationshipGraph(snapshot,options){return SCIIP_ENTERPRISE_RELATIONSHIP_GRAPH_PERSISTENCE.persist(snapshot||{},options||{});}
 
 
+/** Sprint 10 Apps Script certification. */
+function sciipTestV7Epic3Sprint10(){
+  var failures=[],tests=0;function ok(name,value){tests++;if(!value)failures.push(name);}
+  var approved={id:'CMD-OPP-1-LEASE',opportunityId:'OPP-1',action:'LEASE_REPRESENTATION',status:'READY',approved:true};
+  var denied={id:'CMD-OPP-2',opportunityId:'OPP-2',action:'ACQUIRE',status:'AWAITING_APPROVAL',approved:false};
+  var plan=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.createPlan(approved,{owner:'USER-1'});ok('Plan creation',plan.status==='PLANNED'&&plan.tasks.length===4);
+  ok('Approval gate',SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.createPlan(denied,{owner:'USER-1'}).status==='REJECTED');
+  var noEvidence=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.transition(plan,{type:'TASK_COMPLETE',taskId:plan.tasks[0].id,evidenceIds:[]});ok('Evidence gate',noEvidence.reason==='EVIDENCE_REQUIRED');
+  var completed=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.transition(plan,{type:'TASK_COMPLETE',taskId:plan.tasks[0].id,evidenceIds:['SOURCE_VALIDATION','DECISION_RATIONALE']});ok('Task transition',completed.status==='ACCEPTED'&&completed.plan.tasks[1].status==='PENDING');
+  var duplicate=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.transition(completed.plan,{type:'TASK_COMPLETE',taskId:plan.tasks[0].id,evidenceIds:['SOURCE_VALIDATION','DECISION_RATIONALE']});ok('Duplicate safety',duplicate.reason==='DUPLICATE_SAFE');
+  var exception=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.transition(completed.plan,{type:'RAISE_EXCEPTION',reason:'Conflicting source',severity:'HIGH'});ok('Exception control',exception.plan.status==='PAUSED'&&exception.plan.exceptions.length===1);
+  var app=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION_APPLICATION.run({commands:[approved,approved],defaultOwner:'USER-1'});ok('Business key duplicate protection',app.plans.length===1&&app.rejected.length===1);
+  var store=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION_PERSISTENCE.memory(),p1=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION_PERSISTENCE.persist(store,[completed.event]),p2=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION_PERSISTENCE.persist(store,[completed.event]);ok('Append-only persistence',p1.appended===1&&p2.duplicates===1);
+  return {framework:'SCIIP_V7_EPIC_3_SPRINT_10_OPPORTUNITY_WORKFLOW_EXECUTION_CONTROL',version:'v7.0-epic3-sprint10.0',status:failures.length?'FAILED':'PASSED',testsRun:tests,failures:failures,result:{plans:app.plans.length,rejected:app.rejected.length,tasks:plan.tasks.length,milestones:plan.milestones.length,openExceptions:exception.plan.exceptions.length,historyEvents:store.all().length,workspace:'executive-opportunity-command',reviewRequired:true,destructiveCommitEnabled:false,autonomousExecution:false}};
+}
+
+
 function sciipTestV7Epic3Sprint5() {
   var input = {
     entities: [
@@ -2755,6 +2772,56 @@ var SCIIP_NETWORK_INTELLIGENCE_PERSISTENCE = (function () {
 function sciipPersistNetworkIntelligence(snapshot, options) {
   return SCIIP_NETWORK_INTELLIGENCE_PERSISTENCE.persist(snapshot || {}, options || {});
 }
+
+
+/** Sprint 10 application facade and North Star declaration. */
+var SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION_APPLICATION=(function(){
+  'use strict';
+  var NORTH_STAR='SCIIP_OS is the operating system for industrial real estate. It ingests market data, preserves history, connects knowledge, powers GIS, and enables professionals to analyze, manage, and act from one trusted platform.';
+  function run(input){input=input||{};var commands=input.commands||[],existing=input.existingPlans||[],seen={},plans=existing.slice(),rejected=[];plans.forEach(function(p){seen[p.businessKey]=true;});commands.forEach(function(c){var key=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.businessKey(c);if(seen[key]){rejected.push({commandId:c.id,reason:'DUPLICATE_BUSINESS_KEY'});return;}var r=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.createPlan(c,{owner:(input.owners||{})[c.opportunityId]||input.defaultOwner,evidenceRequirements:input.evidenceRequirements});if(r.status==='REJECTED')rejected.push({commandId:c.id,reason:r.reason});else{seen[key]=true;plans.push(r);}});return {version:SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.VERSION,northStar:NORTH_STAR,capabilities:['PRESERVES_HISTORY','CONNECTS_KNOWLEDGE','MANAGE','ACT','ONE_TRUSTED_PLATFORM'],plans:plans,rejected:rejected,portfolio:SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.portfolio(plans),reviewRequired:true,destructiveCommitEnabled:false,autonomousExecution:false};}
+  return {NORTH_STAR:NORTH_STAR,run:run};
+}());
+
+
+/** SCIIP_OS v7.0 — Epic 3 Sprint 10: Opportunity Workflow and Execution Control */
+var SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION=(function(){
+  'use strict';
+  var VERSION='v7.0-epic3-sprint10.0';
+  function text(v){return v===null||v===undefined?'':String(v).trim();}
+  function upper(v){return text(v).toUpperCase();}
+  function clone(v){return JSON.parse(JSON.stringify(v));}
+  function unique(a){var s={},o=[];(a||[]).forEach(function(x){x=text(x);if(x&&!s[x]){s[x]=1;o.push(x);}});return o;}
+  function businessKey(command){return ['EXECUTION',text(command.opportunityId),upper(command.action)].join('|');}
+  function createPlan(command,options){options=options||{};if(!command||upper(command.status)!=='READY'||command.approved!==true)return {status:'REJECTED',reason:'APPROVED_READY_COMMAND_REQUIRED'};var owner=text(options.owner||command.owner);if(!owner)return {status:'REJECTED',reason:'OWNER_REQUIRED'};var now=options.createdAt||new Date().toISOString(),key=businessKey(command),id='PLAN-'+simpleHash(key);var evidence=unique(options.evidenceRequirements||['SOURCE_VALIDATION','DECISION_RATIONALE']);var tasks=[
+    task(id,1,'VERIFY_EVIDENCE',owner,[],evidence,'PENDING'),
+    task(id,2,'CONFIRM_SCOPE_AND_AUTHORITY',owner,['VERIFY_EVIDENCE'],['APPROVAL_RECORD'],'BLOCKED'),
+    task(id,3,upper(command.action),owner,['CONFIRM_SCOPE_AND_AUTHORITY'],['EXECUTION_EVIDENCE'],'BLOCKED'),
+    task(id,4,'CLOSE_AND_RECORD_OUTCOME',owner,[upper(command.action)],['OUTCOME_RECORD'],'BLOCKED')
+  ];return {id:id,businessKey:key,opportunityId:text(command.opportunityId),commandId:text(command.id),action:upper(command.action),status:'PLANNED',owner:owner,createdAt:now,updatedAt:now,tasks:tasks,milestones:[{id:'M1',name:'EVIDENCE_VERIFIED',status:'PENDING'},{id:'M2',name:'EXECUTION_AUTHORIZED',status:'PENDING'},{id:'M3',name:'ACTION_COMPLETED',status:'PENDING'},{id:'M4',name:'OUTCOME_RECORDED',status:'PENDING'}],evidenceRequirements:evidence,exceptions:[],reviewRequired:true,destructiveCommitEnabled:false,autonomousExecution:false};}
+  function task(planId,seq,type,owner,deps,evidence,status){return {id:planId+'-T'+seq,sequence:seq,type:type,owner:owner,status:status,dependencies:deps,evidenceRequirements:evidence,completedAt:null};}
+  function transition(plan,event){plan=clone(plan);event=event||{};var type=upper(event.type),taskId=text(event.taskId),target=null;(plan.tasks||[]).some(function(t){if(t.id===taskId){target=t;return true;}return false;});if(type==='TASK_COMPLETE'){
+      if(!target)return reject(plan,'TASK_NOT_FOUND');if(target.status==='COMPLETED')return accept(plan,'DUPLICATE_SAFE');if(target.status==='BLOCKED')return reject(plan,'TASK_BLOCKED');var supplied=unique(event.evidenceIds||[]);var missing=(target.evidenceRequirements||[]).filter(function(x){return supplied.indexOf(x)<0;});if(missing.length)return reject(plan,'EVIDENCE_REQUIRED',missing);target.status='COMPLETED';target.completedAt=event.occurredAt||new Date().toISOString();unlock(plan,target.type);updateMilestones(plan);plan.status=plan.tasks.every(function(t){return t.status==='COMPLETED';})?'COMPLETED':'IN_PROGRESS';plan.updatedAt=target.completedAt;return {status:'ACCEPTED',plan:plan,event:audit(plan,event,'TASK_COMPLETED')};}
+    if(type==='RAISE_EXCEPTION'){var ex={id:text(event.exceptionId||('EX-'+simpleHash(plan.id+'|'+Date.now()))),severity:upper(event.severity||'WARNING'),reason:text(event.reason),status:'OPEN',raisedAt:event.occurredAt||new Date().toISOString()};plan.exceptions.push(ex);plan.status='PAUSED';plan.updatedAt=ex.raisedAt;return {status:'ACCEPTED',plan:plan,event:audit(plan,event,'EXCEPTION_RAISED')};}
+    if(type==='RESOLVE_EXCEPTION'){var found=null;(plan.exceptions||[]).some(function(x){if(x.id===text(event.exceptionId)){found=x;return true;}return false;});if(!found)return reject(plan,'EXCEPTION_NOT_FOUND');found.status='RESOLVED';found.resolvedAt=event.occurredAt||new Date().toISOString();if(plan.exceptions.every(function(x){return x.status==='RESOLVED';}))plan.status='IN_PROGRESS';return {status:'ACCEPTED',plan:plan,event:audit(plan,event,'EXCEPTION_RESOLVED')};}
+    return reject(plan,'UNSUPPORTED_EVENT');}
+  function unlock(plan,completedType){(plan.tasks||[]).forEach(function(t){if(t.status!=='BLOCKED')return;var ready=(t.dependencies||[]).every(function(dep){return plan.tasks.some(function(x){return x.type===dep&&x.status==='COMPLETED';});});if(ready)t.status='PENDING';});}
+  function updateMilestones(plan){var completed={};(plan.tasks||[]).forEach(function(t){completed[t.type]=t.status==='COMPLETED';});var map=['VERIFY_EVIDENCE','CONFIRM_SCOPE_AND_AUTHORITY',plan.action,'CLOSE_AND_RECORD_OUTCOME'];(plan.milestones||[]).forEach(function(m,i){m.status=completed[map[i]]?'COMPLETED':'PENDING';});}
+  function audit(plan,event,eventType){return {eventId:'EVT-'+simpleHash(plan.id+'|'+eventType+'|'+plan.updatedAt),eventType:eventType,planId:plan.id,opportunityId:plan.opportunityId,occurredAt:plan.updatedAt,payload:clone(event),appendOnly:true};}
+  function reject(plan,reason,details){return {status:'REJECTED',reason:reason,details:details||[],plan:plan};}
+  function accept(plan,reason){return {status:'ACCEPTED',reason:reason,plan:plan,event:null};}
+  function portfolio(plans){plans=plans||[];return {total:plans.length,planned:plans.filter(function(p){return p.status==='PLANNED';}).length,inProgress:plans.filter(function(p){return p.status==='IN_PROGRESS';}).length,paused:plans.filter(function(p){return p.status==='PAUSED';}).length,completed:plans.filter(function(p){return p.status==='COMPLETED';}).length,pendingTasks:plans.reduce(function(n,p){return n+(p.tasks||[]).filter(function(t){return t.status==='PENDING';}).length;},0),openExceptions:plans.reduce(function(n,p){return n+(p.exceptions||[]).filter(function(e){return e.status==='OPEN';}).length;},0)};}
+  function simpleHash(s){var h=2166136261,i;for(i=0;i<s.length;i++){h^=s.charCodeAt(i);h+=(h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24);}return ('00000000'+(h>>>0).toString(16).toUpperCase()).slice(-8);}
+  return {VERSION:VERSION,createPlan:createPlan,transition:transition,portfolio:portfolio,businessKey:businessKey};
+}());
+
+
+/** Append-only persistence adapter for Sprint 10 workflow events. */
+var SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION_PERSISTENCE=(function(){
+  'use strict';
+  function memory(){var rows=[],keys={};return {append:function(events){var appended=0,duplicates=0;(events||[]).forEach(function(e){var k=e.eventId||JSON.stringify(e);if(keys[k]){duplicates++;return;}keys[k]=true;rows.push(JSON.parse(JSON.stringify(e)));appended++;});return {appended:appended,duplicates:duplicates,total:rows.length};},all:function(){return JSON.parse(JSON.stringify(rows));}};}
+  function persist(adapter,events){if(!adapter||typeof adapter.append!=='function')throw new Error('Append-only adapter required.');return adapter.append(events||[]);}
+  return {memory:memory,persist:persist};
+}());
 
 
 /**

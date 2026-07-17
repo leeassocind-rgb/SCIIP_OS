@@ -1,0 +1,7 @@
+/** Sprint 10 application facade and North Star declaration. */
+var SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION_APPLICATION=(function(){
+  'use strict';
+  var NORTH_STAR='SCIIP_OS is the operating system for industrial real estate. It ingests market data, preserves history, connects knowledge, powers GIS, and enables professionals to analyze, manage, and act from one trusted platform.';
+  function run(input){input=input||{};var commands=input.commands||[],existing=input.existingPlans||[],seen={},plans=existing.slice(),rejected=[];plans.forEach(function(p){seen[p.businessKey]=true;});commands.forEach(function(c){var key=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.businessKey(c);if(seen[key]){rejected.push({commandId:c.id,reason:'DUPLICATE_BUSINESS_KEY'});return;}var r=SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.createPlan(c,{owner:(input.owners||{})[c.opportunityId]||input.defaultOwner,evidenceRequirements:input.evidenceRequirements});if(r.status==='REJECTED')rejected.push({commandId:c.id,reason:r.reason});else{seen[key]=true;plans.push(r);}});return {version:SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.VERSION,northStar:NORTH_STAR,capabilities:['PRESERVES_HISTORY','CONNECTS_KNOWLEDGE','MANAGE','ACT','ONE_TRUSTED_PLATFORM'],plans:plans,rejected:rejected,portfolio:SCIIP_OPPORTUNITY_WORKFLOW_EXECUTION.portfolio(plans),reviewRequired:true,destructiveCommitEnabled:false,autonomousExecution:false};}
+  return {NORTH_STAR:NORTH_STAR,run:run};
+}());

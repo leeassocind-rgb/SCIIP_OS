@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 02_storage_010.gs
  * sources: 889
- * generated: 2026-07-17T18:10:18.676Z
+ * generated: 2026-07-17T18:36:59.058Z
  */
 function sciipRun87320_StoragePlatformPermanentHistoryMobilityCoverageAssessmentProcessor(){return SCIIP_STORAGE_PLATFORM_PERMANENT_HISTORY_MOBILITY_BACKEND.executePlatformPermanentHistoryMobilityPlan({processorNumber:87320,processorName:'StoragePlatformPermanentHistoryMobilityCoverageAssessment',statusField:'storagePlatformPermanentHistoryMobilityCoverageAssessmentStatus',component:'Storage Platform Permanent History Mobility Execution',backendLayer:'Storage Platform Permanent History Mobility',sourceSheet:'STORAGE_PLATFORM_PERMANENT_HISTORY_MOBILITY_POLICY_REGISTRY',targetSheet:'STORAGE_PLATFORM_PERMANENT_HISTORY_MOBILITY_COVERAGE_ASSESSMENT',nextAction:'Run 87330_StoragePlatformPermanentHistoryMobilityRiskAnalysisProcessor after this processor completes.'});}
 function sciipTest87320_StoragePlatformPermanentHistoryMobilityCoverageAssessmentProcessor(){var r=sciipRun87320_StoragePlatformPermanentHistoryMobilityCoverageAssessmentProcessor();console.log(JSON.stringify({test:'sciipTest87320_StoragePlatformPermanentHistoryMobilityCoverageAssessmentProcessor',result:r}));return r;}
