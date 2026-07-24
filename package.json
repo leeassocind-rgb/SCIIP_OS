@@ -158,6 +158,9 @@
     "run:v9:sprint27:production-baseline": "node tools/supersheets/sciip-v9-sprint27-production-baseline-engine.js",
     "test:v9:sprint27b:real-replay": "node tools/tests/sciip-v9-sprint27b-real-data-replay-reconciliation-test.js",
     "certify:v9:sprint27b:real-replay": "npm run test:v9:sprint27b:real-replay && npm run deployment:compile",
-    "run:v9:sprint27b:real-replay": "node tools/supersheets/sciip-v9-sprint27b-real-data-replay-reconciliation.js"
+    "run:v9:sprint27b:real-replay": "node tools/supersheets/sciip-v9-sprint27b-real-data-replay-reconciliation.js",
+    "test:v9:sprint27c": "node tools/tests/sciip-v9-sprint27c-real-production-replay-runner-test.js",
+    "certify:v9:sprint27c:real-production": "npm run test:v9:sprint27c && npm run deployment:compile",
+    "run:v9:sprint27c:real-production": "node tools/supersheets/sciip-v9-sprint27c-real-production-replay-runner.js"
   }
 }
