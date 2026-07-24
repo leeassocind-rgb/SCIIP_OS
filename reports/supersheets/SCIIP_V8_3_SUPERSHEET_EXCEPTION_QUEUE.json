@@ -1,0 +1,897 @@
+{
+  "framework": "SCIIP_V8_3_SUPERSHEET_EXCEPTION_QUEUE",
+  "generatedAt": "2026-07-23T16:14:23.005Z",
+  "summary": {
+    "UNRESOLVED_ADDRESS_GRAMMAR": 94,
+    "UNRESOLVED_CITY_ZIP_BINDING": 15
+  },
+  "exceptions": [
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "9 1430 Village Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "vate Airline 2 Ground Level Doors 20' Minimum Clear Height Available Within 30 Days $1.43 NNN NFS 60,000 SF 0/2 Yes No Existing Leased 30 Days 20' Voit Real Estate Services - Brenden Hefner 949-355-3874, Nicholas DiGiovanni 714- 935-2350 Research in Progress 9 1430 Village Way, Unit P-V Santa Ana, CA 92705 McFadden Place Leased 15,560 SF Yes Multi-Tenant Building 55 Fwy Blade Sign and Electronic Reader Board 100% HVAC Open Showroom Set Up 6 Grade Level Loading Doors, 1 Dock High Door 14' Clear Height TBD NFS 47,00"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "5 10837 Commerce Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "ors, 1 Grade Level Door 75 Car Parking Spaces ¼ Mile From 10 Freeway On/Off-Ramp $1.35 G NFS 49,874 SF 7/1 ESFR Fncd/Pvd Existing Available Now 30' 1200 Lee & Associates - Donald Kazanjian 909-373-2929, Joe Lahlou 909-373-2710 Brand New 2025 Class-A Facility 5 10837 Commerce Way, Unit A Fontana, CA 92337 Fontana Distribution Center Marketing Flyer Leased 35,144 SF No TBD Sublease Through 12/31/2027 POL 108,384 SF Building 24' Minimum Clear Height 8 Dock High Positions & 1 Ground Level Doors Power to be Verified by"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "14 37287 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "r Stalls Concrete & Asphalt Paved Yard - Fully Secured Close Proximity to 10, 15, 210, & 60 Fwys NFL TBD 8,888 SF 2/3 Fncd/Pvd Existing Sold COE 19' Colliers - Mark Zorn 909-937-6318, Cory Whitman 909-937-6363, Nico Coppola 909- 937-6348 Research in Progress 14 37287 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 7,703 SF Yes 750 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 15,204 SF 0/1 Yes No E"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "15 37275 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "lley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 15,204 SF 0/1 Yes No Existing Available Now 16' 400 1.0:1/8 Lee & Associates - Michael W. Strode 951-445-4508, Charley Black 951-445-4507 $1.50 MG -> $1.20 MG 15 37275 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 7,498 SF Yes 750 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 15,204 SF 0/1 Yes No E"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "16 37263 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "ley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 15,204 SF 0/1 Yes No Existing Available Now 16' 400 2.5:1/19 Lee & Associates - Michael W. Strode 951-445-4508, Charley Black 951-445-4507 $1.50 MG -> $1.20 MG 16 37263 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 6,376 SF Yes 750 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 12,394 SF 0/1 Yes No E"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "18 37251 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "ing 826 SF Office Area 25' Clear Height 1 Grade Level Door, 1 Dock High Door TBD NFS 38,724 SF 1/1 Yes No Existing Leased Now 25' 200 Voit Real Estate Services - Ryan Moore 909-545-8011, Ryan Shattuck , Dylan Shershenovich 714-935-2312 Research in Progress 18 37251 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 6,018 SF Yes 750 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 12,394 SF 0/1 Yes No E"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "19 37289 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": ". advisor. 6/5/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 19 37289 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 5,865 SF Yes 757 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 11,730 SF 0/1 Yes No E"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "20 37277 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "ley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 11,730 SF 0/1 Yes No Existing Available Now 16' 400 2.7:1/16 Lee & Associates - Michael W. Strode 951-445-4508, Charley Black 951-445-4507 $1.50 MG -> $1.20 MG 20 37277 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 5,865 SF Yes 757 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 11,730 SF 0/1 Yes No E"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "21 37323 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "ley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 11,730 SF 0/1 Yes No Existing Available Now 16' 400 2.7:1/16 Lee & Associates - Michael W. Strode 951-445-4508, Charley Black 951-445-4507 $1.50 MG -> $1.20 MG 21 37323 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 5,625 SF Yes 757 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 11,250 SF 0/1 Yes No E"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "22 37301 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "ey Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 11,250 SF 0/1 Yes No Existing Available Now 16' 400 2.8:1/16 Lee & Associates - Michael W. Strode 951-445-4508, Charley Black 951-445-4507 $1.50 MG -> $1.20 MG 22 37301 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 5,625 SF Yes 757 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 11,250 SF 0/1 Yes No E"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "25 37265 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": ". advisor. 6/5/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 25 37265 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 4,756 SF Yes 648 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 8,255 SF 0/1 Yes No Ex"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "27 37325 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "llpen or Storage AC in Office Area and Evaporative Cooler in Warehouse One 12’x14’ Roll-Up Door Quick and Easy Access to 10 Fwy $1.35 MG NFS 4,716 SF 0/1 No Existing Available Now Desert Pacific Properties - Susan Harvey 760-360-8200 One 12’x14’ Roll-Up Door 27 37325 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 4,677 SF Yes 648 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 8,280 SF 0/1 No Existi"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "28 37313 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "h Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 8,280 SF 0/1 No Existing Available Now 16' 400 2.6:1/12 Lee & Associates - Michael W. Strode 951-445-4508, Charley Black 951-445-4507 $1.60 MG -> $1.20 MG 28 37313 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 4,470 SF Yes 750 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 8,940 SF 0/1 Yes No Ex"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "29 37253 Industry Way",
+      "editionDate": "2026-06-05",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-5-2026.pdf",
+      "evidenceContext": "lley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 8,940 SF 0/1 Yes No Existing Available Now 16' 400 2.7:1/12 Lee & Associates - Michael W. Strode 951-445-4508, Charley Black 951-445-4507 $1.55 MG -> $1.20 MG 29 37253 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Rate Reduced 3,499 SF Yes 648 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG TBD 8,255 SF 0/1 Yes No Ex"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "9 1170 N Van Horne Way",
+      "editionDate": "2026-06-08",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-8-2026.pdf",
+      "evidenceContext": "800 Amps, 277/480 Volts (Verify) High Image Office Improvements 4 GL Loading Doors $1.68 G NFS 14,013 SF 0/4 Yes Yes Existing Available Now 16' 800 2.0:1/28 Lee & Associates - Greg Diab 714-564-7171, Jack A. Haley 714-564-7172 Now Vacant & Fully Refurbished 9 1170 N Van Horne Way Anaheim, CA 92806 Marketing Flyer New Listing For Lease 9,680 SF No 2,033 SF Free Standing Building 2,033 SF of Office Space 400 Amps of 120/208 Volt (Verify) 2 Ground Level Loading Doors 16' Minimum Warehouse Clearance Convenient Access"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "11 400-424 & 610 Main St",
+      "editionDate": "2026-06-08",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-8-2026.pdf",
+      "evidenceContext": "rney, accountant, or other prof. advisor. 6/8/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF LAND Property LocationAvailable Acres Rate/SF Price/SF Building SF Yard Status Use UtilitiesListing NotesDivisible SFTotal PriceRailZoning 11 400-424 & 610 Main St Riverside, CA 92501 Main St/Garner Rd New Listing For Lease Marketing Flyer 98,881 SF 2.27 Ac 2.27 Acres of Land for Lease Divisible to 0.92 & 1.85 Acres Partially Paved/Graveled Yard Fully Secured TBD NFS 0 SF Yes Available Industrial"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "12 400-424 & 610 Main St",
+      "editionDate": "2026-06-08",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-8-2026.pdf",
+      "evidenceContext": "ease Divisible to 0.92 & 1.85 Acres Partially Paved/Graveled Yard Fully Secured TBD NFS 0 SF Yes Available Industrial Gas: Water: Sewer: CBRE - Wes Jones 909-418-2070, James Toomarian 909-418-2083 Electric: Fiber: Partially Paved/Graveled Yard NoNFSNoBMP 12 400-424 & 610 Main St Riverside, CA 92501 Main St/Garner Rd New Listing For Lease Marketing Flyer 80,586 SF 1.85 Ac 1.85 Acres of Land for Lease Partially Paved/Graveled Yard Fully Secured TBD NFS 0 SF Yes Available Industrial Gas: Water: Sewer: CBRE - W"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "14 400-424 & 610 Main St",
+      "editionDate": "2026-06-08",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-8-2026.pdf",
+      "evidenceContext": "Ingress and Egress 0.5 Miles to 10 Fwy TBD NFS 10,000 SF Fncd/Pvd Available Industrial Gas: Water: Sewer: Lee & Associates - Mathew Skogebo 951-276-3646, Ryan Turnquist 951- 276-3680 Electric: Fiber: 10,000 SF Maintenance Facility on 1.64 Acres NoNFSNoM1 14 400-424 & 610 Main St Riverside, CA 92501 Main St/Garner Rd New Listing For Lease Marketing Flyer 40,075 SF 0.92 Ac 0.92 Acres of Land for Lease Partially Paved/Graveled Yard Fully Secured TBD NFS 0 SF Yes Available Industrial Gas: Water: Sewer: CBRE - W"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "5 1170 N Van Horne Way",
+      "editionDate": "2026-06-08",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-8-2026.pdf",
+      "evidenceContext": "5, 5, 91 and 105 Freeways Fenced Yard Possible (±40,000 SF) $1.25 NNN NFS 33,847 SF 2/3 Yes No Existing Available Now 26' 800 CBRE - Santa Fe Springs - John Biven 562-968-1150, Chris Ehrlich 562-968-1160, Dalton Douty 949-809-4052 Now Available @ $1.25 NNN 5 1170 N Van Horne Way Anaheim, CA 92806 Marketing Flyer New Listing For Lease 9,680 SF No 2,033 SF Free Standing Building 2,033 SF of Office Space 400 Amps of 120/208 Volt (Verify) 2 Ground Level Loading Doors 16' Minimum Warehouse Clearance Convenient Access"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "3 6133 Malburg Way",
+      "editionDate": "2026-06-09",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-9-2026.pdf",
+      "evidenceContext": "Eastern Ave and Randolph St Rare Zone Amendment: Equipment/Tool Rental & Sales $0.95 G $158.00 39,873 SF 0/5 No Fncd/Pvd Existing Available 30 Days 14'-40' 1200 Lee & Associates - Tony Naples 818-395-4373, Mattison Behr 818-434-9116 $6,850,000 -> $6,300,000 3 6133 Malburg Way Vernon, CA 90058 Vernon Business Park Leased 36,853 SF No 2,300 SF Vernon Business Park 3 Dock High Positions 1 Large Ground Level Ramp 24' Clearance Height .45/3,000 Calculated Sprinklers $1.15 NNN NFS 79,069 SF 3/1 Yes Paved Existing Lea"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "13 2920 E Ricker Way",
+      "editionDate": "2026-06-09",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-9-2026.pdf",
+      "evidenceContext": "ng/Assembly Facility Immediate Access to 5, 105, 91 & 605 Freeways $1.19 G NFS 23,650 SF 0/3 No Fncd/Pvd Existing Leased 12/01/2025 20' 1200 1.8:1/42 interPres Commercial Realty - Peter Pistone 213-418-9200, Sandy Gonzalez 562-469- 5331 Research in Progress 13 2920 E Ricker Way Anaheim, CA 92806 Marketing Flyer Rate Reduced 19,013 SF No 2,800 SF Free Standing Building Open Office Plan with Glass Line 4-5 Private Offices, Conference Room Office/ Shop Restrooms Large Fenced Concrete Yard Approximate 39,000 SF Parc"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "19 1000 Ortega Way",
+      "editionDate": "2026-06-09",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-9-2026.pdf",
+      "evidenceContext": "lti-Tenant Building Corner Location (2) Ground Level Loading Doors 200 Amps of Power Large Yard $1.25 NNN NFS 48,774 SF 0/2 Yes Fncd/Pvd Existing Leased Now 16' 200 1.7:1/10 Lee & Associates - Newport Beach - Robert Griffin 949-724-4743 Research in Progress 19 1000 Ortega Way, Unit B Placentia, CA 92870 Ortega Way Industrial Park Marketing Flyer New Listing For Sale 5,491 SF No 1,500 SF Industrial Condo 1,500 SF Office Space 1 Ground Level Loading Door 15' Clear Height 400 Amps Sprinklered NFL $400.00 21,976 SF"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "92870 Ortega Way",
+      "editionDate": "2026-06-09",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-9-2026.pdf",
+      "evidenceContext": "round Level Loading Doors 200 Amps of Power Large Yard $1.25 NNN NFS 48,774 SF 0/2 Yes Fncd/Pvd Existing Leased Now 16' 200 1.7:1/10 Lee & Associates - Newport Beach - Robert Griffin 949-724-4743 Research in Progress 19 1000 Ortega Way, Unit B Placentia, CA 92870 Ortega Way Industrial Park Marketing Flyer New Listing For Sale 5,491 SF No 1,500 SF Industrial Condo 1,500 SF Office Space 1 Ground Level Loading Door 15' Clear Height 400 Amps Sprinklered NFL $400.00 21,976 SF 0/1 Yes No Existing Available COE 15' 40"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "18 1130 N Valdivia Way",
+      "editionDate": "2026-06-09",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-9-2026.pdf",
+      "evidenceContext": ". advisor. 6/9/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 18 1130 N Valdivia Way, Unit C Palm Springs, CA 92262 Marketing Flyer Leased 4,500 SF Yes Free Standing Building Fully Air Conditioned Office/Warehouse Space Office, Restroom, and Two Roll-Up Doors Adjacent to Palm Springs International Airport Excellent Visi"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "7 2920 E Ricker Way",
+      "editionDate": "2026-06-09",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-9-2026.pdf",
+      "evidenceContext": "ng/Assembly Facility Immediate Access to 5, 105, 91 & 605 Freeways $1.19 G NFS 23,650 SF 0/3 No Fncd/Pvd Existing Leased 12/01/2025 20' 1200 1.8:1/42 interPres Commercial Realty - Peter Pistone 213-418-9200, Sandy Gonzalez 562-469- 5331 Research in Progress 7 2920 E Ricker Way Anaheim, CA 92806 Marketing Flyer Rate Reduced 19,013 SF No 2,800 SF Free Standing Building Open Office Plan with Glass Line 4-5 Private Offices, Conference Room Office/ Shop Restrooms Large Fenced Concrete Yard Approximate 39,000 SF Parce"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "10 1000 Ortega Way",
+      "editionDate": "2026-06-09",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-9-2026.pdf",
+      "evidenceContext": "lti-Tenant Building Corner Location (2) Ground Level Loading Doors 200 Amps of Power Large Yard $1.25 NNN NFS 48,774 SF 0/2 Yes Fncd/Pvd Existing Leased Now 16' 200 1.7:1/10 Lee & Associates - Newport Beach - Robert Griffin 949-724-4743 Research in Progress 10 1000 Ortega Way, Unit B Placentia, CA 92870 Ortega Way Industrial Park Marketing Flyer New Listing For Sale 5,491 SF No 1,500 SF Industrial Condo 1,500 SF Office Space 1 Ground Level Loading Door 15' Clear Height 400 Amps Sprinklered NFL $400.00 21,976 SF"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "13 2920 E Ricker Way",
+      "editionDate": "2026-06-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-10-2026.pdf",
+      "evidenceContext": "SF of Office 2 Ground Level Doors 2 Dock High Doors, 22’ Clear 400 Amps of Power (Verify) Fully Fire Sprinklered $1.53 G NFS 22,800 SF 2/2 Yes Fncd/Pvd Existing Leased Now 22' 400 1.1:1/24 Lee & Associates - Chris Vassilian 949-790-3102 Research in Progress 13 2920 E Ricker Way Anaheim, CA 92806 Marketing Flyer New Price 19,013 SF No 2,800 SF Free Standing Building Open Office Plan with Glass Line 4-5 Private Offices, Conference Room Office/ Shop Restrooms Large Fenced Concrete Yard Approximate 39,000 SF Parcel"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "17 1170 N Van Horne Way",
+      "editionDate": "2026-06-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-10-2026.pdf",
+      "evidenceContext": "advisor. 6/10/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 17 1170 N Van Horne Way Anaheim, CA 92806 Marketing Flyer New Rate 9,680 SF No 2,033 SF Free Standing Building 2,033 SF of Office Space 400 Amps of 120/208 Volt (Verify) 2 Ground Level Loading Doors 16' Minimum Warehouse Clearance Convenient Access to 91 & 57"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "1 20201 Caroline Way",
+      "editionDate": "2026-06-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-10-2026.pdf",
+      "evidenceContext": "advisor. 6/10/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 1 20201 Caroline Way Riverside, CA 92571 Meridian Business Park New Listing For Lease & Sale 782,209 SF Yes 15,206 SF Meridian Business Park Cross-Dock Building 115 Dock High Door and 3 Grade Level Doors 4,000 Amp Elec Service - w/Existing Infrastructure to A"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "942-4644 142' All Concrete Secured Truck Court",
+      "addressCandidate": "942-4644 142' ALL CONCRETE SECURED TRUCK CT",
+      "editionDate": "2026-06-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-10-2026.pdf",
+      "evidenceContext": "ck High Doors (8 w/Interior Pit Levelers) 3 Grade Level Loading Doors 142' All Concrete Secured Truck Court TBD NFS 72,000 SF 20/3 Yes Fncd/Pvd Existing Available 10/01/2026 26' 400 1.6:1/118 Cushman & Wakefield - Armen Gourdikian 909-942-4643, Sid Osborn 909-942-4644 142' All Concrete Secured Truck Court This information supplied herein is from sources we deem reliable. It is provided without any representation, warranty or guarantee, expressed or implied as to its accuracy. Prospective Buyer or Tenant should cond"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "7 2920 E Ricker Way",
+      "editionDate": "2026-06-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-10-2026.pdf",
+      "evidenceContext": "SF of Office 2 Ground Level Doors 2 Dock High Doors, 22’ Clear 400 Amps of Power (Verify) Fully Fire Sprinklered $1.53 G NFS 22,800 SF 2/2 Yes Fncd/Pvd Existing Leased Now 22' 400 1.1:1/24 Lee & Associates - Chris Vassilian 949-790-3102 Research in Progress 7 2920 E Ricker Way Anaheim, CA 92806 Marketing Flyer New Price 19,013 SF No 2,800 SF Free Standing Building Open Office Plan with Glass Line 4-5 Private Offices, Conference Room Office/ Shop Restrooms Large Fenced Concrete Yard Approximate 39,000 SF Parcel -"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "11 1170 N Van Horne Way",
+      "editionDate": "2026-06-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-10-2026.pdf",
+      "evidenceContext": "Major Street Frontage & High Visibility 2 Grade Level Loading Doors NFL $715.97 11,872 SF 0/2 No Fncd/Pvd Existing Available COE 22' 800 2.07:1000: 1 Avison Young - Los Angeles - Patrick Barnes 213-618-3826, Paul Clark 213-618- 3827 $9,500,000 -> $8,500,000 11 1170 N Van Horne Way Anaheim, CA 92806 Marketing Flyer New Rate 9,680 SF No 2,033 SF Free Standing Building 2,033 SF of Office Space 400 Amps of 120/208 Volt (Verify) 2 Ground Level Loading Doors 16' Minimum Warehouse Clearance Convenient Access to 91 & 57"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "8 720 Hundley Way",
+      "editionDate": "2026-06-11",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-11-2026.pdf",
+      "evidenceContext": "Office Space Exceptional Freeway Access to The 405 and 55 Freeways $1.75 MG NFS 15,700 SF 0/2 No Yes Existing Available 01/01/2027 13' 1200 2.0:1/31 Trico Realty - David Kling 714-751-4420, Parker Roberts 714-751-4420 1,200 Amps, 277/480 Volts, 3 Phase Power 8 720 Hundley Way Placentia, CA 92870 Marketing Flyer Leased 12,880 SF Yes 1,040 SF Free Standing Building 1,040 SF of Office Area Two Ground Level Doors 100% Air Conditioned Warehouse Large Fenced Yard Area $1.49 G NFS 12,880 SF 0/2 Yes Fncd/Pvd Existing Lea"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "394-3551 Private & Secured 175' Truck Court",
+      "editionDate": "2026-06-11",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-11-2026.pdf",
+      "evidenceContext": "rs 32' Minimum Clearance Height Private & Secured 175' Truck Court Trailer Parking Available 6\" Thick Building Slab, Super Flat Floor Slab TBD NFS 61,023 SF 4/0 ESFR Fncd/Pvd Existing Available 30 Days 32' 1200 JLL - Cody Clayton 909-467-6864, Jake Malloy 626-394-3551 Private & Secured 175' Truck Court 6 4881 Airport Dr Ontario, CA 91761 Marketing Flyer New Listing For Lease 29,732 SF No 4,123 SF Free Standing Building 4,123 SF of Single Story Office 4 Dock High Doors, 2 Grade Level Doors 15 Fwy Frontage, Fenced Ya"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "5 720 Hundley Way",
+      "editionDate": "2026-06-11",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-11-2026.pdf",
+      "evidenceContext": "ight / 58 Car Pkg Stalls ESFR Sprinklers / 450 Amps, 277/480 Volt, 3 Phase (Expandable) $1.39 NNN NFS 194,795 SF 5/0 ESFR No Existing Available 02/01/2027 30' 450 1.6:1/58 Colliers - Clyde Stauff 949-724-5543, Jace Gan 949-724-5529 Now Available @ $1.39 NNN 5 720 Hundley Way Placentia, CA 92870 Marketing Flyer Leased 12,880 SF Yes 1,040 SF Free Standing Building 1,040 SF of Office Area Two Ground Level Doors 100% Air Conditioned Warehouse Large Fenced Yard Area $1.49 G NFS 12,880 SF 0/2 Yes Fncd/Pvd Existing Lea"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "6 2201-B N Hollywood Way",
+      "editionDate": "2026-06-11",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-11-2026.pdf",
+      "evidenceContext": "ge Roof Top Solar System Upscale Executive Office Warehouse Skylights - Kitchen - Conference Room $1.79 G NFS 8,400 SF 0/1 No No Existing Available Now 12' 400 1.9:1/16 Delphi Business Properties, Inc. - David Hoffberg, SIOR 818-917-2505 $1.99 G -> $1.79 G 6 2201-B N Hollywood Way Burbank, CA 91505 Rate Reduced 8,298 SF No 6,500 SF Major Street Frontage Fantastic Creative Office Upscale Executive Offices Roof Top Signage $1.79 G NFS 10,452 SF 0/1 No Existing Available 30 Days 12' 1.3:1/11 Delphi Business Prope"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "5 8333-8337 Secura Way",
+      "editionDate": "2026-06-12",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-12-2026.pdf",
+      "evidenceContext": "a 12'-13' Clear Height Fenced Yard Close Proximity to 91, 57, & 5 Fwys NFL $225.00 34,484 SF 0/9 Fenced Portfolio Available COE 12' - 13' 400 Voit Real Estate Services - Brenden Hefner 949-355-3874, Nicholas DiGiovanni 714- 935-2350 $8,103,740 -> $7,758,900 5 8333-8337 Secura Way Santa Fe Springs, CA 90670 New Listing For Lease 33,596 SF No 1,800 SF Excellent Manufacturing Building Concrete Yard - Private/Fenced/Secure 4 Ground Level Doors - 2 Dock High Fully Sprinklered - LED Lights / 62 Parking Spaces 800 Amps,"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "6 Fenced & Secured Concrete Truck Court",
+      "editionDate": "2026-06-12",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-12-2026.pdf",
+      "evidenceContext": "ession Listing Status Clear Height Amps Parking Listing Notes 1 11010 Juniper Avenue, Bldg 6 Fontana, CA 92337 Goodman Logistics Center Fontana Building 6 Marketing Flyer New Listing For Lease 212,420 SF N/A 4,573 SF Goodman Logistics Center Fontana Building 6 Fenced & Secured Concrete Truck Court 52 Trailer Stalls / 92 Auto Stalls Direct Connectivity to 10 Fwy Estimated Completion Q1 2027 4,000 Amps / 56'x60' Column Spacing TBD NFS 212,420 SF 32/1 ESFR Fncd/Pvd Planned Available Completion 36' 4000 0.4:1/92 KBC A"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "241-8571 Fenced & Secured Concrete Truck Court",
+      "editionDate": "2026-06-12",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-12-2026.pdf",
+      "evidenceContext": "d Completion Q1 2027 4,000 Amps / 56'x60' Column Spacing TBD NFS 212,420 SF 32/1 ESFR Fncd/Pvd Planned Available Completion 36' 4000 0.4:1/92 KBC Advisors - Colin MacMillan 626-825-8700, Ryan Bos 310-962-1123, Eric Daschbach 562-882-1273, Jillian Escobar 424-241-8571 Fenced & Secured Concrete Truck Court 2 3534 Philadelphia St Chino, CA 91710 New Listing For Lease 85,440 SF Yes 7,000 SF Free Standing Building 6 Dock-High, 3 Ground Level Doors Large Private Yard Heavy Powered Easy Freeway Access $1.12 G NFS 85,440"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "4 8333-8337 Secura Way",
+      "editionDate": "2026-06-12",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-12-2026.pdf",
+      "evidenceContext": "a 12'-13' Clear Height Fenced Yard Close Proximity to 91, 57, & 5 Fwys NFL $225.00 34,484 SF 0/9 Fenced Portfolio Available COE 12' - 13' 400 Voit Real Estate Services - Brenden Hefner 949-355-3874, Nicholas DiGiovanni 714- 935-2350 $8,103,740 -> $7,758,900 4 8333-8337 Secura Way Santa Fe Springs, CA 90670 New Listing For Lease 33,596 SF No 1,800 SF Excellent Manufacturing Building Concrete Yard - Private/Fenced/Secure 4 Ground Level Doors - 2 Dock High Fully Sprinklered - LED Lights / 62 Parking Spaces 800 Amps,"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "55 Fwy & Lincoln Ave",
+      "editionDate": "2026-06-15",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-15-2026.pdf",
+      "evidenceContext": "-4420 16' Clear Height 10 2875 N Orange Olive Rd, Unit A Orange, CA 92865 Marketing Flyer New Listing For Lease 13,600 SF Yes 1,500 SF Free Standing Industrial 1,500 SF Office Space 4 DH Doors, 1 GL Door 22’ Clear Height Excellent Location Immediate Access to 55 Fwy & Lincoln Ave $1.72 G NFS 13,600 SF 4/1 Yes Fncd/Pvd Existing Available Now 22' 400 2.0:1/27 Lee & Associates - Scott Seal 714-564-7159 1,500 SF Office Space 11 2886 E Blue Star St Anaheim, CA 92806 Marketing Flyer New Listing For Lease 13,000 SF No 3,"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "6 29395 Hunco Way",
+      "editionDate": "2026-06-15",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-15-2026.pdf",
+      "evidenceContext": "0.95 Acre Parking Lot Also Available For Lease or Sale TBD NFS 29,211 SF 2/2 No No Existing Leased 06/01/2026 28' 1200 Lee & Associates - Charley Black 951-445-4507, Scott Stewart 951-445-4514, Sam Robles 951-445-4519 Co-Op: Charley Black (Lee & Associates) 6 29395 Hunco Way Lake Elsinore, CA 92530 Big Yards Industrial Park Marketing Flyer Updated Information 28,684 SF Yes 8,000 SF Free Standing Building Large Fenced/Paved Yard ±8,000 SF of Office and Showroom Space ESFR Sprinkler System 1 Truck Well Door & 3 Gro"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "11 29395 Hunco Way",
+      "editionDate": "2026-06-15",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-15-2026.pdf",
+      "evidenceContext": "2) 12x14' Ground Level Loading Doors 600 Amps, 277/480 Volt (Verify) $1.28 MG NFS 10,626 SF 0/2 Yes Fncd/Pvd Existing Available 07/01/2026 27' 600 Masino Commercial Real Estate - Christopher Masino, SIOR 951-795-4556 Two (2) 12x14' Ground Level Loading Doors 11 29395 Hunco Way Lake Elsinore, CA 92530 Big Yards Industrial Park Marketing Flyer Updated Information 10,000 SF Yes POL 28,684 SF Industrial Building Large Fenced/Paved Yard ESFR Sprinkler System 1 Truck Well Door & 3 Ground Level Doors Situated on 1.57 Acr"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "4 6116 Malburg Way",
+      "editionDate": "2026-06-16",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-16-2026.pdf",
+      "evidenceContext": "d Levelers - Two Blocks to New Produce Market ±9,000 SF of Coolers (4) Approx. 42 Loads (Rack) $2.49 G NFS 160,000 SF 9/1 Yes Fncd/Pvd Existing Available 30 Days 27' 800 0.2:1/5 Lee & Associates - David Brandt 213-446-4449, Jake Poxon 626-437-6972 Clear Span 4 6116 Malburg Way Vernon, CA 90058 Vernon Business Park New Listing For Lease 31,562 SF No 1,555 SF Vernon Business Park 24' Ceiling Clearance Height 4 Dock High Positions Calculated Sprinkler System $1.15 NNN NFS 31,562 SF 4/0 Yes No Existing Available 10/0"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "5 6047 Malburg Way",
+      "editionDate": "2026-06-16",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-16-2026.pdf",
+      "evidenceContext": "eiling Clearance Height 4 Dock High Positions Calculated Sprinkler System $1.15 NNN NFS 31,562 SF 4/0 Yes No Existing Available 10/01/2026 24' 400 1.0:1/30 CBRE - El Segundo - Cameron Merrill 310-463-1317, Matthew Tuinstra 310-363- 4873 4 Dock High Positions 5 6047 Malburg Way Vernon, CA 90058 Vernon Business Park New Listing For Lease 13,204 SF No 732 SF Vernon Business Park 24' Clearance Height 2 Dock High Positions Calculated Sprinkler System $1.25 NNN NFS 50,086 SF 2/0 Yes Paved Existing Available 10/01/2026"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "3 1170 Wright Way",
+      "editionDate": "2026-06-16",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-16-2026.pdf",
+      "evidenceContext": "$2.46 NNN TBD 169,318 SF 7/TBD Yes Fncd/Pvd Existing Available Now 14'-19' 3000 2.0:1/335 Newmark - Los Angeles - South Bay - John McMillan 310-491-2048, Mark Repstad 213-453-1155, Connor Reeves 310-491-2088, Jeff Sanita 310-491-2003 $2.73 NNN -> $2.46 NNN 3 1170 Wright Way Industry, CA 91789 Marketing Flyer Sold 14,592 SF Yes 2,500 SF Free Standing Building Three (3) Ground Level Door, 19' Clear Height / Sprinklered Rare Drive-Around Fully Fenced Yard Desirable Location w/ 60 Freeway Frontage Prominent Signag"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "2 10225-10235 San Sevaine Way",
+      "editionDate": "2026-06-18",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-18-2026.pdf",
+      "evidenceContext": "s 40' Warehouse Clearance, ESFR Sprinklers TBD NFS 500,403 SF 79/3 ESFR Fncd/Pvd Existing Leased Now 40' 4000 0.5:1/227 JLL - Mike McCrary 909-467-6885, Patrick Wood 909-467-6857, Peter McWilliams 909-467-6860, Jay Cuccia 909-467-6911 Co-Op: Mac Hewett (JLL) 2 10225-10235 San Sevaine Way Jurupa Valley, CA 91752 Marketing Flyer New Size 227,752 SF No 3,876 SF Two Free Standing Buildings 3,876 SF of Office Space 28 Dock High Doors, 16 Grade Level Loading Doors 275 Parking Spaces 27' Clear Height Secured Yard Area $0"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "3 10225 San Sevaine Way",
+      "editionDate": "2026-06-18",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-18-2026.pdf",
+      "evidenceContext": "Clear Height Secured Yard Area $0.89 NNN NFS 227,752 SF 28/16 Yes Fenced Existing Available 30 Days 27' 2600 1.2:1/275 Lee & Associates - Michael Giuliano 909-989-7771, Marlene Mesillas 909-373-2704, Fernando Escobedo 909-373-2709 Now Available @ 227,752 SF 3 10225 San Sevaine Way Jurupa Valley, CA 91752 Marketing Flyer New Size 122,358 SF No Free Standing Building 27' Clear Height 16 Dock High Doors, 8 Grade Level Doors Secured Yard Rea 132 Parking Space LED Lighting (Exterior), LED & Fluorescent (Interior) $0.8"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "4 10235 San Sevaine Way",
+      "editionDate": "2026-06-18",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-18-2026.pdf",
+      "evidenceContext": "), LED & Fluorescent (Interior) $0.89 NNN NFS 122,358 SF 16/8 Yes Fenced Existing Available 30 Days 27' 1000 1.1:1/132 Lee & Associates - Michael Giuliano 909-989-7771, Marlene Mesillas 909-373-2704, Fernando Escobedo 909-373-2709 Now Available @ 122,358 SF 4 10235 San Sevaine Way Jurupa Valley, CA 91752 Marketing Flyer New Size 105,394 SF No 3,676 SF Free Standing Building 2,400 SF of Office Space 12 Dock High Doors, 6 Grade Level Loading Doors 143 Parking Spaces 27' Clear Height Secured Yard Area $0.89 NNN NFS"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "2 19560 S Rancho Way",
+      "editionDate": "2026-06-18",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-18-2026.pdf",
+      "evidenceContext": "0' Minimum Clearance High Pile Storage Racking in Place 14 Container Positions in Concrete, Fenced Yard $1.20 Net NFS 171,186 SF 12/1 ESFR Fncd/Pvd Existing Leased Now 30' 400 1.1:1/82 Watson Land Company - Michael Bodlovich 310-952-6417 Research in Progress 2 19560 S Rancho Way Rancho Dominguez, CA 90220 Marketing Flyer Leased 43,295 SF Yes Modern Free Standing CTU Building Dock High & Ground Level Loading Large Fenced Yard Area / Heavy Power Well Appointed Corporate Offices Immediate Access to 91 & 710 Freew"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "10 5901 & 5909 Mettler St",
+      "editionDate": "2026-06-19",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-19-2026.pdf",
+      "evidenceContext": "ial) NFL $73.98 4,942 SF Fncd/Pvd Sold Industrial Gas: Water: Sewer: Daum Commercial - Dennis Sandoval 562-576-1421, Kevin Sandoval 562 -576-1420, Dennis Holt 949-242-1714, David Muir 213-270-2244 Electric: Fiber: Research in Progress No$3,731,760NoIG 10 5901 & 5909 Mettler St Los Angeles, CA 90003 Mettler St/E 59th Pl New Listing For Sale Marketing Flyer 11,200 SF 0.26 Ac 11,200 SF of Land for Sale Two Non-Contiguous 5,600 SF Parcels Being Sold Together Ideal for Parking, Fleet Storage, Contractor Yard, Eq"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "55 and 405 Fwys & 73 Toll Road",
+      "editionDate": "2026-06-19",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-19-2026.pdf",
+      "evidenceContext": "Irvine, CA 92614 Marketing Flyer Subleased 90,061 SF No 10,152 SF Sublease Through 4/30/2029 Creative Office & Industrial Flexible Zoning in the Heart of IBC 8 Dock-High Doors; ESFR Sprinkler System One 1,200 Amp-Service, One 2,000 Amp-Service Easy Access to 55 and 405 Fwys & 73 Toll Road TBD NFS 90,061 SF 8/1 ESFR Fenced Existing Leased 06/01/2026 25' 1200-2000 Savills - Brett Lessman 949-683-5277 Research in Progress 2 650 Columbia St Brea, CA 92821 Turner Brea Business Park Marketing Flyer Price Reduced 49,903"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "2 1400 Village Way",
+      "editionDate": "2026-06-22",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-22-2026.pdf",
+      "evidenceContext": "ng Beach TBD TBD 55,696 SF 5/1 ESFR Fncd/Pvd Planned Available Completion 32' 1600 0.9:1/50 CBRE - El Segundo - Rick McGeagh 310-363-4878, Ben Seybold 714-371-9233, Joshua Bonwell 714-371-9207, Keith Greer 714-371-9209 New Development 2Q 2027 in Mid-Counties 2 1400 Village Way Santa Ana, CA 92705 Marketing Flyer New Listing For Lease 14,393 SF Yes Multi-Tenant Building 100% HVAC Open Showroom w/Separate Warehouse 2 Grade Level Loading Doors 18' Minimum Warehouse Clearance 55 Fwy Blade Sign & Electronic Reader Boar"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "7 10888 San Sevaine Way",
+      "editionDate": "2026-06-22",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-22-2026.pdf",
+      "evidenceContext": "432 AIR CRE INDUSTRIAL & LAND SUPER SHEET Inland Empire | Monday 6/22/2026 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 7 10888 San Sevaine Way, Unit D Jurupa Valley, CA 91752 Freeway Business Center Marketing Flyer Updated Information 17,370 SF Yes 1,419 SF Freeway Business Center Multi-Tenant Building Close to the 15 & 10 Fwys / Immediate Access to the 60 Fwy ±1,419 SF of Off"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "2 16400 Trojan Way",
+      "editionDate": "2026-06-23",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-23-2026.pdf",
+      "evidenceContext": "advisor. 6/23/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 2 16400 Trojan Way La Mirada, CA 90638 Prologis Mid Counties Distribution Center Marketing Flyer Leased 220,000 SF Yes 10,179 SF Prologis Mid Counties Distribution Center $0.90 NNN Year 1 Rate For 5 - Year Term Signed By 4/30/2026 Excellent Distribution Build"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "1 20201 Caroline Way",
+      "editionDate": "2026-06-24",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-24-2026.pdf",
+      "evidenceContext": "advisor. 6/24/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 1 20201 Caroline Way Riverside, CA 92571 Meridian Business Park Marketing Flyer Updated Information 782,209 SF Yes 8,034 SF Meridian Business Park Cross-Dock Building 114 Dock High Door and 3 Grade Level Doors 4,000 Amp Elec Service - w/Existing Infrastructur"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "3 1120-1130 & 1140-1150 Price Ave",
+      "editionDate": "2026-06-24",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-24-2026.pdf",
+      "evidenceContext": "Fire Sprinklered, Rail Service Possible 9 Ground Level Doors, 1 - Exterior Truckwell 3,000 Amp Panel, 277/480 Volt Power $0.89 NNN TBD 54,805 SF 0/9 Yes Fncd/Pvd Existing Available 60 Days 3000 Delmar Commercial - Robert Jimenez 909-238-9874 Still on Market 3 1120-1130 & 1140-1150 Price Ave Pomona, CA 91767 Marketing Flyer Sold 28,544 SF No Multi-Tenant Leased Investment Value Add Opportunity Environmental Reports Completed and On-Hand Below Market Leases in Place w/Short Term Leases Give Investor Opportunity to"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "1 10500 Orbital Way",
+      "editionDate": "2026-06-24",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-24-2026.pdf",
+      "evidenceContext": "advisor. 6/24/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 1 10500 Orbital Way Pacoima, CA 91331 New Size 83,755 SF Yes 45,838 SF Free Standing Building Great Parking with The Ability to Expand Heavy Power - 3,000 Amps 3 GL Loading Doors 24,041 SF Mezzanine 21' Clear Height $1.29 NNN NFS 83,755 SF 0/3 No No Existing"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "1 1120-1130 & 1140-1150 Price Ave",
+      "editionDate": "2026-06-24",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-24-2026.pdf",
+      "evidenceContext": "advisor. 6/24/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 1 1120-1130 & 1140-1150 Price Ave Pomona, CA 91767 Marketing Flyer Sold 28,544 SF No Multi-Tenant Leased Investment Value Add Opportunity Environmental Reports Completed and On-Hand Below Market Leases in Place w/Short Term Leases Give Investor Opportunity to"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "955-5126 Gale Avenue",
+      "addressCandidate": "955-5126 GALE AVE",
+      "editionDate": "2026-06-25",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-25-2026.pdf",
+      "evidenceContext": "ts Immediate Access To 60 Freeway 60 Freeway Signage Available Gale Avenue Frontage & 60 Freeway Visibility $1.53 IG NFS 14,000 SF 0/1 No Existing Available Now Cushman & Wakefield - Christopher Tolles 213-955-5129, Maya Schirn 213-236- 4931, Erik Larson 213-955-5126 Gale Avenue Frontage & 60 Freeway Visibility This information supplied herein is from sources we deem reliable. It is provided without any representation, warranty or guarantee, expressed or implied as to its accuracy. Prospective Buyer or Tenant sho"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "5 1005 E Raymond Way",
+      "editionDate": "2026-06-26",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-26-2026.pdf",
+      "evidenceContext": "8 SF Office 16' Clear - 2 (10'x12') Roll Up Doors (GL) 480 Amp Power - Sprinklers New Roof (3 Years) $1.60 G NFS 7,388 SF 0/2 Yes No Existing Available Now 16' 480 Daum Commercial - David Steeves 562-207-3304, Dustin Hullinger 949-341-4514 $1.70 G -> $1.60 G 5 1005 E Raymond Way Anaheim, CA 92801 Raymond Way Industrial Center Leased 4,000 SF Yes 640 SF Raymond Way Industrial Center Multi-Tenant Building Two (2) Ground Level Doors Drive-Around Building No CAM Fees Near All Major Freeways $1.55 G NFS 8,000 SF 0/2"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "92801 Raymond Way",
+      "editionDate": "2026-06-26",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-26-2026.pdf",
+      "evidenceContext": "') Roll Up Doors (GL) 480 Amp Power - Sprinklers New Roof (3 Years) $1.60 G NFS 7,388 SF 0/2 Yes No Existing Available Now 16' 480 Daum Commercial - David Steeves 562-207-3304, Dustin Hullinger 949-341-4514 $1.70 G -> $1.60 G 5 1005 E Raymond Way Anaheim, CA 92801 Raymond Way Industrial Center Leased 4,000 SF Yes 640 SF Raymond Way Industrial Center Multi-Tenant Building Two (2) Ground Level Doors Drive-Around Building No CAM Fees Near All Major Freeways $1.55 G NFS 8,000 SF 0/2 No Existing Leased Now 12' 100 3."
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "4 1005 E Raymond Way",
+      "editionDate": "2026-06-26",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-26-2026.pdf",
+      "evidenceContext": "8 SF Office 16' Clear - 2 (10'x12') Roll Up Doors (GL) 480 Amp Power - Sprinklers New Roof (3 Years) $1.60 G NFS 7,388 SF 0/2 Yes No Existing Available Now 16' 480 Daum Commercial - David Steeves 562-207-3304, Dustin Hullinger 949-341-4514 $1.70 G -> $1.60 G 4 1005 E Raymond Way Anaheim, CA 92801 Raymond Way Industrial Center Leased 4,000 SF Yes 640 SF Raymond Way Industrial Center Multi-Tenant Building Two (2) Ground Level Doors Drive-Around Building No CAM Fees Near All Major Freeways $1.55 G NFS 8,000 SF 0/2"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "12 26170 Enterprise Way",
+      "editionDate": "2026-06-29",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-29-2026.pdf",
+      "evidenceContext": "' Clear Height One (1) 12'x14' Ground Level Door 400 Amps, 120/208 Volts, 3 Phase Fully Secured and Paved Yard TBD NFS 4,453 SF 0/1 Yes Fncd/Pvd Existing Available Now 16' 400 2.0:1/9 Lee & Associates - Keith Anderson 909-373-2912 Fully Secured and Paved Yard 12 26170 Enterprise Way, Unit 300 Lake Forest, CA 92630 Enterprise Technology Center Marketing Flyer New Listing For Lease 3,469 SF No 2,195 SF Enterprise Technology Court 4 Private Offices, 2 Bullpens Reception, 3 Restrooms 1,040 SF of Mezzanine Space Dual E"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "383-7151 Racking In Place",
+      "addressCandidate": "383-7151 RACKING IN PL",
+      "editionDate": "2026-06-30",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-30-2026.pdf",
+      "evidenceContext": "±3,330 SF of Two (2) Story Office Space Eight DH Doors & 1 GL Ramp ESFR Sprinklers (K-17 Heads) $1.25 G NFS 45,702 SF 8/1 ESFR No Existing Available Now 24' 400 Voit Real Estate Services - Braden Sprenger 909-545-8012, Shy Assar 909-545- 8091, Jerry Chen 626-383-7151 Racking In Place, and Available For Purchase This information supplied herein is from sources we deem reliable. It is provided without any representation, warranty or guarantee, expressed or implied as to its accuracy. Prospective Buyer or Tenant shou"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "215 Fwy at Barton Road",
+      "addressCandidate": "215 FWY AT BARTON RD",
+      "editionDate": "2026-06-30",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-30-2026.pdf",
+      "evidenceContext": "ve/Barton Rd Price Reduced 187,308 SF 4.30 Ac 4.3 AC M2 Zoned Industrial Fully Fenced Yard w/ 4,470 SF of Bldgs Hard to Find Large Yard for Outdoor Storage, Truck Parking, Trailers or Containers Great Central IE Location for Tuck Yard/ Distribution Just Off 215 Fwy at Barton Road NFL $30.94 4,470 SF Fncd/Pvd Available Industrial Gas: Y Water: Sewer: Industrial Partners Group - Martin Smith 424-229-4248 Electric: Fiber: $5,999,000 -> $5,795,000 No$5,795,000NoM2 13 SE of Tussing Ranch Rd and Troutdale Rd Ap"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "1 6111 Scott Way",
+      "editionDate": "2026-07-01",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-01-2026.pdf",
+      "evidenceContext": "Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 1 6111 Scott Way Commerce, CA 90040 New Listing For Lease 22,390 SF Yes 3,280 SF Great Commerce Location, Cul-De-Sac Large Fenced Yard 2 Dock High Positions $1.25 G NFS 22,390 SF 2/3 Yes Fenced Existing Available Now 20' 1200 1.3:1/30 CBRE - El Segundo - Jack"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "13 26170 Enterprise Way",
+      "editionDate": "2026-07-01",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-01-2026.pdf",
+      "evidenceContext": "Offices, (2) Restrooms 2 Grade Level Loading Doors (10'x12') Corner Unit Within Park Recently Refurbished NFL $428.75 14,122 SF 0/2 No No Existing Sold COE 14' TBD Lee & Associates - Brett Leiter 714-564-7108, Robert Leiter 714-396-3116 Research in Progress 13 26170 Enterprise Way, Unit 300 Lake Forest, CA 92630 Enterprise Technology Center Marketing Flyer New Size 3,372 SF No 1,989 SF Enterprise Technology Court 4 Private Offices, 2 Bullpens Reception, 3 Restrooms 1,056 SF of Mezzanine Space Dual Entry $2.25 G"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "7 3474 Niki Way",
+      "editionDate": "2026-07-01",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-01-2026.pdf",
+      "evidenceContext": "AIR CRE INDUSTRIAL & LAND SUPER SHEET Inland Empire | Wednesday 7/01/2026 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 7 3474 Niki Way Riverside, CA 92507 Marketing Flyer New Listing For Lease 11,000 SF Yes 8,500 SF Free Standing Building Fully Paved, Lit, & Secured Yard 8,500 SF of 2-Story Office Space 2 grade Level Loading Doors 22' Minimum Clearance Height Close Proximity t"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "10 37371 Industry Way",
+      "editionDate": "2026-07-01",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-01-2026.pdf",
+      "evidenceContext": "trooms & 1 Warehouse Restroom 800 Amps, 3 Phase Power (1,200 Amps Possible) 15 Parking Spaces 18' Clearance, Possible Yard $1.35 NNN NFS 7,755 SF 0/3 Yes Possible Existing Leased Now 18' 800 1.9:1/15 NAI Capital - Don Archer 951-346-0807 Research in Progress 10 37371 Industry Way, Bldg 25 Murrieta, CA 92563 French Valley Airport Center Phase III Marketing Flyer New Listing For Lease & Sale 6,508 SF Yes 972 SF French Valley Airport Center Phase III Free Standing Building Optional Fenced-In Yard 972 SF of Office Spa"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "3 Street Frontage with High Visibility on Santa Fe Ave",
+      "addressCandidate": "3 ST FRONTAGE WITH HIGH VISIBILITY ON SANTA FE AVE",
+      "editionDate": "2026-07-02",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-2-2026.pdf",
+      "evidenceContext": "o 10,267 SF Exceptional Warehouse or Studio Building Recent Rezone Provides Clear Development Path Prime Arts District Location, Future Development Potential Walking Distance to Restaurants and Amenities Opportunity Zone Benefits, Located in Arts District BID 3 Street Frontage with High Visibility on Santa Fe Ave $1.25 NNN $338.31 35,470 SF 2/1 Yes No Existing Available 07/01/2026 25' 600 0.8:1/30 Cushman & Wakefield - Brandon Burns 213-629-6541, Brandon Gill 213-629-6528, Jae Yoo 213-629-6551, Dillon Kneafsey 2"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "13 13065 Tom White Way",
+      "editionDate": "2026-07-02",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-2-2026.pdf",
+      "evidenceContext": ". advisor. 7/2/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 13 13065 Tom White Way, Unit F/G Norwalk, CA 90650 Victory Industrial Park Leased 3,080 SF Yes 300 SF Beautiful Quiet Industrial Park Excellent Location - Freeway Friendly Rear Loading Door CAM of $0.10 PSF Divisible From 1,100 SF $1.55 MG NFS 13,750 SF 0/2"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "10 Freeway & Highway",
+      "editionDate": "2026-07-02",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-2-2026.pdf",
+      "evidenceContext": "ein 909-418-2285 Electric: Fiber: Proposed 705,783 SF Building on 33.83 Acres of Land NoTBDNoBP-SPA1 20 Intake Blvd & N Hobson Way Blythe, CA 92225 New Listing For Sale Marketing Flyer 693,910 SF 15.93 Ac Nearly ±16 Acres Of Residential Land Easy Access To 10 Freeway & Highway 95 (Intake Blvd) First California Exit From Arizona Close Proximity To The Colorado River & Recreational Amenities Adjacent To Empire CAT Equipment Facility NFL $0.74 0 SF Yes Available Residential Development Gas: Water: Sewer: Dese"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "5 13065 Tom White Way",
+      "editionDate": "2026-07-02",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-2-2026.pdf",
+      "evidenceContext": "70 Subleased 3,096 SF No Sublease Through TBD Dead Space Storage Warehouse Space Is Shared Please Do Not Disturb Tenant $1.00 G NFS 48,000 SF / Yes No Existing Leased 30 Days Canada Pacific Realty Advisors - Patrick Meaney 661-502-6868 Research in Progress 5 13065 Tom White Way, Unit F/G Norwalk, CA 90650 Victory Industrial Park Leased 3,080 SF Yes 300 SF Beautiful Quiet Industrial Park Excellent Location - Freeway Friendly Rear Loading Door CAM of $0.10 PSF Divisible From 1,100 SF $1.55 MG NFS 13,750 SF 0/2 N"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "4801 Staunton Ave",
+      "addressCandidate": "4801 STAUNTON AVE",
+      "editionDate": "2026-07-07",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-7-2026.pdf",
+      "evidenceContext": "90058 Staunton Portfolio Sale Marketing Flyer Back on Market 57,550 SF N/A 15,200 SF 2 Free Standing Buildings 20'-24' Clear Height, 4 GL Doors 400 Amps, 480 Volts, 3 Phase Power 15,000 SF of Mezzanine that Can Be Removed 15,200 SF Office that Can Be Removed 4801 Staunton Ave: 39,450 SF | 4815 Staunton Ave: 18,100 SF NFL $224.15 57,550 SF 0/4 Yes Fenced Portfolio Available COE 20' - 24' 400 0.9:1/50 Global Commercial Real Estate - Frank Lahijani 213-221-1292 20'-24' Clear Height, 4 GL Doors 5 2828 E 12th St Los"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "1 16800 Trojan Way",
+      "editionDate": "2026-07-07",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-7-2026.pdf",
+      "evidenceContext": ". advisor. 7/7/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 1 16800 Trojan Way La Mirada, CA 90638 La Mirada Commerce Center Marketing Flyer Leased 130,459 SF Yes 6,190 SF Free Standing Corporate Headquarters/Distribution Building 30' Clear/ESFR Fire Sprinkler System, 25 Dock High & GL Door Large Fenced Yard Up To 198'"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "15 2209 - 2213 Business Way",
+      "editionDate": "2026-07-07",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-7-2026.pdf",
+      "evidenceContext": "Doors, 16' Clearance 400 Amps, 277/480 Volts Power Private Gated Yard $1.34 MG NFS 12,370 SF 0/2 Yes Fenced Existing Available Now 16' 400 Daum Commercial - Kenneth Andersen, CCIM, SIOR 909-980-1234, Gabriel DuPlantier 909-912-0008 Now Available @ $1.34 MG 15 2209 - 2213 Business Way Riverside, CA 92501 Russell Street Business Park Leased 9,512 SF Yes Russell Street Business Park Multi-Tenant Building One (1) 12'x12' GL Door 18' Clear Height CAM Fees: $0.10 PSF $0.57 G NFS 13,532 SF 0/1 Yes Yes Existing Leased"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "23 14271 Albers Way",
+      "editionDate": "2026-07-07",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-7-2026.pdf",
+      "evidenceContext": "le Industrial Park Multi-Tenant Building Reception, Conference Room, 2 Offices, 3 Restrooms 1 Grade Level Loading Door $1.10 MG NFS 19,408 SF 0/1 No Existing Leased Now Lee & Associates - Toby Tewell 951-276-3662, Zach Cohen 951-276-3639 Research in Progress 23 14271 Albers Way Chino, CA 91710 Marketing Flyer New Listing For Lease 3,200 SF Yes 1,000 SF Industrial Condo ±1,000 SF Office; 16' Clear Height One 14’x12’ Ground Level Door 250 Amps, 120/208 Volts, 3 Phase Power (Verify) 3 Private Offices, 2 Restrooms Eas"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "5 Miles From 110 Fwy Vernon Ave",
+      "addressCandidate": "5 MILES FROM 110 FWY VERNON AVE",
+      "editionDate": "2026-07-08",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-8-2026.pdf",
+      "evidenceContext": "ced Commercial/Industrial Building Which Has Undergone Recent Major Refurbishment New 400 Amp 240 Volt 3 Ph 4 W Electrical, New Restrooms (1 w/ Shower) and Other Great New Amenities Used For Many Years For Garment MFG - Use Code 3100 Bus Stop Adjacent, Prox 1.5 Miles From 110 Fwy Vernon Ave Ramps $0.75 G NFS 4,800 SF 0/1 No No Existing Available Now 10' 400 Dorin Realty Company - Mark Whitman 213-627-0007 $0.83 G -> $0.75 G This information supplied herein is from sources we deem reliable. It is provided without"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "13 16191 Scientific Way",
+      "editionDate": "2026-07-09",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-9-2026.pdf",
+      "evidenceContext": ". advisor. 7/9/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 13 16191 Scientific Way Irvine Spectrum, CA 92618 Marketing Flyer Leased 4,215 SF No 4,215 SF Commercial Condo with Office/Warehouse 1 GL Door (11'W X 14'H), 22' Clear Height 3:1,000 Parking Ratio 1st Floor - 3,055 SF / 1 Restroom Mezzanine - ±1,160 SF / Bonus"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "215 Fwy via Harvill Ave",
+      "addressCandidate": "215 FWY VIA HARVILL AVE",
+      "editionDate": "2026-07-09",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-9-2026.pdf",
+      "evidenceContext": "arketing Flyer 605,920 SF 13.91 Ac Zoned IP - Industrial Park CUP in Final Review; 11,630 SF Industrial Maintenance & Service Bldg 4 Pass-thru Bays, 6 Offices/Conf Rm, Lobby, Board Room, 4 Restrooms On Approved Riverside County Truck Route Immediate Access to 215 Fwy via Harvill Ave/Nuevo Ave NFL $25.00 0 SF Fncd/Pvd Available Industrial Gas: Water: Sewer: Sperry Commercial - Liz Roubidoux 909-440-0967, Jon Sorokowski 951- 742-8600 Electric: Fiber: On Approved Riverside County Truck Route No$15,148,000NoI-P"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "000 SF Drive",
+      "addressCandidate": "000 SF DR",
+      "editionDate": "2026-07-09",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-9-2026.pdf",
+      "evidenceContext": "pment Opportunity / Located In The T-C / Town Center Area 2 Zoning District ±19,538 SF / 0.4485-Acre Infill Site / Signalized Corner Intersection Three Blocks North Of The 91 Fwy /Nearby East/West On & Off Ramps Plans For 145-Unit Multifamily Project Or 2,000 SF Drive-Thru Retail NFL $142.21 0 SF Yes Available Retail Gas: Water: N Sewer: N Daum Commercial - Bryan Abayan 310-883-8476 Electric: N Fiber: $3,000,000 -> $2,800,000 No$2,800,000NoCG This information supplied herein is from sources we deem reliable"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "2 16205 Distribution Way",
+      "editionDate": "2026-07-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-10-2026.pdf",
+      "evidenceContext": "ESFR Sprinklers 400 Amps, 277/480 Volts (Verify) Gated Concrete Truck Court TBD NFS 196,265 SF 23/2 ESFR Fncd/Pvd Existing Available 60 Days 30' 400 Lee & Associates - Larry Null 951-276-3616, Justin B Null, SIOR 951-276-3634 2 GL Door & 23 (12'x14') DH Doors 2 16205 Distribution Way Cerritos, CA 90703 Marketing Flyer Updated Information 64,318 SF Yes 12,428 SF Free Standing Building Heavy Power / Large Yard / Production Area 4 Dock High Loading Doors 1 Ground Level Loading 22-23' Clear Height 12,300 SF HVAC Produc"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "4 10225-10235 San Sevaine Way",
+      "editionDate": "2026-07-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-10-2026.pdf",
+      "evidenceContext": "rking, & All Heavy Uses Rail Served w/3 Spurs - BNSF Massive Power at 10,000 Amps Large Yard, Fully Gated & Secured NFL $116.07 336,000 SF 6/14 Yes Fncd/Pvd Existing Sold COE 22' - 36' 10000 2.4:1/800 Lee & Associates - Rocky Moran 951-276-3681 Direct Deal 4 10225-10235 San Sevaine Way Jurupa Valley, CA 91752 Marketing Flyer New Size 228,011 SF No 3,876 SF Two Free Standing Buildings 3,876 SF of Office Space 28 Dock High Doors, 16 Grade Level Loading Doors 275 Parking Spaces 27' Clear Height Secured Yard Area $0"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "6 10225 San Sevaine Way",
+      "editionDate": "2026-07-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-10-2026.pdf",
+      "evidenceContext": "432 AIR CRE INDUSTRIAL & LAND SUPER SHEET Inland Empire | Friday 7/10/2026 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 6 10225 San Sevaine Way Jurupa Valley, CA 91752 Marketing Flyer New Size 122,470 SF No Free Standing Building 27' Clear Height 16 Dock High Doors, 8 Grade Level Doors Secured Yard Rea 132 Parking Space LED Lighting (Exterior), LED & Fluorescent (Interior) $0.8"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "8 10235 San Sevaine Way",
+      "editionDate": "2026-07-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-10-2026.pdf",
+      "evidenceContext": "ESFR Sprinklers 400 Amps, 277/480 Volts (Verify) Gated Concrete Truck Court TBD NFS 196,265 SF 23/2 ESFR Fncd/Pvd Existing Available 60 Days 30' 400 Lee & Associates - Larry Null 951-276-3616, Justin B Null, SIOR 951-276-3634 2 GL Door & 23 (12'x14') DH Doors 8 10235 San Sevaine Way Jurupa Valley, CA 91752 Marketing Flyer New Size 105,541 SF No 3,676 SF Free Standing Building 3,676 SF of Office Space 12 Dock High Doors, 8 Grade Level Loading Doors 143 Parking Spaces 27' Clear Height Secured Yard Area $0.89 NNN NFS"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "60 Fwy & Rubidoux Blvd",
+      "editionDate": "2026-07-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-10-2026.pdf",
+      "evidenceContext": "isting Status Clear Height Amps Parking Listing Notes 24 2906 Rubidoux Blvd, Unit C Riverside, CA 92509 Shadow Rock Commerce Center Marketing Flyer New Rate 3,585 SF Yes Shadow Rock Commerce Center Multi-Tenant Building Ground Level Loading Direct Frontage on 60 Fwy & Rubidoux Blvd Contiguous with 2906 D/E NNN Fees $0.33 PSF $1.20 NNN NFS 12,209 SF 0/1 No Existing Available Now Lee & Associates - Mason Wilson 951-276-3600, Toby Tewell 951-276-3662 Now Available @ $1.20 NNN 25 1115 S Grove Ave, Unit 101 Ontario, CA"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "1 16205 Distribution Way",
+      "editionDate": "2026-07-10",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-10-2026.pdf",
+      "evidenceContext": "advisor. 7/10/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 1 16205 Distribution Way Cerritos, CA 90703 Marketing Flyer Updated Information 64,318 SF Yes 12,428 SF Free Standing Building Heavy Power / Large Yard / Production Area 4 Dock High Loading Doors 1 Ground Level Loading 22-23' Clear Height 12,300 SF HVAC Produc"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "2 Monroe Way",
+      "editionDate": "2026-07-13",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-13-2026.pdf",
+      "evidenceContext": ", CA 90017 | 714-538-8432 AIR CRE INDUSTRIAL & LAND SUPER SHEET Orange County | Monday 7/13/2026 Available SF LAND Property LocationAvailable Acres Rate/SF Price/SF Building SF Yard Status Use UtilitiesListing NotesDivisible SFTotal PriceRailZoning 7 719 1/2 Monroe Way Placentia, CA 92870 W Orangethorpe Ave/Orange Fwy Sold Marketing Flyer 16,117 SF 0.37 Ac Back on The Market .37 Acre Yard in City of Placentia Entitled for Construction of ±7,200 SF Office/Warehouse Electricity + Water (Verify Amps) NFL $74.46"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "5 Fwy & Hwy",
+      "editionDate": "2026-07-13",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-13-2026.pdf",
+      "evidenceContext": "8210 N Avenue Stanford Santa Clarita, CA 91355 Updated Information 109,379 SF Yes 33,600 SF High Image Manufacturing/Distribution Building Purchase Option Available! Prime Valencia Industrial Center Location Offices can be Removed/Modified Immediate Access to 5 Fwy & Hwy 126 Large Rear Yard City of Santa Clarita $1.45 NNN TBD 109,379 SF 5/1 Yes Paved Existing Available Now 24' 3000 2.2:1/245 CBRE - Craig Peters 818-907-4616, Sam Glendon 818-502-6745, Nicholas Casasante 626-808-2698 Now Available For Lease & Sale"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "93550 Challenger Way",
+      "editionDate": "2026-07-13",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-13-2026.pdf",
+      "evidenceContext": "RE INDUSTRIAL & LAND SUPER SHEET LA Northwest & Ventura | Monday 7/13/2026 Available SF LAND Property LocationAvailable Acres Rate/SF Price/SF Building SF Yard Status Use UtilitiesListing NotesDivisible SFTotal PriceRailZoning 6 1101 E Ave L12 Palmdale, CA 93550 Challenger Way/E Ave L12 Price Reduced 225,075 SF 5.17 Ac ±5.17 Acres Zoned for Industrial Uses Just North of The Palmdale Regional Airport Near Challenger Way and East Avenue M *Price Reduction *Seller Motivated Will Entertain All Offers NFL $1.16 0 S"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "5 5990 Malburg Way",
+      "editionDate": "2026-07-14",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-14-2026.pdf",
+      "evidenceContext": "wo (2) 12'x14' GL Doors New LED Warehouse Lighting, Secure Building and Compound Minutes to 5, 710, 105 & 605 Fwys NFL $308.88 10,125 SF 0/2 No Fncd/Pvd Existing Available COE 20' 800 1.6:1/16 CIF Group - John Wentzel 310-874-4400 Now Available @ $3,127,375 5 5990 Malburg Way Vernon, CA 90058 Vernon Business Park New Listing For Sublease 10,000 SF Yes 0 SF Sublease Through 3/31/2028 Dead Storage Uses Only Fully Racked Excellent High Clearance 1 Dock Position Located in Vernon Business Park $0.90 G NFS 50,000 SF"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "24 37325 Industry Way",
+      "editionDate": "2026-07-14",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-14-2026.pdf",
+      "evidenceContext": "Height 250 Amps, 120/208 Volts, 3 Phase Power (Verify) Close Proximity to 15, 210, 10 Fwys $1.20 G NFS 48,430 SF 0/1 Yes No Existing Available Now 24' 250 2.6:1/12 Lee & Associates - Daniel Glazer 909-989-7771, Hank Wiehebrink 909-373-2712 $1.29 G -> $1.20 G 24 37325 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Sold 4,677 SF Yes 648 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building NFL TBD 8,280 SF 0/1 No Existing Sold COE 1"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "2085 S. Harbor Blvd",
+      "addressCandidate": "2085 S HARBOR BLVD",
+      "editionDate": "2026-07-15",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-15-2026.pdf",
+      "evidenceContext": "e Agreements •Purchase Related Agreements •Listing Agreements •Related Addenda Join us for an in-person review of AIR CRE Purchase and Sale Agreements, presented by AIR CRE Contracts experts Bryan Mashian and John Pagliassotti. LOCATION DoubleTree Anaheim 2085 S. Harbor Blvd. Anaheim, CA, 92802 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 6 729 Merchant St Los Angeles, CA 9"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "9 37253 Industry Way",
+      "editionDate": "2026-07-15",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-15-2026.pdf",
+      "evidenceContext": "ng Building Fenced / Paved Yard 3 Ground Level Loading Doors 2 Offices/ 2 Restrooms HVAC Excellent Access To 215, 60 & 91 Freeways $1.10 NNN NFS 5,288 SF 0/3 Fncd/Pvd Existing Available Now 200 Lee & Associates - Toby Tewell 951-276-3662 Fenced / Paved Yards 9 37253 Industry Way Murrieta, CA 92563 French Valley Airport Center Phase IV Marketing Flyer Leased 3,499 SF Yes 648 SF French Valley Airport Center Phase IV New Construction High Quality & Energy Efficient Building $1.20 MG NFS 8,255 SF 0/1 Yes No Existing"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "215 Fwy via Harvill Ave",
+      "addressCandidate": "215 FWY VIA HARVILL AVE",
+      "editionDate": "2026-07-16",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-16-2026.pdf",
+      "evidenceContext": "le Marketing Flyer 605,920 SF 13.91 Ac Zoned IP Industrial Park (Opportunity Zone) CUP in Final Review 11,630 SF Ind Maintenance & Service Bldg 4 Pass-thru Bays, 6 Ofc/Conf Rm, Lobby, Board Rm, 4 RR On Approved Riverside County Truck Route Immediate Access to 215 Fwy via Harvill Ave/Nuevo Ave NFL $25.00 0 SF Yes Available Industrial Gas: Water: Sewer: Sperry Commercial - Liz Roubidoux 909-440-0967, Jon Sorokowski 951- 742-8600 Electric: Fiber: On Approved Riverside County Truck Route No$15,148,000NoI-P 17 16"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "2028 Can be Combined with 7255 & 7301 Radford Ave",
+      "editionDate": "2026-07-16",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-16-2026.pdf",
+      "evidenceContext": "MG NFS 27,647 SF 1/3 No Fncd/Pvd Existing Available 30 Days 16'-18' 400 2.2:1/30 Lee & Associates - Patrick Reddy 818-986-9800 Large Rear Yard / Fully Fenced 4 7311 Radford Ave North Hollywood, CA 91605 Subleased 10,000 SF No 3,000 SF Sublease Through 4/30/2028 Can be Combined with 7255 & 7301 Radford Ave Totaling up to 29,600 SF; Gated Industrial Complex Potential for Long Term Direct Lease Positioned in Well-Established Strategic North Hollywood Industrial Location, Direct Street Frontage $1.45 NNN NFS 10,000"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "2085 S. Harbor Blvd",
+      "addressCandidate": "2085 S HARBOR BLVD",
+      "editionDate": "2026-07-17",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-17-2026.pdf",
+      "evidenceContext": "e Agreements •Purchase Related Agreements •Listing Agreements •Related Addenda Join us for an in-person review of AIR CRE Purchase and Sale Agreements, presented by AIR CRE Contracts experts Bryan Mashian and John Pagliassotti. LOCATION DoubleTree Anaheim 2085 S. Harbor Blvd. Anaheim, CA, 92802 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 6 1375 E 6th St, Unit 4 Los Angeles"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "1650 S Claudina Way",
+      "editionDate": "2026-07-17",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-17-2026.pdf",
+      "evidenceContext": "TRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 6 511 E Katella Ave Anaheim, CA 92805 New Listing For Sale 73,419 SF No 4,449 SF Can Be Sold W/1650 S Claudina Way For Total of ±107,863 SF on ±6.37 Acres Excess Land for Additional Yard/Parking, Single Story Office Part of Larger Project, Subject to Lot Line Adjustment Loading From DH Positions + 1 Ramp Multiple Power Panels, Portion of Wh 16’-17’ Clr"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "9 1650 S Claudina Way",
+      "editionDate": "2026-07-17",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-17-2026.pdf",
+      "evidenceContext": "ess Park 5 Dock High Loading Doors Sprinklered 24' Clear Height $1.20 G NFS 112,000 SF 5/1 Yes No Existing Available 09/01/2026 24' 400 1.0:1/50 Lee & Associates - Dave Hunsaker 714-564-7113, Charles Noble 714-564-7100, Bart McNulty 714-564-7121 Sprinklered 9 1650 S Claudina Way Anaheim, CA 92805 Marketing Flyer New Listing For Sale 34,444 SF No 2,123 SF Can Be Sold W/ 511 E Katella Ave For Total of ±107,863 SF on ±6.37 Acres Single Story Office, Loading from DH Positions & 1 Ramp Part of Larger Project, Subject"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "11 37419 Industry Way",
+      "editionDate": "2026-07-17",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-17-2026.pdf",
+      "evidenceContext": "Clearance Height; 10 Parking Spaces Excellent Access to the 60, 71 and 91 Freeways Professional Business Park Environment $1.45 G NFS 26,943 SF 0/1 Yes No Existing Available 30 Days 20' 400 2.0:1/10 Colliers - Peter Lee 909-278-7325 Now Available @ $1.45 G 11 37419 Industry Way, Bldg A-32 Murrieta, CA 92563 French Valley Airport Center Phase III Marketing Flyer Rate Reduced 4,884 SF Yes 583 SF French Valley Airport Center Phase III Industrial Condo Close to 215 Freeway & French Valley Airport ±583 SF of Office A"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "1 1609 & 1635 - 1645 E Del Amo Blvd",
+      "editionDate": "2026-07-17",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-17-2026.pdf",
+      "evidenceContext": "advisor. 7/17/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 1 1609 & 1635 - 1645 E Del Amo Blvd Carson, CA 90746 1609 - 1645 E Del Amo Blvd Marketing Flyer New Listing For Sale 56,354 SF No Rare Infill Opportunity 8,400 - 12,750 SF Unit Sizes Quick Access to 405, 91, and 710 Freeways 8 Ground Level Loading Doors 14' -"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "2085 S. Harbor Blvd",
+      "addressCandidate": "2085 S HARBOR BLVD",
+      "editionDate": "2026-07-20",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-20-2026.pdf",
+      "evidenceContext": "Lease-Related Agreements •Listing Agreements •Related Addenda Learn the ins and outs of AIR CRE Lease Agreements firsthand, at our in-person seminar, led by esteemed AIR CRE Contracts experts Bryan Mashian and John Pagliassotti. LOCATION DoubleTree Anaheim 2085 S. Harbor Blvd. Anaheim, CA, 92802 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 6 2155 E 7th St, Unit 302 Los Angel"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "908-6012 Loading in Rear on Pacific Way",
+      "editionDate": "2026-07-20",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-20-2026.pdf",
+      "evidenceContext": "ge Loading in Rear on Pacific Way Free Standing Building - M2 Zone 400 Amp / 240/480V / 3 Phase Power Excellent Proximity to Vernon and LB 710 Freeway NFL $255.10 3,920 SF 0/2 No No Existing Available COE 10' 400 Penta Pacific Properties - Douglas Wells 562-908-6012 Loading in Rear on Pacific Way This information supplied herein is from sources we deem reliable. It is provided without any representation, warranty or guarantee, expressed or implied as to its accuracy. Prospective Buyer or Tenant should conduct an"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "2085 S. Harbor Blvd",
+      "addressCandidate": "2085 S HARBOR BLVD",
+      "editionDate": "2026-07-22",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-22-2026.pdf",
+      "evidenceContext": "Lease-Related Agreements •Listing Agreements •Related Addenda Learn the ins and outs of AIR CRE Lease Agreements firsthand, at our in-person seminar, led by esteemed AIR CRE Contracts experts Bryan Mashian and John Pagliassotti. LOCATION DoubleTree Anaheim 2085 S. Harbor Blvd. Anaheim, CA, 92802 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 1 9615 Norwalk Blvd Santa Fe Spring"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "1 5116-5166 & 5026-5076 Chino Hills Pkwy",
+      "editionDate": "2026-07-22",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-22-2026.pdf",
+      "evidenceContext": "advisor. 7/22/2026 AIR CREAIRCRE.com, Los Angeles, CA 90017 | 714-538-8432 Available SF INDUSTRIAL Property LocationVacant Office SF Rate/SF Price/SF Bldg SF DH/GL Sprinkler Yard Const Status Possession Listing Status Clear Height Amps Parking Listing Notes 1 5116-5166 & 5026-5076 Chino Hills Pkwy Chino, CA 91710 Marketing Flyer New Listing For Lease 885,000 SF No 9,304 SF 2-Building Campus For Lease 30' Clearance at 1st Column / ESFR (K-17 Heads) 128 DH Doors w/ 118 Pit-Levelers / 4 GL Ramps Rail Service (Subje"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_CITY_ZIP_BINDING",
+      "raw": "215 Fwy via Harvill Ave",
+      "addressCandidate": "215 FWY VIA HARVILL AVE",
+      "editionDate": "2026-07-22",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-22-2026.pdf",
+      "evidenceContext": "le Marketing Flyer 605,920 SF 13.91 Ac Zoned IP Industrial Park (Opportunity Zone) CUP in Final Review 11,630 SF Ind Maintenance & Service Bldg 4 Pass-thru Bays, 6 Ofc/Conf Rm, Lobby, Board Rm, 4 RR On Approved Riverside County Truck Route Immediate Access to 215 Fwy via Harvill Ave/Nuevo Ave NFL $25.00 11,630 SF Yes Available Industrial Gas: Water: Sewer: Sperry Commercial - Liz Roubidoux 909-440-0967, Jon Sorokowski 951- 742-8600 Electric: Fiber: On Approved Riverside County Truck Route No$15,148,000NoI-P"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "3 677 & 725 Pacific Ave",
+      "editionDate": "2026-07-22",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-22-2026.pdf",
+      "evidenceContext": "ess to Interstate 5 NFL $320.00 30,072 SF 4/1 Yes Fncd/Pvd Existing Sold COE 22' 600 1.6:1/47 Newmark - John DeGrinis, SIOR 818-921-8529, Patrick DuRoss, SIOR 818-219-8903, Jeff Abraham, SIOR 310-880-7403, Javier Galvan Jr 818-921-8532 Research in Progress 3 677 & 725 Pacific Ave Oxnard, CA 93030 Marketing Flyer In Escrow 24,536 SF No 800 SF M-2 Zoned Industrial Property on Pacific Ave Multiple Clear Span Buildings w/Fenced Yards Located in a Designated Opportunity Zone 677 Pacific Leased to 2028, 725 Pacific is"
+    },
+    {
+      "accepted": false,
+      "rejection": "UNRESOLVED_ADDRESS_GRAMMAR",
+      "raw": "10 5251 Verdugo Way",
+      "editionDate": "2026-07-22",
+      "evidenceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-22-2026.pdf",
+      "evidenceContext": "' Clear Height, 12'x13' GL & 480V Power Minimal Office Space & No CAM Fees Great Location by Telephone Rd & 101 Freeway $1.25 G NFS 20,688 SF 0/2 Yes No Existing Leased Now 20' 400 2.0:1/15 IPA Commercial - Michael Wax, SIOR 805-844-1000 Research in Progress 10 5251 Verdugo Way, Unit G Camarillo, CA 93012 Mission Oaks Business Park Rate Reduced 4,767 SF Yes 4,767 SF Recently Completed Exterior Renovations 2-Story Office / Production Space Well Maintained Multi-Tenant Complex Excellent 101 Freeway Access Near Major"
+    }
+  ]
+}

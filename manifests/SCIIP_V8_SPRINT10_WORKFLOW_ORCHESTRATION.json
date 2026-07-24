@@ -1,0 +1,21 @@
+{
+  "framework": "SCIIP_V8_SPRINT10_WORKFLOW_ORCHESTRATION_AUTONOMOUS_ACTION_CENTER",
+  "version": "v8.0-sprint10.0",
+  "publicCertification": "sciipTestV8Sprint10WorkflowOrchestrationAutonomousActionCenter",
+  "preferredCompiledTarget": "dist/apps-script/11_other_001.gs",
+  "capabilities": [
+    "workflow-orchestration",
+    "execution-queues",
+    "task-routing",
+    "human-approvals",
+    "retry-controls",
+    "exception-handling",
+    "dry-run-execution",
+    "rollback-metadata",
+    "permanent-action-history",
+    "autonomous-action-governance",
+    "cross-workspace-navigation"
+  ],
+  "autonomousCommitEnabled": false,
+  "destructiveActionsEnabledByDefault": false
+}

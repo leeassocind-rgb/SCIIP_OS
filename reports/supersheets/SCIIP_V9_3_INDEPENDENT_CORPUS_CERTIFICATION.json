@@ -1,0 +1,15 @@
+{
+  "framework": "SCIIP_V9_3_INDEPENDENT_CORPUS_CERTIFICATION",
+  "version": "v9.3.0",
+  "generatedAt": "2026-07-23T17:41:25.124Z",
+  "status": "NOT_PROVIDED",
+  "externalCorpus": {
+    "provided": false,
+    "status": "NOT_PROVIDED",
+    "gates": [],
+    "summary": null
+  },
+  "productionWrites": 0,
+  "commitEnabled": false,
+  "evidenceDigest": "ef5f2cbf4778d2900f34a63756c1765e9d59eee4cb8cca9f2b7ec78e000f381c"
+}

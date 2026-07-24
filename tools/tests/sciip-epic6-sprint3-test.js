@@ -1,0 +1,13 @@
+const fs = require('fs');
+const vm = require('vm');
+const path = require('path');
+const root = path.resolve(__dirname, '../..');
+const source = fs.readFileSync(path.join(root,'src/applications/executive-operations/SCIIP_Epic6_Executive_Alerts_Decisions_Actions.gs'),'utf8');
+let logged='';
+const sandbox={console,Date,JSON,Logger:{log:v=>{logged=String(v);}},Utilities:{getUuid:()=> '12345678-1234-1234-1234-123456789abc'}};
+vm.createContext(sandbox); vm.runInContext(source,sandbox);
+const result=sandbox.sciipTestV7Epic6ExecutiveAlertsDecisionsActionOrchestration();
+if(result.status!=='PASSED') throw new Error(JSON.stringify(result));
+if(result.testsRun!==10) throw new Error('Expected 10 tests');
+if(!logged.includes('"status":"PASSED"')) throw new Error('Certification output was not logged');
+console.log(JSON.stringify(result));

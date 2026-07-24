@@ -1,0 +1,19 @@
+{
+  "framework": "SCIIP_V8_8_SUPERSHEET_GOLD_STANDARD",
+  "version": "v8.8.0",
+  "generatedAt": "2026-07-23T16:59:24.832Z",
+  "sourceFramework": "SCIIP_V8_7_SEMANTIC_RECORDS",
+  "sourceVersion": "v8.7.0",
+  "sourceEvidenceDigest": "cf16e05f849d6f7361c86701cf432b25c159f0cf54c4508837b21adcf1bff3a0",
+  "expected": {
+    "inputRecords": 2582,
+    "canonicalProperties": 2098,
+    "canonicalListings": 2224,
+    "canonicalGeographies": 526,
+    "canonicalTransactionTypes": 3,
+    "classificationGroups": 281
+  },
+  "canonicalEvidenceDigest": "c88ce6bb4b7bd0b183ded43c153e385dcf543ebdc9212a5d773401b7c92c5d09",
+  "locked": true,
+  "productionWrites": 0
+}

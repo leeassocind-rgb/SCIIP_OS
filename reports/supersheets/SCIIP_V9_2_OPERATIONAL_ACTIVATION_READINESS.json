@@ -1,0 +1,82 @@
+{
+  "framework": "SCIIP_V9_2_OPERATIONAL_ACTIVATION_READINESS",
+  "version": "v9.2.0",
+  "generatedAt": "2026-07-23T17:34:43.757Z",
+  "status": "CONDITIONAL",
+  "applicationStatus": "CONDITIONAL_PASS_EXTERNAL_CORPUS_REQUIRED",
+  "gates": [
+    {
+      "name": "LOCKED_GOLD_STANDARD",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "TEMPORAL_GRAPH_CERTIFIED",
+      "passed": true,
+      "actual": "SCIIP_V8_10_TEMPORAL_KNOWLEDGE_GRAPH",
+      "required": "SCIIP_V8_10_TEMPORAL_KNOWLEDGE_GRAPH"
+    },
+    {
+      "name": "TIMELINE_PARITY",
+      "passed": true,
+      "actual": 2224,
+      "required": 2224
+    },
+    {
+      "name": "EDITION_REPLAY_COMPLETE",
+      "passed": true,
+      "actual": 32,
+      "required": 32
+    },
+    {
+      "name": "DETERMINISTIC_REPLAY",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "IDEMPOTENT_BUSINESS_KEYS",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "ROLLBACK_RECOVERY_DRILL",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "TRANSACTION_WRITES_ZERO",
+      "passed": true,
+      "actual": 0,
+      "required": 0
+    },
+    {
+      "name": "COMMIT_DISABLED",
+      "passed": true,
+      "actual": false,
+      "required": false
+    },
+    {
+      "name": "INDEPENDENT_CORPUS_CERTIFIED",
+      "passed": false,
+      "actual": "NOT_PROVIDED",
+      "required": "PASSED"
+    }
+  ],
+  "externalCorpus": {
+    "provided": false,
+    "status": "NOT_PROVIDED",
+    "result": null
+  },
+  "activation": {
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "automaticActivation": false,
+    "stewardApprovalRequired": true,
+    "activationTokenRequired": true
+  },
+  "recommendedNextAction": "Provide an independent SuperSheet corpus and run this installer with its timelines file as the second argument."
+}

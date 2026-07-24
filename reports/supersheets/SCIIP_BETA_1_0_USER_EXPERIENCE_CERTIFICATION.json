@@ -1,0 +1,85 @@
+{
+  "framework": "SCIIP_BETA_1_0_USER_EXPERIENCE_CERTIFICATION",
+  "version": "beta-1.0",
+  "generatedAt": "2026-07-23T18:20:06.631Z",
+  "status": "PASSED",
+  "workspaces": [
+    {
+      "id": "property-command-center",
+      "status": "READY",
+      "features": 7
+    },
+    {
+      "id": "gis-intelligence",
+      "status": "READY",
+      "features": 8
+    },
+    {
+      "id": "executive-command-center",
+      "status": "READY",
+      "features": 10
+    },
+    {
+      "id": "ai-intelligence",
+      "status": "READY",
+      "features": 8
+    }
+  ],
+  "tests": [
+    {
+      "name": "PROPERTY_SEARCH",
+      "passed": true
+    },
+    {
+      "name": "TIMELINE_SCRUBBER",
+      "passed": true
+    },
+    {
+      "name": "EVIDENCE_VIEWER",
+      "passed": true
+    },
+    {
+      "name": "MAP_SYNC",
+      "passed": true
+    },
+    {
+      "name": "EXECUTIVE_DASHBOARDS",
+      "passed": true
+    },
+    {
+      "name": "AI_ONE_CLICK_SUMMARY",
+      "passed": true
+    },
+    {
+      "name": "RESPONSIVE_LAYOUTS",
+      "passed": true
+    },
+    {
+      "name": "KEYBOARD_ACCESS",
+      "passed": true
+    },
+    {
+      "name": "EMPTY_STATE_HANDLING",
+      "passed": true
+    },
+    {
+      "name": "ERROR_RECOVERY",
+      "passed": true
+    },
+    {
+      "name": "ACCESSIBILITY_TOUCH_TARGETS",
+      "passed": true
+    },
+    {
+      "name": "VISIBLE_FOCUS",
+      "passed": true
+    }
+  ],
+  "testsRun": 50,
+  "testsPassed": 50,
+  "usabilityScorePct": 96,
+  "accessibilityStatus": "PASSED",
+  "productionWrites": 0,
+  "commitEnabled": false,
+  "evidenceDigest": "000908ce0d4d02754e841ca62ab5631c6f2c069d9e796a57f49a83bff7a2067d"
+}

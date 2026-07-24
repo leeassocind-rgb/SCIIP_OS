@@ -1,0 +1,18 @@
+{
+  "framework": "SCIIP_V9_3_5_INDEPENDENT_CORPUS_CANARY_OPERATIONS_BATCH",
+  "version": "v9.5.0",
+  "sprints": [
+    "v9.3 Independent Corpus Certification",
+    "v9.4 Isolated Canary Persistence and Transaction Parity",
+    "v9.5 Ingestion Operations Command Center"
+  ],
+  "status": "READY_TO_INSTALL",
+  "governance": {
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "isolatedCanaryOnly": true,
+    "independentCorpusCertificationRequired": true,
+    "stewardApprovalRequired": true,
+    "activationTokenRequired": true
+  }
+}

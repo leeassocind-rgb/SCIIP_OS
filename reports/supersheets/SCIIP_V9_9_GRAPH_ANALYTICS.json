@@ -1,0 +1,542 @@
+{
+  "framework": "SCIIP_V9_9_GRAPH_ANALYTICS_ENGINE",
+  "version": "v9.9.0",
+  "generatedAt": "2026-07-23T18:08:12.680Z",
+  "status": "OPERATIONAL",
+  "algorithms": [
+    {
+      "name": "PROPERTY_DEGREE_CENTRALITY",
+      "records": 2098,
+      "top": [
+        {
+          "propertyId": "PROP-1B97321A72B877A63133",
+          "outDegree": 12,
+          "inDegree": 0,
+          "totalDegree": 12
+        },
+        {
+          "propertyId": "PROP-35509204AC072A6788B5",
+          "outDegree": 12,
+          "inDegree": 0,
+          "totalDegree": 12
+        },
+        {
+          "propertyId": "PROP-B5D44DE0D28B343CA30F",
+          "outDegree": 10,
+          "inDegree": 0,
+          "totalDegree": 10
+        },
+        {
+          "propertyId": "PROP-FE808F7C0525DDAB8F11",
+          "outDegree": 10,
+          "inDegree": 0,
+          "totalDegree": 10
+        },
+        {
+          "propertyId": "PROP-0F9C1DAB1FE1A96E241D",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-274588B4CD8F9E209822",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-2F07940ADA8EDCD34DC6",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-318A30D36241F754C6F5",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-350E95A831CCC5FD06AB",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-46149E2939BDD76DB117",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-4EE6D0E92F380C5F9370",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-5016B4069AB1243BBDCA",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-61BDF97F7DD0366198D9",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-68B3BE6DD32F61900CCD",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-84AD57BD116908E37EBF",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-89054AFC52E0AB8F0062",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-A80A0D850418C47DE6E3",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-BAF77BCCDFDF4FBB7479",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-BD3928FD2CA1DE619C32",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-D74DAE238B3D746D2B80",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-D755E3DAC8F361695E81",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-FF49F230BC3C5EEB4FA9",
+          "outDegree": 8,
+          "inDegree": 0,
+          "totalDegree": 8
+        },
+        {
+          "propertyId": "PROP-00EFF0B0077D6DFD56BE",
+          "outDegree": 6,
+          "inDegree": 0,
+          "totalDegree": 6
+        },
+        {
+          "propertyId": "PROP-031469DFAB607F92D124",
+          "outDegree": 6,
+          "inDegree": 0,
+          "totalDegree": 6
+        },
+        {
+          "propertyId": "PROP-0CD927C5F554D2FBF638",
+          "outDegree": 6,
+          "inDegree": 0,
+          "totalDegree": 6
+        }
+      ]
+    },
+    {
+      "name": "LISTING_PERSISTENCE_RANKING",
+      "records": 2224,
+      "top": [
+        {
+          "listingId": "LIST-C9E80D766051EE3708F4",
+          "observationCount": 5,
+          "changeCount": 0,
+          "firstObserved": "2026-06-08",
+          "lastObserved": "2026-06-12"
+        },
+        {
+          "listingId": "LIST-A763812F37E993832DB7",
+          "observationCount": 4,
+          "changeCount": 0,
+          "firstObserved": "2026-07-07",
+          "lastObserved": "2026-07-22"
+        },
+        {
+          "listingId": "LIST-069D6C48FB5229A9D3D7",
+          "observationCount": 3,
+          "changeCount": 2,
+          "firstObserved": "2026-07-15",
+          "lastObserved": "2026-07-17"
+        },
+        {
+          "listingId": "LIST-12789C0988B671997AEB",
+          "observationCount": 3,
+          "changeCount": 2,
+          "firstObserved": "2026-06-10",
+          "lastObserved": "2026-07-08"
+        },
+        {
+          "listingId": "LIST-2C8DB7BDDBD79F869A45",
+          "observationCount": 3,
+          "changeCount": 0,
+          "firstObserved": "2026-07-15",
+          "lastObserved": "2026-07-17"
+        },
+        {
+          "listingId": "LIST-2EAE39A12899EEDD9F2D",
+          "observationCount": 3,
+          "changeCount": 1,
+          "firstObserved": "2026-06-08",
+          "lastObserved": "2026-06-16"
+        },
+        {
+          "listingId": "LIST-37ED0556BA9B0D2E4BE1",
+          "observationCount": 3,
+          "changeCount": 2,
+          "firstObserved": "2026-06-25",
+          "lastObserved": "2026-07-16"
+        },
+        {
+          "listingId": "LIST-52E8FE9AE7D92DB07550",
+          "observationCount": 3,
+          "changeCount": 0,
+          "firstObserved": "2026-06-10",
+          "lastObserved": "2026-07-08"
+        },
+        {
+          "listingId": "LIST-5C084231F8A9D41E647C",
+          "observationCount": 3,
+          "changeCount": 0,
+          "firstObserved": "2026-06-08",
+          "lastObserved": "2026-07-16"
+        },
+        {
+          "listingId": "LIST-69A7F3076B31E9E76B23",
+          "observationCount": 3,
+          "changeCount": 0,
+          "firstObserved": "2026-07-09",
+          "lastObserved": "2026-07-22"
+        },
+        {
+          "listingId": "LIST-70D73CF4CAF37611A1ED",
+          "observationCount": 3,
+          "changeCount": 1,
+          "firstObserved": "2026-06-24",
+          "lastObserved": "2026-07-13"
+        },
+        {
+          "listingId": "LIST-9E0957E1DF045353C898",
+          "observationCount": 3,
+          "changeCount": 0,
+          "firstObserved": "2026-06-16",
+          "lastObserved": "2026-06-18"
+        },
+        {
+          "listingId": "LIST-A4D6A2455FDD19156125",
+          "observationCount": 3,
+          "changeCount": 0,
+          "firstObserved": "2026-07-09",
+          "lastObserved": "2026-07-22"
+        },
+        {
+          "listingId": "LIST-AD55D4CDDC8E02E6A5F5",
+          "observationCount": 3,
+          "changeCount": 0,
+          "firstObserved": "2026-06-25",
+          "lastObserved": "2026-07-16"
+        },
+        {
+          "listingId": "LIST-CCE9D3439B6F7147CB75",
+          "observationCount": 3,
+          "changeCount": 1,
+          "firstObserved": "2026-06-19",
+          "lastObserved": "2026-07-09"
+        },
+        {
+          "listingId": "LIST-041AD9B4F1AB1AF289FB",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-09",
+          "lastObserved": "2026-07-07"
+        },
+        {
+          "listingId": "LIST-057E52057A570728FA17",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-22",
+          "lastObserved": "2026-07-10"
+        },
+        {
+          "listingId": "LIST-090BC8F69E01803AA54A",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-07-07",
+          "lastObserved": "2026-07-20"
+        },
+        {
+          "listingId": "LIST-0BA9C3DFC4A692B8F67C",
+          "observationCount": 2,
+          "changeCount": 0,
+          "firstObserved": "2026-07-09",
+          "lastObserved": "2026-07-14"
+        },
+        {
+          "listingId": "LIST-0DDF61BDE4F4BCF96DFB",
+          "observationCount": 2,
+          "changeCount": 0,
+          "firstObserved": "2026-07-09",
+          "lastObserved": "2026-07-22"
+        },
+        {
+          "listingId": "LIST-0E2F7B7EF2E99E3C64B7",
+          "observationCount": 2,
+          "changeCount": 0,
+          "firstObserved": "2026-06-10",
+          "lastObserved": "2026-07-08"
+        },
+        {
+          "listingId": "LIST-0EB25FEE9B5A79B21DA6",
+          "observationCount": 2,
+          "changeCount": 0,
+          "firstObserved": "2026-06-19",
+          "lastObserved": "2026-07-08"
+        },
+        {
+          "listingId": "LIST-0EC4606831C202F615DE",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-29",
+          "lastObserved": "2026-07-22"
+        },
+        {
+          "listingId": "LIST-0FF502C3A8A05E76D49A",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-29",
+          "lastObserved": "2026-07-15"
+        },
+        {
+          "listingId": "LIST-13289FB7F17E1A5BD918",
+          "observationCount": 2,
+          "changeCount": 0,
+          "firstObserved": "2026-06-16",
+          "lastObserved": "2026-06-17"
+        }
+      ]
+    },
+    {
+      "name": "CHANGE_FREQUENCY_RANKING",
+      "records": 2224,
+      "top": [
+        {
+          "listingId": "LIST-069D6C48FB5229A9D3D7",
+          "observationCount": 3,
+          "changeCount": 2,
+          "firstObserved": "2026-07-15",
+          "lastObserved": "2026-07-17"
+        },
+        {
+          "listingId": "LIST-12789C0988B671997AEB",
+          "observationCount": 3,
+          "changeCount": 2,
+          "firstObserved": "2026-06-10",
+          "lastObserved": "2026-07-08"
+        },
+        {
+          "listingId": "LIST-37ED0556BA9B0D2E4BE1",
+          "observationCount": 3,
+          "changeCount": 2,
+          "firstObserved": "2026-06-25",
+          "lastObserved": "2026-07-16"
+        },
+        {
+          "listingId": "LIST-2EAE39A12899EEDD9F2D",
+          "observationCount": 3,
+          "changeCount": 1,
+          "firstObserved": "2026-06-08",
+          "lastObserved": "2026-06-16"
+        },
+        {
+          "listingId": "LIST-70D73CF4CAF37611A1ED",
+          "observationCount": 3,
+          "changeCount": 1,
+          "firstObserved": "2026-06-24",
+          "lastObserved": "2026-07-13"
+        },
+        {
+          "listingId": "LIST-CCE9D3439B6F7147CB75",
+          "observationCount": 3,
+          "changeCount": 1,
+          "firstObserved": "2026-06-19",
+          "lastObserved": "2026-07-09"
+        },
+        {
+          "listingId": "LIST-041AD9B4F1AB1AF289FB",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-09",
+          "lastObserved": "2026-07-07"
+        },
+        {
+          "listingId": "LIST-057E52057A570728FA17",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-22",
+          "lastObserved": "2026-07-10"
+        },
+        {
+          "listingId": "LIST-090BC8F69E01803AA54A",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-07-07",
+          "lastObserved": "2026-07-20"
+        },
+        {
+          "listingId": "LIST-0EC4606831C202F615DE",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-29",
+          "lastObserved": "2026-07-22"
+        },
+        {
+          "listingId": "LIST-0FF502C3A8A05E76D49A",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-29",
+          "lastObserved": "2026-07-15"
+        },
+        {
+          "listingId": "LIST-1EC2E15DE2ADFDF45308",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-26",
+          "lastObserved": "2026-06-29"
+        },
+        {
+          "listingId": "LIST-20F0FAF0BEA39EDC1441",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-07-08",
+          "lastObserved": "2026-07-09"
+        },
+        {
+          "listingId": "LIST-22CF3DE26491FA7F4A44",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-09",
+          "lastObserved": "2026-07-16"
+        },
+        {
+          "listingId": "LIST-2B6E2DDFD98548697656",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-07-14",
+          "lastObserved": "2026-07-15"
+        },
+        {
+          "listingId": "LIST-303A33E9AC299855267C",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-05",
+          "lastObserved": "2026-06-11"
+        },
+        {
+          "listingId": "LIST-35051298D5C61AFA3BFC",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-17",
+          "lastObserved": "2026-07-14"
+        },
+        {
+          "listingId": "LIST-38B14CF6C481F1F08FF9",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-09",
+          "lastObserved": "2026-06-10"
+        },
+        {
+          "listingId": "LIST-38FC14C69FE1CCCD8CD3",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-07-01",
+          "lastObserved": "2026-07-02"
+        },
+        {
+          "listingId": "LIST-43FA77E6A6EB470FE238",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-07-15",
+          "lastObserved": "2026-07-16"
+        },
+        {
+          "listingId": "LIST-48D6E4409C9AB497DBFB",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-18",
+          "lastObserved": "2026-07-21"
+        },
+        {
+          "listingId": "LIST-5B3EB0622AA0D681F981",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-06-12",
+          "lastObserved": "2026-07-07"
+        },
+        {
+          "listingId": "LIST-60D4B4C54561AA8D401A",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-07-09",
+          "lastObserved": "2026-07-10"
+        },
+        {
+          "listingId": "LIST-6129FEA6C0C20F626B56",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-07-20",
+          "lastObserved": "2026-07-21"
+        },
+        {
+          "listingId": "LIST-63438B8E0482267BFBC2",
+          "observationCount": 2,
+          "changeCount": 1,
+          "firstObserved": "2026-07-07",
+          "lastObserved": "2026-07-08"
+        }
+      ]
+    },
+    {
+      "name": "NEIGHBORHOOD_TRAVERSAL",
+      "records": 2098
+    },
+    {
+      "name": "TEMPORAL_SNAPSHOT_COMPARISON",
+      "records": 31
+    },
+    {
+      "name": "EVIDENCE_TRACEABILITY_SCORING",
+      "records": 7497
+    }
+  ],
+  "algorithmCount": 6,
+  "propertyAnalytics": 2098,
+  "listingAnalytics": 2224,
+  "evidenceDigest": "219484d3b5f0ac9da8e5351dc73d4af2d813b2ab38a5d6773c5957001e9f8b95"
+}

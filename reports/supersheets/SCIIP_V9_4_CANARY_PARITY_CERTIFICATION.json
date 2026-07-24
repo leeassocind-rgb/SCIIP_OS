@@ -1,0 +1,13 @@
+{
+  "framework": "SCIIP_V9_4_CANARY_PARITY_CERTIFICATION",
+  "version": "v9.4.0",
+  "generatedAt": "2026-07-23T17:41:25.124Z",
+  "status": "PASSED",
+  "expectedTransactions": 32,
+  "persistedRecords": 32,
+  "parityPassed": true,
+  "rollbackTriggered": false,
+  "primaryProductionWrites": 0,
+  "commitEnabled": false,
+  "evidenceDigest": "2a720104f93d4cd95d97fa586f4a6598a4d55a836b0dbdc36be0c55563816921"
+}

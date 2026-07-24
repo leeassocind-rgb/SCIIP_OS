@@ -1,0 +1,21 @@
+<section id="sciip-epic6-sprint3" class="sciip-workspace-panel" data-workspace="executive-operations" hidden>
+  <header class="sciip-panel-header">
+    <div><p class="sciip-eyebrow">Executive Operations</p><h2>Alerts, Decisions & Actions</h2></div>
+    <button type="button" onclick="SCIIP_EPIC6_S3.refresh()">Refresh</button>
+  </header>
+  <div id="sciip-epic6-s3-kpis" class="sciip-kpi-grid"></div>
+  <div class="sciip-grid-3">
+    <article><h3>Operational Alerts</h3><div id="sciip-epic6-s3-alerts"></div></article>
+    <article><h3>Executive Decisions</h3><div id="sciip-epic6-s3-decisions"></div></article>
+    <article><h3>Accountable Actions</h3><div id="sciip-epic6-s3-actions"></div></article>
+  </div>
+</section>
+<script>
+var SCIIP_EPIC6_S3=(function(){
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function rows(items,id,title,status){document.getElementById(id).innerHTML=(items||[]).map(function(x){return '<div class="sciip-list-row"><strong>'+esc(x[title])+'</strong><span>'+esc(x[status])+'</span><small>'+esc(x.owner||'UNASSIGNED')+'</small></div>';}).join('')||'<p>No records.</p>';}
+  function render(d){document.getElementById('sciip-epic6-s3-kpis').innerHTML=d.kpis.map(function(k){return '<article class="sciip-kpi-card"><span>'+esc(k.label)+'</span><strong>'+esc(k.value)+'</strong></article>';}).join('');rows(d.alerts,'sciip-epic6-s3-alerts','title','status');rows(d.decisions,'sciip-epic6-s3-decisions','title','status');rows(d.actions,'sciip-epic6-s3-actions','title','status');}
+  function refresh(){google.script.run.withSuccessHandler(render).sciipGetEpic6ExecutiveActionOrchestration();}
+  return {refresh:refresh,render:render};
+})();
+</script>

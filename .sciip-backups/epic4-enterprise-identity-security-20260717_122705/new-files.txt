@@ -1,0 +1,14 @@
+src/platform/security/SCIIP_Identity_Registry.gs
+src/platform/security/SCIIP_Role_Based_Access_Control.gs
+src/platform/security/SCIIP_Service_Identity_Manager.gs
+src/platform/security/SCIIP_Security_Policy_Engine.gs
+src/platform/security/SCIIP_Approval_Governance_Service.gs
+src/platform/security/SCIIP_Session_Token_Manager.gs
+src/platform/security/SCIIP_Security_Audit_Persistence.gs
+src/platform/security/SCIIP_Security_Health_Certification.gs
+src/platform/security/SCIIP_Epic4_Enterprise_Identity_Security_Application.gs
+src/platform/security/SCIIP_Epic4_Enterprise_Identity_Security_Tests.gs
+tools/tests/sciip-epic4-enterprise-identity-security-test.js
+.github/workflows/sciip-v7-epic4-enterprise-identity-security.yml
+manifests/SCIIP_V7_EPIC4_ENTERPRISE_IDENTITY_SECURITY_MILESTONE.json
+docs/releases/SCIIP_V7_EPIC4_ENTERPRISE_IDENTITY_SECURITY_README.md

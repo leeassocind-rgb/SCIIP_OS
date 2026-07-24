@@ -1,0 +1,5 @@
+const fs=require('fs'),vm=require('vm'),path=require('path');
+const root=path.resolve(__dirname,'../../');
+const source=fs.readFileSync(path.join(root,'src/applications/data-sources/SCIIP_Epic5_Pilot_Review_Console_First_Execution.gs'),'utf8');
+const store={}; const sandbox={console,Date,JSON,Math,String,Number,Object,Array,Error,Utilities:{getUuid:()=> '11111111-2222-3333-4444-555555555555'},Session:{getActiveUser:()=>({getEmail:()=> 'test@sciip.local'})},PropertiesService:{getScriptProperties:()=>({getProperty:k=>store[k]||null,setProperty:(k,v)=>store[k]=v,deleteProperty:k=>delete store[k]})},HtmlService:{createTemplateFromFile:()=>({evaluate:()=>({setTitle(){return this},setXFrameOptionsMode(){return this}})}),XFrameOptionsMode:{ALLOWALL:'ALLOWALL'}}};
+vm.createContext(sandbox); vm.runInContext(source,sandbox); const out=sandbox.sciipTestV7Epic5PilotReviewConsoleFirstExecution(); if(out.status!=='PASSED') throw new Error(JSON.stringify(out)); console.log(JSON.stringify(out,null,2));

@@ -1,0 +1,27 @@
+{
+  "framework": "SCIIP_BETA_1_0_SCALE_PERFORMANCE",
+  "version": "beta-1.0",
+  "generatedAt": "2026-07-23T18:20:06.631Z",
+  "status": "PASSED",
+  "corpus": {
+    "editions": 32,
+    "propertyRecords": 2098,
+    "timelines": 2224,
+    "transactions": 32
+  },
+  "benchmarks": {
+    "deterministicReplayPasses": 3,
+    "replayBenchmarkMs": 13.188,
+    "propertySearchIterations": 600,
+    "propertySearchBenchmarkMs": 2462.457,
+    "searchHits": 527800,
+    "throughputTimelinesPerSecond": 505927,
+    "memoryStrategy": "STREAMABLE_CHUNKED_READINESS"
+  },
+  "deterministicReplay": true,
+  "incrementalIngestionReady": true,
+  "goldStandardRegression": "PASSED",
+  "productionWrites": 0,
+  "commitEnabled": false,
+  "evidenceDigest": "896ed05ecb307ec33ee9bfa72977dae28b0549d3181eb5908c062374a977a1fb"
+}

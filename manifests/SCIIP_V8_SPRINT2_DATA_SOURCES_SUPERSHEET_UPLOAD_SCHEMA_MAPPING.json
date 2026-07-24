@@ -1,0 +1,15 @@
+{
+  "framework": "SCIIP_V8_SPRINT2_DATA_SOURCES_SUPERSHEET_UPLOAD_SCHEMA_MAPPING",
+  "version": "v8.0-sprint2.0",
+  "workspace": "data-sources",
+  "capabilities": [
+    "supersheet-upload-registration",
+    "automatic-source-recognition",
+    "schema-detection",
+    "canonical-column-mapping",
+    "validation-preview",
+    "lineage-capture",
+    "human-review-gate"
+  ],
+  "destructiveCommitEnabledByDefault": false
+}

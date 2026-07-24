@@ -1,12 +1,12 @@
 {
   "status": "PASSED",
   "version": "v7.0-compiler-v2",
-  "sourceFiles": 12150,
-  "sourceGsFiles": 12129,
-  "sourceHtmlFiles": 17,
+  "sourceFiles": 12320,
+  "sourceGsFiles": 12267,
+  "sourceHtmlFiles": 49,
   "bundleFiles": 31,
-  "deploymentFiles": 49,
-  "reductionPercent": 99.6,
+  "deploymentFiles": 81,
+  "reductionPercent": 99.34,
   "rebuiltBundles": 31,
   "reusedBundles": 0,
   "incremental": true,
@@ -24,7 +24,7 @@
         "src/shared/003_SCIIP_ServiceContainer.gs"
       ],
       "bytes": 35488,
-      "sha256": "fc55ca4d2c64ef152c013b676cb13c4fe0ff44489e5ec8d0ee022213aa40c83d"
+      "sha256": "b009bc9dd47d708ea244936f7d4249cf2d7f316f6a8754f99ee311061edb5dc5"
     },
     {
       "file": "01_runtime_001.gs",
@@ -76,7 +76,7 @@
         "src/shared/SCIIP_RuntimeWorkbookMaintenance.gs"
       ],
       "bytes": 354372,
-      "sha256": "aa7d0ec4df92bf2f64703bac578d4e2aff69a265268e18ac5eb85dee2b612f15"
+      "sha256": "249256b49cda3262d532cc49e9532b150cdf157d67fceed831107e631b80846b"
     },
     {
       "file": "02_storage_001.gs",
@@ -983,7 +983,7 @@
         "src/processors/runtime/storage/12580_ArchiveCertificationProcessor.gs"
       ],
       "bytes": 951548,
-      "sha256": "a84cd1d1ccd0a863a05f0711134795f3a711236b60f5fa230307c84c85f195ad"
+      "sha256": "1ace28fc9ad1711e6b98a3dcea6476858c16212c845d7b8c5fe12e843bad88aa"
     },
     {
       "file": "02_storage_002.gs",
@@ -2115,7 +2115,7 @@
         "src/processors/runtime/storage/23820_StorageIntegrationGovernanceCoverageAssessmentProcessor.gs"
       ],
       "bytes": 951978,
-      "sha256": "54faa5ee57dfbd72ec9826529c6cca90e9215b1e3b40b0503f3329029f2db2df"
+      "sha256": "542ce60230b65a694ba52f734e5c85ebc452f96cf06ba0d370d909b11480e45e"
     },
     {
       "file": "02_storage_003.gs",
@@ -3015,7 +3015,7 @@
         "src/processors/runtime/storage/32740_StoragePlatformEnterpriseEngineeringPlanningProcessor.gs"
       ],
       "bytes": 951098,
-      "sha256": "9aa70eef85590c62a25011bc455902cbe788528d7b813be49b70d46b17788a63"
+      "sha256": "811df46038eefb6bfe377833adc7bcdafe2509f6fe2399d6d569cf83a87ce5db"
     },
     {
       "file": "02_storage_004.gs",
@@ -3950,7 +3950,7 @@
         "src/processors/runtime/storage/42010_StoragePlatformGlobalFinancialManagementPolicyRegistryProcessor.gs"
       ],
       "bytes": 951017,
-      "sha256": "4c39626ec4dec193136698bbde7d966558df5459e3d008bf2edb1fdbffc40cc4"
+      "sha256": "65876a2ce99f0407854c41c6ef8e47745a59773b3a19905e4f9eb730c7df1a43"
     },
     {
       "file": "02_storage_005.gs",
@@ -4912,7 +4912,7 @@
         "src/processors/runtime/storage/51550_StoragePlatformInterregionalChangeManagementExecutionProcessor.gs"
       ],
       "bytes": 951959,
-      "sha256": "0ab3c5c2e4c216ad6d4982c4b688fc0d7b9eaed64e71f6d299ccb88e53ae5449"
+      "sha256": "1495641c51d4405b31a41b0453621c27865fff89c4dc2e55da830a4e8076713a"
     },
     {
       "file": "02_storage_006.gs",
@@ -5849,7 +5849,7 @@
         "src/processors/runtime/storage/60840_StoragePlatformCrossPlatformGovernancePlanningProcessor.gs"
       ],
       "bytes": 951839,
-      "sha256": "1d17c3f15029f3ac55a11149cd6be793ce3fe05fb45bc46536617041097b63aa"
+      "sha256": "b62c8899986e28d9b9e3aa8dc0f81da6d8073b276ec1a2e886665a20e71cf7e4"
     },
     {
       "file": "02_storage_007.gs",
@@ -6752,7 +6752,7 @@
         "src/processors/runtime/storage/69790_StoragePlatformUniversalStorageIndustrializationAcceptanceProcessor.gs"
       ],
       "bytes": 950871,
-      "sha256": "66d9c44068f3d7df00b572eefca28db9941414c38762b89265d748b988253a0e"
+      "sha256": "130a8528a61462fce4da76f73e220c72b42c75240dc5f1037d1329980129d350"
     },
     {
       "file": "02_storage_008.gs",
@@ -7614,7 +7614,7 @@
         "src/processors/runtime/storage/78330_StoragePlatformUniversalCompletionHealthRiskAnalysisProcessor.gs"
       ],
       "bytes": 951435,
-      "sha256": "6a63781ee3ea69a3fb2bc356b3939078406046b15501ec6b1885663c5f7e2a3d"
+      "sha256": "542586f4952f48a0e9ba3faab9fa04884dbeb4b86a91c90e8660ace9e9df2199"
     },
     {
       "file": "02_storage_009.gs",
@@ -8520,7 +8520,7 @@
         "src/processors/runtime/storage/87310_StoragePlatformPermanentHistoryMobilityPolicyRegistryProcessor.gs"
       ],
       "bytes": 951244,
-      "sha256": "cfd1bbe543479f779c35e84f65508fe2b8a5f49b365cc200bae7b55ed15e0dfd"
+      "sha256": "ec9892951638bbd97d08871f20b2a9d3ad937e21139a8877d168b195e3a4b131"
     },
     {
       "file": "02_storage_010.gs",
@@ -9417,7 +9417,7 @@
         "src/processors/runtime/storage/96200_StoragePlatformProcessorDrivenStorageMonitoringReadinessProcessor.gs"
       ],
       "bytes": 950710,
-      "sha256": "630964fe8018df04f9aefb364174e9aed55935032fcb41ddb18c12575f875e86"
+      "sha256": "1724580d31c534088a66c59b739697a11961dd806448a55f2e08a5b0ae8ebd53"
     },
     {
       "file": "02_storage_011.gs",
@@ -10027,7 +10027,7 @@
         "src/shared/SCIIP_StoragePlatformEnterpriseAssuranceBackend_v6.gs"
       ],
       "bytes": 949241,
-      "sha256": "b4f6f885488ec0b8e57a93b89ca33d26a06b2f9b85ed3bbd1d5c6d48a1d8b65c"
+      "sha256": "165f168fc4046aecf5119d3580baf6c8cde259503cb0df85e8395ae8e19d1315"
     },
     {
       "file": "02_storage_012.gs",
@@ -10466,7 +10466,7 @@
         "src/shared/SCIIP_StoragePlatformProcessorDrivenStorageAcceptanceBackend_v6.gs"
       ],
       "bytes": 950388,
-      "sha256": "bb8d10f6276aff9d07c5c23b57f2e664fcb85cd55808474d88a52aa6570ffb5a"
+      "sha256": "479c617a03be0e93d1ecb2cbd2a7083c94c1216bfd91eae0c3f1a1bacb257221"
     },
     {
       "file": "02_storage_013.gs",
@@ -10763,7 +10763,7 @@
         "src/shared/SCIIP_StorageWorkloadPlacementBackend_v6.gs"
       ],
       "bytes": 649040,
-      "sha256": "62c1d9f9e5b6664854ad0adfa7ecdd5047659bab8414bc19b4140d7092db6d14"
+      "sha256": "29aead4a1762944913c85fe47bddd75658e706137d9a3fc515a40d15028abafb"
     },
     {
       "file": "03_identity_001.gs",
@@ -10785,7 +10785,7 @@
         "src/processors/identity/execution/6750_IdentityAcceptanceProcessor.gs"
       ],
       "bytes": 79534,
-      "sha256": "41db098f8b388a2c349c97aeedce23e2de890e584684cdd8a046745f84310de9"
+      "sha256": "68840e264ecad2c16422c80a330537990989db7fe33c1b90b92e98532687cbce"
     },
     {
       "file": "04_graph_001.gs",
@@ -10807,7 +10807,7 @@
         "src/processors/graph/execution/6850_GraphAcceptanceProcessor.gs"
       ],
       "bytes": 77012,
-      "sha256": "37af75b88aabc0fd7e1cae12c2d30b45c2b63e71faa094ce0d4b94aed0593f90"
+      "sha256": "3aef29442b5d7da0d4f2549e23079c7af9e8f7b5a23bb844a6c9415610248a6f"
     },
     {
       "file": "05_gis_001.gs",
@@ -10826,7 +10826,7 @@
         "src/processors/gis/execution/6950_GISAcceptanceProcessor.gs"
       ],
       "bytes": 68546,
-      "sha256": "040a250f5a4858ed22693986b90007efaab664d12068f60620762f0bb3b453d2"
+      "sha256": "f5decc18063a9c274fb718e44958c9a8b4daf8a8f93123ca4cf10f6695820e6a"
     },
     {
       "file": "06_ai_001.gs",
@@ -11318,7 +11318,7 @@
         "src/processors/intelligence/execution/9540_EnterpriseTransformationCertificationProcessor.gs"
       ],
       "bytes": 950113,
-      "sha256": "ee2a73bbdd9638d510f2cd0594e6a1d990f7ab6701feed988c257855a17f104b"
+      "sha256": "293b20dcd6352ffd32056ea4a3ba3ce9995fe171cbe5e565a2e94c4522dceeed"
     },
     {
       "file": "06_ai_002.gs",
@@ -11377,7 +11377,7 @@
         "src/processors/intelligence/executive/7060_7150_ExecutiveIntelligenceExecutionShared.gs"
       ],
       "bytes": 87387,
-      "sha256": "48105d16f22d98dc4ceb6e9e2b050251b97b6ce089fa4fd1030ee26fc9a740da"
+      "sha256": "d8c3d0e6762739e0bb24ca415fcbdccc1d4d3224ed1e4447a7291721e869729d"
     },
     {
       "file": "07_api_001.gs",
@@ -11388,7 +11388,7 @@
         "src/api/SCIIP_API_Tests.gs"
       ],
       "bytes": 7380,
-      "sha256": "b580ec9075237458e31b15788b0b1e88b5ae39c23e49d31e98e3103d0a1f94a0"
+      "sha256": "d5cd690e4748378659787a97384f33097a9b5d2ecd30fcbfe2506f489b23a969"
     },
     {
       "file": "08_ui_001.gs",
@@ -11526,8 +11526,8 @@
         "src/ui/integration/SCIIP_Streaming_Signal_Engine.gs",
         "src/ui/integration/SCIIP_Temporal_Graph_Engine.gs"
       ],
-      "bytes": 370204,
-      "sha256": "7f87b299b17320cca35882270bfd1258a3ab37386e1622c812c1cd596766ea8c"
+      "bytes": 370622,
+      "sha256": "7ca875514fd0da6d67eacfacaaf080bbf341adbffe8123dc356a4bb37c158828"
     },
     {
       "file": "09_tests_001.gs",
@@ -11642,7 +11642,7 @@
         "src/tests/SCIIP_TestingFramework_v4_StorageExecution_68200_78190_1000ProcessorPatch.gs"
       ],
       "bytes": 875469,
-      "sha256": "fa3b3f45122d9f9ea7cb377cd003f2cc619c783ddc01821f13bdc3727d0dfe5c"
+      "sha256": "fdf2aa54474cdf0e2d9247c43144e2fc7b6e1531cdab01ec67194cf874856eb6"
     },
     {
       "file": "09_tests_002.gs",
@@ -11712,7 +11712,7 @@
         "src/tests/suites/IndustrialIntelligenceExecutionSuite.gs"
       ],
       "bytes": 525467,
-      "sha256": "efdd1dc900eaa87cdb5c7e9efdf11c7aeb3cf0d89e4bb1e19485396274e65a46"
+      "sha256": "772f068d5dc087a74e8a1440f653aae59b34cf5df75e43416d5a3c5f037f7ed2"
     },
     {
       "file": "10_events_001.gs",
@@ -11722,18 +11722,31 @@
         "src/events/EventStore.gs"
       ],
       "bytes": 4416,
-      "sha256": "ec1e515f44b8d8da3a037b82900567d8a44eb4e1cd5db7cb8d6e57cd7fc8deb9"
+      "sha256": "c0a71ac29a4d3457f132698119cab195e088cd10dbf04d8b0eb5b43289e5dcd0"
     },
     {
       "file": "11_other_001.gs",
       "domain": "11_other",
       "sources": [
+        "src/applications/ai-copilot/SCIIP_V8_AI_Copilot_Application.gs",
+        "src/applications/ai-copilot/SCIIP_V8_Sprint9_Compiled_Certification.gs",
         "src/applications/asset-administration/SCIIP_Asset_Administration_Application.gs",
         "src/applications/asset-administration/SCIIP_Asset_Administration_Workspace.gs",
         "src/applications/asset-administration/SCIIP_Asset_Onboarding_Registry.gs",
         "src/applications/asset-administration/SCIIP_Critical_Date_Engine.gs",
         "src/applications/asset-administration/SCIIP_Lease_Obligation_Engine.gs",
         "src/applications/asset-administration/SCIIP_Occupancy_Economics_Engine.gs",
+        "src/applications/beta-hardening/SCIIP_BETA_1_0_Hardening.gs",
+        "src/applications/collaboration-case-management/SCIIP_V8_Collaboration_Case_Management_Application.gs",
+        "src/applications/company-explorer/SCIIP_V8_Company_Explorer_Application.gs",
+        "src/applications/data-sources-commit/SCIIP_V8_Sprint4_Certification.gs",
+        "src/applications/data-sources-commit/SCIIP_V8_Sprint4_Governed_Commit_Engine.gs",
+        "src/applications/data-sources-review/SCIIP_V8_Sprint3_Release_Certification.gs",
+        "src/applications/data-sources-review/SCIIP_V8_Sprint3_Review_Engine.gs",
+        "src/applications/data-sources/SCIIP_Epic5_Multi_SuperSheet_Batch_Orchestrator.gs",
+        "src/applications/data-sources/SCIIP_Epic5_Pilot_Review_Console_First_Execution.gs",
+        "src/applications/data-sources/SCIIP_Epic5_Production_Commit_Console.gs",
+        "src/applications/data-sources/SCIIP_Epic5_Real_SuperSheet_Pilot_Production_Readiness.gs",
         "src/applications/deal-pipeline/SCIIP_Deal_Execution_Workspace.gs",
         "src/applications/deal-pipeline/SCIIP_Deal_Pipeline_Application.gs",
         "src/applications/deal-pipeline/SCIIP_Deal_Qualification_Engine.gs",
@@ -11754,6 +11767,7 @@
         "src/applications/development-intelligence/SCIIP_Development_Risk_Engine.gs",
         "src/applications/development-intelligence/SCIIP_Development_Workspace.gs",
         "src/applications/development-intelligence/SCIIP_Project_Schedule_Engine.gs",
+        "src/applications/enterprise-administration/SCIIP_V8_Enterprise_Administration_Identity_Security_Governance.gs",
         "src/applications/enterprise-ai-governance/SCIIP_S28_AI_Decision_Governance_Engine.gs",
         "src/applications/enterprise-ai-governance/SCIIP_S28_AI_Governance_Scorecard.gs",
         "src/applications/enterprise-ai-governance/SCIIP_S28_Enterprise_AI_Governance_Application.gs",
@@ -11787,6 +11801,15 @@
         "src/applications/enterprise-continuous-learning/SCIIP_S29_Learning_Feedback_Engine.gs",
         "src/applications/enterprise-continuous-learning/SCIIP_S29_Learning_Recommendation_Engine.gs",
         "src/applications/enterprise-continuous-learning/SCIIP_S29_Model_Performance_Engine.gs",
+        "src/applications/enterprise-data-fabric/SCIIP_Epic8_Sprint1_Ingestion_Registry_Batch_Intake.gs",
+        "src/applications/enterprise-data-fabric/SCIIP_Epic8_Sprint2_Schema_Mapping_Canonicalization.gs",
+        "src/applications/enterprise-data-fabric/SCIIP_Epic8_Sprint3_Data_Quality_Validation_Quarantine.gs",
+        "src/applications/enterprise-data-fabric/SCIIP_Epic8_Sprint4_Entity_Resolution_Master_Data.gs",
+        "src/applications/enterprise-data-fabric/SCIIP_Epic8_Sprint5_Event_Generation_Idempotent_Ledger.gs",
+        "src/applications/enterprise-data-fabric/SCIIP_Epic8_Sprint6_Knowledge_Graph_Synchronization.gs",
+        "src/applications/enterprise-data-fabric/SCIIP_Epic8_Sprint7_Continuous_Intelligence_Refresh.gs",
+        "src/applications/enterprise-data-fabric/SCIIP_Epic8_Sprint8_Release_Certification.gs",
+        "src/applications/enterprise-data-governance/SCIIP_V8_Enterprise_Data_Governance_Master_Data_Quality_Lineage_Stewardship.gs",
         "src/applications/enterprise-digital-ceo/SCIIP_S30_Digital_CEO_Scorecard.gs",
         "src/applications/enterprise-digital-ceo/SCIIP_S30_Enterprise_Digital_CEO_Application.gs",
         "src/applications/enterprise-digital-ceo/SCIIP_S30_Enterprise_Orchestration_Engine.gs",
@@ -11811,6 +11834,14 @@
         "src/applications/enterprise-digital-strategy-officer/SCIIP_S33_Strategic_Initiative_Engine.gs",
         "src/applications/enterprise-digital-strategy-officer/SCIIP_S33_Strategy_Scorecard.gs",
         "src/applications/enterprise-digital-strategy-officer/SCIIP_S33_Strategy_Synthesis_Engine.gs",
+        "src/applications/enterprise-digital-twin-simulation/SCIIP_V8_Enterprise_Digital_Twin_Simulation_Predictive_Operations.gs",
+        "src/applications/enterprise-digital-twin/SCIIP_Epic7_Sprint1_Enterprise_Digital_Twin_Registry.gs",
+        "src/applications/enterprise-digital-twin/SCIIP_Epic7_Sprint2_Cross_Workspace_Event_Synchronization_Fabric.gs",
+        "src/applications/enterprise-digital-twin/SCIIP_Epic7_Sprint3_Autonomous_Monitoring_Anomaly_Detection.gs",
+        "src/applications/enterprise-digital-twin/SCIIP_Epic7_Sprint4_Predictive_Operational_Simulation.gs",
+        "src/applications/enterprise-digital-twin/SCIIP_Epic7_Sprint5_Enterprise_Command_Playbooks.gs",
+        "src/applications/enterprise-digital-twin/SCIIP_Epic7_Sprint6_Governed_Autonomous_Execution.gs",
+        "src/applications/enterprise-digital-twin/SCIIP_Epic7_Sprint7_Release_Certification.gs",
         "src/applications/enterprise-execution/SCIIP_Critical_Path_Engine.gs",
         "src/applications/enterprise-execution/SCIIP_Enterprise_Execution_Application.gs",
         "src/applications/enterprise-execution/SCIIP_Enterprise_Execution_Engine.gs",
@@ -11823,6 +11854,8 @@
         "src/applications/enterprise-financial-planning/SCIIP_Executive_Financial_Workspace.gs",
         "src/applications/enterprise-financial-planning/SCIIP_Financial_Risk_Forecast.gs",
         "src/applications/enterprise-financial-planning/SCIIP_Forecast_Variance_Engine.gs",
+        "src/applications/enterprise-integration-hub/SCIIP_V8_Enterprise_Integration_Hub_Connectors_APIs_Webhooks_Synchronization_Governance.gs",
+        "src/applications/enterprise-integration/SCIIP_V10_1_10_5_Enterprise_Application_Integration.gs",
         "src/applications/enterprise-operating-system-orchestrator/SCIIP_Approval_Orchestrator.gs",
         "src/applications/enterprise-operating-system-orchestrator/SCIIP_Cross_Application_Coordinator.gs",
         "src/applications/enterprise-operating-system-orchestrator/SCIIP_Enterprise_Operating_System_Orchestrator_Application.gs",
@@ -11830,6 +11863,7 @@
         "src/applications/enterprise-operating-system-orchestrator/SCIIP_Enterprise_Timeline.gs",
         "src/applications/enterprise-operating-system-orchestrator/SCIIP_Enterprise_Workflow_Engine.gs",
         "src/applications/enterprise-operating-system-orchestrator/SCIIP_Workflow_State_Machine.gs",
+        "src/applications/enterprise-planning-strategy/SCIIP_V8_Enterprise_Planning_Objectives_Portfolio_Strategy_Decision_Governance.gs",
         "src/applications/enterprise-planning/SCIIP_Adaptive_Planning_Engine.gs",
         "src/applications/enterprise-planning/SCIIP_Enterprise_Planning_Application.gs",
         "src/applications/enterprise-planning/SCIIP_Enterprise_Planning_Engine.gs",
@@ -11848,6 +11882,19 @@
         "src/applications/enterprise-resource-capacity/SCIIP_Executive_Capacity_Workspace.gs",
         "src/applications/enterprise-resource-capacity/SCIIP_Resource_Capacity_Engine.gs",
         "src/applications/enterprise-resource-capacity/SCIIP_Resource_Risk_Engine.gs",
+        "src/applications/enterprise-search/SCIIP_V8_Enterprise_Search_Application.gs",
+        "src/applications/executive-command-center/SCIIP_V8_Executive_Intelligence_Command_Center.gs",
+        "src/applications/executive-operations-portal/SCIIP_Epic6_Executive_Operations_Portal.gs",
+        "src/applications/executive-operations-portal/SCIIP_Epic6_Executive_Operations_Portal_Tests.gs",
+        "src/applications/executive-operations/SCIIP_Epic6_Executive_Alerts_Decisions_Actions.gs",
+        "src/applications/executive-operations/SCIIP_Epic6_Executive_Asset_Strategy_Disposition_Management.gs",
+        "src/applications/executive-operations/SCIIP_Epic6_Executive_Development_Construction_Delivery_Operations.gs",
+        "src/applications/executive-operations/SCIIP_Epic6_Executive_Forecasting_Scenario_Planning.gs",
+        "src/applications/executive-operations/SCIIP_Epic6_Executive_Leasing_Tenant_Pipeline_Revenue_Operations.gs",
+        "src/applications/executive-operations/SCIIP_Epic6_Executive_Operating_Review_Performance.gs",
+        "src/applications/executive-operations/SCIIP_Epic6_Executive_Operations_Command_Center_Release_Certification.gs",
+        "src/applications/executive-operations/SCIIP_Epic6_Executive_Portfolio_Operations.gs",
+        "src/applications/executive-operations/SCIIP_Epic6_Executive_Portfolio_Optimization_Capital_Allocation.gs",
         "src/applications/industrial-data-platform/SCIIP_Canonical_Industrial_Knowledge_Model.gs",
         "src/applications/industrial-data-platform/SCIIP_Epic2_Release2_Tests.gs",
         "src/applications/industrial-data-platform/SCIIP_Epic2_Release3_Tests.gs",
@@ -11902,12 +11949,14 @@
         "src/applications/market-intelligence/SCIIP_Market_Intelligence_AI_Bridge.gs",
         "src/applications/market-intelligence/SCIIP_Market_Intelligence_Engine.gs",
         "src/applications/market-intelligence/SCIIP_Market_Intelligence_Persistence.gs",
+        "src/applications/market-intelligence/SCIIP_V8_Market_Intelligence_Application.gs",
         "src/applications/market-opportunity/SCIIP_Broker_Action_Center.gs",
         "src/applications/market-opportunity/SCIIP_Company_Expansion_Intelligence.gs",
         "src/applications/market-opportunity/SCIIP_Market_Intelligence_Workspace.gs",
         "src/applications/market-opportunity/SCIIP_Market_Opportunity_Application.gs",
         "src/applications/market-opportunity/SCIIP_Market_Opportunity_Engine.gs",
         "src/applications/market-opportunity/SCIIP_Property_Opportunity_Matcher.gs",
+        "src/applications/platform-services/SCIIP_V9_6_10_0_Platform_Services_Batch.gs",
         "src/applications/portfolio-performance/SCIIP_Capital_Planning_Engine.gs",
         "src/applications/portfolio-performance/SCIIP_Portfolio_Benchmark_Engine.gs",
         "src/applications/portfolio-performance/SCIIP_Portfolio_KPI_Engine.gs",
@@ -11915,6 +11964,35 @@
         "src/applications/portfolio-performance/SCIIP_Portfolio_Performance_Engine.gs",
         "src/applications/portfolio-performance/SCIIP_Portfolio_Performance_Workspace.gs",
         "src/applications/portfolio-performance/SCIIP_Portfolio_Risk_Engine.gs",
+        "src/applications/production-readiness/SCIIP_V8_10_Temporal_Knowledge_Graph.gs",
+        "src/applications/production-readiness/SCIIP_V8_1_Native_SuperSheet_Parser.gs",
+        "src/applications/production-readiness/SCIIP_V8_2_Canonical_SuperSheet_Resolution.gs",
+        "src/applications/production-readiness/SCIIP_V8_3_SuperSheet_Extraction_Accuracy.gs",
+        "src/applications/production-readiness/SCIIP_V8_4_Row_Aware_Cross_Edition_Identity.gs",
+        "src/applications/production-readiness/SCIIP_V8_5_SuperSheet_Production_Certification.gs",
+        "src/applications/production-readiness/SCIIP_V8_6_SuperSheet_Production_Acceptance.gs",
+        "src/applications/production-readiness/SCIIP_V8_7_SuperSheet_Semantic_Intelligence.gs",
+        "src/applications/production-readiness/SCIIP_V8_8_Canonicalization_Engine.gs",
+        "src/applications/production-readiness/SCIIP_V8_9_Knowledge_Graph_Population.gs",
+        "src/applications/production-readiness/SCIIP_V8_Historical_SuperSheet_Ingestion_Engine.gs",
+        "src/applications/production-readiness/SCIIP_V8_Production_Readiness_Batch_Sprints4_7.gs",
+        "src/applications/production-readiness/SCIIP_V8_Production_Readiness_Batch_Sprints8_10.gs",
+        "src/applications/production-readiness/SCIIP_V8_Production_Readiness_Command_Center.gs",
+        "src/applications/production-readiness/SCIIP_V8_Production_Readiness_Real_SuperSheet_Profiling.gs",
+        "src/applications/production-readiness/SCIIP_V8_Production_Readiness_SuperSheet_Validation.gs",
+        "src/applications/production-readiness/SCIIP_V9_0_2_Governed_Historical_Ingestion_Batch.gs",
+        "src/applications/production-readiness/SCIIP_V9_3_5_Independent_Corpus_Canary_Operations_Batch.gs",
+        "src/applications/property-command-center/SCIIP_Epic5_Approved_Commit_Refresh_Engine.gs",
+        "src/applications/property-command-center/SCIIP_Epic5_Live_Ingestion_Review_Workflow.gs",
+        "src/applications/property-command-center/SCIIP_Epic5_Property_Command_Application.gs",
+        "src/applications/property-command-center/SCIIP_Epic5_Property_Command_Core.gs",
+        "src/applications/property-command-center/SCIIP_Epic5_Property_Command_Service.gs",
+        "src/applications/property-command-center/SCIIP_Epic5_Property_Command_Tests.gs",
+        "src/applications/property-command-center/SCIIP_Epic5_Property_Context_Engine.gs",
+        "src/applications/property-command-center/SCIIP_Epic5_Property_Context_Service.gs",
+        "src/applications/property-command-center/SCIIP_Epic5_Property_Context_Tests.gs",
+        "src/applications/property-command-center/SCIIP_Epic5_SuperSheet_Ingestion_Center.gs",
+        "src/applications/property-explorer/SCIIP_V8_Property_Explorer_Application.gs",
         "src/applications/relationship-intelligence/SCIIP_Adaptive_Opportunity_Learning_Portfolio_Intelligence_Application.gs",
         "src/applications/relationship-intelligence/SCIIP_Adaptive_Opportunity_Learning_Portfolio_Intelligence_Engine.gs",
         "src/applications/relationship-intelligence/SCIIP_Adaptive_Opportunity_Learning_Portfolio_Intelligence_Persistence.gs",
@@ -11968,7 +12046,15 @@
         "src/applications/tenant-prospecting/SCIIP_Engagement_Planner.gs",
         "src/applications/tenant-prospecting/SCIIP_Expansion_Signal_Engine.gs",
         "src/applications/tenant-prospecting/SCIIP_Occupier_Fit_Engine.gs",
-        "src/applications/tenant-prospecting/SCIIP_Prospect_Prioritization_Engine.gs",
+        "src/applications/tenant-prospecting/SCIIP_Prospect_Prioritization_Engine.gs"
+      ],
+      "bytes": 949972,
+      "sha256": "639152672558c3f56717881b844e161c254f81153dc09bc4b734404f0135ab0c"
+    },
+    {
+      "file": "11_other_002.gs",
+      "domain": "11_other",
+      "sources": [
         "src/applications/tenant-prospecting/SCIIP_Prospect_Profile.gs",
         "src/applications/tenant-prospecting/SCIIP_Tenant_Prospecting_Application.gs",
         "src/applications/tenant-prospecting/SCIIP_Tenant_Prospecting_Workspace.gs",
@@ -11978,6 +12064,66 @@
         "src/applications/transaction-execution/SCIIP_Transaction_Execution_Application.gs",
         "src/applications/transaction-execution/SCIIP_Transaction_Execution_Workspace.gs",
         "src/applications/transaction-execution/SCIIP_Transaction_Milestone_Registry.gs",
+        "src/applications/web-application/SCIIP_V8_Data_Sources_SuperSheet_Workflow.gs",
+        "src/applications/web-application/SCIIP_V8_Web_Application_Foundation.gs",
+        "src/applications/workflow-orchestration/SCIIP_V8_Workflow_Orchestration_Application.gs",
+        "src/platform/ai/SCIIP_AI_Approval_Execution_Gateway.gs",
+        "src/platform/ai/SCIIP_AI_Context_Memory_Manager.gs",
+        "src/platform/ai/SCIIP_AI_Cost_Usage_Controller.gs",
+        "src/platform/ai/SCIIP_AI_Evidence_Confidence_Service.gs",
+        "src/platform/ai/SCIIP_AI_Execution_Audit_Persistence.gs",
+        "src/platform/ai/SCIIP_AI_Model_Registry.gs",
+        "src/platform/ai/SCIIP_AI_Prompt_Governance.gs",
+        "src/platform/ai/SCIIP_AI_Runtime_Health_Certification.gs",
+        "src/platform/ai/SCIIP_Epic4_AI_Runtime_Application.gs",
+        "src/platform/ai/SCIIP_Epic4_AI_Runtime_Tests.gs",
+        "src/platform/data/SCIIP_Cache_Manager.gs",
+        "src/platform/data/SCIIP_Cross_Source_Federation_Service.gs",
+        "src/platform/data/SCIIP_Epic4_Platform_Core_Application.gs",
+        "src/platform/data/SCIIP_Epic4_Platform_Core_Tests.gs",
+        "src/platform/data/SCIIP_Platform_Core_Health_Certification.gs",
+        "src/platform/data/SCIIP_Query_Planner.gs",
+        "src/platform/data/SCIIP_Repository_Registry.gs",
+        "src/platform/data/SCIIP_Storage_Provider_Abstraction.gs",
+        "src/platform/data/SCIIP_Transaction_Coordinator.gs",
+        "src/platform/data/SCIIP_Unified_Data_Access_Layer.gs",
+        "src/platform/digital-twin/SCIIP_Digital_Twin_Audit_Persistence.gs",
+        "src/platform/digital-twin/SCIIP_Digital_Twin_Change_Propagation.gs",
+        "src/platform/digital-twin/SCIIP_Digital_Twin_Prediction_Hooks.gs",
+        "src/platform/digital-twin/SCIIP_Digital_Twin_Runtime_Health_Certification.gs",
+        "src/platform/digital-twin/SCIIP_Digital_Twin_Scenario_Simulation.gs",
+        "src/platform/digital-twin/SCIIP_Digital_Twin_Spatial_Synchronization.gs",
+        "src/platform/digital-twin/SCIIP_Digital_Twin_State_Registry.gs",
+        "src/platform/digital-twin/SCIIP_Digital_Twin_Temporal_Versioning.gs",
+        "src/platform/digital-twin/SCIIP_Epic4_Digital_Twin_Runtime_Application.gs",
+        "src/platform/digital-twin/SCIIP_Epic4_Digital_Twin_Runtime_Tests.gs",
+        "src/platform/execution/SCIIP_Dead_Letter_Recovery_Service.gs",
+        "src/platform/execution/SCIIP_Enterprise_Event_Bus.gs",
+        "src/platform/execution/SCIIP_Epic4_Execution_Runtime_Application.gs",
+        "src/platform/execution/SCIIP_Epic4_Execution_Runtime_Tests.gs",
+        "src/platform/execution/SCIIP_Event_Replay_Recovery_Service.gs",
+        "src/platform/execution/SCIIP_Execution_Audit_Persistence.gs",
+        "src/platform/execution/SCIIP_Execution_Runtime_Health_Certification.gs",
+        "src/platform/execution/SCIIP_Governed_Scheduler.gs",
+        "src/platform/execution/SCIIP_Reliable_Message_Broker.gs",
+        "src/platform/execution/SCIIP_Workflow_Orchestration_Runtime.gs",
+        "src/platform/security/SCIIP_Approval_Governance_Service.gs",
+        "src/platform/security/SCIIP_Epic4_Enterprise_Identity_Security_Application.gs",
+        "src/platform/security/SCIIP_Epic4_Enterprise_Identity_Security_Tests.gs",
+        "src/platform/security/SCIIP_Identity_Registry.gs",
+        "src/platform/security/SCIIP_Role_Based_Access_Control.gs",
+        "src/platform/security/SCIIP_Security_Audit_Persistence.gs",
+        "src/platform/security/SCIIP_Security_Health_Certification.gs",
+        "src/platform/security/SCIIP_Security_Policy_Engine.gs",
+        "src/platform/security/SCIIP_Service_Identity_Manager.gs",
+        "src/platform/security/SCIIP_Session_Token_Manager.gs",
+        "src/platform/services/SCIIP_Epic4_Sprint1_Tests.gs",
+        "src/platform/services/SCIIP_Epic4_Sprint1_Unified_Platform_Application.gs",
+        "src/platform/services/SCIIP_Unified_Platform_Audit_Persistence.gs",
+        "src/platform/services/SCIIP_Unified_Platform_Command_Query_Bus.gs",
+        "src/platform/services/SCIIP_Unified_Platform_Context_Evidence_Service.gs",
+        "src/platform/services/SCIIP_Unified_Platform_Health_Governance_Service.gs",
+        "src/platform/services/SCIIP_Unified_Platform_Service_Registry.gs",
         "src/processors/asset/execution/6480_AssetRegistryExecutionProcessor.gs",
         "src/processors/asset/execution/6490_AssetDiscoveryExecutionProcessor.gs",
         "src/processors/asset/execution/6500_AssetRegistryBuilderProcessor.gs",
@@ -12022,18 +12168,18 @@
         "src/processors/domain/6350_GISDomainExecutionPlanProcessor.gs",
         "src/processors/domain/6360_DomainExecutionCoordinationLedgerProcessor.gs",
         "src/processors/domain/6370_DomainExecutionHandoffProcessor.gs",
-        "src/processors/domain/6380_DomainExecutionAcceptanceProcessor.gs"
-      ],
-      "bytes": 915268,
-      "sha256": "54590aa5b87d1785aca2bbf860adfc2fd90415cdedb4f06f36a9893019ecb738"
-    },
-    {
-      "file": "11_other_002.gs",
-      "domain": "11_other",
-      "sources": [
+        "src/processors/domain/6380_DomainExecutionAcceptanceProcessor.gs",
         "src/processors/runtime/autonomous/3420_4000_Production_Runtime_Framework.gs",
         "src/processors/runtime/autonomous/4010_4600_Autonomous_Runtime_Core.gs",
-        "src/processors/runtime/autonomous/4610_5200_Autonomous_Runtime_Recovery_Governance.gs",
+        "src/processors/runtime/autonomous/4610_5200_Autonomous_Runtime_Recovery_Governance.gs"
+      ],
+      "bytes": 938391,
+      "sha256": "68a7c9dd8e7902323087ceb92143d27145f31a0ff3cc67ad32a9d4aab81a8250"
+    },
+    {
+      "file": "11_other_003.gs",
+      "domain": "11_other",
+      "sources": [
         "src/processors/runtime/autonomous/5210_5800_Autonomous_Runtime_Control_Intelligence.gs",
         "src/processors/runtime/autonomous/5810_6200_Autonomous_Runtime_Reporting_Supervisor.gs",
         "src/processors/runtime/framework/1000_AutonomousProcessorExecutionControlProcessor.gs",
@@ -12051,15 +12197,7 @@
         "src/processors/runtime/framework/1120_AutonomousProcessorExecutionDailyBriefProcessor.gs",
         "src/processors/runtime/framework/1130_AutonomousProcessorExecutionDailyBriefLedgerProcessor.gs",
         "src/processors/runtime/framework/1140_AutonomousProcessorExecutionRunStateProcessor.gs",
-        "src/processors/runtime/framework/1150_AutonomousProcessorExecutionRunStateLedgerProcessor.gs"
-      ],
-      "bytes": 944249,
-      "sha256": "304647dbef7cfc1a03f2b12d4549c57b080fb67e091897e2452376921423429b"
-    },
-    {
-      "file": "11_other_003.gs",
-      "domain": "11_other",
-      "sources": [
+        "src/processors/runtime/framework/1150_AutonomousProcessorExecutionRunStateLedgerProcessor.gs",
         "src/processors/runtime/framework/1160_AutonomousProcessorExecutionRunStateDigestProcessor.gs",
         "src/processors/runtime/framework/1170_AutonomousProcessorExecutionRunStateDigestLedgerProcessor.gs",
         "src/processors/runtime/framework/1180_AutonomousProcessorExecutionRunStateSignalProcessor.gs",
@@ -12082,7 +12220,15 @@
         "src/processors/runtime/framework/1350_AutonomousProcessorExecutionRunStateContinuityDigestLedgerProcessor.gs",
         "src/processors/runtime/framework/1360_AutonomousProcessorExecutionRunStateContinuitySignalProcessor.gs",
         "src/processors/runtime/framework/1370_AutonomousProcessorExecutionRunStateContinuitySignalLedgerProcessor.gs",
-        "src/processors/runtime/framework/1380_AutonomousProcessorExecutionRunStateContinuitySignalDigestProcessor.gs",
+        "src/processors/runtime/framework/1380_AutonomousProcessorExecutionRunStateContinuitySignalDigestProcessor.gs"
+      ],
+      "bytes": 939518,
+      "sha256": "bc2f4cd4a2ce8c81879a94412796975d6f0e649db20277aaecacb405dcbc355b"
+    },
+    {
+      "file": "11_other_004.gs",
+      "domain": "11_other",
+      "sources": [
         "src/processors/runtime/framework/1390_AutonomousProcessorExecutionRunStateContinuitySignalDigestLedgerProcessor.gs",
         "src/processors/runtime/framework/1400_AutonomousProcessorExecutionRunStateContinuityCommandCenterProcessor.gs",
         "src/processors/runtime/framework/1410_AutonomousProcessorExecutionRunStateContinuityCommandCenterLedgerProcessor.gs",
@@ -12124,15 +12270,7 @@
         "src/processors/runtime/framework/1770_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewClosureProcessor.gs",
         "src/processors/runtime/framework/1780_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewArchiveProcessor.gs",
         "src/processors/runtime/framework/1790_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewKnowledgeGraphProcessor.gs",
-        "src/processors/runtime/framework/1800_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemMapProcessor.gs"
-      ],
-      "bytes": 947322,
-      "sha256": "b18478f55acfc832e0f0c46b322567dd706ad26e91fcb921596ab8261bc5191f"
-    },
-    {
-      "file": "11_other_004.gs",
-      "domain": "11_other",
-      "sources": [
+        "src/processors/runtime/framework/1800_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemMapProcessor.gs",
         "src/processors/runtime/framework/1810_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemIndexProcessor.gs",
         "src/processors/runtime/framework/1820_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemRegistryProcessor.gs",
         "src/processors/runtime/framework/1830_AutonomousProcessorExecutionRunStateContinuityArchitectureReviewSystemStateProcessor.gs",
@@ -12167,7 +12305,15 @@
         "src/processors/runtime/framework/2740_SuperSheetDataQualityLedgerProcessor.gs",
         "src/processors/runtime/framework/900_AutonomousGovernanceReviewProcessor.gs",
         "src/processors/runtime/framework/910_AutonomousProcessorGuidanceProcessor.gs",
-        "src/processors/runtime/framework/920_AutonomousProcessorExecutionPlanProcessor.gs",
+        "src/processors/runtime/framework/920_AutonomousProcessorExecutionPlanProcessor.gs"
+      ],
+      "bytes": 945406,
+      "sha256": "ecd8851fae4b4bc4352cb0249763c2661a600c1f56d53e9df08bd3454e65680c"
+    },
+    {
+      "file": "11_other_005.gs",
+      "domain": "11_other",
+      "sources": [
         "src/processors/runtime/framework/930_AutonomousProcessorBuildTaskProcessor.gs",
         "src/processors/runtime/framework/940_AutonomousProcessorBuildValidationProcessor.gs",
         "src/processors/runtime/framework/950_AutonomousProcessorReadinessProcessor.gs",
@@ -12227,15 +12373,7 @@
         "src/processors/runtime/supersheet/2940_SuperSheetImportReleaseAuthorizationLedgerProcessor.gs",
         "src/processors/runtime/supersheet/2950_SuperSheetImportReleaseCommandProcessor.gs",
         "src/processors/runtime/supersheet/2960_SuperSheetImportReleaseCommandLedgerProcessor.gs",
-        "src/processors/runtime/supersheet/2970_SuperSheetImportExecutionHandoffProcessor.gs"
-      ],
-      "bytes": 944360,
-      "sha256": "7d048e90e3554b7327ad31ff1fe9f80fdd504afc9f0c18cc4b3c00990acb862b"
-    },
-    {
-      "file": "11_other_005.gs",
-      "domain": "11_other",
-      "sources": [
+        "src/processors/runtime/supersheet/2970_SuperSheetImportExecutionHandoffProcessor.gs",
         "src/processors/runtime/supersheet/2980_SuperSheetImportExecutionHandoffLedgerProcessor.gs",
         "src/processors/runtime/supersheet/2990_SuperSheetImportExecutionReadinessProcessor.gs",
         "src/processors/runtime/supersheet/3000_SuperSheetImportExecutionReadinessLedgerProcessor.gs",
@@ -12277,7 +12415,15 @@
         "src/processors/runtime/supersheet/3320_SuperSheetImportExecutionEndToEndReadinessLedgerProcessor.gs",
         "src/processors/runtime/supersheet/3330_SuperSheetImportExecutionProductionTestAuthorizationProcessor.gs",
         "src/processors/runtime/supersheet/3340_SuperSheetImportExecutionProductionTestAuthorizationLedgerProcessor.gs",
-        "src/processors/runtime/supersheet/3350_SuperSheetImportExecutionProductionTestLaunchProcessor.gs",
+        "src/processors/runtime/supersheet/3350_SuperSheetImportExecutionProductionTestLaunchProcessor.gs"
+      ],
+      "bytes": 940993,
+      "sha256": "99f2539af3c7e96c790dba826547c3f4ea57c047966db8168eab5c8f9837e947"
+    },
+    {
+      "file": "11_other_006.gs",
+      "domain": "11_other",
+      "sources": [
         "src/processors/runtime/supersheet/3360_SuperSheetImportExecutionProductionTestLaunchLedgerProcessor.gs",
         "src/processors/runtime/supersheet/3370_SuperSheetImportExecutionProductionTestExecutionProcessor.gs",
         "src/processors/runtime/supersheet/3380_SuperSheetImportExecutionProductionTestExecutionLedgerProcessor.gs",
@@ -12321,15 +12467,7 @@
         "src/processors/runtime/supersheet/680_ScenarioMonitoringProcessor.gs",
         "src/processors/runtime/supersheet/690_MonitoringSignalDetectionProcessor.gs",
         "src/processors/runtime/supersheet/700_AutonomousActionRoutingProcessor.gs",
-        "src/processors/runtime/supersheet/710_ActionQueueProcessor.gs"
-      ],
-      "bytes": 945507,
-      "sha256": "d8bd33ea48167c249568829997c58c77f76a7b5409f69dfbff35489709e99fa4"
-    },
-    {
-      "file": "11_other_006.gs",
-      "domain": "11_other",
-      "sources": [
+        "src/processors/runtime/supersheet/710_ActionQueueProcessor.gs",
         "src/processors/runtime/supersheet/720_ActionDigestProcessor.gs",
         "src/processors/runtime/supersheet/730_OperatorBriefingProcessor.gs",
         "src/processors/runtime/supersheet/740_CommandCenterUpdateProcessor.gs",
@@ -12385,8 +12523,8 @@
         "src/shared/Utilities.gs",
         "src/utils/SpreadsheetResolver.gs"
       ],
-      "bytes": 314811,
-      "sha256": "2534178cb46ef00e3a791bdb0fbe95307234089ad3e2f64d53487110a2444092"
+      "bytes": 884527,
+      "sha256": "c6c9e2f0a2251af06960e0075e1785694af4a1693e6fcbf810e13406b9dd2b62"
     }
   ]
 }

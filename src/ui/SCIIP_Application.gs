@@ -11,6 +11,7 @@ var SCIIP_APPLICATION = (function () {
     {id:'knowledge-graph',label:'Knowledge Graph',description:'Explore relationships among properties, companies, people, and events.',capability:'graph'},
     {id:'ai-copilot',label:'AI Copilot',description:'Ask grounded questions across the SCIIP industrial database.',capability:'ai'},
     {id:'market-intelligence',label:'Market Intelligence',description:'Track governed market changes, property timelines, and opportunities.',capability:'market'},
+    {id:'relationship-intelligence',label:'Relationship Intelligence',description:'Explore governed owner, tenant, broker, company, property, and portfolio networks.',capability:'graph'},
     {id:'reports',label:'Reports',description:'Generate market surveys, owner updates, and analysis packages.',capability:'reports'},
     {id:'administration',label:'Administration',description:'Data governance, services, users, and platform health.',capability:'admin'}
   ];
@@ -45,6 +46,7 @@ var SCIIP_APPLICATION = (function () {
     session:{status:'ACTIVE',authenticationMode:'GOOGLE_IDENTITY',user:safe_(function(){return Session.getActiveUser().getEmail()||'SCIIP User';},'SCIIP User')},
     dashboard:dashboard_(),dataSources:dataSources_(),
     marketIntelligence:(typeof sciipMarketIntelligenceWorkspace==='function'?sciipMarketIntelligenceWorkspace():{status:'READY',events:[],opportunities:[],summary:{eventCount:0,summary:'No governed market changes detected.'},counts:{events:0,opportunities:0}}),
+    relationshipIntelligence:(typeof sciipRelationshipIntelligenceWorkspace==='function'?sciipRelationshipIntelligenceWorkspace():{status:'READY',relationships:[],counts:{relationships:0,entities:0},centrality:[],components:[]}),
     propertyExplorer:typeof SCIIP_PROPERTY_EXPLORER!=='undefined'?SCIIP_PROPERTY_EXPLORER.snapshot():null,
     gisWorkspace:typeof SCIIP_GIS_WORKSPACE!=='undefined'?SCIIP_GIS_WORKSPACE.snapshot({}):null,
     generatedAt:new Date().toISOString()

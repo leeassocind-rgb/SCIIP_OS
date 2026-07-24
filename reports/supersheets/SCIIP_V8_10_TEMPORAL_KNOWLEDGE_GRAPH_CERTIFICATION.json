@@ -1,0 +1,92 @@
+{
+  "framework": "SCIIP_V8_10_TEMPORAL_KNOWLEDGE_GRAPH_CERTIFICATION",
+  "version": "v8.10.0",
+  "status": "PASSED",
+  "generatedAt": "2026-07-23T17:30:50.549Z",
+  "testsRun": 48,
+  "failures": [],
+  "result": {
+    "workspace": "temporal-knowledge-graph",
+    "applicationStatus": "CONDITIONAL_PASS_EXTERNAL_CORPUS_REQUIRED",
+    "baseNodes": 7497,
+    "baseEdges": 18069,
+    "nodes": 9892,
+    "edges": 20464,
+    "timelines": 2224,
+    "validityIntervals": 2281,
+    "changeEvents": 114,
+    "listingsWithChanges": 54,
+    "recurringTimelines": 92,
+    "stewardReview": 0,
+    "productionWrites": 0,
+    "commitEnabled": false
+  },
+  "gates": [
+    {
+      "name": "GOLD_STANDARD_LOCKED",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "BASE_GRAPH_CERTIFIED",
+      "passed": true,
+      "actual": "SCIIP_V8_9_KNOWLEDGE_GRAPH",
+      "required": "SCIIP_V8_9_KNOWLEDGE_GRAPH"
+    },
+    {
+      "name": "TIMELINE_PARITY",
+      "passed": true,
+      "actual": 2224,
+      "required": 2224
+    },
+    {
+      "name": "TEMPORAL_BINDINGS_RESOLVED",
+      "passed": true,
+      "actual": 0,
+      "required": 0
+    },
+    {
+      "name": "FIRST_LAST_VALID",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "INTERVALS_NON_OVERLAPPING",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "SOURCE_OBSERVATION_PARITY",
+      "passed": true,
+      "actual": 2582,
+      "required": 2582
+    },
+    {
+      "name": "PRODUCTION_WRITES_ZERO",
+      "passed": true,
+      "actual": 0,
+      "required": 0
+    },
+    {
+      "name": "COMMIT_DISABLED",
+      "passed": true,
+      "actual": false,
+      "required": false
+    }
+  ],
+  "governance": {
+    "eventSourced": true,
+    "permanentHistory": true,
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "stewardApprovalRequired": true,
+    "independentCorpusCertificationRequired": true,
+    "graphPersistenceMode": "DRY_RUN"
+  },
+  "evidenceDigest": "15b257821a3d92a240263947b481ce6d018ad0a4ab64b504ee1c591853d76cb3",
+  "timelineDigest": "903680377b9dba42d30882909abc03a42a670355f8b22ee0dc12177019417e44",
+  "changeLedgerDigest": "e3165d5b7734fdfb33ccb22a9a29a59de95d7bb7ea6c87ecced7d42523b07c20"
+}

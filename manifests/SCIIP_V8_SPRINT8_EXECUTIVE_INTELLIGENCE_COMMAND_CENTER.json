@@ -1,0 +1,11 @@
+{
+  "framework": "SCIIP_V8_SPRINT8_EXECUTIVE_INTELLIGENCE_COMMAND_CENTER",
+  "version": "v8.0-sprint8.0",
+  "publicCertification": "sciipTestV8Sprint8ExecutiveIntelligenceCommandCenter",
+  "capabilities": [
+    "portfolio-health", "market-kpis", "priority-command-ranking", "risk-panel",
+    "alerts", "approvals", "executive-briefing", "cross-workspace-navigation",
+    "shared-context", "live-refresh", "governance"
+  ],
+  "destructiveActionsEnabledByDefault": false
+}

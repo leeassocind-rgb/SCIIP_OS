@@ -1,38 +1,8 @@
-function sciipTestV7Epic3Sprint5() {
-  var input = {
-    entities: [
-      {id:'COMP-A', name:'Owner A', type:'COMPANY'},
-      {id:'PERSON-B', name:'Broker B', type:'PERSON'},
-      {id:'COMP-C', name:'Tenant C', type:'COMPANY'}
-    ],
-    relationships: [
-      {sourceId:'COMP-A', targetId:'PERSON-B', type:'REPRESENTED_BY', strength:90, confidence:95, observedAt:'2026-07-17'},
-      {sourceId:'PERSON-B', targetId:'COMP-C', type:'KNOWS', strength:85, confidence:90, observedAt:'2026-07-17'},
-      {sourceId:'COMP-A', targetId:'PERSON-B', type:'REPRESENTED_BY', strength:80, confidence:80, observedAt:'2026-07-17'}
-    ]
-  };
-  var result = SCIIP_RELATIONSHIP_INTELLIGENCE_APPLICATION.run(input, {commit:false});
-  var failures = [];
-  if (result.analysis.entities !== 3) failures.push('Expected 3 entities.');
-  if (result.analysis.relationships !== 2) failures.push('Duplicate relationship was not suppressed.');
-  if (!result.analysis.topInfluencer || result.analysis.topInfluencer.entityId !== 'PERSON-B') failures.push('Influence scoring failed.');
-  if (result.analysis.opportunities.length !== 1) failures.push('Warm-introduction opportunity missing.');
-  if (result.persistence.status !== 'PREVIEW') failures.push('Default persistence must be preview-only.');
-  if (!result.briefing.grounded || !result.briefing.evidenceRequired) failures.push('AI briefing is not evidence governed.');
-  return {
-    framework:'SCIIP_V7_EPIC_3_SPRINT_5_RELATIONSHIP_INTELLIGENCE',
-    version:'v7.0-epic3-sprint5.0',
-    status:failures.length ? 'FAILED' : 'PASSED',
-    testsRun:6,
-    failures:failures,
-    result:{
-      entities:result.analysis.entities,
-      relationships:result.analysis.relationships,
-      opportunities:result.analysis.opportunities.length,
-      topInfluencer:result.analysis.topInfluencer && result.analysis.topInfluencer.entityId,
-      workspace:result.descriptor.workspace,
-      reviewRequired:result.descriptor.governance.reviewRequired,
-      destructiveCommitEnabled:result.descriptor.governance.destructiveCommitEnabled
-    }
-  };
-}
+/** Apps Script certification for Epic 3 Sprint 5. */
+function sciipTestV7Epic3Sprint5RelationshipIntelligence(){var failures=[];function ok(n,v){if(!v)failures.push(n);}var raw=[
+{relationshipType:'OWNER_PROPERTY',fromId:'OWNER-A',fromType:'OWNER',toId:'P-1',toType:'PROPERTY',direction:'BIDIRECTIONAL',effectiveAt:'2026-01-01',weight:.9,confidence:95},
+{relationshipType:'TENANT_PROPERTY',fromId:'TENANT-X',fromType:'TENANT',toId:'P-1',toType:'PROPERTY',direction:'BIDIRECTIONAL',effectiveAt:'2026-02-01',weight:.8,confidence:90},
+{relationshipType:'BROKER_LEASE',fromId:'BROKER-B',fromType:'BROKER',toId:'TENANT-X',toType:'TENANT',direction:'BIDIRECTIONAL',effectiveAt:'2026-03-01',weight:.7,confidence:88}];
+var e=raw.map(SCIIP_RELATIONSHIP_INTELLIGENCE.edge),path=SCIIP_RELATIONSHIP_INTELLIGENCE.shortestPath(e,'OWNER-A','BROKER-B'),snap=SCIIP_RELATIONSHIP_INTELLIGENCE.snapshot({relationships:e,occupancies:[{tenantId:'TENANT-X',propertyId:'P-1',occupiedSf:100000,effectiveAt:'2025-01-01'},{tenantId:'TENANT-X',propertyId:'P-1',occupiedSf:150000,effectiveAt:'2026-01-01'}],transactions:[{brokerId:'BROKER-B',transactionType:'LEASE',sf:150000,marketId:'IE'}],properties:[{propertyId:'P-1',ownerId:'OWNER-A',buildingSf:200000,marketId:'IE'}]});
+ok('version',snap.version==='v7.0-epic3-sprint5.0');ok('deterministic-id',e[0].relationshipId===SCIIP_RELATIONSHIP_INTELLIGENCE.edge(raw[0]).relationshipId);ok('path',path.found&&path.distance===3);ok('components',snap.network.components.length===1);ok('centrality',snap.network.centrality['P-1'].score>0);ok('tenant-movement',snap.tenantMovements[0].type==='EXPANSION');ok('broker',snap.brokers[0].brokerId==='BROKER-B');ok('owner',snap.owners[0].ownerId==='OWNER-A');ok('governance',snap.reviewRequired&&!snap.destructiveCommitEnabled);var ai=sciipRelationshipIntelligenceAnswerContext('Which tenants are expanding?',{relationships:e,occupancies:[{tenantId:'TENANT-X',propertyId:'P-1',occupiedSf:100000,effectiveAt:'2025-01-01'},{tenantId:'TENANT-X',propertyId:'P-1',occupiedSf:150000,effectiveAt:'2026-01-01'}]});ok('ai-grounding',ai.groundedOnly&&ai.evidenceCount===2);
+var result={framework:'SCIIP_V7_EPIC_3_SPRINT_5_RELATIONSHIP_INTELLIGENCE',version:'v7.0-epic3-sprint5.0',status:failures.length?'FAILED':'PASSED',testsRun:10,failures:failures,result:{relationships:e.length,pathDistance:path.distance,components:snap.network.components.length,tenantMovements:snap.tenantMovements.length,brokers:snap.brokers.length,owners:snap.owners.length,workspace:'relationship-intelligence',reviewRequired:snap.reviewRequired,destructiveCommitEnabled:snap.destructiveCommitEnabled}};console.log(JSON.stringify(result));return result;}

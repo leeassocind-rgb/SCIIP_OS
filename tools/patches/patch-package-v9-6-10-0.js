@@ -1,0 +1,2 @@
+#!/usr/bin/env node
+'use strict';const fs=require('fs'),path=require('path');const repo=process.argv[2]||process.cwd(),p=path.join(repo,'package.json'),d=JSON.parse(fs.readFileSync(p,'utf8'));d.scripts=d.scripts||{};d.scripts['platform:v10:services']='node tools/platform/sciip-v9-6-10-0-platform-services.js';d.scripts['test:v10:services']='node tools/tests/sciip-v9-6-10-0-platform-services-test.js';d.scripts['certify:v10:services']='npm run test:v10:services';fs.writeFileSync(p,JSON.stringify(d,null,2)+'\n');

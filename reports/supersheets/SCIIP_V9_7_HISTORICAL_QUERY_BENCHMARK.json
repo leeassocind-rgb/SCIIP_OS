@@ -1,0 +1,822 @@
+{
+  "framework": "SCIIP_V9_7_HISTORICAL_QUERY_ENGINE",
+  "version": "v9.7.0",
+  "generatedAt": "2026-07-23T18:08:12.680Z",
+  "status": "PASSED",
+  "queriesRun": 135,
+  "averageQueryLatencyMs": 0.2759,
+  "deterministicResponses": true,
+  "queries": [
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.1322,
+      "resultDigest": "2dc8a10967db18219ee5c3b301ec7c9a720770cd65a04059da5200663916ea4f",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0727,
+      "resultDigest": "9265598c6b7fdabbe574c5c104954c687f9b633df12e3ac296fb54aac1b350af",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0593,
+      "resultDigest": "d9a7ca965aca6bdf6682591cea63824af8d5b7f9c437ef69d7139fd14e2e3c8d",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0313,
+      "resultDigest": "6bed0ebcb5e7c11207ca51fc9488095d1b2a1127b9e51938889632865d4ec7e7",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0088,
+      "resultDigest": "338b87be3aa3ee38c1f539f15c1925f4142552027d061acbfef9c2a1f464ed38",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0176,
+      "resultDigest": "00a6702d9ba8c3a3befa51fef00314e563d3e3d4594bd4bd5005a7175597e806",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0262,
+      "resultDigest": "9cfabfd8231fa080df1cff00102f5e1b57abf43412c9f8fc7a2561e8f26d83ad",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0057,
+      "resultDigest": "c8b1f178f59d968afad9d676af6c01468f85dca6d00158eb40204e3fe14812f3",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0076,
+      "resultDigest": "4f2451391bf0a0b162ead244231032ebf8469dd5ddb951d354e12a4725d6c31a",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.034,
+      "resultDigest": "59e60d48d753291eb0d4479550869f47200cf16750f913b86e39b9ac60507019",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0052,
+      "resultDigest": "e36e8b8fedbaaaa24932a917a56948f55632d474bd57049b9f12deabf9b7df6b",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0073,
+      "resultDigest": "3c04a48248f6f7232ed01e4284397c123fac8c42d1517e3363b71b505594a353",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0183,
+      "resultDigest": "f4b7e8c161bc82d9bb6745ce9b09e560c284ffeaab1b0c202c435205842f3128",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.005,
+      "resultDigest": "2ec5ddd4ebfa23cd36714cb6767f1d9a2c8a93e320e9a96f993bdc3c0c6fcc6d",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0093,
+      "resultDigest": "770d295c928357cba393e0bd6f60c47f1adcde08014f4845ed60612df5ea5ec2",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0155,
+      "resultDigest": "173a0359be9adfe62a45a8ed939b5ba5fbe62469f492f9696a90f7625e65793a",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0052,
+      "resultDigest": "cce2e32e2c84d624641a57733935b93a948f055b701469bb412796ef4e793aa2",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0047,
+      "resultDigest": "86a1f8e242f79fd583ca3188a7a0fdb0466146cd9f7ee37a682c0e7791c1ec90",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0153,
+      "resultDigest": "7e9ab5ce945132398144fe7a1b6fbd1d4d266fed324b91c470371e87ad30a762",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.005,
+      "resultDigest": "9bcda66a6b20a5b91c3188408c81f2204644a04fa423fdb0cd13447a1d0b7c03",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0044,
+      "resultDigest": "c8ac0cfac30baf4091d058e7939fea3c2499a9c40838f2c1c9ef1c7153c656d4",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0176,
+      "resultDigest": "174a257f58189e7f59c782d9e299ed9d5fbb1e8da4aa61e75e559d8a425e297d",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0051,
+      "resultDigest": "95ec8865e4ca56c715159a78c723a87bd20706fdd193d8e7f0ea3b4882ab9735",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0042,
+      "resultDigest": "576b832daf44b7b0698eeea13b7fa0e852d246184395575e81134f3d4f9266ff",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0235,
+      "resultDigest": "ae8ebc0afffbe672db53a7a32267e19d757a50cab38a69b722d3fe0adfa72798",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0061,
+      "resultDigest": "330489c20ba058aa3580172af0369a79f412767253d0c5d1abcc2385a6b37c41",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0058,
+      "resultDigest": "449bd13f80fad17d5a62cb62646d415013a330747c50c71715c48430467b40c3",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0236,
+      "resultDigest": "206542e1921f28cfa4b0937ed35fb2e35ea2ef0effc800fa3be77cb0dfe2d349",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.1035,
+      "resultDigest": "bc9f9cd915bce933570d2afe1b1f2a5495650bbe0b10d92ca4a2b354eabbb6ce",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0065,
+      "resultDigest": "e5a5b80369d9302e3144f1c35bf7f776700117ed3c4b731b172e0170c84d533b",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0178,
+      "resultDigest": "287278c2534843c85122a253894c4712b04bdd6b4939d65ee6d2f07e4a3aea35",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0135,
+      "resultDigest": "b9d7106ca01faaeda7f4c64038eee3172ec17664f6593fbab3f7ccb8e4bf7017",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.01,
+      "resultDigest": "70bf053a42e4160154fe2e104ddb7bc08f7cd12c9480dbb3b6353b1b01ab0e95",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0195,
+      "resultDigest": "4ec7cf50d472e9d15a9ec7bd82ef43885f2a4f93e31a17d708a102653363f71a",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0028,
+      "resultDigest": "06d9cd8c31bde6a1dc359547c6be0991734c61bb2cfa194d6f52ef81f732f37f",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0051,
+      "resultDigest": "24d1e2a87ef6513a677c0396ea7499303ef44d8131645cfaac22b34a6c86968c",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.03,
+      "resultDigest": "2dc651bd49efd5b450f9721af0e356c66afb447e8e01a6bfdbb897d7ff84dccf",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0035,
+      "resultDigest": "7c745c84333a7e6687d5db0bf5a47be7ca0035acefacc3c7fe540da7687de452",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0042,
+      "resultDigest": "b295dca8632144bc54588ec43123b0031c337b5c79c47764b8a5e0b4b73a27a4",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0272,
+      "resultDigest": "3baa9959289423d72b8ccb820c0c9510713fb53b445925fa3e0687135dd93614",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0024,
+      "resultDigest": "b4732caf4681608eea82eb82a6d6da985bc34dfafdddeac975ac928a016c80dd",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0034,
+      "resultDigest": "ccad90cacfda54552e7ae3344880fe7555570132dd19a35e7a4d786b97a297d8",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0194,
+      "resultDigest": "d5f2bd0e04d517d5ce3b8ba8304400ff1227bb74bde7d47ab7417c61ab5c36e0",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0018,
+      "resultDigest": "65b9e32bc219e25bc3db109776b732c0e02e6ad951f842626176001dfe177d7f",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0032,
+      "resultDigest": "6a9d29448fdbd65a8b785606e6839929d99d5e476b29bb29ff0565a7f21e0437",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0188,
+      "resultDigest": "d520949048db055fb8be8d388d6eb4004ae4938ba7d762c68f10bc3cd7f4e907",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0019,
+      "resultDigest": "c86ecda23f30b8a6ea530375ee18ed312477f11a5bd8325c2b2d9d89f4a1a58e",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.003,
+      "resultDigest": "4ad8ff516b227d4bd59734c5ef774a2a7f1104b0f6de8b8601a6fb2d68de0675",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0183,
+      "resultDigest": "945662720d2577e7118cddfe2e242b650ca53ee478afb31a86dea009de5ae508",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0026,
+      "resultDigest": "d20429d3b78ec6ef191de96087066d20e83d5c4e844e6a9f804ec286f9aafcc6",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.003,
+      "resultDigest": "cd7b05902893e6a94fc15024f1b4ed88416954addd6c28a03250c2411f5c9bed",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.011,
+      "resultDigest": "5e585e6baf76f84350ea4dbbcdcd857e2daf348d2c6ff7164d772ee869938c77",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0018,
+      "resultDigest": "16a67d8b7b20f197fee27ee3804c3dd13b1f729dd36afa491e4145d50d87fbcb",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0032,
+      "resultDigest": "b9ff90ea7c6aabd3db4396e5e30302dde72c140f2ae2cfeaeee377d74b84b027",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0116,
+      "resultDigest": "19ee77d0f2938bb0457d8478c08ac112c59770e012d7b3566efb56c2cb773a91",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0033,
+      "resultDigest": "6bc895dc4e96c89d2e1ae5eab258924fe5d8679a43e26014328af67189d83c21",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0031,
+      "resultDigest": "e0da4a75743301bbf85531dc8b5d7e0af8e25a87454d180f2c0063ff5916258e",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0124,
+      "resultDigest": "8a4fdecf5da10fbcf4fc92d1a9b8b65ebd9d9b705e313011ffc28f4bca3062db",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.002,
+      "resultDigest": "4f0686bee7263a62b2e2f8320a02a1ae00336b797ca3c1242a65b728f2b7792f",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0043,
+      "resultDigest": "ff8f9795631fc1425eb181db6f3e8a18746b941daf798624686e1203511dd825",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0137,
+      "resultDigest": "c5b9c6eebbbd960f7f354d7e6235bf90cf59b892513e6e556c3050e0e1c702d1",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0019,
+      "resultDigest": "ba8c0705cdb89c86a2026607b3ecc8f6b031c49f372556f9a3ef9369c2819f33",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0059,
+      "resultDigest": "b8c042db7504af14093758d0a5ff00aa3be9142065c9463c4814ffef860ca490",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0116,
+      "resultDigest": "2defec05481900c08c6a1845d1b633561d57e9cd27fd2b4a8ec198b2dd05a67c",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0014,
+      "resultDigest": "82366c7980419bd8f778205f4e826047ee3d9234f06240760a38967df5eedd35",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0042,
+      "resultDigest": "dca19c6cae2b2e3a4efccc13546d22a9c51286fbc2dbd9c5487fa2410dced8a0",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.011,
+      "resultDigest": "ce956c76924cb4fa4d58f3c41e70098b13cf9a07baa0ba84fb1bd79f478cd9c3",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0019,
+      "resultDigest": "aedf67f7f02f75d3eccd1d9cb1818b92383097e493e95897c4ab065053240c80",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0028,
+      "resultDigest": "1e7018474b4969400d55a7b53d28dcff154879f65388e45de18120a062e3aebd",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.012,
+      "resultDigest": "2e1225bbe25a1316f0ea5871b1ee6274b8dd4f23f25168daa0f09ce6613efb52",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0017,
+      "resultDigest": "800565f8cb31bf1bb813e9a664602b0279e7d37b9983fe080fb55921719e1cf3",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0028,
+      "resultDigest": "688058254a92c35b0c3dfdbae33f59a5011e3c377da7dd1eb6e5b180d5955792",
+      "nonNull": true
+    },
+    {
+      "name": "PropertyService.getProperty",
+      "latencyMs": 0.0237,
+      "resultDigest": "60f3fa05af07d95ca8ac8f442a1a0b271ce84134c518c855bb1fa20ff6a34a1c",
+      "nonNull": true
+    },
+    {
+      "name": "RelationshipService.getNeighbors",
+      "latencyMs": 0.0019,
+      "resultDigest": "33fa92a4fa716d2d4f9798df11a27a2c5f4cdc190281b09617ab2aedf7276423",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0031,
+      "resultDigest": "9fd6a0ab6a8dcee4abc7fc5391ce15c1f84ca29aa2cce5734223d0db0e83bdab",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0763,
+      "resultDigest": "0931b73c1902f39302e00b50a01624a607fdbb931e4a1b4be97851629e46e3d6",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0225,
+      "resultDigest": "6517fed38418320c0170345cb9d3f2ec2b970f0ffa61ee8d092fcf1f554e864a",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0291,
+      "resultDigest": "2c15f61f83e79ff3da42ace96c208d2e4e2d13eb76b3552d6565bc8ab06f42d5",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0324,
+      "resultDigest": "ebeb562624779813f3ec7a2950505ff12e747c59dfa5d41b8e4f11bd6b8de238",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.027,
+      "resultDigest": "d40013531ab940b54041a6e9f4f63a98af8da63899d1184aac5437f2cfbb8223",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0104,
+      "resultDigest": "1acf202a897559299c490b690143eae3426885769c5de482e5ec28ce2355c468",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.027,
+      "resultDigest": "17027ebd3d4a17e225491fa9fe7522203bfc42659446855b4ab257b92b9460e2",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0097,
+      "resultDigest": "f3b85fd1f05692b83f423c97b37986c48d319658cccb55f9cc6625dbe282484c",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.028,
+      "resultDigest": "c12b3769194eae9ad84018373d6b077e8bb46dbf6f5e845b079c1200c7fda39c",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0086,
+      "resultDigest": "0a9e0fc32c3874a5876a82f5ad32a5e0ce839ea49212f637a8aec0966a3a8b7c",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0249,
+      "resultDigest": "11bd5fa3817e47a93b11e6f623501c0202ca9b54b09c1d9dc6449607401b78c0",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0092,
+      "resultDigest": "c14b1aafb708e43e80d6866ddb3dcf9434d2bca7e6713de75aa00af9b8746c21",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0283,
+      "resultDigest": "87a713d532b5a68c42c9c913304ba9d5c28b9276af59c2890bbc0512edb2d864",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0093,
+      "resultDigest": "5e4c1a7bcddbaf2d5dd93944eec32e67198e0aa666d20f9700bd69ddbd6d2a2f",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0238,
+      "resultDigest": "d2790e8a4b44695b6f92c41d0c7355d2ce8dfa0020cf3d0c9392b651dbc72cc6",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0081,
+      "resultDigest": "8b385356fcfa9ef0b04540e38106378712ba5cee6abe4f236bd23022b708c5ae",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0259,
+      "resultDigest": "290afb296334f3ab28742d210dd64c05ddb1a2c420afa50fb992d4259454b6b6",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0097,
+      "resultDigest": "eff850af6175c8758bb84d652d1ba1e8aa496121e49b36f2c66dada9d235d2bd",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0267,
+      "resultDigest": "a0436fb58db744aaae0c33518fbc723d5f373b5346554b147c528c95786d19e6",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0093,
+      "resultDigest": "dae8e87e94f235abea41762e5a81d7ba042ae98770928532d89ce8572d3d17e5",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.024,
+      "resultDigest": "b4083e31c89d596e520427d121fcacfdf5cfad928747bbd47d9baf76e63a5756",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0092,
+      "resultDigest": "94aa5a3b144e081638e7cab6d5fb6cf5c0f2c8ff71a43c8692aa2cbcca898d3f",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0227,
+      "resultDigest": "bad018707b5c972e2e50f708a3d1fd82aa1508b7ab4fc243b72af7d1f07bd740",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0105,
+      "resultDigest": "40ac94ab535c0a0aaab8f4dd79556858035c6d6d897ecb1d710c119550021c90",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0238,
+      "resultDigest": "677e15d82041b13395920479df5bc26d19fa65b95aa51b1bd06dc82ce2601cb7",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0092,
+      "resultDigest": "7a7bff299d20a067bccd2235b5554ceb09b427f3a64cc5282607dca2c92fa4f4",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0247,
+      "resultDigest": "235e827837a3319c944e0ec25c47de184155214779d0980e0bfc34b01c54cb86",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0092,
+      "resultDigest": "707e8168edb42a6caee16d9e43193673b4afe4fae81056103983630b5ad9cb4f",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0242,
+      "resultDigest": "8908541739a6ff2134078c6a77bfaf819838572228ab0083dd766202c1a33059",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0129,
+      "resultDigest": "3e8b3dd540134e400a875feee16fd9cbef113d9adfa74937042702f24a01ac08",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0242,
+      "resultDigest": "62954dd565d74701d2e69f16df19dcf52b6ba0e0930bda80db1e16ac2dbee19b",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.01,
+      "resultDigest": "ce6f2be93010d0e3d5a3c9721d92854c356bf61930762da1dcb93b4b92bf49e8",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0266,
+      "resultDigest": "b51a7fca27471c972da6b2a104ae9c3dd4db4efa4ba5a953c6634bb0a4c18ee2",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0088,
+      "resultDigest": "ecb281006d359aabff8980b6e4bc8f5c72782b66207d48f2bc6df145b14d644b",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0236,
+      "resultDigest": "27a73277773a4c2a5c1dba3f0c37bd472570b31cb930a78412bce865d6a25387",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0081,
+      "resultDigest": "380f7ebe441221ad3968ea4c6713fc408ea2f1763e1ad70d3b9b4523f6fa9bee",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0243,
+      "resultDigest": "d96785212b858f8eccff463ef4681b95e3cb702b46f9b7a8d80acd9d878137ed",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0073,
+      "resultDigest": "9211f007b77d1685d8c5a1f73c48d783e06e933a1ef16f57e47d387cb39d03cb",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0256,
+      "resultDigest": "aec3900f4815f9491ec67a0b6fabb29fd08100fab94c3e2b1f7c5d127d4d31eb",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0078,
+      "resultDigest": "7d043f04d08cf9dbe4ba53954bf9b4092efdfb206738e8fe2394780bfdb54ab4",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.024,
+      "resultDigest": "e3354e3dd736b70c2f5fdcf61882ab35a2cd5f9f1315e009a0a8e6b24c3ae62e",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0086,
+      "resultDigest": "b757ac1206cfa3b67188fe208ca4d5f4ed8a095d1b000107962e4cdec2197316",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0243,
+      "resultDigest": "bbcf84c974cff4e4c4e0ecc8eb8621c0c2e83d6c5b1016d575534dfb0106bedd",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.009,
+      "resultDigest": "e185d8c10275342bfc10bee5656e09beddae630c99a7e0e00eaa3188051de373",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0241,
+      "resultDigest": "d5d2bf7a024f5ca71d58fbf2fd8a82d2714b0313747b26f69e485a3833d5a64b",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0088,
+      "resultDigest": "fe7098c639085572fef4d7b066592af5ac3cca55ddc96c026f7ec67cd1dd6d26",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.024,
+      "resultDigest": "1d476c3fbd2960bb7ca10f78919c8ac267e44dc69479e1ce7a7f60dd2ebe2f3a",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0089,
+      "resultDigest": "d2107f7ce7c0968985d60ee8b710deff5153a2e8fc2b624040d8abaf3b042a3f",
+      "nonNull": true
+    },
+    {
+      "name": "TimelineService.getTimeline",
+      "latencyMs": 0.0237,
+      "resultDigest": "b98b96b5e1ee1dcb1fdacbf867ffb4dbdd710a3c8ca5f5ab23fd513d0e90f86c",
+      "nonNull": true
+    },
+    {
+      "name": "EvidenceService.getEvidence",
+      "latencyMs": 0.0076,
+      "resultDigest": "7b86a18f127bf636005a2932e9210144cac10fb13d48416562753ffb26cf41a1",
+      "nonNull": true
+    },
+    {
+      "name": "MarketSnapshotService.getSnapshot",
+      "latencyMs": 18.31,
+      "resultDigest": "d6ef92e688548266ef203ae862ddd6cc23cc06efbdfb62ccd6b1f026485d1d97",
+      "nonNull": true
+    },
+    {
+      "name": "MarketSnapshotService.getSnapshot",
+      "latencyMs": 1.0018,
+      "resultDigest": "41baa5124920b641f12da8e851d638fd3a48259eb62a8631f0000b396b39bb84",
+      "nonNull": true
+    },
+    {
+      "name": "MarketSnapshotService.getSnapshot",
+      "latencyMs": 1.2777,
+      "resultDigest": "cd39a412218ca46e2eca7046f187cf78f7b2c6981ea82a37b290ccdc9958c7b1",
+      "nonNull": true
+    },
+    {
+      "name": "MarketSnapshotService.getSnapshot",
+      "latencyMs": 1.4713,
+      "resultDigest": "d0a690958b0cb9847a69362acb805b3bc37aa85677fb5f3497fa8085fa95f58b",
+      "nonNull": true
+    },
+    {
+      "name": "MarketSnapshotService.getSnapshot",
+      "latencyMs": 1.5347,
+      "resultDigest": "70409bc27716a62692ef91959b6b4b1afa6f3d83c7c22c49042611b220ca0c1e",
+      "nonNull": true
+    },
+    {
+      "name": "MarketSnapshotService.getSnapshot",
+      "latencyMs": 1.8246,
+      "resultDigest": "098837c390e6ffca8e2a2dc5ca6099ed73160dd4a25237f31c4fc821d7e0c55e",
+      "nonNull": true
+    },
+    {
+      "name": "MarketSnapshotService.getSnapshot",
+      "latencyMs": 2.251,
+      "resultDigest": "46a1546f85a01906720cae9f2ede72cb912cc181b618f93c38db493f3fc5b435",
+      "nonNull": true
+    },
+    {
+      "name": "MarketSnapshotService.getSnapshot",
+      "latencyMs": 2.8102,
+      "resultDigest": "5dea1ec8f2a7d9f55608ac56515130c7837a0b65822b9823353d347f27294b2b",
+      "nonNull": true
+    },
+    {
+      "name": "MarketSnapshotService.getSnapshot",
+      "latencyMs": 2.2571,
+      "resultDigest": "09f7a9fc9506f91f5e0c1a5586b4d3792cdf19702fc1597792ee33637be63b3f",
+      "nonNull": true
+    },
+    {
+      "name": "MarketSnapshotService.getSnapshot",
+      "latencyMs": 2.5175,
+      "resultDigest": "1940fbdc2af08a6ef567ef3afad599a73b6126e5fa3c4d0de02670df35727b91",
+      "nonNull": true
+    }
+  ],
+  "evidenceDigest": "f7c7c7249d2e45cc44bb43eaab3f80dfb5f2aab2a63147052a30a2ee7115a695"
+}

@@ -1,0 +1,100 @@
+{
+  "framework": "SCIIP_V9_3_5_INDEPENDENT_CORPUS_CANARY_OPERATIONS_BATCH_CERTIFICATION",
+  "version": "v9.5.0",
+  "generatedAt": "2026-07-23T17:41:25.124Z",
+  "status": "PASSED",
+  "testsRun": 96,
+  "failures": [],
+  "result": {
+    "workspace": "ingestion-operations-command-center",
+    "applicationStatus": "CONDITIONAL_PASS_EXTERNAL_CORPUS_REQUIRED",
+    "goldStandardTimelines": 2224,
+    "externalCorpusStatus": "NOT_PROVIDED",
+    "externalCorpusProvided": false,
+    "canaryMode": "SIMULATED_ONLY",
+    "canaryEligible": false,
+    "canaryRecords": 32,
+    "isolatedCanaryWrites": 0,
+    "primaryProductionWrites": 0,
+    "commitEnabled": false,
+    "operationsStatus": "OPERATIONAL"
+  },
+  "gates": [
+    {
+      "name": "V9_0_2_CERTIFIED",
+      "passed": true,
+      "actual": "PASSED",
+      "required": "PASSED"
+    },
+    {
+      "name": "GOLD_STANDARD_LOCKED",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "DETERMINISTIC_REPLAY_PRESERVED",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "ROLLBACK_RECOVERY_PRESERVED",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "CANARY_PARITY",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "PRIMARY_PRODUCTION_WRITES_ZERO",
+      "passed": true,
+      "actual": 0,
+      "required": 0
+    },
+    {
+      "name": "PRIMARY_COMMIT_DISABLED",
+      "passed": true,
+      "actual": false,
+      "required": false
+    },
+    {
+      "name": "INDEPENDENT_CORPUS_CERTIFIED",
+      "passed": false,
+      "actual": "NOT_PROVIDED",
+      "required": "PASSED"
+    },
+    {
+      "name": "STEWARD_APPROVAL",
+      "passed": false,
+      "actual": false,
+      "required": true
+    },
+    {
+      "name": "ACTIVATION_TOKEN_VALID",
+      "passed": false,
+      "actual": false,
+      "required": true
+    }
+  ],
+  "governance": {
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "isolatedCanaryOnly": true,
+    "externalCorpusCertificationRequired": true,
+    "stewardApprovalRequired": true,
+    "activationTokenRequired": true,
+    "automaticProductionActivation": false
+  },
+  "evidenceDigests": {
+    "external": "ef5f2cbf4778d2900f34a63756c1765e9d59eee4cb8cca9f2b7ec78e000f381c",
+    "replay": "33bfb67e2d299106a2bfaf17ec980076a1d282dc3f88179548ad80c98531b640",
+    "canary": "31e034d3fa2250f8db5a875c1d3e2deb10e25146189b54e6a31ba34e015799c5",
+    "parity": "2a720104f93d4cd95d97fa586f4a6598a4d55a836b0dbdc36be0c55563816921",
+    "operations": "4c64025bad9c761c5a08791920ec0b2778ca2b75924c4b9d0fb251da1dbe2621"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "framework": "SCIIP_V7_EPIC_4_EXECUTION_RUNTIME_MILESTONE",
+  "version": "v7.0-epic4-execution-runtime.0",
+  "type": "INCREMENTAL_REVERSIBLE_MILESTONE",
+  "northStar": "SCIIP_OS is the operating system for industrial real estate.",
+  "capabilities": ["enterprise-event-bus","reliable-messaging","workflow-orchestration","governed-scheduling","event-replay","dead-letter-recovery","append-only-audit","health-certification"],
+  "governance": {"reviewRequired": true,"rollbackRequired": true,"destructiveCommitEnabled": false,"autonomousExecution": false,"automaticDeployment": false}
+}

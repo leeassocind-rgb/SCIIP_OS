@@ -1,201 +1,26 @@
-/**
- * SCIIP_OS v7.0 — Epic 3 Sprint 5
- * Relationship Intelligence Engine
- *
- * Cohesive application service. No direct sheet writes. Duplicate-safe,
- * deterministic, and compatible with Apps Script and Node certification.
- */
-var SCIIP_RELATIONSHIP_INTELLIGENCE = (function () {
-  'use strict';
-
-  var VERSION = 'v7.0-epic3-sprint5.0';
-
-  function text_(value) {
-    return value === null || value === undefined ? '' : String(value).trim();
-  }
-
-  function number_(value, fallback) {
-    var n = Number(value);
-    return isFinite(n) ? n : (fallback || 0);
-  }
-
-  function upper_(value) {
-    return text_(value).toUpperCase();
-  }
-
-  function stableId_(parts) {
-    var input = parts.join('|');
-    var hash = 2166136261;
-    var i;
-    for (i = 0; i < input.length; i += 1) {
-      hash ^= input.charCodeAt(i);
-      hash += (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
-    }
-    return 'REL-' + ('00000000' + (hash >>> 0).toString(16).toUpperCase()).slice(-8);
-  }
-
-  function normalizeEntity_(entity) {
-    entity = entity || {};
-    return {
-      id: text_(entity.id || entity.entityId || entity.companyId || entity.contactId),
-      name: text_(entity.name || entity.label),
-      type: upper_(entity.type || entity.entityType || 'UNKNOWN'),
-      market: text_(entity.market || entity.submarket),
-      attributes: entity.attributes || {}
-    };
-  }
-
-  function normalizeRelationship_(relationship) {
-    relationship = relationship || {};
-    var sourceId = text_(relationship.sourceId || relationship.fromId);
-    var targetId = text_(relationship.targetId || relationship.toId);
-    var relationshipType = upper_(relationship.type || relationship.relationshipType || 'RELATED_TO');
-    var observedAt = text_(relationship.observedAt || relationship.date || '');
-    var confidence = Math.max(0, Math.min(100, number_(relationship.confidence, 50)));
-    return {
-      id: text_(relationship.id) || stableId_([sourceId, targetId, relationshipType, observedAt]),
-      sourceId: sourceId,
-      targetId: targetId,
-      type: relationshipType,
-      strength: Math.max(0, Math.min(100, number_(relationship.strength, confidence))),
-      confidence: confidence,
-      observedAt: observedAt,
-      evidence: relationship.evidence || [],
-      metadata: relationship.metadata || {}
-    };
-  }
-
-  function deduplicateRelationships_(relationships) {
-    var index = {};
-    var output = [];
-    (relationships || []).forEach(function (raw) {
-      var item = normalizeRelationship_(raw);
-      var key = [item.sourceId, item.targetId, item.type, item.observedAt].join('|');
-      if (!index[key]) {
-        index[key] = item;
-        output.push(item);
-      } else {
-        index[key].strength = Math.max(index[key].strength, item.strength);
-        index[key].confidence = Math.max(index[key].confidence, item.confidence);
-        index[key].evidence = index[key].evidence.concat(item.evidence || []);
-      }
-    });
-    return output;
-  }
-
-  function buildGraph(input) {
-    input = input || {};
-    var entities = (input.entities || []).map(normalizeEntity_);
-    var relationships = deduplicateRelationships_(input.relationships || []);
-    var entityIndex = {};
-    var adjacency = {};
-    entities.forEach(function (entity) {
-      if (!entity.id) return;
-      entityIndex[entity.id] = entity;
-      adjacency[entity.id] = adjacency[entity.id] || [];
-    });
-    relationships.forEach(function (relationship) {
-      if (!relationship.sourceId || !relationship.targetId) return;
-      adjacency[relationship.sourceId] = adjacency[relationship.sourceId] || [];
-      adjacency[relationship.targetId] = adjacency[relationship.targetId] || [];
-      adjacency[relationship.sourceId].push(relationship);
-      adjacency[relationship.targetId].push(relationship);
-    });
-    return {
-      version: VERSION,
-      entities: entities,
-      relationships: relationships,
-      entityIndex: entityIndex,
-      adjacency: adjacency
-    };
-  }
-
-  function calculateInfluence(graph) {
-    var scores = [];
-    Object.keys(graph.adjacency || {}).forEach(function (entityId) {
-      var links = graph.adjacency[entityId] || [];
-      var weighted = links.reduce(function (sum, link) {
-        return sum + (link.strength * link.confidence / 100);
-      }, 0);
-      scores.push({
-        entityId: entityId,
-        relationshipCount: links.length,
-        influenceScore: Math.round((links.length * 12 + weighted) * 100) / 100
-      });
-    });
-    scores.sort(function (a, b) {
-      return b.influenceScore - a.influenceScore || a.entityId.localeCompare(b.entityId);
-    });
-    return scores;
-  }
-
-  function detectOpportunities(graph) {
-    var opportunities = [];
-    var entities = graph.entities || [];
-    var direct = {};
-    (graph.relationships || []).forEach(function (link) {
-      direct[link.sourceId + '|' + link.targetId] = true;
-      direct[link.targetId + '|' + link.sourceId] = true;
-    });
-    entities.forEach(function (left, i) {
-      entities.slice(i + 1).forEach(function (right) {
-        if (!left.id || !right.id || direct[left.id + '|' + right.id]) return;
-        var leftLinks = graph.adjacency[left.id] || [];
-        var rightLinks = graph.adjacency[right.id] || [];
-        var leftNeighbors = {};
-        leftLinks.forEach(function (link) {
-          leftNeighbors[link.sourceId === left.id ? link.targetId : link.sourceId] = true;
-        });
-        var shared = [];
-        rightLinks.forEach(function (link) {
-          var neighbor = link.sourceId === right.id ? link.targetId : link.sourceId;
-          if (leftNeighbors[neighbor]) shared.push(neighbor);
-        });
-        if (shared.length) {
-          opportunities.push({
-            id: stableId_([left.id, right.id, 'INTRODUCTION']),
-            sourceId: left.id,
-            targetId: right.id,
-            sharedConnections: shared,
-            opportunityType: 'WARM_INTRODUCTION',
-            score: Math.min(100, 55 + shared.length * 15)
-          });
-        }
-      });
-    });
-    opportunities.sort(function (a, b) { return b.score - a.score; });
-    return opportunities;
-  }
-
-  function analyze(input) {
-    var graph = buildGraph(input);
-    var influence = calculateInfluence(graph);
-    var opportunities = detectOpportunities(graph);
-    return {
-      framework: 'SCIIP_V7_EPIC_3_SPRINT_5_RELATIONSHIP_INTELLIGENCE',
-      version: VERSION,
-      status: 'AVAILABLE',
-      generatedAt: new Date().toISOString(),
-      entities: graph.entities.length,
-      relationships: graph.relationships.length,
-      influence: influence,
-      opportunities: opportunities,
-      topInfluencer: influence.length ? influence[0] : null
-    };
-  }
-
-  return {
-    VERSION: VERSION,
-    normalizeEntity: normalizeEntity_,
-    normalizeRelationship: normalizeRelationship_,
-    deduplicateRelationships: deduplicateRelationships_,
-    buildGraph: buildGraph,
-    calculateInfluence: calculateInfluence,
-    detectOpportunities: detectOpportunities,
-    analyze: analyze
-  };
-})();
-
-function sciipRelationshipIntelligenceAnalyze(input) {
-  return SCIIP_RELATIONSHIP_INTELLIGENCE.analyze(input || {});
-}
+/** SCIIP_OS v7.0 Epic 3 Sprint 5 — Relationship Intelligence Engine. */
+var SCIIP_RELATIONSHIP_INTELLIGENCE=(function(){
+'use strict';
+var VERSION='v7.0-epic3-sprint5.0',SCHEMA='relationship-edge-v1';
+var TYPES={OWNER_PROPERTY:'OWNER_PROPERTY',TENANT_PROPERTY:'TENANT_PROPERTY',COMPANY_BUILDING:'COMPANY_BUILDING',BROKER_LISTING:'BROKER_LISTING',BROKER_LEASE:'BROKER_LEASE',BROKER_SALE:'BROKER_SALE',COMPANY_COMPANY:'COMPANY_COMPANY',COMPANY_OWNER:'COMPANY_OWNER',OWNER_PORTFOLIO:'OWNER_PORTFOLIO',PROPERTY_PORTFOLIO:'PROPERTY_PORTFOLIO'};
+function clone_(x){return JSON.parse(JSON.stringify(x==null?null:x));}
+function hash_(s){s=String(s||'');var h=2166136261,i;for(i=0;i<s.length;i++){h^=s.charCodeAt(i);h+=(h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24);}return('00000000'+(h>>>0).toString(16).toUpperCase()).slice(-8);}
+function iso_(v){var d=v?new Date(v):new Date();return isNaN(d.getTime())?new Date().toISOString():d.toISOString();}
+function edge(input){input=input||{};var from=String(input.fromId||input.sourceId||''),to=String(input.toId||input.targetId||''),type=String(input.relationshipType||input.type||'RELATED_TO').toUpperCase();if(!from||!to)throw new Error('RELATIONSHIP_ENDPOINTS_REQUIRED');var effective=iso_(input.effectiveAt||input.observedAt),source=input.source||{};return{relationshipId:'REL-'+hash_([type,from,to,effective,String(input.sourceEventId||source.eventId||'')].join('|')),schemaVersion:SCHEMA,relationshipType:type,fromId:from,fromType:String(input.fromType||'ENTITY').toUpperCase(),toId:to,toType:String(input.toType||'ENTITY').toUpperCase(),direction:String(input.direction||'DIRECTED').toUpperCase(),status:String(input.status||'ACTIVE').toUpperCase(),effectiveAt:effective,endedAt:input.endedAt?iso_(input.endedAt):'',weight:Math.max(0,Math.min(1,Number(input.weight==null?0.5:input.weight))),confidence:Math.max(0,Math.min(100,Number(input.confidence==null?80:input.confidence))),attributes:clone_(input.attributes||{}),source:{sourceId:String(source.sourceId||input.sourceId||'DIRECT'),sourceEventId:String(input.sourceEventId||source.eventId||''),sourceName:String(source.sourceName||'SCIIP')},evidence:clone_(input.evidence||[]),recordedAt:iso_(input.recordedAt),reviewStatus:String(input.reviewStatus||'PENDING_REVIEW').toUpperCase(),appendOnly:true};}
+function normalize(edges){var seen={},out=[];(edges||[]).forEach(function(e){var x=e.relationshipId?clone_(e):edge(e);if(!seen[x.relationshipId]){seen[x.relationshipId]=true;out.push(x);}});out.sort(function(a,b){return a.relationshipId<b.relationshipId?-1:1;});return out;}
+function graph(edges){var nodes={},adj={};normalize(edges).filter(function(e){return e.status!=='REVOKED';}).forEach(function(e){nodes[e.fromId]={id:e.fromId,type:e.fromType};nodes[e.toId]={id:e.toId,type:e.toType};(adj[e.fromId]||(adj[e.fromId]=[])).push({id:e.toId,edge:e});if(e.direction==='UNDIRECTED'||e.direction==='BIDIRECTIONAL')(adj[e.toId]||(adj[e.toId]=[])).push({id:e.fromId,edge:e});else (adj[e.toId]||(adj[e.toId]=[]));});return{nodes:nodes,adjacency:adj};}
+function shortestPath(edges,start,end){var g=graph(edges),q=[start],prev={},seen={};seen[start]=true;while(q.length){var n=q.shift();if(n===end)break;(g.adjacency[n]||[]).forEach(function(x){if(!seen[x.id]){seen[x.id]=true;prev[x.id]={node:n,edge:x.edge};q.push(x.id);}});}if(!seen[end])return{found:false,nodes:[],relationships:[],distance:-1};var ns=[end],rs=[],cur=end;while(cur!==start){rs.unshift(prev[cur].edge);cur=prev[cur].node;ns.unshift(cur);}return{found:true,nodes:ns,relationships:rs,distance:rs.length};}
+function components(edges){var g=graph(edges),seen={},out=[];Object.keys(g.nodes).sort().forEach(function(id){if(seen[id])return;var q=[id],part=[];seen[id]=true;while(q.length){var n=q.shift();part.push(n);(g.adjacency[n]||[]).forEach(function(x){if(!seen[x.id]){seen[x.id]=true;q.push(x.id);}});}part.sort();out.push(part);});out.sort(function(a,b){return b.length-a.length;});return out;}
+function strength(edges,a,b){var rows=normalize(edges).filter(function(e){return(e.fromId===a&&e.toId===b)||(e.fromId===b&&e.toId===a);}),score=0;rows.forEach(function(e){var recency=Math.max(0,1-((Date.now()-new Date(e.effectiveAt).getTime())/(5*365*86400000)));score+=e.weight*(e.confidence/100)*(0.5+0.5*recency);});return{fromId:a,toId:b,relationships:rows.length,score:Number(Math.min(1,score).toFixed(4))};}
+function centrality(edges){var g=graph(edges),ids=Object.keys(g.nodes),n=Math.max(1,ids.length-1),out={};ids.forEach(function(id){var links=g.adjacency[id]||[],unique={};links.forEach(function(x){unique[x.id]=true;});var degree=Object.keys(unique).length/n,weighted=links.reduce(function(s,x){return s+Number(x.edge.weight||0)*(Number(x.edge.confidence||0)/100);},0)/n;out[id]={entityId:id,degree:Number(degree.toFixed(4)),weightedDegree:Number(weighted.toFixed(4)),score:Number((degree*60+Math.min(1,weighted)*40).toFixed(2))};});return out;}
+function influence(edges){var c=centrality(edges),g=graph(edges),out={};Object.keys(c).forEach(function(id){var second={};(g.adjacency[id]||[]).forEach(function(x){(g.adjacency[x.id]||[]).forEach(function(y){if(y.id!==id)second[y.id]=true;});});out[id]={entityId:id,centrality:c[id].score,secondDegreeReach:Object.keys(second).length,influenceScore:Number(Math.min(100,c[id].score+Math.min(30,Object.keys(second).length*3)).toFixed(2))};});return out;}
+function clusters(edges,portfolios){var grouped={};(portfolios||[]).forEach(function(p){var key=String(p.marketId||p.region||'UNASSIGNED')+'|'+String(p.ownerId||'UNKNOWN');(grouped[key]||(grouped[key]=[])).push(p);});return Object.keys(grouped).sort().map(function(k){var x=grouped[k],sf=x.reduce(function(s,p){return s+Number(p.buildingSf||p.sf||0);},0);return{clusterId:'PCL-'+hash_(k),key:k,propertyIds:x.map(function(p){return String(p.propertyId||p.id);}).sort(),propertyCount:x.length,totalSf:sf,concentration:Number((x.length/Math.max(1,(portfolios||[]).length)).toFixed(4))};}).sort(function(a,b){return b.totalSf-a.totalSf;});}
+function tenantMovements(occupancies){var byTenant={};(occupancies||[]).forEach(function(o){(byTenant[String(o.tenantId)]||(byTenant[String(o.tenantId)]=[])).push(o);});var out=[];Object.keys(byTenant).forEach(function(t){var r=byTenant[t].sort(function(a,b){return new Date(a.effectiveAt)-new Date(b.effectiveAt);});for(var i=1;i<r.length;i++){var a=r[i-1],b=r[i],type='RENEWAL';if(a.propertyId!==b.propertyId)type='RELOCATION';else if(Number(b.occupiedSf||0)>Number(a.occupiedSf||0))type='EXPANSION';else if(Number(b.occupiedSf||0)<Number(a.occupiedSf||0))type='CONTRACTION';if(String(b.status||'').toUpperCase()==='MOVED_OUT')type='MOVE_OUT';out.push({movementId:'TMV-'+hash_([t,a.propertyId,b.propertyId,b.effectiveAt,type].join('|')),tenantId:t,type:type,fromPropertyId:a.propertyId,toPropertyId:b.propertyId,oldSf:Number(a.occupiedSf||0),newSf:Number(b.occupiedSf||0),effectiveAt:iso_(b.effectiveAt),evidence:[a,b]});}});return out.sort(function(a,b){return new Date(b.effectiveAt)-new Date(a.effectiveAt);});}
+function brokerProfiles(transactions){var by={};(transactions||[]).forEach(function(t){(t.brokerIds||[t.brokerId]).filter(Boolean).forEach(function(id){var p=by[id]||(by[id]={brokerId:id,listings:0,leases:0,sales:0,totalSf:0,markets:{},propertyTypes:{}});var type=String(t.transactionType||t.type||'LISTING').toUpperCase();if(type.indexOf('LEASE')>=0)p.leases++;else if(type.indexOf('SALE')>=0)p.sales++;else p.listings++;p.totalSf+=Number(t.sf||t.buildingSf||0);p.markets[String(t.marketId||'UNKNOWN')]=(p.markets[String(t.marketId||'UNKNOWN')]||0)+1;p.propertyTypes[String(t.propertyType||'INDUSTRIAL')]=(p.propertyTypes[String(t.propertyType||'INDUSTRIAL')]||0)+1;});});return Object.keys(by).map(function(id){var p=by[id],total=p.listings+p.leases+p.sales;p.specialization=Object.keys(p.markets).sort(function(a,b){return p.markets[b]-p.markets[a];})[0]||'UNKNOWN';p.marketShare=Number((total/Math.max(1,(transactions||[]).length)).toFixed(4));p.industrialExpertise=Number(Math.min(100,total*8+Math.min(40,p.totalSf/100000)).toFixed(2));return p;}).sort(function(a,b){return b.industrialExpertise-a.industrialExpertise;});}
+function ownerProfiles(properties,events){var by={};(properties||[]).forEach(function(p){var id=String(p.ownerId||'UNKNOWN'),o=by[id]||(by[id]={ownerId:id,properties:[],totalSf:0,markets:{},developmentPipeline:0,acquisitions:0,dispositions:0});o.properties.push(String(p.propertyId||p.id));o.totalSf+=Number(p.buildingSf||p.sf||0);o.markets[String(p.marketId||'UNKNOWN')]=(o.markets[String(p.marketId||'UNKNOWN')]||0)+1;if(String(p.constructionStatus||'').toUpperCase().indexOf('PLANNED')>=0||String(p.constructionStatus||'').toUpperCase().indexOf('CONSTRUCTION')>=0)o.developmentPipeline++;});(events||[]).forEach(function(e){var id=String(e.ownerId||e.newOwnerId||e.oldOwnerId||'');if(!id)return;var o=by[id]||(by[id]={ownerId:id,properties:[],totalSf:0,markets:{},developmentPipeline:0,acquisitions:0,dispositions:0});if(String(e.eventType).indexOf('ACQUISITION')>=0)o.acquisitions++;if(String(e.eventType).indexOf('DISPOSITION')>=0)o.dispositions++;});return Object.keys(by).map(function(id){var o=by[id];o.portfolioGrowth=o.acquisitions-o.dispositions;o.geographicConcentration=Object.keys(o.markets).reduce(function(m,k){return Math.max(m,o.markets[k]/Math.max(1,o.properties.length));},0);return o;}).sort(function(a,b){return b.totalSf-a.totalSf;});}
+function portfolioSimilarity(a,b){var aset={},bset={};(a||[]).forEach(function(x){aset[String(x.marketId||x.propertyType||x.id)]=true;});(b||[]).forEach(function(x){bset[String(x.marketId||x.propertyType||x.id)]=true;});var keys={},inter=0,uni=0;Object.keys(aset).forEach(function(k){keys[k]=true;});Object.keys(bset).forEach(function(k){keys[k]=true;});Object.keys(keys).forEach(function(k){uni++;if(aset[k]&&bset[k])inter++;});return Number((inter/Math.max(1,uni)).toFixed(4));}
+function snapshot(input){input=input||{};var es=normalize(input.relationships||[]);return{version:VERSION,schemaVersion:SCHEMA,status:'AVAILABLE',relationships:es,network:{components:components(es),centrality:centrality(es),influence:influence(es)},tenantMovements:tenantMovements(input.occupancies||[]),brokers:brokerProfiles(input.transactions||[]),owners:ownerProfiles(input.properties||[],input.ownerEvents||[]),portfolioClusters:clusters(es,input.properties||[]),reviewRequired:true,destructiveCommitEnabled:false};}
+return{VERSION:VERSION,SCHEMA:SCHEMA,TYPES:TYPES,edge:edge,normalize:normalize,graph:graph,shortestPath:shortestPath,components:components,strength:strength,centrality:centrality,influence:influence,clusters:clusters,tenantMovements:tenantMovements,brokerProfiles:brokerProfiles,ownerProfiles:ownerProfiles,portfolioSimilarity:portfolioSimilarity,snapshot:snapshot};})();
+function sciipRelationshipCreate(input){return SCIIP_RELATIONSHIP_INTELLIGENCE.edge(input);}
+function sciipRelationshipShortestPath(edges,startId,endId){return SCIIP_RELATIONSHIP_INTELLIGENCE.shortestPath(edges,startId,endId);}
+function sciipRelationshipNetworkSnapshot(input){return SCIIP_RELATIONSHIP_INTELLIGENCE.snapshot(input||{});}

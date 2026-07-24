@@ -1,29 +1,20 @@
-# SCIIP_OS v7.0 — Epic 3 Sprint 5
+# SCIIP_OS v7 — Epic 3 Sprint 5: Relationship Intelligence
 
-## Relationship Intelligence
+Sprint 5 extends the canonical SCIIP knowledge graph with governed, deterministic relationship edges for owners, tenants, companies, brokers, properties, buildings, transactions, and portfolios.
 
-This is an incremental patch. It does not contain or reinstall the SCIIP_OS repository.
+## Capabilities
 
-Capabilities:
-- relationship graph normalization and duplicate suppression
-- influence scoring
-- explainable warm-introduction detection
-- evidence-grounded AI briefing requests
-- governed preview/append persistence
-- Apps Script and Node certification
+- Relationship creation and normalization with deterministic IDs and versioned `relationship-edge-v1` contracts.
+- Shortest paths, connected components, relationship strength, centrality, influence, and portfolio clustering.
+- Tenant expansion, contraction, relocation, renewal, move-out, and historical occupancy analysis.
+- Broker listing, leasing, transaction, specialization, market-share, and industrial-expertise profiles.
+- Owner history, acquisition/disposition, portfolio growth, development-pipeline, concentration, and portfolio similarity analytics.
+- Grounded-only AI Copilot retrieval and a registered Relationship Intelligence workspace.
 
-Install from the extracted package with:
+## Governance
 
-```bash
-chmod +x INSTALL.command
-./INSTALL.command
-```
+Persistence is append-only and duplicate-safe. Commits require an explicit approval object with `status: APPROVED`. Rejected or absent approvals return `REVIEW_REQUIRED`; destructive writes are never enabled.
 
-The installer targets `~/Desktop/SCIIP_OS`, backs up every target file that already exists, records newly created files, patches only the Sprint 5 npm test command, and runs the Node certification.
+## Certification
 
-Rollback:
-
-```bash
-chmod +x ROLLBACK.command
-./ROLLBACK.command
-```
+Run `npm run certification:epic3-sprint5`, then `npm run deployment:compile`. In Apps Script, run `sciipTestV7Epic3Sprint5RelationshipIntelligence()`.

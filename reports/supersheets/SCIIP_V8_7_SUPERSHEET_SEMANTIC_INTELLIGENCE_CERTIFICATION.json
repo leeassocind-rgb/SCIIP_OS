@@ -1,0 +1,87 @@
+{
+  "framework": "SCIIP_V8_7_SUPERSHEET_SEMANTIC_INTELLIGENCE_CERTIFICATION",
+  "version": "v8.7.0",
+  "status": "PASSED",
+  "generatedAt": "2026-07-23T16:46:57.489Z",
+  "testsRun": 28,
+  "failures": [],
+  "result": {
+    "workspace": "production-readiness",
+    "applicationStatus": "CONDITIONAL_PASS_EXTERNAL_CORPUS_REQUIRED",
+    "sourceEditions": 32,
+    "acceptedObservations": 2582,
+    "semanticRecords": 2582,
+    "lowConfidenceRecords": 1475,
+    "duplicateClassifications": 281,
+    "duplicateSummary": {
+      "SAME_PROPERTY_DISTINCT_LISTINGS": 51,
+      "INTENTIONAL_MULTI_INDEX": 220,
+      "TRUE_DUPLICATE_CANDIDATE": 10
+    },
+    "corrections": {
+      "clearHeightSuppressed": 1856,
+      "clearHeightExplicit": 697,
+      "powerSuppressed": 1864,
+      "powerExplicit": 709
+    },
+    "externalCorpusProvided": false,
+    "productionWrites": 0,
+    "commitEnabled": false
+  },
+  "externalCorpus": {
+    "provided": false,
+    "path": null,
+    "status": "REQUIRED_BEFORE_PRODUCTION_COMMIT"
+  },
+  "gates": [
+    {
+      "name": "V8_6_INTERNAL_ACCEPTANCE",
+      "passed": true,
+      "actual": "PASSED",
+      "required": "PASSED"
+    },
+    {
+      "name": "OBSERVATION_COUNT_PRESERVED",
+      "passed": true,
+      "actual": 2582,
+      "expected": 2582
+    },
+    {
+      "name": "CRITICAL_IDENTITY_GAPS",
+      "passed": true,
+      "actual": 0,
+      "maximum": 0
+    },
+    {
+      "name": "IMPLAUSIBLE_CLEAR_HEIGHT_REMOVED",
+      "passed": true,
+      "actual": 0,
+      "maximum": 0
+    },
+    {
+      "name": "IMPLAUSIBLE_POWER_REMOVED",
+      "passed": true,
+      "actual": 0,
+      "maximum": 0
+    },
+    {
+      "name": "DUPLICATE_CLASSIFICATION_COMPLETE",
+      "passed": true,
+      "actual": 281,
+      "expected": 281
+    },
+    {
+      "name": "PRODUCTION_WRITES_DISABLED",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    }
+  ],
+  "governance": {
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "stewardApprovalRequired": true,
+    "independentCorpusCertificationRequired": true
+  },
+  "priorSemanticDigest": "a8900e3ba423f88b52d80e1796dd854e104166af09346f659e162694b79ec5ae"
+}

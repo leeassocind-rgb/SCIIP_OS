@@ -1,0 +1,16 @@
+{
+  "framework": "SCIIP_V7_EPIC5_PROPERTY_COMMAND_CENTER_BUILD1",
+  "version": "v7.0-epic5-build1.0",
+  "status": "IMPLEMENTED",
+  "primaryInput": "SUPERSHEET_INGESTION",
+  "workspace": "property-command-center",
+  "files": [
+    "src/applications/property-command-center/SCIIP_Epic5_Property_Command_Core.gs",
+    "src/applications/property-command-center/SCIIP_Epic5_Property_Command_Service.gs",
+    "src/applications/property-command-center/SCIIP_Epic5_Property_Command_Application.gs",
+    "src/applications/property-command-center/SCIIP_Epic5_Property_Command_Tests.gs"
+  ],
+  "productionGates": ["EXPLICIT_TEST_PATCH", "ARCHITECTURE_GOVERNANCE", "DEPLOYMENT_COMPILATION", "HUMAN_REVIEW"],
+  "destructiveCommitEnabled": false,
+  "reviewRequired": true
+}

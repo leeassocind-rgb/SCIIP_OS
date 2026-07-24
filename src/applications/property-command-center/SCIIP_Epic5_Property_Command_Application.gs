@@ -1,0 +1,4 @@
+/** Product application registration and routing contract. */
+var SCIIP_EPIC5_PROPERTY_COMMAND_APPLICATION_V7 = SCIIP_EPIC5_PROPERTY_COMMAND_APPLICATION_V7 || {};
+SCIIP_EPIC5_PROPERTY_COMMAND_APPLICATION_V7.describe=function(){return {id:'property-command-center',label:'Property Command',version:SCIIP_PROPERTY_COMMAND_V7.VERSION,route:'/property-command-center',primaryInput:'SUPERSHEET_INGESTION',capabilities:['PROPERTY_CONTEXT','SUPERSHEET_SCHEMA_DETECTION','PROPERTY_IDENTITY_RESOLUTION','EVENT_PROJECTION','GIS_PROJECTION','GRAPH_PROJECTION','INGESTION_READINESS','DIGITAL_TWIN','GIS','KNOWLEDGE_GRAPH','AI_BRIEFING','MARKET_INTELLIGENCE','GOVERNED_ACTIONS'],productionMode:'VERTICAL_SLICE',reviewRequired:true,destructiveCommitEnabled:false};};
+function sciipGetEpic5PropertyCommandApplication(){return SCIIP_EPIC5_PROPERTY_COMMAND_APPLICATION_V7.describe();}

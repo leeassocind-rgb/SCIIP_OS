@@ -1,0 +1,31 @@
+{
+  "framework": "SCIIP_V8_SPRINT13_ENTERPRISE_ADMINISTRATION_IDENTITY_ROLES_SECURITY_GOVERNANCE",
+  "version": "v8.0-sprint13.0",
+  "publicCertification": "sciipTestV8Sprint13EnterpriseAdministrationIdentityRolesSecurityGovernance",
+  "preferredCompiledTarget": "dist/apps-script/11_other_001.gs",
+  "workspace": "enterprise-administration",
+  "capabilities": [
+    "user-administration",
+    "identity-management",
+    "rbac",
+    "workspace-permissions",
+    "group-management",
+    "approval-authorities",
+    "security-policies",
+    "session-management",
+    "append-only-audit-logging",
+    "administrative-dashboard",
+    "security-event-monitoring",
+    "access-reviews",
+    "governance-reporting",
+    "organization-settings",
+    "api-service-permissions"
+  ],
+  "governance": {
+    "denyByDefault": true,
+    "evidenceRequired": true,
+    "approvalRequiredForPrivilege": true,
+    "appendOnlyAudit": true,
+    "destructiveActionsEnabledByDefault": false
+  }
+}

@@ -1,0 +1,15 @@
+name: SCIIP v7 Epic 4 Sprint 1
+on:
+  push:
+    branches: [v7.0-sciip-desktop-recovery]
+  pull_request:
+    branches: [v7.0-sciip-desktop-recovery]
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm run test:epic4:sprint1

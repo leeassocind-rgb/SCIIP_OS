@@ -1,0 +1,19 @@
+{
+  "framework": "SCIIP_V8_SPRINT9_AI_COPILOT_GUIDED_DECISION_WORKSPACE",
+  "version": "v8.0-sprint9.0",
+  "publicCertification": "sciipTestV8Sprint9AiCopilotGuidedDecisionWorkspace",
+  "capabilities": [
+    "natural-language-analysis",
+    "governed-evidence-retrieval",
+    "citations",
+    "scenario-comparison",
+    "explainable-recommendations",
+    "decision-planning",
+    "approval-workflow",
+    "dry-run-execution",
+    "rollback-metadata",
+    "executive-briefing",
+    "cross-workspace-context-continuity"
+  ],
+  "destructiveActionsEnabledByDefault": false
+}

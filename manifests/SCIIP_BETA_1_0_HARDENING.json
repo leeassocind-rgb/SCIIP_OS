@@ -1,0 +1,12 @@
+{
+  "framework": "SCIIP_OS_BETA_1_0_HARDENING_PROGRAM",
+  "version": "beta-1.0",
+  "tracks": [
+    "SCALE_PERFORMANCE",
+    "USER_EXPERIENCE",
+    "AI_COPILOT",
+    "ENTERPRISE_OPERATIONS"
+  ],
+  "productionWrites": 0,
+  "commitEnabled": false
+}

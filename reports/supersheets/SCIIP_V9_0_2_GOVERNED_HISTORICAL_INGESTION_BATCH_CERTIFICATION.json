@@ -1,0 +1,103 @@
+{
+  "framework": "SCIIP_V9_0_2_GOVERNED_HISTORICAL_INGESTION_BATCH_CERTIFICATION",
+  "version": "v9.2.0",
+  "status": "PASSED",
+  "generatedAt": "2026-07-23T17:34:43.757Z",
+  "testsRun": 72,
+  "failures": [],
+  "result": {
+    "workspace": "governed-historical-ingestion",
+    "applicationStatus": "CONDITIONAL_PASS_EXTERNAL_CORPUS_REQUIRED",
+    "editions": 32,
+    "transactions": 32,
+    "replayEvents": 4547,
+    "checkpoints": 32,
+    "rollbackPlans": 32,
+    "deterministicReplay": true,
+    "idempotentReplay": true,
+    "recoveryDrillPassed": true,
+    "externalCorpusStatus": "NOT_PROVIDED",
+    "productionWrites": 0,
+    "commitEnabled": false
+  },
+  "gates": [
+    {
+      "name": "LOCKED_GOLD_STANDARD",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "TEMPORAL_GRAPH_CERTIFIED",
+      "passed": true,
+      "actual": "SCIIP_V8_10_TEMPORAL_KNOWLEDGE_GRAPH",
+      "required": "SCIIP_V8_10_TEMPORAL_KNOWLEDGE_GRAPH"
+    },
+    {
+      "name": "TIMELINE_PARITY",
+      "passed": true,
+      "actual": 2224,
+      "required": 2224
+    },
+    {
+      "name": "EDITION_REPLAY_COMPLETE",
+      "passed": true,
+      "actual": 32,
+      "required": 32
+    },
+    {
+      "name": "DETERMINISTIC_REPLAY",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "IDEMPOTENT_BUSINESS_KEYS",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "ROLLBACK_RECOVERY_DRILL",
+      "passed": true,
+      "actual": true,
+      "required": true
+    },
+    {
+      "name": "TRANSACTION_WRITES_ZERO",
+      "passed": true,
+      "actual": 0,
+      "required": 0
+    },
+    {
+      "name": "COMMIT_DISABLED",
+      "passed": true,
+      "actual": false,
+      "required": false
+    },
+    {
+      "name": "INDEPENDENT_CORPUS_CERTIFIED",
+      "passed": false,
+      "actual": "NOT_PROVIDED",
+      "required": "PASSED"
+    }
+  ],
+  "governance": {
+    "eventSourced": true,
+    "transactionAware": true,
+    "idempotent": true,
+    "permanentHistory": true,
+    "rollbackCapable": true,
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "independentCorpusCertificationRequired": true
+  },
+  "evidenceDigests": {
+    "pass1": "cba4779e6f18dcf49780d48f9c95b037680495220376982537fabc36a9a20d04",
+    "pass2": "cba4779e6f18dcf49780d48f9c95b037680495220376982537fabc36a9a20d04",
+    "transactions": "093fb36c174ea7026cdcbbd7a1a7eaba06d216c78698b6cb090265648fabc030",
+    "deltas": "3a65bf4900a4f3f7a01603de7c8fa908e863742cbeebff4a2f1baac6b81dc278",
+    "checkpoints": "32870965526a853fa0b4e70c684d6f1b90df1471bd6b6f11123d6efc88097ea9",
+    "rollbacks": "87fd805471120987ff8ebab3d56811df5b4e9ef8666a18330fbdef5c91fbae6e"
+  }
+}

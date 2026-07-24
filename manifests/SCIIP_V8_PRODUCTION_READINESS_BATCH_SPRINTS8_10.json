@@ -1,0 +1,13 @@
+{
+  "framework":"SCIIP_V8_PRODUCTION_READINESS_BATCH_SPRINTS_8_10",
+  "version":"v8.0-production-readiness-batch-8-10.0",
+  "sprints":[8,9,10],
+  "mode":"CONTROLLED_ROLLOUT_CERTIFICATION",
+  "liveCommitEnabled":false,
+  "realSuperSheetsConnected":false,
+  "certificationDecision":"CONTROLLED_ROLLOUT_READY",
+  "conditionalDomain":"SUPERSHEET",
+  "requiredCondition":"CONNECT_PROFILE_DRY_RUN_AND_STEWARD_APPROVE_REAL_SUPERSHEETS",
+  "wrapper":"sciipTestV8ProductionReadinessBatchSprints8To10",
+  "compiledTarget":"dist/apps-script/11_other_001.gs"
+}

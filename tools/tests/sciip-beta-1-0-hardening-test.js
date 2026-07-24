@@ -1,0 +1,1 @@
+const fs=require('fs');const p=process.argv[2];const j=JSON.parse(fs.readFileSync(p));if(j.status!=='PASSED'||j.testsRun!==250||j.result.productionWrites!==0||j.result.commitEnabled!==false)process.exit(1);console.log(JSON.stringify({status:'PASSED',testsRun:250}));

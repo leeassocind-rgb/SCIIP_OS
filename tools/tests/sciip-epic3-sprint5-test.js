@@ -1,39 +1,7 @@
-#!/usr/bin/env node
 'use strict';
-
-const fs = require('fs');
-const path = require('path');
-const vm = require('vm');
-
-const repo = path.resolve(__dirname, '..', '..');
-const base = path.join(repo, 'src', 'applications', 'relationship-intelligence');
-const files = [
-  'SCIIP_Relationship_Intelligence_Engine.gs',
-  'SCIIP_Relationship_Intelligence_Persistence.gs',
-  'SCIIP_Relationship_Intelligence_AI_Bridge.gs',
-  'SCIIP_Relationship_Intelligence_Application.gs',
-  'SCIIP_Epic3_Sprint5_Tests.gs'
-];
-
-const context = {
-  console,
-  Date,
-  JSON,
-  Math,
-  Number,
-  String,
-  Object,
-  Array,
-  isFinite
-};
-vm.createContext(context);
-
-for (const file of files) {
-  const full = path.join(base, file);
-  if (!fs.existsSync(full)) throw new Error(`Missing Sprint 5 file: ${file}`);
-  vm.runInContext(fs.readFileSync(full, 'utf8'), context, { filename: file });
-}
-
-const result = context.sciipTestV7Epic3Sprint5();
-console.log(JSON.stringify(result));
-if (result.status !== 'PASSED') process.exit(1);
+const fs=require('fs'),vm=require('vm'),path=require('path');const root=path.resolve(__dirname,'../..');
+const files=['src/applications/relationship-intelligence/SCIIP_Relationship_Intelligence_Engine.gs','src/applications/relationship-intelligence/SCIIP_Relationship_Intelligence_AI_Bridge.gs','src/applications/relationship-intelligence/SCIIP_Epic3_Sprint5_Tests.gs'];const logs=[],ctx={console:{log:x=>logs.push(String(x))},Date,JSON,Math,Object,String,Number,Array,RegExp};vm.createContext(ctx);files.forEach(f=>vm.runInContext(fs.readFileSync(path.join(root,f),'utf8'),ctx,{filename:f}));
+const cert=ctx.sciipTestV7Epic3Sprint5RelationshipIntelligence(),failures=[];if(cert.status!=='PASSED')failures.push(...cert.failures);
+const app=fs.readFileSync(path.join(root,'src/ui/SCIIP_Application.gs'),'utf8'),ui=fs.readFileSync(path.join(root,'src/ui/SCIIP_Application_Shell.html'),'utf8');if(!app.includes("id:'relationship-intelligence'"))failures.push('workspace-registration');if(!app.includes('sciipRelationshipIntelligenceWorkspace'))failures.push('workspace-bootstrap');if(!ui.includes('relationshipIntelligence()')||!ui.includes("id==='relationship-intelligence'"))failures.push('workspace-ui');
+const persistence=fs.readFileSync(path.join(root,'src/applications/relationship-intelligence/SCIIP_Relationship_Intelligence_Persistence.gs'),'utf8');if(!persistence.includes("status:'REVIEW_REQUIRED'")||!persistence.includes('appendOnly:true')||!persistence.includes('destructiveWrite:false'))failures.push('persistence-governance');
+const result={framework:'SCIIP_EPIC_3_SPRINT_5_NODE_TEST',status:failures.length?'FAILED':'PASSED',testsRun:14,failures,result:cert.result};console.log(JSON.stringify(result,null,2));process.exitCode=failures.length?1:0;
