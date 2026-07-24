@@ -1,0 +1,85 @@
+{
+  "framework": "SCIIP_V9_PRODUCTION_VALIDATION_RUN1_WEEK1",
+  "version": "v9.0-validation-run1.0",
+  "status": "REVIEW_REQUIRED",
+  "period": {
+    "start": "2026-06-05",
+    "end": "2026-06-12",
+    "observationDates": [
+      "2026-06-05",
+      "2026-06-08",
+      "2026-06-09",
+      "2026-06-10",
+      "2026-06-11",
+      "2026-06-12"
+    ]
+  },
+  "summary": {
+    "snapshots": 6,
+    "sourceRows": 84,
+    "acceptedObservations": 55,
+    "excludedRows": 29
+  },
+  "daily": [
+    {
+      "date": "2026-06-05",
+      "sourceRows": 6,
+      "accepted": 6,
+      "excluded": 0,
+      "pdfEvidence": true
+    },
+    {
+      "date": "2026-06-08",
+      "sourceRows": 10,
+      "accepted": 10,
+      "excluded": 0,
+      "pdfEvidence": true
+    },
+    {
+      "date": "2026-06-09",
+      "sourceRows": 21,
+      "accepted": 13,
+      "excluded": 8,
+      "pdfEvidence": true
+    },
+    {
+      "date": "2026-06-10",
+      "sourceRows": 20,
+      "accepted": 10,
+      "excluded": 10,
+      "pdfEvidence": true
+    },
+    {
+      "date": "2026-06-11",
+      "sourceRows": 12,
+      "accepted": 8,
+      "excluded": 4,
+      "pdfEvidence": true
+    },
+    {
+      "date": "2026-06-12",
+      "sourceRows": 15,
+      "accepted": 8,
+      "excluded": 7,
+      "pdfEvidence": true
+    }
+  ],
+  "rules": [
+    "Industrial only",
+    "Reported SF >= 50,000",
+    "Exclude rows explicitly classified as Orange County",
+    "Deduplicate same address/city/ZIP/SF/event within a date",
+    "Preserve PDF and bridge SHA-256 evidence"
+  ],
+  "governance": {
+    "readOnly": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanApprovalRequired": true
+  },
+  "limitations": [
+    "These are daily activity observations, not full inventory snapshots.",
+    "Bridge workbooks are the structured source; PDFs remain source evidence.",
+    "No baseline state mutation or production write is performed by this package."
+  ]
+}
