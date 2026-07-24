@@ -152,6 +152,9 @@
     "certify:v9:sprint26:market-delta": "npm run test:v9:sprint26:market-delta",
     "test:v9:sprint26b:real-supersheet": "node tools/tests/sciip-v9-sprint26b-real-supersheet-observation-adapter-test.js",
     "certify:v9:sprint26b:real-supersheet": "npm run test:v9:sprint26b:real-supersheet",
-    "run:v9:sprint26b:real-supersheet": "node tools/supersheets/sciip-v9-sprint26b-real-supersheet-observation-adapter.js"
+    "run:v9:sprint26b:real-supersheet": "node tools/supersheets/sciip-v9-sprint26b-real-supersheet-observation-adapter.js",
+    "test:v9:sprint27": "node tools/tests/sciip-v9-sprint27-production-baseline-engine-test.js",
+    "certify:v9:sprint27:production-baseline": "npm run test:v9:sprint27 && npm run deployment:compile",
+    "run:v9:sprint27:production-baseline": "node tools/supersheets/sciip-v9-sprint27-production-baseline-engine.js"
   }
 }
