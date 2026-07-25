@@ -1,0 +1,18 @@
+{
+  "name": "SCIIP GIS Workspace Alpha Certification",
+  "version": "v7.0-alpha.1",
+  "requiredFiles": [
+    "src/ui/SCIIP_GISWorkspace.gs",
+    "src/ui/SCIIP_GISWorkspace_Tests.gs",
+    "src/ui/SCIIP_GISWorkspace_Styles.html",
+    "src/ui/SCIIP_UI_App.html"
+  ],
+  "requiredCapabilities": [
+    "spatial snapshot",
+    "feature lookup",
+    "coordinate validation",
+    "layer filtering",
+    "selected-feature detail",
+    "responsive map"
+  ]
+}

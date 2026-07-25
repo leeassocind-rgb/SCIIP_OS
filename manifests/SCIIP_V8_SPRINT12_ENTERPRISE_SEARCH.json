@@ -1,0 +1,22 @@
+{
+  "framework": "SCIIP_V8_SPRINT12_ENTERPRISE_SEARCH_KNOWLEDGE_DISCOVERY_UNIFIED_ACTIVITY_TIMELINE",
+  "version": "v8.0-sprint12.0",
+  "publicCertification": "sciipTestV8Sprint12EnterpriseSearchKnowledgeDiscoveryUnifiedActivityTimeline",
+  "preferredCompiledTarget": "dist/apps-script/11_other_001.gs",
+  "capabilities": [
+    "global-search",
+    "semantic-retrieval",
+    "saved-searches",
+    "entity-discovery",
+    "knowledge-graph-context",
+    "map-context",
+    "unified-activity-timeline",
+    "audit-history",
+    "workflow-history",
+    "case-history",
+    "comment-history",
+    "document-discovery",
+    "cross-workspace-navigation"
+  ],
+  "destructiveActionsEnabledByDefault": false
+}

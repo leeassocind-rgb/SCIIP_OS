@@ -1,0 +1,17 @@
+{
+  "framework": "SCIIP_V7_EPIC_3_SPRINT_11_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE",
+  "version": "v7.0-epic3-sprint11.0",
+  "dependency": "SCIIP_V7_EPIC_3_SPRINT_10_OPPORTUNITY_WORKFLOW_EXECUTION_CONTROL",
+  "northStarCapabilities": ["PRESERVES_HISTORY","CONNECTS_KNOWLEDGE","ANALYZE","MANAGE","ACT","ONE_TRUSTED_PLATFORM"],
+  "files": [
+    "src/applications/relationship-intelligence/SCIIP_Execution_Monitoring_Outcome_Intelligence_Engine.gs",
+    "src/applications/relationship-intelligence/SCIIP_Execution_Monitoring_Outcome_Intelligence_Application.gs",
+    "src/applications/relationship-intelligence/SCIIP_Execution_Monitoring_Outcome_Intelligence_Persistence.gs",
+    "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint11_Tests.gs",
+    "tools/tests/sciip-epic3-sprint11-test.js",
+    ".github/workflows/sciip-v7-epic3-sprint11.yml",
+    "docs/releases/SCIIP_V7_EPIC3_SPRINT11_README.md",
+    "manifests/SCIIP_V7_EPIC3_SPRINT11_EXECUTION_MONITORING_OUTCOME_INTELLIGENCE.json"
+  ],
+  "governance": {"appendOnly":true,"duplicateSafe":true,"reviewRequired":true,"destructiveCommitEnabled":false,"autonomousExecution":false,"automaticModelMutation":false}
+}

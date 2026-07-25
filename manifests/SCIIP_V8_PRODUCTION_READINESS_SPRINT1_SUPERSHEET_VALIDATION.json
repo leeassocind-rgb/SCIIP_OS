@@ -1,0 +1,10 @@
+{
+  "framework": "SCIIP_V8_PRODUCTION_READINESS_SUPERSHEET_VALIDATION",
+  "version": "v8.0-production-readiness-sprint1.0",
+  "publicCertification": "sciipTestV8ProductionReadinessSprint1SuperSheetValidation",
+  "preferredCompiledTarget": "dist/apps-script/11_other_001.gs",
+  "phase": "A",
+  "scope": "SuperSheet Production Validation Foundation",
+  "validationDimensions": ["schema","entity-resolution","duplicate-detection","relationships","knowledge-graph","gis","events","evidence","provenance","transaction"],
+  "governance": {"dryRunRequired":true,"appendOnly":true,"evidenceRequired":true,"provenanceRequired":true,"transactionAware":true,"duplicateSafe":true,"idempotent":true,"rollbackTestRequired":true,"denyCommitOnCritical":true,"destructiveActionsEnabledByDefault":false}
+}

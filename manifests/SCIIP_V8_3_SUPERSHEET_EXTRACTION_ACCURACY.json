@@ -1,0 +1,14 @@
+{
+  "framework": "SCIIP_V8_3_SUPERSHEET_EXTRACTION_ACCURACY",
+  "version": "v8.3.0",
+  "status": "VALIDATION_READY",
+  "productionWrites": 0,
+  "commitEnabled": false,
+  "focus": [
+    "layout-aware evidence binding",
+    "address grammar",
+    "city/ZIP recovery",
+    "noise classification",
+    "regression corpus"
+  ]
+}

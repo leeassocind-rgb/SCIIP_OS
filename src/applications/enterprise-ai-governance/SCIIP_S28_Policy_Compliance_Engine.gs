@@ -1,0 +1,3 @@
+var SCIIP_S28_POLICY_COMPLIANCE_ENGINE=(function(){'use strict';
+function validate(input){var decisions=(input&&input.decisions)||[],policies=(input&&input.policies)||[];var violations=[];decisions.forEach(function(d){policies.forEach(function(p){if(p.rule==='MAX_AUTONOMOUS_IMPACT'&&!d.approvalRequired&&Number(d.impact||0)>Number(p.threshold||0))violations.push({decisionId:d.decisionId,policyId:p.policyId,severity:'HIGH'});if(p.rule==='MIN_CONFIDENCE'&&Number(d.confidence||0)<Number(p.threshold||0))violations.push({decisionId:d.decisionId,policyId:p.policyId,severity:'MEDIUM'});});});return {status:violations.length?'NON_COMPLIANT':'COMPLIANT',policies:policies.length,violations:violations};}
+return {validate:validate};})();

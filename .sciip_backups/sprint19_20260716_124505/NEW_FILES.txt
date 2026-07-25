@@ -1,0 +1,10 @@
+tools/tests/sciip-integration-sprint19-test.js
+.github/workflows/sciip-v7-integration-sprint19.yml
+src/tests/SCIIP_TestingFramework_v7_IntegrationSprint19.gs
+src/applications/development-intelligence/SCIIP_Change_Order_Engine.gs
+src/applications/development-intelligence/SCIIP_Project_Schedule_Engine.gs
+src/applications/development-intelligence/SCIIP_Capital_Project_Registry.gs
+src/applications/development-intelligence/SCIIP_Development_Intelligence_Application.gs
+src/applications/development-intelligence/SCIIP_Development_Workspace.gs
+src/applications/development-intelligence/SCIIP_Budget_Forecast_Engine.gs
+src/applications/development-intelligence/SCIIP_Development_Risk_Engine.gs

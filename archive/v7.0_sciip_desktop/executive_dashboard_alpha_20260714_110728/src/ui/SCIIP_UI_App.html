@@ -1,0 +1,13 @@
+<script>
+(function(){'use strict';
+const state=window.SCIIP_BOOTSTRAP||{};
+const app=document.getElementById('app'),sidebar=document.getElementById('sidebar'),title=document.getElementById('viewTitle'),desc=document.getElementById('viewDescription'),content=document.getElementById('content'),status=document.getElementById('systemStatus'),menu=document.getElementById('menuButton');
+function escapeHtml(v){return String(v).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function renderNav(){sidebar.innerHTML=(state.views||[]).map(v=>`<button class="nav-button" data-view="${escapeHtml(v.id)}" aria-current="${v.id===state.activeView?'page':'false'}"><span aria-hidden="true">•</span><span>${escapeHtml(v.label)}</span></button>`).join('');sidebar.addEventListener('click',e=>{const b=e.target.closest('[data-view]');if(!b)return;selectView(b.dataset.view);if(innerWidth<701)toggleMenu(false);});}
+function selectView(id){const v=(state.views||[]).find(x=>x.id===id)||(state.views||[])[0];if(!v)return;state.activeView=v.id;title.textContent=v.label;desc.textContent='Shared SCIIP_OS application shell with certified service and API boundaries.';document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-current',b.dataset.view===v.id?'page':'false'));renderCards(v);history.replaceState(null,'','?view='+encodeURIComponent(v.id));}
+function renderCards(v){const api=state.api||{};content.innerHTML=[['Workspace status',v.status||'FOUNDATION'],['API boundary',api.status||'UNKNOWN'],['UI version',state.uiVersion||'v1'],['Responsive modes','Mobile · Tablet · Desktop'],['Accessibility','Keyboard · Focus · Reduced motion'],['Authentication',state.authentication&&state.authentication.mode||'HANDOFF']].map(([h,m])=>`<article class="card"><h2>${escapeHtml(h)}</h2><div class="metric">${escapeHtml(m)}</div><p class="muted">Certified UI foundation evidence.</p></article>`).join('');}
+function toggleMenu(open){const value=open===undefined?!sidebar.classList.contains('open'):open;sidebar.classList.toggle('open',value);menu.setAttribute('aria-expanded',String(value));}
+menu.addEventListener('click',()=>toggleMenu());document.getElementById('refreshButton').addEventListener('click',()=>{status.textContent='Available';selectView(state.activeView);});
+try{renderNav();selectView(state.activeView);status.textContent=(state.api&&state.api.status)==='AVAILABLE'?'Available':'Degraded';app.dataset.state='ready';}catch(err){document.getElementById('errorState').hidden=false;document.getElementById('errorState').textContent='Unable to initialize SCIIP_OS UI: '+err.message;status.textContent='Error';app.dataset.state='error';}
+})();
+</script>

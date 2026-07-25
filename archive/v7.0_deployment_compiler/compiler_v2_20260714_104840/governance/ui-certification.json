@@ -1,0 +1,21 @@
+{
+  "framework": "SCIIP_UI_CERTIFICATION",
+  "version": "v6.1-phase7d",
+  "status": "PASSED",
+  "certifiedAt": "2026-07-14T15:17:09.377Z",
+  "checks": {
+    "applicationShell": true,
+    "navigation": true,
+    "apiBinding": true,
+    "authenticationHandoff": true,
+    "responsive": true,
+    "accessibility": true,
+    "loadingState": true,
+    "errorState": true,
+    "emptyState": true,
+    "htmlService": true,
+    "views": true
+  },
+  "failures": [],
+  "certificateId": "B62CCBD122C754383912C67F"
+}

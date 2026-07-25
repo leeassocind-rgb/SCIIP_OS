@@ -1,0 +1,3 @@
+var SCIIP_ENTERPRISE_EXECUTION_ENGINE=(function(){'use strict';
+function execute(input){input=input||{};var initiatives=input.initiatives||[];var tasks=[];initiatives.forEach(function(i){(i.work||[]).forEach(function(x,n){tasks.push({taskId:i.initiativeId+'-T'+(n+1),initiativeId:i.initiativeId,name:x.name||x,owner:x.owner||i.owner||'UNASSIGNED',status:x.status||'READY',effort:Number(x.effort||1),priority:Number(i.priority||50),slaHours:Number(x.slaHours||72)});});});var completed=tasks.filter(function(t){return t.status==='COMPLETED';}).length;return {status:'AVAILABLE',initiatives:initiatives.length,tasks:tasks,completed:completed,completion:tasks.length?Math.round(completed/tasks.length*10000)/100:0};}
+return {execute:execute};})();

@@ -1,0 +1,11 @@
+const fs=require('fs'),vm=require('vm'),path=require('path');
+const root=path.resolve(__dirname,'../..');
+const file=path.join(root,'src/applications/executive-operations/SCIIP_Epic6_Executive_Operating_Review_Performance.gs');
+const source=fs.readFileSync(file,'utf8'); let logged='';
+const sandbox={console,Date,JSON,Logger:{log:v=>{logged=String(v);}},Utilities:{getUuid:()=>Math.random().toString(16).slice(2).padEnd(32,'0').slice(0,32).replace(/^(.{8})(.{4})(.{4})(.{4})(.{12}).*$/,'$1-$2-$3-$4-$5')}};
+vm.createContext(sandbox);vm.runInContext(source,sandbox);
+const result=sandbox.sciipTestV7Epic6ExecutiveOperatingReviewPerformanceManagement();
+if(result.status!=='PASSED') throw new Error(JSON.stringify(result));
+if(result.testsRun!==10) throw new Error('Expected 10 tests');
+if(!logged.includes('"status":"PASSED"')) throw new Error('Certification output not logged');
+console.log(JSON.stringify(result));

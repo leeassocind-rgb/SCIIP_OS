@@ -1,0 +1,9 @@
+{
+  "framework": "SCIIP_V10_1_10_5_ENTERPRISE_APPLICATION_INTEGRATION",
+  "version": "v10.5.0",
+  "status": "READY_TO_INSTALL",
+  "workspaces": 5,
+  "tests": 160,
+  "productionWrites": 0,
+  "commitEnabled": false
+}

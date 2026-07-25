@@ -1,0 +1,6 @@
+/** SCIIP_OS v7.0 Sprint 9 — enterprise data source registry. */
+var SCIIP_DATA_SOURCE_REGISTRY=(function(){'use strict';var sources={},order=[];
+function clone(x){return JSON.parse(JSON.stringify(x));}
+function register(def){def=def||{};if(!def.id)throw new Error('Data source id is required.');var existing=sources[def.id];if(existing&&existing.version===String(def.version||'1'))return {status:'DUPLICATE_SAFE',source:clone(existing)};var item={id:String(def.id),name:String(def.name||def.id),type:String(def.type||'UNKNOWN'),version:String(def.version||'1'),domains:(def.domains||[]).slice(),capabilities:(def.capabilities||['READ']).slice(),connection:def.connection||{},registeredAt:new Date().toISOString()};sources[item.id]=item;if(!existing)order.push(item.id);return {status:existing?'UPDATED':'REGISTERED',source:clone(item)};}
+function get(id){return sources[id]?clone(sources[id]):null;}function list(){var out=[];for(var i=0;i<order.length;i++)if(sources[order[i]])out.push(clone(sources[order[i]]));return out;}function reset(){sources={};order=[];return {status:'RESET'};}
+return {register:register,get:get,list:list,reset:reset};})();

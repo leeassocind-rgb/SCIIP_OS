@@ -1,0 +1,11 @@
+/** Aggregates backend ledgers into one product-facing workspace model. */
+var SCIIP_IDP_WORKSPACE_V7 = SCIIP_IDP_WORKSPACE_V7 || {};
+SCIIP_IDP_WORKSPACE_V7.model = function(selectedJobId){
+  var jobs=SCIIP_IDP_LEDGER_QUERY_V7.jobs(),selected=selectedJobId||((jobs[0]||{}).jobId||''),job=selected?SCIIP_IDP_LEDGER_QUERY_V7.job(selected):null;
+  var records=selected?SCIIP_IDP_LEDGER_QUERY_V7.records(selected):[],decisions=selected?SCIIP_IDP_LEDGER_QUERY_V7.decisions(selected):[],latestDecision=SCIIP_IDP_LEDGER_QUERY_V7.latestBy(decisions,'recordId');
+  var review=records.map(function(r){var d=latestDecision[String(r.recordId)]||null;return {recordId:r.recordId,rowNumber:r.rowNumber,businessKey:r.businessKey,classification:r.classification,reviewStatus:d?d.decision:r.reviewStatus,record:SCIIP_IDP_RELEASE4_V7.safeJson(r.recordJson,{}),validation:SCIIP_IDP_RELEASE4_V7.safeJson(r.validationJson,{}),changes:SCIIP_IDP_RELEASE4_V7.safeJson(r.changesJson,[])};});
+  var plans=selected?SCIIP_IDP_LEDGER_QUERY_V7.plans(selected):[],executions=selected?SCIIP_IDP_LEDGER_QUERY_V7.executions(selected):[],events=SCIIP_IDP_LEDGER_QUERY_V7.rows(SCIIP_IDP_RELEASE3_V7.SHEETS.EVENTS);
+  return {version:SCIIP_IDP_RELEASE4_V7.VERSION,status:'AVAILABLE',workspace:SCIIP_IDP_RELEASE4_V7.WORKSPACE,selectedJobId:selected,jobs:jobs.slice(0,50),job:job,review:review,entityMatches:selected?SCIIP_IDP_LEDGER_QUERY_V7.matches(selected):[],plans:plans,executions:executions,history:selected?SCIIP_IDP_LEDGER_QUERY_V7.history(selected):[],dataQuality:SCIIP_IDP_DATA_QUALITY_V7.calculate(jobs,SCIIP_IDP_LEDGER_QUERY_V7.current()),whatChanged:SCIIP_IDP_CHANGE_SUMMARY_V7.build(events,20),actions:['CREATE_FROM_ACTIVE_SHEET','APPROVE','REJECT','HOLD','PREPARE_COMMIT','EXECUTE_COMMIT','REFRESH','OPEN_GIS','OPEN_SEARCH'],destructiveCommitEnabled:true,rollbackReady:true,acceptanceState:'END_TO_END_DATA_SOURCES_WORKSPACE_READY'};
+};
+function sciipGetDataSourcesWorkspace(jobId){return SCIIP_IDP_WORKSPACE_V7.model(jobId);}
+function sciipOpenDataSourcesWorkspace(){var html=HtmlService.createTemplateFromFile('SCIIP_IDP_DataSources_Workspace').evaluate().setTitle('SCIIP Data Sources').setWidth(480);SpreadsheetApp.getUi().showSidebar(html);return {status:'OPENED',workspace:'data-sources'};}

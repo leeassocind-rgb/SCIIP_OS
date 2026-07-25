@@ -1,0 +1,20 @@
+name: SCIIP v7 Epic 4 Execution Runtime
+on:
+  push:
+    paths:
+      - 'src/platform/execution/**'
+      - 'tools/tests/sciip-epic4-execution-runtime-test.js'
+      - 'manifests/SCIIP_V7_EPIC4_EXECUTION_RUNTIME_MILESTONE.json'
+  pull_request:
+    paths:
+      - 'src/platform/execution/**'
+      - 'tools/tests/sciip-epic4-execution-runtime-test.js'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node tools/tests/sciip-epic4-execution-runtime-test.js

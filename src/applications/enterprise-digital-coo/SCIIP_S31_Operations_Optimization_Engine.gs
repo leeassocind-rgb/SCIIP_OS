@@ -1,0 +1,3 @@
+var SCIIP_S31_OPERATIONS_OPTIMIZATION_ENGINE=(function(){'use strict';
+function optimize(input){var synthesis=(input&&input.synthesis)||{},actions=(synthesis.bottlenecks||[]).map(function(b,i){return {actionId:'COO-A'+(i+1),domainId:b.domainId,type:Number(b.utilization||0)>90?'REBALANCE_CAPACITY':'RECOVER_SLA',priority:Number(b.utilization||0)>95?'CRITICAL':'HIGH',approvalRequired:Number(b.cost||0)>250,route:Number(b.cost||0)>250?'DIGITAL_CEO':'AUTO_EXECUTE'};});return {status:'COMPLETED',actions:actions,count:actions.length,approvals:actions.filter(function(a){return a.approvalRequired;}).length};}
+return {optimize:optimize};})();

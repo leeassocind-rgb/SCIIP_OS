@@ -1,0 +1,19 @@
+name: SCIIP v7 Integration Sprint 3F
+on:
+  push:
+    paths:
+      - 'src/ui/SCIIP_*Assurance*.gs'
+      - 'src/ui/SCIIP_AuditTrail.gs'
+      - 'src/ui/SCIIP_OperationalResilienceEngine.gs'
+      - 'src/ui/SCIIP_Integration_Sprint3F_*.gs'
+      - 'tools/tests/sciip-integration-sprint3f-test.js'
+  pull_request:
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node tools/tests/sciip-integration-sprint3f-test.js

@@ -1,0 +1,7 @@
+{
+  "baselineFile": "../../data/sprint27/baseline-validation.json",
+  "snapshotsDirectory": "../../data/supersheets/observation-json",
+  "currentAirFile": "../../data/current-air/current-availability-observation.json",
+  "leeProFile": "../../data/leepro/LeePro_Comps_Last5Years.xlsx",
+  "absenceConfirmationDays": 2
+}

@@ -1,0 +1,13 @@
+{
+  "framework": "SCIIP_V8_SPRINT4_GOVERNED_COMMIT_EVENT_LEDGER_GRAPH_SYNC_LIVE_REFRESH",
+  "version": "v8.0-sprint4.0",
+  "publicTest": "sciipTestV8Sprint4GovernedCommitEventLedgerGraphSyncLiveRefresh",
+  "governance": {
+    "reviewRequiredBeforeCommit": true,
+    "idempotent": true,
+    "duplicateSafe": true,
+    "permanentEventLedger": true,
+    "lineagePreserved": true,
+    "destructiveCommitEnabledByDefault": false
+  }
+}

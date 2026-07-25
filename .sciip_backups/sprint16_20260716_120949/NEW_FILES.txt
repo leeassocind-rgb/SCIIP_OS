@@ -1,0 +1,9 @@
+tools/tests/sciip-integration-sprint16-test.js
+.github/workflows/sciip-v7-integration-sprint16.yml
+src/tests/SCIIP_TestingFramework_v7_IntegrationSprint16.gs
+src/applications/asset-administration/SCIIP_Asset_Administration_Workspace.gs
+src/applications/asset-administration/SCIIP_Occupancy_Economics_Engine.gs
+src/applications/asset-administration/SCIIP_Critical_Date_Engine.gs
+src/applications/asset-administration/SCIIP_Asset_Administration_Application.gs
+src/applications/asset-administration/SCIIP_Asset_Onboarding_Registry.gs
+src/applications/asset-administration/SCIIP_Lease_Obligation_Engine.gs

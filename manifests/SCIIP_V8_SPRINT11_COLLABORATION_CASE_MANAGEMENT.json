@@ -1,0 +1,7 @@
+{
+  "framework": "SCIIP_V8_SPRINT11_ENTERPRISE_COLLABORATION_NOTIFICATIONS_CASE_MANAGEMENT",
+  "version": "v8.0-sprint11.0",
+  "publicCertification": "sciipTestV8Sprint11EnterpriseCollaborationNotificationsCaseManagement",
+  "preferredCompiledTarget": "dist/apps-script/11_other_001.gs",
+  "destructiveActionsEnabledByDefault": false
+}

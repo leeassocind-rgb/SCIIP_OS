@@ -1,0 +1,4 @@
+/** SCIIP_OS v7.0 Sprint 13 — Broker Action Center. */
+var SCIIP_BROKER_ACTION_CENTER=(function(){'use strict';
+function build(expansion,matches){var byCompany={};(matches||[]).forEach(function(m){if(!byCompany[m.companyId]&&m.feasible)byCompany[m.companyId]=m;});var actions=(expansion||[]).map(function(c){var m=byCompany[c.companyId],priority=Math.round((c.score*.65+(m?m.score:0)*.35)*100)/100;return {companyId:c.companyId,companyName:c.name,priorityScore:priority,priority:priority>=70?'IMMEDIATE':priority>=50?'NEXT':'MONITOR',propertyId:m?m.propertyId:null,recommendedAction:m?'Prepare evidence-backed outreach and property brief.':'Research requirement and verify expansion timing.',approvalRequired:true,evidence:c.evidence||[]};}).sort(function(a,b){return b.priorityScore-a.priorityScore;});return {queue:actions,top:actions[0]||null};}
+return {build:build};})();

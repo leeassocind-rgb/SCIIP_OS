@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <title>SCIIP_OS</title>
+  <?!= SCIIP_UI.include('SCIIP_UI_Styles'); ?>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div id="app" class="app-shell" data-state="loading">
+    <header class="topbar" role="banner">
+      <button id="menuButton" class="icon-button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <div class="brand"><strong>SCIIP_OS</strong><span>Industrial Intelligence Platform</span></div>
+      <div id="systemStatus" class="status-chip" role="status" aria-live="polite">Initializing</div>
+    </header>
+    <aside id="sidebar" class="sidebar" aria-label="Primary navigation"></aside>
+    <main id="main" class="main" tabindex="-1">
+      <section class="hero" aria-labelledby="viewTitle">
+        <div><p class="eyebrow">SCIIP DESKTOP</p><h1 id="viewTitle">Loading…</h1><p id="viewDescription">Preparing the workspace.</p></div>
+        <button id="refreshButton" class="primary-button">Refresh status</button>
+      </section>
+      <section id="content" class="content-grid" aria-live="polite"></section>
+      <section id="errorState" class="state-panel error" hidden role="alert"></section>
+      <section id="emptyState" class="state-panel" hidden><h2>No data available</h2><p>The UI foundation is ready. Domain data will appear when the corresponding service is connected.</p></section>
+    </main>
+  </div>
+  <script>window.SCIIP_BOOTSTRAP=<?!= bootstrapJson ?>;</script>
+  <?!= SCIIP_UI.include('SCIIP_UI_App'); ?>
+</body>
+</html>

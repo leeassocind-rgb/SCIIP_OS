@@ -1,0 +1,1150 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-25",
+  "summary": {
+    "observations": 10,
+    "reviewRequired": 1,
+    "blocked": 0,
+    "lineageComplete": 10
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-25-2026.pdf",
+    "sourceSha256": "7b29426591000ce0e0c500b3bf45ad139d4b95ebe9d19f1caf82b0a3a2edec16",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260625-001",
+      "snapshotDate": "2026-06-25",
+      "address": "1807 E 48th Pl",
+      "city": "Los Angeles",
+      "postalCode": "90058",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 71083,
+      "buildingSf": 71083,
+      "officeSf": 14612,
+      "askingRate": 1.38,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 1",
+      "notes": "1 71,083 SF $1.38 NNN 4/4 Existing 32' Sublease Through TBD | 1807 E 48th Pl No NFS Yes Available 800 Free Standing Building | Los Angeles, CA 90058 14,612 SF 71,083 SF No 30 Days 0.7:1/49 Modern Warehouse Facility | Marketing Flyer High 32' Ceiling Clearance | Major Properties - Jamie Kennedy 412-589-2751, Ryan Kirschner 323-538-2882, Heavy 900 Amps Power Service | Anthony Behar 310-880-2329 Fully Racked (Can Be Modified or Remodeled) | New Listing Modern Warehouse Facility | For Sublease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-E9572464D5F823285703",
+      "propertyIdentityKey": "1807 E 48TH PL|LOS ANGELES|90058",
+      "listingVariantId": "LISTING-4760D0D94B52EADB5C4F",
+      "structuredNotes": {
+        "power": [
+          "900 Amps Power Service"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-25"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1807 E 48th Pl",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Los Angeles",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "4463B82B948DEE6F2A550F7E533C2F0B"
+      }
+    },
+    {
+      "candidateId": "DA-20260625-002",
+      "snapshotDate": "2026-06-25",
+      "address": "6467 E Washington Blvd",
+      "city": "Commerce",
+      "postalCode": "90040",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 70140,
+      "buildingSf": 70140,
+      "officeSf": 3000,
+      "askingRate": 0.99,
+      "askingRateType": "IG",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 2",
+      "notes": "2 70,140 SF $0.99 IG 10/1 Existing 20' Excellent North Commerce Location | 6467 E Washington Blvd Yes NFS Yes Leased 400 10 Dock High Positions | Commerce, CA 90040 3,000 SF 70,140 SF Fncd/Pvd Now 0.9:1/60 Large Fenced and Secure Yard | Corner Location / Major Street Frontage | CBRE - El Segundo - Cameron Merrill 310-463-1317, Matthew Tuinstra 310-363- Immediate Access to the 5 Freeway | 4873 | Leased | Co-Op: Sam Rinkov (Lee & Associates)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-CDB8C5287CC31B73678C",
+      "propertyIdentityKey": "6467 E WASHINGTON BLVD|COMMERCE|90040",
+      "listingVariantId": "LISTING-31DF82CA62ACDBA8982A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "10 Dock High Positions"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-25"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "6467 E Washington Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Commerce",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Commerce"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "6311A51E30969F75D7BA4B191EBD41AE"
+      }
+    },
+    {
+      "candidateId": "DA-20260625-003",
+      "snapshotDate": "2026-06-25",
+      "address": "4768 S Alameda St",
+      "city": "Vernon",
+      "postalCode": "90058",
+      "region": "LA Central",
+      "propertyType": "Land",
+      "availableSf": 71875,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.38,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 15",
+      "notes": "15 71,875 SF $0.38 G 0 SF Leased Gas: Prime West Vernon Location | 4768 S Alameda St 1.65 Ac NFS Fenced Industrial Water: Y Gated and Secure Yard | Vernon, CA 90058 No NFS No I Sewer: Y ±175 Striped Parking Spaces | Alameda St/E 48th St Utilities on Site | Cushman & Wakefield - Brandon Gill 213-629-6528, Brandon Burns 213- Electric: Y | Marketing Flyer 629-6541, Jae Yoo 213-629-6551, Dillon Kneafsey 213-629-6519 Fiber: | Leased | Research in Progress | 6/25/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-59FC4732E60E56E8C029",
+      "propertyIdentityKey": "4768 S ALAMEDA ST|VERNON|90058",
+      "listingVariantId": "LISTING-2CD264C9C1A5495E8365",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-25"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "4768 S Alameda St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Vernon",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "4E327B0DB9B48837E8AA064B9EDC79D6"
+      }
+    },
+    {
+      "candidateId": "DA-20260625-004",
+      "snapshotDate": "2026-06-25",
+      "address": "12301 Hawkins St",
+      "city": "Santa Fe Springs",
+      "postalCode": "90670",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 132888,
+      "buildingSf": 132888,
+      "officeSf": 12004,
+      "askingRate": 1.4,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 1",
+      "notes": "1 Heritage Springs Business Park 132,888 SF $1.40 NNN 18/2 Existing 30' Heritage Springs Business Park | 12301 Hawkins St Yes NFS ESFR Leased 800 132,888 SF Available | Santa Fe Springs, CA 90670 12,004 SF 132,888 SF Paved Now 1.3:1/175 Strong Corporate Image - Low OPEX | Marketing Flyer 30' Clear Height, 18 DH Positions, ESFR | JLL - Jon Reno, SIOR, CCIM 213-271-1508, Mark Vanis 213-239-5908, Trevor Gale, Excellent Access to the 5, 105 and 605 Freeways | SIOR 213-239-6256, Patrick Stark 310-251-2925 Professionally Managed | Leased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-7689D90204514286AF79",
+      "propertyIdentityKey": "12301 HAWKINS ST|SANTA FE SPRINGS|90670",
+      "listingVariantId": "LISTING-C4ED79EDD4A7494E50DE",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "18 DH Positions"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-25"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "12301 Hawkins St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Santa Fe Springs",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Santa Fe Springs"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "6A06BA12A8F24FF2F5A486333FB99F7F"
+      }
+    },
+    {
+      "candidateId": "DA-20260625-005",
+      "snapshotDate": "2026-06-25",
+      "address": "6201 Knott Ave",
+      "city": "Buena Park",
+      "postalCode": "90620",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 102367,
+      "buildingSf": 271573,
+      "officeSf": 7548,
+      "askingRate": 1.25,
+      "askingRateType": "IG",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 2",
+      "notes": "2 Mid-Counties Distribution Center 102,367 SF $1.25 IG 18/1 Existing 30' Sublease Through 8/01/2027 | 6201 Knott Ave No NFS ESFR Leased 800 POL 271,573 SF Building; 7,548 SF Office Space | Buena Park, CA 90620 7,548 SF 271,573 SF No 01/01/2026 18 Dock High Doors; 1 Ground Level Ramp | Marketing Flyer 30' Minimum Clear Height, 52' x 50' Bay Spacing | Mohr Partners - Michael Massaro 714-813-1174 800 Amps of Well Distributed Power | Immediate Access to the 5 & 91 Freeways | Subleased Co-Op: Trent Peterson (CBRE)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-EC092D8A9AC529FACC8F",
+      "propertyIdentityKey": "6201 KNOTT AVE|BUENA PARK|90620",
+      "listingVariantId": "LISTING-A49C9791EDB9AB40071E",
+      "structuredNotes": {
+        "power": [
+          "800 Amps of Well Distributed Power"
+        ],
+        "loading": [
+          "18 Dock High Doors",
+          "1 Ground Level Ramp"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "7,548 SF Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-25"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "6201 Knott Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Buena Park",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "2AC0FC529D525294E6522C0E722CA622"
+      }
+    },
+    {
+      "candidateId": "DA-20260625-006",
+      "snapshotDate": "2026-06-25",
+      "address": "River Rd",
+      "city": "Corona",
+      "postalCode": "92880",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 81000,
+      "buildingSf": 81000,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 3",
+      "notes": "3 81,000 SF TBD 11/2 Existing 28' Free Standing Building | 200 River Rd Yes NFS ESFR Leased 1700 28' Clear Height | Corona, CA 92880 81,000 SF Fncd/Pvd Now 11 DH Doors, 2 GL Doors | Fenced and Paved Yard | Cushman & Wakefield - Kevin Turner 949-955-7653 | Leased | Direct Deal",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-EC7E57E4D5BFF05303E5",
+      "propertyIdentityKey": "RIVER RD|CORONA|92880",
+      "listingVariantId": "LISTING-AFC293A938F21353AF35",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "11 DH Doors",
+          "2 GL Doors"
+        ],
+        "yard": [
+          "Paved Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-25"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "River Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Corona",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9EBFE534F7C4C44EE6A1DF5F6230A6A0"
+      }
+    },
+    {
+      "candidateId": "DA-20260625-007",
+      "snapshotDate": "2026-06-25",
+      "address": "10156 Live Oak Ave",
+      "city": "Fontana",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 237636,
+      "buildingSf": 237636,
+      "officeSf": 6766,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 1",
+      "notes": "1 Oakmont Live Oak 237,636 SF TBD 32/1 Existing 32' Free Standing Building, Available 42 2026 | 10156 Live Oak Ave Yes NFS ESFR Available 2000 6,766 SF of Office Space | Fontana, CA 92335 6,766 SF 237,636 SF Fncd/Pvd 10/01/2026 0.5:1/128 32' Clear Height | Marketing Flyer 32 Dock High Doors, 1 Ground Level Door | Lee & Associates - Austin Hill 909-373-2732, Tyler Plata 909-373-2948, Holden Secured, Full Concrete Truck Court & Drive Aisles | Edmondson 562-493-1116, Ian Armbruster 909-373-2903 51 Trailer Storage Stalls, 128 Auto Parking Stalls | Updated Information 6,766 SF of Office Space",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-62B52A88BB24C73F96C8",
+      "propertyIdentityKey": "10156 LIVE OAK AVE|FONTANA|92335",
+      "listingVariantId": "LISTING-99BE90C6547105CEB488",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "32 Dock High Doors",
+          "1 Ground Level Door"
+        ],
+        "yard": [],
+        "parking": [
+          "128 Auto Parking Stalls"
+        ],
+        "office": [
+          "6,766 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-25"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "10156 Live Oak Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Fontana"
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "69FB08E910F48644EE30FFAE1EDC558F"
+      }
+    },
+    {
+      "candidateId": "DA-20260625-008",
+      "snapshotDate": "2026-06-25",
+      "address": "1090 E Belmont St",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 125470,
+      "buildingSf": 125470,
+      "officeSf": 16219,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 2",
+      "notes": "2 125,470 SF TBD 66/6 Existing 30' Sublease Through 8/31/2030 | 1090 E Belmont St No NFS ESFR Available 1200 Free Standing Building | Ontario, CA 91761 16,219 SF 125,470 SF Fncd/Pvd 30 Days 30' Clear Height | Marketing Flyer 66 DH Doors w/ Edge Of Dock Levelers & 6 GL Doors | Cushman & Wakefield - Milo Lipson 909-942-4648, Ryan Velasquez 909-942-4673, 1,200 Amps Heavy Power (Verify) | Cooper Hughes 909-472-4487 165'-210' Truck Court | New Listing 66 DH Doors w/ Edge Of Dock Levelers & 6 GL Doors | For Sublease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-6B8E018FC72A6E17FFB3",
+      "propertyIdentityKey": "1090 E BELMONT ST|ONTARIO|91761",
+      "listingVariantId": "LISTING-E22BE5FD2B7090EA4D5E",
+      "structuredNotes": {
+        "power": [
+          "200 Amps Heavy Power (Verify)"
+        ],
+        "loading": [
+          "66 DH Doors w/ Edge Of Dock Levelers & 6 GL Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-25"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1090 E Belmont St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "AE52B12E9014D5CF13BD89A800D6676A"
+      }
+    },
+    {
+      "candidateId": "DA-20260625-009",
+      "snapshotDate": "2026-06-25",
+      "address": "19464 Kendall Dr",
+      "city": "San Bernardino",
+      "postalCode": "92407",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 54450,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.22,
+      "askingRateType": "MG",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 29",
+      "notes": "29 54,450 SF $0.22 MG 0 SF Leased Gas: 1.55 Acres of Land | 19464 Kendall Dr 1.25 Ac NFS Fenced Industrial Water: Compact Gravel Yard | San Bernardino, CA 92407 No NFS Yes GH/SP-CI Sewer: Fenced & Secured | Yucca Ave/Kendall Dr Electric: Outside Storage and Trucking Allowed | KW Commercial - Rene Ramos, Jr. 909-980-6868 | Marketing Flyer Fiber: Access to The 215 Freeway | Leased | Co-Op: Henry Liu and Alex Liu (Sperry Commercial) | 6/25/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-90A8F62506834E7036FC",
+      "propertyIdentityKey": "19464 KENDALL DR|SAN BERNARDINO|92407",
+      "listingVariantId": "LISTING-AC0747663A983F15DF79",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-25"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "19464 Kendall Dr",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "San Bernardino",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "4D45D1C2625C6BDDBDB3D40BF848808F"
+      }
+    },
+    {
+      "candidateId": "DA-20260625-010",
+      "snapshotDate": "2026-06-25",
+      "address": "NW of Goodenough Rd and 6th St",
+      "city": "Fillmore",
+      "postalCode": "93015",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 429501,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 16,
+      "sourceRow": "Page 16 AIR Listing 12",
+      "notes": "12 429,501 SF NFL 0 SF In Escrow Gas: ±9.86 Acres of Land | NW of Goodenough Rd and 6th St 9.86 Ac $9.31 Yes Residential Water: Residential Development Opportunity | Fillmore, CA 93015 Development Density: 5/Units Per Acre | No $4,000,000 No NFSP Sewer: North Fillmore Specific | Marketing Flyer CBRE, Inc - Jim Meaney 805-288-4671 Electric: | Fiber: | In Escrow",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-4C56B60CAE409E2D7DC5",
+      "propertyIdentityKey": "NW OF GOODENOUGH RD AND 6TH ST|FILLMORE|93015",
+      "listingVariantId": "LISTING-73EAFBE7409B0790ED3E",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-25"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Goodenough Rd and 6th St",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Fillmore",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.84,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "09089633B4779A8D176B828C33ACAF71"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

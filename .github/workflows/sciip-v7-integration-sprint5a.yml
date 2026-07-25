@@ -1,0 +1,17 @@
+name: SCIIP v7 Sprint 5A Certification
+on:
+  push:
+    paths:
+      - 'src/ui/SCIIP_Autonomous*.gs'
+      - 'src/ui/SCIIP_Integration_Sprint5A_*.gs'
+      - 'tools/tests/sciip-integration-sprint5a-test.js'
+  workflow_dispatch:
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node tools/tests/sciip-integration-sprint5a-test.js

@@ -1,0 +1,1806 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-19",
+  "summary": {
+    "observations": 16,
+    "reviewRequired": 0,
+    "blocked": 0,
+    "lineageComplete": 16
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-19-2026.pdf",
+    "sourceSha256": "6697cd07b3c53c40c63ea0db5b00e59e8f1475eb0346b65e47c6b0ce3c4decfd",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260619-001",
+      "snapshotDate": "2026-06-19",
+      "address": "3737 San Gabriel River Pkwy",
+      "city": "Pico Rivera",
+      "postalCode": "90660",
+      "region": "LA Central",
+      "propertyType": "Land",
+      "availableSf": 50442,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "Sale Comp",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 2,
+      "sourceRow": "Page 2 AIR Listing 9",
+      "notes": "9 50,442 SF NFL 4,942 SF Sold Gas: Immediate Access to 605 Freeway | 3737 San Gabriel River Pkwy 1.16 Ac $73.98 Fncd/Pvd Industrial Water: Well Appointed Offices | Pico Rivera, CA 90660 No $3,731,760 No IG Sewer: Paved and Secured Yard | San Gabriel River Pkwy All Utilities to Suite | Daum Commercial - Dennis Sandoval 562-576-1421, Kevin Sandoval 562 Electric: | Marketing Flyer Fiber: Drive Thru Site w/ Multiple Point of Ingress/Egress | -576-1420, Dennis Holt 949-242-1714, David Muir 213-270-2244 Zoning - IG (General Industrial) | Sold | Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-E507AFC0BF819FB67BAC",
+      "propertyIdentityKey": "3737 SAN GABRIEL RIVER PKWY|PICO RIVERA|90660",
+      "listingVariantId": "LISTING-6112E5B264EE67F1514B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Paved and Secured Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "3737 San Gabriel River Pkwy",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Pico Rivera",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "393AAA66CDC5B2A290519201F98CA06D"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-002",
+      "snapshotDate": "2026-06-19",
+      "address": "17421 Derian Ave",
+      "city": "Irvine",
+      "postalCode": "92614",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 90061,
+      "buildingSf": 90061,
+      "officeSf": 10152,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 1",
+      "notes": "1 90,061 SF TBD 8/1 Existing 25' Sublease Through 4/30/2029 | 17421 Derian Ave No NFS ESFR Leased 1200-2000 Creative Office & Industrial | Irvine, CA 92614 10,152 SF 90,061 SF Fenced 06/01/2026 Flexible Zoning in the Heart of IBC | Marketing Flyer 8 Dock-High Doors; ESFR Sprinkler System | Savills - Brett Lessman 949-683-5277 One 1,200 Amp-Service, One 2,000 Amp-Service | Easy Access to 55 and 405 Fwys & 73 Toll Road | Subleased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-927B9827A53137D1061F",
+      "propertyIdentityKey": "17421 DERIAN AVE|IRVINE|92614",
+      "listingVariantId": "LISTING-14633A90644AC9193CCC",
+      "structuredNotes": {
+        "power": [
+          "200 Amp-Service",
+          "000 Amp-Service"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "17421 Derian Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Irvine",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9CF8786F796A643A881BC56B660D2EAE"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-003",
+      "snapshotDate": "2026-06-19",
+      "address": "9253 Dreamland Dr, Bldg 1",
+      "city": "Fontana",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 1286569,
+      "buildingSf": 1286569,
+      "officeSf": 5072,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 1",
+      "notes": "1 Speedway Commerce Center II 1,286,569 SF TBD 205/4 Existing 40' Free Standing Building | 9253 Dreamland Dr, Bldg 1 Yes NFS ESFR Leased 4000 205 DH Doors/4 GL Doors | Fontana, CA 92335 5,072 SF 1,286,569 SF Fncd/Pvd Now 0.3:1/424 ±40' Clear Height, 0.0% Slope Slab, LEED Gold | Marketing Flyer 424 Auto Parking | CBRE - Eloy Covarrubias 909-418-2284, Dan de la Paz 909-418-2169, Darla Longo 265 Trailer Parking (Additional Lots Available Separate) | 909-418-2105, Joe Werdein 909-418-2285 Construction Complete | Leased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-711DE293F56BD1E754D9",
+      "propertyIdentityKey": "9253 DREAMLAND DR BLDG 1|FONTANA|92335",
+      "listingVariantId": "LISTING-26858D90781C65DDB60E",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "205 DH Doors/4 GL Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "9253 Dreamland Dr, Bldg 1",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Fontana"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "F3C3B4F20DEE60DFF9438FB2D05CC1CA"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-004",
+      "snapshotDate": "2026-06-19",
+      "address": "1301 W Harley Knox Blvd",
+      "city": "Perris",
+      "postalCode": "92571",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 397351,
+      "buildingSf": 397351,
+      "officeSf": 4650,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 2",
+      "notes": "2 Perris Gateway Commerce Center 397,351 SF TBD 49/2 Existing 32' Perris Gateway Commerce Center | 1301 W Harley Knox Blvd Yes NFS ESFR Leased 1600 Free Standing Building | Perris, CA 92571 4,650 SF 397,351 SF Fncd/Pvd Now 0.9:1/355 49 Dock Doors, ESFR | Great Freeway Access with /1,205 SF 215 Fwy Frontage | CBRE - Eloy Covarrubias 909-418-2284, Joe Werdein 909-418-2285, Hunter | McDonald 909-467-6873, Kathee Wozniak 909-418-2286 | Leased | Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-B58963480516B41FA792",
+      "propertyIdentityKey": "1301 W HARLEY KNOX BLVD|PERRIS|92571",
+      "listingVariantId": "LISTING-22E8C1D0E78B901B617C",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1301 W Harley Knox Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Perris",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Perris"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "25DA145C1F70E1CB04794BF6D622C438"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-005",
+      "snapshotDate": "2026-06-19",
+      "address": "NE of Harvard Rd and Bobcat Ln",
+      "city": "Newberry Springs",
+      "postalCode": "92365",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 207346,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 9",
+      "notes": "9 207,346 SF NFL 0 SF Available Gas: ±4.76 Acres Available | NE of Harvard Rd and Bobcat Ln 4.76 Ac $0.05 Yes Specialty Water: Resource Conservation Zoning | Newberry Springs, CA 92365 No $9,500 No RC Sewer: | Kursch Group - Ryan Travis 760-983-2594 Electric: | Marketing Flyer Fiber: | Price Reduced | $11,500 -> $9,500",
+      "changeDetail": "$11,500 -> $9,500",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-87654C9628D8F6F61372",
+      "propertyIdentityKey": "NE OF HARVARD RD AND BOBCAT LN|NEWBERRY SPRINGS|92365",
+      "listingVariantId": "LISTING-2DE794A0A0F1E905C216",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NE of Harvard Rd and Bobcat Ln",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Newberry Springs",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "ADB8419E9198A3536171D0AFD2E5C63E"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-006",
+      "snapshotDate": "2026-06-19",
+      "address": "4963-4981 Holt Blvd",
+      "city": "Montclair",
+      "postalCode": "91763",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 65376,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 10",
+      "notes": "10 65,376 SF NFL 2,574 SF Available Gas: Large 1.50 Acre Infill Parcel Along Holt Blvd | 4963-4981 Holt Blvd 1.50 Ac $36.68 Yes Retail Water: Strong vVsibility Along a Major Commercial Corridor | Montclair, CA 91763 No $2,398,000 No SP Sewer: Existing Automotive Sales Configuration | Monte Vista Ave/Holt Blvd Electric: Potential Residential or Mixed-Use Redevelopment Opportunity | Kott & Company - Brett Cervantes 714-707-4959 | Marketing Flyer Fiber: Located Within The Growing Inland Empire Market | New Listing | For Sale Large 1.50 Acre Infill Parcel Along Holt Blvd",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-64403D4C4006B177E49C",
+      "propertyIdentityKey": "4963 4981 HOLT BLVD|MONTCLAIR|91763",
+      "listingVariantId": "LISTING-7B33ED6FC7295BD6F273",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "4963-4981 Holt Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Montclair",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "7D053236729D552151D6A13E304248F1"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-007",
+      "snapshotDate": "2026-06-19",
+      "address": "1151-1351 Pacific Ave",
+      "city": "Oxnard",
+      "postalCode": "93033",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 196034,
+      "buildingSf": 196034,
+      "officeSf": 19500,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 1",
+      "notes": "1 196,034 SF TBD 14/6 Existing 24' 16,000 Amps of Power / ±405 Car Parking (Tenant to Verify) High | 1151-1351 Pacific Ave No TBD Yes Available 16,000 Image Manufacturing/Warehousing Buildings Fenced Campus – | Oxnard, CA 93033 19,500 SF 196,034 SF Fncd/Pvd 30 Days 2.1:1/405 Ideal for High Security Uses | Marketing Flyer 14 DH & 6 GL, 24' Clear, 2005 Built | Lee & Associates - Armen Kazaryan 323-767-2041, Mike Smith 323-767-2109, Minutes from Port Hueneme, Naval CBC & Point Mugu Naval Base | Bennett Robinson 818-907-4608 Quick Access to 101 Freeway | Updated Information Now Available For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-AC606BB6804CA8CF477C",
+      "propertyIdentityKey": "1151 1351 PACIFIC AVE|OXNARD|93033",
+      "listingVariantId": "LISTING-09AF39BCF81ED3B9832A",
+      "structuredNotes": {
+        "power": [
+          "16,000 Amps of Power / ±405 Car Parking (Tenant to Verify) High"
+        ],
+        "loading": [
+          "14 DH & 6 GL"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1151-1351 Pacific Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Oxnard",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "BD37A2ECB76DF77F875D551AA3B482E7"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-008",
+      "snapshotDate": "2026-06-19",
+      "address": "1151 Pacific Ave",
+      "city": "Oxnard",
+      "postalCode": "93033",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 107759,
+      "buildingSf": 107759,
+      "officeSf": 14400,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 2",
+      "notes": "2 107,759 SF TBD 7/3 Existing 24' 12,000 Amps of Power / ±212 Car Parking (Verify) | 1151 Pacific Ave No TBD Yes Available 12000 High Image Manufacturing/Warehousing Buildings Fenced Campus – | Oxnard, CA 93033 14,400 SF 107,759 SF Fncd/Pvd 30 Days 2.0:1/212 Ideal for High Security Uses | Marketing Flyer 7 DH & 3 GL, 24' Clear, 2005 Built | Lee & Associates - Armen Kazaryan 323-767-2041, Mike Smith 323-767-2109, Minutes from Port Hueneme, Naval CBC & Point Mugu Naval Base | Bennett Robinson 818-907-4608 Quick Access to 101 Freeway | New Listing High Image Manufacturing/Warehousing Buildings | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-DE9DDF7C1A36E39C3501",
+      "propertyIdentityKey": "1151 PACIFIC AVE|OXNARD|93033",
+      "listingVariantId": "LISTING-299FE3A98345FF4495B0",
+      "structuredNotes": {
+        "power": [
+          "12,000 Amps of Power / ±212 Car Parking (Verify)"
+        ],
+        "loading": [
+          "7 DH & 3 GL"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1151 Pacific Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Oxnard",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "5001411CC73249CF4391539404A5092E"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-009",
+      "snapshotDate": "2026-06-19",
+      "address": "13943-13949 Balboa Blvd",
+      "city": "Sylmar",
+      "postalCode": "91342",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 105172,
+      "buildingSf": 200632,
+      "officeSf": 5751,
+      "askingRate": 1.69,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 3",
+      "notes": "3 Cascades Business Park 105,172 SF $1.69 NNN 13/2 Existing 28' Limited Time $25K Broker Bonus for Leases Signed by 9/30/2026 | 13943-13949 Balboa Blvd Yes NFS ESFR Available 2600 48,440 SF to 105,172 SF Available, Jointly or Separately | Sylmar, CA 91342 5,751 SF 200,632 SF No Now 1.2:1/121 State-of-the-Art Distribution Facility | Rare 28' Minimum Clear/ESFR Sprinkler System | CBRE - Michael Bogle 818-907-4746, Craig Peters 818-907-4616 Immediate Access to 5, 405, 118, 210, & 14 Fwys | Efficiently Planned Office Layout w/ Premium Finishes | New Listing | For Lease State-of-the-Art Distribution Facility",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-313AFB30AD473621C334",
+      "propertyIdentityKey": "13943 13949 BALBOA BLVD|SYLMAR|91342",
+      "listingVariantId": "LISTING-68EB043E94964A184ACC",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "13943-13949 Balboa Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Sylmar",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "3E25AD204AA4A19D89ACC10BF57A663B"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-010",
+      "snapshotDate": "2026-06-19",
+      "address": "1351 Pacific Ave",
+      "city": "Oxnard",
+      "postalCode": "93033",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 88275,
+      "buildingSf": 88275,
+      "officeSf": 5000,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 4",
+      "notes": "4 88,275 SF TBD 7/3 Existing 24' 4,000 Amps of Power / ±193 Car Parking (Verify) | 1351 Pacific Ave No TBD Yes Available 16000 High Image Manufacturing/Warehousing Buildings Fenced Campus – | Oxnard, CA 93033 5,000 SF 88,275 SF Fncd/Pvd 30 Days 2.2:1/193 Ideal for High Security Uses | Marketing Flyer 7 DH & 3 GL, 24' Clear, 2005 Built | Lee & Associates - Armen Kazaryan 323-767-2041, Mike Smith 323-767-2109, Minutes from Port Hueneme, Naval CBC & Point Mugu Naval Base | Bennett Robinson 818-907-4608 Quick Access to 101 Freeway | New Listing 7 DH & 3 GL, 24' Clear, 2005 Built | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-21416722C15558A61ED6",
+      "propertyIdentityKey": "1351 PACIFIC AVE|OXNARD|93033",
+      "listingVariantId": "LISTING-A0E717D6886199256730",
+      "structuredNotes": {
+        "power": [
+          "000 Amps of Power / ±193 Car Parking (Verify)"
+        ],
+        "loading": [
+          "7 DH & 3 GL"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1351 Pacific Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Oxnard",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "86A6F47C8DF65FB3B01906B5A434C534"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-011",
+      "snapshotDate": "2026-06-19",
+      "address": "13943 Balboa Blvd",
+      "city": "Sylmar",
+      "postalCode": "91342",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 56732,
+      "buildingSf": 200632,
+      "officeSf": 2623,
+      "askingRate": 1.69,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 5",
+      "notes": "5 Cascades Business Park 56,732 SF $1.69 NNN 5/2 Existing 28' Limited Time $25K Broker Bonus for Leases Signed by | 13943 Balboa Blvd Yes NFS ESFR Available 2000 9/30/2026 | Sylmar, CA 91342 2,623 SF 200,632 SF No Now 0.6:1/35 State-of-the-Art Distribution Facility | Rare 28' Minimum Clear/ESFR Sprinkler System | CBRE - Michael Bogle 818-907-4746, Craig Peters 818-907-4616 Immediate Access to 5, 405, 118, 210, & 14 Fwys | Efficiently Planned Office Layout w/ Premium Finishes | New Listing | For Lease Rare 28' Minimum Clear/ESFR Sprinkler System",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-0DDF6FCC45D8C16911D9",
+      "propertyIdentityKey": "13943 BALBOA BLVD|SYLMAR|91342",
+      "listingVariantId": "LISTING-2BF9F74F0F8BEE39521A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "13943 Balboa Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Sylmar",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "1B690E3C939645AA48CB371B5221ADCC"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-012",
+      "snapshotDate": "2026-06-19",
+      "address": "15010 Nelson Ave",
+      "city": "Industry",
+      "postalCode": "91744",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 147100,
+      "buildingSf": 147100,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 1",
+      "notes": "1 147,100 SF TBD 22/2 Planned 36' | Brand New Construction | 15010 Nelson Ave N/A NFS ESFR Available 4000 | Large Trailer Yard (82 Spaces) | Industry, CA 91744 BTS 147,100 SF Yes 36' Clear / 22 Dock High Doors | Completion 1.5:1/218 | Marketing Flyer 4,000 amps / Build to Suit Improvements | JLL - Rustin Mork 213-239-6181, Celina Chhuon-Romero 909-467-6868, Evan Moran Virtual Tour at WWW.OMPINDUSTRY.COM | 310-595-3809 | Updated Information New Address, 15010 Nelson Ave",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-0331B23108EA3DDA9ED0",
+      "propertyIdentityKey": "15010 NELSON AVE|INDUSTRY|91744",
+      "listingVariantId": "LISTING-295553EA82640D3497B9",
+      "structuredNotes": {
+        "power": [
+          "000 amps / Build to Suit Improvements"
+        ],
+        "loading": [
+          "22 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "15010 Nelson Ave",
+          "changed": true,
+          "removedText": "Large Trailer Yard (82 Spaces)",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Industry",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "D9FF2096EDCEB59A4243E5919E0DA97C"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-013",
+      "snapshotDate": "2026-06-19",
+      "address": "2421-2461 W 205th St",
+      "city": "Torrance",
+      "postalCode": "90501",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 143933,
+      "buildingSf": 143933,
+      "officeSf": 15058,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 1",
+      "notes": "1 Stone Pine Technology Center 143,933 SF TBD 2/18 Proposed 32' Two Building Class A Industrial Park | 2421-2461 W 205th St N/A TBD ESFR Available 8000 Office Is Expandable to 30,000 SF Total | Torrance, CA 90501 15,058 SF 143,933 SF Fncd/Pvd Completion 1.7:1/251 13 EV Chargers & 39 EV Ready Spots | Marketing Flyer 8,000 Amps, Fully Entitled, K-25 Sprinkler Heads | Colliers - El Segundo - James Hooks 310-897-1789, Bret Quinlan 310-408-8696, Proximity to Lax and The Ports of Los Angeles & Long Beach | Jenny Edwards 310-745-7506 | New Listing Two Building Class A Industrial Park | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-56AA0A704FE03AAEA671",
+      "propertyIdentityKey": "2421 2461 W 205TH ST|TORRANCE|90501",
+      "listingVariantId": "LISTING-B832764D2124B3807E2D",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2421-2461 W 205th St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Torrance",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "530F4258934ACE7E80FBE5228E611372"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-014",
+      "snapshotDate": "2026-06-19",
+      "address": "2421 W 205th St, Bldg 1",
+      "city": "Torrance",
+      "postalCode": "90501",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 79609,
+      "buildingSf": 79609,
+      "officeSf": 7122,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 2",
+      "notes": "2 Stone Pine Technology Center 79,609 SF TBD 1/9 Proposed 32' 79,609 SF Building in a Class A Industrial Park | 2421 W 205th St, Bldg 1 N/A TBD ESFR Available 4000 Office is Expandable to 15,000 SF Total | Torrance, CA 90501 7,122 SF 79,609 SF Fncd/Pvd Completion 1.9:1/152 9 EV Chargers & 26 EV Ready Spots | Marketing Flyer 4,000 Amps, Fully Entitled, K-25 Sprinkler Heads | Colliers - El Segundo - James Hooks 310-897-1789, Bret Quinlan 310-408-8696, Proximity to LAX and The Ports of Los Angeles & Long Beach | Jenny Edwards 310-745-7506 | New Listing 9 EV Chargers & 26 EV Ready Spots | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-96A9E8642E1A7E06B86F",
+      "propertyIdentityKey": "2421 W 205TH ST BLDG 1|TORRANCE|90501",
+      "listingVariantId": "LISTING-A715A7D4AA09C682E45C",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2421 W 205th St, Bldg 1",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Torrance",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "1DBED73D90D7FAE54D84A9489792906E"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-015",
+      "snapshotDate": "2026-06-19",
+      "address": "1211 E Artesia Blvd",
+      "city": "Carson",
+      "postalCode": "90746",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 71376,
+      "buildingSf": 128502,
+      "officeSf": 14421,
+      "askingRate": 1.35,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 3",
+      "notes": "3 71,376 SF $1.35 G 8/1 Existing 21'-24' Sublease Through 11/30/2028, Longer Term Available | 1211 E Artesia Blvd No NFS Yes Available 1000 Excellent 91 Freeway Frontage/Visibility | Carson, CA 90746 14,421 SF 71,376 SF Fncd/Pvd 12/31/2026 1.5:1/110 ±59,317 - 71,376 SF Industrial Bldg on ±128,502 SF of Land | ±14,421 SF of Beautiful 2 Story Flex/Lab/R&D Offices | Daum Commercial - Chuck Brill 310-538-6710, Ken LaFond 310-538-6742 Heavy Power (1000 Amps via 2 Panels) | 2 Street Access/110 Parking Spaces Available, 8 DH Positions | New Listing | For Sublease ±59,317 - 71,376 SF Industrial Building on ±128,502 SF of Land",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-920196A032F58DA08282",
+      "propertyIdentityKey": "1211 E ARTESIA BLVD|CARSON|90746",
+      "listingVariantId": "LISTING-4D307487382E9947A1B4",
+      "structuredNotes": {
+        "power": [
+          "1000 Amps via 2 Panels)"
+        ],
+        "loading": [
+          "8 DH Positions"
+        ],
+        "yard": [],
+        "parking": [
+          "110 Parking Spaces Available"
+        ],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1211 E Artesia Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Carson",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "65B600A9D978EDFF4FCA70A605A58EE2"
+      }
+    },
+    {
+      "candidateId": "DA-20260619-016",
+      "snapshotDate": "2026-06-19",
+      "address": "2461 W 205th St, Bldg 2",
+      "city": "Torrance",
+      "postalCode": "90501",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 64324,
+      "buildingSf": 64324,
+      "officeSf": 7936,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 4",
+      "notes": "4 Stone Pine Technology Center 64,324 SF TBD 1/9 Proposed 32' 64,324 Sf Building in a Class A Industrial Park | 2461 W 205th St, Bldg 2 N/A TBD ESFR Available 4000 Office is Expandable to 15,000 SF Total | Torrance, CA 90501 7,936 SF 64,324 SF Fncd/Pvd Completion 1.5:1/99 3 EV Chargers & 13 EV Ready Spots | Marketing Flyer 4,000 Amps, Fully Entitled, K-25 Sprinkler Heads | Colliers - El Segundo - James Hooks 310-897-1789, Bret Quinlan 310-408-8696, Proximity to LAX and The Ports of Los Angeles & Long Beach | Jenny Edwards 310-745-7506 | New Listing Office is Expandable to 15,000 SF Total | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-EF093A4173C2723F8ED5",
+      "propertyIdentityKey": "2461 W 205TH ST BLDG 2|TORRANCE|90501",
+      "listingVariantId": "LISTING-B3A81F418F343218F486",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-19"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2461 W 205th St, Bldg 2",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Torrance",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "90042A615AEE028E6EAA38D827EB9937"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

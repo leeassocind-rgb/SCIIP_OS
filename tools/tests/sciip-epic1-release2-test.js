@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),path=require('path');
+const root=path.resolve(__dirname,'../..');
+const current=path.resolve(root,'src/applications/industrial-data-platform');
+const foundation=process.env.SCIIP_FOUNDATION_DIR||(fs.existsSync(path.join(current,'SCIIP_IDP_Canonical_Industrial_Schema.gs'))?current:path.resolve(root,'../SCIIP_OS_v7_Epic_1_Industrial_Data_Platform_Foundation/src/applications/industrial-data-platform'));
+const ctx={console,Date,Math,JSON,isFinite,Logger:{log:()=>{}}}; vm.createContext(ctx);
+['SCIIP_IDP_Canonical_Industrial_Schema.gs','SCIIP_IDP_Import_Intelligence.gs','SCIIP_IDP_Import_Preview_Service.gs'].forEach(f=>vm.runInContext(fs.readFileSync(path.join(foundation,f),'utf8'),ctx,{filename:f}));
+['SCIIP_IDP_Release2_Core.gs','SCIIP_IDP_Change_Detection.gs','SCIIP_IDP_Entity_Resolution.gs','SCIIP_IDP_Review_Service.gs','SCIIP_IDP_Review_Workspace.gs'].forEach(f=>vm.runInContext(fs.readFileSync(path.join(current,f),'utf8'),ctx,{filename:f}));
+const values=[['Property Address','City','Building SF','Owner','Tenant','APN'],['2125 W Lowell St','Rialto','664859','Prologis LP','Amazon Logistics','0132-101-01'],['18012 Slover Ave','Bloomington','300000','Slover Holdings LLC','','']];
+const preview=ctx.SCIIP_IDP_PREVIEW_V7.preview(values,{}); const existing={}; existing[preview.records[0].businessKey]={address:'2125 W Lowell St',city:'Rialto',state:'CA',apn:'0132-101-01',buildingSf:650000,owner:'Prologis'};
+const review=ctx.SCIIP_IDP_REVIEW_V7.build(preview,existing,{OWNER:[{id:'OWN-1',label:'Prologis'},{id:'OWN-2',label:'Slover Holdings'}],TENANT:[{id:'TEN-1',label:'Amazon Fulfillment'}]});
+const approved=ctx.SCIIP_IDP_REVIEW_V7.applyDecision(review[0],'APPROVE'); const held=ctx.SCIIP_IDP_REVIEW_V7.applyDecision(review[1],'HOLD'); const plan=ctx.SCIIP_IDP_REVIEW_V7.prepareCommitPlan('IMPORT-NODE',[approved,held],'node-test');
+const checks=[preview.rows===2,review.length===2,review[0].changes.some(x=>x.field==='buildingSf'),review[0].entityMatches.length>=1,approved.reviewStatus==='APPROVED',plan.operationCount===1,!!plan.rollbackToken];
+if(checks.some(x=>!x)){console.error(JSON.stringify({status:'FAILED',checks,review,plan},null,2));process.exit(1);} console.log(JSON.stringify({framework:'SCIIP_EPIC_1_RELEASE_2_NODE_TEST',status:'PASSED',testsRun:checks.length,result:{records:review.length,changes:review[0].changes.length,matches:review[0].entityMatches.length,operations:plan.operationCount,rollbackReady:!!plan.rollbackToken}},null,2));

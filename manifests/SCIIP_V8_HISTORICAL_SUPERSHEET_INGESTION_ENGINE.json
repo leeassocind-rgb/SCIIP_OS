@@ -1,0 +1,12 @@
+{
+  "framework": "SCIIP_V8_HISTORICAL_SUPERSHEET_INGESTION_ENGINE",
+  "version": "v8.0-real-data-batch1.0",
+  "sourceEditions": 32,
+  "commitEnabled": false,
+  "productionWrites": 0,
+  "artifacts": [
+    "runtime-profile.json",
+    "real source inventory",
+    "edition transition ledger"
+  ]
+}

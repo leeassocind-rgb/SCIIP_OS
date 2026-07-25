@@ -1,0 +1,10 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),path=require('path');
+const root=path.resolve(__dirname,'../..');
+const source=fs.readFileSync(path.join(root,'src/applications/web-application/SCIIP_V8_Web_Application_Foundation.gs'),'utf8');
+const logs=[];const sandbox={Logger:{log:x=>logs.push(x)},console,Date,JSON};vm.createContext(sandbox);vm.runInContext(source,sandbox);
+const out=sandbox.sciipTestV8Sprint1EnterpriseWebApplicationFoundation();
+if(out.status!=='PASSED') throw new Error(JSON.stringify(out));
+if(out.testsRun!==10) throw new Error('Expected 10 tests');
+if(!logs.length) throw new Error('Apps Script Logger output missing');
+console.log(JSON.stringify(out,null,2));

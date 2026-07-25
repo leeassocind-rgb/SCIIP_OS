@@ -1,0 +1,58 @@
+<script>
+(function () {
+  'use strict';
+
+  var activeWorkspace = 'executive-dashboard';
+
+  function esc(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function render(snapshot) {
+    var root = document.getElementById('sciip-mobile-ui');
+    if (!root) return;
+
+    var tabs = (snapshot.navigation.workspaces || []).map(function (workspace) {
+      var active = workspace.id === activeWorkspace;
+      return '<button class="sciip-mobile-tab' + (active ? ' is-active' : '') + '" ' +
+        'data-workspace="' + esc(workspace.id) + '" aria-pressed="' + active + '">' +
+        '<span aria-hidden="true">' + esc(workspace.icon) + '</span>' +
+        '<small>' + esc(workspace.label) + '</small>' +
+      '</button>';
+    }).join('');
+
+    root.innerHTML =
+      '<header class="sciip-mobile-header">' +
+        '<div><strong>SCIIP Desktop</strong><small>v7.0 Alpha</small></div>' +
+        '<button class="sciip-mobile-menu" type="button" aria-label="Open workspace menu">☰</button>' +
+      '</header>' +
+      '<main class="sciip-mobile-main" tabindex="-1">' +
+        '<section class="sciip-mobile-hero">' +
+          '<p class="eyebrow">Mobile Workspace</p>' +
+          '<h2>' + esc(activeWorkspace.replace(/-/g, ' ')) + '</h2>' +
+          '<p>Compact mobile view with touch-first navigation and responsive workspace contracts.</p>' +
+        '</section>' +
+        '<section class="sciip-mobile-state-grid">' +
+          '<article><span>Shell</span><strong>' + esc(snapshot.certification.shell) + '</strong></article>' +
+          '<article><span>Navigation</span><strong>' + esc(snapshot.certification.navigation) + '</strong></article>' +
+          '<article><span>Touch Targets</span><strong>' + esc(snapshot.accessibility.minimumTouchTargetPx) + 'px</strong></article>' +
+          '<article><span>Layouts</span><strong>' + esc(snapshot.certification.responsiveLayouts) + '</strong></article>' +
+        '</section>' +
+      '</main>' +
+      '<nav class="sciip-mobile-tabs" aria-label="Mobile workspace navigation">' + tabs + '</nav>';
+
+    Array.prototype.forEach.call(root.querySelectorAll('[data-workspace]'), function (button) {
+      button.addEventListener('click', function () {
+        activeWorkspace = button.getAttribute('data-workspace');
+        render(snapshot);
+      });
+    });
+  }
+
+  window.SCIIP_MOBILE_UI_APP = {
+    render: render
+  };
+})();
+</script>

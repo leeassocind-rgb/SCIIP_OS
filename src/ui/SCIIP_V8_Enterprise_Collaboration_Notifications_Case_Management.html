@@ -1,0 +1,19 @@
+<!doctype html><html><head><base target="_top"><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+body{margin:0;font-family:Arial;background:#0b1220;color:#eef3fb}.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+aside{background:#0e1728;padding:22px}.nav{padding:10px;color:#9fb0c8}.active{background:#172238;color:#fff;border-radius:8px}
+main{padding:22px}.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.card,.panel{background:#111a2b;border:1px solid #26344f;border-radius:12px}
+.card{padding:14px}.value{font-size:28px;font-weight:bold}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:16px}
+h3{margin:0;padding:14px;border-bottom:1px solid #26344f}.row{display:flex;justify-content:space-between;padding:13px;border-bottom:1px solid #26344f}
+.badge{padding:4px 8px;border-radius:999px;background:#203150;font-size:12px}button{padding:10px;margin:12px 4px;border:1px solid #31415f;border-radius:8px;background:#172238;color:#fff}
+@media(max-width:1000px){.app{grid-template-columns:1fr}aside{display:none}.kpis{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+</style></head><body><div class="app"><aside><h2>SCIIP_OS</h2><div class="nav">Executive</div><div class="nav">AI Copilot</div><div class="nav">Workflow Center</div><div class="nav active">Cases & Collaboration</div><div class="nav">Properties</div><div class="nav">Companies</div><div class="nav">Market Intelligence</div></aside>
+<main><h1>Enterprise Collaboration, Notifications & Case Management</h1><div class="kpis">
+<div class="card"><small>Open cases</small><div class="value">2</div></div><div class="card"><small>Assignments</small><div class="value">3</div></div>
+<div class="card"><small>Mentions</small><div class="value">2</div></div><div class="card"><small>Notifications</small><div class="value">4</div></div>
+<div class="card"><small>At-risk SLAs</small><div class="value">1</div></div><div class="card"><small>Follow-ups</small><div class="value">2</div></div></div>
+<div class="grid"><section class="panel"><h3>Shared cases</h3><div class="row"><span>Rialto Power Diligence</span><span class="badge">OPEN</span></div>
+<div class="row"><span>South Bay Aerospace Expansion</span><span class="badge">IN REVIEW</span></div><div class="row"><span>Executive Portfolio Follow-up</span><span class="badge">RESOLVED</span></div>
+<button>Create Case</button><button>Assign</button><button>Add Comment</button></section>
+<section class="panel"><h3>Notifications & escalation</h3><div class="row"><span>Executive approval reminder</span><span class="badge">QUEUED</span></div>
+<div class="row"><span>SLA at risk</span><span class="badge">TRIGGERED</span></div><div class="row"><span>Utility team mentioned</span><span class="badge">DELIVERED</span></div>
+<button>Route Notification</button><button>Escalate</button><button>Create Follow-up</button></section></div></main></div></body></html>

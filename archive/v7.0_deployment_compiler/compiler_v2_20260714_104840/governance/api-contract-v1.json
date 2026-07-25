@@ -1,0 +1,14 @@
+{
+  "apiVersion": "v1",
+  "platformVersion": "v6.1",
+  "transport": "Google Apps Script Web App",
+  "entrypoints": ["doGet", "doPost"],
+  "requestRouting": {"queryParameter": "path", "default": "/health"},
+  "responseEnvelope": ["apiVersion", "status", "requestId", "timestamp", "data", "error", "httpStatus"],
+  "authentication": {"mode": "injected-provider", "default": "fail-closed", "publicRoutes": ["/health", "/version"]},
+  "defaultRoutes": [
+    {"method": "GET", "path": "/health", "authRequired": false},
+    {"method": "GET", "path": "/version", "authRequired": false},
+    {"method": "GET", "path": "/routes", "authRequired": true}
+  ]
+}

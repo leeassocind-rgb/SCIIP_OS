@@ -1,0 +1,12 @@
+{
+  "baselineXlsxDirectory": "/path/to/june-4-baseline-xlsx",
+  "baselineKmzDirectory": "/path/to/june-4-baseline-kmz",
+  "superSheetPdfDirectory": "/path/to/supersheets",
+  "currentAirZip": "/path/to/Available.zip",
+  "leeProFile": "/path/to/LeePro_Comps_Last5Years.xlsx",
+  "normalizedSnapshotDirectory": "/path/to/normalized-snapshot-json",
+  "baselineObservationFile": "/path/to/baseline-observation.json",
+  "currentAirObservationFile": "/path/to/current-air-observation.json",
+  "outputDirectory": "../../outputs/sprint27c",
+  "absenceConfirmationDays": 2
+}

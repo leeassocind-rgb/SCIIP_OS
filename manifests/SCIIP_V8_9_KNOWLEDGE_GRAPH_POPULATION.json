@@ -1,0 +1,13 @@
+{
+  "framework": "SCIIP_V8_9_KNOWLEDGE_GRAPH_POPULATION",
+  "version": "v8.9.0",
+  "status": "RELEASED",
+  "productionWrites": 0,
+  "commitEnabled": false,
+  "outputs": [
+    "SCIIP_V8_9_KNOWLEDGE_GRAPH_POPULATION_CERTIFICATION.json",
+    "SCIIP_V8_9_KNOWLEDGE_GRAPH.json",
+    "SCIIP_V8_9_GRAPH_PROVENANCE_LEDGER.json",
+    "SCIIP_V8_9_GRAPH_STEWARD_REVIEW.json"
+  ]
+}

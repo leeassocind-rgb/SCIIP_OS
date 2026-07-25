@@ -1,0 +1,26 @@
+<style>
+#sciip-enterprise-administration { display:grid; gap:1rem; }
+.sciip-admin-header { display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; }
+.sciip-admin-header h2 { margin:.2rem 0; }
+.sciip-admin-header p { margin:.25rem 0; max-width:65ch; }
+.sciip-admin-status { border:1px solid currentColor; border-radius:999px; padding:.4rem .75rem; font-weight:700; }
+.sciip-admin-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.75rem; }
+.sciip-admin-card,.sciip-admin-panel { border:1px solid rgba(120,130,150,.25); border-radius:12px; padding:1rem; background:rgba(255,255,255,.03); }
+.sciip-admin-card { display:grid; gap:.4rem; }
+.sciip-admin-card strong { font-size:1.1rem; }
+.sciip-admin-columns { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.sciip-admin-panel ul { list-style:none; padding:0; margin:0; }
+.sciip-admin-panel li { display:flex; justify-content:space-between; padding:.55rem 0; border-bottom:1px solid rgba(120,130,150,.18); }
+.sciip-admin-panel dl { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
+.sciip-admin-panel dd { margin:0; text-align:right; font-weight:700; }
+.sciip-admin-panel table { width:100%; border-collapse:collapse; }
+.sciip-admin-panel th,.sciip-admin-panel td { text-align:left; padding:.6rem; border-bottom:1px solid rgba(120,130,150,.18); }
+@media (max-width:900px) {
+  .sciip-admin-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .sciip-admin-columns { grid-template-columns:1fr; }
+}
+@media (max-width:560px) {
+  .sciip-admin-header { display:grid; }
+  .sciip-admin-grid { grid-template-columns:1fr; }
+}
+</style>

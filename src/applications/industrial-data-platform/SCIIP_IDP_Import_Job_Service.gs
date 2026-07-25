@@ -1,0 +1,17 @@
+/** Persistent import jobs and review decisions. */
+var SCIIP_IDP_JOB_SERVICE_V7 = SCIIP_IDP_JOB_SERVICE_V7 || {};
+SCIIP_IDP_JOB_SERVICE_V7.create = function(values,options){
+  options=options||{}; var preview=SCIIP_IDP_PREVIEW_V7.preview(values,options.existingKeys||{});
+  var jobId=SCIIP_IDP_RELEASE2_V7.id('IMPORT'); var actor=options.actor||Session.getActiveUser().getEmail()||'UNKNOWN';
+  var review=SCIIP_IDP_REVIEW_V7.build(preview,options.existingRecords||{},options.entityIndex||{});
+  var job={jobId:jobId,createdAt:SCIIP_IDP_RELEASE2_V7.now(),createdBy:actor,sourceType:preview.source?preview.source.sourceType:'UNKNOWN',sourceName:options.sourceName||'Active Sheet',confidence:preview.source?preview.source.confidence:0,status:preview.status==='BLOCKED'?'BLOCKED':'AWAITING_REVIEW',rowCount:preview.rows||0,newCount:preview.counts?preview.counts.newRecords:0,updateCount:preview.counts?preview.counts.updates:0,duplicateCount:preview.counts?preview.counts.duplicates:0,errorCount:preview.counts?preview.counts.errors:0,warningCount:preview.counts?preview.counts.warnings:0,commitAllowed:preview.commitAllowed===true,payloadJson:SCIIP_IDP_RELEASE2_V7.json({headers:preview.headers,mapping:preview.mapping,missingRequired:preview.missingRequired})};
+  SCIIP_IDP_PERSISTENCE_V7.appendObject(SCIIP_IDP_RELEASE2_V7.SHEETS.JOBS,SCIIP_IDP_RELEASE2_V7.HEADERS.JOBS,job);
+  review.forEach(function(r){SCIIP_IDP_PERSISTENCE_V7.appendObject(SCIIP_IDP_RELEASE2_V7.SHEETS.RECORDS,SCIIP_IDP_RELEASE2_V7.HEADERS.RECORDS,{recordId:r.recordId,jobId:jobId,rowNumber:r.rowNumber,businessKey:r.businessKey,classification:r.classification,reviewStatus:r.reviewStatus,changeCount:r.changes.length,entityMatchCount:r.entityMatches.length,recordJson:SCIIP_IDP_RELEASE2_V7.json(r.record),validationJson:SCIIP_IDP_RELEASE2_V7.json(r.validation),changesJson:SCIIP_IDP_RELEASE2_V7.json(r.changes)}); r.entityMatches.forEach(function(m){m.candidates.forEach(function(c){SCIIP_IDP_PERSISTENCE_V7.appendObject(SCIIP_IDP_RELEASE2_V7.SHEETS.ENTITY_MATCHES,SCIIP_IDP_RELEASE2_V7.HEADERS.ENTITY_MATCHES,{matchId:SCIIP_IDP_RELEASE2_V7.id('MATCH'),jobId:jobId,recordId:r.recordId,entityType:m.entityType,incomingValue:m.incomingValue,candidateId:c.candidateId,candidateLabel:c.candidateLabel,confidence:c.confidence,resolutionStatus:m.resolutionStatus,createdAt:SCIIP_IDP_RELEASE2_V7.now(),payloadJson:SCIIP_IDP_RELEASE2_V7.json(c)});});});});
+  SCIIP_IDP_PERSISTENCE_V7.appendHistory(jobId,'IMPORT_JOB_CREATED',job.status,actor,{counts:preview.counts});
+  return {job:job,preview:preview,review:review};
+};
+SCIIP_IDP_JOB_SERVICE_V7.recordDecision = function(jobId,recordId,decision,reason,actor){
+  actor=actor||Session.getActiveUser().getEmail()||'UNKNOWN'; var row={decisionId:SCIIP_IDP_RELEASE2_V7.id('DECISION'),jobId:jobId,recordId:recordId,decision:decision,reason:reason||'',decidedBy:actor,decidedAt:SCIIP_IDP_RELEASE2_V7.now(),payloadJson:SCIIP_IDP_RELEASE2_V7.json({decision:decision,reason:reason||''})};
+  SCIIP_IDP_PERSISTENCE_V7.appendObject(SCIIP_IDP_RELEASE2_V7.SHEETS.DECISIONS,SCIIP_IDP_RELEASE2_V7.HEADERS.DECISIONS,row); SCIIP_IDP_PERSISTENCE_V7.appendHistory(jobId,'REVIEW_DECISION_RECORDED',decision,actor,{recordId:recordId,reason:reason||''}); return row;
+};
+function sciipCreateIndustrialDataImportJobFromActiveSheet(){var sheet=SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();return SCIIP_IDP_JOB_SERVICE_V7.create(sheet.getDataRange().getValues(),{sourceName:sheet.getName()});}

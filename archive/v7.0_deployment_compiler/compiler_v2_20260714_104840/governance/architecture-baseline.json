@@ -1,0 +1,16 @@
+{
+  "createdAt": "2026-07-13T21:55:47.692Z",
+  "metrics": {
+    "files": 11705,
+    "syntaxErrors": 0,
+    "duplicateFunctions": 139,
+    "duplicateGlobals": 3,
+    "duplicateProcessorNumbers": 11,
+    "placeholders": 0,
+    "unboundedTestRanges": 10,
+    "storageProcessorFiles": 9640,
+    "storageRuntimeBaseFiles": 0,
+    "storageWriteFiles": 0,
+    "lockServiceFiles": 0
+  }
+}

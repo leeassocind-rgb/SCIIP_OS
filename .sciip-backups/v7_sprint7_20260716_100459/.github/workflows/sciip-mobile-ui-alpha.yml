@@ -1,0 +1,16 @@
+name: SCIIP Mobile UI Alpha
+
+on:
+  push:
+    branches: [main, v7.0-sciip-desktop]
+  pull_request:
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node tools/tests/sciip-mobile-ui-alpha-test.js

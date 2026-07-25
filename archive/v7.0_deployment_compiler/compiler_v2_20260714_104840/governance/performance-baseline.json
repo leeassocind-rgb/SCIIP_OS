@@ -1,0 +1,11 @@
+{
+  "version": "v6.1-phase7-performance",
+  "nodeMajor": 20,
+  "thresholds": {
+    "architectureGovernanceMs": 30000,
+    "repositoryGovernanceMs": 30000,
+    "sourceInventoryMs": 5000,
+    "peakRssMb": 768,
+    "minimumFilesPerSecond": 1000
+  }
+}

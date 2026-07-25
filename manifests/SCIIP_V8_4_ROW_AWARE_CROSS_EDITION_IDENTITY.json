@@ -1,0 +1,17 @@
+{
+  "framework": "SCIIP_V8_4_ROW_AWARE_CROSS_EDITION_IDENTITY",
+  "version": "v8.4.0",
+  "status": "VALIDATION_READY",
+  "scope": [
+    "AIR-CRE row number separation",
+    "address ranges and unit parsing",
+    "address-adjacent city and ZIP binding",
+    "stable canonical property IDs",
+    "stable suite-level listing IDs",
+    "conservative cross-edition fuzzy matching",
+    "historical persistence scoring",
+    "identity collision and false-merge protection",
+    "evidence lineage"
+  ],
+  "governance": {"productionWrites": 0, "commitEnabled": false}
+}

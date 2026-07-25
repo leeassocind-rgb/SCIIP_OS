@@ -1,0 +1,33 @@
+<script>
+(function(){'use strict';
+const VERSION='v7.0-integration-sprint-1c',KEY='SCIIP_CONTEXT_CONTINUITY_V7',MAX=50;
+let history=[],cursor=-1,restoring=false;
+const clone=v=>v==null?v:JSON.parse(JSON.stringify(v));
+const state=()=>window.SCIIP_APP_STATE&&window.SCIIP_APP_STATE.snapshot?window.SCIIP_APP_STATE.snapshot():{};
+function selected(s){return s.selectedProperty||s.selectedCompany||s.selectedMarket||s.selectedGraphNode||s.selectedMapFeature||null}
+function envelope(s){s=s||state();return{version:VERSION,workspace:s.currentWorkspace||'executive-dashboard',selectedEntity:clone(selected(s)),selections:{property:clone(s.selectedProperty),company:clone(s.selectedCompany),market:clone(s.selectedMarket),graphNode:clone(s.selectedGraphNode),mapFeature:clone(s.selectedMapFeature)},searchText:String(s.globalSearchText||''),filters:clone(s.activeFilters||{}),mapExtent:clone(s.mapExtent),capturedAt:new Date().toISOString()}}
+function comparable(e){const x=clone(e);delete x.capturedAt;return JSON.stringify(x)}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({history,cursor}))}catch(e){}}
+function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&Array.isArray(x.history)){history=x.history.slice(-MAX);cursor=Math.max(-1,Math.min(Number(x.cursor),history.length-1))}}catch(e){}}
+function encode(e){return btoa(unescape(encodeURIComponent(JSON.stringify(e)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function decode(t){t=String(t||'').replace(/-/g,'+').replace(/_/g,'/');while(t.length%4)t+='=';return JSON.parse(decodeURIComponent(escape(atob(t))))}
+function deepLink(e){e=e||envelope();const entity=e.selectedEntity||{},p=new URLSearchParams({workspace:e.workspace||'executive-dashboard',context:encode(e)});if(entity.entityType)p.set('entityType',entity.entityType);if(entity.id)p.set('entityId',entity.id);return '#'+p.toString()}
+function parse(hash){const p=new URLSearchParams(String(hash||'').replace(/^#/,''));return p.get('context')?decode(p.get('context')):{version:VERSION,workspace:p.get('workspace')||'executive-dashboard',selectedEntity:p.get('entityId')?{id:p.get('entityId'),label:p.get('entityId'),entityType:p.get('entityType')||'ENTITY'}:null,selections:{},searchText:'',filters:{},mapExtent:null,capturedAt:new Date().toISOString()}}
+function record(s){if(restoring)return;const e=envelope(s);if(cursor>=0&&comparable(history[cursor])===comparable(e))return;if(cursor<history.length-1)history=history.slice(0,cursor+1);history.push(e);history=history.slice(-MAX);cursor=history.length-1;save();updateButtons()}
+function restore(e,replaceHash){if(!e)return;restoring=true;try{const x=e.selections||{};window.SCIIP_APP_STATE.patch({currentWorkspace:e.workspace||'executive-dashboard',selectedProperty:clone(x.property||null),selectedCompany:clone(x.company||null),selectedMarket:clone(x.market||null),selectedGraphNode:clone(x.graphNode||null),selectedMapFeature:clone(x.mapFeature||null),globalSearchText:String(e.searchText||''),activeFilters:clone(e.filters||{}),mapExtent:clone(e.mapExtent||null)});document.querySelector(`[data-view="${CSS.escape(e.workspace||'executive-dashboard')}"]`)?.click();if(replaceHash)historyApiReplace(e)}finally{restoring=false}updateButtons()}
+function back(){if(cursor<=0)return;cursor--;restore(history[cursor],true);save()}
+function forward(){if(cursor>=history.length-1)return;cursor++;restore(history[cursor],true);save()}
+function historyApiReplace(e){try{window.history.replaceState({sciip:true},'',deepLink(e))}catch(err){location.hash=deepLink(e)}}
+function share(){const url=location.origin+location.pathname+location.search+deepLink();if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(()=>notify('Context link copied.')).catch(()=>prompt('Copy context link',url))}else prompt('Copy context link',url)}
+function notify(message){window.SCIIP_APP_EVENTS?.publish('NOTIFICATION_CREATED',{severity:'success',title:message,detail:'The current SCIIP context can be restored from the copied link.'},{source:'CONTEXT_CONTINUITY'})}
+function updateButtons(){const b=document.getElementById('contextBackButton'),f=document.getElementById('contextForwardButton');if(b)b.disabled=cursor<=0;if(f)f.disabled=cursor<0||cursor>=history.length-1}
+load();if(location.hash){try{const e=parse(location.hash);history.push(e);cursor=history.length-1;restore(e,false)}catch(err){}}else if(cursor>=0)restore(history[cursor],false);else record(state());
+window.SCIIP_APP_STATE?.subscribe(change=>{if(!restoring)record(change.state)});
+document.getElementById('contextBackButton')?.addEventListener('click',back);
+document.getElementById('contextForwardButton')?.addEventListener('click',forward);
+document.getElementById('contextShareButton')?.addEventListener('click',share);
+window.addEventListener('hashchange',()=>{try{restore(parse(location.hash),false)}catch(err){}});
+window.SCIIP_CONTEXT_CONTINUITY_CLIENT={VERSION,back,forward,share,deepLink,parse,snapshot:()=>({version:VERSION,count:history.length,cursor,canGoBack:cursor>0,canGoForward:cursor>=0&&cursor<history.length-1,current:clone(history[cursor]||null)})};
+updateButtons();
+})();
+</script>

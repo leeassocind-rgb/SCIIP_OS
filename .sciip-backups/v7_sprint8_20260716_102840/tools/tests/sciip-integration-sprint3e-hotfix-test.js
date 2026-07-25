@@ -1,0 +1,12 @@
+const fs=require('fs'), path=require('path');
+const root=path.resolve(__dirname,'../..');
+const wiring=fs.readFileSync(path.join(root,'src/ui/SCIIP_Integration_Sprint3E_Wiring.gs'),'utf8');
+const tests=fs.readFileSync(path.join(root,'src/ui/SCIIP_Integration_Sprint3E_Tests.gs'),'utf8');
+const failures=[];
+if(!wiring.includes('SCIIP_LIVE_RUNTIME.register(')) failures.push('Live Runtime must use register().');
+if(wiring.includes('registerService(')) failures.push('Deprecated/nonexistent registerService() remains.');
+if(!wiring.includes("function(){return SCIIP_GOVERNANCE_ASSURANCE_WORKSPACE.snapshot();}")) failures.push('Live service handler missing.');
+if(!wiring.includes('liveRegistered_')) failures.push('Post-registration verification missing.');
+if(!tests.includes("v7.0-integration-sprint-3e.1")) failures.push('Apps Script suite version not updated.');
+const out={framework:'SCIIP_V7_INTEGRATION_SPRINT_3E_LIVE_RUNTIME_WIRING_HOTFIX_NODE_TEST',status:failures.length?'FAILED':'PASSED',filesChecked:2,failures};
+console.log(JSON.stringify(out,null,2));if(failures.length)process.exit(1);

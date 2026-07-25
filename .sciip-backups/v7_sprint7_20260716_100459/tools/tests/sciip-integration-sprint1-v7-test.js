@@ -1,0 +1,9 @@
+'use strict';
+const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');const root=path.resolve(__dirname,'../..');
+function read(rel){return fs.readFileSync(path.join(root,rel),'utf8')}
+const files=['src/ui/SCIIP_AppState.gs','src/ui/SCIIP_AppEvents.gs','src/ui/SCIIP_AppIntegration.gs','src/ui/SCIIP_Integration_Tests.gs','src/ui/SCIIP_IntegrationClient.html'];files.forEach(f=>assert(fs.existsSync(path.join(root,f)),`Missing ${f}`));
+const ctx={console,Date,JSON};vm.createContext(ctx);vm.runInContext(read(files[0]),ctx);vm.runInContext(read(files[1]),ctx);vm.runInContext(read(files[2]),ctx);
+assert.strictEqual(ctx.SCIIP_APP_STATE.VERSION,'v7.0-integration-sprint-1');ctx.SCIIP_APP_STATE.reset();let count=0;ctx.SCIIP_APP_STATE.subscribe(()=>count++);ctx.SCIIP_APP_STATE.patch({currentWorkspace:'gis-workspace'});assert.strictEqual(count,1);
+let once=0;ctx.SCIIP_APP_EVENTS.once('PROPERTY_SELECTED',()=>once++);ctx.SCIIP_APP_EVENTS.publish('PROPERTY_SELECTED',{property:{propertyId:'P-1',address:'Test'}});ctx.SCIIP_APP_EVENTS.publish('PROPERTY_SELECTED',{property:{propertyId:'P-2'}});assert.strictEqual(once,1);assert.strictEqual(ctx.SCIIP_APP_STATE.get('selectedProperty').id,'P-2');assert(ctx.SCIIP_APP_STATE.get('selectedGraphNode'));assert(ctx.SCIIP_APP_STATE.get('selectedMapFeature'));
+const shell=read('src/ui/SCIIP_UI_Shell.html');assert(shell.includes('globalSearch'));assert(shell.includes("SCIIP_IntegrationClient"));const mobile=read('src/ui/SCIIP_MobileUI.gs');assert(mobile.includes('stateContract'));const pkg=JSON.parse(read('package.json'));assert(pkg.scripts['certification:integration-sprint1']);
+console.log(JSON.stringify({framework:'SCIIP_V7_INTEGRATION_SPRINT_1_NODE',status:'PASSED',files:files.length,contracts:['state','events','synchronization','search','mobile-parity']},null,2));

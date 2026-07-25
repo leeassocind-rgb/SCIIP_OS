@@ -1,0 +1,19 @@
+name: SCIIP Deployment Compiler v2
+on:
+  pull_request:
+  push:
+    branches: [main, v7.0-sciip-desktop]
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node tools/sciip-deployment-compiler-v2.js --force
+      - run: node tools/tests/sciip-deployment-compiler-v2-test.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sciip-apps-script-dist
+          path: dist/apps-script

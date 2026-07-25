@@ -1,0 +1,1 @@
+{"framework":"SCIIP_V8_6_SUPERSHEET_PRODUCTION_ACCEPTANCE","version":"v8.6.0","purpose":"Add semantic consistency validation, lock internal acceptance gates, preserve steward review, and require an independent corpus before production commit.","productionWrites":false,"commitEnabled":false,"externalCorpusRequired":true}

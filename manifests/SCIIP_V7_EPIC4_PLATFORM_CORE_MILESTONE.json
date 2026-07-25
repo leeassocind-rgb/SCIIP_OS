@@ -1,0 +1,40 @@
+{
+  "framework": "SCIIP_V7_EPIC_4_PLATFORM_CORE_MILESTONE",
+  "version": "v7.0-epic4-platform-core.0",
+  "type": "INCREMENTAL_REVERSIBLE_PATCH",
+  "northStarAligned": true,
+  "capabilities": [
+    "UNIFIED_DATA_ACCESS",
+    "REPOSITORY_REGISTRY",
+    "TRANSACTION_COORDINATION",
+    "QUERY_PLANNING",
+    "CACHE_MANAGEMENT",
+    "STORAGE_PROVIDER_ABSTRACTION",
+    "CROSS_SOURCE_FEDERATION",
+    "PLATFORM_HEALTH_CERTIFICATION"
+  ],
+  "governance": {
+    "humanReviewRequired": true,
+    "appendOnlyAudit": true,
+    "rollbackRequired": true,
+    "destructiveCommitEnabled": false,
+    "autonomousExecution": false,
+    "automaticDeployment": false
+  },
+  "files": [
+    "src/platform/data/SCIIP_Unified_Data_Access_Layer.gs",
+    "src/platform/data/SCIIP_Repository_Registry.gs",
+    "src/platform/data/SCIIP_Transaction_Coordinator.gs",
+    "src/platform/data/SCIIP_Query_Planner.gs",
+    "src/platform/data/SCIIP_Cache_Manager.gs",
+    "src/platform/data/SCIIP_Storage_Provider_Abstraction.gs",
+    "src/platform/data/SCIIP_Cross_Source_Federation_Service.gs",
+    "src/platform/data/SCIIP_Platform_Core_Health_Certification.gs",
+    "src/platform/data/SCIIP_Epic4_Platform_Core_Application.gs",
+    "src/platform/data/SCIIP_Epic4_Platform_Core_Tests.gs",
+    "tools/tests/sciip-epic4-platform-core-test.js",
+    ".github/workflows/sciip-v7-epic4-platform-core.yml",
+    "manifests/SCIIP_V7_EPIC4_PLATFORM_CORE_MILESTONE.json",
+    "docs/releases/SCIIP_V7_EPIC4_PLATFORM_CORE_README.md"
+  ]
+}

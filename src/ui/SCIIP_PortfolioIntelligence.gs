@@ -1,0 +1,11 @@
+/** SCIIP_OS v7.0 Integration Sprint 3C — portfolio intelligence. */
+var SCIIP_PORTFOLIO_INTELLIGENCE=(function(){
+  'use strict';var VERSION='v7.0-integration-sprint-3c',portfolios={};
+  function clone_(v){return v==null?v:JSON.parse(JSON.stringify(v));}function now_(){return new Date().toISOString();}function number_(v){v=Number(v||0);return isFinite(v)?v:0;}
+  function create(request){request=request||{};var id=String(request.id||request.portfolioId||'').trim();if(!id)throw new Error('PORTFOLIO_ID_REQUIRED');if(portfolios[id])return clone_(portfolios[id]);portfolios[id]={id:id,label:request.label||id,ownerId:request.ownerId||null,twinIds:[],createdAt:now_(),updatedAt:now_()};return clone_(portfolios[id]);}
+  function addTwin(portfolioId,twinId){var p=portfolios[portfolioId];if(!p)throw new Error('PORTFOLIO_NOT_FOUND');if(!SCIIP_DIGITAL_TWIN_REGISTRY.get(twinId))throw new Error('DIGITAL_TWIN_NOT_FOUND');if(p.twinIds.indexOf(twinId)===-1)p.twinIds.push(twinId);p.updatedAt=now_();return clone_(p);}
+  function analyze(portfolioId){var p=portfolios[portfolioId];if(!p)throw new Error('PORTFOLIO_NOT_FOUND');var twins=p.twinIds.map(function(id){return SCIIP_DIGITAL_TWIN_REGISTRY.get(id);}).filter(Boolean),statusCounts={},marketCounts={},totalSf=0,totalAcres=0,totalPower=0,geoReady=0;twins.forEach(function(t){totalSf+=number_(t.buildingSf||t.sf);totalAcres+=number_(t.landAcres||t.acres);totalPower+=number_(t.powerAmps);statusCounts[t.status||'UNKNOWN']=(statusCounts[t.status||'UNKNOWN']||0)+1;if(t.marketId)marketCounts[t.marketId]=(marketCounts[t.marketId]||0)+1;if(isFinite(Number(t.latitude))&&isFinite(Number(t.longitude)))geoReady++;});return {version:VERSION,status:'AVAILABLE',portfolio:clone_(p),assetCount:twins.length,totalBuildingSf:totalSf,totalLandAcres:totalAcres,totalPowerAmps:totalPower,gisReadyAssets:geoReady,statusCounts:statusCounts,marketCounts:marketCounts,twins:twins,generatedAt:now_()};}
+  function list(){return Object.keys(portfolios).map(function(k){return clone_(portfolios[k]);});}function reset(){portfolios={};return true;}
+  return {VERSION:VERSION,create:create,addTwin:addTwin,analyze:analyze,list:list,reset:reset};
+})();
+function sciipPortfolioIntelligenceV7(portfolioId){return SCIIP_PORTFOLIO_INTELLIGENCE.analyze(portfolioId);}

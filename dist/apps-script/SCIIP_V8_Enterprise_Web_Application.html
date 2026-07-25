@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root{--bg:#f4f6f8;--panel:#fff;--ink:#18212b;--muted:#647180;--line:#dfe5eb;--accent:#173b57;--accent2:#2f6f8f;--ok:#1e7a4f;--warn:#a16409}
+    *{box-sizing:border-box} body{margin:0;font:14px/1.45 Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    .app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}.sidebar{background:var(--accent);color:white;padding:22px 16px}.brand{font-size:21px;font-weight:700;letter-spacing:.4px;margin-bottom:24px}.brand small{display:block;font-size:11px;font-weight:400;opacity:.72;margin-top:4px}.nav button{width:100%;border:0;background:transparent;color:inherit;text-align:left;padding:11px 12px;border-radius:8px;margin:2px 0;cursor:pointer}.nav button:hover,.nav button.active{background:rgba(255,255,255,.13)}
+    .main{display:grid;grid-template-rows:64px 1fr}.topbar{background:var(--panel);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 24px}.search{flex:1;max-width:580px;border:1px solid var(--line);border-radius:9px;padding:10px 12px}.content{padding:26px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:22px}.hero h1{margin:0 0 6px;font-size:27px}.muted{color:var(--muted)}.badge{background:#e8f4ed;color:var(--ok);padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:0 1px 2px rgba(0,0,0,.03)}.card h3{margin:0 0 8px}.metric{font-size:25px;font-weight:700;margin:7px 0}.workflow{margin-top:18px}.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px}.step{border:1px solid var(--line);border-radius:9px;padding:12px;text-align:center;background:#fafbfc}.step.active{border-color:var(--accent2);background:#edf5f8}.cta{background:var(--accent2);color:#fff;border:0;border-radius:9px;padding:11px 16px;font-weight:700;cursor:pointer}
+    @media(max-width:900px){.app{grid-template-columns:76px 1fr}.brand small,.nav span{display:none}.grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}.content{padding:18px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar"><div class="brand">SCIIP_OS<small>Enterprise Web Application v8.0</small></div><nav class="nav" id="nav"></nav></aside>
+  <main class="main"><header class="topbar"><input class="search" placeholder="Search properties, companies, markets, and documents"><button class="cta" onclick="openCommandPalette()">⌘K</button></header><section class="content" id="content"></section></main>
+</div>
+<script>
+const model={navigation:[['executive-dashboard','Executive'],['data-sources','Data Sources'],['review-queue','Review Queue'],['properties','Properties'],['companies','Companies'],['gis','GIS'],['knowledge-graph','Knowledge Graph'],['market-intelligence','Market Intelligence'],['administration','Administration']],selected:'executive-dashboard'};
+function renderNav(){document.getElementById('nav').innerHTML=model.navigation.map(([id,label])=>`<button class="${model.selected===id?'active':''}" onclick="selectWorkspace('${id}')"><span>${label}</span></button>`).join('')}
+function selectWorkspace(id){model.selected=id;renderNav();renderContent()}
+function renderContent(){const label=(model.navigation.find(x=>x[0]===model.selected)||['','Workspace'])[1];document.getElementById('content').innerHTML=`<div class="hero"><div><h1>${label}</h1><div class="muted">Connected SCIIP_OS operational workspace</div></div><div class="badge">FOUNDATION READY</div></div><div class="grid"><div class="card"><h3>Application shell</h3><div class="metric">Operational</div><div class="muted">Routing, shared state, responsive layout</div></div><div class="card"><h3>Governance</h3><div class="metric">Protected</div><div class="muted">Review required; destructive actions disabled</div></div><div class="card"><h3>Data fabric</h3><div class="metric">Connected</div><div class="muted">Epic 8 ingestion services available</div></div></div><div class="card workflow"><h3>Supersheet workflow</h3><div class="muted">The first complete operational workflow begins here.</div><div class="steps"><div class="step active">Upload</div><div class="step">Map</div><div class="step">Validate</div><div class="step">Review</div><div class="step">Commit</div></div><p><button class="cta" onclick="startUpload()">Start Supersheet Import</button></p></div>`}
+function startUpload(){alert('Supersheet source registration is ready. Sprint 2 will add upload, schema detection, and mapping.')}
+function openCommandPalette(){alert('Command palette boundary is active.')}
+renderNav();renderContent();
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "framework": "SCIIP_API_CERTIFICATION",
+  "version": "v6.1-phase7c",
+  "status": "PASSED",
+  "certifiedAt": "2026-07-14T15:03:51.150Z",
+  "checks": {
+    "doGet": true,
+    "doPost": true,
+    "version": true,
+    "router": true,
+    "validation": true,
+    "auth": true,
+    "envelope": true,
+    "failClosed": true
+  },
+  "failures": [],
+  "certificateId": "DEFB42E6A3338D695506F1C6"
+}

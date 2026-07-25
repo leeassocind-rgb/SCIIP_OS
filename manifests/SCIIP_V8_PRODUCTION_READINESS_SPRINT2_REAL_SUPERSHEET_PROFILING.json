@@ -1,0 +1,9 @@
+{
+  "framework": "SCIIP_V8_PRODUCTION_READINESS_REAL_SUPERSHEET_PROFILING",
+  "version": "v8.0-production-readiness-sprint2.0",
+  "phase": "A_SUPERSHEET_PRODUCTION_VALIDATION",
+  "scope": ["real source inventory", "schema profiling", "quality profiling", "classification", "mapping proposals", "exception classification", "non-destructive dry run", "performance benchmark", "executive reporting"],
+  "governance": {"commitEnabled": false, "productionWrites": 0, "sourceMutationEnabled": false, "readOnly": true, "dataStewardReviewRequired": true},
+  "certificationFunction": "sciipTestV8ProductionReadinessSprint2RealSuperSheetProfiling",
+  "compiledTarget": "dist/apps-script/11_other_001.gs"
+}

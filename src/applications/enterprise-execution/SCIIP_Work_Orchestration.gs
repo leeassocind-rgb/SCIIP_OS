@@ -1,0 +1,3 @@
+var SCIIP_WORK_ORCHESTRATION=(function(){'use strict';
+function orchestrate(input){input=input||{};var tasks=(input.tasks||[]).slice();var dependencies=input.dependencies||[];var done={};tasks.forEach(function(t){if(t.status==='COMPLETED')done[t.taskId]=true;});var blocked=[];dependencies.forEach(function(d){if(!done[d.dependsOn])blocked.push(d.taskId);});tasks=tasks.map(function(t){var b=blocked.indexOf(t.taskId)!==-1;return Object.assign({},t,{status:b&&t.status!=='COMPLETED'?'BLOCKED':t.status});});return {status:'SYNCHRONIZED',tasks:tasks,dependencies:dependencies.length,blocked:blocked.length,blockedTaskIds:blocked};}
+return {orchestrate:orchestrate};})();

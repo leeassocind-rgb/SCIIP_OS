@@ -1,0 +1,15 @@
+{
+  "framework": "SCIIP_V9_0_2_GOVERNED_HISTORICAL_INGESTION_BATCH",
+  "version": "v9.2.0",
+  "sprints": [
+    "v9.0 Governed Historical Replay",
+    "v9.1 Determinism Rollback and Recovery Assurance",
+    "v9.2 Operational Activation Readiness"
+  ],
+  "status": "READY_TO_INSTALL",
+  "governance": {
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "independentCorpusCertificationRequired": true
+  }
+}

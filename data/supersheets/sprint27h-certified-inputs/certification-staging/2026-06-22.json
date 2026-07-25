@@ -1,0 +1,1016 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-22",
+  "summary": {
+    "observations": 9,
+    "reviewRequired": 0,
+    "blocked": 0,
+    "lineageComplete": 9
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-22-2026.pdf",
+    "sourceSha256": "997371ba492d04e06f170a3a243760e3e5c27ec97c4986cafad3b941d50d47b4",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260622-001",
+      "snapshotDate": "2026-06-22",
+      "address": "17316 Edwards Rd",
+      "city": "Cerritos",
+      "postalCode": "90703",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 55696,
+      "buildingSf": 55696,
+      "officeSf": 4074,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 1",
+      "notes": "1 LINK Jade Business Center 55,696 SF TBD 5/1 Planned 32' New Development 2Q 2027 in Mid-Counties | 17316 Edwards Rd N/A TBD ESFR Available 1600 55,696 SF Free-Standing Building on 2.6 Acres | Cerritos, CA 90703 4,074 SF 55,696 SF Fncd/Pvd Completion 0.9:1/50 32' Clear, ESFR, 5 DH + GL, 136' Truck Court | LED Lighting, Solar Panels, 6 EV Chargers | CBRE - El Segundo - Rick McGeagh 310-363-4878, Ben Seybold 714-371-9233, Direct Access to 5, 605, 91 Freeways | Joshua Bonwell 714-371-9207, Keith Greer 714-371-9209 Close Proximity to Ports of Los Angeles and Long Beach | New Listing | For Lease & Sale New Development 2Q 2027 in Mid-Counties",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-A54687A926E9875C7617",
+      "propertyIdentityKey": "17316 EDWARDS RD|CERRITOS|90703",
+      "listingVariantId": "LISTING-93F2AE63F3B561F84878",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "5 DH + GL"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-22"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "17316 Edwards Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Cerritos",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Cerritos"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "F345244378860CDB4CAEAB1A677F9BDF"
+      }
+    },
+    {
+      "candidateId": "DA-20260622-002",
+      "snapshotDate": "2026-06-22",
+      "address": "21950 Temescal Canyon Rd",
+      "city": "Corona",
+      "postalCode": "92883",
+      "region": "Orange County",
+      "propertyType": "Land",
+      "availableSf": 101494,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 9",
+      "notes": "9 101,494 SF NFL 0 SF Available Gas: 2.3 Acres Industrial Land | 21950 Temescal Canyon Rd 2.33 Ac $34.39 Fenced Industrial Water: Zoning Allows Manufacturing | Corona, CA 92883 No $3,490,000 No M-SC Sewer: | Temescal Canyon Rd/Dos Lagos Dr AMDJ Realty, Inc - Diana Luo 951-313-8818 Electric: | Fiber: | Price Reduced | $3,600,000 -> $3,490,000 | 6/22/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": "$3,600,000 -> $3,490,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-B6DB64C92CAD24307A9E",
+      "propertyIdentityKey": "21950 TEMESCAL CANYON RD|CORONA|92883",
+      "listingVariantId": "LISTING-47C90680350DF3F2EFB1",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-22"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "21950 Temescal Canyon Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Corona",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "B4A45F4D0BB8A4E9F10496C87956BEDC"
+      }
+    },
+    {
+      "candidateId": "DA-20260622-003",
+      "snapshotDate": "2026-06-22",
+      "address": "36312-36324 Cherry Valley Blvd",
+      "city": "Beaumont",
+      "postalCode": "92223",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 1832667,
+      "buildingSf": 1832667,
+      "officeSf": 16390,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 1",
+      "notes": "1 I-10 Logistics Center 1,832,667 SF TBD 300/8 Existing 40' 2 Building Campus Totaling 1,832,667 SF | 36312-36324 Cherry Valley Blvd No TBD ESFR Available 4000 Efficient Operations w/8 Drive In Doors | Beaumont, CA 92223 16,390 SF 1,832,667 SF Fncd/Pvd 30 Days 0.4:1/706 Ample Parking w/706 Auto Parking & 519 Trailer | Marketing Flyer Property Has Secured Truck Courts w/Outdoor Storage | CBRE - Eloy Covarrubias 909-418-2284, Joe Werdein 909-418-2285 Direct Access to 10 & 60 Fwys | New Listing 2 Building Campus Totaling 1,832,667 SF | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-D2322DA09FD7B8266FD8",
+      "propertyIdentityKey": "36312 36324 CHERRY VALLEY BLVD|BEAUMONT|92223",
+      "listingVariantId": "LISTING-AE4C5E5AA8C5AB93B5F3",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-22"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "36312-36324 Cherry Valley Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Beaumont",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "5576E9FF0278D99B949ACD21A2369EE0"
+      }
+    },
+    {
+      "candidateId": "DA-20260622-004",
+      "snapshotDate": "2026-06-22",
+      "address": "36312 Cherry Valley Blvd",
+      "city": "Cherry Valley",
+      "postalCode": "92223",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 814822,
+      "buildingSf": 814822,
+      "officeSf": 8195,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 2",
+      "notes": "2 I-10 Logistics Center 814,822 SF TBD 130/4 Existing 40' I-10 Logistics Center | 36312 Cherry Valley Blvd No TBD ESFR Available 4000 Free Standing Building | Cherry Valley, CA 92223 8,195 SF 814,822 SF Fncd/Pvd 30 Days 0.3:1/274 Efficient Operations w/4 Drive In Doors | Marketing Flyer Ample Parking w/274 Auto Parking & 271 Trailer | CBRE - Eloy Covarrubias 909-418-2284, Joe Werdein 909-418-2285 Secured Truck Courts w/Outdoor Storage | Direct Access to 10 & 60 Fwys | New Listing Secured Truck Courts w/Outdoor Storage | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-10EDC4DE5A5EDA675ADF",
+      "propertyIdentityKey": "36312 CHERRY VALLEY BLVD|CHERRY VALLEY|92223",
+      "listingVariantId": "LISTING-C1BFCE275882A80EE134",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-22"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "36312 Cherry Valley Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Cherry Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A4F2FBAA79DACA9BE2DF51A984A37D79"
+      }
+    },
+    {
+      "candidateId": "DA-20260622-005",
+      "snapshotDate": "2026-06-22",
+      "address": "7350 San Gorgonio Dr",
+      "city": "Riverside",
+      "postalCode": "92508",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 121390,
+      "buildingSf": 121390,
+      "officeSf": 6150,
+      "askingRate": 1.1,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 3",
+      "notes": "3 Sycamore Business Center 121,390 SF $1.10 G 20/2 Existing 30' Free Standing Building | 7350 San Gorgonio Dr Yes $250.00 ESFR Available 2000 ±6,150 SF of First Class Office Space | Riverside, CA 92508 6,150 SF 121,390 SF Fenced Now 1.1:1/133 20 DH Doors w/2 Additional Knock Outs | Marketing Flyer Equipped w/Bumpers and 9 Pit Levelers | CBRE - Ryan Athens 909-418-2021, Jeff Fritch 909-418-2075, Sean Ward 714-371- (2) GL Loading Doors, ESFR Sprinklers (K-17 Heads, 52 PSI) | 9222, Alexander Davis 909-418-2079 LED Lighting w/Motion Sensors, Fenced Yard w/13 Trailer Stalls | Updated Information Now Available for Lease and Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-428DCB0CEF2216E21C53",
+      "propertyIdentityKey": "7350 SAN GORGONIO DR|RIVERSIDE|92508",
+      "listingVariantId": "LISTING-B5F8D5257C4AC4ADF726",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "20 DH Doors w/2 Additional Knock Outs"
+        ],
+        "yard": [
+          "Fenced Yard w/13 Trailer Stalls"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-22"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "7350 San Gorgonio Dr",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Riverside",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "59627B7E3BAB69825C70C6849A24AEA2"
+      }
+    },
+    {
+      "candidateId": "DA-20260622-006",
+      "snapshotDate": "2026-06-22",
+      "address": "3001 Hamner Ave",
+      "city": "Norco",
+      "postalCode": "92860",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 73616,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "Sale Comp",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 19",
+      "notes": "19 73,616 SF NFL 0 SF Sold Gas: 1.69 Acres Available | 3001 Hamner Ave 1.69 Ac $25.81 Yes Retail Water: Zoned C2 Lot | Norco, CA 92860 No $1,900,000 No C2 Sewer: Next To 15 Fwy | Hamner Ave/Fourth St AMDJ Realty, Inc - Diana Luo 951-313-8818 Electric: | Fiber: | Sold | Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-D044A193B7F8843490CE",
+      "propertyIdentityKey": "3001 HAMNER AVE|NORCO|92860",
+      "listingVariantId": "LISTING-7D9235B347226E58C321",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-22"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "3001 Hamner Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Norco",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9967A221FA7C7F4872D201062F6CEC8C"
+      }
+    },
+    {
+      "candidateId": "DA-20260622-007",
+      "snapshotDate": "2026-06-22",
+      "address": "3030 Andrita St",
+      "city": "Los Angeles",
+      "postalCode": "90065",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 108249,
+      "buildingSf": 108249,
+      "officeSf": 28029,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 1",
+      "notes": "1 Boxcar Studios 108,249 SF TBD 0/5 Existing 10' 108,249 SF Flex Studio / Industrial Property | 3030 Andrita St No TBD Available 5000 Large Secured Lot with Ample Parking | Los Angeles, CA 90065 28,029 SF 108,249 SF Fenced 06/30/2027 1.7:1/180 Heavy Power, Modern Mechanical, Electrical & Plumbing | $18.6M in Recent Capital Improvements | CBRE - Sam Glendon 818-502-6745, Michael Longo 310-363-4906, Nicole Mihalka 100% HVAC | 213-613-3370 Located at the Heart of Los Angeles' Creative Core | New Listing | For Lease & Sale Large Secured Lot with Ample Parking",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-1979C86C447C48AEAD68",
+      "propertyIdentityKey": "3030 ANDRITA ST|LOS ANGELES|90065",
+      "listingVariantId": "LISTING-BF3821FDB25F91D450B9",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-22"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "3030 Andrita St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Los Angeles",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "6D102398A1D9412FE87A56CE7F435C8F"
+      }
+    },
+    {
+      "candidateId": "DA-20260622-008",
+      "snapshotDate": "2026-06-22",
+      "address": "W Gardena Blvd, Bldg 2",
+      "city": "Carson",
+      "postalCode": "90248",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 102083,
+      "buildingSf": 102083,
+      "officeSf": 4972,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 12,
+      "sourceRow": "Page 12 AIR Listing 1",
+      "notes": "1 Pinyon Pointe 102,083 SF TBD 25/2 Existing 36' New Construction From Link Logistics Real Estate | 219 W Gardena Blvd, Bldg 2 Yes NFS ESFR Leased 1600 New State of the Art 3 Building Industrial Campus | Carson, CA 90248 4,972 SF 102,083 SF Fncd/Pvd Now 0.9:1/92 Excellent Dock High Count *25 Dock High Doors | Marketing Flyer 36' Clearance - ESFR Sprinkler System | Newmark - Los Angeles - South Bay - Danny Williams 310-491-2061, John McMillan Centrally Located Between LAX & Ports Of LA/Long Beach | 310-491-2048, Barry Hill 310-491-2026 With Immediate Access to 5 Major Freeways | Leased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-6191AE018BE2FC89303C",
+      "propertyIdentityKey": "W GARDENA BLVD BLDG 2|CARSON|90248",
+      "listingVariantId": "LISTING-19D51D2099756DAF62C9",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "25 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-22"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W Gardena Blvd, Bldg 2",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Carson",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "1A593A1765411A724E0AE3B0D6431FA6"
+      }
+    },
+    {
+      "candidateId": "DA-20260622-009",
+      "snapshotDate": "2026-06-22",
+      "address": "1211 E Artesia Blvd",
+      "city": "Carson",
+      "postalCode": "90746",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 71376,
+      "buildingSf": 128502,
+      "officeSf": 14421,
+      "askingRate": 1.35,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 12,
+      "sourceRow": "Page 12 AIR Listing 2",
+      "notes": "2 71,376 SF $1.35 G 8/1 Existing 21'-24' Sublease Through 11/30/2028, Longer Term Available | 1211 E Artesia Blvd No NFS Yes Available 1000 Excellent 91 Freeway Frontage/Visibility | Carson, CA 90746 14,421 SF 71,376 SF Fncd/Pvd 12/31/2026 1.5:1/110 ±59,317 - 71,376 SF Industrial Bldg on ±128,502 SF of Land | Marketing Flyer ±14,421 SF of Beautiful 2 Story Flex/Lab/R&D Offices | Daum Commercial - Chuck Brill 310-538-6710, Ken LaFond 310-538-6742 Heavy Power (1000 Amps via 2 Panels) | 2 Street Access/110 Parking Spaces Available, 8 DH Positions | New Listing ±59,317 - 71,376 SF Industrial Building on ±128,502 SF of Land | For Sublease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-920196A032F58DA08282",
+      "propertyIdentityKey": "1211 E ARTESIA BLVD|CARSON|90746",
+      "listingVariantId": "LISTING-D6B75255DA3F7F75437F",
+      "structuredNotes": {
+        "power": [
+          "1000 Amps via 2 Panels)"
+        ],
+        "loading": [
+          "8 DH Positions"
+        ],
+        "yard": [],
+        "parking": [
+          "110 Parking Spaces Available"
+        ],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [],
+      "semanticNormalization": {
+        "address": {
+          "value": "1211 E Artesia Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Carson",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.131Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "6DB91825C3C51064EE8E79D0398882B7"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

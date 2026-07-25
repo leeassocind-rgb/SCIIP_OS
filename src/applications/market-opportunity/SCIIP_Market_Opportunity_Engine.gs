@@ -1,0 +1,6 @@
+/** SCIIP_OS v7.0 Sprint 13 — Market Opportunity Engine. */
+var SCIIP_MARKET_OPPORTUNITY_ENGINE=(function(){'use strict';
+function round(n){return Math.round(n*100)/100;}
+function evaluate(market){market=market||{};var vacancy=Number(market.vacancyRate||0),absorption=Number(market.netAbsorption||0),rentGrowth=Number(market.rentGrowthPct||0),pipeline=Number(market.pipelineSf||0),inventory=Number(market.inventorySf||1);var demand=Math.max(0,Math.min(100,50+(absorption/Math.max(inventory,.01))*5000-vacancy*2+rentGrowth*4-(pipeline/Math.max(inventory,1))*100));var status=demand>=70?'HIGH_OPPORTUNITY':demand>=50?'WATCH':'BALANCED';return {marketId:String(market.id||market.market||'UNKNOWN'),score:round(demand),status:status,evidence:[{metric:'vacancyRate',value:vacancy},{metric:'netAbsorption',value:absorption},{metric:'rentGrowthPct',value:rentGrowth},{metric:'pipelineSf',value:pipeline}]};}
+function rank(markets){var rows=(markets||[]).map(evaluate).sort(function(a,b){return b.score-a.score;});return {opportunities:rows,top:rows[0]||null};}
+return {evaluate:evaluate,rank:rank};})();

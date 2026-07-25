@@ -1,0 +1,1267 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-07-23",
+  "summary": {
+    "observations": 11,
+    "reviewRequired": 1,
+    "blocked": 0,
+    "lineageComplete": 11
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-23-2026.pdf",
+    "sourceSha256": "48b102a3faf3824b1c6574ebb3aa83696502a4fe0770fc8e22e4db237d98203a",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260723-001",
+      "snapshotDate": "2026-07-23",
+      "address": "2042 Garfield Ave",
+      "city": "Commerce",
+      "postalCode": "90040",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 56715,
+      "buildingSf": 56715,
+      "officeSf": 6000,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 1",
+      "notes": "1 56,715 SF NFL 6/1 Existing 18' 1,200 Amps Power | 2042 Garfield Ave No $260.07 Yes Available 1200 M2 Zoning | Commerce, CA 90040 6,000 SF 56,715 SF Fncd/Pvd COE 0.9:1/52 Major Street Frontage | Marketing Flyer 18'+ Clearance / Heavy Power / M2 Zoning | Cushman & Wakefield - David Schatz 310-943-4201, Tim Wallace 213-955-5108 6+ Loading Docks / Fenced Yard | Close Proximity to 5 Freeway | New Listing 18'+ Clearance / Heavy Power / M2 Zoning | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-33FAF482C24CAFFF0170",
+      "propertyIdentityKey": "2042 GARFIELD AVE|COMMERCE|90040",
+      "listingVariantId": "LISTING-D906E8E6C7C98E58D97D",
+      "structuredNotes": {
+        "power": [
+          "200 Amps Power"
+        ],
+        "loading": [],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2042 Garfield Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Commerce",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Commerce"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.146Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9C96947697EE668B42E8DAC990643295"
+      }
+    },
+    {
+      "candidateId": "DA-20260723-002",
+      "snapshotDate": "2026-07-23",
+      "address": "2717 Tanager Ave",
+      "city": "Commerce",
+      "postalCode": "90040",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 55988,
+      "buildingSf": 55988,
+      "officeSf": 5191,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 2",
+      "notes": "2 55,988 SF NFL 5/1 Existing 16' - 20' Immaculate Warehousing/Manufacturing Building | 2717 Tanager Ave No $269.00 Yes Available 1200 Convenient Commerce Location on Quiet Cul-De-Sac Street | Commerce, CA 90040 5,191 SF 55,988 SF Fncd/Pvd COE 0.8:1/45 Recessed Loading Dock with 4 DH Positions | Fenced Side Yard w/ Exterior Dock and Ramp to Grade | Kidder Mathews - Nick Arnst 989-245-2226, Lindsay Park 213-225-7234, Tom Heavy Power: 1,200 Amps @ 277-480 volts | Williams 213-225-7229 Recently Refurbished Modern Offices | New Listing | For Sale Fenced Side Yard w/ Exterior Dock and Ramp to Grade",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-A9C3A88B265F1E988DE8",
+      "propertyIdentityKey": "2717 TANAGER AVE|COMMERCE|90040",
+      "listingVariantId": "LISTING-11E20955627587E7F1B3",
+      "structuredNotes": {
+        "power": [
+          "200 Amps @ 277-480 volts"
+        ],
+        "loading": [
+          "4 DH Positions"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2717 Tanager Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Commerce",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Commerce"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.146Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "4A4317B9D02D330FA7A315D24ADEC430"
+      }
+    },
+    {
+      "candidateId": "DA-20260723-003",
+      "snapshotDate": "2026-07-23",
+      "address": "1709-1727 N Spring St",
+      "city": "Los Angeles",
+      "postalCode": "90012",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 55150,
+      "buildingSf": 55150,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 3",
+      "notes": "3 1709 - 1727 N Spring St (Portfolio) 55,150 SF NFL 0/5 Existing 4 Industrial Structures on 6 Parcels | 1709-1727 N Spring St No $126.93 Available Frontage on Four Streets | Los Angeles, CA 90012 55,150 SF No COE Easy Access to All DTLA Freeways: I-5, 101, I-10 and 110 | Marketing Flyer Chapter 7 Bankruptcy Sale | Major Properties - Jeffrey Luster 213-747-4151, Rene Mexia 213-747-4151, Clarence | Yoshikane II 949-644-6200 | Price Reduced $10,000,000 -> $7,000,000",
+      "changeDetail": "$10,000,000 -> $7,000,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-858BE316F068608B1ABA",
+      "propertyIdentityKey": "1709 1727 N SPRING ST|LOS ANGELES|90012",
+      "listingVariantId": "LISTING-01255BDFF8E4FC07C003",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1709-1727 N Spring St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Los Angeles",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.146Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "3374973E0DA659C951DC4F593447895B"
+      }
+    },
+    {
+      "candidateId": "DA-20260723-004",
+      "snapshotDate": "2026-07-23",
+      "address": "18582 Teller Ave",
+      "city": "Irvine",
+      "postalCode": "92612",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 136612,
+      "buildingSf": 25000,
+      "officeSf": 13275,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 1",
+      "notes": "1 Irvine Commerce Center 136,612 SF TBD 20/2 Existing 36' Brand New Free Standing Building | 18582 Teller Ave Yes NFS ESFR Leased 4000 Jamboree Frontage | Irvine, CA 92612 13,275 SF 136,612 SF Fenced Now 1.0:1/133 ±13,275 SF of Office (Expandable Up To 25,000 SF) | Marketing Flyer 4,000 Amp Power | CBRE - Ross Bourne 949-725-8537, Ross Fippinger 949-725-8481, Joe Czech 949- ESFR Sprinklers, Fenced, Secured Yard | 725-8529 Close to Outstanding Retail Amenities at Park Pl | Leased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-C4BB91E7022200B12376",
+      "propertyIdentityKey": "18582 TELLER AVE|IRVINE|92612",
+      "listingVariantId": "LISTING-91A2C33799ED3DE665F5",
+      "structuredNotes": {
+        "power": [
+          "000 Amp Power"
+        ],
+        "loading": [],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [
+          "13,275 SF of Office"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "18582 Teller Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Irvine",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.146Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "33296EC1B6320FF2DC0237B0CCDBF84B"
+      }
+    },
+    {
+      "candidateId": "DA-20260723-005",
+      "snapshotDate": "2026-07-23",
+      "address": "6485 Descanso Ave",
+      "city": "Buena Park",
+      "postalCode": "90620",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 110000,
+      "buildingSf": 110000,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 2",
+      "notes": "2 110,000 SF NFL 8/1 Existing 24' | Premier Mid-Counties Location | 6485 Descanso Ave No $293.55 Yes Available | 147' Truck Court 1200 | Buena Park, CA 90620 110,000 SF Fncd/Pvd COERail-Served w/ 4 Rail Doors | 0.8:1/87 | Marketing Flyer Multiple Points of Access | CBRE - Barbara Perrier 213-613-3033, Ben Seybold 714-371-9233, Keith Greer 714- Close Proximity to the 5,91,55,57 & 22 Fwys | 371-9209 | New Listing Multiple Points of Access | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-9F739F96F9EF6C1C7F58",
+      "propertyIdentityKey": "6485 DESCANSO AVE|BUENA PARK|90620",
+      "listingVariantId": "LISTING-E2DEF8710FD01433DBFC",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "6485 Descanso Ave",
+          "changed": true,
+          "removedText": "147' Truck Court",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Buena Park",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.146Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "4A19BC7CE8958F56984661C9F60DFEE1"
+      }
+    },
+    {
+      "candidateId": "DA-20260723-006",
+      "snapshotDate": "2026-07-23",
+      "address": "1900 S Lewis St",
+      "city": "Anaheim",
+      "postalCode": "92805",
+      "region": "Orange County",
+      "propertyType": "Land",
+      "availableSf": 148540,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.65,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 15",
+      "notes": "15 148,540 SF $0.65 G 17,200 SF Available Gas: 3.41 Acres of Land | 1900 S Lewis St 3.41 Ac NFS Fncd/Pvd Industrial Water: Rare Industrial Outdoor Storage Yard | Anaheim, CA 92805 No NFS No I Sewer: 5 Ground Level Loading Doors | S Westside Dr/ E Gene Autry Way Electric: Fenced & Paved Yard | CBRE - Keith Greer 714-371-9209 | Marketing Flyer Fiber: | New Listing | For Lease Fenced & Paved Yard",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-4BC7C2E5F2AE1475BCD8",
+      "propertyIdentityKey": "1900 S LEWIS ST|ANAHEIM|92805",
+      "listingVariantId": "LISTING-6C5214131B66A803DE31",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "5 Ground Level Loading Doors"
+        ],
+        "yard": [
+          "Paved Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1900 S Lewis St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Anaheim",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.146Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "FACCE470CBD1E7501A767F743EFD06CC"
+      }
+    },
+    {
+      "candidateId": "DA-20260723-007",
+      "snapshotDate": "2026-07-23",
+      "address": "23682 Water St",
+      "city": "Perris",
+      "postalCode": "92570",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 186648,
+      "buildingSf": 186648,
+      "officeSf": 3179,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 1",
+      "notes": "1 186,648 SF TBD 24/2 U/C 36' State of The Art Distribution Facility, Now Under Construction | 23682 Water St N/A NFS ESFR Available 2000 3,179 SF of Spec Office | Perris, CA 92570 3,179 SF 186,648 SF Fncd/Pvd Completion 0.7:1/124 36' Minimum Clearance Height | Marketing Flyer 24 Dock High Doors w/12 Pit Levelers | JLL - Patrick Wood 909-467-6857, Jeff Bellitti 909-467-6881, Scott Coyle 909-467- 30 Trailer Stalls, 124 Auto Parking Stalls | 6870, Chase Berry 704-681-1707 Fully Secured 185' Concrete Truck Court | New Listing State of The Art Distribution Facility, Now Under Construction | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-BAEF0E8BDC6C8A27BAA6",
+      "propertyIdentityKey": "23682 WATER ST|PERRIS|92570",
+      "listingVariantId": "LISTING-A5B04D0FE87807C0AB2A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "24 Dock High Doors w/12 Pit Levelers"
+        ],
+        "yard": [],
+        "parking": [
+          "124 Auto Parking Stalls"
+        ],
+        "office": [],
+        "construction": [
+          "U/C 36' State of The Art Distribution Facility",
+          "Under Construction"
+        ]
+      },
+      "historicalDeltas": [],
+      "semanticNormalization": {
+        "address": {
+          "value": "23682 Water St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Perris",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.146Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9953208DDA733BF0FA54A7D69F08120F"
+      }
+    },
+    {
+      "candidateId": "DA-20260723-008",
+      "snapshotDate": "2026-07-23",
+      "address": "2010 S Cucamonga Ave",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 177725,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.38,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 11",
+      "notes": "11 177,725 SF $0.38 NNN 9,000 SF Available Gas: 9,000 SF Building on 4.08 Acre Lot | 2010 S Cucamonga Ave 4.08 Ac NFS Fncd/Pvd Industrial Water: 500 SF of Office Space | Ontario, CA 91761 No NFS No IG Sewer: 8 Grade Level Loading Doors (12'x14') | S Cucamonga Ave/E Cedar St Electric: 17' Minimum Clearance Height | Lee & Associates - Daniel Glazer 909-989-7771, Hank Wiehebrink 909- | Marketing Flyer Fiber: Easy Access to 60, 10, 15 Fwys | 373-2712 | Rate Reduced | $0.40 NNN -> $0.38 NNN",
+      "changeDetail": "$0.40 NNN -> $0.38 NNN",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-AC26F8772CC30B0AA066",
+      "propertyIdentityKey": "2010 S CUCAMONGA AVE|ONTARIO|91761",
+      "listingVariantId": "LISTING-325E53F4B6AEEFE4A374",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "500 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2010 S Cucamonga Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.146Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "AF39CAFF9A608E9D408AAA7312830BCF"
+      }
+    },
+    {
+      "candidateId": "DA-20260723-009",
+      "snapshotDate": "2026-07-23",
+      "address": "14578 Valley Blvd",
+      "city": "Fontana",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 111078,
+      "buildingSf": 26778,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 12",
+      "notes": "12 111,078 SF NFL 26,778 SF Available Gas: Real Estate and Business Available For Sale | 14578 Valley Blvd 2.55 Ac $134.14 Fncd/Pvd Industrial Water: Y GTS Group (www.gtstrucks.com), First Dealership on | Fontana, CA 92335 No $14,900,000 No SD Sewer: Y Cherry Ave, ±2.55 Acres of Land w/ ±26,778 SF Building | Valley Blvd/Cherry Ave Electric: Y Area, State-of-the-Art Showroom w/ High End Finishes | Lee & Associates - John Seoane 909-373-2946 | Marketing Flyer Fiber: 5 Ground Level Doors, Fully Fenced, Paved & Secured | Yard Area, County of San Bernardino Zoning | Price Reduction | Now Asking $14,900,000 on Purchase of Business + Real Estate",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.85,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-D795FDE6761FCCCF247A",
+      "propertyIdentityKey": "14578 VALLEY BLVD|FONTANA|92335",
+      "listingVariantId": "LISTING-FF8357CEEF4E7A7A9C49",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "5 Ground Level Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "LISTING_STATUS_CHANGED",
+          "field": "listingStatus",
+          "from": "Sold",
+          "to": "Available"
+        },
+        {
+          "type": "EVENT_CHANGED",
+          "field": "eventCode",
+          "from": "SOLD",
+          "to": "OBSERVED"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14578 Valley Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Fontana"
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.146Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": false,
+        "transitionAnomalies": [
+          {
+            "code": "SOLD_TO_AVAILABLE",
+            "severity": "REVIEW",
+            "from": "Sold",
+            "to": "Available"
+          }
+        ],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "SOLD_TO_AVAILABLE"
+        ],
+        "certificationHash": "0F290E5D53C2EC95736345C740390A44"
+      }
+    },
+    {
+      "candidateId": "DA-20260723-010",
+      "snapshotDate": "2026-07-23",
+      "address": "5045 E State St",
+      "city": "Ontario",
+      "postalCode": "91762",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 102802,
+      "buildingSf": 5120,
+      "officeSf": 102802,
+      "askingRate": 0.29,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 13",
+      "notes": "13 102,802 SF $0.29 G 5,120 SF Available Gas: Now available for lease, 5045 State Street in Montclair offers a | 5045 E State St 2.36 Ac TBD Fncd/Pvd Industrial Water: Y rare industrial outdoor storage (IOS) opportunity on ±2.36 acres | Ontario, CA 91762 No NFS No M1 Sewer: (±102,802 SF) with an existing ±5,120 SF industrial building. | Monte Vista Ave/E State St Electric: Y Strategically positioned in the heart of the Inland Empire West | Canada Pacific Realty Advisors - Patrick Meaney 661-502-6868 | Marketing Flyer Fiber: submarket, this property provides excellent access to major | transportation corridors and regional logistics hubs. | Updated Information | Now Available For Lease & Sale | 7/23/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-A8B4A6562A8F4B1891F9",
+      "propertyIdentityKey": "5045 E STATE ST|ONTARIO|91762",
+      "listingVariantId": "LISTING-EEACF14ACAD08FB14C43",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "5045 E State St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.146Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "018A7ABA27DAD516880D4AB299440FF8"
+      }
+    },
+    {
+      "candidateId": "DA-20260723-011",
+      "snapshotDate": "2026-07-23",
+      "address": "W Ave",
+      "city": "Lancaster",
+      "postalCode": "93535",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 223463,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 5",
+      "notes": "5 223,463 SF NFL 0 SF Available Gas: 5.13 Acres Available | 413 W Ave G 5.13 Ac $2.00 Fenced Industrial Water: Light Manufacturing Zone (M-1) | Lancaster, CA 93535 No $446,925 No M-1 Sewer: IOS (Industrial Outdoor Storage) or Development Site | W Ave G/Sierra Hwy Ongoing Residential & Commercial Developments | Cushman & Wakefield - Erik Larson 213-955-5126, Paul Sims 213-955- Electric: | Marketing Flyer Fiber: Fully Secured Yard | 5153 Immediate (14) Freeway Access | New Listing | For Sale Light Manufacturing Zone (M-1) | 7/23/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-479BB18AF5930E32E5A6",
+      "propertyIdentityKey": "W AVE|LANCASTER|93535",
+      "listingVariantId": "LISTING-060907F0D7D6C327F680",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W Ave",
+          "changed": true,
+          "removedText": "G",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Lancaster",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Lancaster"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.146Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "4DDEB21E9E495188CE20CB6A9C185B17"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

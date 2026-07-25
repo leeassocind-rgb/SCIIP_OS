@@ -1,0 +1,28 @@
+name: SCIIP Repository Governance
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Architecture and repository governance
+        run: npm run governance:ci
+      - name: Upload governance reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sciip-governance-reports
+          path: |
+            governance/architecture-governance-report.json
+            governance/architecture-governance-summary.md
+            governance/repository-governance-report.json

@@ -1,0 +1,17 @@
+{
+  "framework": "SCIIP_V8_8_CANONICALIZATION_ENGINE",
+  "version": "v8.8.0",
+  "status": "RELEASED",
+  "productionWrites": 0,
+  "commitEnabled": false,
+  "capabilities": [
+    "stable property identity",
+    "stable listing identity",
+    "geography canonicalization",
+    "transaction canonicalization",
+    "alias ledger",
+    "gold standard lock",
+    "evidence lineage",
+    "steward review"
+  ]
+}

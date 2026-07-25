@@ -1,0 +1,7 @@
+/** SCIIP_OS v7.0 Sprint 12 — normalized occupier prospect profiles. */
+var SCIIP_PROSPECT_PROFILE=(function(){'use strict';var VERSION='v7.0-integration-sprint-12.0',store={};
+function clone(v){return JSON.parse(JSON.stringify(v));}function num(v,d){v=Number(v);return isFinite(v)?v:d;}
+function key(x){return String(x.id||x.domain||x.name||'').trim().toUpperCase();}
+function normalize(input){input=input||{};var id=key(input);if(!id)throw new Error('Prospect id, domain, or name is required.');return {id:id,name:String(input.name||id),domain:String(input.domain||''),industry:String(input.industry||''),subsector:String(input.subsector||''),headquarters:String(input.headquarters||''),employees:num(input.employees,0),funding:num(input.funding,0),growthScore:num(input.growthScore,0),locationNeedSf:num(input.locationNeedSf,0),powerNeedAmps:num(input.powerNeedAmps,0),targetMarkets:(input.targetMarkets||[]).slice(),signals:(input.signals||[]).slice(),evidence:(input.evidence||[]).slice(),contacts:(input.contacts||[]).slice(),createdAt:input.createdAt||new Date().toISOString()};}
+function register(input){var p=normalize(input);if(store[p.id])return {status:'DUPLICATE_SAFE',prospect:clone(store[p.id])};store[p.id]=p;return {status:'CREATED',prospect:clone(p)};}function list(){return Object.keys(store).sort().map(function(k){return clone(store[k]);});}function reset(){store={};}
+return {VERSION:VERSION,normalize:normalize,register:register,list:list,reset:reset};})();

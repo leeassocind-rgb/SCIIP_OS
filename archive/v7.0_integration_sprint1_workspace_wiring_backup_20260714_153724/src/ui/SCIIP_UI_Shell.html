@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <title>SCIIP Desktop</title>
+  <?!= SCIIP_UI.include('SCIIP_UI_Styles'); ?>
+  <?!= SCIIP_UI.include('SCIIP_Integration_Styles'); ?>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<div id="app" class="desktop" data-state="loading">
+  <header class="topbar" role="banner">
+    <button id="menuButton" class="icon-button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <div class="brand"><strong>SCIIP</strong><span>DESKTOP</span></div>
+    <div class="topbar-actions">
+      <button id="notificationButton" class="icon-button" aria-label="Open notifications">◎</button>
+      <span id="systemStatus" class="status-chip" role="status" aria-live="polite">Initializing</span>
+    </div>
+  </header>
+  <section id="contextBar" class="integration-bar" aria-label="Application context"><div><div id="breadcrumbs" class="breadcrumbs">SCIIP</div><div id="selectedContext" class="context-selection">No selected context</div></div><div class="global-search-wrap"><input id="globalSearch" type="search" placeholder="Search properties, companies, markets, graph nodes, and GIS features" aria-label="Global search"><div id="globalSearchResults" class="global-search-results" hidden></div></div><div class="context-actions"><button id="clearContextButton" class="icon-button" aria-label="Clear selected context">Clear</button></div></section>
+  <aside id="sidebar" class="sidebar" aria-label="Workspace navigation">
+    <div class="sidebar-heading">WORKSPACES</div>
+    <nav id="workspaceNav"></nav>
+    <div class="sidebar-footer"><span id="releaseBadge">v7.0 Alpha</span></div>
+  </aside>
+  <main id="main" class="main" tabindex="-1">
+    <section class="page-header">
+      <div><p class="eyebrow">SCIIP DESKTOP ALPHA</p><h1 id="viewTitle">Loading…</h1><p id="viewDescription">Preparing workspace.</p></div>
+      <button id="refreshButton" class="primary-button">Refresh platform</button>
+    </section>
+    <section id="summary" class="summary-grid" aria-label="Platform summary"></section>
+    <section class="workspace-grid">
+      <section id="workspaceContent" class="workspace-panel" aria-live="polite"></section>
+      <aside id="activityPanel" class="activity-panel" aria-label="Notifications and activity"></aside>
+    </section>
+    <section id="errorState" class="state-panel error" hidden role="alert"></section>
+  </main>
+  <div id="notificationDrawer" class="drawer" hidden aria-label="Notifications"></div>
+</div>
+<script>window.SCIIP_BOOTSTRAP=<?!= bootstrapJson ?>;</script>
+<?!= SCIIP_UI.include('SCIIP_UI_App'); ?>
+<?!= SCIIP_UI.include('SCIIP_IntegrationClient'); ?>
+</body>
+</html>

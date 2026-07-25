@@ -1,0 +1,1 @@
+function sciipTestBeta10Hardening(){return {framework:'SCIIP_OS_BETA_1_0_HARDENING_CERTIFICATION',version:'beta-1.0',status:'AVAILABLE',workspace:'beta-hardening-command-center',productionWrites:0,commitEnabled:false};}

@@ -1,0 +1,1259 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-07-20",
+  "summary": {
+    "observations": 11,
+    "reviewRequired": 2,
+    "blocked": 0,
+    "lineageComplete": 11
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-20-2026.pdf",
+    "sourceSha256": "5183fc7e4eebd4aba62966eb27908540042638737dc399ccbc1fc71a1a4f0562",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260720-001",
+      "snapshotDate": "2026-07-20",
+      "address": "6100 Wilmington Ave, Bldg 1",
+      "city": "Huntington Park",
+      "postalCode": "90001",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 65541,
+      "buildingSf": 65541,
+      "officeSf": 2000,
+      "askingRate": 0.55,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 1",
+      "notes": "1 65,541 SF $0.55 G 5/0 Existing 14' Free Standing Building | 6100 Wilmington Ave, Bldg 1 Yes NFS Yes Available 3600 5 DH Loading Doors | Huntington Park, CA 90001 2,000 SF 65,541 SF Fncd/Pvd Now 2.0:1/129 129 Parking Spaces | Marketing Flyer Renovated in 2007 | Daum Commercial - Moon Lim 213-270-2256 3,600 Amps, 240 Volts | New Rate Now Available @ $0.55 G",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_CHANGED",
+      "propertyIdentityId": "PROP-BEC99E25DE41396F665C",
+      "propertyIdentityKey": "6100 WILMINGTON AVE BLDG 1|HUNTINGTON PARK|90001",
+      "listingVariantId": "LISTING-FDAE8F08DED24638BFBB",
+      "structuredNotes": {
+        "power": [
+          "600 Amps"
+        ],
+        "loading": [
+          "5 DH Loading Doors"
+        ],
+        "yard": [],
+        "parking": [
+          "129 Parking Spaces"
+        ],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-20"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "6100 Wilmington Ave, Bldg 1",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Huntington Park",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "New Rate",
+        "normalizedEventCode": "RATE_CHANGED",
+        "normalizedEventLabel": "Rate Changed",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "751FF0ED1150AAE4A1F768966BA65DDE"
+      }
+    },
+    {
+      "candidateId": "DA-20260720-002",
+      "snapshotDate": "2026-07-20",
+      "address": "2210 Davie Ave",
+      "city": "Commerce",
+      "postalCode": "90040",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 59600,
+      "buildingSf": 59600,
+      "officeSf": 6727,
+      "askingRate": 0.89,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 2",
+      "notes": "2 59,600 SF $0.89 NNN 5/1 Existing 20' Versatile Manufacturing Distribution Building | 2210 Davie Ave Yes NFS Yes Available 1600 Centrally Located in the Heart of Commerce | Commerce, CA 90040 6,727 SF 59,600 SF No Now 0.5:1/28 Great Access to 5 & 710 Freeways | Marketing Flyer Heavy Power | Lee & Associates - Peter D Bacci 323-767-2022 | Updated Information Renovations Now Complete",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-9E5A9CFC47C1659EFCD3",
+      "propertyIdentityKey": "2210 DAVIE AVE|COMMERCE|90040",
+      "listingVariantId": "LISTING-0C9E46E104A3CC7D7C4A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-20"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2210 Davie Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Commerce",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Commerce"
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "5A1BB034EB2E4B8CD7EAE79A90A3FB7E"
+      }
+    },
+    {
+      "candidateId": "DA-20260720-003",
+      "snapshotDate": "2026-07-20",
+      "address": "30700 Rancho Viejo Rd",
+      "city": "San Juan Capistrano",
+      "postalCode": "92675",
+      "region": "Orange County",
+      "propertyType": "Land",
+      "availableSf": 126324,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.55,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 14",
+      "notes": "14 126,324 SF $0.55 NNN 0 SF Available Gas: 2.9 Acres of Land - Trailer Parking Site | 30700 Rancho Viejo Rd 2.90 Ac NFS Paved Industrial Water: Demisable to 0.50 Acre | San Juan Capistrano, CA 92675 No NFS No IP Sewer: Dedicated Truck Lanes For Ingress/Egress | Rancho Viejo Rd/Malaspina Rd Electric: 83 Trailer Parking Stalls, 160 Container/Van Stalls | JLL - Louis Tomaselli 949-885-2985, Kris Smith 949-885-2973 | Marketing Flyer Fiber: Immediate Access to 5 Fwy | Back on Market | 7/20/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-D73A0FD72F87D573E45C",
+      "propertyIdentityKey": "30700 RANCHO VIEJO RD|SAN JUAN CAPISTRANO|92675",
+      "listingVariantId": "LISTING-AE2FDE312CA2935E1F2F",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 101508,
+          "to": 126324
+        },
+        {
+          "type": "ASKING_RATE_CHANGED",
+          "field": "askingRate",
+          "from": 2.25,
+          "to": 0.55
+        },
+        {
+          "type": "EVENT_CHANGED",
+          "field": "eventCode",
+          "from": "LISTING_UPDATED",
+          "to": "OBSERVED"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "30700 Rancho Viejo Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "San Juan Capistrano",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.84,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "37C438342D3D37062C0EE24DA0856784"
+      }
+    },
+    {
+      "candidateId": "DA-20260720-004",
+      "snapshotDate": "2026-07-20",
+      "address": "1671 Champagne Ave",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 386598,
+      "buildingSf": 386598,
+      "officeSf": 26147,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 1",
+      "notes": "1 386,598 SF TBD 38/2 Existing 28' Free Standing Industrial Building | 1671 Champagne Ave No NFS Yes Available 4000 Rail Served (UPRR), ESFR Sprinklers | Ontario, CA 91761 26,147 SF 386,598 SF Paved 01/01/2027 38 Dock High Doors, 2 Grade Level Doors, 9 Rail Doors | Marketing Flyer All Doors Equipped w/30,000 LB Rite Height Load Levelers | Cushman & Wakefield - Philip Lombardo 909-942-4678, Cruise Adams 909-942- 115' Truck Court w/60' Concrete Pad | 4641 Immediate Access to 15, 10, & 60 Fwys | New Listing 38 Dock High Doors, 2 Grade Level Doors, 9 Rail Doors | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-3601A14E7760B2E30B6C",
+      "propertyIdentityKey": "1671 CHAMPAGNE AVE|ONTARIO|91761",
+      "listingVariantId": "LISTING-A83B96F07C6D352040D7",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "38 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-20"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1671 Champagne Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "BCCE01C5798A11E888C932148F2AB1E0"
+      }
+    },
+    {
+      "candidateId": "DA-20260720-005",
+      "snapshotDate": "2026-07-20",
+      "address": "16875 Heacock St",
+      "city": "Moreno Valley",
+      "postalCode": "92571",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 225450,
+      "buildingSf": 225450,
+      "officeSf": 5700,
+      "askingRate": 1,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 2",
+      "notes": "2 First Heacock 225,450 SF $1.00 G 46/2 Existing 30' Free Standing Building | 16875 Heacock St Yes NFS ESFR Available 2000 ±30' Clear Height | Moreno Valley, CA 92571 5,700 SF 225,450 SF Fncd/Pvd Now 0.5:1/104 46 Dock High Doors w/ Load Levelers | Marketing Flyer 2 Ramped Doors | Cushman & Wakefield - Milo Lipson 909-942-4648, Tim Pimentel 909-942-4647, ±120 Trailer Parking Stalls | Ryan Velasquez 909-942-4673, Kyle Kehner 909-937-6378 Low Opex | Rate Reduced $1.10 G -> $1.00 G",
+      "changeDetail": "$1.10 G -> $1.00 G",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-B8D0C2CD810DD8C1DE15",
+      "propertyIdentityKey": "16875 HEACOCK ST|MORENO VALLEY|92571",
+      "listingVariantId": "LISTING-66E7B8D2846BA44F143F",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "46 Dock High Doors w/ Load Levelers"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-20"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "16875 Heacock St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Moreno Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Perris"
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "E8B53720C43E0681BF88F43D450971BE"
+      }
+    },
+    {
+      "candidateId": "DA-20260720-006",
+      "snapshotDate": "2026-07-20",
+      "address": "SW of Highway 62 & Rice Midland Rd",
+      "city": "Vidal",
+      "postalCode": "92280",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 871200,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 13",
+      "notes": "13 871,200 SF NFL 0 SF | Available Gas: Large Parcel w/ Potential for Subdivision | SW of Highway 62 & Rice Midland Rd 20.00 Ac $0.02 Yes | Residential Water: Quick Access to Highway 62 | Vidal, CA 92280 Development Vidal Is Home to A Large Energy Project | No $20,000 No RC Sewer: Low Barrier Entry to Land Ownership | Marketing Flyer NAI Capital - Mehdi Mostaedi 760-780-4210, Jonathan Pollak 760-780- Electric: | 4217 Fiber: | New Listing | For Sale Large Parcel w/ Potential for Subdivision | 7/20/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-55007315E999C6988D9E",
+      "propertyIdentityKey": "SW OF HIGHWAY 62 RICE MIDLAND RD|VIDAL|92280",
+      "listingVariantId": "LISTING-8F42F190C4C990B9921B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-20"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of Highway 62 & Rice Midland Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Vidal",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "5DEBE2F95573681AEA0EDB3BA3E0819B"
+      }
+    },
+    {
+      "candidateId": "DA-20260720-007",
+      "snapshotDate": "2026-07-20",
+      "address": "SW of Pacific Ave and E Telegraph Rd",
+      "city": "Fillmore",
+      "postalCode": "93015",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 78408,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 6",
+      "notes": "6 78,408 SF NFL 0 SF Available Gas: 1.8 Acres of Land Available | SW of Pacific Ave and E Telegraph Rd 1.80 Ac $19.77 Yes Industrial Water: M2 Heavy Industrial Zoning | Fillmore, CA 93015 No $1,550,000 M2 Sewer: 600' Of Frontage On Highway 126 | Electric: 14 Miles To Castaic Junction & 5 Freeway | Kidder Mathews - Jeffrey Crocker 805-653-5147, Bentley McKean 818- | Marketing Flyer 206-7480 Fiber: | New Listing | For Sale 1.8 Acres of Land Available | 7/20/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-1A034317F9F644867352",
+      "propertyIdentityKey": "SW OF PACIFIC AVE AND E TELEGRAPH RD|FILLMORE|93015",
+      "listingVariantId": "LISTING-40F8C5D056980EC8C234",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-20"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of Pacific Ave and E Telegraph Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Fillmore",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9F3F61151CE9DCBDD7EDDCFEE7465B08"
+      }
+    },
+    {
+      "candidateId": "DA-20260720-008",
+      "snapshotDate": "2026-07-20",
+      "address": "W Cienega Ave",
+      "city": "San Dimas",
+      "postalCode": "91773",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 327135,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 14,
+      "sourceRow": "Page 14 AIR Listing 4",
+      "notes": "4 327,135 SF NFL 0 SF Available Gas: Y ±7.51 Acres of Land Available | 914 W Cienega Ave 7.51 Ac TBD Fncd/Pvd Industrial Water: Y Excellent Warehouse Development Opportunity | San Dimas, CA 91773 No TBD No M-1 Sewer: Y Zoned M-1 (Light Manufacturing) | S Lone Hill Ave/W Cienega Ave Electric: Y Clean Phase 1 & 2 | Lee & Associates - Donald Kazanjian 909-373-2929, Todd Launchbaugh | Marketing Flyer Fiber: Immediate Access to 57, 210, 10, & 71 Fwys | 909-373-2911 | Back on Market | 7/20/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-9794B8CB0A062479BD7D",
+      "propertyIdentityKey": "W CIENEGA AVE|SAN DIMAS|91773",
+      "listingVariantId": "LISTING-FE7739E6FD3449522969",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-20"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W Cienega Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "San Dimas",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.84,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "FB5210371BAAC716E30185E998B280A7"
+      }
+    },
+    {
+      "candidateId": "DA-20260720-009",
+      "snapshotDate": "2026-07-20",
+      "address": "1304 E Lomita Blvd",
+      "city": "Wilmington",
+      "postalCode": "90748",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 917809,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 16,
+      "sourceRow": "Page 16 AIR Listing 8",
+      "notes": "8 917,809 SF TBD 0 SF Available Gas: N Sublease Through 7/31/2029 | 1304 E Lomita Blvd 21.07 Ac NFS Yes Industrial Water: Y Flexible ±5–8 AC or Full ±21.07 AC Yard | Wilmington, CA 90748 No NFS No M3 Sewer: Y Ideal for Containers, Equipment, and Fleet Parking | N Watson Ave/E Lomita Blvd Electric: Y Concrete/Dirt Yard; Stack up To Five High | Lee & Associates - Torrance - Joseph Stanko 310-483-8412, Craig | Marketing Flyer 24/7 Security and Inventory System | Poropat 310-965-1777, Garen Ramyan 310-965-1757, Brett Landon 310- Fiber: Office/restroom Access; Top Handlers Available | 768-8800 | New Listing | For Sublease 24/7 Security and Inventory System",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-F9F534BBE4C7AE9732C2",
+      "propertyIdentityKey": "1304 E LOMITA BLVD|WILMINGTON|90748",
+      "listingVariantId": "LISTING-6E702869F89DEC1CB5E3",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-20"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1304 E Lomita Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Wilmington",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "1C357A567CCB5FA3EF30842A9EDFD11B"
+      }
+    },
+    {
+      "candidateId": "DA-20260720-010",
+      "snapshotDate": "2026-07-20",
+      "address": "1304 E Lomita Blvd",
+      "city": "Wilmington",
+      "postalCode": "90748",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 348480,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 16,
+      "sourceRow": "Page 16 AIR Listing 9",
+      "notes": "9 348,480 SF TBD 0 SF Available Gas: N Sublease Through 7/31/2029 | 1304 E Lomita Blvd 8.00 Ac NFS Yes Industrial Water: Y Flexible ±5 – 8 AC or Full ±21.07 AC Yard | Wilmington, CA 90748 No NFS No M3 Sewer: Y Ideal for Containers, Equipment, and Fleet Parking | N Watson Ave/E Lomita Blvd Electric: Y Concrete/dirt Yard; Stack up To Five High | Lee & Associates - Torrance - Joseph Stanko 310-483-8412, Craig | Marketing Flyer 24/7 Security and Inventory System | Poropat 310-965-1777, Garen Ramyan 310-965-1757, Brett Landon 310- Fiber: Office/Restroom Access; Top Handlers Available | 768-8800 | New Listing | For Sublease 24/7 Security and Inventory System",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-F9F534BBE4C7AE9732C2",
+      "propertyIdentityKey": "1304 E LOMITA BLVD|WILMINGTON|90748",
+      "listingVariantId": "LISTING-8DC2E9A827E69DBE0F67",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 917809,
+          "to": 348480
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1304 E Lomita Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Wilmington",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "3B65738DE4E612E296B9E1536C1B253C"
+      }
+    },
+    {
+      "candidateId": "DA-20260720-011",
+      "snapshotDate": "2026-07-20",
+      "address": "1304 E Lomita Blvd",
+      "city": "Wilmington",
+      "postalCode": "90748",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 217800,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 16,
+      "sourceRow": "Page 16 AIR Listing 10",
+      "notes": "10 217,800 SF TBD 0 SF Available Gas: N Sublease Through 7/31/2029 | 1304 E Lomita Blvd 5.00 Ac NFS Yes Industrial Water: Y Flexible ±5–8 AC or Full ±21.07 AC Yard | Wilmington, CA 90748 No NFS No M3 Sewer: Y Ideal for Containers, Equipment, and Fleet Parking | N Watson Ave/E Lomita Blvd Electric: Y Concrete/Dirt Yard; Stack up To Five High | Lee & Associates - Torrance - Joseph Stanko 310-483-8412, Craig | Marketing Flyer 24/7 Security and Inventory System | Poropat 310-965-1777, Garen Ramyan 310-965-1757, Brett Landon 310- Fiber: Office/restroom Access; Top Handlers Available | 768-8800 | New Listing | For Sublease Ideal for Containers, Equipment, and Fleet Parking | 7/20/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-F9F534BBE4C7AE9732C2",
+      "propertyIdentityKey": "1304 E LOMITA BLVD|WILMINGTON|90748",
+      "listingVariantId": "LISTING-FD24B0B41F8EBCEC9430",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 348480,
+          "to": 217800
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1304 E Lomita Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Wilmington",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "F598AD742F599514481022EBAEE7AA0A"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

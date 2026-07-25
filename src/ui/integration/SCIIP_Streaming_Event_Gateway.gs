@@ -1,0 +1,6 @@
+/** SCIIP_OS v7.0 Sprint 8 — normalized, duplicate-safe streaming event ingestion. */
+var SCIIP_STREAMING_EVENT_GATEWAY=(function(){'use strict';var VERSION='v7.0-integration-sprint-8.0',events=[],keys={};
+function reset(){events=[];keys={};}
+function ingest(input){input=input||{};var key=String(input.businessKey||input.eventId||[input.source||'unknown',input.type||'EVENT',input.occurredAt||new Date().toISOString()].join('|'));if(keys[key])return {status:'DUPLICATE_SKIPPED',event:keys[key]};var e={eventId:String(input.eventId||'stream-event-'+(events.length+1)),businessKey:key,source:String(input.source||'unknown'),type:String(input.type||'EVENT'),occurredAt:String(input.occurredAt||new Date().toISOString()),receivedAt:new Date().toISOString(),partition:String(input.partition||input.source||'default'),payload:input.payload||{},sequence:events.length+1};keys[key]=e;events.push(e);return {status:'ACCEPTED',event:e};}
+function batch(items){var out=[];items=items||[];for(var i=0;i<items.length;i++)out.push(ingest(items[i]));return {status:'COMPLETED',accepted:out.filter(function(x){return x.status==='ACCEPTED';}).length,duplicates:out.filter(function(x){return x.status==='DUPLICATE_SKIPPED';}).length,results:out};}
+function list(){return events.slice();} return {VERSION:VERSION,reset:reset,ingest:ingest,batch:batch,list:list};})();

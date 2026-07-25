@@ -1,0 +1,9 @@
+tools/tests/sciip-integration-sprint21-test.js
+.github/workflows/sciip-v7-integration-sprint21.yml
+src/tests/SCIIP_TestingFramework_v7_IntegrationSprint21.gs
+src/applications/enterprise-portfolio-strategy-optimization/SCIIP_Enterprise_Strategy_Workspace.gs
+src/applications/enterprise-portfolio-strategy-optimization/SCIIP_Capital_Allocation_Engine.gs
+src/applications/enterprise-portfolio-strategy-optimization/SCIIP_Scenario_Optimization_Engine.gs
+src/applications/enterprise-portfolio-strategy-optimization/SCIIP_Enterprise_Portfolio_Strategy_Application.gs
+src/applications/enterprise-portfolio-strategy-optimization/SCIIP_Enterprise_Risk_Aggregation_Engine.gs
+src/applications/enterprise-portfolio-strategy-optimization/SCIIP_Portfolio_Strategy_Engine.gs

@@ -1,0 +1,33 @@
+{
+  "framework": "SCIIP_V8_SPRINT15_ENTERPRISE_INTEGRATION_HUB_CONNECTORS_APIS_WEBHOOKS_SYNCHRONIZATION_GOVERNANCE",
+  "version": "v8.0-sprint15.0",
+  "publicCertification": "sciipTestV8Sprint15EnterpriseIntegrationHubConnectorsApisWebhooksSynchronizationGovernance",
+  "preferredCompiledTarget": "dist/apps-script/11_other_001.gs",
+  "workspace": "enterprise-integration-hub",
+  "capabilities": [
+    "enterprise-connector-registry",
+    "integration-orchestration",
+    "api-governance",
+    "webhook-management",
+    "schema-and-contract-validation",
+    "credential-governance",
+    "event-driven-synchronization",
+    "incremental-sync",
+    "idempotent-processing",
+    "replay-and-recovery",
+    "dead-letter-management",
+    "integration-observability",
+    "service-health-monitoring",
+    "cross-workspace-context"
+  ],
+  "governance": {
+    "appendOnly": true,
+    "provenanceRequired": true,
+    "evidenceRequired": true,
+    "denyByDefault": true,
+    "idempotencyRequired": true,
+    "replaySafe": true,
+    "credentialLeastPrivilege": true,
+    "destructiveActionsEnabledByDefault": false
+  }
+}

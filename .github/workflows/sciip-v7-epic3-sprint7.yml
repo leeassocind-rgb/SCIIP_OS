@@ -1,0 +1,20 @@
+name: SCIIP v7 Epic 3 Sprint 7
+on:
+  push:
+    paths:
+      - 'src/applications/relationship-intelligence/**'
+      - 'tools/tests/sciip-epic3-sprint7-test.js'
+      - 'manifests/SCIIP_V7_EPIC3_SPRINT7_ENTERPRISE_RELATIONSHIP_GRAPH.json'
+  pull_request:
+    paths:
+      - 'src/applications/relationship-intelligence/**'
+      - 'tools/tests/sciip-epic3-sprint7-test.js'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node tools/tests/sciip-epic3-sprint7-test.js

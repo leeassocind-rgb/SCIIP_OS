@@ -1,0 +1,13 @@
+{
+  "framework": "SCIIP_V8_7_SUPERSHEET_SEMANTIC_INTELLIGENCE",
+  "version": "v8.7.0",
+  "status": "VALIDATION_READY",
+  "capabilities": [
+    "context-aware numeric extraction",
+    "per-field confidence",
+    "intentional multi-index classification",
+    "true duplicate candidate isolation",
+    "independent corpus gate",
+    "zero-write governance"
+  ]
+}

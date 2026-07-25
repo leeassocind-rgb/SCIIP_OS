@@ -1,0 +1,7 @@
+{
+  "version":"v7.0-alpha.1",
+  "requiredKpis":4,
+  "requiredCertifiedDomains":12,
+  "requiredBindings":["SCIIP_API","SCIIP_STORAGE_BACKEND","SCIIP_SERVICE_CONTAINER"],
+  "processorsAdded":0
+}

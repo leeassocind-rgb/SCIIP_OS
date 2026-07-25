@@ -1,0 +1,80 @@
+{
+  "framework": "SCIIP_V8_6_SUPERSHEET_PRODUCTION_ACCEPTANCE",
+  "version": "v8.6.0",
+  "generatedAt": "2026-07-23T16:42:01.073Z",
+  "status": "CONDITIONAL_PASS_EXTERNAL_CORPUS_REQUIRED",
+  "internalAcceptance": "PASSED",
+  "externalCorpus": {
+    "provided": false,
+    "status": "REQUIRED_BEFORE_PRODUCTION_COMMIT"
+  },
+  "internalGates": [
+    {
+      "name": "V8_5_CERTIFICATION",
+      "passed": true,
+      "actual": "PASSED",
+      "required": "PASSED"
+    },
+    {
+      "name": "ACCEPTED_OBSERVATIONS",
+      "passed": true,
+      "actual": 2582,
+      "minimum": 2582
+    },
+    {
+      "name": "EXCEPTION_RATE",
+      "passed": true,
+      "actual": 1.34,
+      "maximum": 1.34
+    },
+    {
+      "name": "EXCEPTION_CLASSIFICATION_COMPLETE",
+      "passed": true,
+      "actual": 35,
+      "expected": 35
+    },
+    {
+      "name": "TIMELINES_COMPLETE",
+      "passed": true,
+      "actual": 2222,
+      "expected": 2222
+    },
+    {
+      "name": "CRITICAL_SEMANTIC_FINDINGS",
+      "passed": true,
+      "actual": 0,
+      "maximum": 0
+    },
+    {
+      "name": "EVIDENCE_LINEAGE",
+      "passed": true,
+      "actual": 2582,
+      "expected": 2582
+    },
+    {
+      "name": "PRODUCTION_WRITES_DISABLED",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    }
+  ],
+  "semanticSummary": {
+    "observationsEvaluated": 2582,
+    "findings": 679,
+    "severity": {
+      "HIGH": 443,
+      "MEDIUM": 236
+    },
+    "rules": {
+      "POWER_RANGE": 98,
+      "CLEAR_HEIGHT_RANGE": 345,
+      "DUPLICATE_LISTING_SAME_EDITION": 236
+    }
+  },
+  "governance": {
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "stewardApprovalRequired": true,
+    "externalCorpusCertificationRequired": true
+  }
+}

@@ -1,0 +1,17 @@
+name: SCIIP v7 Integration Sprint 1 Context Continuity
+on:
+  push:
+    branches: [v7.0-sciip-desktop]
+  pull_request:
+    branches: [v7.0-sciip-desktop]
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm run certification:integration-sprint1-context-continuity
+      - run: npm run deployment:compile
+      - run: npm run architecture:governance

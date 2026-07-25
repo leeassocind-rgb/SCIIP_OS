@@ -1,0 +1,17 @@
+{
+  "framework": "SCIIP_V8_10_TEMPORAL_KNOWLEDGE_GRAPH",
+  "version": "v8.10.0",
+  "status": "READY_TO_INSTALL",
+  "outputs": [
+    "SCIIP_V8_10_TEMPORAL_KNOWLEDGE_GRAPH.json",
+    "SCIIP_V8_10_LISTING_TIMELINES.json",
+    "SCIIP_V8_10_TEMPORAL_CHANGE_LEDGER.json",
+    "SCIIP_V8_10_TEMPORAL_STEWARD_REVIEW.json",
+    "SCIIP_V8_10_TEMPORAL_KNOWLEDGE_GRAPH_CERTIFICATION.json"
+  ],
+  "governance": {
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "independentCorpusCertificationRequired": true
+  }
+}

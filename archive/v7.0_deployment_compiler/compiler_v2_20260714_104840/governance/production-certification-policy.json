@@ -1,0 +1,45 @@
+{
+  "version": "v6.1-phase7b",
+  "profiles": {
+    "foundation": {
+      "requiredDomains": [
+        "runtime",
+        "storage",
+        "gis",
+        "knowledgeGraph",
+        "ai",
+        "identity",
+        "security",
+        "deployment"
+      ],
+      "deferredDomains": [
+        "ui",
+        "api",
+        "performance",
+        "recovery"
+      ]
+    },
+    "production": {
+      "requiredDomains": [
+        "runtime",
+        "storage",
+        "gis",
+        "knowledgeGraph",
+        "ai",
+        "identity",
+        "ui",
+        "api",
+        "security",
+        "deployment",
+        "performance",
+        "recovery"
+      ],
+      "deferredDomains": []
+    }
+  },
+  "secretPatterns": [
+    "-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----",
+    "AIza[0-9A-Za-z\\-_]{35}",
+    "(?i)(password|secret|api[_-]?key)\\s*[:=]\\s*[\"'][^\"']{8,}[\"']"
+  ]
+}

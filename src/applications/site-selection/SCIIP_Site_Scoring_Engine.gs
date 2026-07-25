@@ -1,0 +1,4 @@
+/** SCIIP_OS v7.0 Sprint 11 — explainable weighted site scoring. */
+var SCIIP_SITE_SCORING_ENGINE=(function(){'use strict';var VERSION='v7.0-integration-sprint-11.0';function cap(v){v=Number(v||0);return Math.max(0,Math.min(100,v));}
+function evaluate(c,r){var cost=r.maximumOccupancyCost===Infinity?70:cap(100-(c.occupancyCost/Math.max(1,r.maximumOccupancyCost))*100),power=cap((c.powerAmps/Math.max(1,r.minimumPowerAmps||c.powerAmps||1))*100),components={power:power,labor:cap(c.laborScore),logistics:cap(c.logisticsScore),cost:cost,building:cap(c.buildingScore),risk:cap(100-c.riskScore)},score=0,k;for(k in components)score+=components[k]*(r.weights[k]||0)/100;score=Math.round(score*100)/100;return {candidateId:c.id,score:score,components:components,explanation:Object.keys(components).map(function(x){return {criterion:x,score:components[x],weight:r.weights[x],contribution:Math.round(components[x]*r.weights[x])/100};})};}
+return {VERSION:VERSION,evaluate:evaluate};})();

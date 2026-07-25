@@ -1,0 +1,4 @@
+/** SCIIP_OS v7.0 Sprint 12 — expansion and relocation signal scoring. */
+var SCIIP_EXPANSION_SIGNAL_ENGINE=(function(){'use strict';var VERSION='v7.0-integration-sprint-12.0',weights={FUNDING:24,HIRING:18,FACILITY_SEARCH:30,CONTRACT_AWARD:18,LEASE_EXPIRATION:25,PRODUCTION_GROWTH:20,MARKET_ENTRY:22};
+function evaluate(prospect){var total=Math.max(0,Math.min(100,Number(prospect.growthScore||0)*0.35)),reasons=[];(prospect.signals||[]).forEach(function(s){var type=String(s.type||s).toUpperCase(),confidence=s.confidence==null?1:Number(s.confidence);var impact=(weights[type]||8)*Math.max(0,Math.min(1,confidence));total+=impact;reasons.push({type:type,impact:Math.round(impact*100)/100,evidence:s.evidence||''});});total=Math.round(Math.min(100,total)*100)/100;return {prospectId:prospect.id,signalScore:total,priority:total>=75?'IMMEDIATE':total>=50?'HIGH':total>=25?'MONITOR':'LOW',reasons:reasons};}
+return {VERSION:VERSION,evaluate:evaluate};})();

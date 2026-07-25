@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root{font-family:Inter,Arial,sans-serif;color:#15202b;background:#f5f7fa}*{box-sizing:border-box}body{margin:0}.shell{display:grid;grid-template-columns:260px 1fr;min-height:100vh}.nav{background:#111827;color:#fff;padding:24px}.brand{font-weight:800;font-size:20px}.nav p{opacity:.65}.main{padding:28px}.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}.status{padding:7px 11px;border-radius:999px;background:#e8eef6;font-size:12px;font-weight:700}.card{background:#fff;border:1px solid #dde3ea;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 6px 18px rgba(15,23,42,.04)}.drop{border:2px dashed #9aa9bb;border-radius:12px;padding:38px;text-align:center}.button{border:0;border-radius:8px;padding:11px 16px;background:#1f4f7a;color:#fff;font-weight:700;cursor:pointer}.button.secondary{background:#e9eef4;color:#233548}.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:18px 0}.step{padding:10px;border-radius:8px;background:#e9eef4;font-size:12px;text-align:center}.step.active{background:#1f4f7a;color:#fff}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.metric{font-size:28px;font-weight:800}.mapping{width:100%;border-collapse:collapse}.mapping th,.mapping td{padding:10px;border-bottom:1px solid #e5e9ef;text-align:left;font-size:13px}.tag{padding:4px 8px;border-radius:999px;background:#eef3f8;font-size:11px;font-weight:700}.warning{background:#fff7df;border-color:#f1d38a}.footer{display:flex;justify-content:flex-end;gap:8px}@media(max-width:900px){.shell{grid-template-columns:1fr}.nav{display:none}.grid{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <aside class="nav"><div class="brand">SCIIP_OS</div><p>Enterprise Web Application</p><hr><strong>Data Sources</strong><p>Review Queue</p><p>Properties</p><p>Companies</p><p>GIS</p><p>Knowledge Graph</p></aside>
+  <main class="main">
+    <div class="header"><div><h1>Data Sources</h1><div>Upload and prepare Supersheets for governed ingestion.</div></div><span class="status">SPRINT 2</span></div>
+    <div class="steps"><div class="step active">1 Upload</div><div class="step active">2 Recognize</div><div class="step active">3 Detect</div><div class="step active">4 Map</div><div class="step active">5 Validate</div><div class="step">6 Review</div></div>
+    <section class="card drop"><h2>Drop a Supersheet here</h2><p>XLSX, CSV, or Google Sheet</p><button class="button">Choose file</button></section>
+    <div class="grid"><section class="card"><div class="metric">240</div><div>Rows discovered</div></section><section class="card"><div class="metric">91.7%</div><div>Mapping coverage</div></section></div>
+    <section class="card"><h2>Column mapping</h2><table class="mapping"><tr><th>Source</th><th>Canonical field</th><th>Confidence</th><th>Status</th></tr><tr><td>Address</td><td>address</td><td>100%</td><td><span class="tag">AUTO-MAPPED</span></td></tr><tr><td>Available SF</td><td>available_sf</td><td>100%</td><td><span class="tag">AUTO-MAPPED</span></td></tr><tr><td>Broker Notes</td><td>—</td><td>0%</td><td><span class="tag">REVIEW</span></td></tr></table></section>
+    <section class="card warning"><strong>Human review required.</strong><p>Commit remains blocked until mapping and validation review are approved.</p></section>
+    <div class="footer"><button class="button secondary">Save draft</button><button class="button">Continue to review</button></div>
+  </main>
+</div>
+</body>
+</html>

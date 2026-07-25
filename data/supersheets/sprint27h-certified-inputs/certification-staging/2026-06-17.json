@@ -1,0 +1,1728 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-17",
+  "summary": {
+    "observations": 15,
+    "reviewRequired": 0,
+    "blocked": 0,
+    "lineageComplete": 15
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+    "sourceSha256": "e57cdb613cfe05dc9796292d4df6f6ffd0d80e3a744423e29f615fa3cf8e732d",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260617-001",
+      "snapshotDate": "2026-06-17",
+      "address": "7261 E Slauson Ave",
+      "city": "Commerce",
+      "postalCode": "90040",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 107894,
+      "buildingSf": 128833,
+      "officeSf": 6498,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 1",
+      "notes": "1 107,894 SF TBD 11/1 Existing 24' | Multi-Tenant Building | 7261 E Slauson Ave No NFS Yes Available 400 | Major Street Frontage / Direct 5 Freeway Access | Commerce, CA 90040 6,498 SF 128,833 SF Fncd/Pvd 11 Dock High Positions / 1 Ground Level Via Ramp | 01/01/2027 0.5:1/55 | Marketing Flyer 24' Clearance / Concrete Apron / .45/3000 Sprinklers | Newmark - Los Angeles - South Bay - Jeff Sanita 310-491-2003, John McMillan 310- Shared Fenced & Secured Yard | 491-2048, Andrew Conroy 310-491-2085 | New Listing Shared Fenced & Secured Yard | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-3DAC5533014CFB0D1AFE",
+      "propertyIdentityKey": "7261 E SLAUSON AVE|COMMERCE|90040",
+      "listingVariantId": "LISTING-563DE91EEE916EEB18DC",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "11 Dock High Positions / 1 Ground Level Via Ramp"
+        ],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "7261 E Slauson Ave",
+          "changed": true,
+          "removedText": "Major Street Frontage / Direct 5 Freeway Access",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Commerce",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Commerce"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "701FBE4A61C5E7B621AA15A92DF6C948"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-002",
+      "snapshotDate": "2026-06-17",
+      "address": "5928 S Malt Ave",
+      "city": "Commerce",
+      "postalCode": "90040",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 66967,
+      "buildingSf": 157252,
+      "officeSf": 6617,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 2",
+      "notes": "2 66,967 SF NFL 5/3 Existing 16' - 36' Highly Desirable City of Commerce Location | 5928 S Malt Ave No $223.17 Yes Available 3000 Excellent Development Site | Commerce, CA 90040 6,617 SF 66,967 SF Fncd/Pvd COE 0.9:1/60 ±66,967 SF Facility/±157,252 SF Rectangular Parcel | Marketing Flyer M-2 Zoning/ 16'-36' Ceiling Clearance | Newmark - Ontario - Johnson Chien, SIOR, CCIM 626-255-5280, Rick Sheckter 818- Dock High Loading/Potential Rail Service | 601-7511 Easy Access to the 5 and 710 Freeways | New Listing Excellent Development Site | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-9401B99CCC5219CD9098",
+      "propertyIdentityKey": "5928 S MALT AVE|COMMERCE|90040",
+      "listingVariantId": "LISTING-7217ABBB8F2F839F6E50",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "5928 S Malt Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Commerce",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Commerce"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A62E9FCF893FE40E4830BBBB4E6CAD7D"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-003",
+      "snapshotDate": "2026-06-17",
+      "address": "5928 S Malt Ave",
+      "city": "Commerce",
+      "postalCode": "90040",
+      "region": "LA Central",
+      "propertyType": "Land",
+      "availableSf": 157252,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 2,
+      "sourceRow": "Page 2 AIR Listing 7",
+      "notes": "7 157,252 SF NFL 66,967 SF Available Gas: Highly Desirable City of Commerce Location | 5928 S Malt Ave 3.61 Ac $95.04 Fncd/Pvd Industrial Water: Y Excellent Development Site | Commerce, CA 90040 No $14,945,230 Possible M2 Sewer: Y Adjacent to Newer Developments | S Malt Ave/ E Slauson Ave Electric: Y M-2 Zoning/Ideal Rectangular Parcel | Newmark - Ontario - Johnson Chien, SIOR, CCIM 626-255-5280, Rick | Marketing Flyer Fiber: Potential Rail Service | Sheckter 818-601-7511 Easy Access to the 5 and 710 Freeways | New Listing | For Sale M-2 Zoning/Ideal Rectangular Parcel",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-9401B99CCC5219CD9098",
+      "propertyIdentityKey": "5928 S MALT AVE|COMMERCE|90040",
+      "listingVariantId": "LISTING-85C7050C17E73CD09257",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 66967,
+          "to": 157252
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "5928 S Malt Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Commerce",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Commerce"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A3C9075794BD6E411078E3EB2770EE16"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-004",
+      "snapshotDate": "2026-06-17",
+      "address": "615-672 N Spring St",
+      "city": "Los Angeles",
+      "postalCode": "90012",
+      "region": "LA Central",
+      "propertyType": "Land",
+      "availableSf": 82082,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "Sale Comp",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 2,
+      "sourceRow": "Page 2 AIR Listing 8",
+      "notes": "8 82,082 SF NFL 56,914 SF Sold Gas: 82,082 SF SF of Land | 615-672 N Spring St & 638-648 New 1.88 Ac $174.83 Yes Industrial Water: Seven (7) Buildings Totaling 56,914 SF | High St | Los (Portfolio) | Angeles, CA 90012 No $14,350,000 No C2 Sewer: Zoning: [DM2-G1-5] [CX2-FA] [CPIO] | N Spring St/Ord St Electric: Located in Los Angeles State Enterprise Zone | Kidder Mathews - John Anthony 213-225-7218, Chris Steck 213-255- | Marketing Flyer Fiber: Historic Cultural North Neighborhood Council | 7231, Peter Beauchamp 949-557-5010 | Sold | Research in Progress | 6/17/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-C0AE7D47F58182024105",
+      "propertyIdentityKey": "615 672 N SPRING ST|LOS ANGELES|90012",
+      "listingVariantId": "LISTING-1898E627555D40DD95BB",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "615-672 N Spring St",
+          "changed": true,
+          "removedText": "& 638-648 New High St",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Los Angeles",
+          "changed": true,
+          "method": "zip-reconstruction",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "BA88A1ED23CA4DCC47569758444E1D6F"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-005",
+      "snapshotDate": "2026-06-17",
+      "address": "15928 Commerce Wy",
+      "city": "Cerritos",
+      "postalCode": "90703",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 163290,
+      "buildingSf": 163290,
+      "officeSf": 5000,
+      "askingRate": 1.35,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 1",
+      "notes": "1 163,290 SF $1.35 G 31/1 Existing 24' Sublease Through 1/31/2029 | 15928 Commerce Wy No NFS Yes Available 400 Flexible Term & Size | Cerritos, CA 90703 5,000 SF 163,290 SF Paved 30 Days 0.8:1/129 Great Mid-Counties Location | Marketing Flyer Free Standing w/ 31 DH | Colliers - El Segundo - Chuck Littell, SIOR 310-321-1838, Cole Cervantes 310-321- Recently Refurbished | 1815 Prologis Master Landlord | New Listing Flexible Term & Size | For Sublease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-490D20F5A3A7DE44A0E5",
+      "propertyIdentityKey": "15928 COMMERCE WY|CERRITOS|90703",
+      "listingVariantId": "LISTING-84CCF3DAFD62DCD0F9AC",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "31 DH"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "15928 Commerce Wy",
+          "changed": false,
+          "removedText": null,
+          "method": "unchanged"
+        },
+        "city": {
+          "value": "Cerritos",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Cerritos"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.98,
+          "parts": {
+            "addressValidity": 0.16,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "5D10FA5D1439B4A493844E78387B218D"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-006",
+      "snapshotDate": "2026-06-17",
+      "address": "1241 Old Temescal Rd, Unit 103",
+      "city": "Corona",
+      "postalCode": "92881",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 87248,
+      "buildingSf": 206024,
+      "officeSf": 10752,
+      "askingRate": 1.1,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 2",
+      "notes": "2 87,248 SF $1.10 G 13/1 Existing 30' | Excellent Warehouse/Distribution Space | 1241 Old Temescal Rd, Unit 103 Yes NFS Yes Leased 800 | Offices Can Be Reduced By 5,376 SF | Corona, CA 92881 10,752 SF 206,024 SF Fncd/Pvd 13 Dock High Loading Positions | Now 1.1:1/100 | Marketing Flyer Large Private Fenced Yard | Inco Commercial Brokerage - Kevin Romano 714-521-0800, Joseph Maiolo 714-521- .60/3,000 GPM Fire Sprinklers - ESFR (K25 Heads) in a Portion | 0800, Brandon Courtney 714-726-4578 Convenient Access to 15, 71 and 91 Freeways | Leased Co-Op: Reid Wilbraham and Berit McLaughlin (CBRE)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-C7EF2B812E1C4474B0A4",
+      "propertyIdentityKey": "1241 OLD TEMESCAL RD UNIT 103|CORONA|92881",
+      "listingVariantId": "LISTING-65805FF7D7EB8849B99B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "13 Dock High Loading Positions"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1241 Old Temescal Rd, Unit 103",
+          "changed": true,
+          "removedText": "Offices Can Be Reduced By 5,376 SF",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Corona",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "6A73DFBEE016CFDEE8623B341A7F8F24"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-007",
+      "snapshotDate": "2026-06-17",
+      "address": "15928 Commerce Wy",
+      "city": "Cerritos",
+      "postalCode": "90703",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 71247,
+      "buildingSf": 163290,
+      "officeSf": null,
+      "askingRate": 1.05,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 3",
+      "notes": "3 71,247 SF $1.05 G 16/1 Existing 24' Sublease Through 1/21/2029 | 15928 Commerce Wy Yes NFS Yes Available 400 Super Cheap Dead Storage | Cerritos, CA 90703 TBD 163,290 SF Paved Now 1.1:1/80 Flexible Term & Size | Marketing Flyer Great Mid-Counties Location | Colliers - El Segundo - Chuck Littell, SIOR 310-321-1838, Cole Cervantes 310-321- Office I Restrooms in Main Office Possible | 1815 Prologis Master Landlord | New Listing Great Mid-Counties Location | For Sublease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-490D20F5A3A7DE44A0E5",
+      "propertyIdentityKey": "15928 COMMERCE WY|CERRITOS|90703",
+      "listingVariantId": "LISTING-D2F4A38828B328F095A0",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 163290,
+          "to": 71247
+        },
+        {
+          "type": "ASKING_RATE_CHANGED",
+          "field": "askingRate",
+          "from": 1.35,
+          "to": 1.05
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "15928 Commerce Wy",
+          "changed": false,
+          "removedText": null,
+          "method": "unchanged"
+        },
+        "city": {
+          "value": "Cerritos",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Cerritos"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.98,
+          "parts": {
+            "addressValidity": 0.16,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "57068AC12FD6C5D31FB3D1ADCCC54044"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-008",
+      "snapshotDate": "2026-06-17",
+      "address": "1656 S Cucamonga Ave",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 210703,
+      "buildingSf": 210703,
+      "officeSf": 5037,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 1",
+      "notes": "1 South Cucamonga Distribution Center 210,703 SF TBD 23/2 Existing 40' Free Standing Building | 1656 S Cucamonga Ave No NFS ESFR Available 2000 23 DH Loading Doors | Ontario, CA 91761 5,037 SF 210,703 SF Yes 03/01/2027 2 GL Loading Doors | Marketing Flyer 2,000 Amps Power | CBRE - Nicholas Chang 909-418-2014, Richard Lee 909-418-2010, Sione Fua 909- 40' Clear Height | 418-2007, Justin Kuehn 909-418-2013 ESFR Sprinklered | New Listing 23 DH Loading Doors | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-9F561D5CBEC6F94CB87A",
+      "propertyIdentityKey": "1656 S CUCAMONGA AVE|ONTARIO|91761",
+      "listingVariantId": "LISTING-339BE061F5049168F902",
+      "structuredNotes": {
+        "power": [
+          "000 Amps Power"
+        ],
+        "loading": [
+          "23 DH Loading Doors",
+          "2 GL Loading Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1656 S Cucamonga Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "974073B9CA6AD71322C29E9546A50793"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-009",
+      "snapshotDate": "2026-06-17",
+      "address": "8247 Lime Ave",
+      "city": "Fontana",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 243718,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Marketing Event",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 10",
+      "notes": "10 243,718 SF TBD 12,500 SF Available Gas: N ±5.595 Acres Available | 8247 Lime Ave 5.59 Ac NFS Fncd/Pvd Industrial Water: Concrete & Decomposed Granite Yard | Fontana, CA 92335 No NFS No IR/CS Sewer: Excellent Trailer Parking Potential | = | Foothill Blvd/Lime Ave Electric: Up to ±127 Trailer Parking Spaces | JLL - Sharon Wortmann 909-467-6861, Mac Hewett 909-467-6902, | Marketing Flyer Fiber: ±12,500 SF Building | Hunter McDonald 909-467-6873 Fully Energized & Ready For Immediate Occupancy | Open House | June 18th Catered Lunch, Mocktails, Goodie Bags and Cash Giveaways for All Who Attend! | 11:30am - 1:30pm RSVP to Cristy.Faber@jll.com and Sharon.Vasquez@jll.com",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "MARKETING_EVENT",
+      "propertyIdentityId": "PROP-9A4FDC5669EE2E242331",
+      "propertyIdentityKey": "8247 LIME AVE|FONTANA|92335",
+      "listingVariantId": "LISTING-6A41358D0542C2B03126",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [],
+      "semanticNormalization": {
+        "address": {
+          "value": "8247 Lime Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Fontana"
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "MARKETING_EVENT",
+        "normalizedEventLabel": "Marketing Event",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "B227DD5047B4E2EC27700C87CFF681F7"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-010",
+      "snapshotDate": "2026-06-17",
+      "address": "1391 Spruce St",
+      "city": "Riverside",
+      "postalCode": "92507",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 111078,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 11",
+      "notes": "11 111,078 SF TBD 25,000 SF Available Gas: Corporate HQ Facility w/Outdoor Storage | 1391 Spruce St 2.55 Ac NFS Fncd/Pvd Industrial Water: 1,250 SF of Office Space | Riverside, CA 92507 No NFS No MP Sewer: Distributed Electrical & Air Lines Throughout Warehouse | Iowa Ave/Spruce St Fully Paved & Gated Yard w/Automatic Gate Openers | Lee & Associates - Ryan Turnquist 951-276-3680, Mathew Skogebo 951- Electric: | Marketing Flyer Fiber: 18 Ground Level Doors | 276-3646 Close Proximity to 91, 60, & 215 Fwys | New Listing | For Lease Corporate HQ Facility w/Outdoor Storage | 6/17/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-6E7BC2AA282EBCDAD514",
+      "propertyIdentityKey": "1391 SPRUCE ST|RIVERSIDE|92507",
+      "listingVariantId": "LISTING-66C56E7BB5D538438564",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "18 Ground Level Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "1,250 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1391 Spruce St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Riverside",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Riverside"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "89597BD5369601DBD867023AFE9F540E"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-011",
+      "snapshotDate": "2026-06-17",
+      "address": "NE of N Perris Blvd and Ramona Expy",
+      "city": "Perris",
+      "postalCode": "92571",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 69260,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 12",
+      "notes": "12 69,260 SF NFL 0 SF Available Gas: 1.59 Acres of Land | NE of N Perris Blvd and Ramona Expy 1.59 Ac TBD Yes Retail Water: Drive-Thru or Sit-Down Restaurants, Retail, Medical, or Office Uses | Perris, CA 92571 No TBD No CC Sewer: Underserved Trade Area w/Large Daytime Population= | Electric: Motivated Seller | AREAS - Jay Brun 951-816-9626 | Marketing Flyer Fiber: | Updated Information | Motivated Seller",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-2F903484460AC9F08255",
+      "propertyIdentityKey": "NE OF N PERRIS BLVD AND RAMONA EXPY|PERRIS|92571",
+      "listingVariantId": "LISTING-3DE0E74C83A90152279C",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NE of N Perris Blvd and Ramona Expy",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Perris",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Perris"
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "ADDF0B3A293E558A5EB8CF891B380275"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-012",
+      "snapshotDate": "2026-06-17",
+      "address": "NW of Challenger Wy and E Avenue M",
+      "city": "Lancaster",
+      "postalCode": "93535",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 167706,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 3",
+      "notes": "3 167,706 SF NFL 0 SF Available Gas: 3.85 Acres of Land | NW of Challenger Wy and E Avenue M 3.85 Ac $4.76 Yes Industrial Water: Heavy Industrial Zoned | Lancaster, CA 93535 No $799,000 HI Sewer: Multiple Access Points | Challenger Wy/E Avenue M Flat Developable Land | Lee & Associates - Mathew Skogebo 951-276-3646, Ryan Turnquist 951- Electric: | Fiber: Great Access to 138 Fwy | 276-3680 | New Listing | For Sale 3.85 Acres of Land",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-146ADB6E50B7375982E7",
+      "propertyIdentityKey": "NW OF CHALLENGER WY AND E AVENUE M|LANCASTER|93535",
+      "listingVariantId": "LISTING-36FE153E32D91B60F6A1",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Challenger Wy and E Avenue M",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Lancaster",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Lancaster"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "8AB776DA103A0ED45CB7E033E6536CC2"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-013",
+      "snapshotDate": "2026-06-17",
+      "address": "2222 Rosemead Blvd",
+      "city": "South El Monte",
+      "postalCode": "91733",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 156877,
+      "buildingSf": 28184,
+      "officeSf": 28184,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 1",
+      "notes": "1 Rockland Business Park 156,877 SF TBD 13/1 U/C 42' Construction Now Underway, Q2' 2027 Delivery | 2222 Rosemead Blvd N/A NFS Available 4000 42' Ceilings /13 DH / 4,000 Amps | South El Monte, CA 91733 28,184 SF 156,877 SF Fncd/Pvd Completion 1.1:1/176 28,184 SF of Office Space / Fenced Yard | Marketing Flyer Major Street Frontage on Rosemead Blvd | Newmark - Mark Repstad 213-453-1155, Rob Castro 657-532-8400 Prime West SGV Location | New Listing 28,184 SF of Office Space / Fenced Yard | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-B0A026876B7D43ED0153",
+      "propertyIdentityKey": "2222 ROSEMEAD BLVD|SOUTH EL MONTE|91733",
+      "listingVariantId": "LISTING-826070554DE7B0F50AF0",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [
+          "13 DH / 4"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [
+          "28,184 SF of Office Space"
+        ],
+        "construction": [
+          "U/C 42' Construction Now Underway"
+        ]
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2222 Rosemead Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "South El Monte",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "South El Monte"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "BF4CAC79971F22FC7002C6B825C4C948"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-014",
+      "snapshotDate": "2026-06-17",
+      "address": "2222 Rosemead Blvd",
+      "city": "South El Monte",
+      "postalCode": "91733",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 148998,
+      "buildingSf": 20305,
+      "officeSf": 20305,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 2",
+      "notes": "2 Rockland Business Park 148,998 SF TBD 13/1 U/C 42' Construction Now Underway, Q2' 2027 Delivery | 2222 Rosemead Blvd N/A NFS Available 4000 42' Ceilings /13 DH / 4,000 Amps | South El Monte, CA 91733 20,305 SF 156,877 SF Fncd/Pvd Completion 1.2:1/176 20,305 SF of Office Space / Fenced Yard | Marketing Flyer Major Street Frontage on Rosemead Blvd | Newmark - Mark Repstad 213-453-1155, Rob Castro 657-532-8400 Prime West SGV Location | New Listing 20,305 SF of Office Space / Fenced Yard | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-B0A026876B7D43ED0153",
+      "propertyIdentityKey": "2222 ROSEMEAD BLVD|SOUTH EL MONTE|91733",
+      "listingVariantId": "LISTING-FB35DA7C8F8904319230",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [
+          "13 DH / 4"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [
+          "20,305 SF of Office Space"
+        ],
+        "construction": [
+          "U/C 42' Construction Now Underway"
+        ]
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 156877,
+          "to": 148998
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2222 Rosemead Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "South El Monte",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "South El Monte"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "5E870293EA02860428D3B0AF32485CF5"
+      }
+    },
+    {
+      "candidateId": "DA-20260617-015",
+      "snapshotDate": "2026-06-17",
+      "address": "2222 Rosemead Blvd",
+      "city": "South El Monte",
+      "postalCode": "91733",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 139514,
+      "buildingSf": 10821,
+      "officeSf": 10821,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 3",
+      "notes": "3 Rockland Business Park 139,514 SF TBD 13/1 U/C 42' Construction Now Underway, Q2' 2027 Delivery | 2222 Rosemead Blvd N/A NFS Available 4000 42' Ceilings /13 DH / 4,000 Amps | South El Monte, CA 91733 10,821 SF 156,877 SF Fncd/Pvd Completion 1.3:1/176 10,821 SF of Office Space / Fenced Yard | Marketing Flyer Major Street Frontage on Rosemead Blvd | Newmark - Mark Repstad 213-453-1155, Rob Castro 657-532-8400 Prime West SGV Location | Updated Information Construction Now Underway, Q2' 2027 Delivery",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-B0A026876B7D43ED0153",
+      "propertyIdentityKey": "2222 ROSEMEAD BLVD|SOUTH EL MONTE|91733",
+      "listingVariantId": "LISTING-29FC4BAD20A46E9E6021",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [
+          "13 DH / 4"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [
+          "10,821 SF of Office Space"
+        ],
+        "construction": [
+          "U/C 42' Construction Now Underway",
+          "Construction Now Underway"
+        ]
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 148998,
+          "to": 139514
+        },
+        {
+          "type": "TRANSACTION_TYPE_CHANGED",
+          "field": "transactionType",
+          "from": "For Lease",
+          "to": null
+        },
+        {
+          "type": "EVENT_CHANGED",
+          "field": "eventCode",
+          "from": "NEW_LISTING",
+          "to": "LISTING_UPDATED"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2222 Rosemead Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "South El Monte",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "South El Monte"
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.129Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "5D3189FDF3E7F798C581B5D0E737CD1E"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

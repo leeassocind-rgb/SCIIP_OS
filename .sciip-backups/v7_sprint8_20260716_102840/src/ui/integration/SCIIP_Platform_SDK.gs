@@ -1,0 +1,10 @@
+/** SCIIP_OS v7.0 Sprint 6 — declarative platform SDK. */
+var SCIIP_PLATFORM_SDK=(function(){
+'use strict';var VERSION='v7.0-integration-sprint-6.0';function clone(v){return v==null?v:JSON.parse(JSON.stringify(v));}function list(v){return (v||[]).map(String);}
+function define(spec){spec=spec||{};if(!spec.id)throw new Error('SDK_CAPABILITY_ID_REQUIRED');var id=String(spec.id),symbol=id.toUpperCase().replace(/[^A-Z0-9]+/g,'_');return {id:id,name:String(spec.name||id),version:String(spec.version||VERSION),dependencies:list(spec.dependencies),services:list(spec.services),queries:list(spec.queries),events:list(spec.events),stateBindings:list(spec.stateBindings),workspaces:list(spec.workspaces),tests:list(spec.tests),liveHandler:String(spec.liveHandler||''),queryHandler:String(spec.queryHandler||''),metadata:{sdkVersion:VERSION,declarative:true,compiler:'v2',processors:false,symbol:symbol}};}
+function generate(spec){var d=define(spec);return {status:'GENERATED',definition:d,artifacts:{serviceSymbol:'SCIIP_'+d.metadata.symbol,queryFunctions:d.queries.map(function(q){return 'query:'+q;}),liveServices:d.services.map(function(s){return 'service:'+s;}),tests:d.tests,documentation:{title:d.name,capabilityId:d.id,dependencies:d.dependencies},deployment:{compiler:'v2',automaticRegistration:true,processorFamily:false}}};}
+function register(spec){var g=generate(spec),r=SCIIP_PLATFORM_REGISTRY.register(g.definition);return {status:r.status==='CONFLICT'?'CONFLICT':'REGISTERED',generation:g,registration:r};}
+function certify(spec){var g=generate(spec),failures=[];if(!g.definition.id)failures.push('id');if(g.definition.metadata.processors!==false)failures.push('processors');if(g.artifacts.deployment.compiler!=='v2')failures.push('compiler');return {status:failures.length?'FAILED':'PASSED',capabilityId:g.definition.id,failures:failures,artifacts:g.artifacts};}
+return {VERSION:VERSION,define:define,generate:generate,register:register,certify:certify};})();
+function sciipPlatformSdkGenerateV7(request){return SCIIP_PLATFORM_SDK.generate(request||{});}
+

@@ -1,0 +1,11 @@
+{
+  "framework": "SCIIP_V8_1_NATIVE_SUPERSHEET_PARSER",
+  "version": "v8.1-native-supersheet-parser.0",
+  "status": "VALIDATION_READY",
+  "pdfExtraction": "JAVASCRIPT_NATIVE",
+  "nodeDependency": "pdf-parse@1.1.1",
+  "externalPdfBinaries": [],
+  "productionWrites": 0,
+  "commitEnabled": false,
+  "candidateEventsOnly": true
+}

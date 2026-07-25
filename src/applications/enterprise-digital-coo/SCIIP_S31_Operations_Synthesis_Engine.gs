@@ -1,0 +1,3 @@
+var SCIIP_S31_OPERATIONS_SYNTHESIS_ENGINE=(function(){'use strict';
+function analyze(input){input=input||{};var domains=input.domains||[];var total=domains.length;var sla=total?Math.round(domains.reduce(function(s,d){return s+Number(d.slaAttainment||0);},0)/total*100)/100:100;var throughput=domains.reduce(function(s,d){return s+Number(d.throughput||0);},0);var bottlenecks=domains.filter(function(d){return Number(d.utilization||0)>90||Number(d.slaAttainment||0)<85;});return {status:bottlenecks.length?'ATTENTION_REQUIRED':'HEALTHY',domains:total,slaAttainment:sla,throughput:throughput,bottlenecks:bottlenecks};}
+return {analyze:analyze};})();

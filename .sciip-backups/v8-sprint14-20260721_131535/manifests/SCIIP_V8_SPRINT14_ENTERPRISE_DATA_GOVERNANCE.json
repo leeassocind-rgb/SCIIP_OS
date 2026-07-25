@@ -1,0 +1,31 @@
+{
+  "framework": "SCIIP_V8_SPRINT14_ENTERPRISE_DATA_GOVERNANCE_MASTER_DATA_QUALITY_LINEAGE_STEWARDSHIP",
+  "version": "v8.0-sprint14.0",
+  "publicCertification": "sciipTestV8Sprint14EnterpriseDataGovernanceMasterDataQualityLineageStewardship",
+  "preferredCompiledTarget": "dist/apps-script/11_other_001.gs",
+  "workspace": "enterprise-data-governance",
+  "capabilities": [
+    "enterprise-data-catalog",
+    "business-glossary",
+    "data-domain-ownership",
+    "master-data-management",
+    "golden-records",
+    "data-quality-rules",
+    "quality-issue-remediation",
+    "end-to-end-lineage",
+    "provenance",
+    "data-classification",
+    "data-contracts",
+    "stewardship-workflows",
+    "access-impact-analysis",
+    "governance-reporting"
+  ],
+  "governance": {
+    "appendOnly": true,
+    "provenanceRequired": true,
+    "evidenceRequired": true,
+    "stewardApprovalRequired": true,
+    "contractEnforcement": true,
+    "destructiveActionsEnabledByDefault": false
+  }
+}

@@ -1,0 +1,2127 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-15",
+  "summary": {
+    "observations": 19,
+    "reviewRequired": 0,
+    "blocked": 0,
+    "lineageComplete": 19
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-15-2026.pdf",
+    "sourceSha256": "274a5be3c8d48f935209a2286b0f74322bdb81a9a8dda1424764d9f58de05bd8",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260615-001",
+      "snapshotDate": "2026-06-15",
+      "address": "9701 Bluff Rd",
+      "city": "Downey",
+      "postalCode": "90240",
+      "region": "LA Central",
+      "propertyType": "Land",
+      "availableSf": 70373,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.6,
+      "askingRateType": "IG",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 2,
+      "sourceRow": "Page 2 AIR Listing 7",
+      "notes": "7 70,373 SF $0.60 IG 0 SF Leased Gas: Large Concrete Fenced Yard | 9701 Bluff Rd 1.62 Ac NFS Fncd/Pvd Industrial Water: Site Approved for Truck Trailer on Chassis Storage | Downey, CA 90240 No NFS No M-1 Sewer: Fully Fenced & Secured | Bluff Rd/Suva St Electric: Y Power Has Been Brought to the Property | JLL - Jon Reno, SIOR, CCIM 213-271-1508, Mark Vanis 213-239-5908, | Marketing Flyer Fiber: Centrally Located & Proximity to 710 and 5 Freeways | Trevor Gale, SIOR 213-239-6256, Patrick Stark 310-251-2925 | Leased | Research in Progress | 6/15/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-AD2D340295D66774D3AB",
+      "propertyIdentityKey": "9701 BLUFF RD|DOWNEY|90240",
+      "listingVariantId": "LISTING-547C61CDA0D33855EA9B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "9701 Bluff Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Downey",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.126Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "C1E0FD265105DE05B2B530ADC57F028A"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-002",
+      "snapshotDate": "2026-06-15",
+      "address": "11488 Slater Ave, Unit AB",
+      "city": "Fountain Valley",
+      "postalCode": "92708",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 110000,
+      "buildingSf": 134000,
+      "officeSf": 0,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 1",
+      "notes": "1 Southpark Business Center 110,000 SF TBD 12/5 Existing Short Term Dead Storage | 11488 Slater Ave, Unit AB Yes NFS ESFR Available In-Place Racks | Fountain Valley, CA 92708 0 SF 134,000 SF No Now ESFR Sprinklers | Dock High and Ground Level Loading | Newmark - Scott Read 949-608-2007 Expandable to 134,000 SF | Long-Term Lease Possible | New Listing | For Lease Short Term Dead Storage",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-AE836B82307EC08A4F67",
+      "propertyIdentityKey": "11488 SLATER AVE UNIT AB|FOUNTAIN VALLEY|92708",
+      "listingVariantId": "LISTING-6365E60CB347B17404AC",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "11488 Slater Ave, Unit AB",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fountain Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.126Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "B867AD975D3FB8482168FA9FA24F4251"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-003",
+      "snapshotDate": "2026-06-15",
+      "address": "14511 Myford Rd",
+      "city": "Tustin",
+      "postalCode": "92780",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 103566,
+      "buildingSf": 103566,
+      "officeSf": 10800,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 2",
+      "notes": "2 103,566 SF TBD 12/2 Planned 36' | Project Demolition Underway | 14511 Myford Rd N/A NFS ESFR Available 8000 | New Class A Construction Delivering Q2 2027 | Tustin, CA 92780 10,800 SF 103,566 SF Possible 8,000 Amps Electrical Service (277/480V-3P-4W) | Completion 0.9:1/90 | Marketing Flyer 135' Concrete Truck Yard w/ ESFR Sprinklers (K-25 Heads) | JLL - Louis Tomaselli 949-885-2985, Nick Carey 949-296-3626, Byron Foss 949-296- 7” Reinforced Floor Slab (4,000 PSI), Roof Ready for Whse HVAC | 3615, Wade Tift 949-296-3605 ±4.99 Acre Site at Signalized Corner of Walnut and Myford | Updated Information Project Demolition Underway",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-4CB73C692C3AB5ECE779",
+      "propertyIdentityKey": "14511 MYFORD RD|TUSTIN|92780",
+      "listingVariantId": "LISTING-13C81D492C8E2BA128AC",
+      "structuredNotes": {
+        "power": [
+          "000 Amps Electrical Service (277/480V-3P-4W)"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14511 Myford Rd",
+          "changed": true,
+          "removedText": "New Class A Construction Delivering Q2 2027",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Tustin",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.126Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "33BFBC4515B3B04E26AA0B5D19336521"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-004",
+      "snapshotDate": "2026-06-15",
+      "address": "11488 Slater Ave, Unit B",
+      "city": "Fountain Valley",
+      "postalCode": "92708",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 65000,
+      "buildingSf": 134000,
+      "officeSf": 0,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 3",
+      "notes": "3 Southpark Business Center 65,000 SF TBD 9/2 Existing Short Term Dead Storage | 11488 Slater Ave, Unit B Yes NFS ESFR Available In-Place Racks | Fountain Valley, CA 92708 0 SF 134,000 SF No Now ESFR Sprinklers | Dock High and Ground Level Loading | Newmark - Scott Read 949-608-2007 Expandable to 134,000 SF | Long-Term Lease Possible | New Listing | For Lease Short Term Dead Storage",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-A6284AA0A81402FB3DB3",
+      "propertyIdentityKey": "11488 SLATER AVE UNIT B|FOUNTAIN VALLEY|92708",
+      "listingVariantId": "LISTING-503D4C20FD9DD6E929FC",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "11488 Slater Ave, Unit B",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fountain Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.126Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "FCA492F33274A7B3C7B64C2F2EB1FF61"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-005",
+      "snapshotDate": "2026-06-15",
+      "address": "14511 Myford Rd, Unit A",
+      "city": "Tustin",
+      "postalCode": "92780",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 60000,
+      "buildingSf": 103566,
+      "officeSf": 5400,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 4",
+      "notes": "4 60,000 SF TBD 6/1 Planned 36' | Project Demolition Underway | 14511 Myford Rd, Unit A N/A NFS ESFR Available 8000 | New Class A Construction Delivering Q2 2027 | Tustin, CA 92780 5,400 SF 103,566 SF Possible 135' Concrete Truck Yard w/ ESFR Sprinklers (K-25 Heads) | Completion 0.9:1/52 | Marketing Flyer 7” Reinforced Floor Slab (4,000 PSI), Roof Ready for Whse HVAC | JLL - Louis Tomaselli 949-885-2985, Nick Carey 949-296-3626, Byron Foss 949-296- ±4.99 Acre Site at Signalized Corner of Walnut and Myford | 3615, Wade Tift 949-296-3605 | Updated Information Project Demolition Underway",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-6C5E6774E076FDC316E1",
+      "propertyIdentityKey": "14511 MYFORD RD UNIT A|TUSTIN|92780",
+      "listingVariantId": "LISTING-D29FA0D2B3B96656F660",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14511 Myford Rd, Unit A",
+          "changed": true,
+          "removedText": "New Class A Construction Delivering Q2 2027",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Tustin",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.126Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9D5A17E9A7A0625EF52D84042B3B8742"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-006",
+      "snapshotDate": "2026-06-15",
+      "address": "5650-B Dolly Ave",
+      "city": "Buena Park",
+      "postalCode": "90621",
+      "region": "Orange County",
+      "propertyType": "Land",
+      "availableSf": 104544,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.46,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 21",
+      "notes": "21 104,544 SF $0.46 G 23,616 SF Available Gas: Rare ±23,616 SF Cross-Dock Facility on 2.4AC= | 5650-B Dolly Ave 2.40 Ac NFS Fncd/Pvd Industrial Water: Transloading / High-Throughput Facility | Buena Park, CA 90621 No NFS No ML Sewer: Fenced & Lit Concrete Yard Area | Dolly Ave/Desman Rd Electric: 37 Docks (36 with Edge-of-Dock Levelers) / 1 Ground Level Ramp | CBRE - Ben Seybold 714-371-9233, Reid Wilbraham 310-709-2690 | Marketing Flyer Fiber: Immediate Freeway Access (5 & 91 Freeways) | ±2,616 SF of Office Space | Updated Information | Major Rate Reduction - $0.46 PLSF For 23k Cross Dock + 2.4AC",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-B8E060534181DEC1247C",
+      "propertyIdentityKey": "5650 B DOLLY AVE|BUENA PARK|90621",
+      "listingVariantId": "LISTING-72E9F3BAB4FC4530A4BE",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "1 Ground Level Ramp"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "2,616 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "5650-B Dolly Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Buena Park",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.126Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "48CCF0A41CDF51E307C6734BB3C7081C"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-007",
+      "snapshotDate": "2026-06-15",
+      "address": "1990 S Cucamonga Ave",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 416713,
+      "buildingSf": 416713,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 1",
+      "notes": "1 416,713 SF TBD 53/2 Existing 30' Free Standing Building | 1990 S Cucamonga Ave No NFS ESFR Available 53 Dock High Doors | Ontario, CA 91761 416,713 SF Yes 11/01/2026 2 Grade Level Doors | 30' Minimum Clearance Height | CBRE - Jay Dick 909-418-2000, Nicholas Chang 909-418-2014, Joey Sugar 909-418- | 2026 | New Listing | For Lease Free Standing Building",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-99CBE4D813804324F42F",
+      "propertyIdentityKey": "1990 S CUCAMONGA AVE|ONTARIO|91761",
+      "listingVariantId": "LISTING-431B11CEAA1DF6339521",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "53 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1990 S Cucamonga Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.126Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "256A819FA998359D02B993B750A53BB9"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-008",
+      "snapshotDate": "2026-06-15",
+      "address": "11450 Philadelphia St",
+      "city": "Jurupa Valley",
+      "postalCode": "91752",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 100000,
+      "buildingSf": 238397,
+      "officeSf": null,
+      "askingRate": 1.3,
+      "askingRateType": "IG",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 2",
+      "notes": "2 Philadelphia Distribution Center 100,000 SF $1.30 IG TBD/TBD Existing 30' Sublease Through 3/31/2027 | 11450 Philadelphia St No NFS Yes Available 400 30' Clear Height | Jurupa Valley, CA 91752 238,397 SF Fncd/Pvd 30 Days Racking and Docks Are Available | 400 Amps, 277-480 Volts, 3 Phase | Capital Bay, Inc. - Charlie Ren 949-394-6858 Divisible by 40,000 SF | New Listing | For Sublease Racking and Docks Are Available",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-E2ADBD5234D03251C1A7",
+      "propertyIdentityKey": "11450 PHILADELPHIA ST|JURUPA VALLEY|91752",
+      "listingVariantId": "LISTING-AD754C4A5FE6E42A9979",
+      "structuredNotes": {
+        "power": [
+          "400 Amps"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "11450 Philadelphia St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Jurupa Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Jurupa Valley"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.126Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "B26A23B6E16E88B8CD2EE802B522E720"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-009",
+      "snapshotDate": "2026-06-15",
+      "address": "14326 Limonite Ave, Bldg 5",
+      "city": "Eastvale",
+      "postalCode": "92880",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 87180,
+      "buildingSf": 87180,
+      "officeSf": 4800,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 3",
+      "notes": "3 The Merge West 87,180 SF TBD 12/1 Existing 30' | The Merge West, Free Standing Building | 14326 Limonite Ave, Bldg 5 No NFS ESFR Available 2000 | 2,410 SF of Office Space, 2,390 SF Finished Mezz Office | Eastvale, CA 92880 4,800 SF 87,180 SF Fncd/Pvd 12 Dock High Doors, 1 Grade Level Door | 02/01/2027 | Marketing Flyer 30' Minimum Warehouse Clearance | CBRE - Alex Heim 909-418-2287, Eloy Covarrubias 909-418-2284, Joe Werdein 909- ESFR Sprinkler System, LED Warehouse Lighting | 418-2285, Garry L Jenkins 909-418-2147 Fully Secured Truck Court | New Listing 12 Dock High Doors, 1 Grade Level Door | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-DCD71EEFF06E7D91FFAD",
+      "propertyIdentityKey": "14326 LIMONITE AVE BLDG 5|EASTVALE|92880",
+      "listingVariantId": "LISTING-AA85664E3921848ED407",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "12 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "2,410 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14326 Limonite Ave, Bldg 5",
+          "changed": true,
+          "removedText": "2,410 SF of Office Space, 2,390 SF Finished Mezz Office",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Eastvale",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.126Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "1BE056CD3901E7A7092DC79E73F1E6CD"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-010",
+      "snapshotDate": "2026-06-15",
+      "address": "SE of Intake Blvd and N of Hobson Way",
+      "city": "Blythe",
+      "postalCode": "92225",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 693911,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 13",
+      "notes": "13 693,911 SF NFL 0 SF Available Gas: 15.93 SF Available | SE of Intake Blvd and N of Hobson Way 15.93 Ac $0.74 Yes Residential Water: Nearly 16 Acres of Residential Land in Blythe, Ca | Blythe, CA 92225 Development Easy Access to 10 Fwy and Highway 95 (Intake Blvd) | No $511,309 No R-M Sewer: First Exit in California Coming from Arizona | Marketing Flyer Electric: Close Proximity to Colorado River | Desert Pacific Properties - Susan Harvey 760-360-8200 | Fiber: Adjacent to Empire Cat Equipment Facility | New Listing | For Sale Easy Access to 10 Fwy and Highway 95 (Intake Blvd)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-760734BCE726EF0C20C7",
+      "propertyIdentityKey": "SE OF INTAKE BLVD AND N OF HOBSON WAY|BLYTHE|92225",
+      "listingVariantId": "LISTING-8F228191FB76EB974376",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SE of Intake Blvd and N of Hobson Way",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Blythe",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.126Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "321132530603BA066A68502912EDBE4B"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-011",
+      "snapshotDate": "2026-06-15",
+      "address": "SE of San Jacinto Rd and McLaughlin Rd 13.62 Ac",
+      "city": "Menifee",
+      "postalCode": "92585",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 593287,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 14",
+      "notes": "14 593,287 SF NFL 0 SF Available Gas: 13.62 Acres Available | SE of San Jacinto Rd and McLaughlin Rd 13.62 Ac TBD Yes Industrial Water: 4.55 Acres “BP” Zoned; 9.07 Acres “LDR-2” Zoned | Menifee, CA 92585 No TBD No BP & LDR-2 Sewer: Industrial Sites for Development or Users | Electric: Water, Sewer, Recycle Lines in McLaughlin, Rouse Road | NAI Capital - Andrew M Shirk 909-329-0485 | Fiber: San Jacinto Road Frontage 984' | Back on Market",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-65B9B48207C643D9D0C8",
+      "propertyIdentityKey": "SE OF SAN JACINTO RD AND MCLAUGHLIN RD 13 62 AC|MENIFEE|92585",
+      "listingVariantId": "LISTING-CAC9E419A01EC9B71FD1",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SE of San Jacinto Rd and McLaughlin Rd 13.62 Ac",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Menifee",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.84,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.126Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "74FB0EDECB4EFA69903AE5ECA8164047"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-012",
+      "snapshotDate": "2026-06-15",
+      "address": "W Randall Ave",
+      "city": "Rialto",
+      "postalCode": "92376",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 108900,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 15",
+      "notes": "15 108,900 SF NFL 1,224 SF Available Gas: 2.5 Acres of Land Available | 520 W Randall Ave 2.50 Ac $12.40 Yes Industrial Water: Remodeled 1,224 SF Home | Rialto, CA 92376 No $1,350,000 No A-1 Sewer: 2 Driveway Access | Bloomington Ave/W Randall Ave Electric: Large Storage Yard | RE/MAX Time Realty - Bobby Mendez 951-283-5015 | Marketing Flyer Fiber: Potential to Add Workshop or Additional Residences | Price Reduced | $1,500,000 -> $1,350,000",
+      "changeDetail": "$1,500,000 -> $1,350,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-C62F03F747A9161416C3",
+      "propertyIdentityKey": "W RANDALL AVE|RIALTO|92376",
+      "listingVariantId": "LISTING-D76378B4316CE3A9C8AD",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W Randall Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rialto",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.127Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "3A50FCE228F7DCBBF28505261A68864D"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-013",
+      "snapshotDate": "2026-06-15",
+      "address": "NW of Adelanto Rd and Air Expy",
+      "city": "Adelanto",
+      "postalCode": "92301",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 98010,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "Sale Comp",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 16",
+      "notes": "16 98,010 SF NFL 0 SF Sold Gas: 2.25 Acres Available | NW of Adelanto Rd and Air Expy 2.25 Ac $1.53 Yes Retail Water: 3 Parcels | Adelanto, CA 92301 No $150,000 No BP Sewer: Zoned BP (Business Park) | May Be Purchased as A Portfolio or Individually | RE/MAX Time Realty - Bobby Mendez 951-283-5015, Rachel Kim 909-727 Electric: | Marketing Flyer -2307 Fiber: | Sold | Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-68A504ECF1722C2C0E10",
+      "propertyIdentityKey": "NW OF ADELANTO RD AND AIR EXPY|ADELANTO|92301",
+      "listingVariantId": "LISTING-327FDE7E661C17F3F1B3",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Adelanto Rd and Air Expy",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Adelanto",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.127Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "782A12177D224012EFF6C2DA8AFC0927"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-014",
+      "snapshotDate": "2026-06-15",
+      "address": "10905 Hemlock Ave",
+      "city": "Fontana",
+      "postalCode": "92337",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 95832,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 17",
+      "notes": "17 95,832 SF TBD 10,000 SF Available Gas: ±10,000 SF Industrial Building On ±2.20 Acres | 10905 Hemlock Ave 2.20 Ac NFS Yes Industrial Water: 1,260 SF Office | Fontana, CA 92337 No NFS No SP Sewer: 800 Amps (Verify) | Hemlock Ave/Santa Ana Ave Three (3) GL Doors | Voit Real Estate Services - Juan Gutierrez 909-545-8008, Shy Assar 909- Electric: | Marketing Flyer Fiber: 14' Clear Height | 545-8091, Ian Ozimec, CCIM 909-545-8001 Truck & Trailer Storage Permitted | New Listing | For Lease ±10,000 SF Industrial Building On ±2.20 Acres | 6/15/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-3BC45CE62C7E930B32DC",
+      "propertyIdentityKey": "10905 HEMLOCK AVE|FONTANA|92337",
+      "listingVariantId": "LISTING-0549072DEFE80965832D",
+      "structuredNotes": {
+        "power": [
+          "800 Amps (Verify)"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "1,260 SF Office"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "10905 Hemlock Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.127Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "958755C9F1AA1B444F36A53564A4CB3B"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-015",
+      "snapshotDate": "2026-06-15",
+      "address": "14806-14814 Ceres Ave",
+      "city": "Fontana",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 64012,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.3,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 18",
+      "notes": "18 64,012 SF $0.30 G 1,314 SF Available Gas: Do Not Disturb the Tenant | 14806-14814 Ceres Ave 1.47 Ac $55.00 Fenced Industrial Water: Month to Month Lease | Fontana, CA 92335 No $3,520,660 No C2 Sewer: Fully Fenced Site | Live Oak Ave/Ceres Ave Small Structure on the Site, ± 1,314 SF | Lee & Associates - John Martin 714-307-1250, Chris Coyte 909-373-2935 Electric: | Marketing Flyer Fiber: Ideal Contractor's Yard | Updated Information | Now Available For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-6FB81D663F5874612D79",
+      "propertyIdentityKey": "14806 14814 CERES AVE|FONTANA|92335",
+      "listingVariantId": "LISTING-D46E5DD553418A55A5D2",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14806-14814 Ceres Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Fontana"
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.127Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "1E31D7EC44AA2D7B12CF5508D7B6ED4F"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-016",
+      "snapshotDate": "2026-06-15",
+      "address": "W La Cadena Dr",
+      "city": "Riverside",
+      "postalCode": "92501",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 52708,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 19",
+      "notes": "19 52,708 SF NFL 0 SF Available Gas: 1.21 Acre Lot | 101 W La Cadena Dr 1.21 Ac $16.13 Yes Industrial Water: Land Use Designation: Light Industrial (LI) | Riverside, CA 92501 No $850,000 C-2 Sewer: High Traffic Visibility | W La Cadena Dr/W Main St Electric: 275' of Frontage | RE/MAX Time Realty - Bobby Mendez 951-283-5015 | Marketing Flyer Fiber: Immediate Fwy Access | Back on Market",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-CA93274A4B8E2D7D4384",
+      "propertyIdentityKey": "W LA CADENA DR|RIVERSIDE|92501",
+      "listingVariantId": "LISTING-0E03E449CF95F5235D4A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W La Cadena Dr",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Riverside",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.84,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.127Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "89DF5E05F3E1CBFE0E1E958431313A48"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-017",
+      "snapshotDate": "2026-06-15",
+      "address": "SW of Sierra Hwy and Rancho Vista Blvd 2.33 Ac",
+      "city": "Palmdale",
+      "postalCode": "93550",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 101495,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 14,
+      "sourceRow": "Page 14 AIR Listing 8",
+      "notes": "8 101,495 SF NFL 0 SF Available Gas: ±2.33 Acres Available | SW of Sierra Hwy and Rancho Vista Blvd 2.33 Ac $2.22 Yes Industrial Water: Prime for Development | Palmdale, CA 93550 No $225,000 No OF Sewer: Office Flex Zoning | Electric: Frontage Along Sierra Hwy | Johnson Commercial Real Estate - Jim Towery 760-779-4008 | Marketing Flyer Fiber: | Price Reduced | $240,000 -> $225,000 | 6/15/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": "$240,000 -> $225,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-F67DB1A436CE260DF25D",
+      "propertyIdentityKey": "SW OF SIERRA HWY AND RANCHO VISTA BLVD 2 33 AC|PALMDALE|93550",
+      "listingVariantId": "LISTING-B1C9D269B05580175C45",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of Sierra Hwy and Rancho Vista Blvd 2.33 Ac",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Palmdale",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.127Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "DC632E23C1538B62843275186A67E597"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-018",
+      "snapshotDate": "2026-06-15",
+      "address": "3815 Schaufele Ave",
+      "city": "Long Beach",
+      "postalCode": "90808",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 103128,
+      "buildingSf": 103128,
+      "officeSf": 11348,
+      "askingRate": 2.4,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 17,
+      "sourceRow": "Page 17 AIR Listing 1",
+      "notes": "1 Cabot Innovation Center 103,128 SF $2.40 NNN 11/1 Existing 30' Free Standing Building | 3815 Schaufele Ave No NFS ESFR Leased 3,000 11,348 SF Two-Story Office | Long Beach, CA 90808 11,348 SF 103,128 SF Fncd/Pvd 01/01/2027 1.5:1/154 30' Clear Height | Marketing Flyer 3,000 AMPS of Power (Expandable to 4,000 AMPS) | Colliers - El Segundo - James Hooks 310-897-1789, Bret Quinlan 310-408-8696, January 1, 2027 Occupancy | Jenny Edwards 310-745-7506 | Leased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-4325C7F6D320B9A8498D",
+      "propertyIdentityKey": "3815 SCHAUFELE AVE|LONG BEACH|90808",
+      "listingVariantId": "LISTING-C9184FAC4FC3332A2807",
+      "structuredNotes": {
+        "power": [
+          "000 AMPS of Power (Expandable to 4",
+          "000 AMPS)"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "3815 Schaufele Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Long Beach",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.127Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "3AA55E828A85BEE3304829F08079D9D2"
+      }
+    },
+    {
+      "candidateId": "DA-20260615-019",
+      "snapshotDate": "2026-06-15",
+      "address": "18737 S Reyes Ave",
+      "city": "Rancho Dominguez",
+      "postalCode": "90221",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 57416,
+      "buildingSf": 57416,
+      "officeSf": 5000,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 17,
+      "sourceRow": "Page 17 AIR Listing 2",
+      "notes": "2 57,416 SF NFL 2/4 Existing 20' Free Standing Building | 18737 S Reyes Ave No $235.13 Yes Available 1400 5,000 SF of Office Space | Rancho Dominguez, CA 90221 5,000 SF 57,416 SF Fncd/Pvd COE 1.29:1 20' Minimum Clearance Height | Marketing Flyer 2 Dock High Doors, 4 Grade Level Doors | The CREM Group - Andrew Leff 818-939-4058 74 Parking Spaces/Gated Lot | Access to 91, 405, 710, & 110 Fwys | New Listing 2 Dock High Doors, 4 Grade Level Doors | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-25549BE62DD805DB4112",
+      "propertyIdentityKey": "18737 S REYES AVE|RANCHO DOMINGUEZ|90221",
+      "listingVariantId": "LISTING-9ECACEE327156A57CFB9",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "2 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [
+          "74 Parking Spaces/Gated Lot"
+        ],
+        "office": [
+          "5,000 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-15"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "18737 S Reyes Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rancho Dominguez",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.127Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "DDAFC18072E285333FC8661FF1E63552"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

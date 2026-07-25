@@ -1,0 +1,18 @@
+{
+  "framework": "SCIIP_V7_EPIC_3_SPRINT_14_PRODUCTION_HARDENING_INTEGRATION_CERTIFICATION",
+  "version": "v7.0-epic3-sprint14.0",
+  "type": "INCREMENTAL_PATCH",
+  "northStar": "SCIIP_OS is the operating system for industrial real estate. It ingests market data, preserves history, connects knowledge, powers GIS, and enables professionals to analyze, manage, and act from one trusted platform.",
+  "dependencies": ["EPIC3_SPRINTS_5_THROUGH_13"],
+  "controls": {"reviewRequired": true, "rollbackRequired": true, "automaticDeployment": false, "autonomousExecution": false, "destructiveCommitEnabled": false},
+  "files": [
+    "src/applications/relationship-intelligence/SCIIP_Epic3_Production_Hardening_Integration_Engine.gs",
+    "src/applications/relationship-intelligence/SCIIP_Epic3_Production_Hardening_Integration_Application.gs",
+    "src/applications/relationship-intelligence/SCIIP_Epic3_Production_Hardening_Integration_Persistence.gs",
+    "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint14_Tests.gs",
+    "tools/tests/sciip-epic3-sprint14-test.js",
+    ".github/workflows/sciip-v7-epic3-sprint14.yml",
+    "manifests/SCIIP_V7_EPIC3_SPRINT14_PRODUCTION_HARDENING_INTEGRATION_CERTIFICATION.json",
+    "docs/releases/SCIIP_V7_EPIC3_SPRINT14_README.md"
+  ]
+}

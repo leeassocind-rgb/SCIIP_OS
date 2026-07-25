@@ -1,0 +1,30 @@
+{
+  "ignoredPathPrefixes": [
+    "archive/",
+    "node_modules/",
+    ".git/"
+  ],
+  "allowedNamespaceGlobals": [
+    "SCIIP_RUNTIME",
+    "SCIIP_TEST",
+    "SCIIP_EXECUTIVE_INTELLIGENCE_EXECUTION"
+  ],
+  "warningFunctionPatterns": [
+    "^sciipTest\\d+$",
+    "^sciipTestRange\\d+_\\d+",
+    "^sciipTestBatch\\d+_\\d+",
+    "^run\\d+_",
+    "_$"
+  ],
+  "allowedFilePatterns": [
+    "FULL_CAPACITY_BYPASS",
+    "REPAIR_Patch",
+    "compat",
+    "legacy",
+    "migration"
+  ],
+  "criticalPublicFunctionPatterns": [
+    "^sciipRun\\d+_",
+    "^sciipTest\\d+_.*Processor$"
+  ]
+}

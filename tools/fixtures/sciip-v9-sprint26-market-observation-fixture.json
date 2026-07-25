@@ -1,0 +1,24 @@
+{
+  "policy": { "absenceConfirmationDays": 2 },
+  "priorAbsenceStreaks": {},
+  "previousSnapshot": {
+    "date": "2026-07-23",
+    "source": { "fileName": "SouthBay-2026-07-23.xls", "format": "XLS" },
+    "records": [
+      { "listingNumber": "41380587", "apn": "7319-028-057", "address": "921 W Artesia Blvd", "city": "Compton", "postalCode": "90220", "region": "South Bay", "transactionType": "For Lease", "listingStatus": "Available", "availableSf": 145036, "askingRate": 1.45, "askingRateType": "NNN" },
+      { "listingNumber": "44487274", "apn": "7352-009-038", "address": "2929-2931 California St", "city": "Torrance", "postalCode": "90503", "region": "South Bay", "transactionType": "Sublease", "listingStatus": "Available", "availableSf": 154000, "askingRate": 1.15, "askingRateType": "IG" },
+      { "listingNumber": "45009128", "apn": "7351-003-013", "address": "19200 S Western Ave", "city": "Torrance", "postalCode": "90501", "region": "South Bay", "transactionType": "For Lease", "listingStatus": "Available", "availableSf": 315256, "askingRate": 1.60, "askingRateType": "NNN" },
+      { "listingNumber": "99900001", "apn": "0000-000-001", "address": "100 Test Absorption Ave", "city": "Carson", "postalCode": "90745", "region": "South Bay", "transactionType": "For Lease", "listingStatus": "Available", "availableSf": 100000, "askingRate": 1.50, "askingRateType": "NNN" }
+    ]
+  },
+  "currentSnapshot": {
+    "date": "2026-07-24",
+    "source": { "fileName": "SouthBay-2026-07-24.xls", "format": "XLS" },
+    "records": [
+      { "listingNumber": "41380587", "apn": "7319-028-057", "address": "921 W Artesia Boulevard", "city": "Compton", "postalCode": "90220", "region": "South Bay", "transactionType": "For Lease", "listingStatus": "Available", "availableSf": 145036, "askingRate": 1.45, "askingRateType": "NNN" },
+      { "listingNumber": "44487274", "apn": "7352-009-038", "address": "2929-2931 California St", "city": "Torrance", "postalCode": "90503", "region": "South Bay", "transactionType": "Sublease", "listingStatus": "Available", "availableSf": 154000, "askingRate": 1.10, "askingRateType": "IG" },
+      { "listingNumber": "45009128", "apn": "7351-003-013", "address": "19200 S Western Ave", "city": "Torrance", "postalCode": "90501", "region": "South Bay", "transactionType": "For Lease", "listingStatus": "Leased", "availableSf": 315256, "askingRate": 1.60, "askingRateType": "NNN" },
+      { "listingNumber": "45265697", "apn": "7323-001-062", "address": "1609-1645 E Del Amo Blvd", "city": "Carson", "postalCode": "90746", "region": "South Bay", "transactionType": "For Sale", "listingStatus": "Available", "availableSf": 56354, "askingPrice": 234.94 }
+    ]
+  }
+}

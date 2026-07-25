@@ -1,0 +1,1954 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-07-17",
+  "summary": {
+    "observations": 17,
+    "reviewRequired": 1,
+    "blocked": 0,
+    "lineageComplete": 17
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-17-2026.pdf",
+    "sourceSha256": "3220edac6844dd30e3d2a1ccc254a1e3922294857b463fafd1376478e1be9f7f",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260717-001",
+      "snapshotDate": "2026-07-17",
+      "address": "5899 S Downey Rd",
+      "city": "Vernon",
+      "postalCode": "90058",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 69540,
+      "buildingSf": 69540,
+      "officeSf": 8190,
+      "askingRate": 1.05,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 1",
+      "notes": "1 69,540 SF $1.05 G 6/2 Existing 26' Central Vernon Location | 5899 S Downey Rd No NFS Yes Available 800 Excellent Distribution Facility | Vernon, CA 90058 8,190 SF 69,540 SF Fncd/Pvd 09/01/2026 1.1:1/78 Major Street Frontage / Corner Location | Marketing Flyer Ample Parking | Lee & Associates - Peter D Bacci 323-767-2022, Jeffrey Bethel 562-568-2002 | New Listing Ample Parking | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-E499F2813D649933EEBC",
+      "propertyIdentityKey": "5899 S DOWNEY RD|VERNON|90058",
+      "listingVariantId": "LISTING-CED06BB35FB198A04DE6",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "5899 S Downey Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Vernon",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "B01B4D1CE38BA6F4DED06A8FD80DDBB3"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-002",
+      "snapshotDate": "2026-07-17",
+      "address": "5001 E La Palma Ave",
+      "city": "Anaheim",
+      "postalCode": "92807",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 149810,
+      "buildingSf": 17445,
+      "officeSf": 17445,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 1",
+      "notes": "1 149,810 SF TBD 6/2 Existing 24' Free Standing Building, Refurbishment Complete | 5001 E La Palma Ave Yes $395.00 ESFR Available 3000 ±149,810 SF Drive-Around Building on ±9.5 Acres of Land | Anaheim, CA 92807 17,445 SF 149,810 SF Fenced Now 3.2:1/479 ±17,445 SF Single Story Office Space | Marketing Flyer 6 DH Doors, 2 GL Doors / 24' Clear Height | Voit Real Estate Services - Adam Hill 714-935-2311, Mitch Zehner 714-935-2307, 3,000 Amps 480 Volt / 174-385 Auto & 37 Trailer Stalls | Michael Zehner 714-935-2328 Massive ±2.9 Acre Fenced Yard | Updated Information Video Tour Here",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-1B97321A72B877A63133",
+      "propertyIdentityKey": "5001 E LA PALMA AVE|ANAHEIM|92807",
+      "listingVariantId": "LISTING-960968F20368E1B7BF5D",
+      "structuredNotes": {
+        "power": [
+          "000 Amps 480 Volt / 174-385 Auto & 37 Trailer Stalls"
+        ],
+        "loading": [
+          "6 DH Doors",
+          "2 GL Doors / 24' Clear Height"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 97010,
+          "to": 149810
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "5001 E La Palma Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Anaheim",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A1E4174848682B170950DA62BD2C5B73"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-003",
+      "snapshotDate": "2026-07-17",
+      "address": "1211 N Miller St, Unit A",
+      "city": "Anaheim",
+      "postalCode": "92806",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 135080,
+      "buildingSf": 205674,
+      "officeSf": 31284,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 2",
+      "notes": "2 Anaheim Technology Center 135,080 SF TBD 26/1 Existing 30' POL 205,674 SF Building | 1211 N Miller St, Unit A No NFS Yes Available BTS Office Can Be Reduced/Modified to Suit | Anaheim, CA 92806 31,284 SF 205,674 SF Fncd/Pvd 09/01/2026 1.3:1/175 Fenced Yard/Truck Court | Marketing Flyer 26 Dock High Loading Doors | Voit Real Estate Services - Michael Hefner 714-935-2331, Mike Vernick 714-935- Ground Level Loading Door | 2354 30' Clear Height | New Listing Fenced Yard/Truck Court | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-71DF5C25DEB005E48ADB",
+      "propertyIdentityKey": "1211 N MILLER ST UNIT A|ANAHEIM|92806",
+      "listingVariantId": "LISTING-2963EC4332EF9E6A100A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "26 Dock High Loading Doors"
+        ],
+        "yard": [
+          "Fenced Yard/Truck Court"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1211 N Miller St, Unit A",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Anaheim",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "4C495BC6DE59209D69B6CB05C22D9CEB"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-004",
+      "snapshotDate": "2026-07-17",
+      "address": "E Katella Ave",
+      "city": "Anaheim",
+      "postalCode": "92805",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 107863,
+      "buildingSf": 107863,
+      "officeSf": 6572,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 3",
+      "notes": "3 107,863 SF NFL 12/2 Existing 18' - 27' | 2 Industrial Bldgs/ Available Together or Separately | 511 E Katella Ave & 1650 S Claudina No $350.00 Yes Available 1800 | (Pending Lot Line Adjustment) | Way | Anaheim, CA 92805 6,572 SF 107,863 SF Paved ±6.37 Acre Parcel, Excess Land for Additional Yard/Parking | COE 1.5:1/161 | Marketing Flyer Single Story Office, Loading From DH Positions and 2 Ramps | JLL - Byron Foss 949-296-3615, Nick Carey 949-296-3626, Wade Tift 949-296-3605 Multiple Power Panels, Portion of 511 WH 16'-17' Clr | Prime Platinum Triangle Location, Immediate Access to 5 Fwy | New Listing Single Story Office, Loading from DH Positions and 2 Ramps | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-0C5C6BF7073097BA8484",
+      "propertyIdentityKey": "E KATELLA AVE|ANAHEIM|92805",
+      "listingVariantId": "LISTING-686B8F1C18EED2D38E54",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "E Katella Ave",
+          "changed": true,
+          "removedText": "& 1650 S Claudina Way",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Anaheim",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "D387EE631E80AB2F7221910BD2CD3962"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-005",
+      "snapshotDate": "2026-07-17",
+      "address": "5001 E La Palma Ave",
+      "city": "Anaheim",
+      "postalCode": "92807",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 97010,
+      "buildingSf": 149810,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 4",
+      "notes": "4 97,010 SF TBD 3/2 Existing 24' POL ±149,810 SF Building, Refurbishment Complete | 5001 E La Palma Ave Yes $395.00 ESFR Available 3000 Drive-Around Building on ±9.5 Acres of Land | Anaheim, CA 92807 149,810 SF Fenced Now 3.2:1/310 Single Story Office Space | Marketing Flyer 3 DH Doors, 2 GL Doors / 24' Clear Height | Voit Real Estate Services - Adam Hill 714-935-2311, Mitch Zehner 714-935-2307, 3,000 Amps 480 Volt / 174-385 Auto & 37 Trailer Stalls | Michael Zehner 714-935-2328 Massive ±2.9 Acre Fenced Yard | Updated Information Video Tour Here",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-1B97321A72B877A63133",
+      "propertyIdentityKey": "5001 E LA PALMA AVE|ANAHEIM|92807",
+      "listingVariantId": "LISTING-3615B9A07F948F03107A",
+      "structuredNotes": {
+        "power": [
+          "000 Amps 480 Volt / 174-385 Auto & 37 Trailer Stalls"
+        ],
+        "loading": [
+          "3 DH Doors",
+          "2 GL Doors / 24' Clear Height"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 149810,
+          "to": 97010
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "5001 E La Palma Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Anaheim",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "810EF835786AA198136166C542E103EA"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-006",
+      "snapshotDate": "2026-07-17",
+      "address": "Best Avenue",
+      "city": "Santa Fe Springs",
+      "postalCode": "90670",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 81000,
+      "buildingSf": 112000,
+      "officeSf": 3000,
+      "askingRate": 1.15,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 5",
+      "notes": "5 Best Avenue Centre 81,000 SF $1.15 G 13/1 Existing | Best Avenue Centre 24' | 14404 - 14410 Best Ave No NFS Yes Available 600 | Multi-Tenant Building | Santa Fe Springs, CA 90670 3,000 SF 112,000 SF No Well-Maintained Business Park | 09/01/2026 1.0:1/81 | 13 Dock High Loading Doors | Lee & Associates - Dave Hunsaker 714-564-7113, Charles Noble 714-564-7100, Bart Sprinklered | McNulty 714-564-7121 24' Clear Height | New Listing | For Lease Well-Maintained Business Park | 7/17/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-ECC11271B8F0B087EBBB",
+      "propertyIdentityKey": "BEST AVENUE|SANTA FE SPRINGS|90670",
+      "listingVariantId": "LISTING-BF95A6A7662D87C08D84",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "13 Dock High Loading Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Best Avenue",
+          "changed": true,
+          "removedText": "Centre 24' 14404 - 14410 Best Ave",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Santa Fe Springs",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Santa Fe Springs"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "B20E94968B7EFE8B697B59C3032379E4"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-007",
+      "snapshotDate": "2026-07-17",
+      "address": "E Katella Ave",
+      "city": "Anaheim",
+      "postalCode": "92805",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 73419,
+      "buildingSf": 73419,
+      "officeSf": 4449,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 6",
+      "notes": "6 73,419 SF NFL 7/1 Existing 18' - 21' Can Be Sold W/1650 S Claudina Way | 511 E Katella Ave No TBD Yes Available 1200 For Total of ±107,863 SF on ±6.37 Acres | Anaheim, CA 92805 4,449 SF 73,419 SF Paved COE 1.6:1/116 Excess Land for Additional Yard/Parking, Single Story Office | Part of Larger Project, Subject to Lot Line Adjustment | JLL - Byron Foss 949-296-3615, Nick Carey 949-296-3626, Wade Tift 949-296-3605 Loading From DH Positions + 1 Ramp | Multiple Power Panels, Portion of Wh 16'-17' Clr | New Listing Prime Platinum Triangle Location / Immediate Access to 5 Fwy | For Sale Excess Land for Additional Yard/Parking, Single Story Office",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-0C5C6BF7073097BA8484",
+      "propertyIdentityKey": "E KATELLA AVE|ANAHEIM|92805",
+      "listingVariantId": "LISTING-BDBC492F4AA57F8C6D2E",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 107863,
+          "to": 73419
+        },
+        {
+          "type": "LISTING_STATUS_CHANGED",
+          "field": "listingStatus",
+          "from": "Available",
+          "to": "Sold"
+        },
+        {
+          "type": "EVENT_CHANGED",
+          "field": "eventCode",
+          "from": "NEW_LISTING",
+          "to": "SOLD"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "E Katella Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Anaheim",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "B1623027C62D626A55AF074BFAD2980A"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-008",
+      "snapshotDate": "2026-07-17",
+      "address": "1211 N Miller St, Unit B",
+      "city": "Anaheim",
+      "postalCode": "92806",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 70594,
+      "buildingSf": 205674,
+      "officeSf": 3827,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 7",
+      "notes": "7 Anaheim Technology Center 70,594 SF TBD 18/1 Existing 30' POL 205,674 SF Building | 1211 N Miller St, Unit B No NFS Yes Available BTS Office Can Be Reduced/Modified to Suit | Anaheim, CA 92806 3,827 SF 205,674 SF Fncd/Pvd 09/01/2026 1.3:1/91 Fenced Yard/Truck Court | Marketing Flyer 18 Dock High Loading Doors | Voit Real Estate Services - Michael Hefner 714-935-2331, Mike Vernick 714-935- Ground Level Loading Door | 2354 30' Clear Height | New Listing Fenced Yard/Truck Court | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-B0D432D2A33BCB9E783E",
+      "propertyIdentityKey": "1211 N MILLER ST UNIT B|ANAHEIM|92806",
+      "listingVariantId": "LISTING-81759A9D5E11BB8D696A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "18 Dock High Loading Doors"
+        ],
+        "yard": [
+          "Fenced Yard/Truck Court"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1211 N Miller St, Unit B",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Anaheim",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "AE38699E1B70EF4977EF760A5BD38A33"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-009",
+      "snapshotDate": "2026-07-17",
+      "address": "Best Avenue",
+      "city": "Santa Fe Springs",
+      "postalCode": "90670",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 50000,
+      "buildingSf": 112000,
+      "officeSf": null,
+      "askingRate": 1.2,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 8",
+      "notes": "8 Best Avenue Centre 50,000 SF $1.20 G 5/1 Existing | Best Avenue Centre 24' | 14404 - 14410 Best Ave No NFS Yes Available 400 | Multi-Tenant Building | Santa Fe Springs, CA 90670 112,000 SF No Well-Maintained Business Park | 09/01/2026 1.0:1/50 | 5 Dock High Loading Doors | Lee & Associates - Dave Hunsaker 714-564-7113, Charles Noble 714-564-7100, Bart Sprinklered | McNulty 714-564-7121 24' Clear Height | New Listing | For Lease Sprinklered",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-ECC11271B8F0B087EBBB",
+      "propertyIdentityKey": "BEST AVENUE|SANTA FE SPRINGS|90670",
+      "listingVariantId": "LISTING-1ADAD3D0DB6F71A9DA97",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "5 Dock High Loading Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 81000,
+          "to": 50000
+        },
+        {
+          "type": "ASKING_RATE_CHANGED",
+          "field": "askingRate",
+          "from": 1.15,
+          "to": 1.2
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Best Avenue",
+          "changed": true,
+          "removedText": "Centre 24' 14404 - 14410 Best Ave",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Santa Fe Springs",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Santa Fe Springs"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "99E94658622D8C40CFA84DCC7748A030"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-010",
+      "snapshotDate": "2026-07-17",
+      "address": "2867 Surveyor St",
+      "city": "Pomona",
+      "postalCode": "91768",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 116025,
+      "buildingSf": 190464,
+      "officeSf": 5396,
+      "askingRate": 1.15,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 1",
+      "notes": "1 116,025 SF $1.15 G 4/2 Existing 24'-28' POL 190,464 SF Industrial Building | 2867 Surveyor St Yes NFS Yes Leased 1800 4 DH Doors, 2 GL Doors / 24'-28' Clear Height | Pomona, CA 91768 5,396 SF 190,464 SF Fncd/Pvd Now Large Secured Yard - Abundant Trailer Parking | Marketing Flyer Ashwill Associates - Mitch Ashwill 626-363-7868, Sean Casey 626-363-7855, Greg | Ashwill 626-363-7828 | Leased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-67C2BAE2C6BC47BBAB3B",
+      "propertyIdentityKey": "2867 SURVEYOR ST|POMONA|91768",
+      "listingVariantId": "LISTING-FBB65658DC13EFE70DD7",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "4 DH Doors",
+          "2 GL Doors / 24'-28' Clear Height"
+        ],
+        "yard": [
+          "Secured Yard - Abundant Trailer Parking"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2867 Surveyor St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Pomona",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A91570269630C315E9364E82977772A6"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-011",
+      "snapshotDate": "2026-07-17",
+      "address": "N Wineville Ave, Unit A",
+      "city": "Ontario",
+      "postalCode": "91764",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 74697,
+      "buildingSf": 255090,
+      "officeSf": 3500,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 2",
+      "notes": "2 74,697 SF TBD 7/1 Existing 28' Sublease Through 12/31/2033 | 905 N Wineville Ave, Unit A No NFS ESFR Available 600 3,500 SF of Office Space | Ontario, CA 91764 3,500 SF 255,090 SF Paved 01/01/2027 7 Dock High Doors, 1 Grade Level Door | Marketing Flyer ESFR Sprinkler System | Cushman & Wakefield - Tim Pimentel 909-942-4647, Chris Pimentel 909-942-4600 28' Minimum Clearance Height | Convenient Access to 10 & 15 Fwys | New Listing 7 Dock High Doors, 1 Grade Level Door | For Sublease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-9376A2AEB198A306A3A6",
+      "propertyIdentityKey": "N WINEVILLE AVE UNIT A|ONTARIO|91764",
+      "listingVariantId": "LISTING-A102C71F0F30704E6179",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "7 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "3,500 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "N Wineville Ave, Unit A",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "BEA1599BB1300B482C6093B9F7DA3661"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-012",
+      "snapshotDate": "2026-07-17",
+      "address": "15850 Slover Ave",
+      "city": "Fontana",
+      "postalCode": "92337",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 60127,
+      "buildingSf": 60127,
+      "officeSf": 3968,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 3",
+      "notes": "3 60,127 SF TBD 6/2 Existing 30' Free Standing Building | 15850 Slover Ave Yes NFS ESFR Available 1200 30' Minimum Clear Height | Fontana, CA 92337 3,968 SF 60,127 SF Fncd/Pvd Now 1.0:1/61 6 DH Doors, 2 GL Doors | Marketing Flyer 1,200 Amps, 480/277 Volts (Expandable to 2,000A) | Daum Commercial - Cody Wolf 909-912-0018, Stephen Deverian 909-373-2938 120' Fully Secured Truck Court | Easy Access to 10, 15 & 215 Freeways | Updated Information Make Ready Improvements Underway",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-09F7DD08A0B56480B871",
+      "propertyIdentityKey": "15850 SLOVER AVE|FONTANA|92337",
+      "listingVariantId": "LISTING-5C2C54627E288F407C3F",
+      "structuredNotes": {
+        "power": [
+          "200 Amps",
+          "480/277 Volts (Expandable to 2",
+          "000A)"
+        ],
+        "loading": [
+          "6 DH Doors",
+          "2 GL Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "15850 Slover Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "E9963E9C4F228E21321D6703649C4A11"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-013",
+      "snapshotDate": "2026-07-17",
+      "address": "13113-13231 Whittram Ave",
+      "city": "Rancho Cucamonga",
+      "postalCode": "91739",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 253482,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.2,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 12",
+      "notes": "12 253,482 SF $0.20 G 0 SF Available Gas: 5.82 AC Industrial Land Site* | 13113-13231 Whittram Ave 5.82 Ac NFS Yes Industrial Water: Y Neo Industrial Zone, City of Rancho Cucamonga | Rancho Cucamonga, CA 91739 No NFS No NI Sewer: Y Unimproved Land, Improvements to Suit Based on Credit | Whittram Ave/Etiwanda Ave Electric: Y West Inland Empire Location at 10, 15 and 210 Fwys | Newmark - Mark Repstad 213-453-1155, Henry Chambers 949-299- | Marketing Flyer 1132, Rob Castro 657-532-8400 Fiber: | New Rate | Now Available @ $0.20 G",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_CHANGED",
+      "propertyIdentityId": "PROP-88ACAB666E89EC1237B1",
+      "propertyIdentityKey": "13113 13231 WHITTRAM AVE|RANCHO CUCAMONGA|91739",
+      "listingVariantId": "LISTING-4F24329392B07A8DE309",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "13113-13231 Whittram Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rancho Cucamonga",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Rancho Cucamonga"
+        },
+        "originalEventCategory": "New Rate",
+        "normalizedEventCode": "RATE_CHANGED",
+        "normalizedEventLabel": "Rate Changed",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "C165E54376A99FD33092DE1882E2926D"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-014",
+      "snapshotDate": "2026-07-17",
+      "address": "8569 Beech Ave",
+      "city": "Fontana",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 197327,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 13",
+      "notes": "13 197,327 SF TBD 9,000 SF Available Gas: Rare Permitted Auto Dismantling Yard | 8569 Beech Ave 4.53 Ac NFS Fenced Industrial Water: ±9,000 SF Warehouse on ±4.53 Acres | Fontana, CA 92335 No NFS No IR Sewer: Close Proximity to 15 & 10 Fwys | Beech Ave/Arrow Rte Fully Fenced & Secured Yard | Lee & Associates - Mathew Skogebo 951-276-3646, Ryan Turnquist 951- Electric: | Marketing Flyer Fiber: Great Ingress & Egress | 276-3680, John Mulrooney 909-373-2928 IR Zoned Within The County | New Listing | For Lease Rare Permitted Auto Dismantling Yard",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-5CB45555F67C7B1FB177",
+      "propertyIdentityKey": "8569 BEECH AVE|FONTANA|92335",
+      "listingVariantId": "LISTING-77965A0FAE85094E6E10",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "8569 Beech Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Fontana"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "5BA47D7AA10C70EAFE1BDCBBA6F9A028"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-015",
+      "snapshotDate": "2026-07-17",
+      "address": "6300 Box Springs Blvd",
+      "city": "Riverside",
+      "postalCode": "92507",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 105415,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.2,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 14",
+      "notes": "14 105,415 SF $0.20 G 0 SF Available Gas: ±2.42 Acres of Land Available | 6300 Box Springs Blvd 2.42 Ac NFS Fncd/Pvd Industrial Water: Permitted For Truck Trailer Storage & Outdoor Storage | Riverside, CA 92507 No NFS No BMP Sewer: Fenced, Secured and Lit Yard Area | Box Springs Blvd/East Ridge Ave Electric: Key Pad Yard Access, Flexible Hours of Operation | Lee & Associates - Ryan De Guzman 909-989-7771 | Marketing Flyer Fiber: Guard Shack Located Within the Fence | ±14,000 Square Foot Potential Expansion | New Listing | For Lease Permitted For Truck Trailer Storage & Outdoor Storage | 7/17/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-AB92757EEBE52BEE74CA",
+      "propertyIdentityKey": "6300 BOX SPRINGS BLVD|RIVERSIDE|92507",
+      "listingVariantId": "LISTING-88CD3A05F5FD96AE64A5",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "6300 Box Springs Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Riverside",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Riverside"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "4290C0EB5F0CB039B6C5ADA48889228A"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-016",
+      "snapshotDate": "2026-07-17",
+      "address": "S Motor Ave",
+      "city": "Azusa",
+      "postalCode": "91702",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 94321,
+      "buildingSf": 94321,
+      "officeSf": 6380,
+      "askingRate": 1.13,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 2",
+      "notes": "2 94,321 SF $1.13 NNN 15/1 Existing 32' Free Standing Industrial Building | 415 S Motor Ave No NFS ESFR Leased 1600 2022 Construction | Azusa, CA 91702 6,380 SF 94,321 SF Fncd/Pvd 60 Days Ideal for Last Mile E-Commerce Distribution | Marketing Flyer Large Concrete & Fenced Yard | Cushman & Wakefield - Christopher Tolles 213-955-5129, Maya Schirn 213-236- Close Proximity to 210, 605, 10 Freeways | 4931, Erik Larson 213-955-5126 | Leased Co-Op: Dean Krieger (Kidder Matthews)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-4A38D53DD283C472E081",
+      "propertyIdentityKey": "S MOTOR AVE|AZUSA|91702",
+      "listingVariantId": "LISTING-289CBDE23EE4E624078B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "S Motor Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Azusa",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "5FDA72E509F2470F4F364539EC9AFB6F"
+      }
+    },
+    {
+      "candidateId": "DA-20260717-017",
+      "snapshotDate": "2026-07-17",
+      "address": "1609 & 1635 - 1645 E Del Amo Blvd",
+      "city": "Carson",
+      "postalCode": "90746",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 56354,
+      "buildingSf": 56354,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 17,
+      "sourceRow": "Page 17 AIR Listing 1",
+      "notes": "1 1609 - 1645 E Del Amo Blvd 56,354 SF NFL 0/8 Existing 14' - 18' Rare Infill Opportunity | 1609 & 1635 - 1645 E Del Amo Blvd No $234.94 Yes Available 8,400 - 12,750 SF Unit Sizes | Carson, CA 90746 56,354 SF Fncd/Pvd COE Quick Access to 405, 91, and 710 Freeways | Marketing Flyer 8 Ground Level Loading Doors | Cushman & Wakefield - Steve Bohannon 310-729-6957, James Latimer 310-748- 14' - 18' Clear Height | 2225 | New Listing Rare Infill Opportunity | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-A384205B0E1CD0A3D8DC",
+      "propertyIdentityKey": "1609 1635 1645 E DEL AMO BLVD|CARSON|90746",
+      "listingVariantId": "LISTING-8EB3F523CA41C4C653A6",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "8 Ground Level Loading Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-17"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1609 & 1635 - 1645 E Del Amo Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Carson",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.144Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "0027F371E97FE412AA751876B7EAFB3A"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

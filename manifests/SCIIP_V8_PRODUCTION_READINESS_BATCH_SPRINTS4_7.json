@@ -1,0 +1,11 @@
+{
+  "version": "v8.0-production-readiness-batch-4-7.0",
+  "sprints": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "productionWritesEnabled": false,
+  "certificationFunction": "sciipTestV8ProductionReadinessBatchSprints4To7"
+}

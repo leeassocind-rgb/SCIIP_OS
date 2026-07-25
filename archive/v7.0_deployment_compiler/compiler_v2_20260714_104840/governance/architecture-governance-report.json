@@ -1,0 +1,801 @@
+{
+  "generatedAt": "2026-07-14T15:17:16.341Z",
+  "policyVersion": "v6.1",
+  "metrics": {
+    "files": 11714,
+    "syntaxErrors": 0,
+    "duplicateProcessorNumbers": 0,
+    "realDuplicateGlobals": 0,
+    "realPublicFunctionConflicts": 0,
+    "warningFunctionDuplicates": 26,
+    "allowedNamespaceExtensions": 1,
+    "allowedCompatibilityDuplicates": 66,
+    "storageProcessorFiles": 9640,
+    "storageRuntimeBaseFiles": 9540,
+    "storageWriteFiles": 0,
+    "lockServiceFiles": 0
+  },
+  "errors": [],
+  "warnings": [
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipEnsureSheetWithHeaders_",
+      "locations": [
+        "src/processors/foundation/190_AutonomousResearchAgentProcessor.gs",
+        "src/shared/SCIIP_SystemContinuityCommon.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipFirstValue_",
+      "locations": [
+        "src/processors/foundation/190_AutonomousResearchAgentProcessor.gs",
+        "src/processors/foundation/80_EventTimelineProcessor.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipGetRuntimeSpreadsheet_",
+      "locations": [
+        "src/processors/foundation/190_AutonomousResearchAgentProcessor.gs",
+        "src/processors/runtime/supersheet/340_DecisionBriefProcessor.gs",
+        "src/processors/runtime/supersheet/350_StrategicDecisionProcessor.gs",
+        "src/processors/runtime/supersheet/360_DecisionExecutionPlanProcessor.gs",
+        "src/processors/runtime/supersheet/370_ExecutionTaskProcessor.gs",
+        "src/processors/runtime/supersheet/380_TaskPrioritizationProcessor.gs",
+        "src/processors/runtime/supersheet/390_WorkQueueProcessor.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipReadSheetObjects_",
+      "locations": [
+        "src/processors/foundation/80_EventTimelineProcessor.gs",
+        "src/processors/runtime/supersheet/340_DecisionBriefProcessor.gs",
+        "src/processors/runtime/supersheet/350_StrategicDecisionProcessor.gs",
+        "src/processors/runtime/supersheet/360_DecisionExecutionPlanProcessor.gs",
+        "src/processors/runtime/supersheet/370_ExecutionTaskProcessor.gs",
+        "src/processors/runtime/supersheet/380_TaskPrioritizationProcessor.gs",
+        "src/processors/runtime/supersheet/390_WorkQueueProcessor.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipRuntimeCertificationTest_",
+      "locations": [
+        "src/processors/foundation/SCIIP_RuntimeCertificationSuite_v2.gs",
+        "src/shared/SCIIP_RuntimeCertificationSuite.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipEnsureAutonomousProcessorExecutionRunStateContinuitySystemIndexLedgerSheet_",
+      "locations": [
+        "src/processors/runtime/framework/1570_AutonomousProcessorExecutionRunStateContinuitySystemIndexLedgerProcessor.gs",
+        "src/processors/runtime/framework/1580_AutonomousProcessorExecutionRunStateContinuitySystemRegistryProcessor.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipGetLatestRuntimeRecordByCreatedAt_",
+      "locations": [
+        "src/processors/runtime/supersheet/460_ExecutiveDashboardProcessor.gs",
+        "src/processors/runtime/supersheet/470_CommandBriefProcessor.gs",
+        "src/processors/runtime/supersheet/480_AutonomousOperationsProcessor.gs",
+        "src/processors/runtime/supersheet/490_SystemLearningProcessor.gs",
+        "src/processors/runtime/supersheet/500_StrategicIntelligenceProcessor.gs",
+        "src/processors/runtime/supersheet/510_IntelligenceRequirementProcessor.gs",
+        "src/processors/runtime/supersheet/520_ResearchMissionProcessor.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipRuntimeRecordTimestamp_",
+      "locations": [
+        "src/processors/runtime/supersheet/460_ExecutiveDashboardProcessor.gs",
+        "src/processors/runtime/supersheet/470_CommandBriefProcessor.gs",
+        "src/processors/runtime/supersheet/480_AutonomousOperationsProcessor.gs",
+        "src/processors/runtime/supersheet/490_SystemLearningProcessor.gs",
+        "src/processors/runtime/supersheet/500_StrategicIntelligenceProcessor.gs",
+        "src/processors/runtime/supersheet/510_IntelligenceRequirementProcessor.gs",
+        "src/processors/runtime/supersheet/520_ResearchMissionProcessor.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipExtractFirstAvailable_",
+      "locations": [
+        "src/processors/runtime/supersheet/460_ExecutiveDashboardProcessor.gs",
+        "src/processors/runtime/supersheet/470_CommandBriefProcessor.gs",
+        "src/processors/runtime/supersheet/490_SystemLearningProcessor.gs",
+        "src/processors/runtime/supersheet/500_StrategicIntelligenceProcessor.gs",
+        "src/processors/runtime/supersheet/510_IntelligenceRequirementProcessor.gs",
+        "src/processors/runtime/supersheet/520_ResearchMissionProcessor.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipGenerateId_",
+      "locations": [
+        "src/processors/runtime/supersheet/460_ExecutiveDashboardProcessor.gs",
+        "src/processors/runtime/supersheet/470_CommandBriefProcessor.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestBatch6210_6290_DomainFoundation",
+      "locations": [
+        "src/testing/runners/SCIIP_BatchTestRunner.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestBatch6300_6380_DomainExecutionReadiness",
+      "locations": [
+        "src/testing/runners/SCIIP_BatchTestRunner.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestBatch6390_6470_AssetRegistryExecutionReadiness",
+      "locations": [
+        "src/testing/runners/SCIIP_BatchTestRunner.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestBatch6480_6550_AssetRegistryExecution",
+      "locations": [
+        "src/testing/runners/SCIIP_BatchTestRunner.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestBatch6560_6650_AssetDataExecution",
+      "locations": [
+        "src/testing/runners/SCIIP_BatchTestRunner.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs",
+        "src/tests/suites/AssetDataExecutionSuite.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestRange6660_6750",
+      "locations": [
+        "src/testing/suites/SCIIP_TestSuites.gs",
+        "src/tests/framework/SCIIP_TestFrameworkV4_1Patch.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs",
+        "src/tests/suites/IdentityExecutionSuite.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestBatch6660_6750_IdentityExecution",
+      "locations": [
+        "src/testing/suites/SCIIP_TestSuites.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs",
+        "src/tests/suites/IdentityExecutionSuite.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestRange6210_6290",
+      "locations": [
+        "src/tests/framework/SCIIP_TestFrameworkV4_1Patch.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestRange6300_6380",
+      "locations": [
+        "src/tests/framework/SCIIP_TestFrameworkV4_1Patch.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestRange6390_6470",
+      "locations": [
+        "src/tests/framework/SCIIP_TestFrameworkV4_1Patch.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestRange6480_6550",
+      "locations": [
+        "src/tests/framework/SCIIP_TestFrameworkV4_1Patch.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestRange6560_6650",
+      "locations": [
+        "src/tests/framework/SCIIP_TestFrameworkV4_1Patch.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs",
+        "src/tests/suites/AssetDataExecutionSuite.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestRange6760_6850",
+      "locations": [
+        "src/tests/framework/SCIIP_TestFrameworkV4_1Patch.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs",
+        "src/tests/suites/GraphExecutionSuite.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestBatch6760_6850_GraphExecution",
+      "locations": [
+        "src/tests/framework/SCIIP_TestFrameworkV4_1Patch.gs",
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs",
+        "src/tests/suites/GraphExecutionSuite.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestRange6860_6950",
+      "locations": [
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs",
+        "src/tests/suites/GISExecutionSuite.gs"
+      ]
+    },
+    {
+      "type": "HELPER_OR_TEST_DUPLICATE",
+      "name": "sciipTestBatch6860_6950_GISExecution",
+      "locations": [
+        "src/tests/runners/SCIIP_TestRangeRunners_v4.gs",
+        "src/tests/suites/GISExecutionSuite.gs"
+      ]
+    }
+  ],
+  "allowed": [
+    {
+      "type": "NAMESPACE_EXTENSION",
+      "name": "SCIIP_EXECUTIVE_INTELLIGENCE_EXECUTION",
+      "locations": [
+        "src/processors/intelligence/execution/7060_7150_ExecutiveIntelligenceExecutionShared.gs",
+        "src/processors/intelligence/executive/7060_7150_ExecutiveIntelligenceExecutionShared.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10260",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10270",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10280",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10290",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10300",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10310",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10320",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10330",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10340",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_Patch.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompounding_10340_10350_REPAIR_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10350",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_Patch.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompounding_10340_10350_REPAIR_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTestRange10260_10350_EnterpriseCompoundingExecution",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompoundingExecution_10260_10350_Patch.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseCompounding_10340_10350_REPAIR_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10460",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10470",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10480",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10490",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10500",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10510",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10520",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10530",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10540",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10550",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTestRange10460_10550_EnterpriseEfficiencyExecution",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseEfficiencyExecution_10460_10550_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10360",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10370",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10380",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10390",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10400",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10410",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10420",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10430",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10440",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10450",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTestRange10360_10450_EnterpriseOptimizationExecution",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseOptimizationExecution_10360_10450_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10560",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10570",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10580",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10590",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10600",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10610",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10620",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10630",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10640",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10650",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTestRange10560_10650_EnterpriseProductivityExecution",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseProductivityExecution_10560_10650_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10760",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10770",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10780",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10790",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10800",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10810",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10820",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10830",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10840",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10850",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTestRange10760_10850_EnterpriseQualityExecution",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseQualityExecution_10760_10850_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10660",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10670",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10680",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10690",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10700",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10710",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10720",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10730",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10740",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTest10750",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_Patch.gs"
+      ]
+    },
+    {
+      "type": "COMPATIBILITY_DUPLICATE",
+      "name": "sciipTestRange10660_10750_EnterpriseReliabilityExecution",
+      "locations": [
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_FULL_CAPACITY_BYPASS.gs",
+        "src/tests/SCIIP_TestingFramework_v4_EnterpriseReliabilityExecution_10660_10750_Patch.gs"
+      ]
+    }
+  ]
+}

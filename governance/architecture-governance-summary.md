@@ -1,6 +1,6 @@
 # SCIIP_OS Architecture Governance Summary
 
-Generated: 2026-07-14T15:17:16.341Z
+Generated: 2026-07-16T15:00:17.216Z
 
 ## Errors
 - Syntax errors: 0

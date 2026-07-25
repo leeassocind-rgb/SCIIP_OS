@@ -1,0 +1,18 @@
+{
+  "framework": "SCIIP_V9_6_10_0_PLATFORM_SERVICES_BATCH",
+  "version": "v10.0.0",
+  "sprints": [
+    "v9.6 Graph Service Layer",
+    "v9.7 Historical Query Engine",
+    "v9.8 Property History Explorer",
+    "v9.9 Graph Analytics Engine",
+    "v10.0 Platform Service Certification"
+  ],
+  "status": "READY_TO_INSTALL",
+  "governance": {
+    "readOnly": true,
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "independentCorpusGatePreserved": true
+  }
+}

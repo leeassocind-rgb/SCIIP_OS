@@ -1,0 +1,1 @@
+{"version":"v7.0-alpha.1","requiredFiles":["src/ui/SCIIP_KnowledgeGraphViewer.gs","src/ui/SCIIP_KnowledgeGraphViewer_Tests.gs","src/ui/SCIIP_KnowledgeGraphViewer_Styles.html"],"requiresLiveOrFallbackData":true,"requiresNoNewProcessors":true}

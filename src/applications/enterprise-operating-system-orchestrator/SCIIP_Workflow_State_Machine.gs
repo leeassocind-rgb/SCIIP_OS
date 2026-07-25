@@ -1,0 +1,5 @@
+var SCIIP_WORKFLOW_STATE_MACHINE=(function(){'use strict';
+var transitions={DISCOVERED:['QUALIFIED','REJECTED'],QUALIFIED:['MATCHED','REJECTED'],MATCHED:['UNDERWRITTEN','REJECTED'],UNDERWRITTEN:['APPROVED','REJECTED'],APPROVED:['EXECUTING','ON_HOLD'],EXECUTING:['CLOSED','FAILED','ON_HOLD'],ON_HOLD:['EXECUTING','REJECTED'],CLOSED:['ONBOARDED'],ONBOARDED:['OPTIMIZED'],FAILED:['EXECUTING','REJECTED'],REJECTED:[],OPTIMIZED:[]};
+function can(from,to){return (transitions[from]||[]).indexOf(to)!==-1;}
+function move(instance,to,meta){instance=instance||{};var from=instance.state||'DISCOVERED';if(!can(from,to))return {status:'INVALID_TRANSITION',from:from,to:to,instance:instance};var next=Object.assign({},instance,{state:to,updatedAt:new Date().toISOString()});next.history=(instance.history||[]).slice();next.history.push({from:from,to:to,at:next.updatedAt,meta:meta||{}});return {status:'TRANSITIONED',from:from,to:to,instance:next};}
+return {canTransition:can,transition:move,transitions:transitions};})();

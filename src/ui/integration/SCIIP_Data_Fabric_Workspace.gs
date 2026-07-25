@@ -1,0 +1,2 @@
+/** SCIIP_OS v7.0 Sprint 9 — enterprise data fabric workspace. */
+var SCIIP_DATA_FABRIC_WORKSPACE=(function(){'use strict';function build(ctx){ctx=ctx||{};return {status:'AVAILABLE',workspace:{id:'data-fabric',label:'Data Fabric',sections:{fabricHealth:ctx.fabricHealth||{},sources:ctx.sources||[],dataProducts:ctx.dataProducts||[],federatedQueries:ctx.federatedQueries||[],lineage:ctx.lineage||[],quality:ctx.quality||[],contracts:ctx.contracts||[],recommendations:ctx.recommendations||[]}},generatedAt:new Date().toISOString()};}return {build:build};})();

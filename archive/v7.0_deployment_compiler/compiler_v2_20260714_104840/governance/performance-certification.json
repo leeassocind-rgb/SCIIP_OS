@@ -1,0 +1,32 @@
+{
+  "framework": "SCIIP_PERFORMANCE_CERTIFICATION",
+  "version": "v6.1-phase7-performance",
+  "status": "PASSED",
+  "measuredAt": "2026-07-14T14:17:46.326Z",
+  "node": "20.20.2",
+  "files": 11713,
+  "bytes": 19538104,
+  "filesPerSecond": 138598.98,
+  "peakRssMb": 73.75,
+  "metrics": {
+    "architectureGovernanceMs": 2351.36,
+    "repositoryGovernanceMs": 1973.15,
+    "sourceInventoryMs": 84.51
+  },
+  "thresholds": {
+    "architectureGovernanceMs": 30000,
+    "repositoryGovernanceMs": 30000,
+    "sourceInventoryMs": 5000,
+    "peakRssMb": 768,
+    "minimumFilesPerSecond": 1000
+  },
+  "checks": {
+    "architectureGovernance": true,
+    "repositoryGovernance": true,
+    "sourceInventory": true,
+    "memory": true,
+    "throughput": true
+  },
+  "failures": [],
+  "certificateId": "37F74946587DEC70959B635E"
+}

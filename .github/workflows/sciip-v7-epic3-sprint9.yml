@@ -1,0 +1,18 @@
+name: SCIIP v7 Epic 3 Sprint 9
+on:
+  push:
+    paths:
+      - "src/applications/relationship-intelligence/**"
+      - "tools/tests/sciip-epic3-sprint9-test.js"
+  pull_request:
+    paths:
+      - "src/applications/relationship-intelligence/**"
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm run test:epic3:sprint9

@@ -1,0 +1,1 @@
+const fs=require('fs');const p='package.json';if(!fs.existsSync(p))process.exit(0);const j=JSON.parse(fs.readFileSync(p));j.scripts=j.scripts||{};j.scripts['beta:1.0:certify']='node tools/beta/sciip-beta-1-0-hardening.js';fs.writeFileSync(p,JSON.stringify(j,null,2)+'\n');

@@ -1,0 +1,3 @@
+var SCIIP_S28_EXPLAINABILITY_ASSURANCE_ENGINE=(function(){'use strict';
+function assess(input){var decisions=(input&&input.decisions)||[];var records=decisions.map(function(d){var reasons=(d.reasons||[]),evidence=(d.evidence||[]);var complete=reasons.length>0&&evidence.length>=2;return {decisionId:d.decisionId,explainable:complete,reasons:reasons,evidenceCount:evidence.length,assurance:complete?'HIGH':'ATTENTION_REQUIRED'};});return {status:records.every(function(r){return r.explainable;})?'ASSURED':'ATTENTION_REQUIRED',records:records,explainable:records.filter(function(r){return r.explainable;}).length};}
+return {assess:assess};})();

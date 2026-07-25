@@ -1,0 +1,17 @@
+{
+  "framework": "SCIIP_V7_EPIC_3_SPRINT_9_EXECUTIVE_OPPORTUNITY_COMMAND_WORKSPACE",
+  "version": "v7.0-epic3-sprint9.0",
+  "northStar": "SCIIP_OS is the operating system for industrial real estate. It ingests market data, preserves history, connects knowledge, powers GIS, and enables professionals to analyze, manage, and act from one trusted platform.",
+  "dependency": "SCIIP_V7_EPIC_3_SPRINT_8_AUTONOMOUS_OPPORTUNITY_DISCOVERY",
+  "files": [
+    "src/applications/relationship-intelligence/SCIIP_Executive_Opportunity_Command_Engine.gs",
+    "src/applications/relationship-intelligence/SCIIP_Executive_Opportunity_Command_Application.gs",
+    "src/applications/relationship-intelligence/SCIIP_Executive_Opportunity_Command_Persistence.gs",
+    "src/applications/relationship-intelligence/SCIIP_Epic3_Sprint9_Tests.gs",
+    "tools/tests/sciip-epic3-sprint9-test.js",
+    ".github/workflows/sciip-v7-epic3-sprint9.yml",
+    "manifests/SCIIP_V7_EPIC3_SPRINT9_EXECUTIVE_OPPORTUNITY_COMMAND_WORKSPACE.json",
+    "docs/releases/SCIIP_V7_EPIC3_SPRINT9_README.md"
+  ],
+  "destructiveCommitEnabled": false
+}

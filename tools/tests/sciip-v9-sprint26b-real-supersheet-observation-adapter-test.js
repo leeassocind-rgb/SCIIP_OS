@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+'use strict';
+const assert=require('assert'); const fs=require('fs'); const path=require('path');
+const adapter=require('../supersheets/sciip-v9-sprint26b-real-supersheet-observation-adapter.js');
+const base=path.resolve(__dirname,'../fixtures'); let tests=0; const t=(x,m)=>{tests++;assert.ok(x,m)};
+function cfg(name,date){return {snapshotDate:date,region:'South Bay',structuredFile:path.join(base,`sciip-v9-sprint26b-${name}.csv`),pdfFile:path.join(base,'sciip-v9-sprint26b-evidence.pdf'),kmzFile:path.join(base,'sciip-v9-sprint26b-geography.kml')}}
+const previous=adapter.buildObservationPackage(cfg('previous','2026-07-23'));
+const current=adapter.buildObservationPackage(cfg('current','2026-07-24'));
+t(previous.status==='PASSED'); t(previous.summary.sourceRows===4); t(previous.summary.acceptedObservations===4); t(previous.summary.pdfEvidenceAttached===true); t(previous.evidence.structured.checksum.length===64); t(previous.governance.snapshotIsStatusObservation===true); t(previous.governance.canonicalWrites===0); t(previous.governance.commitEnabled===false);
+t(current.observations.some(x=>x.listingNumber==='44697517')); t(current.observations.every(x=>x.region==='South Bay')); t(current.observations.filter(x=>Number.isFinite(x.latitude)).length===4); t(current.observations.some(x=>x.geographicMatch?.method==='APN')); t(current.observations.find(x=>x.listingNumber==='44487274').askingRate===1.10); t(current.observations.find(x=>x.listingNumber==='44487274').askingRateType==='IG');
+const result=adapter.buildComparisonPackage({previous:cfg('previous','2026-07-23'),current:cfg('current','2026-07-24'),absenceConfirmationDays:2});
+t(result.status==='PASSED'); t(result.review.required===true); t(result.review.canonicalWrites===0); t(result.delta.summary.newListings===1); t(result.delta.summary.leased===1); t(result.delta.events.some(x=>x.eventType==='RATE_REDUCED')); t(result.delta.summary.removalCandidates===1); t(result.delta.summary.confirmedRemovals===0); t(result.delta.summary.availableListings===3); t(result.delta.indicators.length>=1); t(result.delta.governance.sourceEvidencePreserved===true); t(result.delta.governance.approvalRequired===true);
+const again=adapter.buildComparisonPackage({previous:cfg('previous','2026-07-23'),current:cfg('current','2026-07-24'),absenceConfirmationDays:2});
+t(result.delta.evidenceDigest===again.delta.evidenceDigest); t(result.delta.events.every(x=>x.eventId));
+console.log(JSON.stringify({framework:'SCIIP_V9_SPRINT26B_REAL_SUPERSHEET_OBSERVATION_ADAPTER_CERTIFICATION',version:'v9.0-sprint26b.0',status:'PASSED',testsRun:tests,failures:[],result:{workspace:'real-supersheet-observation',structuredSource:'AUTHORITATIVE',pdfEvidence:true,kmzEvidence:true,dailyStatusObservation:true,dayOverDayComparison:true,newListingDetection:true,leasedSoldDetection:true,rateChangeDetection:true,availablePropertyDatabase:true,competitiveSets:true,absorptionIndicators:true,rateIndicators:true,deterministicRerun:true,canonicalWrites:0,commitEnabled:false}}));

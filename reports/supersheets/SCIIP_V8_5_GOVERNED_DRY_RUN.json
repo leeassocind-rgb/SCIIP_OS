@@ -1,0 +1,24 @@
+{
+  "framework": "SCIIP_V8_5_GOVERNED_SUPERSHEET_DRY_RUN",
+  "status": "PASSED",
+  "mode": "DRY_RUN",
+  "productionWrites": 0,
+  "commitEnabled": false,
+  "entities": {
+    "observations": 2582,
+    "properties": 2096,
+    "listings": 2222,
+    "timelines": 2222
+  },
+  "events": {
+    "sourceEvents": 2337,
+    "fieldChanges": 144
+  },
+  "reviewQueue": {
+    "total": 35,
+    "stewardReview": 11,
+    "suppressed": 14,
+    "reprocess": 10
+  },
+  "evidenceDigest": "7b1467b1d59c73bb6a93acf25dac2440f5254b44308e87cecf59b3531bb3cef5"
+}
