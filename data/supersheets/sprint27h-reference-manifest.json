@@ -1,0 +1,122 @@
+{
+  "framework": "SCIIP_V9_SPRINT27H_REFERENCE_MANIFEST",
+  "status": "REFERENCE_INVENTORY_DECLARED",
+  "references": [
+    {
+      "sourceType": "AIR_ZIP",
+      "name": "Current AIR ZIP",
+      "sourceSha256": "897f41b526947cab0f480a87ac5be334a2fb20489d7aadcb81494868fc28609d",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "AIR_EXCEL",
+      "name": "AIR Excel Workbook 1",
+      "sourceSha256": "bd6775f737bb895756e7457caa426e06c730e14446729b3c746911ec70d09666",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "AIR_EXCEL",
+      "name": "AIR Excel Workbook 2",
+      "sourceSha256": "c765d12ff20c9d81713c1bc3282e65dabfb3d93cd60971d03ee754febfdecaf8",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "AIR_EXCEL",
+      "name": "AIR Excel Workbook 3",
+      "sourceSha256": "83cb34462172d15a12974a6ab0f1602dbc87b257647964f920f3c93e1c9baf99",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "AIR_EXCEL",
+      "name": "AIR Excel Workbook 4",
+      "sourceSha256": "f760f8a00994e5586c363db6fd3793920a569c520bc03abd987fb64a0faaacaf",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "AIR_EXCEL",
+      "name": "AIR Excel Workbook 5",
+      "sourceSha256": "0c947fd2aa79d560951ff4df42f20e103a7a4a2bf8bb56caf4b54a4c6915fe4b",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "AIR_EXCEL",
+      "name": "AIR Excel Workbook 6",
+      "sourceSha256": "2a1f03876b92428b2600b25a565891d15fd7ddeb47c5a5df8d186959e7c340c1",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "KMZ",
+      "name": "AIR KMZ 1",
+      "sourceSha256": "cb321be82527712155c94634f3ffb621cd7ff2654da9dc0935166c89cfffa35a",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "KMZ",
+      "name": "AIR KMZ 2",
+      "sourceSha256": "c8153b643f2005fdaf1bebb9f9a454c92a55d3decc928fbf0422f64e456d76f5",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "KMZ",
+      "name": "AIR KMZ 3",
+      "sourceSha256": "183c85af4ce69b7a703a64d0d210b33282ca8da2f80219c914cdc56685e2f114",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "KMZ",
+      "name": "AIR KMZ 4",
+      "sourceSha256": "d1a5f51077deb2e02354ecad12429e9bbba2a1984f9743ae7d3d405e3f6d3766",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "KMZ",
+      "name": "AIR KMZ 5",
+      "sourceSha256": "23e85783024a7bb7f23e03a05a15ac359237f1b0e529e5f5339de894c8f328e8",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "KMZ",
+      "name": "AIR KMZ 6",
+      "sourceSha256": "a1ad8b219f46e80c91432ab3f1693cb3978b9337b1677f970e021f610bab105c",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    },
+    {
+      "sourceType": "LEEPRO",
+      "name": "LeePro Workbook",
+      "sourceSha256": "ccca106d0b769df01964d46e7295f6ba6678776a1a2ab8e8a93a1aede04a3cd5",
+      "expected": {
+        "propertyIdentities": 396
+      }
+    }
+  ],
+  "governance": {
+    "immutable": true,
+    "approvalRequired": true
+  }
+}

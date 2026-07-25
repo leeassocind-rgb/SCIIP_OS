@@ -1,0 +1,1283 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-30",
+  "summary": {
+    "observations": 11,
+    "reviewRequired": 0,
+    "blocked": 0,
+    "lineageComplete": 11
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-30-2026.pdf",
+    "sourceSha256": "2f6b3e160b22e11fe33752060aa1d47f6ec26bb8e1974fcb647a396c19eb63e3",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260630-001",
+      "snapshotDate": "2026-06-30",
+      "address": "1400 Manhattan Ave",
+      "city": "Fullerton",
+      "postalCode": "92831",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 91116,
+      "buildingSf": 102016,
+      "officeSf": 19125,
+      "askingRate": 0.99,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 2,
+      "sourceRow": "Page 2 AIR Listing 2",
+      "notes": "2 91,116 SF $0.99 G 7/2 Existing 22'-26' Sublease Through 2/29/2028, Direct Deal Possible | 1400 Manhattan Ave No NFS Yes Available 1200 91,116 SF Free Standing Building | Fullerton, CA 92831 19,125 SF 102,016 SF No 10/09/2025 2.2:1/204 22-26' Minimum Clear Height | Marketing Flyer 10,900 SF Second Story Office Removable | Lee & Associates - Chris Vassilian 949-790-3102 7 Dock High Loading Doors | Large Fenced Yard/50 Trailer Parking Possible | Rate Reduced $1.18 G -> $0.99 G",
+      "changeDetail": "$1.18 G -> $0.99 G",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-B36BE1DDA8B763393932",
+      "propertyIdentityKey": "1400 MANHATTAN AVE|FULLERTON|92831",
+      "listingVariantId": "LISTING-68B503E6B3BD703D54B1",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "7 Dock High Loading Doors"
+        ],
+        "yard": [
+          "Fenced Yard/50 Trailer Parking Possible"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-30"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1400 Manhattan Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fullerton",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9ACE97859FE4594919F5891D9DC236AB"
+      }
+    },
+    {
+      "candidateId": "DA-20260630-002",
+      "snapshotDate": "2026-06-30",
+      "address": "1400 Manhattan Ave, Unit B",
+      "city": "Fullerton",
+      "postalCode": "92831",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 61241,
+      "buildingSf": 102016,
+      "officeSf": null,
+      "askingRate": 0.99,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 2,
+      "sourceRow": "Page 2 AIR Listing 3",
+      "notes": "3 61,241 SF $0.99 G 5/1 Existing 22'-26' Sublease Through 2/29/2028, Direct Deal Possible | 1400 Manhattan Ave, Unit B No NFS Yes Available 1200 POL 102,016 SF Building | Fullerton, CA 92831 102,016 SF No 10/09/2025 3.3:1/204 22-26' Minimum Clear Height | Marketing Flyer 5 Dock High Loading Doors | Lee & Associates - Chris Vassilian 949-790-3102 Large Fenced Yard/50 Trailer Parking Possible | Rate Reduced $1.18 G -> $0.99 G",
+      "changeDetail": "$1.18 G -> $0.99 G",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-AC2548D255E4BBDD1A2B",
+      "propertyIdentityKey": "1400 MANHATTAN AVE UNIT B|FULLERTON|92831",
+      "listingVariantId": "LISTING-33F739A055CD64AC4DFF",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "5 Dock High Loading Doors"
+        ],
+        "yard": [
+          "Fenced Yard/50 Trailer Parking Possible"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-30"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1400 Manhattan Ave, Unit B",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fullerton",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "4E86B2E536C57865544DDEFCD3D5D5F1"
+      }
+    },
+    {
+      "candidateId": "DA-20260630-003",
+      "snapshotDate": "2026-06-30",
+      "address": "82851 Avenue",
+      "city": "Indio",
+      "postalCode": "92201",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 118641,
+      "buildingSf": 118641,
+      "officeSf": 8561,
+      "askingRate": 1.45,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 2",
+      "notes": "2 118,641 SF $1.45 NNN 1/11 Existing 18'-22' Legacy One-Of-A Kind Corp Distribution Facility | 82851 Avenue 45 No $160.00 Yes Available 8,561 SF of Office | Indio, CA 92201 8,561 SF 118,641 SF Yes 60 Days 18' – 22' Clear Height | One (1) GL Door & Eleven (11) DH Loading Doors | Lee & Associates - Polo Doria, SIOR 760-251-6300 ±60,000 SF Cold Storage Facility (No Freezer) | Located in An Opportunity Zone | New Listing | For Lease & Sale Legacy One-Of-A Kind Corp Distribution Facility",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-630676A8013A46E6DCAD",
+      "propertyIdentityKey": "82851 AVENUE|INDIO|92201",
+      "listingVariantId": "LISTING-9DB8EF298E4D0DFA7A92",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "8,561 SF of Office"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-30"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "82851 Avenue",
+          "changed": true,
+          "removedText": "45",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Indio",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "0B2E6E979CC74F6991AD1D1ACAF5A6F2"
+      }
+    },
+    {
+      "candidateId": "DA-20260630-004",
+      "snapshotDate": "2026-06-30",
+      "address": "6450 Sycamore Canyon Blvd",
+      "city": "Riverside",
+      "postalCode": "92507",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 71100,
+      "buildingSf": 1230,
+      "officeSf": 5806,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 3",
+      "notes": "3 Sycamore Canyon Commerce Center 71,100 SF TBD 11/2 Existing 28' | Sycamore Canyon Commerce Center | 6450 Sycamore Canyon Blvd No NFS ESFR Available 2000 | Free Standing Building | Riverside, CA 92507 5,806 SF 71,100 SF Fncd/Pvd 5,806 SF Ofc Space (4,576 SF North Ofc & 1,230 SF South Ofc) | 02/01/2027 | Marketing Flyer 28' Clear Height, ESFR Sprinkler System | Stream Realty Partners, LP - Brad Yates 949-285-2535, Stefan Pastor 646-352-1113 Eleven (11) Dock High Doors and Two (2) Grade Level Door | 2,000 Amps, 277/480 Volts Power | New Listing 2,000 Amps, 277/480 Volts Power | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-8B513929A24C04FE5FF2",
+      "propertyIdentityKey": "6450 SYCAMORE CANYON BLVD|RIVERSIDE|92507",
+      "listingVariantId": "LISTING-455A36664AD8F2E5C81A",
+      "structuredNotes": {
+        "power": [
+          "000 Amps",
+          "277/480 Volts Power"
+        ],
+        "loading": [
+          "Dock High Doors and Two (2) Grade Level Door"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-30"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "6450 Sycamore Canyon Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Riverside",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Riverside"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "322A19F59CD83CA99D0D6DCDFA8F76C6"
+      }
+    },
+    {
+      "candidateId": "DA-20260630-005",
+      "snapshotDate": "2026-06-30",
+      "address": "1690 S Milliken Ave",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 52387,
+      "buildingSf": 52387,
+      "officeSf": 2207,
+      "askingRate": 1.2,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 4",
+      "notes": "4 52,387 SF $1.20 G 5/1 Existing 27' Sublease Through 2/29/2028 | 1690 S Milliken Ave No NFS ESFR Leased 800 ±52,387 SF Single Tenant Industrial Building | Ontario, CA 91761 2,207 SF 52,387 SF Fncd/Pvd 60 Days Direct Lease Options Now Possible, Call For Details | Marketing Flyer 5 Dock High Doors w/Pit Levelers & 1 Ground Level Door | Lee & Associates - Ryan De Guzman 909-989-7771, John Seoane 909-373-2946 ESFR Sprinkler System (K-17 @ 52 PSI) | 27' Clearance Height, Fully Secured Yard | Subleased Please Contact Brokers For Details",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-DB83E2C3F18B30DA1B8B",
+      "propertyIdentityKey": "1690 S MILLIKEN AVE|ONTARIO|91761",
+      "listingVariantId": "LISTING-F92449A282C1B3739003",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "5 Dock High Doors w/Pit Levelers & 1 Ground Level Door"
+        ],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-30"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1690 S Milliken Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "F0115E19CF980BD4EAF112351B37D6B1"
+      }
+    },
+    {
+      "candidateId": "DA-20260630-006",
+      "snapshotDate": "2026-06-30",
+      "address": "21600 Walnut Ave",
+      "city": "Grand Terrace",
+      "postalCode": "92313",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 187308,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 12",
+      "notes": "12 187,308 SF NFL 4,470 SF Available Gas: Y 4.3 AC M2 Zoned Industrial Fully Fenced Yard w/ 4,470 SF of Bldgs | 21600 Walnut Ave 4.30 Ac $30.94 Fncd/Pvd Industrial Water: Hard to Find Large Yard for Outdoor Storage, | Grand Terrace, CA 92313 No $5,795,000 No M2 Sewer: Truck Parking, Trailers or Containers | Terrace Ave/Barton Rd Electric: Great Central IE Location for Tuck Yard/ Distribution | Industrial Partners Group - Martin Smith 424-229-4248 | Fiber: Just Off 215 Fwy at Barton Road | Price Reduced | $5,999,000 -> $5,795,000",
+      "changeDetail": "$5,999,000 -> $5,795,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-E0E8C1122828645B2BD1",
+      "propertyIdentityKey": "21600 WALNUT AVE|GRAND TERRACE|92313",
+      "listingVariantId": "LISTING-A3284868BACAE1A1751B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Fenced Yard w/ 4"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-30"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "21600 Walnut Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Grand Terrace",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "C5B010FB39A85DC37422E14393DD3DEB"
+      }
+    },
+    {
+      "candidateId": "DA-20260630-007",
+      "snapshotDate": "2026-06-30",
+      "address": "SE of Tussing Ranch Rd and Troutdale Rd",
+      "city": "Apple Valley",
+      "postalCode": "92308",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 180774,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 13",
+      "notes": "13 180,774 SF NFL 0 SF Available Gas: ±4.15 Acres Available | SE of Tussing Ranch Rd and Troutdale 4.15 Ac $1.11 Yes Residential Water: Residential Vacant Land | Rd | Apple Valley, CA 92308 Development | No $200,000 R-A Sewer: | Kursch Group - Ryan Travis 760-983-2594 Electric: | Price Reduced Fiber: | $275,000 -> $200,000",
+      "changeDetail": "$275,000 -> $200,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-39D78F9E54C9D1052D9F",
+      "propertyIdentityKey": "SE OF TUSSING RANCH RD AND TROUTDALE RD|APPLE VALLEY|92308",
+      "listingVariantId": "LISTING-E0900929F614D51B02A5",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-30"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SE of Tussing Ranch Rd and Troutdale Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Apple Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "33E64391B38F883F7B558B2123114DC1"
+      }
+    },
+    {
+      "candidateId": "DA-20260630-008",
+      "snapshotDate": "2026-06-30",
+      "address": "2023 S Bon View Ave",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 83200,
+      "buildingSf": 1700,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "Sale Comp",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 14",
+      "notes": "14 83,200 SF NFL 3,300 SF Available Gas: ±1.91 Acres of Land | 2023 S Bon View Ave 1.91 Ac $58.89 Fncd/Pvd Industrial Water: Y ±1,600 SF Warehouse | Ontario, CA 91761 No $4,900,000 No IL Sewer: Y ±1,700 SF Office | S Bon View Ave/ E Cedar St Electric: Y Fully Fenced and Secured | Lee & Associates - Bobby Martinez 949-790-3104, Steffan Morris 949- | Marketing Flyer Fiber: CUP in Place for Contractor's Storage Yard | 790-3190 | Updated Information | New Marketing Materials | 64,680 SF NFL 2,088 SF Sold Gas: Y ±1.48 Acres | 15 | 2268-2288 Gardena St 1.48 Ac $19.33 Yes Retail Water: Three 21,560 SF Lots | San Bernardino, CA 92408 No $1,250,000 No CR-3 Sewer: 2288 S Gardena St - 2 Bed/1 Bath 1,128 SF | Gardena St/Caroline St Electric: 2278 S Gardena St - Vacant Land | Sid Lao & Associates - Sid Lao, CCIM 951-339-9989 | Marketing Flyer Fiber: 2268 S Gardena St - 2 Bed/1 Bath 696 SF | Seller Will Sell Individual Parcels Separately | Sold | Reasearch in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-031469DFAB607F92D124",
+      "propertyIdentityKey": "2023 S BON VIEW AVE|ONTARIO|91761",
+      "listingVariantId": "LISTING-AE3F28A279824B1067B9",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "1,700 SF Office"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "LISTING_STATUS_CHANGED",
+          "field": "listingStatus",
+          "from": "Available",
+          "to": "Sold"
+        },
+        {
+          "type": "TRANSACTION_TYPE_CHANGED",
+          "field": "transactionType",
+          "from": null,
+          "to": "Sale Comp"
+        },
+        {
+          "type": "EVENT_CHANGED",
+          "field": "eventCode",
+          "from": "PRICE_REDUCED",
+          "to": "SOLD"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2023 S Bon View Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "FE3E144C4F89CAD285D995F1B2557DD5"
+      }
+    },
+    {
+      "candidateId": "DA-20260630-009",
+      "snapshotDate": "2026-06-30",
+      "address": "26100-26140 Avenue",
+      "city": "Valencia",
+      "postalCode": "91355",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 80245,
+      "buildingSf": 80245,
+      "officeSf": 4078,
+      "askingRate": 1.39,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 2",
+      "notes": "2 80,245 SF $1.39 NNN 5/4 Existing 24'-28' Two Building Campus Feel | 26100-26140 Avenue Hall No NFS Yes Available 2000 24'-28' Clear Height/2000 Amps Power | Valencia, CA 91355 4,078 SF 80,245 SF Fenced 07/15/2026 2.1:1/169 Dock High Doors/Fenced Yard & Parking | Great for Distribution or Manufacturing | Colliers - Matthew Dierckman 818-334-1870, David Harding 818-334-1880, Greg Excellent Street Presence & Freeway Access | Geraci 818-334-1844, William Walk 818-334-1898 | New Listing | For Lease Two Building Campus Feel",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-1A6008899DD0B03FB2B9",
+      "propertyIdentityKey": "26100 26140 AVENUE|VALENCIA|91355",
+      "listingVariantId": "LISTING-13B21DC4BDFB3B2378AB",
+      "structuredNotes": {
+        "power": [
+          "2000 Amps Power"
+        ],
+        "loading": [
+          "169 Dock High Doors/Fenced Yard & Parking"
+        ],
+        "yard": [
+          "Fenced Yard & Parking"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-30"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "26100-26140 Avenue",
+          "changed": true,
+          "removedText": "Hall",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Valencia",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "2D38387489E38A383862CBCBDC99F1D4"
+      }
+    },
+    {
+      "candidateId": "DA-20260630-010",
+      "snapshotDate": "2026-06-30",
+      "address": "14428 Valley Blvd",
+      "city": "City of Industry",
+      "postalCode": "91746",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 140720,
+      "buildingSf": 140720,
+      "officeSf": 10000,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 2",
+      "notes": "2 Industry Valley Center 140,720 SF TBD 14/1 Proposed 40' | Brand New State-of-the-Art Construction | 14428 Valley Blvd N/A TBD ESFR Available 4000 | 40' Min Warehouse Clearance | City of Industry, CA 91746 10,000 SF 140,720 SF Fncd/Pvd 14 Dock High Doors w/9 Levelers | Completion 1.4:1/191 | Marketing Flyer 135' Truck Depth | CBRE - Jason Chao 909-418-2131, Lynn Knox 909-418-2112, Case Dahlen 909-418- ESFR Sprinklers | 2089, Jasmine Li 909-418-2219 | New Listing Brand New State-of-the-Art Construction | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-564A232FC7EA124B612F",
+      "propertyIdentityKey": "14428 VALLEY BLVD|CITY OF INDUSTRY|91746",
+      "listingVariantId": "LISTING-C30267BF301F7E0FD98A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "14 Dock High Doors w/9 Levelers"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-30"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14428 Valley Blvd",
+          "changed": true,
+          "removedText": "40' Min Warehouse Clearance",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "City of Industry",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9B8D16E5208B87B4B1CE70E8EF5E9274"
+      }
+    },
+    {
+      "candidateId": "DA-20260630-011",
+      "snapshotDate": "2026-06-30",
+      "address": "14428 Valley Blvd",
+      "city": "City of Industry",
+      "postalCode": "91746",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 273121,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 5",
+      "notes": "5 Industry Valley Center 273,121 SF NFL 140,720 SF Available Gas: Entitled Land For Sale | 14428 Valley Blvd 6.27 Ac TBD Yes Industrial Water: Y Fully Entitled and Permit Ready | City of Industry, CA 91746 No TBD No IDM Sewer: N Zoned as \"M\" Industrial Zoning | S 6th St/Valley Blvd Electric: Y Up to 140,720 SF Building Approved | CBRE - Jason Chao 909-418-2131, Lynn Knox 909-418-2112, Case | Marketing Flyer Dahlen 909-418-2089, Jasmine Li 909-418-2219 Fiber: | New Listing | For Sale Fully Entitled and Permit Ready | 6/30/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-564A232FC7EA124B612F",
+      "propertyIdentityKey": "14428 VALLEY BLVD|CITY OF INDUSTRY|91746",
+      "listingVariantId": "LISTING-6F347F66B0C917DD7C1C",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 140720,
+          "to": 273121
+        },
+        {
+          "type": "RATE_TYPE_CHANGED",
+          "field": "askingRateType",
+          "from": "TBD",
+          "to": "NFL"
+        },
+        {
+          "type": "TRANSACTION_TYPE_CHANGED",
+          "field": "transactionType",
+          "from": "For Lease",
+          "to": "For Sale"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14428 Valley Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "City of Industry",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "C7D1A1CDAB44DFCBD403AF91E999EB89"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

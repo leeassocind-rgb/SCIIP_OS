@@ -1,0 +1,1473 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-29",
+  "summary": {
+    "observations": 13,
+    "reviewRequired": 1,
+    "blocked": 0,
+    "lineageComplete": 13
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-29-2026.pdf",
+    "sourceSha256": "54414c398ddfd552b421adc8a43a23344177bbc539fc389bf30cbf96a25ad506",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260629-001",
+      "snapshotDate": "2026-06-29",
+      "address": "4601 S Boyle Ave",
+      "city": "Vernon",
+      "postalCode": "90058",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 65280,
+      "buildingSf": 65280,
+      "officeSf": 7350,
+      "askingRate": 0.72,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 1",
+      "notes": "1 65,280 SF $0.72 G 10/1 Existing 16' Free Standing Building | 4601 S Boyle Ave Yes NFS Yes Leased 400 Not a Teaser Rate | Vernon, CA 90058 7,350 SF 65,280 SF Fncd/Pvd Now 0.9:1/60 Large Showroom | Marketing Flyer 10 Dock High Loading Positions | CBRE - El Segundo - Evan Crawford 213-613-3332, Jeff Stephens 213-613-3761, Private/Fenced Yard | Jack Mergenthaler 310-363-4946, John Stephens 626-862-5215 | Leased Co-Op: Ian Ameche (Lee & Associates)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-537B5BD7785A67335633",
+      "propertyIdentityKey": "4601 S BOYLE AVE|VERNON|90058",
+      "listingVariantId": "LISTING-8170FC79B15FF4FC3D48",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "10 Dock High Loading Positions"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "4601 S Boyle Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Vernon",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "F351D1F790C690CE37AF3F910CE91566"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-002",
+      "snapshotDate": "2026-06-29",
+      "address": "11810 Center St",
+      "city": "South Gate",
+      "postalCode": "90280",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 59960,
+      "buildingSf": 59960,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 2",
+      "notes": "2 59,960 SF TBD 9/3 Existing 24'-30' Food Processing, Cold Storage & Distribution Facility | 11810 Center St No NFS No Leased TBD Brand New Interior Construction | South Gate, CA 90280 TBD 59,960 SF Fncd/Pvd 90 Days Freezers Coolers, and Floor Drains! | Marketing Flyer To Be Delivered as USDA/ SQF Ready | Lee & Associates - Adam Vilan 323-767-2047, Peter D Bacci 323-767-2022 24/7/365 Security Monitoring Available! | Can Be Combined With Any Other Units | Leased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-C89BB100C121FD8FD28C",
+      "propertyIdentityKey": "11810 CENTER ST|SOUTH GATE|90280",
+      "listingVariantId": "LISTING-849164C422690EFE99BC",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "11810 Center St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "South Gate",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9953DFF337DE054E39C30B4F332BC621"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-003",
+      "snapshotDate": "2026-06-29",
+      "address": "14445 Alondra Blvd",
+      "city": "La Mirada",
+      "postalCode": "90638",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 199588,
+      "buildingSf": 199588,
+      "officeSf": 12753,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 1",
+      "notes": "1 199,588 SF TBD 35/2 Existing 32' 32' Minimum Clear Height | 14445 Alondra Blvd Yes NFS ESFR Leased 1000 ESFR Sprinkler System (K-25 Heads) | La Mirada, CA 90638 12,753 SF 199,588 SF Fncd/Pvd Now 0.7:1/141 35 Dock High Doors | Marketing Flyer Fenced Concrete Yard - 23 Trailer Stalls | JLL - Cameron Driscoll 949-885-2976, Luke McDaniel 949-885-2974 Heavy Power - Expandable to 3,000 Amps | Immediate Access to 91 and 5 Freeways | Leased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-7398C702EBA4EC3B14C8",
+      "propertyIdentityKey": "14445 ALONDRA BLVD|LA MIRADA|90638",
+      "listingVariantId": "LISTING-0B498BA8A43141D60C2C",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [
+          "35 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14445 Alondra Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "La Mirada",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "La Mirada"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9C10CC3D9199D19141B3E0897241BF72"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-004",
+      "snapshotDate": "2026-06-29",
+      "address": "S Melrose St",
+      "city": "Placentia",
+      "postalCode": "92870",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 72736,
+      "buildingSf": 72736,
+      "officeSf": 4561,
+      "askingRate": 1.35,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 2",
+      "notes": "2 72,736 SF $1.35 NNN 5/7 Existing 24' Freestanding Building, Now Vacant and Refurbishments Underway | 567 S Melrose St Yes NFS Yes Available 2000 Low Net Fees $0.20/sf | Placentia, CA 92870 4,561 SF 72,736 SF Fncd/Pvd Now 1.5:1/109 2,000 Amps, 277/480 Volt | Marketing Flyer 7 Grade Level Loading Doors, 5 Dock High Doors | Voit Real Estate Services - Michael Hefner 714-935-2331, Mike Vernick 714-935- Freeway Frontage | 2354 Fully Gated & Secured Site | Back on Market Now Vacant and Refurbishments Underway",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-ED24DA89E07766B53C7A",
+      "propertyIdentityKey": "S MELROSE ST|PLACENTIA|92870",
+      "listingVariantId": "LISTING-566B20FEA7FF5FF34F31",
+      "structuredNotes": {
+        "power": [
+          "000 Amps",
+          "277/480 Volt"
+        ],
+        "loading": [
+          "5 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "S Melrose St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Placentia",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.84,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "2339C80562A5FF56F318DA23E310CBCE"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-005",
+      "snapshotDate": "2026-06-29",
+      "address": "9225 Stellar Ct, Unit A/C",
+      "city": "Corona",
+      "postalCode": "92883",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 56787,
+      "buildingSf": 3495,
+      "officeSf": 11128,
+      "askingRate": 1.45,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 3",
+      "notes": "3 Wildrose Business Park 56,787 SF $1.45 G 11/6 Existing 30' Wildrose Business Park | 9225 Stellar Ct, Unit A/C No NFS Yes Available 1600 POL 61,887 SF Building | Corona, CA 92883 11,128 SF 61,887 SF Fncd/Pvd 08/01/2026 0.4:1/20 7,633 SF of 1st Floor Office, 3,495 SF of 2nd Floor Office | Marketing Flyer 6 Ground Level Doors, 11 Dock High Doors | Lee & Associates - Larry Null 951-276-3616, Justin B Null, SIOR 951-276-3634 30' Clear Height in Warehouse in Suite A | Secured Concrete Yard Area | New Rate Now Available @ $1.45 G",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_CHANGED",
+      "propertyIdentityId": "PROP-0520A76EFA54A18745FE",
+      "propertyIdentityKey": "9225 STELLAR CT UNIT A C|CORONA|92883",
+      "listingVariantId": "LISTING-FB68579BEDB6525FF598",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "6 Ground Level Doors",
+          "11 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "9225 Stellar Ct, Unit A/C",
+          "changed": false,
+          "removedText": null,
+          "method": "unchanged"
+        },
+        "city": {
+          "value": "Corona",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Rate",
+        "normalizedEventCode": "RATE_CHANGED",
+        "normalizedEventLabel": "Rate Changed",
+        "confidence": {
+          "score": 0.88,
+          "parts": {
+            "addressValidity": 0.16,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "BAB23E7BA86731E1F82CE93D072B3B97"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-006",
+      "snapshotDate": "2026-06-29",
+      "address": "10415 8th St",
+      "city": "Rancho Cucamonga",
+      "postalCode": "91730",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 120628,
+      "buildingSf": 6870,
+      "officeSf": 6870,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 1",
+      "notes": "1 120,628 SF TBD 12/1 Existing 32' Prologis Rancho Cucamonga Distribution Center 12 | 10415 8th St No NFS ESFR Available 2000-4000 Free Standing Building | Rancho Cucamonga, CA 91730 6,870 SF 120,628 SF Paved 11/01/2026 0.7:1/85 6,870 SF of Office Space | 32' Minimum Warehouse Clearance Height | Daum Commercial - Eric Fikse 909-652-9056, Cole Fikse 909-980-1234 12 Dock High Doors, 1 Drive-In Door | Immediate Access to 10 & 15 Fwys | New Listing | For Lease 12 Dock High Doors, 1 Drive-In Door",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-E6CD05B4617DEB1FA210",
+      "propertyIdentityKey": "10415 8TH ST|RANCHO CUCAMONGA|91730",
+      "listingVariantId": "LISTING-7982FD0227281D8441C1",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "12 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "6,870 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "10415 8th St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rancho Cucamonga",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "7418E3D6BB997BC3E537F69A4DF9ADC5"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-007",
+      "snapshotDate": "2026-06-29",
+      "address": "16025 Slover Ave",
+      "city": "Fontana",
+      "postalCode": "92337",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 424710,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Available SF Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 14",
+      "notes": "14 424,710 SF TBD 0 SF Available Gas: 9.75 Acres of Land | 16025 Slover Ave 9.75 Ac NFS Fncd/Pvd Industrial Water: Y Secured Property | Fontana, CA 92337 No NFS No SP Sewer: Y Truck and Trailer Use is Permitted | Slover Ave/Citrus Ave Close Proximity to 10 & 15 Fwys | Voit Real Estate Services - Ryan Lal, SIOR 909-545-8020, Juan Gutierrez Electric: Y | Marketing Flyer Fiber: Available For Month-to-Month Lease | 909-545-8008, Dante Borruso 909-775-4475 | New Size | 9.75 Acres Now Available",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "AVAILABLE_SF_CHANGED",
+      "propertyIdentityId": "PROP-530A50367274547AE1AD",
+      "propertyIdentityKey": "16025 SLOVER AVE|FONTANA|92337",
+      "listingVariantId": "LISTING-15B5C6CE276515AD8E20",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "16025 Slover Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "AVAILABLE_SF_CHANGED",
+        "normalizedEventLabel": "Available SF Changed",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "01B68C3F2C84757DA2B0B76E4591C259"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-008",
+      "snapshotDate": "2026-06-29",
+      "address": "28939 Ave",
+      "city": "Valencia",
+      "postalCode": "91355",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 81482,
+      "buildingSf": 206930,
+      "officeSf": 4088,
+      "askingRate": 1.25,
+      "askingRateType": "NET",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 1",
+      "notes": "1 Valencia Commerce Center 81,482 SF $1.25 Net 12/1 Existing 30' Sublease Through 12/31/2027 - Longer Term Available | 28939 Ave Williams No NFS ESFR Available TBD Fully Racked High-Tech Drop-Shipping Facility | Valencia, CA 91355 4,088 SF 206,930 SF Fncd/Pvd 30 Days 1.0:1/85 Ideal for E-Commerce Operations | 30' Minimum Ceiling Height | NAI Capital - David Young 818-742-1651, Chad Gahr 818-742-1626, Scott Young 12 Dock High Loading Position | 818-742-1648 ESFR Sprinkler System, OpEx: $0.07 PSF | New Listing | For Lease Sublease Through 12/31/2027 - Longer Term Available",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-BD34FA7DF3FF7CDB4D74",
+      "propertyIdentityKey": "28939 AVE|VALENCIA|91355",
+      "listingVariantId": "LISTING-67D8A6944B7FDBA26849",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "12 Dock High Loading Position"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "28939 Ave",
+          "changed": true,
+          "removedText": "Williams",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Valencia",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "38EF06217D2BAD785AAD378103695F81"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-009",
+      "snapshotDate": "2026-06-29",
+      "address": "1550 Eubank Ave",
+      "city": "Wilmington",
+      "postalCode": "90744",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 410770,
+      "buildingSf": 217800,
+      "officeSf": null,
+      "askingRate": 0.55,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "Rate Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 6",
+      "notes": "6 410,770 SF $0.55 NNN 3,000 SF Available Gas: Sublease Through 8/1/2029; Low Net to Gross Fees | 1550 Eubank Ave 9.43 Ac NFS Fncd/Pvd Industrial Water: Y ±5-9.43 Acres of Land Avail, Paved Yard w/ Dirt on Top | Wilmington, CA 90744 217,800 SF NFS No MR2 Sewer: Large Office w/ Multiple Rooms and Covered Shop | Eubank Ave/Lomita Blvd Electric: Y Legally Permitted Wash Pad | Voit Real Estate Services - Ryan Huguenard 310-819-7077, David Fults | Marketing Flyer Fiber: CUP in Place for Trucking, Container Storage, Stacking, and Repair | 323-791-0038 Paved Yard w/ Dirt on Top | New Rate | Now Available @ $0.55 NNN",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_CHANGED",
+      "propertyIdentityId": "PROP-5C6D971B29995DBD9C11",
+      "propertyIdentityKey": "1550 EUBANK AVE|WILMINGTON|90744",
+      "listingVariantId": "LISTING-230692507BA508FFFEAB",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Paved Yard w/ Dirt on Top"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "ASKING_RATE_CHANGED",
+          "field": "askingRate",
+          "from": 0.49,
+          "to": 0.55
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1550 Eubank Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Wilmington",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Rate",
+        "normalizedEventCode": "RATE_CHANGED",
+        "normalizedEventLabel": "Rate Changed",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "17B54D89BB21331ADA5FF46D2CCB200C"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-010",
+      "snapshotDate": "2026-06-29",
+      "address": "1400 Atlantic Ave",
+      "city": "Compton",
+      "postalCode": "90723",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 295337,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.6,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 7",
+      "notes": "7 295,337 SF $0.60 NNN 0 SF Available Gas: N Highly Secured/Lit Truck & Trailer Storage Yard | 1400 Atlantic Ave 6.78 Ac NFS Fncd/Pvd Industrial Water: Y Immediate Access to 710 Fwy | Compton, CA 90723 No NFS No COCL-ML Sewer: N 13.4 Miles to The World Ports of Los Angeles & Long Beach | Atlantic Ave/E Alondra Blvd Electric: Y 16.7 Miles to LAX | Colliers - El Segundo - Bret Quinlan 310-408-8696, James Hooks 310- | Marketing Flyer Fiber: CUP For Container Stacking in Place | 897-1789, Jenny Edwards 310-745-7506 | New Listing | For Lease Highly Secured/Lit Truck & Trailer Storage Yard",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-4C5B73ED4240CB3F4932",
+      "propertyIdentityKey": "1400 ATLANTIC AVE|COMPTON|90723",
+      "listingVariantId": "LISTING-64C88F238EE983D32EB0",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1400 Atlantic Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Compton",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "B61683C124A81126D4F1D345690B46D8"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-011",
+      "snapshotDate": "2026-06-29",
+      "address": "11220 Wright Rd",
+      "city": "Lynwood",
+      "postalCode": "90262",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 84942,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 8",
+      "notes": "8 84,942 SF NFL 36,734 SF Available Gas: Y Priced At Land Value! | 11220 Wright Rd 1.95 Ac $70.64 Fncd/Pvd Industrial Water: Y Multiple Buildings That Can Remain or Be Demolished | Lynwood, CA 90262 No $6,000,000 No M Sewer: Y Facility Was Renovated in 1992 | Martin Luther King Jr Blvd/Wright Rd Electric: Y Main Buildings and Covered Storage Areas Are Sprinklered | Colliers - Scott A. Heaton 323-278-3110, Riley Heaton 323-278-3118 | Marketing Flyer Fiber: Immediate Access to 710 & 105 Freeways | Located in the City of Lynwood Manufacturing (M) Zone | Price Reduced | $6,950,000 -> $6,000,000",
+      "changeDetail": "$6,950,000 -> $6,000,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-FBC42603AFE3A6C3A5F0",
+      "propertyIdentityKey": "11220 WRIGHT RD|LYNWOOD|90262",
+      "listingVariantId": "LISTING-6C358AC4DA9E6A579CC9",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "11220 Wright Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Lynwood",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A7FB32902BE5FDC4EA322FB7C6E9C8AD"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-012",
+      "snapshotDate": "2026-06-29",
+      "address": "8911 Bellanca Ave",
+      "city": "Los Angeles",
+      "postalCode": "90045",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 60813,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 9",
+      "notes": "9 60,813 SF TBD 0 SF Leased Gas: Parking Lot for Lease | 8911 Bellanca Ave 1.40 Ac NFS Fenced Retail Water: 178 Striped Parking Spaces | Los Angeles, CA 90045 No NFS No MR1 Sewer: Site Can Support up To 320 Cars | Bellanca Ave/W Arbor Vitae St Electric: Parking Control Access System Available | Kidder Mathews - James Cho 213-225-7255 | Marketing Flyer Fiber: | Leased | Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-0C2D391DB03378FB6652",
+      "propertyIdentityKey": "8911 BELLANCA AVE|LOS ANGELES|90045",
+      "listingVariantId": "LISTING-C2BBCA019D4BF0329C32",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "8911 Bellanca Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Los Angeles",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "F454798F75368D43E57BE471801BFD46"
+      }
+    },
+    {
+      "candidateId": "DA-20260629-013",
+      "snapshotDate": "2026-06-29",
+      "address": "W 140 St",
+      "city": "Los Angeles",
+      "postalCode": "90248",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 57692,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.5,
+      "askingRateType": null,
+      "askingPrice": null,
+      "transactionType": "For Sale or Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 10",
+      "notes": "10 57,692 SF $0.50 1,600 SF Available Gas: 1.32 Acres of Land for Sale | 606 W 140 St 1.32 Ac NFS Fenced Industrial Water: 1,600 SF Warehouse and Office Space | Los Angeles, CA 90248 No NFS No M2 Sewer: Two (2) Access Points | Figueroa St/W 140 St 110 Fwy Frontage | Matthews Real Estate Investment Services | San Diego - Sam Sukut 949- Electric: | Marketing Flyer 939-1219, Duncan Burns 310-209-8348, Chris Nelson 949-280-6217, Fiber: | Jackson Pollock 949-527-0073 | New Listing | For Lease 1.32 Acres of Land for Sale | 6/29/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-581FFCA076E22B7B30B4",
+      "propertyIdentityKey": "W 140 ST|LOS ANGELES|90248",
+      "listingVariantId": "LISTING-BE6AC492C96CB33B8152",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-29"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W 140 St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Los Angeles",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.134Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A0DD3BAA08F642A77F20202D68942132"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

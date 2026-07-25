@@ -1,0 +1,1708 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-07-21",
+  "summary": {
+    "observations": 15,
+    "reviewRequired": 0,
+    "blocked": 0,
+    "lineageComplete": 15
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-21-2026.pdf",
+    "sourceSha256": "539391bcc49a618ea142a5755ffa6c284cd019fab8d4c3c1730a100621956776",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260721-001",
+      "snapshotDate": "2026-07-21",
+      "address": "5530 Rickenbacker Rd",
+      "city": "Bell",
+      "postalCode": "90201",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 94078,
+      "buildingSf": 4095,
+      "officeSf": 4095,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 1",
+      "notes": "1 Pacific Business Center 94,078 SF TBD 19/1 Existing 32' | Class A State-of-the-Art Building | 5530 Rickenbacker Rd No NFS ESFR Available 600 | 19 DH Positions (Each w/ EOD Levelers) /1 GL Via Ramp | Bell, CA 90201 4,095 SF 218,598 SF Fncd/Pvd 32' Clearance / ESFR Sprinkler System / 4,095 SF Office | 30 Days 0.5:1/48 | Marketing Flyer 600 Amps (Potentially Expandable to 1800 Amps) | Newmark - Los Angeles - South Bay - Jeff Sanita 310-491-2003, John McMillan 310- ±135' 100% Concrete Truck Court / Fenced & Secured Yard | 491-2048, Andrew Conroy 310-491-2085 Direct 710 & 5 Freeway Access | New Listing 32' Clearance / ESFR Sprinkler System / 4,095 SF Office | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-60B273127D440D532581",
+      "propertyIdentityKey": "5530 RICKENBACKER RD|BELL|90201",
+      "listingVariantId": "LISTING-2E73236F398DED728A91",
+      "structuredNotes": {
+        "power": [
+          "600 Amps (Potentially Expandable to 1800 Amps)"
+        ],
+        "loading": [
+          "1 GL Via Ramp",
+          "19 DH Positions (Each w/ EOD Levelers) /1 GL Via Ramp"
+        ],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [
+          "4,095 SF Office"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "5530 Rickenbacker Rd",
+          "changed": true,
+          "removedText": "DH Positions (Each w/ EOD Levelers) /1 GL Via Ramp",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Bell",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Bell"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "110DF9E95206A126A6B104F1FD7E8041"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-002",
+      "snapshotDate": "2026-07-21",
+      "address": "1334 W 11th Pl",
+      "city": "Los Angeles",
+      "postalCode": "90015",
+      "region": "LA Central",
+      "propertyType": "Land",
+      "availableSf": 68727,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 2,
+      "sourceRow": "Page 2 AIR Listing 6",
+      "notes": "6 68,727 SF NFL 0 SF Available Gas: Subject To Bankruptcy Court Approval | 1334 W 11th Pl 1.58 Ac TBD Fncd/Pvd Industrial Water: Zoned CM10 | Los Angeles, CA 90015 No TBD No CM10 Sewer: Asphalt Paved & Fenced | Albany St/ W 12th St Electric: Y Allows For Commercial Manufacturing & ED 1 Eligible | KW Commercial - Patrick Sharples 714-293-2792 | Fiber: Located In Enterprise & Transit Priority Zones | New Listing | For Sale Asphalt Paved & Fenced | 7/21/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-4A43E63CA8479F4F38F8",
+      "propertyIdentityKey": "1334 W 11TH PL|LOS ANGELES|90015",
+      "listingVariantId": "LISTING-A293D185140F30076197",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1334 W 11th Pl",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Los Angeles",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "53C4D21E1C51958940D258AA1E3193A9"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-003",
+      "snapshotDate": "2026-07-21",
+      "address": "16220 Carmenita Rd",
+      "city": "Cerritos",
+      "postalCode": "90703",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 108253,
+      "buildingSf": 201434,
+      "officeSf": 6030,
+      "askingRate": 1.5,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 1",
+      "notes": "1 108,253 SF $1.50 G 12/1 Existing 24' Major Refurbishment Complete! | 16220 Carmenita Rd Yes NFS Yes Available 600 24' Clear / 12 Dock High Positions | Cerritos, CA 90703 6,030 SF 201,434 SF Fncd/Pvd Now 0.8:1/92 Fenced Yard/ .45/3000 Sprinklers | Marketing Flyer Direct Access to the 5 & 91 Freeways | Newmark - Los Angeles - South Bay - John McMillan 310-491-2048, Connor Reeves | 310-491-2088 | New Listing 24' Clear / 12 Dock High Positions | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-45DE4E56202319B19466",
+      "propertyIdentityKey": "16220 CARMENITA RD|CERRITOS|90703",
+      "listingVariantId": "LISTING-E26588C00F75C93FDF2E",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "12 Dock High Positions"
+        ],
+        "yard": [
+          "Fenced Yard/"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "16220 Carmenita Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Cerritos",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Cerritos"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "72C05A41AEAD0A1A2C7D17CA121C1E10"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-004",
+      "snapshotDate": "2026-07-21",
+      "address": "11700 Monarch St",
+      "city": "Garden Grove",
+      "postalCode": "92841",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 107000,
+      "buildingSf": 107000,
+      "officeSf": 18000,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 2",
+      "notes": "2 107,000 SF TBD 5/2 Existing 24' Free Standing Building | 11700 Monarch St Yes $295.00 Yes Available 4000 Over 4,000 Amps Heavy Power (Verify) | Garden Grove, CA 92841 18,000 SF 107,000 SF Fenced Now 0.9:1/92 24' Clear Height | Marketing Flyer 5 DH Doors, 2 GL Doors | The REEF Group - Blake Garrett 949-375-3609 Secured Fenced Yard | NNN Fee: $0.22 PSF | Updated Information Negotiable Rate",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-E77904C1CC7E6AFD832B",
+      "propertyIdentityKey": "11700 MONARCH ST|GARDEN GROVE|92841",
+      "listingVariantId": "LISTING-BD191B89C69ED45C8F0D",
+      "structuredNotes": {
+        "power": [
+          "000 Amps Heavy Power (Verify)"
+        ],
+        "loading": [
+          "5 DH Doors",
+          "2 GL Doors"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "11700 Monarch St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Garden Grove",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "D4AACC3A3F1FCFFDEBC9CD044E086DA8"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-005",
+      "snapshotDate": "2026-07-21",
+      "address": "10400 Amargosa Rd",
+      "city": "Hesperia",
+      "postalCode": "92345",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 428185,
+      "buildingSf": 428185,
+      "officeSf": 8000,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 1",
+      "notes": "1 428,185 SF TBD 49/2 U/C 36' Free Standing Building | 10400 Amargosa Rd N/A TBD Available 4000 ±8,000 SF Office Space | Hesperia, CA 92345 8,000 SF 428,185 SF No Completion 0.5:1/216 49 Dock High Doors, 2 Grade Level Doors | Marketing Flyer 216 Auto Parking Stalls, 59 Trailer Parking Stalls | CBRE - Wes Jones 909-418-2070, Walt Arrington, SIOR 909-418-2154, James 4,000 Amps, 480 Volt Power | Toomarian 909-418-2083 Estimated Completion is 1Q2027 | Updated Information Walls Tilting",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-5884B0D3CC433E6817AF",
+      "propertyIdentityKey": "10400 AMARGOSA RD|HESPERIA|92345",
+      "listingVariantId": "LISTING-E832BC0697AE9CA1DF71",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [
+          "49 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [
+          "216 Auto Parking Stalls"
+        ],
+        "office": [
+          "8,000 SF Office Space"
+        ],
+        "construction": [
+          "U/C 36' Free Standing Building"
+        ]
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "10400 Amargosa Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Hesperia",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "CF0FD60260578E3007875C74620FFA67"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-006",
+      "snapshotDate": "2026-07-21",
+      "address": "Sublease Through 3/31/2029 3407 N Perris Blvd",
+      "city": "Perris",
+      "postalCode": "92571",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 100000,
+      "buildingSf": 152510,
+      "officeSf": 0,
+      "askingRate": 0.55,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 2",
+      "notes": "2 100,000 SF $0.55 G 0/15 Existing 21'-25' | Sublease Through 3/31/2029 | 3407 N Perris Blvd No NFS Available 4000 | POL ±152,510 SF Building on ±9.2 Acres of Land | Perris, CA 92571 0 SF 152,510 SF Paved Additional Adjacent 2 Acres Available For Lease | 30 Days | Marketing Flyer 15 Ground Level Doors | Lee & Associates - Michael Giuliano 909-989-7771, Marlene Mesillas 909-373-2704, 4,000 Amps, 277/480 Volt, 3 Phase, 4-Wire | Fernando Escobedo 909-373-2709 Large Paved Yard, Easy Access to 215 Fwy | Rate Reduced $0.69 G -> $0.55 G",
+      "changeDetail": "$0.69 G -> $0.55 G",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-9E5B48F4F04B22C1444B",
+      "propertyIdentityKey": "SUBLEASE THROUGH 3 31 2029 3407 N PERRIS BLVD|PERRIS|92571",
+      "listingVariantId": "LISTING-E5040DBC562764896E00",
+      "structuredNotes": {
+        "power": [
+          "000 Amps",
+          "277/480 Volt"
+        ],
+        "loading": [
+          "15 Ground Level Doors"
+        ],
+        "yard": [
+          "Paved Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Sublease Through 3/31/2029 3407 N Perris Blvd",
+          "changed": true,
+          "removedText": "POL ±152,510 SF Building on ±9.2 Acres of Land",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Perris",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Perris"
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "737920D0B1AD821D4CB646DCD695EE37"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-007",
+      "snapshotDate": "2026-07-21",
+      "address": "1676 Sugarpine Springs Rd",
+      "city": "Hesperia",
+      "postalCode": "92345",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 6969600,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 9",
+      "notes": "9 6,969,600 SF NFL 900 SF Available Gas: ±160 Acres of Land For Sale | 1676 Sugarpine Springs Rd 160.00 Ac $0.23 Yes Specialty Water: Y 900 Sf House/Cabin (Uninhabitable) | Hesperia, CA 92345 No $1,600,000 No RC Sewer: Y Uses May Include - Recreational/Mountain Getaway | Mojave Fwy/Rim Of the World Scenic Electric: Verify All Details | Korek Land Company, Inc. - Deanne Boublis 818-787-3077 | Bywy Fiber: | Marketing Flyer | New Listing ±160 Acres of Land For Sale | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-00F4E5629E788CC167AF",
+      "propertyIdentityKey": "1676 SUGARPINE SPRINGS RD|HESPERIA|92345",
+      "listingVariantId": "LISTING-A469D9901AAAD9853CCE",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1676 Sugarpine Springs Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Hesperia",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "192B6BDCBE5B708EF66D63C2FE46595E"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-008",
+      "snapshotDate": "2026-07-21",
+      "address": "SW of 215 Fwy and Ethanac Rd",
+      "city": "Perris",
+      "postalCode": "92570",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 716562,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 10",
+      "notes": "10 716,562 SF NFL 0 SF Available Gas: Perris - 16.5 Acres - Land Available | SW of 215 Fwy and Ethanac Rd 16.45 Ac TBD Yes Multi-Family Water: I-215 Frontage at Ethanac Rd | Perris, CA 92570 No TBD No CC Sewer: High Density / Affordable Housing Development Site | Electric: The Housing Opportunity Overlay | J. J. Little Company - Dimas Rodriguez 323-708-2999 | Marketing Flyer Fiber: Residential Development Will Be Permitted | Up 30 Units per Acre | Updated Information | Available For Sale Only | 7/21/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-313DEEB395AA81B44BEA",
+      "propertyIdentityKey": "SW OF 215 FWY AND ETHANAC RD|PERRIS|92570",
+      "listingVariantId": "LISTING-7860A0642DDA25AD1FB5",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of 215 Fwy and Ethanac Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Perris",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "70059BAE14FB2EA353B5D2147A9D4440"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-009",
+      "snapshotDate": "2026-07-21",
+      "address": "NE Columbia Ave",
+      "city": "Riverside",
+      "postalCode": "92507",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 386377,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "Sale Comp",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 11",
+      "notes": "11 386,377 SF NFL 0 SF Sold Gas: 8.87 Acres of Land | NE Columbia Ave & Iowa Ave 8.87 Ac TBD Yes Industrial Water: Industrial Zoned Land, Unentitled | Riverside, CA 92507 No TBD Sewer: | Colliers - Kevin McKenna 949-300-0084, Greg Merrill 909-937-6361 Electric: | Fiber: | Sold | Co-Op: Jeff Smith & Johnny Eubanks (Lee & Associates)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-1AC6C5CD3EA3D4E8695C",
+      "propertyIdentityKey": "NE COLUMBIA AVE|RIVERSIDE|92507",
+      "listingVariantId": "LISTING-BF0786AC640253779CE3",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NE Columbia Ave",
+          "changed": true,
+          "removedText": "& Iowa Ave",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Riverside",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Riverside"
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "2ACC5CC650BC49423E04AB06FBEA08EC"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-010",
+      "snapshotDate": "2026-07-21",
+      "address": "31970 Castaic Rd",
+      "city": "Castaic",
+      "postalCode": "91384",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 51619,
+      "buildingSf": 51619,
+      "officeSf": null,
+      "askingRate": 0.97,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 12,
+      "sourceRow": "Page 12 AIR Listing 1",
+      "notes": "1 Castaic Village Shopping Center 51,619 SF $0.97 NNN 2/5 Existing 22' Free Standing Building | 31970 Castaic Rd Yes $189.85 Available 1600 2 Dock High Level Loading Doors | Castaic, CA 91384 51,619 SF Fncd/Pvd Now 5 Ground Level Loading Doors | Ample On-Site Gated Parking | Stratton Commercial Real Estate, Inc. - Robert Stratton 661-702-9700 Heavy Power | HVAC | New Listing | For Lease & Sale Ample On-Site Gated Parking | 7/21/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-9AFF17D6571A4313D61E",
+      "propertyIdentityKey": "31970 CASTAIC RD|CASTAIC|91384",
+      "listingVariantId": "LISTING-FFFD48DE47EA1A3DCF20",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "2 Dock High Level Loading Doors",
+          "5 Ground Level Loading Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "31970 Castaic Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Castaic",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "7B90E139F94BDECF92AFABF368BE5AE5"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-011",
+      "snapshotDate": "2026-07-21",
+      "address": "Free Standing Building25' 19465-19485 E Walnut Dr",
+      "city": "Industry",
+      "postalCode": "91748",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 220000,
+      "buildingSf": 220000,
+      "officeSf": 7180,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 1",
+      "notes": "1 220,000 SF TBD 34/2 Existing | Free Standing Building25' | 19465-19485 E Walnut Dr N Yes NFS Yes Leased 1000 | Prime City of Industry Location | Industry, CA 91748 7,180 SF 220,000 SF Fncd/Pvd Excellent Freeway Frontage | Now | Marketing Flyer Immediate Access to 60 Fwy | CBRE - Jason Chao 909-418-2131, Lynn Knox 909-418-2112, Case Dahlen 909-418- Rail Served/Large Yard Area | 2089 | Leased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-95B7893C3D5F907221B3",
+      "propertyIdentityKey": "FREE STANDING BUILDING25 19465 19485 E WALNUT DR|INDUSTRY|91748",
+      "listingVariantId": "LISTING-B48BC5EB19F1B2CB669F",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Free Standing Building25' 19465-19485 E Walnut Dr",
+          "changed": true,
+          "removedText": "N",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Industry",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "7F35F4A54D6142D93016B2E48ABB61F5"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-012",
+      "snapshotDate": "2026-07-21",
+      "address": "1545 Francisco St",
+      "city": "Torrance",
+      "postalCode": "90501",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 106898,
+      "buildingSf": 272245,
+      "officeSf": 18000,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 14,
+      "sourceRow": "Page 14 AIR Listing 1",
+      "notes": "1 106,898 SF TBD 24/1 Existing 32' Best In Class Facility | 1545 Francisco St No NFS ESFR Available 2000 Extra Parking - 32' Clear - ESFR Sprinklers | Torrance, CA 90501 18,000 SF 272,245 SF Fncd/Pvd 01/01/2027 1.7:1/177 Signalized Corner - 1/2 Mile To 405 Freeway | Marketing Flyer 24 Dock High Doors - 50 Trailer/Container Positions | The Klabin Company - Frank Schulz 310-329-9000, Todd Taugner 310-329-9000, | Nicholas Buss 310-329-9000, David Prior 310-329-9000 | New Listing Extra Parking - 32' Clear - ESFR Sprinklers | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-E5938A8FAC2793EFA5BC",
+      "propertyIdentityKey": "1545 FRANCISCO ST|TORRANCE|90501",
+      "listingVariantId": "LISTING-0AE63A0CB8EE890B3FDA",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "24 Dock High Doors - 50 Trailer/Container Positions"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1545 Francisco St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Torrance",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "6D51278943BF23DC8C490122AB4FE2D2"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-013",
+      "snapshotDate": "2026-07-21",
+      "address": "3643 Doolittle Dr",
+      "city": "Redondo Beach",
+      "postalCode": "90278",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 99840,
+      "buildingSf": 99840,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 14,
+      "sourceRow": "Page 14 AIR Listing 2",
+      "notes": "2 The R10 Research Building 99,840 SF NFL 0/1 Existing The R10 Research Building | 3643 Doolittle Dr No TBD Available Investment Grade Single Tenant NNN Office/ R&D Opportunity | Redondo Beach, CA 90278 99,840 SF No COE 3.6:1/360 100% Leased | Marketing Flyer One (1) Roll Up Door w/Loading Area | CBRE - El Segundo - Bob Healey 310-880-8171, John Lane 310-363-4947 Verify All Details | New Listing Investment Grade Single Tenant NNN Office/ R&D Opportunity | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-BB3AB7356914CE595E6E",
+      "propertyIdentityKey": "3643 DOOLITTLE DR|REDONDO BEACH|90278",
+      "listingVariantId": "LISTING-CD94F735CB426C56342B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "3643 Doolittle Dr",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Redondo Beach",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "BFCB1B52D094B07246C41B19FA3C9D10"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-014",
+      "snapshotDate": "2026-07-21",
+      "address": "1450-1480 Charles Willard St",
+      "city": "Carson",
+      "postalCode": "90746",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 81532,
+      "buildingSf": 81532,
+      "officeSf": 11812,
+      "askingRate": 1.85,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 14,
+      "sourceRow": "Page 14 AIR Listing 3",
+      "notes": "3 Dominguez Technology Center 81,532 SF $1.85 NNN 26/1 Existing 30' State-of-the-Art Warehouse Distribution Facility | 1450-1480 Charles Willard St No NFS ESFR Available 800 30' Clear Height- ESFR Sprinkler System | Carson, CA 90746 11,812 SF 81,532 SF Fncd/Pvd 01/01/2027 1.4:1/112 26 Dock High Doors-Full Concrete Yard Area | Marketing Flyer Close Proximity to LAX & World Ports of LA & LB | CBRE - El Segundo - John Schumacher 310-363-4960, Caroline Reid 310-947-4219 Convenient Access to 5 Fwys | New Listing 26 Dock High Doors-Full Concrete Yard Area | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-C92B3569CA6524077768",
+      "propertyIdentityKey": "1450 1480 CHARLES WILLARD ST|CARSON|90746",
+      "listingVariantId": "LISTING-8087843348524FA9CE5A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "26 Dock High Doors-Full Concrete Yard Area"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1450-1480 Charles Willard St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Carson",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "42C0185CC06AA54AC6AA36B3E79581F4"
+      }
+    },
+    {
+      "candidateId": "DA-20260721-015",
+      "snapshotDate": "2026-07-21",
+      "address": "E Walnut St",
+      "city": "Carson",
+      "postalCode": "90746",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 59462,
+      "buildingSf": 59462,
+      "officeSf": 1536,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 14,
+      "sourceRow": "Page 14 AIR Listing 4",
+      "notes": "4 59,462 SF TBD 4/4 Existing 19' Premier South Bay Location Near 110, 91, 405, and 710 Fwys | 833 E Walnut St No NFS ESFR Available 800 Huge Paved Yard with 140 ft. Trucking Turning Radius | Carson, CA 90746 1,536 SF 59,462 SF Fncd/Pvd 02/01/2027 2.1:1/124 Ample Truck High & Ground Level Loading | Marketing Flyer Second Address is 17140 Kingsview Ave | Lee & Associates - Torrance - Bret Osterberg 310-965-1748 Buildings are Connected Through Warehouse | New Listing Ample Truck High & Ground Level Loading | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-CA976152A952912F7D28",
+      "propertyIdentityKey": "E WALNUT ST|CARSON|90746",
+      "listingVariantId": "LISTING-2B41C39D6F6ABA6594EF",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Paved Yard with 140 ft"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-21"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "E Walnut St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Carson",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.145Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "382C2CBB3F8C9EC133BF2774B011C2C4"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+'use strict';
+const assert=require('assert'),e=require('../supersheets/sciip-v9-sprint27h-governed-historical-promotion-replay');
+let testsRun=0;const failures=[];function test(name,fn){testsRun++;try{fn();}catch(x){failures.push({test:name,error:x.message});}}
+const obs={candidateId:'C1',snapshotDate:'2026-06-04',propertyIdentityId:'PROP-1234567890ABCDEF1234',listingVariantId:'LISTING-1234567890ABCDEF1234',eventCode:'NEW_LISTING',listingStatus:'Available',availableSf:100,buildingSf:200,askingRate:1.2,address:'1 Main St',city:'Ontario',postalCode:'91761',sourcePage:1,sourceRow:'row1',historicalDeltas:[{type:'FIRST_OBSERVED',from:null,to:'2026-06-04'}],evidenceCertification:{certificationHash:'A'.repeat(32),lineageComplete:true,blockingFailures:[]}};
+const snap={snapshotDate:'2026-06-04',evidence:{sourceFile:'x.pdf',sourceSha256:'b'.repeat(64)},observations:[obs]};
+const cand={propertyIdentities:[{propertyIdentityId:obs.propertyIdentityId,canonicalAddress:'1 Main St',canonicalCity:'Ontario',canonicalPostalCode:'91761',registryCandidateHash:'C'.repeat(32)}]};
+test('stable serialization deterministic',()=>assert.strictEqual(e.stable({b:1,a:2}),e.stable({a:2,b:1})));
+test('sha deterministic',()=>assert.strictEqual(e.sha('x'),e.sha('x')));
+test('eligible manifest accepted',()=>assert.deepStrictEqual(e.assertPromotionEligibility({status:'CERTIFIED_FOR_GOVERNED_PROMOTION',eligibleForPromotion:true,gateFailures:[],governance:{canonicalWrites:0}}),[]));
+test('uncertified manifest blocked',()=>assert(e.assertPromotionEligibility({status:'REVIEW_REQUIRED',eligibleForPromotion:false,gateFailures:['X'],governance:{canonicalWrites:0}}).length>=2));
+test('evidence lineage retained',()=>assert.strictEqual(e.evidenceRef(snap,obs).sourceSha256,'b'.repeat(64)));
+test('event built',()=>assert.strictEqual(e.buildEvents([snap]).length,1));
+test('event append only',()=>assert.strictEqual(e.buildEvents([snap])[0].appendOnly,true));
+test('event id deterministic',()=>assert.strictEqual(e.buildEvents([snap])[0].eventId,e.buildEvents([snap])[0].eventId));
+test('duplicate safety',()=>{const x=e.buildEvents([snap])[0],r=e.dedupe([x,x],'eventId');assert.strictEqual(r.items.length,1);assert.strictEqual(r.duplicatesSkipped,1);});
+test('nonidentical duplicate rejected',()=>{let ok=false;try{e.dedupe([{id:'1',a:1},{id:'1',a:2}],'id');}catch(_){ok=true;}assert(ok);});
+test('registry staged',()=>assert.strictEqual(e.buildRegistry(cand,e.buildEvents([snap]))[0].promotion.state,'STAGED'));
+test('registry canonical writes zero',()=>assert.strictEqual(e.buildRegistry(cand,e.buildEvents([snap]))[0].governance.canonicalWrites,0));
+test('registry evidence hash',()=>assert.strictEqual(e.buildRegistry(cand,e.buildEvents([snap]))[0].evidenceHashes.length,1));
+test('graph certified',()=>assert.strictEqual(e.buildGraph(e.buildRegistry(cand,e.buildEvents([snap])),e.buildEvents([snap])).certified,true));
+test('graph property node',()=>assert(e.buildGraph(e.buildRegistry(cand,e.buildEvents([snap])),e.buildEvents([snap])).nodes.some(n=>n.nodeType==='PROPERTY')));
+test('graph event node immutable',()=>assert(e.buildGraph(e.buildRegistry(cand,e.buildEvents([snap])),e.buildEvents([snap])).nodes.some(n=>n.nodeType==='HISTORICAL_EVENT'&&n.immutable)));
+test('graph evidence edge immutable',()=>assert(e.buildGraph(e.buildRegistry(cand,e.buildEvents([snap])),e.buildEvents([snap])).edges.some(x=>x.type==='SUPPORTED_BY'&&x.immutable)));
+test('apply event state',()=>assert.strictEqual(e.applyEvent(null,e.buildEvents([snap])[0]).availableSf,100));
+test('replay terminal state',()=>assert.strictEqual(e.replay(e.buildEvents([snap])).terminalState.length,1));
+test('replay deterministic',()=>{const a=e.replay(e.buildEvents([snap])),b=e.replay(e.buildEvents([snap]));assert.strictEqual(a.replayHash,b.replayHash);});
+test('replay checkpoint',()=>assert.strictEqual(e.replay(e.buildEvents([snap])).checkpoints.length,1));
+const refs=[{sourceType:'AIR_ZIP',name:'z',expected:{propertyIdentities:1}},{sourceType:'AIR_EXCEL',name:'e',expected:{propertyIdentities:1}},{sourceType:'KMZ',name:'k',expected:{propertyIdentities:1}},{sourceType:'LEEPRO',name:'l',expected:{propertyIdentities:1}}];
+test('reconciliation passes',()=>assert(e.reconcile(e.replay(e.buildEvents([snap])).terminalState,refs,{airZip:1,airExcel:1,kmz:1,leePro:1}).passed));
+test('reconciliation mismatch fails',()=>assert(!e.reconcile(e.replay(e.buildEvents([snap])).terminalState,[{sourceType:'AIR_ZIP',name:'z',expected:{propertyIdentities:2}}],{airZip:1,airExcel:0,kmz:0,leePro:0}).passed));
+test('inventory mismatch fails',()=>assert(!e.reconcile(e.replay(e.buildEvents([snap])).terminalState,[],{airZip:1,airExcel:0,kmz:0,leePro:0}).passed));
+test('certification production ready',()=>{const events=e.buildEvents([snap]),registry=e.buildRegistry(cand,events),graph=e.buildGraph(registry,events),twin=e.replay(events),reconciliation=e.reconcile(twin.terminalState,refs,{airZip:1,airExcel:1,kmz:1,leePro:1});const r=e.certify({events,registry,graph,twin,reconciliation,snapshots:[snap],observations:1,lineageFailures:0,expected:{snapshots:1,observations:1,propertyIdentities:1,historicalEvents:1}});assert.strictEqual(r.status,'REPLAY_CERTIFIED');});
+test('certification blocks count mismatch',()=>{const r=e.certify({events:[],registry:[],graph:{certified:true,graphHash:'x'},twin:{certified:true,replayHash:'x'},reconciliation:{passed:true,reconciliationHash:'x'},snapshots:[],observations:0,lineageFailures:0,expected:{snapshots:1,observations:1,propertyIdentities:1,historicalEvents:1}});assert.strictEqual(r.productionReady,false);});
+test('lineage failure blocks',()=>{const r=e.certify({events:[],registry:[],graph:{certified:true,graphHash:'x'},twin:{certified:true,replayHash:'x'},reconciliation:{passed:true,reconciliationHash:'x'},snapshots:[],observations:0,lineageFailures:1,expected:{snapshots:0,observations:0,propertyIdentities:0,historicalEvents:0}});assert(r.failures.includes('IMMUTABLE_LINEAGE_FAILURE'));});
+test('promotion remains reversible',()=>{const r=e.certify({events:[],registry:[],graph:{certified:true,graphHash:'x'},twin:{certified:true,replayHash:'x'},reconciliation:{passed:true,reconciliationHash:'x'},snapshots:[],observations:0,lineageFailures:0,expected:{snapshots:0,observations:0,propertyIdentities:0,historicalEvents:0}});assert.strictEqual(r.governance.reversible,true);});
+test('commit remains disabled',()=>{const r=e.certify({events:[],registry:[],graph:{certified:true,graphHash:'x'},twin:{certified:true,replayHash:'x'},reconciliation:{passed:true,reconciliationHash:'x'},snapshots:[],observations:0,lineageFailures:0,expected:{snapshots:0,observations:0,propertyIdentities:0,historicalEvents:0}});assert.strictEqual(r.governance.commitEnabled,false);});
+console.log(JSON.stringify({framework:'SCIIP_V9_SPRINT27H_GOVERNED_REPLAY_TEST',version:'v9.0-sprint27h.1',status:failures.length?'FAILED':'PASSED',testsRun,failures}));if(failures.length)process.exit(1);

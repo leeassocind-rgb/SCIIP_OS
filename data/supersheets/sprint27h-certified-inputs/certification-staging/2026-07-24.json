@@ -1,0 +1,798 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-07-24",
+  "summary": {
+    "observations": 7,
+    "reviewRequired": 0,
+    "blocked": 0,
+    "lineageComplete": 7
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-24-2026.pdf",
+    "sourceSha256": "c9aeedf45f56b6c1c3d19c89d275e9a56348c8d73e32c279e94bf4643250e9f6",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260724-001",
+      "snapshotDate": "2026-07-24",
+      "address": "14400-14450 Industry Cir",
+      "city": "La Mirada",
+      "postalCode": "90638",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 307839,
+      "buildingSf": 8000,
+      "officeSf": 17695,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 2,
+      "sourceRow": "Page 2 AIR Listing 1",
+      "notes": "1 307,839 SF NFL 34/3 Existing 24' - 28' Outstanding Distribiton/Manufacturing Buildings | 14400-14450 Industry Cir (Portfolio) No TBD Yes Available 3800 Large Fenced Yard, 34 DH Positions + Ramps, 3,800 Amps | La Mirada, CA 90638 17,695 SF 307,839 SF Fncd/Pvd COE 0.6:1/194 24'- 28' Clear, 44'x44' Typ. Bay Spacing, ±8,000 SF New Office | Direct Access to 5, 91, and 605 Fwys | CBRE - El Segundo - Rick McGeagh 310-363-4878, Joshua Bonwell 714-371-9207, New Owner With Major Renovations Underway | Trent Peterson 714-371-9341 | New Listing | For Sale Large Fenced Yard, 34 DH Positions + Ramps, 3,800 Amps",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-75EB234C5284746589AD",
+      "propertyIdentityKey": "14400 14450 INDUSTRY CIR|LA MIRADA|90638",
+      "listingVariantId": "LISTING-9733D424ECA2CCBBA222",
+      "structuredNotes": {
+        "power": [
+          "800 Amps"
+        ],
+        "loading": [
+          "34 DH Positions + Ramps"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14400-14450 Industry Cir",
+          "changed": true,
+          "removedText": "(Portfolio)",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "La Mirada",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "La Mirada"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.147Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "D45EC764D720F8A6D5D08646666EF2AD"
+      }
+    },
+    {
+      "candidateId": "DA-20260724-002",
+      "snapshotDate": "2026-07-24",
+      "address": "4238 W Mission Blvd",
+      "city": "Montclair",
+      "postalCode": "91763",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 131987,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.36,
+      "askingRateType": "MG",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 10",
+      "notes": "10 131,987 SF $0.36 MG 22,079 SF Available Gas: Y Contractor's Yard/Outdoor Storage | 4238 W Mission Blvd 3.03 Ac $52.66 Yes Industrial Water: Y ±22,079 SF Building Size | Montclair, CA 91763 No $6,950,000 No IP Sewer: Y ±3.03 Acre Lot Size | Silicon Ave/W Mission Blvd Electric: Y Two (2) Access Points/Mission Blvd & 3rd St | Daum Commercial - Joseph Harmon, SIOR 562-695-4512, Noah N | Marketing Flyer Fiber: CUP Approved | Samarin 909-912-0007 | Rate Reduced | $0.39 MG -> $0.36 MG | 7/24/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": "$0.39 MG -> $0.36 MG",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-C2CE3DDE859D69E24106",
+      "propertyIdentityKey": "4238 W MISSION BLVD|MONTCLAIR|91763",
+      "listingVariantId": "LISTING-7B63075A8F5029A69391",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "4238 W Mission Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Montclair",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.147Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "8281F22584279AF045703D04FE82FD33"
+      }
+    },
+    {
+      "candidateId": "DA-20260724-003",
+      "snapshotDate": "2026-07-24",
+      "address": "21320 Box Springs Rd",
+      "city": "Moreno Valley",
+      "postalCode": "92557",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 92347,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.19,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 11",
+      "notes": "11 92,347 SF $0.19 NNN 0 SF Available Gas: ±2.12 Acres - 100% Usable | 21320 Box Springs Rd 2.12 Ac TBD Fenced Retail Water: Y Fully Fenced with Automatic Gate | Moreno Valley, CA 92557 No NFS No CC Sewer: Y Utilities On-Site: Water, Sewer, Electric, & Gas | Clark St/Box Springs Rd Electric: Y Ideal for Car & RV Sales Dealership | NAI Capital - Thomas Lam 909-348-0610 | Marketing Flyer Fiber: Prominent Signage Opportunity | High Freeway Visibility - 60 & 215 Fwy | New Listing | For Lease & Sale ±2.12 Acres - 100% Usable",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-B40620AF4B84370F17F4",
+      "propertyIdentityKey": "21320 BOX SPRINGS RD|MORENO VALLEY|92557",
+      "listingVariantId": "LISTING-B89657BB318105621AAF",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "21320 Box Springs Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Moreno Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.147Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "FD75518EF79F39247C5CEB9EE7D4228A"
+      }
+    },
+    {
+      "candidateId": "DA-20260724-004",
+      "snapshotDate": "2026-07-24",
+      "address": "16880 Sportsman Ctr",
+      "city": "Adelanto",
+      "postalCode": "92301",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 74487,
+      "buildingSf": 3000,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 12",
+      "notes": "12 74,487 SF TBD 0 SF Available Gas: 1.71 Acres Lot Available | 16880 Sportsman Ctr 1.71 Ac TBD Yes Retail Water: Up to 7,500 SF - Build to Suit | Adelanto, CA 92301 No NFS No MU Sewer: 3,000 SF Drive Thru Restaurant On Site | Sportsman Ctr/Rancho Rd Prominent Highway Signage from Hwy 395 | Asbury Brokerage Services - Dennis Asbury 949-338-3002, Landon Asbury Electric: | Marketing Flyer 562-761-5216 Fiber: | New Listing | For Lease & Sale 1.71 Acres Lot Available | 7/24/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-8EC801E1C90EA363A47A",
+      "propertyIdentityKey": "16880 SPORTSMAN CTR|ADELANTO|92301",
+      "listingVariantId": "LISTING-3564E4753B61D78361CE",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "16880 Sportsman Ctr",
+          "changed": false,
+          "removedText": null,
+          "method": "unchanged"
+        },
+        "city": {
+          "value": "Adelanto",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.16,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.147Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "D79647C4C26ABF7D14CDE79C991C96CE"
+      }
+    },
+    {
+      "candidateId": "DA-20260724-005",
+      "snapshotDate": "2026-07-24",
+      "address": "24935 Avenue",
+      "city": "Santa Clarita",
+      "postalCode": "91355",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 66130,
+      "buildingSf": 68000,
+      "officeSf": 4584,
+      "askingRate": 1.2,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 1",
+      "notes": "1 66,130 SF $1.20 NNN 2/5 Existing 21' Full Interior and Exterior Renovation Underway | 24935 Avenue Kearny No NFS Leased 1200 Excellent Free Standing Building with Efficient Design | Santa Clarita, CA 91355 4,584 SF 68,000 SF Fenced 08/01/2026 1.3:1/87 Substantial Power, ESFR Sprinkler, Potential For Rear | Yard, Bonus Loading Deck (Not Included in SF) | CBRE - Craig Peters 818-907-4616, Sam Glendon 818-502-6745 Centrally Located Near Valencia Town Center | Close Proximity to 5 & 126 Fwy | Leased | Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-52EFA06922271BC118B2",
+      "propertyIdentityKey": "24935 AVENUE|SANTA CLARITA|91355",
+      "listingVariantId": "LISTING-4272DD1CE233713285A3",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "24935 Avenue",
+          "changed": true,
+          "removedText": "Kearny",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Santa Clarita",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.147Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "D75C07A2617B1D274BBED8AF64F930CC"
+      }
+    },
+    {
+      "candidateId": "DA-20260724-006",
+      "snapshotDate": "2026-07-24",
+      "address": "12102 Garvey Ave",
+      "city": "El Monte",
+      "postalCode": "91732",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 115440,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.35,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 12,
+      "sourceRow": "Page 12 AIR Listing 2",
+      "notes": "2 115,440 SF $0.35 NNN 0 SF Available Gas: 2.65 Acres of Land | 12102 Garvey Ave 2.65 Ac NFS Yes Industrial Water: Yard Area | El Monte, CA 91732 No NFS C-3 Sewer: | Garvey Ave/ Valley Blvd Arbor - Corporate - Matthew Mazur 323-515-8302 Electric: | Fiber: | New Listing | For Lease 2.65 Acres of Land | 7/24/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-BA4191C00A6757B4C3A4",
+      "propertyIdentityKey": "12102 GARVEY AVE|EL MONTE|91732",
+      "listingVariantId": "LISTING-34DFF3D8015DDB502AD4",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "12102 Garvey Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "El Monte",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.147Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "D2893A45CE15B001030691F221BDAE86"
+      }
+    },
+    {
+      "candidateId": "DA-20260724-007",
+      "snapshotDate": "2026-07-24",
+      "address": "W Manville St",
+      "city": "Compton",
+      "postalCode": "90220",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 90000,
+      "buildingSf": 90000,
+      "officeSf": 12746,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 1",
+      "notes": "1 Dominguez North Industrial Center 90,000 SF TBD 18/1 Existing 22' Exceptional Warehouse/Manufacturing Facility | 575 W Manville St No NFS Yes Available 800 123' - 142' Truck Court | Compton, CA 90220 12,746 SF 90,000 SF Fncd/Pvd 03/01/2027 1.2:1/110 Roof Recently Recoated/Silicon Treatment | Marketing Flyer Up to 40 Container Parking Spaces | LAREM Industrial Real Estate Specialists, Inc - Edward Whittemore 310-436-6482, Estimated Operating Expenses ± $.36/SF Month | Colin Lancaster 310-436-6488, Matthew Ginocchio 310-436-6483, Dimitri Petrakis | 310-620-8770 | New Listing | For Lease 18 DH Loading Doors",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-7F42CA13A150E8E94471",
+      "propertyIdentityKey": "W MANVILLE ST|COMPTON|90220",
+      "listingVariantId": "LISTING-C0621F4DC931C5B1DB24",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "18 DH Loading Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W Manville St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Compton",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.147Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "945C1B8411F604C9D43138F1EE4CE5E2"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

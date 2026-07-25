@@ -161,6 +161,24 @@
     "run:v9:sprint27b:real-replay": "node tools/supersheets/sciip-v9-sprint27b-real-data-replay-reconciliation.js",
     "test:v9:sprint27c": "node tools/tests/sciip-v9-sprint27c-real-production-replay-runner-test.js",
     "certify:v9:sprint27c:real-production": "npm run test:v9:sprint27c && npm run deployment:compile",
-    "run:v9:sprint27c:real-production": "node tools/supersheets/sciip-v9-sprint27c-real-production-replay-runner.js"
+    "run:v9:sprint27c:real-production": "node tools/supersheets/sciip-v9-sprint27c-real-production-replay-runner.js",
+    "test:v9:sprint27d:normalize": "node tools/tests/sciip-v9-sprint27d-governed-batch-normalizer-test.js",
+    "run:v9:sprint27d:normalize": "node tools/supersheets/sciip-v9-sprint27d-governed-batch-normalizer.js",
+    "promote:v9:sprint27d:normalize": "node tools/supersheets/sciip-v9-sprint27d-governed-batch-normalizer.js --promote",
+    "certify:v9:sprint27d:normalize": "npm run test:v9:sprint27d:normalize && npm run deployment:compile",
+    "test:v9:sprint27e:parser": "node tools/tests/sciip-v9-sprint27e-air-layout-aware-parser-test.js",
+    "test:v9:sprint27f:semantic": "node tools/tests/sciip-v9-sprint27f-semantic-intelligence-engine-test.js",
+    "run:v9:sprint27f:semantic": "node tools/supersheets/sciip-v9-sprint27f-semantic-intelligence-engine.js",
+    "test:v9:sprint27g:certification": "node tools/tests/sciip-v9-sprint27g-evidence-canonical-knowledge-certification-test.js",
+    "run:v9:sprint27g:certify": "node tools/supersheets/sciip-v9-sprint27g-evidence-canonical-knowledge-certifier.js",
+    "test:v9:sprint27h:governed-replay": "node tools/tests/sciip-v9-sprint27h-governed-historical-promotion-replay-test.js",
+    "run:v9:sprint27h:governed-replay": "node tools/supersheets/sciip-v9-sprint27h-governed-historical-promotion-replay.js --config tools/config/sciip-v9-sprint27h-governed-replay.local.json",
+    "verify:v9:sprint27h:governed-replay": "node tools/verify/sciip-v9-sprint27h-verify.js",
+    "certify:v9:sprint27h:governed-replay": "npm run test:v9:sprint27h:governed-replay && npm run run:v9:sprint27h:governed-replay && npm run deployment:compile && npm run verify:v9:sprint27h:governed-replay",
+    "test:v9:sprint28:live-operations": "node tools/tests/sciip-v9-sprint28-governed-live-operations-test.js",
+    "run:v9:sprint28:live-operations": "node tools/supersheets/sciip-v9-sprint28-governed-live-operations.js --config tools/config/sciip-v9-sprint28-live-operations.local.json",
+    "commit:v9:sprint28:production": "node tools/supersheets/sciip-v9-sprint28-governed-live-operations.js --config tools/config/sciip-v9-sprint28-live-operations.local.json --mode commit --approval-token SCIIP_SPRINT28_EXPLICIT_PRODUCTION_APPROVAL",
+    "verify:v9:sprint28:live-operations": "node tools/verify/sciip-v9-sprint28-verify.js",
+    "certify:v9:sprint28:live-operations": "npm run test:v9:sprint28:live-operations && npm run run:v9:sprint28:live-operations && npm run deployment:compile && npm run verify:v9:sprint28:live-operations"
   }
 }

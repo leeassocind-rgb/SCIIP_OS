@@ -1,0 +1,2176 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-07-09",
+  "summary": {
+    "observations": 19,
+    "reviewRequired": 0,
+    "blocked": 0,
+    "lineageComplete": 19
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-9-2026.pdf",
+    "sourceSha256": "f94a691b5a23141f70a2c689759c7167bc2bee9dfbbdd8bacbfedb30db7a5aca",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260709-001",
+      "snapshotDate": "2026-07-09",
+      "address": "Shoemaker Ave",
+      "city": "Cerritos",
+      "postalCode": "90703",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 120450,
+      "buildingSf": 150450,
+      "officeSf": 18000,
+      "askingRate": 1.25,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 2,
+      "sourceRow": "Page 2 AIR Listing 1",
+      "notes": "1 Pacific Cerritos Center 120,450 SF $1.25 G 17/1 Existing 20' | Shoemaker Ave Frontage | 16300 Shoemaker Ave Yes NFS Yes Available 800 | Corporate Headquarters Location | Cerritos, CA 90703 18,000 SF 150,450 SF Fncd/Pvd Now 20' Clearance, 17 Dock High Positions | 0.5:1/65 | Marketing Flyer Fenced Yard, 142' Truck Court | Colliers - El Segundo - Christopher Sheehan, SIOR 310-321-1831, Jeffrey Smart 310- Excellent Access to 5, 91, 105, and 605 Freeways | 321-1812, Mike Foley 310-977-7330, Elizabeth Capati 310-321-1855 | Updated Information New Brochure",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-860CF009C18BB132BD34",
+      "propertyIdentityKey": "SHOEMAKER AVE|CERRITOS|90703",
+      "listingVariantId": "LISTING-7A768629613F42CE3EC4",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "17 Dock High Positions"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "EVENT_CHANGED",
+          "field": "eventCode",
+          "from": "RATE_CHANGED",
+          "to": "LISTING_UPDATED"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Shoemaker Ave",
+          "changed": true,
+          "removedText": "Frontage 16300 Shoemaker Ave",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Cerritos",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Cerritos"
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "232CE0A47196813E9387B9CE936DD05A"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-002",
+      "snapshotDate": "2026-07-09",
+      "address": "12930 Alondra Blvd",
+      "city": "Cerritos",
+      "postalCode": "90703",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 56125,
+      "buildingSf": 56125,
+      "officeSf": 9151,
+      "askingRate": 1.15,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 2,
+      "sourceRow": "Page 2 AIR Listing 2",
+      "notes": "2 Cerritos Industrial Park 56,125 SF $1.15 NNN 8/2 Existing 23' Prominent Identity Corner At Alondra & Shoemaker | 12930 Alondra Blvd No NFS Yes Available 400 Great Corporate HQ Facility With Large Showroom | Cerritos, CA 90703 9,151 SF 56,125 SF No 06/01/2026 1.2:1/66 8 Dock High Positions / 23' Ceiling Clearance | Marketing Flyer 0.33/3,000 GPM Fire Sprinkler | Lee & Associates - Simon Chen 562-568-2013, Michael Lee 562-568-2018 Immediate Access to 5, 91, 605 Freeways | Updated Information New Marketing Material",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-C8D43B0C28C5216DBC26",
+      "propertyIdentityKey": "12930 ALONDRA BLVD|CERRITOS|90703",
+      "listingVariantId": "LISTING-3117719F3F775F4CE0C7",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "8 Dock High Positions / 23' Ceiling Clearance"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "12930 Alondra Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Cerritos",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Cerritos"
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "903346ACC7B741E1D420C8D65A3FAD5C"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-003",
+      "snapshotDate": "2026-07-09",
+      "address": "NW of Phantom E and Turner Rd, Bldg 1 N/A -3",
+      "city": "Victorville",
+      "postalCode": "92394",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 2796000,
+      "buildingSf": 2796000,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 1",
+      "notes": "1 Southern California Logistics Center 2,796,000 SF TBD 490/0 Proposed 42' Southern California Logistics Center | NW of Phantom E and Turner Rd, Bldg 1 N/A TBD Available Build-to-Suit Opportunity in IE North | -3 | Victorville, CA 92394 BTS 2,796,000 SF Yes Now 0.4:1/1150 Entitled Site | Marketing Flyer Southern California Logistics Center Location | CBRE - Walt Arrington, SIOR 909-418-2154, Jeff Fritch 909-418-2075, Darla Longo 490 Dock Loading Doors | 909-418-2105, Jay Dick 909-418-2000 | New Listing 490 Dock Loading Doors | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-0144360A918931AF59FA",
+      "propertyIdentityKey": "NW OF PHANTOM E AND TURNER RD BLDG 1 N A 3|VICTORVILLE|92394",
+      "listingVariantId": "LISTING-F79C3A01056CC2469A9B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Phantom E and Turner Rd, Bldg 1 N/A -3",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Victorville",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "86D05AAD32E13B90461FE5CF1B10FB75"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-004",
+      "snapshotDate": "2026-07-09",
+      "address": "NW of Phantom E and Turner Rd, Bldg 3",
+      "city": "Victorville",
+      "postalCode": "92394",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 1200000,
+      "buildingSf": 1200000,
+      "officeSf": 30000,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 3",
+      "notes": "3 Southern California Logistics Center 1,200,000 SF TBD 206/0 Proposed 42' Southern California Logistics Center | NW of Phantom E and Turner Rd, Bldg 3 N/A TBD Available Build-to-Suit Opportunity in IE North | Victorville, CA 92394 30,000 SF 1,200,000 SF Yes Now 0.4:1/454 Entitled Site | Marketing Flyer Southern California Logistics Center Location | CBRE - Walt Arrington, SIOR 909-418-2154, Jeff Fritch 909-418-2075, Darla Longo 206 Dock Loading Doors | 909-418-2105, Jay Dick 909-418-2000 30,000 SF Office Space | New Listing 206 Dock Loading Doors | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-45834FA4E122CF3BA429",
+      "propertyIdentityKey": "NW OF PHANTOM E AND TURNER RD BLDG 3|VICTORVILLE|92394",
+      "listingVariantId": "LISTING-6C07D9133D592AF0B0CF",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "30,000 SF Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Phantom E and Turner Rd, Bldg 3",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Victorville",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "EF73834B573C60F265C83589A6A8A2A0"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-005",
+      "snapshotDate": "2026-07-09",
+      "address": "NW of Turner Rd and Phantom E",
+      "city": "Victorville",
+      "postalCode": "92394",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 1090000,
+      "buildingSf": 1090000,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 4",
+      "notes": "4 Southern California Logistics Center 1,090,000 SF TBD 242/4 Proposed 42' Southern California Logistics Center | NW of Turner Rd and Phantom E N/A TBD ESFR Available 4000 Build-to-Suit Opportunity in IE North | Victorville, CA 92394 BTS 1,090,000 SF Yes Completion 0.5:1/491 Entitled Site | Marketing Flyer Southern California Logistics Center Location | CBRE - Walt Arrington, SIOR 909-418-2154, Jeff Fritch 909-418-2075, Darla Longo Corporate Neighbors include: Newell, Dr. Pepper & Amazon | 909-418-2105, Jay Dick 909-418-2000 | Updated Information Now Available for Lease and Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-84D1AD8CA73928A891C7",
+      "propertyIdentityKey": "NW OF TURNER RD AND PHANTOM E|VICTORVILLE|92394",
+      "listingVariantId": "LISTING-FAE80057A0FAB325B21F",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Turner Rd and Phantom E",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Victorville",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "15949635E8B443EB693BC62A246B24E3"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-006",
+      "snapshotDate": "2026-07-09",
+      "address": "Sublease Through 12/31/2026 18012 Slover Ave",
+      "city": "Bloomington",
+      "postalCode": "92316",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 610120,
+      "buildingSf": 610120,
+      "officeSf": 9729,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 5",
+      "notes": "5 610,120 SF TBD 91/4 Existing | Sublease Through 12/31/2026 | 18012 Slover Ave No NFS ESFR Available 2000 | 91 Dock Doors (81 Doors w/Edge of Dock Levelers) | Bloomington, CA 92316 9,729 SF 610,120 SF Yes 4 Drive-In Doors | 30 Days 0.4:1/218 | Marketing Flyer 218 Auto Parking, 112 Trailer Parking | Cushman & Wakefield - Charles Belden 909-942-4640, Tim Pimentel 909-942-4647, 2,000 Amp, 277/480 Volts, ESFR (K-25) Sprinklers | Brice Larson 909-942-4642, Grant Arthur 909-242-4699 Racking Can Be Available or Removed | New Listing 91 Dock Doors (81 Doors w/Edge of Dock Levelers) | For Sublease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-9B9AA1B8CA222A39B3DC",
+      "propertyIdentityKey": "SUBLEASE THROUGH 12 31 2026 18012 SLOVER AVE|BLOOMINGTON|92316",
+      "listingVariantId": "LISTING-C2A4671434AE50C81F9D",
+      "structuredNotes": {
+        "power": [
+          "000 Amp",
+          "277/480 Volts"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Sublease Through 12/31/2026 18012 Slover Ave",
+          "changed": true,
+          "removedText": "Dock Doors (81 Doors w/Edge of Dock Levelers)",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Bloomington",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "954746928CAFCF523F5687B727E565C6"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-007",
+      "snapshotDate": "2026-07-09",
+      "address": "NW of Phantom E and Turner Rd, Bldg 2",
+      "city": "Victorville",
+      "postalCode": "92394",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 506000,
+      "buildingSf": 506000,
+      "officeSf": 15000,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 6",
+      "notes": "6 Southern California Logistics Center 506,000 SF TBD 74/0 Proposed 42' Southern California Logistics Center | NW of Phantom E and Turner Rd, Bldg 2 N/A TBD Available Build-to-Suit Opportunity in IE North | Victorville, CA 92394 15,000 SF 506,000 SF Yes Now 0.5:1/246 Entitled Site | Marketing Flyer Southern California Logistics Center Location | CBRE - Walt Arrington, SIOR 909-418-2154, Jeff Fritch 909-418-2075, Darla Longo 74 Dock Loading Doors | 909-418-2105, Jay Dick 909-418-2000 15,000 SF Office Space | New Listing 74 Dock Loading Doors | For Lease & Sale | 7/9/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-ECD35ACB0A16894766C6",
+      "propertyIdentityKey": "NW OF PHANTOM E AND TURNER RD BLDG 2|VICTORVILLE|92394",
+      "listingVariantId": "LISTING-6479D9F45423F1946405",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "15,000 SF Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Phantom E and Turner Rd, Bldg 2",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Victorville",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "ED524FDAE04C6BBB5AC9FF1F8BF43B3C"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-008",
+      "snapshotDate": "2026-07-09",
+      "address": "Prologis Riverside Distribution Center 3 Palmyrita Ave",
+      "city": "Riverside",
+      "postalCode": "92507",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 202805,
+      "buildingSf": 4500,
+      "officeSf": 4500,
+      "askingRate": 0.87,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 7",
+      "notes": "7 Prologis Riverside Distribution Center 3 202,805 SF $0.87 NNN 40/5 Existing 30' | Prologis Riverside Distribution Center 3 | 555 Palmyrita Ave No NFS ESFR Available 4000 | Free Standing Building | Riverside, CA 92507 4,500 SF 202,805 SF Fncd/Pvd 4,500 SF of Office Space | 03/31/2027 | Marketing Flyer 30' Minimum Warehouse Clearance | Cushman & Wakefield - Tim Pimentel 909-942-4647, Chris Pimentel 909-942-4600, 40 Dock High Doors, 5 Drive-In Doors Via Ramp | Charles Belden 909-942-4640, Brice Larson 909-942-4642 277 Car Parking Spaces, Fully Secured 130' Truck Court | New Rate Now Available @ $0.87 NNN",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_CHANGED",
+      "propertyIdentityId": "PROP-EC68AD95FB6F48BC94CE",
+      "propertyIdentityKey": "PROLOGIS RIVERSIDE DISTRIBUTION CENTER 3 PALMYRITA AVE|RIVERSIDE|92507",
+      "listingVariantId": "LISTING-D6854B916BFACE5CDAD4",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "40 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "4,500 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Prologis Riverside Distribution Center 3 Palmyrita Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Riverside",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Riverside"
+        },
+        "originalEventCategory": "New Rate",
+        "normalizedEventCode": "RATE_CHANGED",
+        "normalizedEventLabel": "Rate Changed",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "8213947AA96210E95535156806B9AF92"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-009",
+      "snapshotDate": "2026-07-09",
+      "address": "1314 W Merrill Ave",
+      "city": "Rialto",
+      "postalCode": "92376",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 127990,
+      "buildingSf": 127990,
+      "officeSf": 2510,
+      "askingRate": 1.09,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 8",
+      "notes": "8 127,990 SF $1.09 G 21/2 Existing 32' Free Standing Building | 1314 W Merrill Ave No NFS ESFR Available 3000 ±2,150 SF Office | Rialto, CA 92376 2,510 SF 127,990 SF Fenced 10/01/2026 0.8:1/100 21 Dock High Doors, (9) Equipped Levelers, 2 GL Door | Marketing Flyer Fully Secured Truck Court (155' Truck Court) | JLL - Chase Berry 704-681-1707, Patrick Wood 909-467-6857 K-25 ESFR at 40PSI, 250 GMP Total Allowance | 3,000 Amps of Power / Tire Use Welcome | New Rate Now Available @ $1.09 G",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_CHANGED",
+      "propertyIdentityId": "PROP-EEF30C025F2A7A742CA5",
+      "propertyIdentityKey": "1314 W MERRILL AVE|RIALTO|92376",
+      "listingVariantId": "LISTING-C5A014BB3EA35D26641B",
+      "structuredNotes": {
+        "power": [
+          "000 Amps of Power / Tire Use Welcome"
+        ],
+        "loading": [
+          "21 Dock High Doors",
+          "2 GL Door"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "2,150 SF Office"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "ASKING_RATE_CHANGED",
+          "field": "askingRate",
+          "from": null,
+          "to": 1.09
+        },
+        {
+          "type": "RATE_TYPE_CHANGED",
+          "field": "askingRateType",
+          "from": "TBD",
+          "to": "G"
+        },
+        {
+          "type": "TRANSACTION_TYPE_CHANGED",
+          "field": "transactionType",
+          "from": "For Lease",
+          "to": null
+        },
+        {
+          "type": "EVENT_CHANGED",
+          "field": "eventCode",
+          "from": "NEW_LISTING",
+          "to": "RATE_CHANGED"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1314 W Merrill Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rialto",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Rate",
+        "normalizedEventCode": "RATE_CHANGED",
+        "normalizedEventLabel": "Rate Changed",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "26C1F8DD2B5285037F9D5F790AA71ABA"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-010",
+      "snapshotDate": "2026-07-09",
+      "address": "8747 - 8807 Rochester Ave",
+      "city": "Rancho Cucamonga",
+      "postalCode": "91730",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 82873,
+      "buildingSf": 82873,
+      "officeSf": 7850,
+      "askingRate": 1.12,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 9",
+      "notes": "9 82,873 SF $1.12 NNN 12/5 Existing 24' I-15 Freeway Frontage Industrial Building | 8747 - 8807 Rochester Ave No TBD Yes Available 800 Divisible Into 2 Industrial Units (±37,679 SF to ±44,926 SF) | Rancho Cucamonga, CA 91730 7,850 SF 82,873 SF Paved 12/01/2026 ±3.94 Acre Parcel of Land, 65 Vehicle Parking Stalls | Marketing Flyer 7,850 SF of Office Space, 24' Minimum Clearance | Lee & Associates - Ken Jones 909-989-7771, Ben Palitz 909-373-2910, Cole 12 Dock High Loading Doors, 5 Ground Level Doors | McFetters 909-373-2733, Jacob Wolfe 909-373-2705 800 Amps, 277/480 Volts of Power (Verify) | New Listing I-15 Freeway Frontage Industrial Building with 12 Dock High Doors | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-432064047656CC6CE301",
+      "propertyIdentityKey": "8747 8807 ROCHESTER AVE|RANCHO CUCAMONGA|91730",
+      "listingVariantId": "LISTING-305C554A661B4595A9B8",
+      "structuredNotes": {
+        "power": [
+          "800 Amps",
+          "277/480 Volts of Power (Verify)"
+        ],
+        "loading": [
+          "12 Dock High Loading Doors",
+          "5 Ground Level Doors",
+          "12 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "7,850 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "8747 - 8807 Rochester Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rancho Cucamonga",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "BD16422929CDA6D96E170CB613B83C12"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-011",
+      "snapshotDate": "2026-07-09",
+      "address": "13941 Norton Ave",
+      "city": "Chino",
+      "postalCode": "91710",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 70980,
+      "buildingSf": 101640,
+      "officeSf": 2206,
+      "askingRate": 0.97,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 10",
+      "notes": "10 70,980 SF $0.97 NNN 8/3 Existing 26' Heavy Office | 13941 Norton Ave Yes NFS Yes Leased 1600 Heavy Power | Chino, CA 91710 2,206 SF 101,640 SF Yes Now Walk to Spectrum Retail Amenities | Marketing Flyer Excellent Freeway Access | Lee & Associates - John Espinosa 714-608-3610 Low Net Expenses | Leased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-1217E76F5697149B6BC3",
+      "propertyIdentityKey": "13941 NORTON AVE|CHINO|91710",
+      "listingVariantId": "LISTING-E41383243B41B2E459BC",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "13941 Norton Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Chino",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "56AC2C9ED8A77814C9C85123BA8464E4"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-012",
+      "snapshotDate": "2026-07-09",
+      "address": "SW of Harvill Ave and Lemon Ave",
+      "city": "Perris",
+      "postalCode": "92570",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 605920,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 18",
+      "notes": "18 605,920 SF NFL 0 SF Available Gas: Zoned IP - Industrial Park | SW of Harvill Ave and Lemon Ave 13.91 Ac $25.00 Fncd/Pvd Industrial Water: CUP in Final Review; 11,630 SF Industrial Maintenance & Service Bldg | Perris, CA 92570 No $15,148,000 No I-P Sewer: 4 Pass-thru Bays, 6 Offices/Conf Rm, Lobby, Board Room, 4 Restrooms | Harvill Ave/ Lemon Ave Electric: On Approved Riverside County Truck Route | Sperry Commercial - Liz Roubidoux 909-440-0967, Jon Sorokowski 951- | Marketing Flyer Fiber: Immediate Access to 215 Fwy via Harvill Ave/Nuevo Ave | 742-8600 | New Listing | For Sale On Approved Riverside County Truck Route",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-68C4247336CB98DDA3DA",
+      "propertyIdentityKey": "SW OF HARVILL AVE AND LEMON AVE|PERRIS|92570",
+      "listingVariantId": "LISTING-97BF00BC341C591886EB",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of Harvill Ave and Lemon Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Perris",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "37D31E322D1CD444D1B7EE6BCC0AC0ED"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-013",
+      "snapshotDate": "2026-07-09",
+      "address": "16235-16297 Valley Blvd",
+      "city": "Fontana",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 500504,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 19",
+      "notes": "19 500,504 SF NFL 7,880 SF Available Gas: ±11.49 Acres of Land | 16235-16297 Valley Blvd 11.49 Ac $69.93 Fncd/Pvd Industrial Water: Located on City of Fontana Truck Route | Fontana, CA 92335 No $35,000,000 No C2 & M1 Sewer: 342 Truck / 53' Trailer parking | Valley Blvd/Oleander Ave Electric: Existing Trucking/Transportation Facility | Sperry Commercial - Liz Roubidoux 909-440-0967, Jon Sorokowski 951- | Marketing Flyer Fiber: Property is Fully Paved / Fenced | 742-8600 Access to 10 Fwy | New Listing | For Sale Property is Fully Paved / Fenced",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-A47D63CF19CBF1E7CC28",
+      "propertyIdentityKey": "16235 16297 VALLEY BLVD|FONTANA|92335",
+      "listingVariantId": "LISTING-E0BF7BD2281328D997E7",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "16235-16297 Valley Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Fontana"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "CC00B62C3461A3CD43D32A7D01A1E991"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-014",
+      "snapshotDate": "2026-07-09",
+      "address": "S Cawston Ave",
+      "city": "Hemet",
+      "postalCode": "92545",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 85378,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale or Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 20",
+      "notes": "20 85,378 SF NFL 16,200 SF Available Gas: Positioned for Owner/User | 850 S Cawston Ave 1.96 Ac $49.19 Yes Industrial Water: 1.96 Acres of Land for Sale | Hemet, CA 92545 No $4,200,000 No M1/M2 Sewer: Multi-Tenant Building (6 Units) | S Cawston Ave/Wentworth Dr Electric: 9 Ground Level Doors (10'x10') | Newmark - Ontario - Craig McKenzie 626-664-1567, Peter Carter 323- | Marketing Flyer Fiber: Each Unit is 200 Amp, 277 Volt, 3 Phase | 445-8629 12' Clear Height,New Sprinkler System | New Listing | For Sale 1.96 Acres of Land for Sale | 64,469 SF TBD 4,830 SF Available Gas: ±1.48 Acres of Land | 21 | 10157-10167 Live Oak Ave 1.48 Ac NFS Fncd/Pvd Industrial Water: Paved & Fenced Yard | Fontana, CA 92335 No NFS No M1 Sewer: Industrial Outdoor Storage Yard | Live Oak Ave/Valley Blvd Contractor's Yard/ Truck Trailer Parking | MacLeod & Company - Jean Carlo Castillo 949-413-9396, Ethan Flor 424- Electric: | Marketing Flyer Fiber: Material Storage/Lumber Yard | 235-9211 Located between Valley Blvd & 10 Fwy | New Listing | For Lease Industrial Outdoor Storage Yard | 7/9/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-DC98F96129402A33D702",
+      "propertyIdentityKey": "S CAWSTON AVE|HEMET|92545",
+      "listingVariantId": "LISTING-F3FBE6DF717E2B313D07",
+      "structuredNotes": {
+        "power": [
+          "200 Amp"
+        ],
+        "loading": [
+          "9 Ground Level Doors (10'x10')"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "S Cawston Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Hemet",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A15B08F1F41A818E6626E80E64786AFF"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-015",
+      "snapshotDate": "2026-07-09",
+      "address": "1st St",
+      "city": "San Fernando",
+      "postalCode": "91340",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 56162,
+      "buildingSf": 56162,
+      "officeSf": 34628,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 1",
+      "notes": "1 56,162 SF NFL 1/1 Existing 26' - 28' Highly Improved Corporate HQ Industrial/Office Facility | 555 1st St No $317.83 ESFR Available 800 21,534 SF Warehouse & 34,628 Class A Office Build Out | San Fernando, CA 91340 34,628 SF 56,162 SF No 12/01/2026 1.9:1/106 Heavy Well Distributed Power / 28'- 30' Clear Height | Marketing Flyer DH & GL loading / 106 Parking Spaces in Gated Parking | TOLD Partners Inc. - Jack Mikail 818-466-0240 City of San Fernando Business Benefits | Close Proximity to 5, 118, 405, 210, 170 & 14 Freeways | Price Reduced $18,250,000 -> $17,850,000",
+      "changeDetail": "$18,250,000 -> $17,850,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-E61B1D0C0FFFDA1D35D7",
+      "propertyIdentityKey": "1ST ST|SAN FERNANDO|91340",
+      "listingVariantId": "LISTING-161A9D20208400BCB36F",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [
+          "106 Parking Spaces in Gated Parking"
+        ],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1st St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "San Fernando",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "3F7B9EBA46939434CE115AB4A5452E85"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-016",
+      "snapshotDate": "2026-07-09",
+      "address": "3809 Durbin St",
+      "city": "Irwindale",
+      "postalCode": "91706",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 52196,
+      "buildingSf": 52196,
+      "officeSf": 6000,
+      "askingRate": 1.25,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 12,
+      "sourceRow": "Page 12 AIR Listing 1",
+      "notes": "1 52,196 SF $1.25 G 3/2 Existing 24' High Image Free Standing Building | 3809 Durbin St No NFS Yes Available 600 Large Fenced & Secured Yard | Irwindale, CA 91706 6,000 SF 52,196 SF Fncd/Pvd 08/01/2026 3 Dock High Positions | Marketing Flyer 2 Oversized Ground Level Doors | NAI Capital - Sam Fong 909-348-0609 Minimum 24' Clear Height | New Listing Large Fenced & Secured Yard | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-BF71DE50E42694C4063D",
+      "propertyIdentityKey": "3809 DURBIN ST|IRWINDALE|91706",
+      "listingVariantId": "LISTING-4406560FDFDE29CFE7CF",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "3 Dock High Positions",
+          "Ground Level Doors"
+        ],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "3809 Durbin St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Irwindale",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "6F3D1656676E428AA47A2297F3818865"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-017",
+      "snapshotDate": "2026-07-09",
+      "address": "2850 E El Presidio St",
+      "city": "Carson",
+      "postalCode": "90810",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 87725,
+      "buildingSf": 87725,
+      "officeSf": 7857,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 1",
+      "notes": "1 87,725 SF TBD 10/1 Existing 24' | Free Standing Concrete Tilt Up/ Paved Yard | 2850 E El Presidio St No NFS ESFR Available 1000 | Cul-de-sac Street with Immediate 710 & 405 Freeway access | Carson, CA 90810 7,857 SF 87,725 SF Fncd/Pvd 10 Dock High Loading Doors/ 1 Ramp | 03/01/2027 1.4:1/125 | Marketing Flyer 24 Foot Clear/ 7,857 Square Feet of Corporate Offices | Kidder Mathews - Harvey Beesen, SIOR 310-906-3264, Luke Staubitz, SIOR 310-906- 100 KW Solar Panel Syetm/1,000 Amps | 3288, Andrew Dilfer, SIOR 310-906-3280 ESFR System & LED Lights | New Listing 10 Dock High Loading Doors/ 1 Ramp | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-D19A586F5D707B344E14",
+      "propertyIdentityKey": "2850 E EL PRESIDIO ST|CARSON|90810",
+      "listingVariantId": "LISTING-9CBA221FD4039003BD30",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [
+          "10 Dock High Loading Doors/ 1 Ramp"
+        ],
+        "yard": [
+          "Paved Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2850 E El Presidio St",
+          "changed": true,
+          "removedText": "Cul-de-sac Street with Immediate 710 & 405 Freeway access",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Carson",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A5E302CA97262E294291F81348AB1454"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-018",
+      "snapshotDate": "2026-07-09",
+      "address": "7110 Rosecrans Ave",
+      "city": "Paramount",
+      "postalCode": "90723",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 74153,
+      "buildingSf": 74153,
+      "officeSf": 4842,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 2",
+      "notes": "2 74,153 SF NFL 4/2 Existing 20' - 26' | Large Fenced & Secured Yard | 7110 Rosecrans Ave No $275.00 ESFR Available 1556 | Bonus Covered Storage/Yard Area | Paramount, CA 90723 4,842 SF 74,153 SF Fenced ESFR Sprinklers (Partial) / 1,566 Amps | COE 0.8:1/59 | Marketing Flyer 4 Dock High Positions / 2 Ground Level Doors | Newmark - Los Angeles - South Bay - Danny Williams 310-491-2061, Connor Reeves Excellent Access to 710, 105, 605 & 91 Freeways | 310-491-2088, John McMillan 310-491-2048, Jeff Sanita 310-491-2003 | New Listing Bonus Covered Storage/Yard Area | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-F3730ECC535C57750C4B",
+      "propertyIdentityKey": "7110 ROSECRANS AVE|PARAMOUNT|90723",
+      "listingVariantId": "LISTING-9541C067DF0D6BF01D6E",
+      "structuredNotes": {
+        "power": [
+          "566 Amps"
+        ],
+        "loading": [
+          "4 Dock High Positions / 2 Ground Level Doors"
+        ],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "7110 Rosecrans Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Paramount",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "15634BC6229CC80075072C36354C5CED"
+      }
+    },
+    {
+      "candidateId": "DA-20260709-019",
+      "snapshotDate": "2026-07-09",
+      "address": "2772-2826 Norton Ave",
+      "city": "Lynwood",
+      "postalCode": "90262",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 65120,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 16",
+      "notes": "16 2772, 2800, 2820, 2826 Norton Ave 65,120 SF NFL 32,000 SF Available Gas: Owner/User or Development Opportunity | (Portfolio) 1.49 Ac $99.82 Fncd/Pvd Industrial Water: Y Structures Can Be Demolished | 2772-2826 Norton Ave No $6,500,000 No LYM Sewer: Y Site Suitable For Transportation Terminal | Lynwood, CA 90262 4 Separate Parcels | Lee & Associates - Garrett Hill 323-767-2092, Jeffrey Hubbard 323-767- Electric: Y | Norton Ave/ Santa Fe Ave 2037 Fiber: | Marketing Flyer | New Listing Owner/User or Development Opportunity | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-271F98C7443732567E1D",
+      "propertyIdentityKey": "2772 2826 NORTON AVE|LYNWOOD|90262",
+      "listingVariantId": "LISTING-FE81224D2F6AF04A2208",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-09"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2772-2826 Norton Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Lynwood",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.139Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "794DD5D68A973359315AA5ED83812FD8"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

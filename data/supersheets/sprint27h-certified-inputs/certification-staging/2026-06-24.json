@@ -1,0 +1,1716 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-24",
+  "summary": {
+    "observations": 15,
+    "reviewRequired": 1,
+    "blocked": 0,
+    "lineageComplete": 15
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-24-2026.pdf",
+    "sourceSha256": "3cb2f83c6809e542518dce032756df692f8355302eba5a97de2597de22abf7c3",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260624-001",
+      "snapshotDate": "2026-06-24",
+      "address": "14450 Industry Cir",
+      "city": "La Mirada",
+      "postalCode": "90638",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 198566,
+      "buildingSf": 8000,
+      "officeSf": 8000,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Available SF Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 1",
+      "notes": "1 198,566 SF TBD 25/1 Existing 24' Outstanding Distribution/Manufacturing Building | 14450 Industry Cir Yes TBD Yes Available 3000 Large Fenced Yard (±80,000 SF) 25 DH Positions + Ramp | La Mirada, CA 90638 8,000 SF 198,566 SF Fncd/Pvd Now 1.0:1/200 24'-28', 44'x44' Typ. Bay Spacing, ±8,000 SF Office | Direct Access to 5, 91, and 605 Fwys | CBRE - El Segundo - Rick McGeagh 310-363-4878, Joshua Bonwell 714-371-9207, New Owner with Major Renovation Planned | Trent Peterson 714-371-9341 | New Size | Now Available @ 198,566 SF",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "AVAILABLE_SF_CHANGED",
+      "propertyIdentityId": "PROP-8E4006E11F05BCF14F37",
+      "propertyIdentityKey": "14450 INDUSTRY CIR|LA MIRADA|90638",
+      "listingVariantId": "LISTING-F712F6FF30F6BBBA690B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "25 DH Positions + Ramp"
+        ],
+        "yard": [
+          "Fenced Yard (±80"
+        ],
+        "parking": [],
+        "office": [
+          "8,000 SF Office"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14450 Industry Cir",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "La Mirada",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "La Mirada"
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "AVAILABLE_SF_CHANGED",
+        "normalizedEventLabel": "Available SF Changed",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "84386621DDAEDBBC33C9C07F3465E970"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-002",
+      "snapshotDate": "2026-06-24",
+      "address": "12300 Lakeland Rd",
+      "city": "Santa Fe Springs",
+      "postalCode": "90650",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 185056,
+      "buildingSf": 185056,
+      "officeSf": 7894,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 2",
+      "notes": "2 185,056 SF TBD 23/1 U/C 36' Free Standing Building | 12300 Lakeland Rd N/A NFS ESFR Leased 4000 7,894 Office SF | Santa Fe Springs, CA 90650 7,894 SF 185,056 SF Fenced Completion 1.3:1/233 23 DH Doors, 1 GL Door | Marketing Flyer Fully Secured and Fenced Yard | Colliers - Clyde Stauff 949-724-5543, Jace Gan 949-724-5529 Built to LEED Silver Standards | Power to Suit - 4,000 Amps | Leased Co-Op: Cameron Driscoll and Luke McDaniel (JLL)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-E05A7C378844C9919F24",
+      "propertyIdentityKey": "12300 LAKELAND RD|SANTA FE SPRINGS|90650",
+      "listingVariantId": "LISTING-43B56E689277C87FF85E",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [
+          "23 DH Doors",
+          "1 GL Door"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": [
+          "U/C 36' Free Standing Building"
+        ]
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "12300 Lakeland Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Santa Fe Springs",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "05ABDB6B4F1C38F697D5548CEF1F01E7"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-003",
+      "snapshotDate": "2026-06-24",
+      "address": "5235 E Hunter Ave",
+      "city": "Anaheim",
+      "postalCode": "92807",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 121364,
+      "buildingSf": 121364,
+      "officeSf": 7083,
+      "askingRate": 1.65,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Marketing Event",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 3",
+      "notes": "3 121,364 SF $1.65 NNN 14/1 Existing 36' | Construction Now Complete! | 5235 E Hunter Ave Yes NFS ESFR Available 3000 | Day 1 Power is 3000 Amps (expandable to 4000) | Anaheim, CA 92807 7,083 SF 121,364 SF Fncd/Pvd Free Standing Building, Abundant Parking | Now 1.0:1/119 | Marketing Flyer Large Fenced & Secured Yard | CBRE - Ben Seybold 714-371-9233, Sean Ward 714-371-9222, Keith Greer 714-371- Two Access Points | 9209 Excellent Access to 57, 55 & 91 Fwys | Open House | July 15th Cash rewards & BIG Raffle Prizes! RSVP to kelli.bruce@cbre.com | 11:30 am-1 pm",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "MARKETING_EVENT",
+      "propertyIdentityId": "PROP-68B3BE6DD32F61900CCD",
+      "propertyIdentityKey": "5235 E HUNTER AVE|ANAHEIM|92807",
+      "listingVariantId": "LISTING-FAC5EFC0B4106CBF2B93",
+      "structuredNotes": {
+        "power": [
+          "3000 Amps (expandable to 4000)"
+        ],
+        "loading": [],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "5235 E Hunter Ave",
+          "changed": true,
+          "removedText": "Day 1 Power is 3000 Amps (expandable to 4000)",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Anaheim",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "MARKETING_EVENT",
+        "normalizedEventLabel": "Marketing Event",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "BB815CAE41AFFD37370FE5CEDC28BA5D"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-004",
+      "snapshotDate": "2026-06-24",
+      "address": "13930 Gannet St",
+      "city": "Santa Fe Springs",
+      "postalCode": "90670",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 75004,
+      "buildingSf": 104004,
+      "officeSf": 2186,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 4",
+      "notes": "4 75,004 SF TBD 4/1 Existing 24'-27' Sublease Term Through 11/30/2029 | 13930 Gannet St Yes NFS Yes Available 600 Large Fenced Yard (±1.25 Acres) | Santa Fe Springs, CA 90670 2,186 SF 104,004 SF Fenced 09/01/2026 1.0:1/75 24'-27' Warehouse Clearance | .60/3,000 Sprinkler Calculation | Lee & Associates - Edward Lee 323-767-2102 Convenient Access to 5, 91, 605 Freeways | 8 DH & 1 GL / Bonus Mezzanine | New Listing | For Lease Large Fenced Yard (±1.25 Acres)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-752F67FBBE71C1FBB286",
+      "propertyIdentityKey": "13930 GANNET ST|SANTA FE SPRINGS|90670",
+      "listingVariantId": "LISTING-C326030BF8B588837EEB",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "8 DH & 1 GL / Bonus Mezzanine"
+        ],
+        "yard": [
+          "Fenced Yard (±1"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "13930 Gannet St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Santa Fe Springs",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Santa Fe Springs"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "5BCB17636BE436F668BCFA2BE06FC997"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-005",
+      "snapshotDate": "2026-06-24",
+      "address": "15125 Marquardt Ave",
+      "city": "Santa Fe Springs",
+      "postalCode": "90670",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 70084,
+      "buildingSf": 70084,
+      "officeSf": 7000,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 5",
+      "notes": "5 70,084 SF NFL 6/1 Existing 19' - 20' Santa Fe Springs - Business Friendly and No Gross Receipts Tax | 15125 Marquardt Ave No $221.16 Yes Available 2940 2,200 KW Power - 4000 AMP Upgrade Possible | Santa Fe Springs, CA 90670 7,000 SF 70,084 SF Fncd/Pvd COE 0.6:1/43 Industrial Wastewater Discharge - 450,000 GPD Avg Flow Capacity | Marketing Flyer Fenced/Gated Yard; Dock High & Ground Level Loading | Cushman & Wakefield - Brandon Gill 213-629-6528, Brandon Burns 213-629-6541, | Jae Yoo 213-629-6551, Dillon Kneafsey 213-629-6519 | New Listing 2,200 KW Power - 4000 AMP Upgrade Possible | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-92EE501F236DE4F91E13",
+      "propertyIdentityKey": "15125 MARQUARDT AVE|SANTA FE SPRINGS|90670",
+      "listingVariantId": "LISTING-3590FD4A4C1EBACB41B6",
+      "structuredNotes": {
+        "power": [
+          "4000 AMP Upgrade Possible"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "15125 Marquardt Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Santa Fe Springs",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Santa Fe Springs"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "320F764E6B6C4A5732FE32270A14DC40"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-006",
+      "snapshotDate": "2026-06-24",
+      "address": "7150 Village Dr",
+      "city": "Buena Park",
+      "postalCode": "90621",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 68870,
+      "buildingSf": 7000,
+      "officeSf": 7000,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "Sale Comp",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 6",
+      "notes": "6 Village Business Park 68,870 SF NFL 8/1 Existing 22' High Image/Freeway Visible Industrial Building | 7150 Village Dr No $365.00 Yes Sold 2000 Eight (8) Dock High Loading Doors w/ Levelers | Buena Park, CA 90621 7,000 SF 68,870 SF Paved COE 1.93:1 ±7,000 SF Functional Office Space | Marketing Flyer 2,000 Amps, 277/480 Volt Electric Service (Verify) | CBRE - Santa Fe Springs - John Biven 562-968-1150, Chris Ehrlich 562-968-1160 Excellent Access to 5,91,605, and 105 Freeways | Sold Co-Op: Stan Kwak and Selden McKnight (Colliers) | 6/24/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-02B1EE43DB2797A66612",
+      "propertyIdentityKey": "7150 VILLAGE DR|BUENA PARK|90621",
+      "listingVariantId": "LISTING-F9EE2D9F19853E9ECC70",
+      "structuredNotes": {
+        "power": [
+          "000 Amps",
+          "277/480 Volt Electric Service (Verify)"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "7150 Village Dr",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Buena Park",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "6730225B29F03A7DF50A1DCAF1D2B660"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-007",
+      "snapshotDate": "2026-06-24",
+      "address": "20201 Caroline Way",
+      "city": "Riverside",
+      "postalCode": "92571",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 782209,
+      "buildingSf": 782209,
+      "officeSf": 8034,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 1",
+      "notes": "1 Meridian Business Park 782,209 SF TBD 114/3 Existing 40' Meridian Business Park | 20201 Caroline Way Yes TBD ESFR Available 4000 Cross-Dock Building | Riverside, CA 92571 8,034 SF 782,209 SF Fncd/Pvd Now 0.5:1/425 114 Dock High Door and 3 Grade Level Doors | Marketing Flyer 4,000 Amp Elec Service - w/Existing Infrastructure to Allow | Cushman & Wakefield - Philip Lombardo 909-942-4678, Charles Belden 909-942- Expansion | 4640, Andrew Starnes 909-942-4667, Joe McKay 909-989-7771 ESFR - K25 Head | Updated Information New Brochure",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-9895C1BE21EDF14A37B9",
+      "propertyIdentityKey": "20201 CAROLINE WAY|RIVERSIDE|92571",
+      "listingVariantId": "LISTING-FC216D086760A4B95200",
+      "structuredNotes": {
+        "power": [
+          "000 Amp Elec Service - w/Existing Infrastructure to Allow"
+        ],
+        "loading": [
+          "114 Dock High Door and 3 Grade Level Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "20201 Caroline Way",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Riverside",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Perris"
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "C3632FD004C4BD36EC92600E8DE2E94E"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-008",
+      "snapshotDate": "2026-06-24",
+      "address": "11251 Jersey Blvd",
+      "city": "Rancho Cucamonga",
+      "postalCode": "91730",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 54805,
+      "buildingSf": 54805,
+      "officeSf": 3055,
+      "askingRate": 0.89,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 2",
+      "notes": "2 54,805 SF $0.89 NNN 0/9 Existing ±4.57 Fully Fenced/Paved Site | 11251 Jersey Blvd No TBD Yes Available 3000 2-10 Ton Cranes (30' Underhook) | Rancho Cucamonga, CA 91730 3,055 SF 54,805 SF Fncd/Pvd 60 Days 3,055 Sq. Ft. Office | Marketing Flyer Fire Sprinklered, Rail Service Possible | Delmar Commercial - Robert Jimenez 909-238-9874 9 Ground Level Doors, 1 - Exterior Truckwell | 3,000 Amp Panel, 277/480 Volt Power | Correction Still on Market",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-5DF4D9A3470FF0A53986",
+      "propertyIdentityKey": "11251 JERSEY BLVD|RANCHO CUCAMONGA|91730",
+      "listingVariantId": "LISTING-7694F18EB112BA16C52C",
+      "structuredNotes": {
+        "power": [
+          "000 Amp Panel",
+          "277/480 Volt Power"
+        ],
+        "loading": [
+          "9 Ground Level Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "11251 Jersey Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rancho Cucamonga",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.84,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A2B224FC4D8F86F762AB27E9A00DB868"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-009",
+      "snapshotDate": "2026-06-24",
+      "address": "S 11th Ave",
+      "city": "Upland",
+      "postalCode": "91786",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 304920,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 9",
+      "notes": "9 304,920 SF NFL 68,520 SF Available Gas: 7 Acres of Prime Infill Land | 420 S 11th Ave 7.00 Ac TBD Yes Industrial Water: 68,520 SF of Industrial Buildings | Upland, CA 91786 No TBD No R-20 Sewer: 16'-18' Warehouse Ceiling | S 11th Ave/E 7th St Electric: R-20 Residential Zoning, Allowing up To 20 Dwelling Units | Coldwell Banker Alliance Realty - Mandy Carter 562-945-2221, Jeffrey | Marketing Flyer Hughes 816-364-1000 Fiber: | New Listing | For Sale 7 Acres of Prime Infill Land",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-3CC3A5FE6C3C800DAE1A",
+      "propertyIdentityKey": "S 11TH AVE|UPLAND|91786",
+      "listingVariantId": "LISTING-3A884B85854CEC32170A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "S 11th Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Upland",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "12AEC1D913C0E8F9B0D4676C265881CC"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-010",
+      "snapshotDate": "2026-06-24",
+      "address": "San Jacinto St",
+      "city": "San Bernardino",
+      "postalCode": "92408",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 300564,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 10",
+      "notes": "10 300,564 SF NFL 0 SF Available Gas: ±6.90 Acres of Land | 549 San Jacinto St 6.90 Ac $25.00 Fenced Industrial Water: Fully Secured Yard | San Bernardino, CA 92408 No $7,514,100 No IL Sewer: Flat Topography | S Valley View Ave/San Jacinto St Electric: Excellent Access To 10 & 215 Freeways | Cushman & Wakefield - Milo Lipson 909-942-4648, Tal Siglar 909-942- | Marketing Flyer Fiber: Two (2) Access Points | 4680 | New Listing | For Sale Fully Secured Yard",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-A95B15934BCCBC15EDAE",
+      "propertyIdentityKey": "SAN JACINTO ST|SAN BERNARDINO|92408",
+      "listingVariantId": "LISTING-5C45A941DB25C81EB881",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "San Jacinto St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "San Bernardino",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "838AF9FAB66DE50EABEC310BEC720A9D"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-011",
+      "snapshotDate": "2026-06-24",
+      "address": "10500 Orbital Way",
+      "city": "Pacoima",
+      "postalCode": "91331",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 83755,
+      "buildingSf": 83755,
+      "officeSf": 45838,
+      "askingRate": 1.29,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Available SF Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 12,
+      "sourceRow": "Page 12 AIR Listing 1",
+      "notes": "1 83,755 SF $1.29 NNN 0/3 Existing 21' Free Standing Building | 10500 Orbital Way Yes NFS No Available 3000 Great Parking with The Ability to Expand | Pacoima, CA 91331 45,838 SF 83,755 SF No Now 2.7:1/230 Heavy Power - 3,000 Amps | 3 GL Loading Doors | CBRE - Bennett Robinson 818-907-4608 24,041 SF Mezzanine | 21' Clear Height | New Size | Now Available @ 83,755 SF",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "AVAILABLE_SF_CHANGED",
+      "propertyIdentityId": "PROP-57D59CD9401A604418ED",
+      "propertyIdentityKey": "10500 ORBITAL WAY|PACOIMA|91331",
+      "listingVariantId": "LISTING-73EF790E9BBA5D23742C",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [
+          "3 GL Loading Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "10500 Orbital Way",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Pacoima",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "AVAILABLE_SF_CHANGED",
+        "normalizedEventLabel": "Available SF Changed",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9A87926D86CB7609478C065FA3F88FEC"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-012",
+      "snapshotDate": "2026-06-24",
+      "address": "E Avenue",
+      "city": "Lancaster",
+      "postalCode": "93535",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 348480,
+      "buildingSf": 400,
+      "officeSf": null,
+      "askingRate": 0.08,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 12,
+      "sourceRow": "Page 12 AIR Listing 4",
+      "notes": "4 348,480 SF $0.08 G 0 SF Available Gas: 8 Acres of Land Available | 100 E Avenue G8 8.00 Ac NFS Fenced Industrial Water: Available Spaces Range from 400 SF to the Entire Site | Lancaster, CA 93535 400 SF NFS No M-1 Sewer: N Fully Fenced w/ Compacted Aggregate Base Surface | Division St/Avenue G8 Electric: N Offers Flexibility for Storage and Operational Needs | Cushman & Wakefield - Michael Chase 310-415-0472 | Fiber: | New Rate | Now Available @ $0.08 G",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_CHANGED",
+      "propertyIdentityId": "PROP-92C2B2ACF1241BE52B1A",
+      "propertyIdentityKey": "E AVENUE|LANCASTER|93535",
+      "listingVariantId": "LISTING-DF996D3172825C04C490",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "E Avenue",
+          "changed": true,
+          "removedText": "G8",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Lancaster",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Lancaster"
+        },
+        "originalEventCategory": "New Rate",
+        "normalizedEventCode": "RATE_CHANGED",
+        "normalizedEventLabel": "Rate Changed",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "98C2494B14A044864C43494CF5340992"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-013",
+      "snapshotDate": "2026-06-24",
+      "address": "11473 Penrose St",
+      "city": "Sun Valley",
+      "postalCode": "91352",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 230411,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.65,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 12,
+      "sourceRow": "Page 12 AIR Listing 5",
+      "notes": "5 230,411 SF $0.65 NNN 65,000 SF Available Gas: ±65K SF of Bldg Area/Renovated Offices | 11473 Penrose St 5.29 Ac NFS Fncd/Pvd Industrial Water: Y Oversized Land Area of ±230,411 SF or 5.3 Acres | Sun Valley, CA 91352 No NFS No M1 Sewer: Y Excellent for RV/Bus/Vehicle Yard/Contractor's Yard/ | Penrose St/Telfair Ave Electric: Y Outside Storage Needs; Fully Fenced & Secure | Colliers - David Harding 818-334-1880, Greg Geraci 818-334-1844, | Marketing Flyer Fiber: Immediate 5 Fwy Access, Great Valley Location | Matthew Dierckman 818-334-1870, William Walk 818-334-1898 Vehicle Wash Area, RV Sized Spray Booth, Mechanic | Bldg/Storage | Rate Reduced | $0.75 NNN -> $0.65 NNN | 6/24/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": "$0.75 NNN -> $0.65 NNN",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-2F07940ADA8EDCD34DC6",
+      "propertyIdentityKey": "11473 PENROSE ST|SUN VALLEY|91352",
+      "listingVariantId": "LISTING-31B6FE2A503C56648DE1",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "11473 Penrose St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Sun Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "29742810D9156D1EDA2620670FD72842"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-014",
+      "snapshotDate": "2026-06-24",
+      "address": "8401 Telfair Ave",
+      "city": "Sun Valley",
+      "postalCode": "91352",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 130680,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.65,
+      "askingRateType": "NET",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 6",
+      "notes": "6 130,680 SF $0.65 Net 28,000 SF Available Gas: ±28K SF Bldg plus ±11K Covered Parking | 8401 Telfair Ave 3.00 Ac NFS Fncd/Pvd Industrial Water: Y Oversized Land Area of Approx. 130,680 SF or 3 Acres | Sun Valley, CA 91352 No NFS No M1 Sewer: Y Excellent for RV/Bus/Vehicle Yard | Penrose St/ Telfair Ave Electric: Y Contractor's Yard/Outside Storage Needs | Colliers - David Harding 818-334-1880, Greg Geraci 818-334-1844, | Marketing Flyer Fiber: Immediate 5 Fwy Access, Great Valley Location | Matthew Dierckman 818-334-1870, William Walk 818-334-1898 Fully Fenced & Secure | Rate Reduced | $0.75 Net -> $0.65 Net",
+      "changeDetail": "$0.75 Net -> $0.65 Net",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-13C2151BF5FCF2A4B16B",
+      "propertyIdentityKey": "8401 TELFAIR AVE|SUN VALLEY|91352",
+      "listingVariantId": "LISTING-E26BA803904215850316",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-24"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "8401 Telfair Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Sun Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "ADCF4D34ACBE1A5EA64383B43AE46505"
+      }
+    },
+    {
+      "candidateId": "DA-20260624-015",
+      "snapshotDate": "2026-06-24",
+      "address": "11473 Penrose St",
+      "city": "Sun Valley",
+      "postalCode": "91352",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 100188,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.65,
+      "askingRateType": "NET",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 7",
+      "notes": "7 100,188 SF $0.65 Net 17,000 SF Available Gas: ±17K SF Bldg plus ±6K Covered Parking | 11473 Penrose St 2.30 Ac NFS Fncd/Pvd Industrial Water: Y Oversized Land Area of Approx. 100,188 SF or 2.3 Acres= | Sun Valley, CA 91352 No NFS No M1 Sewer: Y Excellent for RV/Bus/Vehicle Yard/Contractor's Yard/Outside Storage | Penrose St/ Telfair Ave Electric: Y Immediate 5 Fwy Access, Great Valley Location; Fully Fenced & Secure | Colliers - David Harding 818-334-1880, Greg Geraci 818-334-1844, | Marketing Flyer Fiber: Vehicle Wash Area, RV Sized Spray Booth, Mechanic Bldg/Storag | Matthew Dierckman 818-334-1870, William Walk 818-334-1898 | Rate Reduced | $0.75 Net -> $0.65 Net",
+      "changeDetail": "$0.75 Net -> $0.65 Net",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-2F07940ADA8EDCD34DC6",
+      "propertyIdentityKey": "11473 PENROSE ST|SUN VALLEY|91352",
+      "listingVariantId": "LISTING-0E1F1DE2F800356E2598",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 230411,
+          "to": 100188
+        },
+        {
+          "type": "RATE_TYPE_CHANGED",
+          "field": "askingRateType",
+          "from": "NNN",
+          "to": "NET"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "11473 Penrose St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Sun Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "1CB767D373F69ABD69211A966F9756A1"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

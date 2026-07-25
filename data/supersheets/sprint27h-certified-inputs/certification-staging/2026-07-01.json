@@ -1,0 +1,1478 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-07-01",
+  "summary": {
+    "observations": 13,
+    "reviewRequired": 0,
+    "blocked": 0,
+    "lineageComplete": 13
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-01-2026.pdf",
+    "sourceSha256": "ff8721e2cc4f110d96072bf47d2a9e616d7dea948977dea666db0a9eaa045b50",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260701-001",
+      "snapshotDate": "2026-07-01",
+      "address": "Smith Ave",
+      "city": "Corona",
+      "postalCode": "92880",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 158028,
+      "buildingSf": 158028,
+      "officeSf": 7000,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 1",
+      "notes": "1 158,028 SF TBD 22/2 Existing 36' Free Standing Class “A” Distribution Building | 212 Smith Ave Yes TBD ESFR Available 4000 7,000 SF of 2-Story Office Space | Corona, CA 92880 7,000 SF 158,028 SF Fenced Now 1.3:1/204 22 Dock High Doors, 2 Grade Level Doors | Marketing Flyer 4,000 Amps, 277/480 Volt | Voit Real Estate Services - Ryan Moore 909-545-8011, Mitch Zehner 714-935-2307 Private Secured Truck Yard | Immediate Access to 91 and 15 Freeways | Updated Information Now Available For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-CC256BFD74563D0FF526",
+      "propertyIdentityKey": "SMITH AVE|CORONA|92880",
+      "listingVariantId": "LISTING-0C6912633A667FF027E0",
+      "structuredNotes": {
+        "power": [
+          "000 Amps",
+          "277/480 Volt"
+        ],
+        "loading": [
+          "22 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Smith Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Corona",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "EB26DF55A0E1DC5B37C4A4DC1A20268E"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-002",
+      "snapshotDate": "2026-07-01",
+      "address": "1244 N Anaheim Blvd",
+      "city": "Anaheim",
+      "postalCode": "92801",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 82230,
+      "buildingSf": 82230,
+      "officeSf": 4823,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 2",
+      "notes": "2 82,230 SF TBD 10/1 U/C 36' 82,230 SF Class A Tilt-Up | Q2 2027 Delivery | 1244 N Anaheim Blvd N/A NFS ESFR Available 2000 36' Clear Height w/ Single-Load East-Facing Layout | Anaheim, CA 92801 4,823 SF 82,230 SF Yes Completion 0.8:1/62 (10) DH & (1) DI Door w/ 190' Truck Court | Marketing Flyer 2,000 Amps, 480/277V, 3-Phase Power, ESFR & 7\" 4K PSI Slab | Allure Capital Management - Connor Martin 949-889-2019, Max Weller 949-889- 17 Trailer Stalls, 62 Auto Stalls & ±4,823 SF Office | 2058, Joseph Daurio 949-889-2011 1/2 Block To 91 Freeway & 2 Miles To 57 Freeway | New Listing 36' Clear Height w/ Single-Load East-Facing Layout | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-4302819E50E81663A4D2",
+      "propertyIdentityKey": "1244 N ANAHEIM BLVD|ANAHEIM|92801",
+      "listingVariantId": "LISTING-C5EEBCBD8A72D289C9B2",
+      "structuredNotes": {
+        "power": [
+          "000 Amps",
+          "480/277V"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "4,823 SF Office"
+        ],
+        "construction": [
+          "U/C 36' 82"
+        ]
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1244 N Anaheim Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Anaheim",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "76B29FBF22DF0A4F205D2FD0C567D59D"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-003",
+      "snapshotDate": "2026-07-01",
+      "address": "1508 Taber St",
+      "city": "Corona",
+      "postalCode": "92881",
+      "region": "Orange County",
+      "propertyType": "Land",
+      "availableSf": 118048,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 15",
+      "notes": "15 118,048 SF NFL 0 SF Available Gas: 2.71 Acres of Land for Sale | 1508 Taber St 2.71 Ac $41.93 Yes Retail Water: Commercial/Residential Development Opportunity | Corona, CA 92881 No $4,950,000 No C2 Sewer: 15 Fwy Frontage | Califnornia Ave/Ontario Ave NAI Capital - John Bosko 949-468-2323, David Knowlton 949-468-2307 Electric: | Marketing Flyer Fiber: | New Listing | For Sale Commercial/Residential Development Opportunity | 7/1/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-D279CF3B2C03E7CADEBD",
+      "propertyIdentityKey": "1508 TABER ST|CORONA|92881",
+      "listingVariantId": "LISTING-137EBC2CD07392F072F7",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1508 Taber St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Corona",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "0E43E4753C3E64C2614AEC1A0345BDC3"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-004",
+      "snapshotDate": "2026-07-01",
+      "address": "E Ellis Ave",
+      "city": "Perris",
+      "postalCode": "92570",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 631011,
+      "buildingSf": 631011,
+      "officeSf": 9745,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 1",
+      "notes": "1 Ellis Logistics Center 631,011 SF TBD 87/3 U/C 40' Ellis Logistics Center | 409 E Ellis Ave N/A TBD ESFR Available 4000 Free Standing Building | Perris, CA 92570 9,745 SF 631,011 SF Fncd/Pvd Completion 0.3:1/176 87 Dock High Positions, 3 Grade Level Doors | Marketing Flyer 176 Auto Parking Stalls, 35 EV Auto Parking Stalls Capable | Voit Real Estate Services - Ryan Lal, SIOR 909-545-8020, Dante Borruso 909-775- 185' & 175' All Concrete Secured Truck Courts | 4475 Under Construction, Walls Tilting | Updated Information Walls Tilting",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-8AB10A6DD414657B4E7E",
+      "propertyIdentityKey": "E ELLIS AVE|PERRIS|92570",
+      "listingVariantId": "LISTING-BF557264EE5EF51D8309",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "87 Dock High Positions"
+        ],
+        "yard": [],
+        "parking": [
+          "176 Auto Parking Stalls"
+        ],
+        "office": [],
+        "construction": [
+          "U/C 40' Ellis Logistics Center",
+          "Under Construction"
+        ]
+      },
+      "historicalDeltas": [],
+      "semanticNormalization": {
+        "address": {
+          "value": "E Ellis Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Perris",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "257E711B0C26B65FCE6E077DCA32EAA9"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-005",
+      "snapshotDate": "2026-07-01",
+      "address": "Sublease Through 2/28/2031 3095 E Cedar St",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 83700,
+      "buildingSf": 3163,
+      "officeSf": 3163,
+      "askingRate": 1.05,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 3",
+      "notes": "3 83,700 SF $1.05 NNN 14/1 Existing 30' | Sublease Through 2/28/2031 | 3095 E Cedar St No NFS ESFR Available | POL ±332,095 SF Building | Ontario, CA 91761 3,163 SF 332,095 SF Fncd/Pvd HVAC Equipped Warehouse / ±3,163 SF of Office Space | 09/01/2026 | Marketing Flyer 14 DH Doors - 11 w/ Full Dock Packages Including Lights, | Newmark - Ontario - Mark Kegans 909-974-4070, Ron Washle 909-974-4071, Adam Seals, Levels, and Locks / 1 GL Door / 30' Min. Whse Clearance | Geiger 909-974-4063, Joey Fabian 909-974-4041 ESFR / ±200' Secured Truck Court / Ample Power (Verify) | Updated Information HVAC Equipped Warehouse",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-99B8840B3722F0783B91",
+      "propertyIdentityKey": "SUBLEASE THROUGH 2 28 2031 3095 E CEDAR ST|ONTARIO|91761",
+      "listingVariantId": "LISTING-81BFB4CF2EF243D81F8D",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "14 DH Doors - 11 w/ Full Dock Packages Including Lights",
+          "1 GL Door / 30' Min"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "3,163 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Sublease Through 2/28/2031 3095 E Cedar St",
+          "changed": true,
+          "removedText": "POL ±332,095 SF Building",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "213D3B43A4E384D21E103EBBCA841404"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-006",
+      "snapshotDate": "2026-07-01",
+      "address": "2785 E Francis St",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 61650,
+      "buildingSf": 4476,
+      "officeSf": 4476,
+      "askingRate": 1.2,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 4",
+      "notes": "4 61,650 SF $1.20 G 6/1 Existing 30' Sublease Through 11/30/2029 | 2785 E Francis St No NFS ESFR Available 800 Free Standing Building, Fully Racked | Ontario, CA 91761 4,476 SF 61,650 SF Fncd/Pvd 30 Days 1.8:1/111 4,476 SF of Two-Story Office Space | Marketing Flyer 30' Minimum Warehouse Clearance Height | Cushman & Wakefield - Luke Rivera 213-955-5160, Andrew Morrow 949-378-3978 6 Dock High Loading Doors, 1 Ground Level Door | Private Access/Fenced Yard, 120' Truck Court | New Listing 6 Dock High Loading Doors, 1 Ground Level Door | For Sublease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-A4C803FF5C9E9134A9C2",
+      "propertyIdentityKey": "2785 E FRANCIS ST|ONTARIO|91761",
+      "listingVariantId": "LISTING-1EA5931E007920AB6BAB",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "6 Dock High Loading Doors",
+          "1 Ground Level Door"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2785 E Francis St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "8F7DBCF3B3E6631A1C3E71CB9C44EB9D"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-007",
+      "snapshotDate": "2026-07-01",
+      "address": "POL 100,590 SF Building Nevada St",
+      "city": "Redlands",
+      "postalCode": "92373",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 59950,
+      "buildingSf": 100590,
+      "officeSf": 9065,
+      "askingRate": 0.94,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 5",
+      "notes": "5 Nevada Business Park 59,950 SF $0.94 NNN 13/1 Existing 30' | POL 100,590 SF Building | 490 Nevada St Yes NFS ESFR 30' Warehouse Clearance | Available | Redlands, CA 92373 9,065 SF 100,590 SF Fncd/Pvd1.6:1/97 Fenced/Secured Yard Area | Now | Marketing Flyer 9,065 SF of Office Space, Break Room, & Restrooms | CBRE - Laine Cimino 909-418-2094, David Consani 909-418-2005, Jim Koenig 909- 13 Dock High Doors (13 w/Edge of Dock Levelers, 12 w/Shelters & Lights) | 418-2008 1 Ground Level Ramp (12'x14') | Rate Reduced $0.99 NNN -> $0.94 NNN",
+      "changeDetail": "$0.99 NNN -> $0.94 NNN",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-636913B1B672C4F95271",
+      "propertyIdentityKey": "POL 100 590 SF BUILDING NEVADA ST|REDLANDS|92373",
+      "listingVariantId": "LISTING-B4CB9042AD749BDEC1C2",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "13 Dock High Doors (13 w/Edge of Dock Levelers",
+          "1 Ground Level Ramp (12'x14')"
+        ],
+        "yard": [
+          "Secured Yard Area"
+        ],
+        "parking": [],
+        "office": [
+          "9,065 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "POL 100,590 SF Building Nevada St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Redlands",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "29B0C38BF79544E1705AA750CAA44FA6"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-008",
+      "snapshotDate": "2026-07-01",
+      "address": "SE of Lafayette St and Navajo Rd",
+      "city": "Apple Valley",
+      "postalCode": "92307",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 130680,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 16",
+      "notes": "16 130,680 SF NFL 0 SF Available Gas: 3 Acres of Land for Sale | SE of Lafayette St and Navajo Rd 3.00 Ac $2.87 Yes Industrial Water: Utilities Nearby | Apple Valley, CA 92307 No $375,000 No I Sewer: Zoned Industrial | Electric: Open to Offers | NAI Capital - Don Archer 951-346-0807 | Marketing Flyer Fiber: | New Listing | For Sale 3 Acres of Land for Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-1E091E8387A8E6ACE78C",
+      "propertyIdentityKey": "SE OF LAFAYETTE ST AND NAVAJO RD|APPLE VALLEY|92307",
+      "listingVariantId": "LISTING-79CC67FF0A4D12D7A530",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SE of Lafayette St and Navajo Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Apple Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "B9B451A2EBFFBDF1FB7D2ABC65C80C0C"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-009",
+      "snapshotDate": "2026-07-01",
+      "address": "NE of Bellflower and Brockman Ave",
+      "city": "Adelanto",
+      "postalCode": "92301",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 122839,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 17",
+      "notes": "17 122,839 SF NFL 0 SF Available Gas: 2.82 Acres of Land for Sale | NE of Bellflower and Brockman Ave 2.82 Ac $2.61 Yes Residential Water: Two Adjacent Parcels | Adelanto, CA 92301 Development Lot 1 Spans 1.16 Acres, Lot 2 Spans 1.66 Acres | No $320,000 No MU Sewer: Flat Topography | Marketing Flyer Electric: Both Residential & Commercial Uses Allowed | NAI Capital - Don Archer 951-346-0807 | Fiber: | New Listing | For Sale Both Residential & Commercial Uses Allowed | 7/1/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-C4379EADBC32FCA683FE",
+      "propertyIdentityKey": "NE OF BELLFLOWER AND BROCKMAN AVE|ADELANTO|92301",
+      "listingVariantId": "LISTING-CD71718D91DB41209D6B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NE of Bellflower and Brockman Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Adelanto",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "1A440B04A539984DD13DA617512A126B"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-010",
+      "snapshotDate": "2026-07-01",
+      "address": "2049 E Francis St",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 119790,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 18",
+      "notes": "18 119,790 SF TBD 2,600 SF Available Gas: 2.75 Acres of Land | 2049 E Francis St 2.75 Ac NFS Fenced Industrial Water: 2,600 SF Office Space | Ontario, CA 91761 No NFS No IG Sewer: Permitted Outside Storage (Verify) | E Francis St/S Carlos Ave Electric: Two (2) Access Points | Voit Real Estate Services - Sean Sullivan 909-545-8004, Ryan Lal, SIOR | Marketing Flyer Fiber: Fully Lit and Secured Yard | 909-545-8020, Sean McDonald 424-329-7501 | New Listing | For Lease Fully Lit and Secured Yard",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-3B43EB2B3AB114FBDDCB",
+      "propertyIdentityKey": "2049 E FRANCIS ST|ONTARIO|91761",
+      "listingVariantId": "LISTING-4DA8CEB42DF2C48C1B66",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [
+          "2,600 SF Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2049 E Francis St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "0FE8F5BE21EEDA196754301816712C1A"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-011",
+      "snapshotDate": "2026-07-01",
+      "address": "26150 Madison Ave",
+      "city": "Murrieta",
+      "postalCode": "92562",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 101930,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 20",
+      "notes": "20 101,930 SF NFL 0 SF Available Gas: 2.34 Acres of Land for Sale | 26150 Madison Ave 2.34 Ac $5.89 Yes Industrial Water: Land Use and Zoning: Innovation (INN) | Murrieta, CA 92562 No $600,000 No INN Sewer: Great Access to The 15 and 215 Freeway | Larchmont Ln INCO Commercial - Anthony Gonzalez 562-296-1311 Electric: | Marketing Flyer Fiber: | New Price | Now Available @ $600,000",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-5B29D60272743192F898",
+      "propertyIdentityKey": "26150 MADISON AVE|MURRIETA|92562",
+      "listingVariantId": "LISTING-1A5E4754DCE576859A93",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "26150 Madison Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Murrieta",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Price",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "DD7433C1D11152FBD4EFC004F6B370E1"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-012",
+      "snapshotDate": "2026-07-01",
+      "address": "SE of Shepherd Rd and Dale Evans Pkwy 2.14 Ac",
+      "city": "Apple Valley",
+      "postalCode": "92307",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 93218,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 21",
+      "notes": "21 93,218 SF NFL 0 SF Available Gas: 2.14 Acres of Land for Sale | SE of Shepherd Rd and Dale Evans Pkwy 2.14 Ac $3.21 Yes Industrial Water: Utilities Nearby | Apple Valley, CA 92307 No $299,000 No I Sewer: Zoned Industrial | Electric: Open to Offers | NAI Capital - Don Archer 951-346-0807 | Marketing Flyer Fiber: | New Listing | For Sale 2.14 Acres of Land for Sale | 7/1/2026 | of all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-ED58406EC27409C4C24F",
+      "propertyIdentityKey": "SE OF SHEPHERD RD AND DALE EVANS PKWY 2 14 AC|APPLE VALLEY|92307",
+      "listingVariantId": "LISTING-3EC51143B4527B096F0D",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SE of Shepherd Rd and Dale Evans Pkwy 2.14 Ac",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Apple Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "AC70BFDE2BC8CE6A039D880E88CA5CD6"
+      }
+    },
+    {
+      "candidateId": "DA-20260701-013",
+      "snapshotDate": "2026-07-01",
+      "address": "22632 S Alameda St",
+      "city": "Long Beach",
+      "postalCode": "90810",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 608533,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 8",
+      "notes": "8 608,533 SF TBD 6,144 SF Available Gas: In Place CUP For Container Stacking/Trucking* | 22632 S Alameda St 13.97 Ac NFS Fenced Industrial Water: Minutes to LA/Long Beach Ports via Alameda Corridor | Long Beach, CA 90810 No NFS No MH&ORL Sewer: Fenced, Gated, Lighted, Partially Paved | S Alameda St/E 223rd St Electric: Nice Offices w/Large Employee Breakroom & Locker Room** | Colliers - El Segundo - Chuck Littell, SIOR 310-321-1838, Jeffrey Smart | Marketing Flyer Fiber: Full Perimeter Electric Fencing / Front Block Wall | 310-321-1812, Elizabeth Capati 310-321-1855 High image with new landscaping along Alameda Street | New Listing | For Lease In Place CUP For Container Stacking/Trucking | 7/1/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-77EF22DDB53D6C81A7C6",
+      "propertyIdentityKey": "22632 S ALAMEDA ST|LONG BEACH|90810",
+      "listingVariantId": "LISTING-8200AEE976BC29C8390A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-01"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "22632 S Alameda St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Long Beach",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.135Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "7C465DC6B2FB4F4843C62120388BE9BA"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

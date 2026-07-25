@@ -1,0 +1,22 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "CERTIFIED_FOR_GOVERNED_PROMOTION",
+  "eligibleForPromotion": true,
+  "sourceSnapshots": 28,
+  "observations": 449,
+  "propertyIdentities": 396,
+  "gateFailures": [],
+  "thresholds": {
+    "maximumReviewRate": 0.05,
+    "maximumLineageFailures": 0,
+    "maximumBlockingFailures": 0
+  },
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "promotionExecuted": false
+  }
+}

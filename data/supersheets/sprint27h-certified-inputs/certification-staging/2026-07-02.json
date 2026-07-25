@@ -1,0 +1,2396 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-07-02",
+  "summary": {
+    "observations": 21,
+    "reviewRequired": 3,
+    "blocked": 0,
+    "lineageComplete": 21
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-2-2026.pdf",
+    "sourceSha256": "118899fb82d99496debb0b20fbf9f2023ef6dfa730ee0e12901583c51ea92556",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260702-001",
+      "snapshotDate": "2026-07-02",
+      "address": "4444 E 26th St",
+      "city": "Vernon",
+      "postalCode": "90058",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 65798,
+      "buildingSf": 65798,
+      "officeSf": 2308,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 1",
+      "notes": "1 65,798 SF TBD 20/1 Existing 18'-22' Sublease Through 10/31/2027 | 4444 E 26th St No NFS Yes Leased Flexible Sublease Opportunity With High Runway | Vernon, CA 90058 2,308 SF 65,798 SF Fncd/Pvd 30 Days 1.8:1/118 Flow-Through DC// 20 Dock-High// 208' Truck Court | Marketing Flyer Ideal for High-Speed, Velocity & Yard-Centric Operations | Lee & Associates - Connor Ulf 818-468-1752 710 Fwy Adjacent | Subleased Co-Op: Alex Zhang (TopSky Realty Inc)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-3467117AE462C2FFB9AB",
+      "propertyIdentityKey": "4444 E 26TH ST|VERNON|90058",
+      "listingVariantId": "LISTING-D3C8D6204ADDC14142F9",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "4444 E 26th St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Vernon",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "E63CB9C40282D3F825E3857CB1B5154F"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-002",
+      "snapshotDate": "2026-07-02",
+      "address": "14301 Gannet St",
+      "city": "La Mirada",
+      "postalCode": "90638",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 80000,
+      "buildingSf": 80000,
+      "officeSf": 3246,
+      "askingRate": 0.99,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 1",
+      "notes": "1 80,000 SF $0.99 G 12/2 Existing 22' Free Standing Building | 14301 Gannet St No NFS Yes Leased 3000 22' Minimum Clear Height | La Mirada, CA 90638 3,246 SF 80,000 SF Fncd/Pvd 30 Days 12 Dock Doors, 2 GL Doors | Marketing Flyer .40/5,000 GPM Sprinkler System (Verify) | Voit Real Estate Services - Dan Berkenfield 949-263-5308, Rachel Burney 949-263- Two Fenced Yards | 5312, Ryan Moore 909-545-8011 Rail Possible | Leased Co-Op: Ryan Magarian (Lee & Associates)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-41636A34CDC346914837",
+      "propertyIdentityKey": "14301 GANNET ST|LA MIRADA|90638",
+      "listingVariantId": "LISTING-D77A1E1C2D7E59CCC24C",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "2 GL Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14301 Gannet St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "La Mirada",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "La Mirada"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "50BC400828DF9C3B405AE4E5391AB877"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-003",
+      "snapshotDate": "2026-07-02",
+      "address": "W Crowther Ave",
+      "city": "Placentia",
+      "postalCode": "92870",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 58400,
+      "buildingSf": 58400,
+      "officeSf": 3805,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 2",
+      "notes": "2 58,400 SF TBD 3/1 Existing 25'-28' Free Standing Building | 888 W Crowther Ave Yes TBD Yes Available 25'-28' Clear Heights | Placentia, CA 92870 3,805 SF 58,400 SF Now 3 DH / 1 GL Loading Doors | Marketing Flyer Dock-High, Ground-Level & Rail Loading Doors | Voit Real Estate Services - Garrett McClelland 949-263-5302 Ideal Freeway Access & Visibility | Fully Renovated In 2022 | New Listing Ideal Freeway Access & Visibility | For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-13F051A0374E3AD8A1DF",
+      "propertyIdentityKey": "W CROWTHER AVE|PLACENTIA|92870",
+      "listingVariantId": "LISTING-0AE9B4C745368D213849",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "3 DH / 1 GL Loading Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W Crowther Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Placentia",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "14CBA438780019C7D0DA167B5EEB64A5"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-004",
+      "snapshotDate": "2026-07-02",
+      "address": "SW of Roberts Rd and Singleton Rd Building Campus Totaling 2,248,570 SF on 128 Acres",
+      "city": "Calimesa",
+      "postalCode": "92320",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 2248670,
+      "buildingSf": 40000,
+      "officeSf": 40000,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 1",
+      "notes": "1 Oak Valley Commerce Center 2,248,670 SF NFL 374/11 Proposed 40' | Oak Valley Commerce Center | SW of Roberts Rd and Singleton Rd N/A TBD ESFR Available | 4 Building Campus Totaling 2,248,570 SF on 128 Acres | Calimesa, CA 92320 40,000 SF 2,248,670 SF Fncd/Pvd 0.57:1 40,000 SF of Office Space | Completion | Marketing Flyer 40' Minimum Clearance Height | CBRE - Barbara Perrier 213-613-3033, Eloy Covarrubias 909-418-2284, Eric Cox 213 374 Dock High Doors, 11 Grade Level Door | -613-3210, Joe Werdein 909-418-2285 1,285 Car Parking, 711 Trailer Parking | New Listing 4 Building Campus Totaling 2,248,570 SF on 128 Acres | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-8720610755E34F358B4C",
+      "propertyIdentityKey": "SW OF ROBERTS RD AND SINGLETON RD BUILDING CAMPUS TOTALING 2 248 570 SF ON 128 ACRES|CALIMESA|92320",
+      "listingVariantId": "LISTING-E77D65D06C5BDF803C9D",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "374 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "40,000 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of Roberts Rd and Singleton Rd Building Campus Totaling 2,248,570 SF on 128 Acres",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Calimesa",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "C1A386C4491FFE4ED4D34405F5D72CDA"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-005",
+      "snapshotDate": "2026-07-02",
+      "address": "W State St",
+      "city": "Ontario",
+      "postalCode": "91762",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 107069,
+      "buildingSf": 107069,
+      "officeSf": 9586,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 6",
+      "notes": "6 107,069 SF TBD 16/2 Existing 36' | Free Standing Building | 717 W State St No NFS ESFR Leased | 9,586 SF Two-Story Office | Ontario, CA 91762 9,586 SF 107,069 SF Fncd/Pvd 16 DH Doors (3 w/35k lb Pit Levelers) (3 w/EOD Plates) | 60 Days | Marketing Flyer 2 Drive-In Doors | CBRE - Ryan Athens 909-418-2021, Jeff Fritch 909-418-2075, Alexander Davis 909- Large Secured Truck Court and Additional Yard | 418-2079 36' Minimum Clear Height | Leased Research in Progress | 7/2/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-864D05784A1C27D10720",
+      "propertyIdentityKey": "W STATE ST|ONTARIO|91762",
+      "listingVariantId": "LISTING-B3309AF089D51BB291D7",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "16 DH Doors (3 w/35k lb Pit Levelers) (3 w/EOD Plates)"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W State St",
+          "changed": true,
+          "removedText": "9,586 SF Two-Story Office",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "EA313B8D76EFF2BD09476E9B5306C98D"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-006",
+      "snapshotDate": "2026-07-02",
+      "address": "N Vintage Ave",
+      "city": "Ontario",
+      "postalCode": "91764",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 100000,
+      "buildingSf": 180608,
+      "officeSf": 5162,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 7",
+      "notes": "7 Crossroad Business Park 100,000 SF TBD 23/TBD Existing 30' Sublease Through 05/31/31 | 740 N Vintage Ave Yes NFS ESFR Available Warehouse Space, Dock Loading and Office (5,162 SF) | Ontario, CA 91764 5,162 SF 180,608 SF Fncd/Pvd Now 1.7:1/170 Cross Dock Configuration | Available Immediately | Cushman & Wakefield - Andrew Starnes 909-942-4667, Cruise Adams 909-942- | 4641, Philip Lombardo 909-942-4678 | New Listing | For Sublease Cross Dock Configuration",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-69D3876EFA1DC5FE97ED",
+      "propertyIdentityKey": "N VINTAGE AVE|ONTARIO|91764",
+      "listingVariantId": "LISTING-A37B482C5BED86BD527B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "N Vintage Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "2F4EF3469D229C6D91B3AB2E252F89DD"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-007",
+      "snapshotDate": "2026-07-02",
+      "address": "9449 E 8th St",
+      "city": "Rancho Cucamonga",
+      "postalCode": "91730",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 64113,
+      "buildingSf": 161555,
+      "officeSf": 21157,
+      "askingRate": 1.25,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 8",
+      "notes": "8 Rancho Distribution Center 64,113 SF $1.25 G 12/1 Existing 32' ESFR Sprinkler System | 9449 E 8th St Yes NFS ESFR Available 1200 12 Dock High Doors w/Pit Levelers | Rancho Cucamonga, CA 91730 21,157 SF 161,555 SF Fncd/Pvd Now 0.7:1/43 23 On-Site Trailer Parking Stalls, 176' Truck Court | Direct Access to 10 Fwy Via Archibald Ave | Colliers - Tony Phu 626-283-4560 Prestigious Central Rancho Cucamonga Location | Large Secured Fenced and Paved Yard | New Listing | For Lease ESFR Sprinkler System",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-2D34E56542FA16433073",
+      "propertyIdentityKey": "9449 E 8TH ST|RANCHO CUCAMONGA|91730",
+      "listingVariantId": "LISTING-94B9A36788AAEABD64B6",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "12 Dock High Doors w/Pit Levelers"
+        ],
+        "yard": [
+          "Paved Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "9449 E 8th St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rancho Cucamonga",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "D544B65CFABE1FC351A23A9363F7AD59"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-008",
+      "snapshotDate": "2026-07-02",
+      "address": "SW of Roberts Rd and Singleton Rd",
+      "city": "Calimesa",
+      "postalCode": "92320",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 5575680,
+      "buildingSf": 40000,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 16",
+      "notes": "16 5,575,680 SF NFL 2,248,570 Available Gas: Oak Valley Commerce Center | SW of Roberts Rd and Singleton Rd SF 4 Building Campus Totaling 2,248,570 SF on 128 Acres | Calimesa, CA 92320 128.00 Ac TBD Fncd/Pvd Industrial Water: 40,000 SF of Office Space | No TBD No BP Sewer: 40' Minimum Clearance Height | Marketing Flyer Electric: 374 Dock High Doors, 11 Grade Level Door | CBRE - Barbara Perrier 213-613-3033, Eloy Covarrubias 909-418-2284, | Fiber: 1,285 Car Parking, 711 Trailer Parking | Eric Cox 213-613-3210, Joe Werdein 909-418-2285 | New Listing | For Sale 4 Building Campus Totaling 2,248,570 SF on 128 Acres",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-D8580C277CC4B9E693A8",
+      "propertyIdentityKey": "SW OF ROBERTS RD AND SINGLETON RD|CALIMESA|92320",
+      "listingVariantId": "LISTING-5F2DB3E7D9CB8DFD14F8",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "374 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "40,000 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 362855,
+          "to": 5575680
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of Roberts Rd and Singleton Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Calimesa",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": false,
+        "transitionAnomalies": [
+          {
+            "code": "EXTREME_SF_CHANGE",
+            "severity": "REVIEW",
+            "from": 362855,
+            "to": 5575680,
+            "ratio": 15.37
+          }
+        ],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "EXTREME_SF_CHANGE"
+        ],
+        "certificationHash": "FC8C3AF34F4E5C22300349A89067233A"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-009",
+      "snapshotDate": "2026-07-02",
+      "address": "Intake Blvd",
+      "city": "Blythe",
+      "postalCode": "92225",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 693910,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 20",
+      "notes": "20 693,910 SF NFL 0 SF Available Gas: Nearly ±16 Acres Of Residential Land | Intake Blvd & N Hobson Way 15.93 Ac $0.74 Yes Residential Water: Easy Access To 10 Freeway & Highway 95 (Intake Blvd) | Blythe, CA 92225 Development First California Exit From Arizona | No $511,309 No R-M Sewer: Close Proximity To The Colorado River & Recreational Amenities | Marketing Flyer Electric: Adjacent To Empire CAT Equipment Facility | Desert Pacific Properties - Susan Harvey 760-360-8200 | Fiber: | New Listing | For Sale Nearly ±16 Acres Of Residential Land",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-ECA952472EED4696E73B",
+      "propertyIdentityKey": "INTAKE BLVD|BLYTHE|92225",
+      "listingVariantId": "LISTING-A4A32085BD0FE6A672B3",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Intake Blvd",
+          "changed": true,
+          "removedText": "& N Hobson Way",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Blythe",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "788C106CCA696DA128D61BE552A57D13"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-010",
+      "snapshotDate": "2026-07-02",
+      "address": "NW of Yorba Ave and Schaefer Ave",
+      "city": "Chino",
+      "postalCode": "91710",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 588060,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "Sale Comp",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 21",
+      "notes": "21 588,060 SF NFL 0 SF Sold Gas: 13.5 Acres of Land Available | NW of Yorba Ave and Schaefer Ave 13.50 Ac TBD Yes Industrial Water: Fully Entitled Land Site | Chino, CA 91710 No TBD No M2 Sewer: | Colliers - Clyde Stauff 949-724-5543, Jace Gan 949-724-5529 Electric: | Marketing Flyer Fiber: | Sold | Co-Op: Andy Ho (Kander Pacific)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-A45D5B1671A0986F5266",
+      "propertyIdentityKey": "NW OF YORBA AVE AND SCHAEFER AVE|CHINO|91710",
+      "listingVariantId": "LISTING-8C6EEFD9F382F34F811D",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Yorba Ave and Schaefer Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Chino",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A2899BCF5C73E7D3626A4B2D81726A7C"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-011",
+      "snapshotDate": "2026-07-02",
+      "address": "Dale Kiler Rd.",
+      "city": "Mecca",
+      "postalCode": "92254",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 474804,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "Sale Comp",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 22",
+      "notes": "22 474,804 SF NFL 0 SF Sold Gas: One Of The Last Large-Scale Residential Development Sites In Mecca | Dale Kiler Rd. 10.90 Ac $1.72 Yes Residential Water: Adjacent to Parks, Our Lady of Guadalupe Catholic Church & | Mecca, CA 92254 Development Saul Martinez Elementary School | No $818,500 No R1 Sewer: Rare Residential Development Opportunity | Marketing Flyer Electric: Ideal for Low Income Housing | Desert Pacific Properties - Paula Turner 760-766-7000 | Fiber: Owner May Carry | Sold | Research in Progress | 7/2/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-2EF3D952E09139361B64",
+      "propertyIdentityKey": "DALE KILER RD|MECCA|92254",
+      "listingVariantId": "LISTING-CD59C831C0DC89AE2759",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Dale Kiler Rd.",
+          "changed": false,
+          "removedText": null,
+          "method": "unchanged"
+        },
+        "city": {
+          "value": "Mecca",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.16,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "6C9183A0D8D0F5218E556753D54D9A4A"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-012",
+      "snapshotDate": "2026-07-02",
+      "address": "1313-1345 E Phillips Blvd",
+      "city": "Pomona",
+      "postalCode": "91766",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 470448,
+      "buildingSf": 34515,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 23",
+      "notes": "23 470,448 SF TBD 37,742 SF Available Gas: 10.8 Acre Industrial Outside Storage Facility | 1313-1345 E Phillips Blvd 10.80 Ac TBD Fncd/Pvd Industrial Water: Ideal For Heavy Equipment & Material Storage | Pomona, CA 91766 No NFS Possible M-2 Sewer: 34,515 SF Metal Clear Span Building | S Signal Dr/E Phillips Blvd 3,227 SF Main Office & Shop | CBRE - Eloy Covarrubias 909-418-2284, Joe Werdein 909-418-2285, Alex Electric: | Marketing Flyer Fiber: UP Rail Potential (Verify) | Heim 909-418-2287, Garry L Jenkins 909-418-2147 Fully Paved, Secured, & Lit Yard | New Listing | For Lease & Sale 10.8 Acre Industrial Outside Storage Facility",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-6DE9F22953C8E2F0186A",
+      "propertyIdentityKey": "1313 1345 E PHILLIPS BLVD|POMONA|91766",
+      "listingVariantId": "LISTING-8D001AC2131A78141E10",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1313-1345 E Phillips Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Pomona",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "B2FF09D81401D3C154760187DE45A1FF"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-013",
+      "snapshotDate": "2026-07-02",
+      "address": "SW of Roberts Rd and Singleton Rd",
+      "city": "Calimesa",
+      "postalCode": "92320",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 362855,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 25",
+      "notes": "25 362,855 SF NFL 0 SF Available Gas: Oak Valley Commerce Center | SW of Roberts Rd and Singleton Rd 8.33 Ac TBD Yes Industrial Water: 8.33 Acre Trailer Lot | Calimesa, CA 92320 No TBD No BP-SPA1 Sewer: 231 Trailer Parking, 2 Car Parking | CBRE - Barbara Perrier 213-613-3033, Eloy Covarrubias 909-418-2284, Electric: | Marketing Flyer Eric Cox 213-613-3210, Joe Werdein 909-418-2285 Fiber: | New Listing | For Sale 8.33 Acre Trailer Lot",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-D8580C277CC4B9E693A8",
+      "propertyIdentityKey": "SW OF ROBERTS RD AND SINGLETON RD|CALIMESA|92320",
+      "listingVariantId": "LISTING-A136739FD4B13814A7F9",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 5575680,
+          "to": 362855
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of Roberts Rd and Singleton Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Calimesa",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": false,
+        "transitionAnomalies": [
+          {
+            "code": "EXTREME_SF_CHANGE",
+            "severity": "REVIEW",
+            "from": 5575680,
+            "to": 362855,
+            "ratio": 15.37
+          }
+        ],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "EXTREME_SF_CHANGE"
+        ],
+        "certificationHash": "D285073B95A243AF32FB713388113393"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-014",
+      "snapshotDate": "2026-07-02",
+      "address": "SW of Cajon Blvd and Glen Helen Pkwy",
+      "city": "San Bernardino",
+      "postalCode": "92407",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 274864,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 26",
+      "notes": "26 274,864 SF NFL 0 SF Sold Gas: 6.31 Acres of Land for Sale | SW of Cajon Blvd and Glen Helen Pkwy 6.31 Ac TBD Yes Industrial Water: | San Bernardino, CA 92407 No TBD No Sewer: | Colliers - Kevin McKenna 949-300-0084, Greg Merrill 909-937-6361 Electric: | Fiber: | Sold | Co-Op: Steve Sprenger (Newmark)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-C0EA98BCF66B6BE3218E",
+      "propertyIdentityKey": "SW OF CAJON BLVD AND GLEN HELEN PKWY|SAN BERNARDINO|92407",
+      "listingVariantId": "LISTING-A065C93A1259A0787F9D",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of Cajon Blvd and Glen Helen Pkwy",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "San Bernardino",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "FA03572AAC7AC5C8269F20B14DCE18C5"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-015",
+      "snapshotDate": "2026-07-02",
+      "address": "21026 Palomar St",
+      "city": "Wildomar",
+      "postalCode": "92595",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 234352,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 27",
+      "notes": "27 234,352 SF NFL 2,099 SF Available Gas: Neighboring Lot to The East is Also For Sale | 21026 Palomar St 5.38 Ac $3.20 No Retail Water: Can Be Combined For a Bigger Development | Wildomar, CA 92595 No $750,000 No R-R Sewer: 5.38 Acres Available | Palomar St/Wesley St CBC NRT - Val Wong 626-833-3318 Electric: | Fiber: | New Price | Now Available @ $750,000 | 7/2/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-9C6E236A2804807D6385",
+      "propertyIdentityKey": "21026 PALOMAR ST|WILDOMAR|92595",
+      "listingVariantId": "LISTING-44B32987B1D811E4F6B3",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "21026 Palomar St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Wildomar",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Price",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "B767B9858C505490613E33A79174FB99"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-016",
+      "snapshotDate": "2026-07-02",
+      "address": "35435 Twin Willow Rd",
+      "city": "Murrieta",
+      "postalCode": "92563",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 216058,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 28",
+      "notes": "28 216,058 SF NFL 0 SF In Escrow Gas: ±4.96 Acres Available | 35435 Twin Willow Rd 4.96 Ac $6.25 Yes Multi-Family Water: Multi-Family Development | Murrieta, CA 92563 No $1,350,000 No MF-2 Sewer: 10-30 Units per Acre | Twin Willow Rd/Lee Ln Electric: RR Zoning | Keller Williams Realty - Lou Lollio 310-293-9860 | Fiber: | In Escrow",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-0330F0DE6C4B5E6A5DC3",
+      "propertyIdentityKey": "35435 TWIN WILLOW RD|MURRIETA|92563",
+      "listingVariantId": "LISTING-0F21383010566B2BC5EB",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "35435 Twin Willow Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Murrieta",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.84,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "8D5B0B278FED2B156A157C21119B884E"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-017",
+      "snapshotDate": "2026-07-02",
+      "address": "2049 E Francis St",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 119790,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.36,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 29",
+      "notes": "29 119,790 SF $0.36 G 2,600 SF Available Gas: 2.75 Acres of Land | 2049 E Francis St 2.75 Ac NFS Fenced Industrial Water: 2,600 SF Office Space | Ontario, CA 91761 No NFS No IG Sewer: Permitted Outside Storage (Verify) | E Francis St/S Carlos Ave Electric: Two (2) Access Points | Voit Real Estate Services - Sean Sullivan 909-545-8004, Ryan Lal, SIOR | Marketing Flyer Fiber: Fully Lit and Secured Yard | 909-545-8020, Sean McDonald 424-329-7501 | New Rate | Now Available @ $0.36 G",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_CHANGED",
+      "propertyIdentityId": "PROP-3B43EB2B3AB114FBDDCB",
+      "propertyIdentityKey": "2049 E FRANCIS ST|ONTARIO|91761",
+      "listingVariantId": "LISTING-C2690CAB85CF23FC4A8B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [
+          "2,600 SF Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "ASKING_RATE_CHANGED",
+          "field": "askingRate",
+          "from": null,
+          "to": 0.36
+        },
+        {
+          "type": "RATE_TYPE_CHANGED",
+          "field": "askingRateType",
+          "from": "TBD",
+          "to": "G"
+        },
+        {
+          "type": "TRANSACTION_TYPE_CHANGED",
+          "field": "transactionType",
+          "from": "For Lease",
+          "to": null
+        },
+        {
+          "type": "EVENT_CHANGED",
+          "field": "eventCode",
+          "from": "NEW_LISTING",
+          "to": "RATE_CHANGED"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2049 E Francis St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "New Rate",
+        "normalizedEventCode": "RATE_CHANGED",
+        "normalizedEventLabel": "Rate Changed",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "6130B4BF5E463FD8B3EE35E817046F67"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-018",
+      "snapshotDate": "2026-07-02",
+      "address": "SW of Chico Ave and Ninth St",
+      "city": "Pomona",
+      "postalCode": "91766",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 100188,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 30",
+      "notes": "30 100,188 SF TBD 0 SF Available Gas: 2.3 Acres of Commercial Vacant Land for Lease | SW of Chico Ave and Ninth St 2.30 Ac NFS Fenced Industrial Water: Private and Gated Yard | Pomona, CA 91766 No NFS No IC Sewer: Can Be Leased as A Whole or Subdivided | Marketing Flyer Electric: Existing License for Outdoor Storage and Contractor's Yard | Re/Max Commercial - Jorge Yamzon 626-786-5869 | Fiber: | New Listing | For Lease Existing License for Outdoor Storage and Contractor's Yard",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-DCCDE7ED192D980EB631",
+      "propertyIdentityKey": "SW OF CHICO AVE AND NINTH ST|POMONA|91766",
+      "listingVariantId": "LISTING-2E7CDCACFAFFBAB6AD26",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of Chico Ave and Ninth St",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Pomona",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "1EA92D96BF36BA3A3A423DF1B1992F46"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-019",
+      "snapshotDate": "2026-07-02",
+      "address": "NW of Van Buren Blvd and Challen Ave",
+      "city": "Riverside",
+      "postalCode": "92503",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 85813,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 31",
+      "notes": "31 85,813 SF NFL 0 SF Available Gas: 1.97 Acres of Land | NW of Van Buren Blvd and Challen Ave 1.97 Ac TBD Retail Water: Zoned CG - Commercial General | Riverside, CA 92503 No TBD No CG Sewer: Car Wash Uses Restricted | Electric: Located at a Signalized Corner Adjacent to Food4Less | Lee & Associates - Brian Melkesian 909-373-2943 | Marketing Flyer Fiber: Close Proximity to Riverside Airport & Galleria at Tyler | New Listing | 1.97 Acres of Land | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-FD796E6965EF82E9AE88",
+      "propertyIdentityKey": "NW OF VAN BUREN BLVD AND CHALLEN AVE|RIVERSIDE|92503",
+      "listingVariantId": "LISTING-E85A4A6E3152559350B5",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Van Buren Blvd and Challen Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Riverside",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "704B9492104DE5B873FA1AF97D84AA10"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-020",
+      "snapshotDate": "2026-07-02",
+      "address": "18615 S Ferris Pl",
+      "city": "Rancho Dominguez",
+      "postalCode": "90220",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 102240,
+      "buildingSf": 102240,
+      "officeSf": 9647,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 16,
+      "sourceRow": "Page 16 AIR Listing 1",
+      "notes": "1 Dominguez Technology Center 102,240 SF TBD 19/1 Existing 24' Sublease Through 11/30/2027 | 18615 S Ferris Pl No NFS Yes Available 1200 State-of-the-Art Distribution Facility | Rancho Dominguez, CA 90220 9,647 SF 102,240 SF Yes 11/01/2026 2.1:1/210 19 Dock High Positions - 24' Clear | ±9,647 SF Office Area - Excellent Short Term Space | CBRE - El Segundo - John Schumacher 310-363-4960, Kenji Sakai 310-363-4992, Private Fenced Yard | Caroline Reid 310-947-4219, Nicki Peetz 310-433-0602 Proximity to the World Ports of LA & LB | New Listing | For Sublease State-of-the-Art Distribution Facility",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-24CE94408D11ADA0C7F7",
+      "propertyIdentityKey": "18615 S FERRIS PL|RANCHO DOMINGUEZ|90220",
+      "listingVariantId": "LISTING-A4DAC1C0DFF109DCBE2F",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "19 Dock High Positions - 24' Clear"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [
+          "9,647 SF Office Area"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "18615 S Ferris Pl",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rancho Dominguez",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "C93AA81DE67C22A6B138B1CC60825B07"
+      }
+    },
+    {
+      "candidateId": "DA-20260702-021",
+      "snapshotDate": "2026-07-02",
+      "address": "14732 S Maple Ave",
+      "city": "Gardena",
+      "postalCode": "90248",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 109095,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.85,
+      "askingRateType": "MG",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 16,
+      "sourceRow": "Page 16 AIR Listing 3",
+      "notes": "3 109,095 SF $0.85 MG 8,895 SF Leased Gas: Available 1st QT 2026; Paved, Secured Yard | 14732 S Maple Ave 2.50 Ac NFS Fncd/Pvd Industrial Water: Y 8,895 SF Industrial Bldg On Site; ±4,800 SF Office Space | Gardena, CA 90248 No NFS No M-2 Sewer: Y 14' Clear Height | E Compton Blvd/S Maple Ave Electric: Y 60 Container/ Trailer Parking Stalls | Savills - Sean O'Donnell 949-706-6639, Jeffrey Smart 310-321-1812 | Marketing Flyer Fiber: 4 Dock High Positions Via Truck Well, 1 GL Door | Quick Access to 91, 110 & 105 Freeways | Leased | Research in Progress | 7/2/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-2A5F332BACA6958DAA45",
+      "propertyIdentityKey": "14732 S MAPLE AVE|GARDENA|90248",
+      "listingVariantId": "LISTING-9DEF22A45AE1604C01C2",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "4 Dock High Positions Via Truck Well",
+          "1 GL Door"
+        ],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [
+          "4,800 SF Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-07-02"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "14732 S Maple Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Gardena",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.136Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "4EBDC4929D0BE3AE2B44E6436E65095E"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

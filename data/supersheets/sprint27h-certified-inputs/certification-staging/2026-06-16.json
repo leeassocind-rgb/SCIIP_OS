@@ -1,0 +1,1470 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-16",
+  "summary": {
+    "observations": 13,
+    "reviewRequired": 1,
+    "blocked": 0,
+    "lineageComplete": 13
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-16-2026.pdf",
+    "sourceSha256": "a1d00c7b9d53654c200a744b8d93a20638036b37d8b0a38911c55d09c0534478",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260616-001",
+      "snapshotDate": "2026-06-16",
+      "address": "3359-3389 E 50th St",
+      "city": "Vernon",
+      "postalCode": "90058",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 137402,
+      "buildingSf": 137402,
+      "officeSf": 13500,
+      "askingRate": 0.99,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 2",
+      "notes": "2 137,402 SF $0.99 NNN 16/1 Existing 26' Excellent Central Vernon Location | 3359-3389 E 50th St Yes NFS Yes Leased 1000 2 Fenced Yards | Vernon, CA 90058 13,500 SF 137,402 SF Fncd/Pvd Now 0.8:1/112 .60/5000 Calculated Sprinkler System | Marketing Flyer 16 Dock Positions | CBRE - El Segundo - Cameron Merrill 310-463-1317, Matthew Tuinstra 310-363- 26' Clearance Height | 4873, Abraham Kim 213-613-3347 | Leased Co-Op: Mollie Dietsch (Lee & Associates)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-4204952AE66A44DEBD86",
+      "propertyIdentityKey": "3359 3389 E 50TH ST|VERNON|90058",
+      "listingVariantId": "LISTING-A947727614F590A5326A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "3359-3389 E 50th St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Vernon",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "4B1DE823BE3B5D0744A98DC58E7A29F7"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-002",
+      "snapshotDate": "2026-06-16",
+      "address": "15401 Shoemaker Ave",
+      "city": "Norwalk",
+      "postalCode": "90650",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 184331,
+      "buildingSf": 184331,
+      "officeSf": 15111,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 4,
+      "sourceRow": "Page 4 AIR Listing 2",
+      "notes": "2 Weber Logistics 184,331 SF TBD 24/2 Existing 24'-28' | High Image Distribution Warehouse with Heavy Power | 15401 Shoemaker Ave No NFS Yes Available 3600 | 24' - 28' Clearance / 3600 Amps | Norwalk, CA 90650 15,111 SF 184,331 SF Fncd/Pvd Abundant Loading & Parking Via 3 Sides / Large Fenced Yard | 30 Days 1.0:1/185 | Marketing Flyer Corner Location / Multiple Access Points | Cushman & Wakefield - David Hasbrouck 213-955-6410, Tim Wallace 213-955-5108 Pro-Business City / M2 Zoning | Close to the 5 & 91 Freeways, Orange County, Public Transit | New Listing Abundant Loading & Parking Via 3 Sides / Large Fenced Yard | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-E33F6BB51F099C5DD19E",
+      "propertyIdentityKey": "15401 SHOEMAKER AVE|NORWALK|90650",
+      "listingVariantId": "LISTING-84CA19EDD0BDE86F8C9C",
+      "structuredNotes": {
+        "power": [
+          "3600 Amps"
+        ],
+        "loading": [],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "15401 Shoemaker Ave",
+          "changed": true,
+          "removedText": "24' - 28' Clearance / 3600 Amps",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Norwalk",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "FCE6BA4214AFF4344F812BAD10DF5A90"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-003",
+      "snapshotDate": "2026-06-16",
+      "address": "15915-15939 Piuma Ave",
+      "city": "Cerritos",
+      "postalCode": "90703",
+      "region": "Orange County",
+      "propertyType": "Land",
+      "availableSf": 149846,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.49,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 22",
+      "notes": "22 149,846 SF $0.49 NNN 31,800 SF Available Gas: Low-Coverage Site with Freeway Visibility in Mid Counties | 15915-15939 Piuma Ave 3.44 Ac TBD Fncd/Pvd Industrial Water: Y 25,800 SF & 6,000 SF Buildings on 3.44 Acres | Cerritos, CA 90703 No NFS No MC2 Sewer: Y 12 Oversized Ground Level Loading Doors | Piuma Ave/ Alondra Blvd Immediate Access to 605 & Close to 91, 105, 5 Fwys | CBRE - El Segundo - Rick McGeagh 310-363-4878, Joshua Bonwell 714- Electric: Y | 371-9207, Trent Peterson 714-371-9341 Fiber: | New Listing | For Lease & Sale Low-Coverage Site with Freeway Visibility in Mid Counties | 6/16/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-162A771DCB56F30D2D5E",
+      "propertyIdentityKey": "15915 15939 PIUMA AVE|CERRITOS|90703",
+      "listingVariantId": "LISTING-B4D9D336459BA4F1F3B1",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "15915-15939 Piuma Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Cerritos",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Cerritos"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A1D92B559404E1C73EA186D2F33F9FDC"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-004",
+      "snapshotDate": "2026-06-16",
+      "address": "8247 Lime Ave",
+      "city": "Fontana",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 243718,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Marketing Event",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 14",
+      "notes": "14 243,718 SF TBD 12,500 SF Available Gas: N ±5.595 Acres Available | 8247 Lime Ave 5.59 Ac NFS Fncd/Pvd Industrial Water: Concrete & Decomposed Granite Yard | Fontana, CA 92335 No NFS No IR/CS Sewer: Excellent Trailer Parking Potential | = | Foothill Blvd/Lime Ave Electric: Up to ±127 Trailer Parking Spaces | JLL - Sharon Wortmann 909-467-6861, Mac Hewett 909-467-6902, | Marketing Flyer Fiber: ±12,500 SF Building | Hunter McDonald 909-467-6873 Fully Energized & Ready For Immediate Occupancy | Open House | June 18th Catered Lunch, Mocktails, Goodie Bags and Cash Giveaways for All Who Attend! | 11:30am - 1:30pm RSVP to Cristy.Faber@jll.com and Sharon.Vasquez@jll.com",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "MARKETING_EVENT",
+      "propertyIdentityId": "PROP-9A4FDC5669EE2E242331",
+      "propertyIdentityKey": "8247 LIME AVE|FONTANA|92335",
+      "listingVariantId": "LISTING-11C6F931089994EFEF17",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "8247 Lime Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Fontana"
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "MARKETING_EVENT",
+        "normalizedEventLabel": "Marketing Event",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "331774EC8C0DCE6DCDD784DE615577B3"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-005",
+      "snapshotDate": "2026-06-16",
+      "address": "25245 Ethanac Rd",
+      "city": "Menifee",
+      "postalCode": "92585",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 192100,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 15",
+      "notes": "15 192,100 SF NFL 0 SF Available Gas: N 4.41 Acres of Land for Sale | 25245 Ethanac Rd 4.41 Ac TBD Yes Retail Water: Great for Retail or Industrial | Menifee, CA 92585 No TBD No EDC-NG Sewer: | Wheat St/Ethanac Rd NAI Capital - Andrew M Shirk 909-329-0485 Electric: | Marketing Flyer Fiber: | New Listing | For Sale Great for Retail or Industrial",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-F79CCEDECB0214384DCD",
+      "propertyIdentityKey": "25245 ETHANAC RD|MENIFEE|92585",
+      "listingVariantId": "LISTING-99D1FFDB0E5D002C2128",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "25245 Ethanac Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Menifee",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "0B8B75BFE81A6318D3438D947EEE42FB"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-006",
+      "snapshotDate": "2026-06-16",
+      "address": "2023 S Bon View Ave",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 83200,
+      "buildingSf": 1700,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 16",
+      "notes": "16 83,200 SF NFL 3,300 SF Available Gas: ±1.91 Acres of Land | 2023 S Bon View Ave 1.91 Ac $58.89 Fncd/Pvd Industrial Water: Y ±1,600 SF Warehouse | Ontario, CA 91761 No $4,900,000 No IL Sewer: Y ±1,700 SF Office | S Bon View Ave/ E Cedar St Electric: Y Fully Fenced and Secured | Lee & Associates - Bobby Martinez 949-790-3104, Steffan Morris 949- | Marketing Flyer Fiber: CUP in Place for Contractor's Storage Yard | 790-3190 | Price Reduced | $5,399,999 -> $4,900,000 | 6/16/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": "$5,399,999 -> $4,900,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-031469DFAB607F92D124",
+      "propertyIdentityKey": "2023 S BON VIEW AVE|ONTARIO|91761",
+      "listingVariantId": "LISTING-E63A7E15C9DD89024D8E",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "1,700 SF Office"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2023 S Bon View Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "F344E68283551211C44913178D0102BC"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-007",
+      "snapshotDate": "2026-06-16",
+      "address": "NW of S Archibald Ave and Chino Ave",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 66211,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 17",
+      "notes": "17 66,211 SF NFL 0 SF Available Gas: 1.52 Acres of Prime Infill Land | NW of S Archibald Ave and Chino Ave 1.52 Ac $22.65 Yes Industrial Water: Frontage Along High-Traffic Archibald Ave | Ontario, CA 91761 No $1,500,000 No SP Sewer: Surrounded by New Residential Development | Electric: SP (Specific Plan) Zoning - Flexible Use Potential | Lee & Associates - Chris Johnson 626-240-2786 | Marketing Flyer Fiber: Rare Developable Parcel in an Established Area | New Listing | For Sale 1.52 Acres of Prime Infill Land | 6/16/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-1875755329A44B550FFD",
+      "propertyIdentityKey": "NW OF S ARCHIBALD AVE AND CHINO AVE|ONTARIO|91761",
+      "listingVariantId": "LISTING-9F08C0483AE7FF0BE9E0",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of S Archibald Ave and Chino Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "470843EF11FEA366CAE31568EF17C2E1"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-008",
+      "snapshotDate": "2026-06-16",
+      "address": "1211 E Badillo St",
+      "city": "West Covina",
+      "postalCode": "91791",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 169318,
+      "buildingSf": 169318,
+      "officeSf": null,
+      "askingRate": 2.46,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 16,
+      "sourceRow": "Page 16 AIR Listing 2",
+      "notes": "2 169,318 SF $2.46 NNN 7/TBD Existing 14'-19' $0.45 / SF NNN of Land | 1211 E Badillo St Yes TBD Yes Available 3000 ±169,318 SF on ±21.22 Acres | West Covina, CA 91791 TBD 169,318 SF Fncd/Pvd Now 2.0:1/335 ±19% Coverage - Huge Excess Yard | Marketing Flyer Potential Last Mile Delivery Station | Newmark - Los Angeles - South Bay - John McMillan 310-491-2048, Mark Repstad Additional Dock High Loading Possible | 213-453-1155, Connor Reeves 310-491-2088, Jeff Sanita 310-491-2003 Large Fenced, Paved & Secured Yard (±17.15 Acres) | Rate Reduced $2.73 NNN -> $2.46 NNN",
+      "changeDetail": "$2.73 NNN -> $2.46 NNN",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-85FDC5F17414F6EEB94C",
+      "propertyIdentityKey": "1211 E BADILLO ST|WEST COVINA|91791",
+      "listingVariantId": "LISTING-F8527528BB47012491C4",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Secured Yard (±17"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1211 E Badillo St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "West Covina",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "9C2088682617B56A897F99745C1E6209"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-009",
+      "snapshotDate": "2026-06-16",
+      "address": "1211 E Badillo St",
+      "city": "West Covina",
+      "postalCode": "91791",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 924307,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.45,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 17,
+      "sourceRow": "Page 17 AIR Listing 8",
+      "notes": "8 924,307 SF $0.45 NNN 169,318 SF Available Gas: Y $0.45 / SF NNN of Land | 1211 E Badillo St 21.22 Ac TBD Fncd/Pvd Industrial Water: ±169,318 SF on ±21.22 Acres | West Covina, CA 91791 No NFS No M-1 Sewer: ±19% Coverage - Huge Excess Yard | N Vincent Ave/Lark Ellen Ave Potential Last Mile Delivery Station | Newmark - Los Angeles - South Bay - John McMillan 310-491-2048, Mark Electric: | Marketing Flyer Additional Dock High Loading Possible | Repstad 213-453-1155, Connor Reeves 310-491-2088, Jeff Sanita 310- Fiber: Large Fenced, Paved & Secured Yard (±17.15 Acres) | 491-2003 | Rate Reduced | $0.50 NNN -> $0.45 NNN",
+      "changeDetail": "$0.50 NNN -> $0.45 NNN",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-85FDC5F17414F6EEB94C",
+      "propertyIdentityKey": "1211 E BADILLO ST|WEST COVINA|91791",
+      "listingVariantId": "LISTING-1D17F187F991D05A82B9",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Secured Yard (±17"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 169318,
+          "to": 924307
+        },
+        {
+          "type": "ASKING_RATE_CHANGED",
+          "field": "askingRate",
+          "from": 2.46,
+          "to": 0.45
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1211 E Badillo St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "West Covina",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "4042A598FFB7962B264FA6836075EA50"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-010",
+      "snapshotDate": "2026-06-16",
+      "address": "2905 New York Dr",
+      "city": "Pasadena",
+      "postalCode": "91107",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 62726,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 17,
+      "sourceRow": "Page 17 AIR Listing 9",
+      "notes": "9 62,726 SF NFL 0 SF Available Gas: ±1.44 Acres Available | 2905 New York Dr 1.44 Ac $8.27 Yes Industrial Water: Ideal for Custom Home Development or Small-Lot | Pasadena, CA 91107 No $518,818 No R-1-40000 Sewer: Subdivision (Buyer to Verify w/ City of Pasadena) | New York Dr/Eaton Canyon Dr Situated in Well-Established Residential Area | CBC NRT - Kathi Constanzo, CCIM 626-898-2308, Bill Ukropina 626-233- Electric: | Marketing Flyer Fiber: w/ Nearby Schools, Parks & Shopping | 0383 Prime Location w/ Excellent Visibility and Access | Price Reduced | $595,000 -> $518,818",
+      "changeDetail": "$595,000 -> $518,818",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-51FC6F03CC1E8019B278",
+      "propertyIdentityKey": "2905 NEW YORK DR|PASADENA|91107",
+      "listingVariantId": "LISTING-0BAA0E42FE2602ED18E3",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2905 New York Dr",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Pasadena",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "7804D8875DFB6FB3FF716DAB04E47C73"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-011",
+      "snapshotDate": "2026-06-16",
+      "address": "24215 Garnier St",
+      "city": "Torrance",
+      "postalCode": "90505",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 75616,
+      "buildingSf": 75616,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 18,
+      "sourceRow": "Page 18 AIR Listing 2",
+      "notes": "2 Garnier Business Park 75,616 SF TBD 0/4 Existing 14' Free Standing Building | 24215 Garnier St Yes NFS Yes Available Divisible to 36,856 - 75,616 SF | Torrance, CA 90505 75,616 SF Fncd/Pvd Now 3.0:1/226 14' Minimum Clearance Height | 4 Drive-In Doors | CBRE - El Segundo - Bob Healey 310-880-8171, John Lane 310-363-4947, Richard | Melbye 310-363-4831 | New Listing | For Lease Divisible to 36,856 - 75,616 SF",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-B013453C4DC21256E65C",
+      "propertyIdentityKey": "24215 GARNIER ST|TORRANCE|90505",
+      "listingVariantId": "LISTING-78D20352DBB232008A65",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "24215 Garnier St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Torrance",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "6A696AD30E7C05FB030AAD5FB924FB42"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-012",
+      "snapshotDate": "2026-06-16",
+      "address": "W Alondra Blvd",
+      "city": "Gardena",
+      "postalCode": "90248",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 54000,
+      "buildingSf": 54000,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 18,
+      "sourceRow": "Page 18 AIR Listing 3",
+      "notes": "3 54,000 SF NFL 2/4 Existing 15' - 16' Free Standing Building | 333 W Alondra Blvd No $259.17 Yes Available 1800 2 Dock High Doors, 4 Ground Level Doors | Gardena, CA 90248 54,000 SF Fenced COE 1800 Amps Total, Combo of Single and 3-Phase | Marketing Flyer 14' - 16' Clear Height | illi Commercial Real Estate - Todd Nathanson 818-514-2204 Fire Sprinklered | Abundant Gated Parking | Updated Information Back on Market",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-B9F34A212B67DDE31A03",
+      "propertyIdentityKey": "W ALONDRA BLVD|GARDENA|90248",
+      "listingVariantId": "LISTING-CB4D942DCB77A14E03C0",
+      "structuredNotes": {
+        "power": [
+          "1800 Amps Total"
+        ],
+        "loading": [
+          "2 Dock High Doors",
+          "4 Ground Level Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W Alondra Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Gardena",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "99F38D3690F54DBD4384531F40C5A7FE"
+      }
+    },
+    {
+      "candidateId": "DA-20260616-013",
+      "snapshotDate": "2026-06-16",
+      "address": "2403 E 223rd St",
+      "city": "Carson",
+      "postalCode": "90810",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 182746,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.37,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 20,
+      "sourceRow": "Page 20 AIR Listing 12",
+      "notes": "12 182,746 SF $0.37 NNN 0 SF Available Gas: Permitted Uses Include Sales, Service, Rental & Leasing | 2403 E 223rd St 4.20 Ac $53.00 Fncd/Pvd Industrial Water: N of: Automobiles, Recreation Vehicles, Trucks & Motorcycles | Carson, CA 90810 No $9,685,538 No CA Sewer: N Carson Auto Row - Low Business License Fees | S WIlmington Ave/E 223rd St Electric: Y Freeway Visibility: ±310,000 Average Daily Volume | Lee & Associates Los Angeles – Long Beach Inc. - Ron Mgrublian 562- | Marketing Flyer Fiber: Potential EV Charging Station Site | 354-2537 Close to SCE Hinson Substation | Rate Reduced | $0.38 NNN -> $0.37 NNN | 6/16/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": "$0.38 NNN -> $0.37 NNN",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-C89C2CC192DCE9522022",
+      "propertyIdentityKey": "2403 E 223RD ST|CARSON|90810",
+      "listingVariantId": "LISTING-B60A5C3A8A63FE14254E",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-16"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2403 E 223rd St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Carson",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.128Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "26CE6D35CDB73C7DD9C7635F69A2C733"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

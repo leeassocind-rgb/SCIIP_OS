@@ -1,0 +1,1951 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-26",
+  "summary": {
+    "observations": 17,
+    "reviewRequired": 1,
+    "blocked": 0,
+    "lineageComplete": 17
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-26-2026.pdf",
+    "sourceSha256": "4c4c567a69cd731d884e1891b51a2fe2155b77a3a9b3442d78ba7878c2d029aa",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260626-001",
+      "snapshotDate": "2026-06-26",
+      "address": "2422-2424 E 28th St",
+      "city": "Vernon",
+      "postalCode": "90058",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 61544,
+      "buildingSf": 61544,
+      "officeSf": 4975,
+      "askingRate": 1.15,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 1",
+      "notes": "1 61,544 SF $1.15 G 10/0 Existing 24' Northwest Vernon Location - Dock High - 24' Clear | 2422-2424 E 28th St Yes NFS Yes Available 1200 Calculated Sprinklers - 1800 Amps of Power | Vernon, CA 90058 4,975 SF 61,544 SF Paved 09/01/2026 1.0:1/60 Extensive Restrooms | Great Warehouse and/or Manufacturing Facility | Colliers - Thomas Condon 323-278-3114 Sewer Credits | New Listing | For Lease Great Warehouse and/or Manufacturing Facility",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-2CBCC2F979A1DD29BA3F",
+      "propertyIdentityKey": "2422 2424 E 28TH ST|VERNON|90058",
+      "listingVariantId": "LISTING-9C5FC454343FE2C51251",
+      "structuredNotes": {
+        "power": [
+          "1800 Amps of Power"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2422-2424 E 28th St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Vernon",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "01E6EE0E3EB217E6A2612A1246AAB587"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-002",
+      "snapshotDate": "2026-06-26",
+      "address": "2121 E Winston Rd, Unit 200",
+      "city": "Anaheim",
+      "postalCode": "92806",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 75000,
+      "buildingSf": 140018,
+      "officeSf": 3500,
+      "askingRate": 1.1,
+      "askingRateType": "IG",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 1",
+      "notes": "1 75,000 SF $1.10 IG 5/2 Existing 24' 75,000 SF Part of Larger Warehouse/Distribution Space | 2121 E Winston Rd, Unit 200 Yes NFS Yes Available 1200 3,500 SF Office Space | Anaheim, CA 92806 3,500 SF 140,018 SF Fncd/Pvd 07/01/2026 0.7:1/55 5 Dock High Doors, 2 GL Doors | Marketing Flyer 24' Clear Height | Cushman & Wakefield - Randy Ellison 949-930-4371 Fenced Yard | Prime Anaheim Stadium/Tile Mile Location | New Listing 5 Dock High Doors, 2 GL Doors | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-CA4A73C5987E2837B98C",
+      "propertyIdentityKey": "2121 E WINSTON RD UNIT 200|ANAHEIM|92806",
+      "listingVariantId": "LISTING-83736E0E9F8A1DB4349B",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "5 Dock High Doors",
+          "2 GL Doors"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [
+          "3,500 SF Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2121 E Winston Rd, Unit 200",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Anaheim",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "99079768A85636F7593929FD418E4E7D"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-003",
+      "snapshotDate": "2026-06-26",
+      "address": "E Ellis Ave",
+      "city": "Perris",
+      "postalCode": "92570",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 631011,
+      "buildingSf": 631011,
+      "officeSf": 9745,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 2",
+      "notes": "2 Ellis Logistics Center 631,011 SF TBD 87/3 U/C 40' Ellis Logistics Center | 409 E Ellis Ave N/A TBD ESFR Available 4000 Free Standing Building | Perris, CA 92570 9,745 SF 631,011 SF Fncd/Pvd Completion 0.3:1/176 87 Dock High Positions, 3 Grade Level Doors | Marketing Flyer 176 Auto Parking Stalls, 35 EV Auto Parking Stalls Capable | Voit Real Estate Services - Ryan Lal, SIOR 909-545-8020, Dante Borruso 909-775- 185' & 175' All Concrete Secured Truck Courts | 4475 Under Construction, Slab Poured | Updated Information New Brochure and Floorplan",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-8AB10A6DD414657B4E7E",
+      "propertyIdentityKey": "E ELLIS AVE|PERRIS|92570",
+      "listingVariantId": "LISTING-F60546C8B1B643C0D853",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "87 Dock High Positions"
+        ],
+        "yard": [],
+        "parking": [
+          "176 Auto Parking Stalls"
+        ],
+        "office": [],
+        "construction": [
+          "U/C 40' Ellis Logistics Center",
+          "Under Construction"
+        ]
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "E Ellis Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Perris",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "A3CC1227B80C3BFA6E598FCA3C87F6CC"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-004",
+      "snapshotDate": "2026-06-26",
+      "address": "13930 Santa Ana Ave",
+      "city": "Fontana",
+      "postalCode": "92337",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 135100,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": null,
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 11",
+      "notes": "11 Yes NFS ESFR Available 2000 ±135,100 SF Industrial Building | 13930 Santa Ana Ave 3,650 SF 135,100 SF Fncd/Pvd Now 0.4:1/50 Large Fully Secured Yard, 37 Trailer Parking Stalls | Fontana, CA 92337 36' Minimum Warehouse Clearance | Lee & Associates - Ken Jones 909-989-7771, Stephen Deverian 909-373-2938, Ben 26 Dock High Doors, 1 Drive-In Door | Marketing Flyer Palitz 909-373-2910, Mike Wolfe, SIOR 909-373-2915 2,000 Amp Power, ESFR Sprinklers | New Listing ±135,100 SF Available with Large Fully Secured Yard and ±37 Trailer Parking Stalls | For Lease | 6/26/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-264F524830A94F5AC778",
+      "propertyIdentityKey": "13930 SANTA ANA AVE|FONTANA|92337",
+      "listingVariantId": "LISTING-821EB08A99989F0D3719",
+      "structuredNotes": {
+        "power": [
+          "000 Amp Power"
+        ],
+        "loading": [
+          "26 Dock High Doors"
+        ],
+        "yard": [
+          "Secured Yard",
+          "Secured Yard and ±37 Trailer Parking Stalls"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "13930 Santa Ana Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "C188326B9597BB8E415BD51B8BB6D24E"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-005",
+      "snapshotDate": "2026-06-26",
+      "address": "Rider St",
+      "city": "Perris",
+      "postalCode": "92571",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 71950,
+      "buildingSf": 71950,
+      "officeSf": 3200,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 7",
+      "notes": "7 275 West Rider St 71,950 SF TBD 0/10 Existing 16' Free Standing Building | 275 Rider St No NFS Yes Available 2000 3,200 SF of Office Space | Perris, CA 92571 3,200 SF 71,950 SF Yes 04/01/2027 16' Minimum Clearance Height | Marketing Flyer 2,000 Amp, 277/480 Volt, 3 Phase, 4 Wire (Verify) | Colliers - Brad Fox, SIOR 909-396-4309 10 Ground Level Doors | New Listing 16' Minimum Clearance Height | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-08F1FA9253BCC2457484",
+      "propertyIdentityKey": "RIDER ST|PERRIS|92571",
+      "listingVariantId": "LISTING-15BCB68142A075A027C1",
+      "structuredNotes": {
+        "power": [
+          "000 Amp",
+          "277/480 Volt"
+        ],
+        "loading": [
+          "10 Ground Level Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "3,200 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Rider St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Perris",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Perris"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "E6DC8F200C8F208A88C057353316A7F4"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-006",
+      "snapshotDate": "2026-06-26",
+      "address": "1840 Mountain Ave, Bldg 9",
+      "city": "Norco",
+      "postalCode": "92860",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 67400,
+      "buildingSf": 2992,
+      "officeSf": 6039,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 8",
+      "notes": "8 Palomino Ranch Business Park 67,400 SF TBD 5/1 Existing 32' | Palomino Ranch Business Park | 1840 Mountain Ave, Bldg 9 Yes NFS ESFR Available 1600 | Free Standing Building | Norco, CA 92860 6,039 SF 67,400 SF Fncd/Pvd Now 3,047 SF of 1st Floor Office, 2,992 SF of 2nd Floor Office | Marketing Flyer 32' Minimum Warehouse Clearance Height | Lee & Associates - Jeff Ruscigno 951-276-3630, Ryan Earnhart 909-989-7771, Brian 5 Dock High Doors, 1 Ground Level Door | Pharris 909-373-2927, Austin Hill 909-373-2732 Secured Concrete Truck Court | New Listing Secured Concrete Truck Court | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-A43D2CD40143264F4507",
+      "propertyIdentityKey": "1840 MOUNTAIN AVE BLDG 9|NORCO|92860",
+      "listingVariantId": "LISTING-866F87E36F941E73E039",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "5 Dock High Doors",
+          "1 Ground Level Door"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1840 Mountain Ave, Bldg 9",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Norco",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "01FD2A416961B53C110C4A97D4EB7EC7"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-007",
+      "snapshotDate": "2026-06-26",
+      "address": "1800 Mountain Ave, Bldg 16",
+      "city": "Norco",
+      "postalCode": "92860",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 64800,
+      "buildingSf": 6194,
+      "officeSf": 6194,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 6,
+      "sourceRow": "Page 6 AIR Listing 9",
+      "notes": "9 Palomino Ranch Business Park 64,800 SF TBD 5/1 Existing 32' Palomino Ranch Business Park | 1800 Mountain Ave, Bldg 16 Yes NFS ESFR Available 1600 Free Standing Building, Constructed in 2023 | Norco, CA 92860 6,194 SF 64,800 SF Fncd/Pvd Now 1.0:1/68 6,194 SF Total Spec Office | Marketing Flyer 32' Minimum Clearance Height | Lee & Associates - Jeff Ruscigno 951-276-3630, Paul R. Earnhart, SIOR 909-989- 5 Dock High Doors, 1 Ground Level Door | 7771, Ryan Earnhart 909-989-7771, Brian Pharris 909-373-2927 Secured Concrete Truck Court | New Listing 5 Dock High Doors, 1 Ground Level Door | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-733DAA39B4DF9CF2971D",
+      "propertyIdentityKey": "1800 MOUNTAIN AVE BLDG 16|NORCO|92860",
+      "listingVariantId": "LISTING-E7EFB2F59190E9CE6E0D",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "5 Dock High Doors",
+          "1 Ground Level Door"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1800 Mountain Ave, Bldg 16",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Norco",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "49105476F485B6C2CC9AB90C3CF23A32"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-008",
+      "snapshotDate": "2026-06-26",
+      "address": "SW of Roberts Rd and Singleton Rd",
+      "city": "Calimesa",
+      "postalCode": "92320",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 362855,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 20",
+      "notes": "20 362,855 SF NFL 0 SF Available Gas: Oak Valley Commerce Center | SW of Roberts Rd and Singleton Rd 8.33 Ac TBD Yes Industrial Water: 8.33 Acre Trailer Lot | Calimesa, CA 92320 No TBD No BP-SPA1 Sewer: 231 Trailer Parking, 2 Car Parking | CBRE - Eloy Covarrubias 909-418-2284, Joe Werdein 909-418-2285, Alex Electric: | Marketing Flyer Heim 909-418-2287, Garry L Jenkins 909-418-2147 Fiber: | New Listing | For Sale 8.33 Acre Trailer Lot",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-D8580C277CC4B9E693A8",
+      "propertyIdentityKey": "SW OF ROBERTS RD AND SINGLETON RD|CALIMESA|92320",
+      "listingVariantId": "LISTING-371397591A02B3FC69AF",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of Roberts Rd and Singleton Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Calimesa",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "341558DA1A90D58E2C6C9863A84D8624"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-009",
+      "snapshotDate": "2026-06-26",
+      "address": "18133 Valley Blvd",
+      "city": "Bloomington",
+      "postalCode": "92316",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 119790,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 21",
+      "notes": "21 119,790 SF NFL 1,000 SF Available Gas: 2.75 Acre IOS Yard | 18133 Valley Blvd 2.75 Ac $41.70 Fenced Industrial Water: Owner User or Investment Sale | Bloomington, CA 92316 No $4,995,000 No LI Sewer: Truck and Trailer Storage Permitted (MUP) | Locust Ave/Valley Blvd Electric: 1,000 SF Renovated Office | CBRE - Sione Fua 909-418-2007, Nicholas Chang 909-418-2014 | Marketing Flyer Fiber: Fully Lit and Secured | Gravel Yard | Price Reduced | $5,500,000 -> $4,995,000",
+      "changeDetail": "$5,500,000 -> $4,995,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-E71D98C97C16A7B11C55",
+      "propertyIdentityKey": "18133 VALLEY BLVD|BLOOMINGTON|92316",
+      "listingVariantId": "LISTING-7D33A48BC39782B5FD88",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "18133 Valley Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Bloomington",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "90A2CF2BDA8D68E14458B297D2F34DFC"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-010",
+      "snapshotDate": "2026-06-26",
+      "address": "W Slover Ave",
+      "city": "Bloomington",
+      "postalCode": "92316",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 96703,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.39,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 22",
+      "notes": "22 96,703 SF $0.39 NNN 17,750 SF Available Gas: ±17,750 SF Building on ±2.22 Acres | 205 W Slover Ave 2.22 Ac NFS Fncd/Pvd Industrial Water: 6,200 SF of Two Story, High Image Office | Bloomington, CA 92316 No NFS No H-IND Sewer: 4 Oversized 16'x14' Grade Level Doors | W Slover Ave/S Riverside Ave Electric: 1 14'x14' Grade Level Door | Lee & Associates - Paul Whitehouse 951-276-3607 | Marketing Flyer Fiber: 32' Reinforced Concrete Apron Around Loading Doors | Oversized, Fully Fenced, Secured Yard Area w/Exterior Lighting | New Listing | For Lease ±17,750 SF Building on ±2.22 Acres | 6/26/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-82EB3E598CA3EF058615",
+      "propertyIdentityKey": "W SLOVER AVE|BLOOMINGTON|92316",
+      "listingVariantId": "LISTING-CC80E2F76BB428DE702D",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Secured Yard Area w/Exterior Lighting"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W Slover Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Bloomington",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "11EEB2842B7E6A2DA0446DABA63CBC5C"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-011",
+      "snapshotDate": "2026-06-26",
+      "address": "11139 Laurel Ave",
+      "city": "Bloomington",
+      "postalCode": "92316",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 82764,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 23",
+      "notes": "23 82,764 SF NFL 963 SF Available Gas: 1.9 Acres of Land for Sale | 11139 Laurel Ave 1.90 Ac $21.87 Yes Industrial Water: Industrial Outdoor Storage (Verify) | Bloomington, CA 92316 No $1,810,000 No BP/SP-I/BP Sewer: Ideal for Contractor/Outside Storage Yard Uses | Laurel Ave/Santa Ana Ave RE/MAX Time Realty - Bobby Mendez 951-283-5015, Crystal Hoggard 909 Electric: | Marketing Flyer -957-4304 Fiber: | New Listing | For Sale Ideal for Contractor/Outside Storage Yard Uses",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-C511985D4C8BC60F00E0",
+      "propertyIdentityKey": "11139 LAUREL AVE|BLOOMINGTON|92316",
+      "listingVariantId": "LISTING-190D15A664B90CE19407",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "11139 Laurel Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Bloomington",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "D801C408C380CB3B9ABB7AA73455F744"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-012",
+      "snapshotDate": "2026-06-26",
+      "address": "NW of Day St & Bay Ave",
+      "city": "Moreno Valley",
+      "postalCode": "92553",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 52272,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 24",
+      "notes": "24 52,272 SF NFL 0 SF Available Gas: North-West Corner Location | NW of Day St & Bay Ave 1.20 Ac $13.01 Fenced Industrial Water: N Existing Curb, Gutter, & Sidewalk on Day St | Moreno Valley, CA 92553 No $680,000 No BP Sewer: N Located Near Several Major Distribution & Fulfillment Centers | Electric: N ±1.5 Miles from March Air Reserve Base | KW Commercial - Rene Ramos, Jr. 909-980-6868 | Marketing Flyer Fiber: Great Access to 215 Freeway from E Alessandro Blvd | On/Off Ramps, Minutes to the 60 Freeway | Price Reduced | $950,000 -> $680,000 | 6/26/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": "$950,000 -> $680,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-E25E9114DEE3C008BEE1",
+      "propertyIdentityKey": "NW OF DAY ST BAY AVE|MORENO VALLEY|92553",
+      "listingVariantId": "LISTING-104245696CA603AB61C4",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Day St & Bay Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Moreno Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "68A860C31CB6FDDC705CBA8C9BB68AE5"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-013",
+      "snapshotDate": "2026-06-26",
+      "address": "11473 Penrose St",
+      "city": "Sun Valley",
+      "postalCode": "91352",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 65000,
+      "buildingSf": 65000,
+      "officeSf": 9750,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 1",
+      "notes": "1 65,000 SF TBD 0/12 Existing 11'-14' Approx. 65,000 SF on 230,411 SF Land | 11473 Penrose St & 8401 Telfair Ave No NFS Yes Available 1200 Flexible Bldg/Land Configurations For Lease | Sun Valley, CA 91352 9,750 SF 65,000 SF Fncd/Pvd 60 Days 6.9:1/450 Excellent RV/Bus/Vehicle/Contractor's Yard/Storage | Short or Long Term Considered | Colliers - David Harding 818-334-1880, Greg Geraci 818-334-1844, Matthew Fully Fenced & Secured/5 Fwy Access | Dierckman 818-334-1870, William Walk 818-334-1898 | New Listing | For Lease Approx. 65,000 SF on 230,411 SF Land",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-2F07940ADA8EDCD34DC6",
+      "propertyIdentityKey": "11473 PENROSE ST|SUN VALLEY|91352",
+      "listingVariantId": "LISTING-5E897A4B1B1D1F2945F2",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "AVAILABLE_SF_CHANGED",
+          "field": "availableSf",
+          "from": 100188,
+          "to": 65000
+        },
+        {
+          "type": "ASKING_RATE_CHANGED",
+          "field": "askingRate",
+          "from": 0.65,
+          "to": null
+        },
+        {
+          "type": "RATE_TYPE_CHANGED",
+          "field": "askingRateType",
+          "from": "NET",
+          "to": "TBD"
+        },
+        {
+          "type": "TRANSACTION_TYPE_CHANGED",
+          "field": "transactionType",
+          "from": null,
+          "to": "For Lease"
+        },
+        {
+          "type": "EVENT_CHANGED",
+          "field": "eventCode",
+          "from": "RATE_REDUCED",
+          "to": "NEW_LISTING"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "11473 Penrose St",
+          "changed": true,
+          "removedText": "& 8401 Telfair Ave",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Sun Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "7D73C9CB4E4BB9881D1018DF28B6098A"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-014",
+      "snapshotDate": "2026-06-26",
+      "address": "Sublease Through 12/31/2031 14320 Arminta St",
+      "city": "Panorama City",
+      "postalCode": "91402",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 52801,
+      "buildingSf": 99966,
+      "officeSf": 8600,
+      "askingRate": 1.65,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 2",
+      "notes": "2 52,801 SF $1.65 NNN 3/1 Existing 28' | Sublease Through 12/31/2031 | 14320 Arminta St Yes NFS Yes Available 800 | High Image Class A Industrial Building | Panorama City, CA 91402 8,600 SF 99,966 SF No 28' Clear Height / 3 DH Doors | Now 2.0:1/106 | Marketing Flyer Ample Parking - 2:1,000 Ratio | Newmark - John DeGrinis, SIOR 818-921-8529, Patrick DuRoss, SIOR 818-219-8903, Corporate Business Park Environment | Jeff Abraham, SIOR 310-880-7403, Javier Galvan Jr 818-921-8532 Ideal Central SFV Location | Rate Reduced $1.69 NNN -> $1.65 NNN",
+      "changeDetail": "$1.69 NNN -> $1.65 NNN",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-80BBBB6EF9B8247C7BFF",
+      "propertyIdentityKey": "SUBLEASE THROUGH 12 31 2031 14320 ARMINTA ST|PANORAMA CITY|91402",
+      "listingVariantId": "LISTING-5AB27DC7C7E1D9F4050A",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "3 DH Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "Sublease Through 12/31/2031 14320 Arminta St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Panorama City",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "89B8097444998B79F89B7E5926AB791F"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-015",
+      "snapshotDate": "2026-06-26",
+      "address": "SE of 195th St E and Ave N-8",
+      "city": "Palmdale",
+      "postalCode": "93591",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 435600,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 16",
+      "notes": "16 435,600 SF NFL 0 SF | Available Gas: 10 Acres of Land for Sale | SE of 195th St E and Ave N-8 10.00 Ac $0.06 No | Residential Water: Excellent Investment Opportunity | Palmdale, CA 93591 Development | 195th St E/E Ave 8 No $27,000 No A-2-2 Sewer: | Marketing Flyer Coldwell Banker Commercial Valley Realty - John Fidyk 661-202-6734 Electric: | Fiber: | New Listing | For Sale 10 Acres of Land for Sale | 6/26/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-5B3B471ADA643B44E024",
+      "propertyIdentityKey": "SE OF 195TH ST E AND AVE N 8|PALMDALE|93591",
+      "listingVariantId": "LISTING-08E31C92BC9BE3C42ABF",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SE of 195th St E and Ave N-8",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Palmdale",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "0B79EC5B07282E75FDC69A3324359EC5"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-016",
+      "snapshotDate": "2026-06-26",
+      "address": "2540 Rosemead Boulevard",
+      "city": "South El Monte",
+      "postalCode": "91733",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 53560,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 9",
+      "notes": "9 53,560 SF NFL 0 SF Sold Gas: 1.23 Acres of Land for Sale | 2540 Rosemead Boulevard 1.23 Ac $72.82 Yes Industrial Water: Flat, Usable Land | South El Monte, CA 91733 No $3,900,000 No CM Sewer: Located Within an Active Redevelopment and Growth Corridor | Rosemead Blvd/Starlite Dr Electric: Suitable for Owner-User, Developer, or Investor Acquisition | Lara CRE Group Inc - Jack Nersesian 818-636-3460, Nathan Lara 714- | Marketing Flyer 723-1212, Rudy Lara 714-273-6515 Fiber: | Sold | Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-8D18ACD1E17AFD516194",
+      "propertyIdentityKey": "2540 ROSEMEAD BOULEVARD|SOUTH EL MONTE|91733",
+      "listingVariantId": "LISTING-6296E3988DC7E287AA95",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2540 Rosemead Boulevard",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "South El Monte",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "South El Monte"
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "3005732B7960D7133D5CEBC445026038"
+      }
+    },
+    {
+      "candidateId": "DA-20260626-017",
+      "snapshotDate": "2026-06-26",
+      "address": "W Apra St",
+      "city": "Compton",
+      "postalCode": "90220",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 99174,
+      "buildingSf": 99174,
+      "officeSf": 5100,
+      "askingRate": 1.45,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 16,
+      "sourceRow": "Page 16 AIR Listing 1",
+      "notes": "1 Dominguez Hills Industrial Park 99,174 SF $1.45 NNN 9/1 Existing 24' Dominguez Hills Industrial Park | 450 W Apra St Yes NFS Yes Leased 1600 High Image Corner Location | Compton, CA 90220 5,100 SF 99,174 SF Paved Now 9 Dock High Positions | Marketing Flyer Excellent Warehouse/Manufacturing Facility | Newmark - Los Angeles - South Bay - Danny Williams 310-491-2061, John McMillan Owned By PGIM and Professionally Managed by OMP | 310-491-2048, Barry Hill 310-491-2026 | Leased Research in Progress | LAND Available SF Rate/SF Building SF Status | Property Location Available Acres Price/SF Yard Use | Divisible SF Total Price Rail Zoning Utilities Listing Notes",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-D55A0E365C314E218F7F",
+      "propertyIdentityKey": "W APRA ST|COMPTON|90220",
+      "listingVariantId": "LISTING-5B99BEDA123F00393599",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "9 Dock High Positions"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-26"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W Apra St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Compton",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.133Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "2D644E3B083ED69644756269CABD76C5"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

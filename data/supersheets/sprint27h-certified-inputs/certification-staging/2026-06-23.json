@@ -1,0 +1,1935 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-23",
+  "summary": {
+    "observations": 17,
+    "reviewRequired": 1,
+    "blocked": 0,
+    "lineageComplete": 17
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-23-2026.pdf",
+    "sourceSha256": "2a9f25056f8671e3d7cc8d73fd5478b0fd7f3b05da34a4f53f7f3ef981fbf865",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260623-001",
+      "snapshotDate": "2026-06-23",
+      "address": "3270 E Washington Blvd",
+      "city": "Vernon",
+      "postalCode": "90058",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 73777,
+      "buildingSf": 73777,
+      "officeSf": 8364,
+      "askingRate": 1.45,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 2",
+      "notes": "2 Comstock Industrial Center 73,777 SF $1.45 NNN 8/1 Existing 36' | Comstock Industrial Center @ Vernon | 3270 E Washington Blvd Yes TBD ESFR Available 4000 | State-Of-The-Art Brand New Construction! | Vernon, CA 90058 8,364 SF 73,777 SF Paved Now Low OpEx - $0.27 psf!! * High Identity Corner Location | 1.1:1/78 | Marketing Flyer 36' Clearance * ESFR Sprinklers * 4000 Amps | Newmark - Los Angeles - South Bay - Jeff Sanita 310-491-2003, John McMillan 310- 8 Dock High Positions * 1 Drive In Door Via Ramp | 491-2048, Andrew Conroy 310-491-2085 | New Rate Now Available @ $1.45 NNN",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_CHANGED",
+      "propertyIdentityId": "PROP-64B1DE2B37B383400C9B",
+      "propertyIdentityKey": "3270 E WASHINGTON BLVD|VERNON|90058",
+      "listingVariantId": "LISTING-377EEE87E453EC2CE122",
+      "structuredNotes": {
+        "power": [
+          "4000 Amps"
+        ],
+        "loading": [
+          "8 Dock High Positions * 1 Drive In Door Via Ramp"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "3270 E Washington Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Vernon",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "New Rate",
+        "normalizedEventCode": "RATE_CHANGED",
+        "normalizedEventLabel": "Rate Changed",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "3BD984ADA46F91BAD3D07768F75A6143"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-002",
+      "snapshotDate": "2026-06-23",
+      "address": "16400 Trojan Way",
+      "city": "La Mirada",
+      "postalCode": "90638",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 220000,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": 0.9,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 2",
+      "notes": "2 Prologis Mid Counties Distribution 220,000 SF $0.90 NNN 30/3 Existing 26' Prologis Mid Counties Distribution Center | Center Yes NFS Yes Leased 2000 $0.90 NNN Year 1 Rate For 5 - Year Term Signed By 4/30/2026 | 16400 Trojan Way 10,179 SF 220,000 SF Fncd/Pvd Now 1.5:1/331 Excellent Distribution Building w/ Large Secured Yard | La Mirada, CA 90638 30 Dock High Loading Positions & 3 Ground Level Doors | Colliers - El Segundo - Christopher Sheehan, SIOR 310-321-1831, Mike Foley 310- 26' Clearance / 2,000 Amps | Marketing Flyer 977-7330 Immediate Access to 605, 5, 91, and 105 Freeways | Leased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-005EA7A99946E7EF5FF5",
+      "propertyIdentityKey": "16400 TROJAN WAY|LA MIRADA|90638",
+      "listingVariantId": "LISTING-B63CB026537C6522F11F",
+      "structuredNotes": {
+        "power": [
+          "000 Amps"
+        ],
+        "loading": [
+          "30 Dock High Loading Positions & 3 Ground Level Doors"
+        ],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "16400 Trojan Way",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "La Mirada",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "La Mirada"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "79CC3BE76D5E888F6011A773EDB36AD5"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-003",
+      "snapshotDate": "2026-06-23",
+      "address": "N Poplar St, Bldg 2",
+      "city": "Orange",
+      "postalCode": "92868",
+      "region": "Orange County",
+      "propertyType": "Industrial",
+      "availableSf": 99200,
+      "buildingSf": 99200,
+      "officeSf": 6347,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 3,
+      "sourceRow": "Page 3 AIR Listing 3",
+      "notes": "3 Orange Logistics Center 99,200 SF TBD 11/2 Existing 32' | Free Standing Class \"A\" Distribution Building | 752 N Poplar St, Bldg 2 Yes NFS ESFR Leased | 6,347 SF Office Area | Orange, CA 92868 6,347 SF 99,200 SF No 1.0:1/101 32' Clear Height | Now | Marketing Flyer 11 Docks, 2 Ground Level Doors | Lee & Associates - Allen C. Buchanan, SIOR 714-564-7104, Bill Heim 909-989-7771, 28 Trailer Stalls, Truck Court 130' | Joshua K Harper 714-564-7116 ESFR(k-25) Sprinklers, 101 Parking Spaces | Leased Co-Op: Sean Ward and Josh Samuels (CBRE)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-203FA50BC691D00362EC",
+      "propertyIdentityKey": "N POPLAR ST BLDG 2|ORANGE|92868",
+      "listingVariantId": "LISTING-4FD69CC60451737D80B5",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "2 Ground Level Doors"
+        ],
+        "yard": [],
+        "parking": [
+          "101 Parking Spaces"
+        ],
+        "office": [
+          "6,347 SF Office Area"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "N Poplar St, Bldg 2",
+          "changed": true,
+          "removedText": "6,347 SF Office Area",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Orange",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "3FBB685DFC406532B5648899DF1AD5EB"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-004",
+      "snapshotDate": "2026-06-23",
+      "address": "21661 Barton Rd",
+      "city": "Colton",
+      "postalCode": "92324",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 417809,
+      "buildingSf": 417809,
+      "officeSf": 6483,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 2",
+      "notes": "2 Barton Road Industrial Center 417,809 SF TBD 49/2 Existing 40' Barton Road Industrial Center | 21661 Barton Rd Yes NFS ESFR Leased 2000 Free Standing Building, LEED GOLD Certified | Colton, CA 92324 6,483 SF 417,809 SF Paved Now 0.6:1/255 49 Dock High Doors (25 w/40,000lb Mechanical Pit Levelers) | Marketing Flyer Two 2,000 Amp Electrical Panels | Cushman & Wakefield - Philip Lombardo 909-942-4678, Charles Belden 909-942- 142'-272' Truck Court w/ 63 “Off-Dock” Trailer Parking Stalls | 4640 ESFR Sprinkler System (K25 @ 45 PSI) | Leased Co-Op: Michael Lee (Lee & Associates)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-7616C08AFDBC11F5CC72",
+      "propertyIdentityKey": "21661 BARTON RD|COLTON|92324",
+      "listingVariantId": "LISTING-E3D35CFAFDBF0E5BE468",
+      "structuredNotes": {
+        "power": [
+          "000 Amp Electrical Panels"
+        ],
+        "loading": [
+          "49 Dock High Doors (25 w/40"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "21661 Barton Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Colton",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "83A52E87A11E82AFCFED34A18A176413"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-005",
+      "snapshotDate": "2026-06-23",
+      "address": "2350 S Milliken Ave",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 71091,
+      "buildingSf": 71091,
+      "officeSf": 6000,
+      "askingRate": 1.1,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 3",
+      "notes": "3 Milliken Commerce Center 71,091 SF $1.10 NNN 7/1 Existing 30' Milliken Commerce Center | 2350 S Milliken Ave Yes $298.00 ESFR Available 800 Free Standing building | Ontario, CA 91761 6,000 SF 71,091 SF Fncd/Pvd Now 1.0:1/70 Secured Truck Court/Yard | Marketing Flyer 30' Clear Height | Daum Commercial - Kenneth Andersen, CCIM, SIOR 909-980-1234, Gabriel 7 Dock High Doors, 1 Grade Level Door | DuPlantier 909-912-0008 60' Concrete Loading Apron | Updated Information Now Available For Lease & Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-157711B5BCE522262EDA",
+      "propertyIdentityKey": "2350 S MILLIKEN AVE|ONTARIO|91761",
+      "listingVariantId": "LISTING-209E48E83637F2A8DD36",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "7 Dock High Doors"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "2350 S Milliken Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "3DC0320A7FCE4E550BF78646352B7278"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-006",
+      "snapshotDate": "2026-06-23",
+      "address": "NW of Dracaea Ave and Edgemont St",
+      "city": "Moreno Valley",
+      "postalCode": "92553",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 174240,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 13",
+      "notes": "13 174,240 SF NFL 0 SF | Available Gas: 4 Acres of Flat, Usable Land | NW of Dracaea Ave and Edgemont St 4.00 Ac $14.92 Yes | Residential Water: Strategically Located Development Site | Moreno Valley, CA 92553 Development Commercial, Office, Medical, Industrial, or Mixed-Use | No $2,600,000 No R2 Sewer: Development | Marketing Flyer Electric: (Subject to City Approval) | Keller Williams - Mel Wagstaff 714-392-0806, Al Kothari 714-860-6609 | Fiber: | New Listing | For Sale Strategically Located Development Site | 6/23/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-64CD7282DDDB2B01E97B",
+      "propertyIdentityKey": "NW OF DRACAEA AVE AND EDGEMONT ST|MORENO VALLEY|92553",
+      "listingVariantId": "LISTING-797D59FB4EEB9A267059",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Dracaea Ave and Edgemont St",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Moreno Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "CA5B448F446387C92CB6A803F0D8FF72"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-007",
+      "snapshotDate": "2026-06-23",
+      "address": "1175 Aviation Pl",
+      "city": "San Fernando",
+      "postalCode": "91340",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 93202,
+      "buildingSf": 93202,
+      "officeSf": 5057,
+      "askingRate": 1.65,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Rate Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 2",
+      "notes": "2 San Fernando Business Center 93,202 SF $1.65 NNN 9/1 Existing 24' Excellent Distribution / Manufacturing Building | 1175 Aviation Pl Yes NFS Yes Available 3000 24' Clearance – Heavy Power | San Fernando, CA 91340 5,057 SF 93,202 SF Paved Now 2.0:1/190 48'x48' Column Spacing | Marketing Flyer Power: 3,000 Amps, 277/480 Volts | CBRE - Bennett Robinson 818-907-4608 17 Dock High Positions | Rate Reduced $1.70 NNN -> $1.65 NNN",
+      "changeDetail": "$1.70 NNN -> $1.65 NNN",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_REDUCED",
+      "propertyIdentityId": "PROP-FB171C86EEC9394B88B8",
+      "propertyIdentityKey": "1175 AVIATION PL|SAN FERNANDO|91340",
+      "listingVariantId": "LISTING-A2B936E2788F23FD9FA7",
+      "structuredNotes": {
+        "power": [
+          "000 Amps",
+          "277/480 Volts"
+        ],
+        "loading": [
+          "17 Dock High Positions"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1175 Aviation Pl",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "San Fernando",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Rate Reduced",
+        "normalizedEventCode": "RATE_REDUCED",
+        "normalizedEventLabel": "Rate Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "FEA544AF0F7D2590E6BD3D676DA5514D"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-008",
+      "snapshotDate": "2026-06-23",
+      "address": "NE of W Ave D and 35th St W",
+      "city": "Lancaster",
+      "postalCode": "93536",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 8058600,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 10,
+      "sourceRow": "Page 10 AIR Listing 5",
+      "notes": "5 8,058,600 SF NFL 0 SF | Available Gas: 185 Acres of Prime Development Land | NE of W Ave D and 35th St W 185.00 Ac $1.15 Yes | Residential Water: Ideal for Residential, Commercial, Industrial, or Mixed-Use Development | Lancaster, CA 93536 Development (Subject to Verification and Approvals) | No $9,300,000 No RA Sewer: | Marketing Flyer Keller Williams - Mel Wagstaff 714-392-0806, Al Kothari 714-860-6609 Electric: | Fiber: | New Listing | For Sale 185 Acres of Prime Development Land | 6/23/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-FE2091E5C85A0AD314ED",
+      "propertyIdentityKey": "NE OF W AVE D AND 35TH ST W|LANCASTER|93536",
+      "listingVariantId": "LISTING-7B789FF654FFC9AC04B0",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NE of W Ave D and 35th St W",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Lancaster",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "5D03CF87046CD805BFDDBA30D082B49D"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-009",
+      "snapshotDate": "2026-06-23",
+      "address": "SW of W Ave D and 25th St W",
+      "city": "Lancaster",
+      "postalCode": "93536",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 205168,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 11,
+      "sourceRow": "Page 11 AIR Listing 6",
+      "notes": "6 205,168 SF NFL 0 SF Available Gas: 4.71 Acres of Land for Sale | SW of W Ave D and 25th St W 4.71 Ac $2.00 Yes Industrial Water: Mixed Use Development Site | Lancaster, CA 93536 No $410,000 No LCMXD-RU Sewer: Other Parcels Can Be Added | Keller Williams - Mel Wagstaff 714-392-0806, Al Kothari 714-860-6609 Electric: | Marketing Flyer Fiber: | New Listing | For Sale Mixed Use Development Site | 6/23/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-874530ABAB6A9DBA735D",
+      "propertyIdentityKey": "SW OF W AVE D AND 25TH ST W|LANCASTER|93536",
+      "listingVariantId": "LISTING-F9566627013AE4A6DA29",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of W Ave D and 25th St W",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Lancaster",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "CA5B66CFD8999F0C54D879D38F393FC8"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-010",
+      "snapshotDate": "2026-06-23",
+      "address": "W Carob St",
+      "city": "Compton",
+      "postalCode": "90220",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 234600,
+      "buildingSf": 234600,
+      "officeSf": 4882,
+      "askingRate": 1.15,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 2",
+      "notes": "2 Prologis South Bay Industrial Center 234,600 SF $1.15 NNN 41/2 Existing 22' Prologis South Bay Industrial Center | 601 W Carob St No NFS Yes Available 1200 Excellent Distribution Building & Last Mile Infill Location | Compton, CA 90220 4,882 SF 234,600 SF Fncd/Pvd 08/01/2026 Cross Dock Loading W/ 41 Dock High Loading Positions | Marketing Flyer ±4,882 SF of Office - 22' Clear Height | CBRE - El Segundo - John Schumacher 310-363-4960, Caroline Reid 310-947-4219 Close Proximity to World Ports of LA/LB & LAX | Low OPEX: $0.21/SF | Updated Information Cross Dock Loading W/ 41 Dock High Loading Positions",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-B360AE468615910CD510",
+      "propertyIdentityKey": "W CAROB ST|COMPTON|90220",
+      "listingVariantId": "LISTING-7CCDD20510759782A284",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "41 Dock High Loading Positions"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "4,882 SF of Office"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W Carob St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Compton",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "965D2A9D41CA103ED36FBF6EB239E84D"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-011",
+      "snapshotDate": "2026-06-23",
+      "address": "4800 Conant St, Bldg 11",
+      "city": "Long Beach",
+      "postalCode": "90808",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 219605,
+      "buildingSf": 219605,
+      "officeSf": 11150,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 3",
+      "notes": "3 Pacific Pointe East at Douglas Park 219,605 SF TBD 26/4 Existing 32' Advanced Manufacturing Facility | 4800 Conant St, Bldg 11 No NFS ESFR Available 2000 State-of-the-Art Construction | Long Beach, CA 90808 11,150 SF 219,605 SF Yes 01/01/2027 3.0:1/667 Huge 242' Private Secure Truck Court - ESFR Sprinklers | Marketing Flyer ±11,150 SF Office - 32' Clear Height - 26 Dock High Positions | CBRE - El Segundo - John Schumacher 310-363-4960, Brian DeRevere 714-371- Close to Retail Amenities, LB Airport & Ports of LA & LB | 9224, Ryan Peterson 714-371-9212, Caroline Reid 310-947-4219 Low OpEx $0.29/PSF - ±667 Auto Parking - 2000 Amps | Updated Information New Marketing Material",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-11BF9976C56157A6C770",
+      "propertyIdentityKey": "4800 CONANT ST BLDG 11|LONG BEACH|90808",
+      "listingVariantId": "LISTING-B2BC087D92A007549DDF",
+      "structuredNotes": {
+        "power": [
+          "2000 Amps"
+        ],
+        "loading": [
+          "26 Dock High Positions"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [
+          "11,150 SF Office"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "4800 Conant St, Bldg 11",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Long Beach",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "C8214B83427761D6FEE864DBA093D543"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-012",
+      "snapshotDate": "2026-06-23",
+      "address": "1210 E 223rd St",
+      "city": "Carson",
+      "postalCode": "90745",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 181014,
+      "buildingSf": 181014,
+      "officeSf": 10667,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 4",
+      "notes": "4 Cross Point 181,014 SF TBD 28/1 Planned 36' State-of-the-Art Class A Development | 1210 E 223rd St N/A NFS ESFR Available 4000 Heavyweight Corridor-36' Clear Height- ESFR K-25 Sprinklers | Carson, CA 90745 10,667 SF 181,014 SF Fncd/Pvd 06/01/2027 1.9:1/337 4000 AMPS-28 Dock High- Oversized 223' Full Concrete Yard | Marketing Flyer Flexibility to Accommodate Advanced Manufacturing | CBRE - El Segundo - Tres Reid 310-363-4948, John Schumacher 310-363-4960, Proximity to Amenities, 405 FWY, Ports of LA/LB & LAX | Caroline Reid 310-947-4219 | Updated Information Flexibility to Accommodate Advanced Manufacturing",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-967FF63206A06E71CB00",
+      "propertyIdentityKey": "1210 E 223RD ST|CARSON|90745",
+      "listingVariantId": "LISTING-66B4D9B5CDAA1393B507",
+      "structuredNotes": {
+        "power": [
+          "4000 AMPS-28 Dock High- Oversized 223' Full Concrete Yard"
+        ],
+        "loading": [
+          "28 Dock High- Oversized 223' Full Concrete Yard"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1210 E 223rd St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Carson",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "8A399837A4FA079AD762B4F12F3DAD3C"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-013",
+      "snapshotDate": "2026-06-23",
+      "address": "18455 S Figueroa St",
+      "city": "Gardena",
+      "postalCode": "90248",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 180705,
+      "buildingSf": 180705,
+      "officeSf": 11556,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "For Lease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 5",
+      "notes": "5 Logisticenter at 110 180,705 SF TBD 38/2 U/C 36' ESFR Sprinklers K25 Heads at 50 PSI | 18455 S Figueroa St N/A NFS ESFR Available 4000 331 Auto Parking Spaces | Gardena, CA 90248 11,556 SF 180,705 SF Completion 1.8:1/331 LEED Certified Building | Marketing Flyer Direct Access to the 110, 405, 105 & 91 Fwys | Colliers - El Segundo - James Hooks 310-897-1789, Bret Quinlan 310-408-8696, 2.5% Skylights | Jenny Edwards 310-745-7506, Danny Williams 310-491-2061 | New Listing ESFR Sprinklers K25 Heads at 50 PSI | For Lease",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-774902644A707DA912BE",
+      "propertyIdentityKey": "18455 S FIGUEROA ST|GARDENA|90248",
+      "listingVariantId": "LISTING-136E22E4546F3747CCE8",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [
+          "331 Auto Parking Spaces"
+        ],
+        "office": [],
+        "construction": [
+          "U/C 36' ESFR Sprinklers K25 Heads at 50 PSI"
+        ]
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "18455 S Figueroa St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Gardena",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "D386B99D1B33BCAF4D2600745DE777EC"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-014",
+      "snapshotDate": "2026-06-23",
+      "address": "1000 W 190th St",
+      "city": "Los Angeles",
+      "postalCode": "90502",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 131309,
+      "buildingSf": 131309,
+      "officeSf": 48084,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 6",
+      "notes": "6 131,309 SF TBD 12/1 Existing 30' High Image Advanced Manufacturing Facility | 1000 W 190th St No NFS ESFR Available 1600 48,084 SF Two Story Office- 220 Auto Parking | Los Angeles, CA 90502 48,084 SF 131,309 SF Yes 02/01/2027 1.7:1/220 30' Clear - ESFR Sprinklers- Low OpEx | Marketing Flyer 12 Dock Positions - 1600 Amps | CBRE - El Segundo - John Schumacher 310-363-4960, Caroline Reid 310-947-4219 Proximity to 405 Fwys, Amenities, LAX & World Ports of LA & LB | Updated Information High Image Advanced Manufacturing Facility | 6/23/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-F57EF0094BE5C2486E64",
+      "propertyIdentityKey": "1000 W 190TH ST|LOS ANGELES|90502",
+      "listingVariantId": "LISTING-F5920EB0ACDFD3EC0916",
+      "structuredNotes": {
+        "power": [
+          "1600 Amps"
+        ],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1000 W 190th St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Los Angeles",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "490F33012771A79B2A9AD48339839921"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-015",
+      "snapshotDate": "2026-06-23",
+      "address": "±91,024 SF Building w/Large Yard Area 2930 E Maria St",
+      "city": "Rancho Dominguez",
+      "postalCode": "90221",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 91024,
+      "buildingSf": 91024,
+      "officeSf": 4000,
+      "askingRate": 1.6,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 14,
+      "sourceRow": "Page 14 AIR Listing 7",
+      "notes": "7 91,024 SF $1.60 G 23/2 Existing 19' | ±91,024 SF Building w/Large Yard Area | 2930 E Maria St No NFS Yes Leased | ±4,000 SF Offices2000 | Rancho Dominguez, CA 90221 4,000 SF 91,024 SF Fncd/Pvd 23 Truck High Positions | 30 Days 0.9:1/80 | Marketing Flyer 130' Turning Radius, Concrete Yard | Colliers - El Segundo - Jeffrey Smart 310-321-1812, Elizabeth Capati 310-321-1855 Excellent Location in Rancho Dominguez | Leased Co-Op: Remy Moses and David Bales (Lee & Associates)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-20823E00E8FA0E60898C",
+      "propertyIdentityKey": "91 024 SF BUILDING W LARGE YARD AREA 2930 E MARIA ST|RANCHO DOMINGUEZ|90221",
+      "listingVariantId": "LISTING-46A6C6069DBF1628AEE8",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "±91,024 SF Building w/Large Yard Area 2930 E Maria St",
+          "changed": true,
+          "removedText": "±4,000 SF Offices2000",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rancho Dominguez",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "32A6FE931E90CEA59FAC90777A9CDF8B"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-016",
+      "snapshotDate": "2026-06-23",
+      "address": "1550 Eubank Ave",
+      "city": "Wilmington",
+      "postalCode": "90744",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 410770,
+      "buildingSf": 217800,
+      "officeSf": null,
+      "askingRate": 0.49,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "Rate Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 13",
+      "notes": "13 410,770 SF $0.49 NNN 3,000 SF Available Gas: Sublease Through 8/1/2029; Low Net to Gross Fees | 1550 Eubank Ave 9.43 Ac NFS Fncd/Pvd Industrial Water: Y ±5-9.43 Acres of Land Avail, Paved Yard w/ Dirt on Top | Wilmington, CA 90744 217,800 SF NFS No MR2 Sewer: Large Office w/ Multiple Rooms and Covered Shop | Eubank Ave/Lomita Blvd Electric: Y Legally Permitted Wash Pad | Voit Real Estate Services - Ryan Huguenard 310-819-7077, David Fults | Marketing Flyer Fiber: CUP in Place for Trucking, Container Storage, Stacking, and | 323-791-0038 Repair | Paved Yard w/ Dirt on Top | New Rate | Now Available @ $0.49 NNN",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "RATE_CHANGED",
+      "propertyIdentityId": "PROP-5C6D971B29995DBD9C11",
+      "propertyIdentityKey": "1550 EUBANK AVE|WILMINGTON|90744",
+      "listingVariantId": "LISTING-95DE6EA676C2A1295DD0",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Paved Yard w/ Dirt on Top"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1550 Eubank Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Wilmington",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Rate",
+        "normalizedEventCode": "RATE_CHANGED",
+        "normalizedEventLabel": "Rate Changed",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "3D7609782CBEB1E7873BF0B10EE02805"
+      }
+    },
+    {
+      "candidateId": "DA-20260623-017",
+      "snapshotDate": "2026-06-23",
+      "address": "20555 Hawthorne Blvd",
+      "city": "Torrance",
+      "postalCode": "90503",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 72292,
+      "buildingSf": 3299,
+      "officeSf": null,
+      "askingRate": 0.76,
+      "askingRateType": "G",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 15,
+      "sourceRow": "Page 15 AIR Listing 14",
+      "notes": "14 72,292 SF $0.76 G 3,299 SF Available Gas: Sublease Through 7/01/2030 | 20555 Hawthorne Blvd 1.66 Ac NFS Fncd/Pvd Retail Water: 72,292 SF Available | Torrance, CA 90503 No NFS No H-PR Sewer: 3,299 SF Building | Hawthorne Blvd/Spencer St Electric: Fenced, Paved Lot | Patrick O'Loughlin - Broker - Patrick O'Loughlin 310-774-7555 | Fiber: 200 Parking Spaces | Hertz Car Sales Lot | New Listing | For Sublease Fenced, Paved Lot",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-2D117D8150840D8BAE92",
+      "propertyIdentityKey": "20555 HAWTHORNE BLVD|TORRANCE|90503",
+      "listingVariantId": "LISTING-95A97E31DD14EC8D17A5",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [
+          "200 Parking Spaces"
+        ],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-23"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "20555 Hawthorne Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Torrance",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.132Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "84EDE0A227828F696FA0791DE500FCEB"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}

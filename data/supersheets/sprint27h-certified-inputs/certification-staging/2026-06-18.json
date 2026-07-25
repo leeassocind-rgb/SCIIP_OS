@@ -1,0 +1,2362 @@
+{
+  "framework": "SCIIP_V9_SPRINT27G_EVIDENCE_CANONICAL_KNOWLEDGE_CERTIFICATION",
+  "version": "v9.0-sprint27g.0",
+  "status": "EVIDENCE_CERTIFICATION_CANDIDATE_READY",
+  "snapshotDate": "2026-06-18",
+  "summary": {
+    "observations": 21,
+    "reviewRequired": 2,
+    "blocked": 0,
+    "lineageComplete": 21
+  },
+  "evidence": {
+    "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-18-2026.pdf",
+    "sourceSha256": "94c5b42d960933d97792a1aa83e335727cc61084ed6bd5189b5ff60b3016f2ca",
+    "extractor": "pdftotext-layout",
+    "sourceImmutable": true
+  },
+  "observations": [
+    {
+      "candidateId": "DA-20260618-001",
+      "snapshotDate": "2026-06-18",
+      "address": "6701-6801 Wilson Ave",
+      "city": "Huntington Park",
+      "postalCode": "90001",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 100576,
+      "buildingSf": 100576,
+      "officeSf": 10283,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 1",
+      "notes": "1 100,576 SF NFL 10/4 Existing 24' Infill Cold Storage Investment | 6701-6801 Wilson Ave No $292.00 Yes Available 1200 ±19,933 SF of Cold Storage | Huntington Park, CA 90001 10,283 SF 100,576 SF Fncd/Pvd 60 Days 1.0:1/105 10 DH / 4 GL | Marketing Flyer 24' Clear Height / Fenced Yard | Daum Commercial - Moon Lim 213-270-2256 Approx $1,563,005 In-Place NOI | Leases Until 3/31/2031 & 3/31/2027 Respectively | New Listing Infill Cold Storage Investment | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-8896708604F2164AF54A",
+      "propertyIdentityKey": "6701 6801 WILSON AVE|HUNTINGTON PARK|90001",
+      "listingVariantId": "LISTING-7A364A0C4AEE50FCB0B3",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "10 DH / 4 GL"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "6701-6801 Wilson Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Huntington Park",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "E7F90F61166DF6C15CF678249973E5E2"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-002",
+      "snapshotDate": "2026-06-18",
+      "address": "6801 Wilson Ave",
+      "city": "Huntington Park",
+      "postalCode": "90001",
+      "region": "LA Central",
+      "propertyType": "Industrial",
+      "availableSf": 52128,
+      "buildingSf": 52128,
+      "officeSf": 3500,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 1,
+      "sourceRow": "Page 1 AIR Listing 2",
+      "notes": "2 52,128 SF NFL 5/2 Existing 24' Prime Alameda Corridor | 6801 Wilson Ave No $250.00 Yes Available 400 Location Near I-110 | Huntington Park, CA 90001 3,500 SF 52,128 SF Fncd/Pvd 60 Days 0.8:1/41 Efficient Warehouse | Marketing Flyer 5 DH / 2 GL | Daum Commercial - Moon Lim 213-270-2256 24 ft | Fenced Yard | New Listing Efficient Warehouse | For Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-63042A64D839EACD5369",
+      "propertyIdentityKey": "6801 WILSON AVE|HUNTINGTON PARK|90001",
+      "listingVariantId": "LISTING-7ACD334F780C225F1E7D",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "5 DH / 2 GL"
+        ],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "6801 Wilson Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Huntington Park",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Los Angeles"
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ]
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": true,
+        "reviewReasons": [
+          "CITY_ZIP_ALIAS_REVIEW"
+        ],
+        "certificationHash": "795F4A71EC8D079EFD86538C351A1AEB"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-003",
+      "snapshotDate": "2026-06-18",
+      "address": "13160 Napa St, Bldg A",
+      "city": "Rancho Cucamonga",
+      "postalCode": "91739",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 500403,
+      "buildingSf": 500403,
+      "officeSf": 5478,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": "Lease Comp",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 1",
+      "notes": "1 Speedway Commerce Center 500,403 SF TBD 79/3 Existing 40' Speedway Commerce Center | 13160 Napa St, Bldg A Yes NFS ESFR Leased 4000 Free Standing Building | Rancho Cucamonga, CA 91739 5,478 SF 500,403 SF Fncd/Pvd Now 0.5:1/227 79 Dock High Loading Doors; 29 Dock Levelers | Marketing Flyer 227 Auto Parking Stalls, 78 Trailer Parking Stalls | JLL - Mike McCrary 909-467-6885, Patrick Wood 909-467-6857, Peter McWilliams 40' Warehouse Clearance, ESFR Sprinklers | 909-467-6860, Jay Cuccia 909-467-6911 | Leased Co-Op: Mac Hewett (JLL)",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-0DCE275E6B9025C429B5",
+      "propertyIdentityKey": "13160 NAPA ST BLDG A|RANCHO CUCAMONGA|91739",
+      "listingVariantId": "LISTING-283937B9257E4E963EB6",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "79 Dock High Loading Doors"
+        ],
+        "yard": [],
+        "parking": [
+          "227 Auto Parking Stalls"
+        ],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "13160 Napa St, Bldg A",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rancho Cucamonga",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Rancho Cucamonga"
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 1,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "C4D1A4559462354170541958BBDBFAE1"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-004",
+      "snapshotDate": "2026-06-18",
+      "address": "10225-10235 San Sevaine Way",
+      "city": "Jurupa Valley",
+      "postalCode": "91752",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 227752,
+      "buildingSf": 227752,
+      "officeSf": 3876,
+      "askingRate": 0.89,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Available SF Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 2",
+      "notes": "2 227,752 SF $0.89 NNN 28/16 Existing 27' | Two Free Standing Buildings | 10225-10235 San Sevaine Way No NFS Yes Available 2600 | 3,876 SF of Office Space | Jurupa Valley, CA 91752 3,876 SF 227,752 SF Fenced 28 Dock High Doors, 16 Grade Level Loading Doors | 30 Days 1.2:1/275 | Marketing Flyer 275 Parking Spaces | Lee & Associates - Michael Giuliano 909-989-7771, Marlene Mesillas 909-373-2704, 27' Clear Height | Fernando Escobedo 909-373-2709 Secured Yard Area | New Size Now Available @ 227,752 SF",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "AVAILABLE_SF_CHANGED",
+      "propertyIdentityId": "PROP-18E3E2093AD26E054103",
+      "propertyIdentityKey": "10225 10235 SAN SEVAINE WAY|JURUPA VALLEY|91752",
+      "listingVariantId": "LISTING-0CECE32EFD84456CA058",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "28 Dock High Doors"
+        ],
+        "yard": [
+          "Secured Yard Area"
+        ],
+        "parking": [
+          "275 Parking Spaces"
+        ],
+        "office": [
+          "3,876 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "10225-10235 San Sevaine Way",
+          "changed": true,
+          "removedText": "3,876 SF of Office Space",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Jurupa Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Jurupa Valley"
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "AVAILABLE_SF_CHANGED",
+        "normalizedEventLabel": "Available SF Changed",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "F8F5A99E3EB495E26CAA4BDA2F66BB1C"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-005",
+      "snapshotDate": "2026-06-18",
+      "address": "10225 San Sevaine Way",
+      "city": "Jurupa Valley",
+      "postalCode": "91752",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 122358,
+      "buildingSf": 122358,
+      "officeSf": null,
+      "askingRate": 0.89,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Available SF Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 3",
+      "notes": "3 122,358 SF $0.89 NNN 16/8 Existing 27' | Free Standing Building | 10225 San Sevaine Way No NFS Yes Available | 27' Clear Height 1000 | Jurupa Valley, CA 91752 122,358 SF Fenced 16 Dock High Doors, 8 Grade Level Doors | 30 Days 1.1:1/132 | Marketing Flyer Secured Yard Rea | Lee & Associates - Michael Giuliano 909-989-7771, Marlene Mesillas 909-373-2704, 132 Parking Space | Fernando Escobedo 909-373-2709 LED Lighting (Exterior), LED & Fluorescent (Interior) | New Size Now Available @ 122,358 SF",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "AVAILABLE_SF_CHANGED",
+      "propertyIdentityId": "PROP-4ECC3D73A971E041258F",
+      "propertyIdentityKey": "10225 SAN SEVAINE WAY|JURUPA VALLEY|91752",
+      "listingVariantId": "LISTING-03AB8C2CF563FBAEC2B6",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "16 Dock High Doors"
+        ],
+        "yard": [
+          "Secured Yard Rea"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "10225 San Sevaine Way",
+          "changed": true,
+          "removedText": "27' Clear Height",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Jurupa Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Jurupa Valley"
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "AVAILABLE_SF_CHANGED",
+        "normalizedEventLabel": "Available SF Changed",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "E12C437CAD2D0E01CA58069CF65BD647"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-006",
+      "snapshotDate": "2026-06-18",
+      "address": "10235 San Sevaine Way",
+      "city": "Jurupa Valley",
+      "postalCode": "91752",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 105394,
+      "buildingSf": 105394,
+      "officeSf": 3676,
+      "askingRate": 0.89,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Available SF Changed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 4",
+      "notes": "4 105,394 SF $0.89 NNN 12/8 Existing 27' | Free Standing Building | 10235 San Sevaine Way No NFS Available 1600 | 2,400 SF of Office Space | Jurupa Valley, CA 91752 3,676 SF 105,394 SF Fenced 12 Dock High Doors, 6 Grade Level Loading Doors | 30 Days 1.4:1/143 | Marketing Flyer 143 Parking Spaces | Lee & Associates - Michael Giuliano 909-989-7771, Marlene Mesillas 909-373-2704, 27' Clear Height | Fernando Escobedo 909-373-2709 Secured Yard Area | New Size Now Available @ 105,394 SF",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "AVAILABLE_SF_CHANGED",
+      "propertyIdentityId": "PROP-B668A07A1E7DF964B03B",
+      "propertyIdentityKey": "10235 SAN SEVAINE WAY|JURUPA VALLEY|91752",
+      "listingVariantId": "LISTING-EF4F69A3CE1FC95D4CF1",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "12 Dock High Doors"
+        ],
+        "yard": [
+          "Secured Yard Area"
+        ],
+        "parking": [
+          "143 Parking Spaces"
+        ],
+        "office": [
+          "2,400 SF of Office Space"
+        ],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "10235 San Sevaine Way",
+          "changed": true,
+          "removedText": "2,400 SF of Office Space",
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Jurupa Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Jurupa Valley"
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "AVAILABLE_SF_CHANGED",
+        "normalizedEventLabel": "Available SF Changed",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "F72CD75C188F7FD016B89FC371654046"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-007",
+      "snapshotDate": "2026-06-18",
+      "address": "1351 Doubleday Ave",
+      "city": "Ontario",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 72088,
+      "buildingSf": 72088,
+      "officeSf": 4937,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 5,
+      "sourceRow": "Page 5 AIR Listing 5",
+      "notes": "5 72,088 SF TBD 9/4 Existing 26' Free Standing Building | 1351 Doubleday Ave Yes NFS Yes Available 1200 26' Minimum Clearance | Ontario, CA 91761 4,937 SF 72,088 SF Fncd/Pvd Now 120' Secured Truck Court | Marketing Flyer Prestigious Central Ontario Location | Colliers - Tony Phu 626-283-4560 Easy Access to Pomona (60) and San Bernardino (10) Freeway | 9 Dock High Doors (5 Mechanical Pit Levelers, 4 Electrical Levelers) | Updated Information 26' Minimum Clearance",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-E52947D8A2ADBAB2D073",
+      "propertyIdentityKey": "1351 DOUBLEDAY AVE|ONTARIO|91761",
+      "listingVariantId": "LISTING-86C8E4A8C2DAEA637067",
+      "structuredNotes": {
+        "power": [],
+        "loading": [
+          "9 Dock High Doors (5 Mechanical Pit Levelers"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "1351 Doubleday Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Ontario",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Ontario"
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "326610099C8AC149E1BBFC3E1E321278"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-008",
+      "snapshotDate": "2026-06-18",
+      "address": "SE of Silver Creek Dr and Old Idyllwild Rd",
+      "city": "Banning",
+      "postalCode": "92220",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 25656840,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Price Reduced",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Rate/Price",
+      "targetTable": "RATE_HISTORY",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": true,
+      "sourcePage": 7,
+      "sourceRow": "Page 7 AIR Listing 16",
+      "notes": "16 25,656,840 SF NFL Available 0 SF Gas: ±589 Residential Acres Available | SE of Silver Creek Dr and Old Idyllwild 589.00 Ac $0.06 Residential Water: Beautifully Situated Property: Mountain, Hills & Canyon Views | Rd | Banning, CA 92220 Development Private Secluded Country Living, Already Sub-Divided | No $1,650,000 No W-2-20 Sewer: 4-Mile Dirt Road to Banning, Beaumont | Marketing Flyer Electric: Close to High Mountain Community of Idyllwild | Daum Commercial - Lee Spence 909-969-8800, Gary Womack 909-652- | 9041 Fiber: | Price Reduced | $1,800,000 -> $1,650,000",
+      "changeDetail": "$1,800,000 -> $1,650,000",
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "PRICE_REDUCED",
+      "propertyIdentityId": "PROP-3AE389E71C9B573DACCD",
+      "propertyIdentityKey": "SE OF SILVER CREEK DR AND OLD IDYLLWILD RD|BANNING|92220",
+      "listingVariantId": "LISTING-274F9FEE169BD18E8C68",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SE of Silver Creek Dr and Old Idyllwild Rd",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Banning",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Price Reduced",
+        "normalizedEventCode": "PRICE_REDUCED",
+        "normalizedEventLabel": "Price Reduced",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "1995EABF524E6574FD49BDDCCD5EDF1D"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-009",
+      "snapshotDate": "2026-06-18",
+      "address": "NW of Kimes Ln and Hwy 74",
+      "city": "Perris",
+      "postalCode": "92570",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 5482461,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 18",
+      "notes": "18 5,482,461 SF NFL 0 SF Available Gas: Y ±125.86 Acres of Land | NW of Kimes Ln and Hwy 74 125.86 Ac TBD Yes Industrial Water: Zoning and Land Use Rights for Industrial Use | Perris, CA 92570 No TBD No SP-ZONE Sewer: 1,600 Linear Feet of Frontage Along Highway 74 | Electric: Approved for Outside Storage, and Trailer Parking | CBRE - Eloy Covarrubias 909-418-2284, Joe Werdein 909-418-2285, | Marketing Flyer Garry L Jenkins 909-418-2147 Fiber: | New Listing | For Sale ±125.86 Acres of Land",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-9290F99F29675CADD31D",
+      "propertyIdentityKey": "NW OF KIMES LN AND HWY 74|PERRIS|92570",
+      "listingVariantId": "LISTING-2108CE8754409159A8DF",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of Kimes Ln and Hwy 74",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Perris",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "D65B753899336F7F5541422887856E4C"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-010",
+      "snapshotDate": "2026-06-18",
+      "address": "SW of Van Buren Blvd and 52nd St",
+      "city": "Jurupa Valley",
+      "postalCode": "92509",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 953964,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 19",
+      "notes": "19 953,964 SF NFL 0 SF Available Gas: ±21.9 Acres of Land | SW of Van Buren Blvd and 52nd St 21.90 Ac $7.34 Yes Industrial Water: APN: 169-300-016, 169-290-003 | Jurupa Valley, CA 92509 No $7,000,000 No MSC Sewer: | Daum Commercial - Lee Spence 909-969-8800 Electric: | Fiber: | New Listing | For Sale ±21.9 Acres of Land",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-16078D94C2425F00676C",
+      "propertyIdentityKey": "SW OF VAN BUREN BLVD AND 52ND ST|JURUPA VALLEY|92509",
+      "listingVariantId": "LISTING-7A62AF7E098625D0CB1D",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SW of Van Buren Blvd and 52nd St",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Jurupa Valley",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "C7C717D280EC5B850EBFAF9E3543BBA6"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-011",
+      "snapshotDate": "2026-06-18",
+      "address": "8247 Lime Ave",
+      "city": "Fontana",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 243718,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Marketing Event",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 20",
+      "notes": "20 243,718 SF TBD 12,500 SF Available Gas: N ±5.595 Acres Available | 8247 Lime Ave 5.59 Ac NFS Fncd/Pvd Industrial Water: Concrete & Decomposed Granite Yard | Fontana, CA 92335 No NFS No IR/CS Sewer: Excellent Trailer Parking Potential | = | Foothill Blvd/Lime Ave Electric: Up to ±127 Trailer Parking Spaces | JLL - Sharon Wortmann 909-467-6861, Mac Hewett 909-467-6902, | Marketing Flyer Fiber: ±12,500 SF Building | Hunter McDonald 909-467-6873 Fully Energized & Ready For Immediate Occupancy | Open House | June 18th Catered Lunch, Mocktails, Goodie Bags and Cash Giveaways for All Who Attend! | 11:30am - 1:30pm RSVP to Cristy.Faber@jll.com and Sharon.Vasquez@jll.com",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.75,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": true
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "MARKETING_EVENT",
+      "propertyIdentityId": "PROP-9A4FDC5669EE2E242331",
+      "propertyIdentityKey": "8247 LIME AVE|FONTANA|92335",
+      "listingVariantId": "LISTING-E984751E4AFA3D765DEC",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [],
+      "semanticNormalization": {
+        "address": {
+          "value": "8247 Lime Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Fontana",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": "Fontana"
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "MARKETING_EVENT",
+        "normalizedEventLabel": "Marketing Event",
+        "confidence": {
+          "score": 0.94,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.16,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "AF401EC6CC1420D9BB22E87D82F36EF3"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-012",
+      "snapshotDate": "2026-06-18",
+      "address": "NE of Yale St and Acacia E Ave",
+      "city": "Hemet",
+      "postalCode": "92544",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 206039,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 21",
+      "notes": "21 206,039 SF NFL 0 SF Available Gas: 4.73 Acres of Land for Sale | NE of Yale St and Acacia E Ave 4.73 Ac $6.55 Yes Residential Water: Potential for Townhouses, Condominiums, Apartments, or | Hemet, CA 92544 Development Residential Care Facilities | No $1,350,000 No R-3 Sewer: | Marketing Flyer BMI Realty - Mainor Bojorquez 626-255-3835 Electric: | Fiber: | New Listing | For Sale 4.73 Acres of Land for Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-544A25413770CFD34681",
+      "propertyIdentityKey": "NE OF YALE ST AND ACACIA E AVE|HEMET|92544",
+      "listingVariantId": "LISTING-CC569511E4F1A11B21CB",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NE of Yale St and Acacia E Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Hemet",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "64FB392E050AED7D64EAF629E772E66F"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-013",
+      "snapshotDate": "2026-06-18",
+      "address": "NE of State St and Chambers St",
+      "city": "Hemet",
+      "postalCode": "92543",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 179903,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 8,
+      "sourceRow": "Page 8 AIR Listing 22",
+      "notes": "22 179,903 SF NFL 0 SF Available Gas: 4.13 Acres of Land for Sale | NE of State St and Chambers St 4.13 Ac $6.66 Yes Multi-Family Water: Vacant Land with Potential for Multi-Family Development | Hemet, CA 92543 No $1,199,000 No R-4 Sewer: Maximum 45 DU's per Acre | BMI Realty - Mainor Bojorquez 626-255-3835 Electric: | Marketing Flyer Fiber: | New Listing | For Sale Vacant Land with Potential for Multi-Family Development | 6/18/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-38AB1571DC87ED7361FA",
+      "propertyIdentityKey": "NE OF STATE ST AND CHAMBERS ST|HEMET|92543",
+      "listingVariantId": "LISTING-6817D6CA1302E0A2CFEF",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NE of State St and Chambers St",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Hemet",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "44172EFEA9963F0539C03DEA9E0C05B6"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-014",
+      "snapshotDate": "2026-06-18",
+      "address": "NE of E Florida Ave and N Soboba St",
+      "city": "Hemet",
+      "postalCode": "92544",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 143748,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "New Listing",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 23",
+      "notes": "23 143,748 SF NFL 0 SF Available Gas: Y 3.3 Acres of Vacant Land for Sale | NE of E Florida Ave and N Soboba St 3.30 Ac $16.00 Yes Retail Water: Approved Entitlements for An Express Carwash with CD's Approved | Hemet, CA 92544 No $2,300,000 No C-2 Sewer: Two CUP Approved Restaurants with Drive-Thru | BMI Realty - Mainor Bojorquez 626-255-3835 Electric: | Marketing Flyer Fiber: | New Listing | For Sale 3.3 Acres of Vacant Land for Sale",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 1,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "NEW_LISTING",
+      "propertyIdentityId": "PROP-DFA34E1F36AD85A8D6AE",
+      "propertyIdentityKey": "NE OF E FLORIDA AVE AND N SOBOBA ST|HEMET|92544",
+      "listingVariantId": "LISTING-4EECAFC9B361ADA1F8CE",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NE of E Florida Ave and N Soboba St",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Hemet",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "New Listing",
+        "normalizedEventCode": "NEW_LISTING",
+        "normalizedEventLabel": "New Listing",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "16D46FCE77E894452C2A54B66E4C889D"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-015",
+      "snapshotDate": "2026-06-18",
+      "address": "18545 Cajon Blvd",
+      "city": "San Bernardino",
+      "postalCode": "92407",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 69696,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "For Sale",
+      "eventCategory": "Observed",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 9,
+      "sourceRow": "Page 9 AIR Listing 24",
+      "notes": "24 69,696 SF NFL 0 SF In Escrow Gas: 1.6 Acres of Land for Sale | 18545 Cajon Blvd 1.60 Ac $56.67 No Industrial Water: CUP Approved location for Gas Station/Truck Stop | San Bernardino, CA 92407 No $3,950,000 No GH/SP Sewer: | Cajon Blvd/Glen Helen Pkwy BMI Realty - Mainor Bojorquez 626-255-3835 Electric: | Fiber: | In Escrow",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.85,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0,
+          "transaction": 0.1,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "OBSERVED",
+      "propertyIdentityId": "PROP-744004F992E8D82A1CCE",
+      "propertyIdentityKey": "18545 CAJON BLVD|SAN BERNARDINO|92407",
+      "listingVariantId": "LISTING-C505A07043B802802236",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "18545 Cajon Blvd",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "San Bernardino",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Observed",
+        "normalizedEventCode": "OBSERVED",
+        "normalizedEventLabel": "Observed",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.06,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "08363ADCAE498B39A983232F4947831C"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-016",
+      "snapshotDate": "2026-06-18",
+      "address": "SE of 47th St and W Ave H",
+      "city": "Lancaster",
+      "postalCode": "93536",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 110207,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "Sale Comp",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 12,
+      "sourceRow": "Page 12 AIR Listing 11",
+      "notes": "11 110,207 SF NFL 0 SF Sold Gas: 2.53 Acres Available | SE of 47th St and W Ave H 2.53 Ac $0.41 Yes Residential Water: LRR2.5 Zoning | Lancaster, CA 93536 Development | No $45,000 No LRR2.5 Sewer: | Block Properties, Inc - April Bartlett 661-478-8300 Electric: | Sold Fiber: | Research in Progress | 6/18/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-A89E67B9544DB93CDC03",
+      "propertyIdentityKey": "SE OF 47TH ST AND W AVE H|LANCASTER|93536",
+      "listingVariantId": "LISTING-7C97D67A4BA3E7113200",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "SE of 47th St and W Ave H",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Lancaster",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "1EB10F9E30641EA30DAFF0F3A4FA7714"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-017",
+      "snapshotDate": "2026-06-18",
+      "address": "NW of 43 St W and W Ave F",
+      "city": "Lancaster",
+      "postalCode": "93536",
+      "region": "Inland Empire",
+      "propertyType": "Land",
+      "availableSf": 109335,
+      "buildingSf": null,
+      "officeSf": null,
+      "askingRate": null,
+      "askingRateType": "NFL",
+      "askingPrice": null,
+      "transactionType": "Sale Comp",
+      "eventCategory": "Sold",
+      "listingStatus": "Sold",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 13,
+      "sourceRow": "Page 13 AIR Listing 12",
+      "notes": "12 109,335 SF NFL 0 SF Sold Gas: N 2.51 Acres Available | NW of 43 St W and W Ave F 2.51 Ac $0.32 Yes Industrial Water: LRMPD Zoning | Lancaster, CA 93536 No $35,000 No LRMPD Sewer: | Block Properties, Inc - April Bartlett 661-478-8300 Electric: | Fiber: | Sold | Research in Progress | 6/18/2026 | all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "SOLD",
+      "propertyIdentityId": "PROP-3ECC174671CDD192173F",
+      "propertyIdentityKey": "NW OF 43 ST W AND W AVE F|LANCASTER|93536",
+      "listingVariantId": "LISTING-0D75EAC2E1B03CAF7B92",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "NW of 43 St W and W Ave F",
+          "changed": false,
+          "removedText": null,
+          "method": "intersection"
+        },
+        "city": {
+          "value": "Lancaster",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Sold",
+        "normalizedEventCode": "SOLD",
+        "normalizedEventLabel": "Sold",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "26F13CF3961782D417B7BA5DB7D30C10"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-018",
+      "snapshotDate": "2026-06-18",
+      "address": "20595 Business Pkwy",
+      "city": "Industry",
+      "postalCode": "91789",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 100000,
+      "buildingSf": 3000,
+      "officeSf": 1000,
+      "askingRate": null,
+      "askingRateType": "TBD",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 14,
+      "sourceRow": "Page 14 AIR Listing 1",
+      "notes": "1 100,000 SF TBD 10/1 Existing 26' Free Standing Building | 20595 Business Pkwy No NFS Yes Available 800 26' Clear Height @ 1st Column | Industry, CA 91789 1,000 SF 100,000 SF Yes 07/01/2026 1.5:1/150 Sprinklers: .60 GPM/3,000 SF | Marketing Flyer 10 DH Doors, 1 GL Door | Majestic Realty Co - Terry Baker 562-948-4341, Kent Valley 562-948-4343 Power: 1-800 Amp, 277/480 Volt, 3 Phase, 4 Wire | Parking: 150 Cars | Updated Information Power: 1-800 Amp, 277/480 Volt, 3 Phase, 4 Wire",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-5542905497BA1E72A27F",
+      "propertyIdentityKey": "20595 BUSINESS PKWY|INDUSTRY|91789",
+      "listingVariantId": "LISTING-B72B7CFB5E3AD8620373",
+      "structuredNotes": {
+        "power": [
+          "800 Amp",
+          "277/480 Volt"
+        ],
+        "loading": [
+          "10 DH Doors",
+          "1 GL Door"
+        ],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "20595 Business Pkwy",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Industry",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "432CDB522F617AAB97B0AAE4A0B3141A"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-019",
+      "snapshotDate": "2026-06-18",
+      "address": "W 8th St",
+      "city": "Azusa",
+      "postalCode": "91702",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 74000,
+      "buildingSf": 160500,
+      "officeSf": 2900,
+      "askingRate": 1.1,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 14,
+      "sourceRow": "Page 14 AIR Listing 2",
+      "notes": "2 Azusa Industrial Center 74,000 SF $1.10 NNN 14/1 Existing 30' | Excess Land Available For Trailer Parking | 829 W 8th St No NFS Yes Available 800 | Azusa Industrial Center | Azusa, CA 91702 2,900 SF 160,500 SF Yes Class A Distribution Space, Trailer Parking Possible | 30 Days 1.7:1/125 | Marketing Flyer (14) 10'x12' Dock High & (1) Grade Level Loading Doors | Cushman & Wakefield - Philip Lombardo 909-942-4678, Christopher Tolles 213-955- 30' Clear Height | 5129, Maya Schirn 213-236-4931 http://azusaindustrial.marcelcreates.com | Updated Information Excess Land Available For Trailer Parking",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-7C892A58DCD0CAADB465",
+      "propertyIdentityKey": "W 8TH ST|AZUSA|91702",
+      "listingVariantId": "LISTING-83108FABD078C49E475C",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "W 8th St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Azusa",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "7B90D151C11B4A95E72BDC0855E8E685"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-020",
+      "snapshotDate": "2026-06-18",
+      "address": "875-935 W 8th St",
+      "city": "Azusa",
+      "postalCode": "91702",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 72000,
+      "buildingSf": 72000,
+      "officeSf": 4962,
+      "askingRate": 1.1,
+      "askingRateType": "NNN",
+      "askingPrice": null,
+      "transactionType": null,
+      "eventCategory": "Listing Updated",
+      "listingStatus": "Available",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "createsComp": false,
+      "closesAvailability": false,
+      "rateUpdate": false,
+      "sourcePage": 14,
+      "sourceRow": "Page 14 AIR Listing 3",
+      "notes": "3 Azusa Industrial Center 72,000 SF $1.10 NNN 8/3 Existing 24' | Excess Land Available For Trailer Parking | 875-935 W 8th St Yes NFS Yes Available 1800 | Azusa Industrial Center | Azusa, CA 91702 4,962 SF 72,000 SF Fncd/Pvd Now(8) Dock High & (3) Grade Level Doors | 2.0:1/144 | Marketing Flyer 4,962 SF of New Office Space, 24' Clear Height | Cushman & Wakefield - Christopher Tolles 213-955-5129, Philip Lombardo 909-942- Fully Secured Yard | 4678, Maya Schirn 213-236-4931 http://azusaindustrial.marcelcreates.com | Updated Information Excess Land Available For Trailer Parking",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LISTING_UPDATED",
+      "propertyIdentityId": "PROP-F9AA12452D274A346A68",
+      "propertyIdentityKey": "875 935 W 8TH ST|AZUSA|91702",
+      "listingVariantId": "LISTING-3FF89B11E77936842AC7",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Secured Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "875-935 W 8th St",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Azusa",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Updated Information",
+        "normalizedEventCode": "LISTING_UPDATED",
+        "normalizedEventLabel": "Listing Updated",
+        "confidence": {
+          "score": 0.9,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.04,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "4F3FF08118B0FF021A9BC08CD3578476"
+      }
+    },
+    {
+      "candidateId": "DA-20260618-021",
+      "snapshotDate": "2026-06-18",
+      "address": "18560 S Wilmington Ave",
+      "city": "Rancho Dominguez",
+      "postalCode": "90220",
+      "region": "Inland Empire",
+      "propertyType": "Industrial",
+      "availableSf": 72063,
+      "buildingSf": 171186,
+      "officeSf": 4063,
+      "askingRate": 1.2,
+      "askingRateType": "NET",
+      "askingPrice": null,
+      "transactionType": "For Sublease",
+      "eventCategory": "Leased",
+      "listingStatus": "Leased",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "createsComp": true,
+      "closesAvailability": true,
+      "rateUpdate": false,
+      "sourcePage": 16,
+      "sourceRow": "Page 16 AIR Listing 1",
+      "notes": "1 Dominguez Technology Center 72,063 SF $1.20 Net 12/1 Existing 30' Sublease Through June 30, 2026 - Longer Term Available | 18560 S Wilmington Ave Yes NFS ESFR Leased 400 ESFR / 30' Minimum Clearance | Rancho Dominguez, CA 90220 4,063 SF 171,186 SF Fncd/Pvd Now 1.1:1/82 High Pile Storage Racking in Place | Marketing Flyer 14 Container Positions in Concrete, Fenced Yard | Watson Land Company - Michael Bodlovich 310-952-6417 | Subleased Research in Progress",
+      "changeDetail": null,
+      "extraction": {
+        "parser": "air-layout-aware-v1",
+        "confidence": 0.9,
+        "confidenceParts": {
+          "listingBoundary": 0.15,
+          "address": 0.25,
+          "cityPostalCode": 0.15,
+          "availableSf": 0.15,
+          "event": 0.15,
+          "transaction": 0,
+          "region": 0.05
+        },
+        "reviewRequired": false
+      },
+      "governance": {
+        "candidateOnly": true,
+        "approvalRequired": true
+      },
+      "eventCode": "LEASED",
+      "propertyIdentityId": "PROP-470E4B8839C2BCC83707",
+      "propertyIdentityKey": "18560 S WILMINGTON AVE|RANCHO DOMINGUEZ|90220",
+      "listingVariantId": "LISTING-B7D0C83E05B88FA22D14",
+      "structuredNotes": {
+        "power": [],
+        "loading": [],
+        "yard": [
+          "Fenced Yard"
+        ],
+        "parking": [],
+        "office": [],
+        "construction": []
+      },
+      "historicalDeltas": [
+        {
+          "type": "FIRST_OBSERVED",
+          "from": null,
+          "to": "2026-06-18"
+        }
+      ],
+      "semanticNormalization": {
+        "address": {
+          "value": "18560 S Wilmington Ave",
+          "changed": false,
+          "removedText": null,
+          "method": "street-suffix-boundary"
+        },
+        "city": {
+          "value": "Rancho Dominguez",
+          "changed": false,
+          "method": "unchanged",
+          "expectedCity": null
+        },
+        "originalEventCategory": "Leased",
+        "normalizedEventCode": "LEASED",
+        "normalizedEventLabel": "Leased",
+        "confidence": {
+          "score": 0.96,
+          "parts": {
+            "addressValidity": 0.18,
+            "cityValidity": 0.12,
+            "postalCodeValidity": 0.12,
+            "availableSfValidity": 0.14,
+            "eventConfidence": 0.12,
+            "transactionConfidence": 0.1,
+            "provenance": 0.1,
+            "identityConfidence": 0.08
+          }
+        },
+        "duplicateOrdinal": 1,
+        "reviewRequired": false,
+        "reviewReasons": []
+      },
+      "evidenceCertification": {
+        "certifiedAt": "2026-07-24T22:45:31.130Z",
+        "lineageComplete": true,
+        "locationValid": true,
+        "semanticContractValid": true,
+        "continuityValid": true,
+        "transitionAnomalies": [],
+        "blockingFailures": [],
+        "reviewRequired": false,
+        "reviewReasons": [],
+        "certificationHash": "824C2369FDFAE861C7741D4080EBCBFB"
+      }
+    }
+  ],
+  "governance": {
+    "candidateOnly": true,
+    "approvalRequired": true,
+    "canonicalWrites": 0,
+    "commitEnabled": false,
+    "humanReviewRequired": true
+  }
+}
