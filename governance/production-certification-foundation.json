@@ -1,9 +1,9 @@
 {
   "framework": "SCIIP_PRODUCTION_READINESS_CERTIFICATION",
-  "version": "v6.1-phase6",
+  "version": "v6.1-phase7b",
   "profile": "foundation",
   "status": "FOUNDATION_CERTIFIED",
-  "certifiedAt": "2026-07-14T11:22:49.173Z",
+  "certifiedAt": "2026-07-25T20:19:01.660Z",
   "node": "20.20.2",
   "requiredDomains": [
     "runtime",
@@ -157,36 +157,54 @@
       "checks": [
         {
           "name": "ui-assets",
-          "ok": false,
-          "detail": "0 HTML files"
+          "ok": true,
+          "detail": "49 HTML files"
         },
         {
           "name": "ui-entrypoint",
-          "ok": false
+          "ok": true
+        },
+        {
+          "name": "ui-shell",
+          "ok": true
+        },
+        {
+          "name": "ui-evidence",
+          "ok": false,
+          "detail": "BDB8CF0E6B98131E05A5C391"
         }
       ],
       "failures": [
-        "ui-assets",
-        "ui-entrypoint"
+        "ui-evidence"
       ]
     },
     "api": {
       "name": "API",
-      "status": "DEFERRED",
+      "status": "CERTIFIED",
       "checks": [
         {
-          "name": "api-entrypoint",
-          "ok": false
+          "name": "api-entrypoints",
+          "ok": true
         },
         {
           "name": "api-contract",
-          "ok": false
+          "ok": true
+        },
+        {
+          "name": "api-router",
+          "ok": true
+        },
+        {
+          "name": "api-auth-fail-closed",
+          "ok": true
+        },
+        {
+          "name": "api-evidence",
+          "ok": true,
+          "detail": "052716DFD5C64A801CB3BEE7"
         }
       ],
-      "failures": [
-        "api-entrypoint",
-        "api-contract"
-      ]
+      "failures": []
     },
     "security": {
       "name": "Security",
@@ -229,44 +247,52 @@
     },
     "performance": {
       "name": "Performance",
-      "status": "DEFERRED",
+      "status": "CERTIFIED",
       "checks": [
         {
           "name": "benchmark-runner",
-          "ok": false
+          "ok": true
         },
         {
           "name": "performance-baseline",
-          "ok": false
+          "ok": true
+        },
+        {
+          "name": "performance-evidence",
+          "ok": true,
+          "detail": "37F74946587DEC70959B635E"
         }
       ],
-      "failures": [
-        "benchmark-runner",
-        "performance-baseline"
-      ]
+      "failures": []
     },
     "recovery": {
       "name": "Recovery",
-      "status": "DEFERRED",
+      "status": "CERTIFIED",
       "checks": [
         {
           "name": "checkpoint-script",
           "ok": true
         },
         {
+          "name": "restore-script",
+          "ok": true
+        },
+        {
           "name": "recovery-runbook",
-          "ok": false
+          "ok": true
         },
         {
           "name": "restore-test",
-          "ok": false
+          "ok": true
+        },
+        {
+          "name": "recovery-evidence",
+          "ok": true,
+          "detail": "28BF1633B3D67C138E9EE8C3"
         }
       ],
-      "failures": [
-        "recovery-runbook",
-        "restore-test"
-      ]
+      "failures": []
     }
   },
-  "certificateId": "A0A6855519ABF058319E4990"
+  "certificateId": "816BC205CBAE66FD50CDD6E9"
 }

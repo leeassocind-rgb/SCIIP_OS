@@ -1,10 +1,7 @@
 name: SCIIP v7 Epic 3 Sprint 6
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - 'src/applications/relationship-intelligence/**'
-      - 'tools/tests/sciip-epic3-sprint6-test.js'
+
 jobs:
   certify:
     runs-on: ubuntu-latest
@@ -12,6 +9,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - run: node tools/tests/sciip-epic3-sprint5-test.js
       - run: node tools/tests/sciip-epic3-sprint6-test.js

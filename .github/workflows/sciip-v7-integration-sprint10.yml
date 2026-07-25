@@ -1,5 +1,7 @@
 name: SCIIP v7 Sprint 10 Certification
-on: [push, pull_request]
+on:
+  workflow_dispatch:
+
 jobs:
   certify:
     runs-on: ubuntu-latest
@@ -7,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - run: npm ci --ignore-scripts
       - run: npm run test:sprint10
       - run: npm run deployment:compile

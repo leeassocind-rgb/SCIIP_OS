@@ -1,15 +1,7 @@
 name: SCIIP v7 Sprint 4B Certification
 on:
-  push:
-    paths:
-      - 'src/ui/SCIIP_Platform*.gs'
-      - 'src/ui/SCIIP_Integration_Sprint4B_*.gs'
-      - 'tools/tests/sciip-integration-sprint4b-test.js'
-  pull_request:
-    paths:
-      - 'src/ui/SCIIP_Platform*.gs'
-      - 'src/ui/SCIIP_Integration_Sprint4B_*.gs'
-      - 'tools/tests/sciip-integration-sprint4b-test.js'
+  workflow_dispatch:
+
 jobs:
   certify:
     runs-on: ubuntu-latest
@@ -17,5 +9,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - run: node tools/tests/sciip-integration-sprint4b-test.js

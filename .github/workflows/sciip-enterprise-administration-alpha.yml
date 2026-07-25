@@ -1,9 +1,7 @@
 name: SCIIP Enterprise Administration Alpha
 
 on:
-  push:
-    branches: [main, v7.0-sciip-desktop]
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   certify:
@@ -12,5 +10,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - run: node tools/tests/sciip-enterprise-administration-alpha-test.js

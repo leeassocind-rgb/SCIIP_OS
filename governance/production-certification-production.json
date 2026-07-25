@@ -3,7 +3,7 @@
   "version": "v6.1-phase7b",
   "profile": "production",
   "status": "PRODUCTION_READY",
-  "certifiedAt": "2026-07-14T15:17:23.195Z",
+  "certifiedAt": "2026-07-25T20:27:19.963Z",
   "node": "20.20.2",
   "requiredDomains": [
     "runtime",
@@ -157,7 +157,7 @@
         {
           "name": "ui-assets",
           "ok": true,
-          "detail": "3 HTML files"
+          "detail": "49 HTML files"
         },
         {
           "name": "ui-entrypoint",
@@ -170,7 +170,7 @@
         {
           "name": "ui-evidence",
           "ok": true,
-          "detail": "B62CCBD122C754383912C67F"
+          "detail": "76A1A30E2516C831893DEC35"
         }
       ],
       "failures": []
@@ -198,7 +198,7 @@
         {
           "name": "api-evidence",
           "ok": true,
-          "detail": "DEFB42E6A3338D695506F1C6"
+          "detail": "052716DFD5C64A801CB3BEE7"
         }
       ],
       "failures": []
@@ -285,11 +285,11 @@
         {
           "name": "recovery-evidence",
           "ok": true,
-          "detail": "6BA7326E98536EA0FFC5E79C"
+          "detail": "28BF1633B3D67C138E9EE8C3"
         }
       ],
       "failures": []
     }
   },
-  "certificateId": "6785BC7D05459D25199F52B6"
+  "certificateId": "F9951A96AE88C139299932AC"
 }

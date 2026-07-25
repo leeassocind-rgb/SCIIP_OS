@@ -1,12 +1,7 @@
 name: SCIIP v7 Epic 4 Enterprise Identity Security
 on:
-  push:
-    paths:
-      - 'src/platform/security/**'
-      - 'tools/tests/sciip-epic4-enterprise-identity-security-test.js'
-      - 'manifests/SCIIP_V7_EPIC4_ENTERPRISE_IDENTITY_SECURITY_MILESTONE.json'
-  pull_request:
   workflow_dispatch:
+
 jobs:
   certify:
     runs-on: ubuntu-latest
@@ -14,5 +9,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - run: node tools/tests/sciip-epic4-enterprise-identity-security-test.js

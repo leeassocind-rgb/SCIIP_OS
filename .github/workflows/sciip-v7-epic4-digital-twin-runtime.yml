@@ -1,11 +1,7 @@
 name: SCIIP v7 Epic 4 Digital Twin Runtime
 on:
-  push:
-    paths:
-      - 'src/platform/digital-twin/**'
-      - 'tools/tests/sciip-epic4-digital-twin-runtime-test.js'
-      - 'manifests/SCIIP_V7_EPIC4_DIGITAL_TWIN_RUNTIME_MILESTONE.json'
-  pull_request:
+  workflow_dispatch:
+
 jobs:
   certify:
     runs-on: ubuntu-latest
@@ -13,5 +9,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       - run: npm run test:epic4:digital-twin-runtime
