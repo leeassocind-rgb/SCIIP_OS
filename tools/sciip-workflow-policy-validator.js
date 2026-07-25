@@ -75,7 +75,7 @@ for (const filename of files) {
   ].map((match) => match[1]);
 
   for (const version of nodeVersions) {
-    if (version !== "22") {
+    if (!["20", "22"].includes(version)) {
       failures.push(`${filename}: unsupported Node version ${version}`);
     }
   }
