@@ -1,0 +1,10 @@
+{
+  "framework": "SCIIP_V9_SPRINT29A_AUTONOMOUS_MARKET_INTELLIGENCE",
+  "version": "v9.0-sprint29a.0",
+  "upstream": [
+    "SCIIP_V9_SPRINT28_GOVERNED_LIVE_OPERATIONS"
+  ],
+  "status": "INSTALLABLE",
+  "canonicalWrites": 0,
+  "commitEnabled": false
+}

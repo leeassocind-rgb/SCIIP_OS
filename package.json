@@ -179,6 +179,10 @@
     "run:v9:sprint28:live-operations": "node tools/supersheets/sciip-v9-sprint28-governed-live-operations.js --config tools/config/sciip-v9-sprint28-live-operations.local.json",
     "commit:v9:sprint28:production": "node tools/supersheets/sciip-v9-sprint28-governed-live-operations.js --config tools/config/sciip-v9-sprint28-live-operations.local.json --mode commit --approval-token SCIIP_SPRINT28_EXPLICIT_PRODUCTION_APPROVAL",
     "verify:v9:sprint28:live-operations": "node tools/verify/sciip-v9-sprint28-verify.js",
-    "certify:v9:sprint28:live-operations": "npm run test:v9:sprint28:live-operations && npm run run:v9:sprint28:live-operations && npm run deployment:compile && npm run verify:v9:sprint28:live-operations"
+    "certify:v9:sprint28:live-operations": "npm run test:v9:sprint28:live-operations && npm run run:v9:sprint28:live-operations && npm run deployment:compile && npm run verify:v9:sprint28:live-operations",
+    "test:v9:sprint29a:market-intelligence": "node tools/tests/sciip-v9-sprint29a-autonomous-market-intelligence-test.js",
+    "run:v9:sprint29a:market-intelligence": "node tools/intelligence/sciip-v9-sprint29a-autonomous-market-intelligence.js --config tools/config/sciip-v9-sprint29a-autonomous-market-intelligence.local.json",
+    "verify:v9:sprint29a:market-intelligence": "node tools/verify/sciip-v9-sprint29a-verify.js",
+    "certify:v9:sprint29a:market-intelligence": "npm run test:v9:sprint29a:market-intelligence && npm run run:v9:sprint29a:market-intelligence && npm run deployment:compile && npm run verify:v9:sprint29a:market-intelligence"
   }
 }

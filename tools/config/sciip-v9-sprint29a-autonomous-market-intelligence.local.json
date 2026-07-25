@@ -1,0 +1,5 @@
+{
+  "repositoryRoot": ".",
+  "inputFile": "outputs/sprint28-governed-live-operations/daily-observations.json",
+  "outputDir": "outputs/sprint29a-autonomous-market-intelligence"
+}
