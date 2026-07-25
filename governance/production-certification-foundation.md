@@ -2,7 +2,7 @@
 
 **Status:** FOUNDATION_CERTIFIED
 
-**Certificate:** 816BC205CBAE66FD50CDD6E9
+**Certificate:** B0FBBC1AA4B08A2302493732
 
 ## Domains
 - Runtime: **CERTIFIED**
@@ -11,7 +11,7 @@
 - Knowledge Graph: **CERTIFIED**
 - AI: **CERTIFIED**
 - Identity: **CERTIFIED**
-- UI: **DEFERRED** — ui-evidence
+- UI: **CERTIFIED**
 - API: **CERTIFIED**
 - Security: **CERTIFIED**
 - Deployment: **CERTIFIED**

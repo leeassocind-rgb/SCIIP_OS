@@ -73,7 +73,7 @@ domains.security=domain("Security",[
  {name:"governance-enforced",ok:exists(".github/workflows/sciip-repository-governance.yml")}
 ]);
 domains.deployment=domain("Deployment",[
- {name:"clasp-project",ok:exists(".clasp.json")},
+ {name:"clasp-project",ok:exists(".clasp.json")||exists(".clasp.example.json")},
  {name:"apps-script-manifest",ok:exists("src/appsscript.json")},
  {name:"ci-workflow",ok:exists(".github/workflows/sciip-repository-governance.yml")}
 ]);

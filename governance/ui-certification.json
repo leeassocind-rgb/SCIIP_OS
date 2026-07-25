@@ -2,7 +2,7 @@
   "framework": "SCIIP_UI_CERTIFICATION",
   "version": "v6.1-phase7d",
   "status": "PASSED",
-  "certifiedAt": "2026-07-25T20:28:39.606Z",
+  "certifiedAt": "2026-07-25T20:59:18.944Z",
   "checks": {
     "applicationShell": true,
     "navigation": true,
@@ -17,5 +17,5 @@
     "views": true
   },
   "failures": [],
-  "certificateId": "B561B96410B0B38B1513FBA1"
+  "certificateId": "FFE9852E59411E02926899AB"
 }

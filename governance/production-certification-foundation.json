@@ -3,7 +3,7 @@
   "version": "v6.1-phase7b",
   "profile": "foundation",
   "status": "FOUNDATION_CERTIFIED",
-  "certifiedAt": "2026-07-25T20:19:01.660Z",
+  "certifiedAt": "2026-07-25T20:59:29.272Z",
   "node": "20.20.2",
   "requiredDomains": [
     "runtime",
@@ -153,7 +153,7 @@
     },
     "ui": {
       "name": "UI",
-      "status": "DEFERRED",
+      "status": "CERTIFIED",
       "checks": [
         {
           "name": "ui-assets",
@@ -170,13 +170,11 @@
         },
         {
           "name": "ui-evidence",
-          "ok": false,
-          "detail": "BDB8CF0E6B98131E05A5C391"
+          "ok": true,
+          "detail": "FFE9852E59411E02926899AB"
         }
       ],
-      "failures": [
-        "ui-evidence"
-      ]
+      "failures": []
     },
     "api": {
       "name": "API",
@@ -288,11 +286,11 @@
         {
           "name": "recovery-evidence",
           "ok": true,
-          "detail": "28BF1633B3D67C138E9EE8C3"
+          "detail": "10BD7DD75F0CA87BC81EC4DB"
         }
       ],
       "failures": []
     }
   },
-  "certificateId": "816BC205CBAE66FD50CDD6E9"
+  "certificateId": "B0FBBC1AA4B08A2302493732"
 }

@@ -3,7 +3,7 @@
   "version": "v6.1-phase7b",
   "profile": "production",
   "status": "PRODUCTION_READY",
-  "certifiedAt": "2026-07-25T20:28:49.016Z",
+  "certifiedAt": "2026-07-25T20:59:38.171Z",
   "node": "20.20.2",
   "requiredDomains": [
     "runtime",
@@ -170,7 +170,7 @@
         {
           "name": "ui-evidence",
           "ok": true,
-          "detail": "B561B96410B0B38B1513FBA1"
+          "detail": "FFE9852E59411E02926899AB"
         }
       ],
       "failures": []
@@ -285,11 +285,11 @@
         {
           "name": "recovery-evidence",
           "ok": true,
-          "detail": "28BF1633B3D67C138E9EE8C3"
+          "detail": "10BD7DD75F0CA87BC81EC4DB"
         }
       ],
       "failures": []
     }
   },
-  "certificateId": "01D7E54931B170ECAEAB074C"
+  "certificateId": "AE4889D24900E670B98CAD55"
 }

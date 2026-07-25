@@ -2,9 +2,9 @@
   "framework": "SCIIP_RECOVERY_CERTIFICATION",
   "version": "v6.1-phase7b",
   "status": "PASSED",
-  "certifiedAt": "2026-07-25T20:18:49.265Z",
-  "recoverableFiles": 14202,
-  "rtoSeconds": 0.22,
+  "certifiedAt": "2026-07-25T20:59:19.398Z",
+  "recoverableFiles": 14203,
+  "rtoSeconds": 0.267,
   "rpoMinutes": 0,
   "checks": {
     "requiredPaths": {
@@ -13,20 +13,20 @@
     },
     "recoverableInventory": {
       "ok": true,
-      "count": 14202,
+      "count": 14203,
       "minimum": 10000
     },
     "restoreRoundTrip": {
       "ok": true,
       "detail": {
         "status": "PASSED",
-        "checkpoint": "SCIIP_OS_checkpoint_20260725T201849Z.tar.gz",
+        "checkpoint": "SCIIP_OS_checkpoint_20260725T205919Z.tar.gz",
         "hashVerified": true
       }
     },
     "rto": {
       "ok": true,
-      "seconds": 0.22,
+      "seconds": 0.267,
       "maximum": 30
     },
     "rpo": {
@@ -39,5 +39,5 @@
     }
   },
   "failures": [],
-  "certificateId": "28BF1633B3D67C138E9EE8C3"
+  "certificateId": "10BD7DD75F0CA87BC81EC4DB"
 }
