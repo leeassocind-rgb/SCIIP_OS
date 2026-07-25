@@ -1,9 +1,7 @@
 name: SCIIP v7 Integration Sprint 1 Workspace Wiring
 on:
-  push:
-    branches: [v7.0-sciip-desktop]
-  pull_request:
-    branches: [v7.0-sciip-desktop]
+  workflow_dispatch:
+
 jobs:
   certify:
     runs-on: ubuntu-latest

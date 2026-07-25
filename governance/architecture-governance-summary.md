@@ -1,6 +1,6 @@
 # SCIIP_OS Architecture Governance Summary
 
-Generated: 2026-07-16T15:00:17.216Z
+Generated: 2026-07-25T20:59:32.710Z
 
 ## Errors
 - Syntax errors: 0
@@ -19,6 +19,6 @@ Generated: 2026-07-16T15:00:17.216Z
 - Storage processor files: 9640
 - Runtime-base recognized: 9540
 - Direct write calls: 0
-- LockService usage: 0
+- LockService usage: 2
 
 Overall status: PASSED

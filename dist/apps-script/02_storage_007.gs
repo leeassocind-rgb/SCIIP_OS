@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 02_storage_007.gs
  * sources: 895
- * generated: 2026-07-24T20:34:13.334Z
+ * generated: 2026-07-25T20:28:38.802Z
  */
 function sciipRun60850_StoragePlatformCrossPlatformGovernanceExecutionProcessor(){return SCIIP_STORAGE_PLATFORM_CROSS_PLATFORM_GOVERNANCE_BACKEND.executePlatformCrossPlatformGovernancePlan({processorNumber:60850,processorName:'StoragePlatformCrossPlatformGovernanceExecution',statusField:'storagePlatformCrossPlatformGovernanceExecutionStatus',component:'Storage Platform Cross Platform Governance Execution',backendLayer:'Storage Platform Cross Platform Governance',sourceSheet:'STORAGE_PLATFORM_CROSS_PLATFORM_GOVERNANCE_PLANNING',targetSheet:'STORAGE_PLATFORM_CROSS_PLATFORM_GOVERNANCE_EXECUTION',nextAction:'Run 60860_StoragePlatformCrossPlatformGovernanceLedgerProcessor after this processor completes.'});}
 function sciipTest60850_StoragePlatformCrossPlatformGovernanceExecutionProcessor(){var r=sciipRun60850_StoragePlatformCrossPlatformGovernanceExecutionProcessor();console.log(JSON.stringify({test:'sciipTest60850_StoragePlatformCrossPlatformGovernanceExecutionProcessor',result:r}));return r;}

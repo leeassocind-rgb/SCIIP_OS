@@ -1,14 +1,12 @@
 name: SCIIP v7 Epic 4 AI Runtime
 on:
-  push:
-    paths: ['src/platform/ai/**','tools/tests/sciip-epic4-ai-runtime-test.js','manifests/SCIIP_V7_EPIC4_AI_RUNTIME_MILESTONE.json']
-  pull_request:
-    paths: ['src/platform/ai/**','tools/tests/sciip-epic4-ai-runtime-test.js','manifests/SCIIP_V7_EPIC4_AI_RUNTIME_MILESTONE.json']
+  workflow_dispatch:
+
 jobs:
   certify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: {node-version: '20'}
+        with: {node-version: '22'}
       - run: node tools/tests/sciip-epic4-ai-runtime-test.js

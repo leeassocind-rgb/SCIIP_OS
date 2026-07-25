@@ -1,6 +1,6 @@
 /** SCIIP_OS compiled bundle: 08_ui_001.gs
  * sources: 131
- * generated: 2026-07-24T20:34:13.779Z
+ * generated: 2026-07-25T20:28:39.256Z
  */
 /** SCIIP_OS v7.0 AI Workspace Alpha */
 var SCIIP_AI_WORKSPACE = (function () {
@@ -2992,16 +2992,83 @@ var SCIIP_TWIN_SYNCHRONIZATION=(function(){
 function sciipSynchronizeDigitalTwinV7(){return SCIIP_TWIN_SYNCHRONIZATION.synchronizeState();}
 
 
-/** SCIIP_OS UI compatibility facade. Canonical desktop implementation: SCIIP_DESKTOP. */
+/**
+ * SCIIP_OS UI compatibility facade.
+ *
+ * Canonical desktop implementation: SCIIP_DESKTOP.
+ * This facade preserves the governed UI foundation contract while routing
+ * runtime behavior to the current desktop application.
+ */
 var SCIIP_UI = (function () {
   'use strict';
-  function include(filename) { return HtmlService.createHtmlOutputFromFile('ui/' + filename).getContent(); }
-  function bootstrap(request) { return SCIIP_DESKTOP.bootstrap(request || {}); }
-  function render(event) { return SCIIP_DESKTOP.render(event || {}); }
-  return {VERSION:'v7.0', VIEWS:SCIIP_DESKTOP.WORKSPACES, include:include, bootstrap:bootstrap, render:render};
+
+  var VERSION = 'v7.0';
+
+  /*
+   * Governed compatibility view registry.
+   * Canonical workspace definitions remain owned by SCIIP_DESKTOP.WORKSPACES.
+   */
+  var FOUNDATION_VIEWS = [
+    {id:'executive-dashboard', status:'FOUNDATION'},
+    {id:'property-explorer', status:'FOUNDATION'},
+    {id:'knowledge-graph', status:'FOUNDATION'},
+    {id:'gis-workspace', status:'FOUNDATION'},
+    {id:'ai-workspace', status:'FOUNDATION'},
+    {id:'enterprise-administration', status:'FOUNDATION'}
+  ];
+
+  var GOVERNANCE = {
+    authentication:{mode:'HANDOFF'},
+    apiBinding:'SCIIP_API',
+    canonicalRuntime:'SCIIP_DESKTOP'
+  };
+
+  function include(filename) {
+    return HtmlService
+      .createHtmlOutputFromFile('ui/' + filename)
+      .getContent();
+  }
+
+  function createTemplate(filename) {
+    return HtmlService.createTemplateFromFile('ui/' + filename);
+  }
+
+  function api() {
+    return typeof SCIIP_API !== 'undefined' ? SCIIP_API : null;
+  }
+
+  function bootstrap(request) {
+    return SCIIP_DESKTOP.bootstrap(request || {});
+  }
+
+  function render(event) {
+    return SCIIP_DESKTOP.render(event || {});
+  }
+
+  return {
+    VERSION: VERSION,
+    VIEWS: SCIIP_DESKTOP.WORKSPACES,
+    FOUNDATION_VIEWS: FOUNDATION_VIEWS,
+    GOVERNANCE: GOVERNANCE,
+    include: include,
+    createTemplate: createTemplate,
+    api: api,
+    bootstrap: bootstrap,
+    render: render
+  };
 })();
-function sciipUi() { return SCIIP_DESKTOP.render({}); }
-function sciipUiBootstrap(view) { return SCIIP_DESKTOP.bootstrap({parameter:{view:view}}); }
+
+function sciipUi() {
+  return SCIIP_DESKTOP.render({});
+}
+
+function sciipUiBootstrap(view) {
+  return SCIIP_DESKTOP.bootstrap({
+    parameter: {
+      view: view
+    }
+  });
+}
 
 
 function sciipTestUiFoundationPhase7D() {
@@ -3646,7 +3713,7 @@ var SCIIP_ENTERPRISE_SDK_EXTENSIONS=(function(){'use strict';
 function generate(def){def=def||{};if(!def.id)throw new Error('Definition id required.');var type=def.type||'MISSION';return {status:'GENERATED',artifact:{id:def.id,type:type,missionDefinition:type==='MISSION'?{goal:def.goal||'',steps:def.steps||[]}:null,agentTemplate:type==='AGENT'?{capabilities:def.capabilities||[]}:null,digitalTwinSchema:type==='DIGITAL_TWIN'?{fields:def.fields||[]}:null,workspaceDefinition:def.workspace||null,certification:{functionName:'sciipTest'+String(def.id).replace(/[^A-Za-z0-9]/g,'')},deploymentMetadata:{compiler:'v2',autoRegister:true,selfAssembly:true}},generatedAt:new Date().toISOString()};}return {generate:generate};})();
 
 /** SCIIP_OS v7.0 Sprint 6 — executive command center workspace model. */
-var SCIIP_EXECUTIVE_COMMAND_CENTER=(function(){
+var SCIIP_EXECUTIVE_COMMAND_CENTER_WORKSPACE=(function(){
 'use strict';var VERSION='v7.0-integration-sprint-6.0';function clone(v){return v==null?v:JSON.parse(JSON.stringify(v));}
 function build(request){request=request||{};var twin=SCIIP_ENTERPRISE_DIGITAL_TWIN.health(request.twinId||'enterprise'),opportunities=clone(request.opportunities||[]),risks=clone(request.risks||[]),alerts=clone(request.alerts||[]),workflows=clone(request.workflows||[]),recommendations=clone(request.recommendations||[]);return {version:VERSION,status:'AVAILABLE',workspace:{id:'executive-command-center',label:'Executive Command Center',sections:{liveKpis:clone(request.kpis||{}),enterpriseHealth:{status:(twin.status==='AVAILABLE'&&alerts.length===0)?'HEALTHY':'ATTENTION',digitalTwin:twin},portfolioPerformance:clone(request.portfolioPerformance||{}),autonomousOpportunities:opportunities,risks:risks,alerts:alerts,workflows:workflows,recommendations:recommendations}},generatedAt:new Date().toISOString()};}
 return {VERSION:VERSION,build:build};})();

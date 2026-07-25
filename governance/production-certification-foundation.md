@@ -2,7 +2,7 @@
 
 **Status:** FOUNDATION_CERTIFIED
 
-**Certificate:** A0A6855519ABF058319E4990
+**Certificate:** B0FBBC1AA4B08A2302493732
 
 ## Domains
 - Runtime: **CERTIFIED**
@@ -11,12 +11,12 @@
 - Knowledge Graph: **CERTIFIED**
 - AI: **CERTIFIED**
 - Identity: **CERTIFIED**
-- UI: **DEFERRED** — ui-assets, ui-entrypoint
-- API: **DEFERRED** — api-entrypoint, api-contract
+- UI: **CERTIFIED**
+- API: **CERTIFIED**
 - Security: **CERTIFIED**
 - Deployment: **CERTIFIED**
-- Performance: **DEFERRED** — benchmark-runner, performance-baseline
-- Recovery: **DEFERRED** — recovery-runbook, restore-test
+- Performance: **CERTIFIED**
+- Recovery: **CERTIFIED**
 
 ## Blockers
 - None

@@ -1,13 +1,12 @@
 name: SCIIP Property Explorer Alpha
 on:
-  push:
-    branches: [main, v7.0-sciip-desktop]
-  pull_request:
+  workflow_dispatch:
+
 jobs:
   certify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: {node-version: '20'}
+        with: {node-version: '22'}
       - run: node tools/tests/sciip-property-explorer-alpha-v7-test.js

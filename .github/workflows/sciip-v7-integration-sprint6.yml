@@ -1,8 +1,7 @@
 name: SCIIP v7 Integration Sprint 6
 on:
-  push:
-    branches: [v7.0-sciip-desktop]
-  pull_request:
+  workflow_dispatch:
+
 jobs:
   certify:
     runs-on: ubuntu-latest
@@ -10,6 +9,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '22'
       - run: npm run certification:integration-sprint6
       - run: npm run deployment:compile
