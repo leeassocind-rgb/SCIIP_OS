@@ -10,7 +10,7 @@
     "src/shared/003_SCIIP_ServiceContainer.gs",
     "tools/sciip-production-certification.js",
     "governance/production-certification-policy.json",
-    ".clasp.json",
+    ".clasp.example.json",
     "package.json"
   ],
   "excludedDirectories": [
