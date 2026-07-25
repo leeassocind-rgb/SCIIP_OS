@@ -10,9 +10,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm run architecture:report
+      - run: npm run architecture:validate
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: sciip-architecture-report
-          path: governance/architecture-report.json
+          path: governance/architecture-governance-report.json

@@ -158,7 +158,7 @@ var SCIIP_V8_AI_COPILOT=(function(){
 })();
 function sciipV8AiCopilotGetState(){return SCIIP_V8_AI_COPILOT.createState();}
 function sciipV8AiCopilotAsk(state,question){return SCIIP_V8_AI_COPILOT.ask(state,question);}
-function sciipTestV8Sprint9AiCopilotGuidedDecisionWorkspace(){
+function sciipInternalV8Sprint9AiCopilotGuidedDecisionWorkspace_(){
   var result=SCIIP_V8_AI_COPILOT.certify();
   console.log(JSON.stringify(result));
   return result;
