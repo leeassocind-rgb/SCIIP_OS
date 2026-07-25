@@ -3,7 +3,7 @@
   "version": "v6.1-phase7b",
   "profile": "production",
   "status": "PRODUCTION_READY",
-  "certifiedAt": "2026-07-25T20:27:19.963Z",
+  "certifiedAt": "2026-07-25T20:28:49.016Z",
   "node": "20.20.2",
   "requiredDomains": [
     "runtime",
@@ -170,7 +170,7 @@
         {
           "name": "ui-evidence",
           "ok": true,
-          "detail": "76A1A30E2516C831893DEC35"
+          "detail": "B561B96410B0B38B1513FBA1"
         }
       ],
       "failures": []
@@ -291,5 +291,5 @@
       "failures": []
     }
   },
-  "certificateId": "F9951A96AE88C139299932AC"
+  "certificateId": "01D7E54931B170ECAEAB074C"
 }
