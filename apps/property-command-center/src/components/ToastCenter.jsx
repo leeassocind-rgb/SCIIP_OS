@@ -1,0 +1,1 @@
+import React from'react';import{CheckCircle2}from'lucide-react';export default function ToastCenter({items=[]}){return <div className="toast-center">{items.map(t=><div className="toast" key={t.id}><CheckCircle2 size={17}/><div><strong>{t.title}</strong><span>{t.message}</span></div></div>)}</div>}

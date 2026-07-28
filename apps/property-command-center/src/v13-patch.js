@@ -1,0 +1,1 @@
+export const SCIIP_V13={version:'v13.0-batched.0',features:['COMMAND_PALETTE','KEYBOARD_NAVIGATION','BUILDING_DRAWER','GIS_INTERACTION','SUPERSHEET_REVIEW','COPILOT_POLISH','ACCESSIBILITY_HARDENING'],governance:{repositoryMode:'SHADOW',productionWrites:0,canonicalPromotionEnabled:false}};
