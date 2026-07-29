@@ -83,3 +83,5 @@ export const identityReviewGovernanceWorkspace = { id: "identity-review-governan
 export const identityDecisionExecutionWorkspace = { id: "identity-decision-execution", label: "Identity Execution", group: "Intelligence" };
 
 export const propertyLifecycleIntelligenceWorkspace = { id: "property-lifecycle-intelligence", label: "Property Lifecycle", group: "Intelligence" };
+
+export const lifecycleMarketOutcomesWorkspace = { id: "lifecycle-market-outcomes", label: "Market Outcomes", group: "Intelligence" };

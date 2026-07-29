@@ -1,6 +1,6 @@
 {
   "name": "sciip-os",
-  "version": "196.9.0",
+  "version": "196.10.0",
   "private": true,
   "description": "Southern California Industrial Intelligence Platform",
   "scripts": {
@@ -253,6 +253,8 @@
     "identity-execution:run": "node tools/supersheets/sciip-governed-identity-decision-execution.cjs",
     "test:identity-execution": "node tools/tests/sciip-release5-5-sprint3-8-governed-identity-decision-execution-test.cjs",
     "property-lifecycle:run": "node tools/supersheets/sciip-property-lifecycle-intelligence.cjs",
-    "test:property-lifecycle": "node tools/tests/sciip-release5-5-sprint3-9-property-lifecycle-intelligence-test.cjs"
+    "test:property-lifecycle": "node tools/tests/sciip-release5-5-sprint3-9-property-lifecycle-intelligence-test.cjs",
+    "lifecycle-outcomes:run": "node tools/supersheets/sciip-lifecycle-market-outcome-classification.cjs",
+    "test:lifecycle-outcomes": "node tools/tests/sciip-release5-5-sprint3-10-lifecycle-market-outcome-classification-test.cjs"
   }
 }

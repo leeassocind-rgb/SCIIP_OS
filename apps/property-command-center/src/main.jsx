@@ -1,3 +1,4 @@
+import LifecycleMarketOutcomeClassificationCenter from "./components/LifecycleMarketOutcomeClassificationCenter.jsx";
 import PropertyLifecycleIntelligenceCenter from "./components/PropertyLifecycleIntelligenceCenter.jsx";
 import GovernedIdentityDecisionExecutionCenter from "./components/GovernedIdentityDecisionExecutionCenter.jsx";
 import IdentityReviewGovernanceCenter from "./components/IdentityReviewGovernanceCenter.jsx";
@@ -103,3 +104,5 @@ export { IdentityReviewGovernanceCenter };
 export { GovernedIdentityDecisionExecutionCenter };
 
 export { PropertyLifecycleIntelligenceCenter };
+
+export { LifecycleMarketOutcomeClassificationCenter };

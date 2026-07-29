@@ -1,7 +1,7 @@
 {
   "name": "sciip-property-command-center",
   "private": true,
-  "version": "196.9.0",
+  "version": "196.10.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
