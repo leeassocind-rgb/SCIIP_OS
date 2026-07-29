@@ -1,7 +1,7 @@
 {
   "name": "sciip-property-command-center",
   "private": true,
-  "version": "196.4.0",
+  "version": "170.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -21,11 +21,7 @@
     "certify:release5:real-time-intelligence:batch3": "npm run test:release5:real-time-intelligence:batch3 && npm run build",
     "test:release5:real-time-intelligence:batch3-1-ui-hotfix": "node ../../tools/tests/sciip-release5-real-time-intelligence-batch3-1-ui-hotfix-test.mjs",
     "test:release5:production-enterprise:batch4": "node ../../tools/tests/sciip-release5-production-enterprise-platform-batch4-test.mjs",
-    "certify:release5:production-enterprise:batch4": "npm run test:release5:production-enterprise:batch4 && npm run build",
-    "test:release5.5:production-validation:sprint1": "node ../../tools/tests/sciip-release5-5-sprint1-pdf-production-certification-test.mjs",
-    "certify:release5.5:production-validation:sprint1": "npm run test:release5.5:production-validation:sprint1 && npm run build",
-    "test:release5.5:production-validation:sprint2": "node ../../tools/tests/sciip-release5-5-sprint2-air-cre-certified-connector-test.cjs",
-    "certify:release5.5:production-validation:sprint2": "npm run test:release5.5:production-validation:sprint2 && npm run build"
+    "certify:release5:production-enterprise:batch4": "npm run test:release5:production-enterprise:batch4 && npm run build"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

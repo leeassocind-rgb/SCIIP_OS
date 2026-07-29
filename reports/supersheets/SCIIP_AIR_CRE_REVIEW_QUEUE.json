@@ -1,0 +1,337 @@
+{
+  "framework": "SCIIP_AIR_CRE_REVIEW_ANALYZER",
+  "version": "196.3.0",
+  "status": "REVIEW_REQUIRED",
+  "generatedAt": "2026-07-29T18:30:26.983Z",
+  "summary": {
+    "total": 3,
+    "critical": 0,
+    "byField": {
+      "powerAmps": 3
+    },
+    "byReason": {
+      "SOURCE_SIGNAL_WITHOUT_POWERAMPS_VALUE": 3
+    },
+    "byDocument": {
+      "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-22-2026.pdf": 1,
+      "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-23-2026.pdf": 2
+    },
+    "fieldStates": {
+      "address": {
+        "EXTRACTED": 2261,
+        "SOURCE_NOT_PROVIDED": 0,
+        "REVIEW_REQUIRED": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "city": {
+        "EXTRACTED": 2261,
+        "SOURCE_NOT_PROVIDED": 0,
+        "REVIEW_REQUIRED": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "zip": {
+        "EXTRACTED": 2261,
+        "SOURCE_NOT_PROVIDED": 0,
+        "REVIEW_REQUIRED": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "availableSf": {
+        "EXTRACTED": 2260,
+        "SOURCE_NOT_PROVIDED": 1,
+        "REVIEW_REQUIRED": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "buildingSf": {
+        "EXTRACTED": 2258,
+        "SOURCE_NOT_PROVIDED": 3,
+        "REVIEW_REQUIRED": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "rate": {
+        "EXTRACTED": 1875,
+        "SOURCE_NOT_PROVIDED": 3,
+        "REVIEW_REQUIRED": 0,
+        "NOT_APPLICABLE": 383
+      },
+      "rateType": {
+        "EXTRACTED": 777,
+        "SOURCE_NOT_PROVIDED": 1101,
+        "REVIEW_REQUIRED": 0,
+        "NOT_APPLICABLE": 383
+      },
+      "dockHigh": {
+        "EXTRACTED": 2233,
+        "SOURCE_NOT_PROVIDED": 28,
+        "REVIEW_REQUIRED": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "groundLevel": {
+        "EXTRACTED": 2233,
+        "SOURCE_NOT_PROVIDED": 28,
+        "REVIEW_REQUIRED": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "clearHeight": {
+        "EXTRACTED": 2094,
+        "SOURCE_NOT_PROVIDED": 167,
+        "REVIEW_REQUIRED": 0,
+        "NOT_APPLICABLE": 0
+      },
+      "powerAmps": {
+        "EXTRACTED": 743,
+        "SOURCE_NOT_PROVIDED": 1515,
+        "REVIEW_REQUIRED": 3,
+        "NOT_APPLICABLE": 0
+      },
+      "status": {
+        "EXTRACTED": 2254,
+        "SOURCE_NOT_PROVIDED": 7,
+        "REVIEW_REQUIRED": 0,
+        "NOT_APPLICABLE": 0
+      }
+    }
+  },
+  "queue": [
+    {
+      "reviewId": "REVIEW-B1170C87F761CF76F64B",
+      "recordId": "OBS-A56034275B0F9E6B7938",
+      "propertyId": "PROPERTY-E18D9B338102AEB4CCBB",
+      "field": "powerAmps",
+      "value": null,
+      "confidence": 0,
+      "reason": "SOURCE_SIGNAL_WITHOUT_POWERAMPS_VALUE",
+      "critical": false,
+      "status": "OPEN",
+      "evidence": {
+        "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-22-2026.pdf",
+        "page": 16,
+        "recordNo": 2,
+        "rawLines": [
+          "   2                                                               129,295 SF                  TBD                              15/1             Existing              36'",
+          "                                                                                                                                                   Class A Warehouse w/ 4.25 Acres of Excess Land",
+          "          2104 E 223rd St                                          Yes                         NFS                              ESFR             Available             2000",
+          "                                                                                                                                                   New Construction - Delivering Summer 2026",
+          "          Carson, CA 90810                                         9,971 SF                    129,295 SF                       Paved              9,971 Sf of Two-Story Office Space",
+          "                                                                                                                                                 Now                   0.9:1/112",
+          "          Marketing Flyer                                                                                                                          36' Minimum Clear Height",
+          "                                                                    CBRE - El Segundo - Robert Flores 310-363-4826, Sam Carmack 310-245-0625, Joey Fifteen (15) DH Doors and One (1) GL Ramp",
+          "                                                                    Wagman 310-363-4684                                                            On-Site Parking for 150+ Containers",
+          "",
+          "         Updated Information                                         Construction Complete and Ready for Occupancy!",
+          ""
+        ],
+        "columnEvidence": {
+          "available": [
+            "129,295 SF",
+            "Yes",
+            "9,971 SF",
+            "CBRE - El Segundo - Robert",
+            "Wagman 310-363-4684",
+            "Construction Complete and"
+          ],
+          "rate": [
+            "TBD",
+            "NFS",
+            "129,295 SF",
+            "Flores 310-363-4826, Sam Carmack",
+            "Ready for Occupancy!"
+          ],
+          "loading": [
+            "15/1",
+            "ESFR",
+            "Paved",
+            "310-245-0625, Joe"
+          ],
+          "construction": [
+            "Existing",
+            "Class A Warehouse w/",
+            "Available",
+            "New Construction - D",
+            "9,971 Sf of Two-Stor",
+            "Now",
+            "36' Minimum Clear He",
+            "y Fifteen (15) DH Door",
+            "On-Site Parking for"
+          ],
+          "clear": [
+            "36'",
+            "4.25 Acres of Exc",
+            "2000",
+            "elivering Summer 2",
+            "y Office Space",
+            "0.9:1/112",
+            "ight",
+            "s and One (1) GL R",
+            "150+ Containers"
+          ]
+        }
+      },
+      "sourceDocument": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-22-2026.pdf",
+      "reportDate": "2026-07-22"
+    },
+    {
+      "reviewId": "REVIEW-6648A08BFDAFFB4C18F7",
+      "recordId": "OBS-96B5EFA92CFFCDCE30CE",
+      "propertyId": "PROPERTY-CA47E858C567028E637B",
+      "field": "powerAmps",
+      "value": null,
+      "confidence": 0,
+      "reason": "SOURCE_SIGNAL_WITHOUT_POWERAMPS_VALUE",
+      "critical": false,
+      "status": "OPEN",
+      "evidence": {
+        "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-23-2026.pdf",
+        "page": 4,
+        "recordNo": 5,
+        "rawLines": [
+          "   5                                                               26,100 SF                   NFL                              4/1              Existing              22'",
+          "                                                                                                                                                  Free Standing Building",
+          "          1700 Main St                                             Yes                         $360.00                          Yes              Available             1200",
+          "                                                                                                                                                  7,000 SF of High-Image Showroom & Office",
+          "          Orange, CA 92865                                         7,000 SF                    26,100 SF                        Fenced            Four (4) Dock-High Positions | One (1) Gl Door",
+          "                                                                                                                                                 COE                   2.6:1/68",
+          "                                                                                                                                                  Large Fenced Yard Area",
+          "                                                                    CBRE - Keith Greer 714-371-9209, Ben Seybold 714-371-9233, Sean Ward 714-371- Abundant Parking (2.64:1 Parking Ratio)",
+          "                                                                    9222",
+          "         New Listing",
+          "         For Sale                                                    Free Standing Building",
+          "",
+          "",
+          "",
+          "",
+          "                                                                                                                                                                                                                                                              7/23/2026",
+          "This information supplied herein is from sources we deem reliable. It is provided without any representation, warranty or guarantee, expressed or implied as to its accuracy. Prospective Buyer or Tenant should conduct an independent investigation and verification of",
+          "all matters deemed to be material, including, but not limited to, statements of income and expenses. Consult your attorney, accountant, or other prof. advisor.",
+          ""
+        ],
+        "columnEvidence": {
+          "available": [
+            "26,100 SF",
+            "Yes",
+            "7,000 SF",
+            "CBRE - Keith Greer 714-371-",
+            "9222",
+            "Free Standing Building",
+            "It is provided without any r",
+            "tatements of income and expe"
+          ],
+          "rate": [
+            "NFL",
+            "$360.00",
+            "26,100 SF",
+            "9209, Ben Seybold 714-371-9233, S",
+            "epresentation, warranty or guaran",
+            "nses. Consult your attorney, acco"
+          ],
+          "loading": [
+            "4/1",
+            "Yes",
+            "Fenced",
+            "ean Ward 714-371-",
+            "tee, expressed or",
+            "untant, or other"
+          ],
+          "construction": [
+            "Existing",
+            "Free Standing Buildin",
+            "Available",
+            "7,000 SF of High-Imag",
+            "Four (4) Dock-High Po",
+            "COE",
+            "Large Fenced Yard Are",
+            "Abundant Parking (2.6",
+            "implied as to its acc",
+            "prof. advisor."
+          ],
+          "clear": [
+            "22'",
+            "g",
+            "1200",
+            "e Showroom & Offic",
+            "sitions | One (1)",
+            "2.6:1/68",
+            "a",
+            "4:1 Parking Ratio)",
+            "uracy. Prospective"
+          ]
+        }
+      },
+      "sourceDocument": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-23-2026.pdf",
+      "reportDate": "2026-07-23"
+    },
+    {
+      "reviewId": "REVIEW-9D28A8FF6CCF9998E38C",
+      "recordId": "OBS-973520F99E255556134B",
+      "propertyId": "PROPERTY-CA47E858C567028E637B",
+      "field": "powerAmps",
+      "value": null,
+      "confidence": 0,
+      "reason": "SOURCE_SIGNAL_WITHOUT_POWERAMPS_VALUE",
+      "critical": false,
+      "status": "OPEN",
+      "evidence": {
+        "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-23-2026.pdf",
+        "page": 10,
+        "recordNo": 4,
+        "rawLines": [
+          "   4                                                               26,100 SF                   NFL                              4/1              Existing              22'",
+          "                                                                                                                                                  Free Standing Building",
+          "          1700 Main St                                             Yes                         $360.00                          Yes              Available             1200",
+          "                                                                                                                                                  7,000 SF of High-Image Showroom & Office",
+          "          Orange, CA 92865                                         7,000 SF                    26,100 SF                        Fenced            Four (4) Dock-High Positions | One (1) Gl Door",
+          "                                                                                                                                                 COE                   2.6:1/68",
+          "                                                                                                                                                  Large Fenced Yard Area",
+          "                                                                    CBRE - Keith Greer 714-371-9209, Ben Seybold 714-371-9233, Sean Ward 714-371- Abundant Parking (2.64:1 Parking Ratio)",
+          "                                                                    9222",
+          "         New Listing",
+          "         For Sale                                                    Free Standing Building",
+          ""
+        ],
+        "columnEvidence": {
+          "available": [
+            "26,100 SF",
+            "Yes",
+            "7,000 SF",
+            "CBRE - Keith Greer 714-371-",
+            "9222",
+            "Free Standing Building"
+          ],
+          "rate": [
+            "NFL",
+            "$360.00",
+            "26,100 SF",
+            "9209, Ben Seybold 714-371-9233, S"
+          ],
+          "loading": [
+            "4/1",
+            "Yes",
+            "Fenced",
+            "ean Ward 714-371-"
+          ],
+          "construction": [
+            "Existing",
+            "Free Standing Buildin",
+            "Available",
+            "7,000 SF of High-Imag",
+            "Four (4) Dock-High Po",
+            "COE",
+            "Large Fenced Yard Are",
+            "Abundant Parking (2.6"
+          ],
+          "clear": [
+            "22'",
+            "g",
+            "1200",
+            "e Showroom & Offic",
+            "sitions | One (1)",
+            "2.6:1/68",
+            "a",
+            "4:1 Parking Ratio)"
+          ]
+        }
+      },
+      "sourceDocument": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-7-23-2026.pdf",
+      "reportDate": "2026-07-23"
+    }
+  ]
+}

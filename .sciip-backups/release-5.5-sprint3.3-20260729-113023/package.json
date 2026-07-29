@@ -1,6 +1,6 @@
 {
   "name": "sciip-os",
-  "version": "196.4.0",
+  "version": "196.2.0",
   "private": true,
   "description": "Southern California Industrial Intelligence Platform",
   "scripts": {
@@ -238,10 +238,6 @@
     "property-command-center:test:release5.5:production-validation:sprint3": "node tools/tests/sciip-release5-5-sprint3-air-cre-accuracy-hardening-test.cjs",
     "supersheets:review": "node tools/supersheets/sciip-air-cre-review-analyzer.cjs",
     "property-command-center:test:release5.5:production-validation:sprint3.1": "node tools/tests/sciip-release5-5-sprint3-1-review-precision-hotfix-test.cjs",
-    "property-command-center:test:release5.5:production-validation:sprint3.2": "node tools/tests/sciip-release5-5-sprint3-2-land-exclusion-gate-test.cjs",
-    "property-command-center:test:release5.5:production-validation:sprint3.3": "node tools/tests/sciip-release5-5-sprint3-3-field-accuracy-hardening-test.cjs",
-    "property-command-center:test:release5.5:production-validation:sprint3.4": "node tools/tests/sciip-release5-5-sprint3-4-evidence-certification-platform-test.cjs",
-    "supersheets:evidence": "node tools/supersheets/sciip-evidence-certification-builder.cjs",
-    "supersheets:evidence:decide": "node tools/supersheets/sciip-evidence-decision-ledger.cjs"
+    "property-command-center:test:release5.5:production-validation:sprint3.2": "node tools/tests/sciip-release5-5-sprint3-2-land-exclusion-gate-test.cjs"
   }
 }

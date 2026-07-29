@@ -7,7 +7,7 @@ export const ASSIGNMENT_TYPES = Object.freeze({
   RESEARCH: 'Research'
 });
 
-const common = ['Platform Runtime','Market Intelligence','Intelligence Platform','Integration Platform','Enterprise Collaboration','Enterprise Foundation','Executive Command Center','Executive Summary','Morning Brief','Property Digital Twin','Assignment Health','Production Data Certification','Evidence Inspector','SuperSheet Ingestion','Knowledge Graph','GIS Intelligence','Opportunity Intelligence','Decision Intelligence','Executive AI','Enterprise Operations','Enterprise Knowledge Graph','Real-Time Intelligence','Enterprise Production'];
+const common = ['Platform Runtime','Market Intelligence','Intelligence Platform','Integration Platform','Enterprise Collaboration','Enterprise Foundation','Executive Command Center','Executive Summary','Morning Brief','Property Digital Twin','Assignment Health','Production Data Certification','SuperSheet Ingestion','Knowledge Graph','GIS Intelligence','Opportunity Intelligence','Decision Intelligence','Executive AI','Enterprise Operations','Enterprise Knowledge Graph','Real-Time Intelligence','Enterprise Production'];
 const close = ['Relationships','Documents','Timeline','AI Assistant','Action Center'];
 
 const workspace = (type, focus, tabs, capabilities) => Object.freeze({

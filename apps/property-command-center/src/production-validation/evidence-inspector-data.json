@@ -1,0 +1,45 @@
+{
+  "framework": "SCIIP_EVIDENCE_CERTIFICATION_PLATFORM",
+  "version": "196.4.0",
+  "generatedAt": "2026-07-29T19:42:54.591Z",
+  "governance": {
+    "immutableSource": true,
+    "appendOnlyDecisionLedger": true,
+    "silentPromotion": false,
+    "goldenPromotionRequiresApproval": true,
+    "connectorAgnostic": true
+  },
+  "summary": {
+    "reviewItems": 0,
+    "openReviews": 0,
+    "criticalReviews": 0,
+    "byField": {},
+    "goldenTests": 0,
+    "certificationStatus": "CERTIFIED"
+  },
+  "evidencePackages": [],
+  "decisionLedger": [],
+  "goldenTests": [],
+  "certificationRuns": [
+    {
+      "runId": "CERT-17EFD37B1DFE2B79050C",
+      "connector": "AIR_CRE",
+      "sourceVersion": "196.3.0",
+      "status": "CERTIFIED",
+      "metrics": {
+        "documents": 35,
+        "pages": 588,
+        "sourceObservations": 2401,
+        "observations": 2141,
+        "industrialObservations": 2141,
+        "landExcluded": 260,
+        "unknownExcluded": 0,
+        "landRecordsIngested": 0,
+        "criticalCompleteness": 99.96,
+        "reviewRequired": 0,
+        "criticalReviewRequired": 0,
+        "reviewByField": {}
+      }
+    }
+  ]
+}
