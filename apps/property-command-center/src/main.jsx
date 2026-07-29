@@ -1,3 +1,4 @@
+import GovernedIdentityDecisionExecutionCenter from "./components/GovernedIdentityDecisionExecutionCenter.jsx";
 import IdentityReviewGovernanceCenter from "./components/IdentityReviewGovernanceCenter.jsx";
 import CanonicalPropertyIdentityCenter from "./components/CanonicalPropertyIdentityCenter.jsx";
 import React,{useEffect,useMemo,useRef,useState}from'react';
@@ -97,3 +98,5 @@ createRoot(document.getElementById('root')).render(<App/>);
 export { CanonicalPropertyIdentityCenter };
 
 export { IdentityReviewGovernanceCenter };
+
+export { GovernedIdentityDecisionExecutionCenter };

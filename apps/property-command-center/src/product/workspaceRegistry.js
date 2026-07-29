@@ -79,3 +79,5 @@ export function assertWorkspaceRegistry() {
 export const canonicalPropertyIdentityWorkspace = { id: "canonical-property-identity", label: "Property Identity", group: "Intelligence" };
 
 export const identityReviewGovernanceWorkspace = { id: "identity-review-governance", label: "Identity Review", group: "Intelligence" };
+
+export const identityDecisionExecutionWorkspace = { id: "identity-decision-execution", label: "Identity Execution", group: "Intelligence" };
