@@ -1,0 +1,4 @@
+const KEY='sciip.property-command-center.opportunity-ledger.v1';
+const safeParse=value=>{try{return JSON.parse(value)||[]}catch{return[]}};
+export function readOpportunityLedger(storage=globalThis?.localStorage){return storage?safeParse(storage.getItem(KEY)):[]}
+export function preserveOpportunityDecision(decision,storage=globalThis?.localStorage){if(!storage)return null;const current=readOpportunityLedger(storage);const entry=Object.freeze({id:decision.id||`DEC-${Date.now()}`,opportunityId:decision.opportunityId,assignmentId:decision.assignmentId,status:decision.status||'REVIEWED',note:String(decision.note||''),preservedAt:new Date().toISOString(),brokerControlled:true});const duplicate=current.find(item=>item.id===entry.id);if(duplicate)return duplicate;storage.setItem(KEY,JSON.stringify([...current,entry]));return entry}

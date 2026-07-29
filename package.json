@@ -192,6 +192,8 @@
     "property-command-center:test:sprint6": "node tools/tests/sciip-release1-sprint6-ai-property-copilot-test.mjs",
     "property-command-center:certify:sprint6": "npm run property-command-center:test:sprint6 && npm run property-command-center:build",
     "property-command-center:test:sprint7": "node tools/tests/sciip-release1-sprint7-gis-intelligence-test.mjs",
-    "property-command-center:certify:sprint7": "npm run property-command-center:test:sprint7 && npm run property-command-center:build"
+    "property-command-center:certify:sprint7": "npm run property-command-center:test:sprint7 && npm run property-command-center:build",
+    "property-command-center:test:sprint8": "node tools/tests/sciip-release1-sprint8-opportunity-intelligence-test.mjs",
+    "property-command-center:certify:sprint8": "npm run property-command-center:test:sprint8 && npm run property-command-center:build"
   }
 }

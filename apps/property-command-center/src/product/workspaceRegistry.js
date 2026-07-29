@@ -7,7 +7,7 @@ export const ASSIGNMENT_TYPES = Object.freeze({
   RESEARCH: 'Research'
 });
 
-const common = ['Executive Summary','Morning Brief','Assignment Health','SuperSheet Ingestion','Knowledge Graph','GIS Intelligence'];
+const common = ['Executive Summary','Morning Brief','Assignment Health','SuperSheet Ingestion','Knowledge Graph','GIS Intelligence','Opportunity Intelligence'];
 const close = ['Relationships','Documents','Timeline','AI Assistant','Action Center'];
 
 const workspace = (type, focus, tabs, capabilities) => Object.freeze({
