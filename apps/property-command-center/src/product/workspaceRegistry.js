@@ -75,3 +75,5 @@ export function assertWorkspaceRegistry() {
   if (serialized.includes('Tenant Requirement')) errors.push('Legacy Tenant Requirement terminology remains');
   return { valid: errors.length === 0, errors, workspaceCount: required.length };
 }
+
+export const canonicalPropertyIdentityWorkspace = { id: "canonical-property-identity", label: "Property Identity", group: "Intelligence" };
