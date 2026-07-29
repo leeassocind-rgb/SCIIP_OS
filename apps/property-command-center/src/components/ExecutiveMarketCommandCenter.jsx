@@ -1,0 +1,3 @@
+import React from "react";
+import command from "../production-validation/executive-market-command-center-data.json";
+export default function ExecutiveMarketCommandCenter(){const s=command.summary||{},b=command.executiveBrief||{};return <section aria-label="Executive Market Command Center"><h1>Executive Market Command Center</h1><p>{b.headline||"Multidimensional market intelligence is ready."}</p><div><strong>{s.cubeCells||0}</strong> cube cells · <strong>{s.trends||0}</strong> trends · <strong>{s.forecasts||0}</strong> forecasts</div><h2>Forecast Rankings</h2><ol>{(command.rankedForecasts||[]).slice(0,20).map(x=><li key={x.forecastId}>{x.geography} — {x.horizonMonths} months: {x.forecastScore} ({Math.round((x.confidence||0)*100)}% confidence)</li>)}</ol></section>}

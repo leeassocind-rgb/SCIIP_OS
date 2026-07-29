@@ -1,0 +1,5 @@
+import React from "react";
+import correlation from "../production-validation/cross-property-market-intelligence-data.json";
+import signals from "../production-validation/market-signal-regime-data.json";
+import priorities from "../production-validation/market-opportunity-risk-prioritization-data.json";
+export default function MarketIntelligenceCorrelationCenter(){const s=signals.summary||{},p=priorities.summary||{};return <section aria-label="Market Intelligence Correlation"><h1>Market Intelligence</h1><p>Cross-property correlations, governed market regimes, and approval-gated opportunity/risk priorities.</p><div><strong>{correlation.summary?.totalCorrelations||0}</strong> correlations · <strong>{s.totalSignals||0}</strong> signals · <strong>{p.totalPriorities||0}</strong> priorities</div><h2>Regimes</h2><ul>{Object.entries(s.regimeCounts||{}).map(([k,v])=><li key={k}>{k.replaceAll('_',' ')}: {v}</li>)}</ul><h2>Priority Queue</h2><ol>{(priorities.rankedPriorities||[]).slice(0,20).map(x=><li key={x.priorityId}>{x.geography} — {x.category.replaceAll('_',' ')} ({x.priorityScore})</li>)}</ol></section>}

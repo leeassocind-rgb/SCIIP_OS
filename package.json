@@ -1,6 +1,6 @@
 {
   "name": "sciip-os",
-  "version": "196.10.0",
+  "version": "196.17.0",
   "private": true,
   "description": "Southern California Industrial Intelligence Platform",
   "scripts": {
@@ -255,6 +255,15 @@
     "property-lifecycle:run": "node tools/supersheets/sciip-property-lifecycle-intelligence.cjs",
     "test:property-lifecycle": "node tools/tests/sciip-release5-5-sprint3-9-property-lifecycle-intelligence-test.cjs",
     "lifecycle-outcomes:run": "node tools/supersheets/sciip-lifecycle-market-outcome-classification.cjs",
-    "test:lifecycle-outcomes": "node tools/tests/sciip-release5-5-sprint3-10-lifecycle-market-outcome-classification-test.cjs"
+    "test:lifecycle-outcomes": "node tools/tests/sciip-release5-5-sprint3-10-lifecycle-market-outcome-classification-test.cjs",
+    "market-correlation:run": "node tools/supersheets/sciip-cross-property-market-intelligence-correlation.cjs",
+    "market-signals:run": "node tools/supersheets/sciip-market-signal-regime-classification.cjs",
+    "market-priorities:run": "node tools/supersheets/sciip-market-opportunity-risk-prioritization.cjs",
+    "test:market-intelligence-batch": "node tools/tests/sciip-release5-5-batch3-11-to-3-13-market-intelligence-test.cjs",
+    "market-cube:run": "node tools/supersheets/sciip-multidimensional-market-cube.cjs",
+    "market-trends:run": "node tools/supersheets/sciip-market-trend-momentum.cjs",
+    "market-forecast:run": "node tools/supersheets/sciip-explainable-market-forecasting.cjs",
+    "executive-market-command:run": "node tools/supersheets/sciip-executive-market-command-center.cjs",
+    "test:multidimensional-market-intelligence-batch": "node tools/tests/sciip-release5-5-batch3-14-to-3-17-multidimensional-market-intelligence-test.cjs"
   }
 }

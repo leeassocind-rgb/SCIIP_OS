@@ -1,0 +1,43 @@
+{
+  "framework": "SCIIP_MARKET_TREND_MOMENTUM_ENGINE",
+  "version": "196.15.0",
+  "status": "PASSED",
+  "generatedAt": "2026-07-29T21:13:58.775Z",
+  "governance": {
+    "appendOnlyTrendLedger": true,
+    "rollingMetrics": true,
+    "evidenceLinked": true,
+    "duplicateSafe": true,
+    "noSourceMutation": true
+  },
+  "summary": {
+    "sourceCubeCells": 1,
+    "trendsCreated": 1,
+    "duplicateSafeSkips": 0,
+    "totalTrends": 1,
+    "up": 0,
+    "down": 0,
+    "flat": 1
+  },
+  "trends": [
+    {
+      "trendId": "TRD-9B0DE0EDC2D6B38AF6579B43",
+      "businessKey": "UNASSIGNED|INDUSTRIAL|UNKNOWN|UNKNOWN|UNKNOWN|2026-07|3F45B22015",
+      "geography": "UNASSIGNED",
+      "period": "2026-07",
+      "assetClass": "INDUSTRIAL",
+      "sizeBucket": "UNKNOWN",
+      "powerBucket": "UNKNOWN",
+      "tenantSector": "UNKNOWN",
+      "direction": "FLAT",
+      "scoreDelta": 0,
+      "momentumScore": 5,
+      "rollingPeriods": 1,
+      "evidenceCubeCellIds": [
+        "CUBE-DB6ED22CED082A62AB34F9EE"
+      ],
+      "immutable": true,
+      "modelVersion": "196.15.0"
+    }
+  ]
+}

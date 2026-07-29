@@ -85,3 +85,7 @@ export const identityDecisionExecutionWorkspace = { id: "identity-decision-execu
 export const propertyLifecycleIntelligenceWorkspace = { id: "property-lifecycle-intelligence", label: "Property Lifecycle", group: "Intelligence" };
 
 export const lifecycleMarketOutcomesWorkspace = { id: "lifecycle-market-outcomes", label: "Market Outcomes", group: "Intelligence" };
+
+export const marketIntelligenceCorrelationWorkspace = { id: "market-intelligence-correlation", label: "Market Intelligence", group: "Intelligence" };
+
+export const executiveMarketCommandCenterWorkspace = { id: "executive-market-command-center", label: "Executive Market", group: "Intelligence" };

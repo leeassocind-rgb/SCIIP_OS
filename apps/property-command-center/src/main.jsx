@@ -1,3 +1,5 @@
+import ExecutiveMarketCommandCenter from "./components/ExecutiveMarketCommandCenter.jsx";
+import MarketIntelligenceCorrelationCenter from "./components/MarketIntelligenceCorrelationCenter.jsx";
 import LifecycleMarketOutcomeClassificationCenter from "./components/LifecycleMarketOutcomeClassificationCenter.jsx";
 import PropertyLifecycleIntelligenceCenter from "./components/PropertyLifecycleIntelligenceCenter.jsx";
 import GovernedIdentityDecisionExecutionCenter from "./components/GovernedIdentityDecisionExecutionCenter.jsx";
@@ -106,3 +108,7 @@ export { GovernedIdentityDecisionExecutionCenter };
 export { PropertyLifecycleIntelligenceCenter };
 
 export { LifecycleMarketOutcomeClassificationCenter };
+
+export { MarketIntelligenceCorrelationCenter };
+
+export { ExecutiveMarketCommandCenter };
