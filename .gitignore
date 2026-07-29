@@ -5,3 +5,4 @@ node_modules/
 .clasp.json
 clasprc.json
 __MACOSX/
+.sciip-backups/
