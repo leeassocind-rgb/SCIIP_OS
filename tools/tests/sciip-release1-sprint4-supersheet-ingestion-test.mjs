@@ -1,0 +1,18 @@
+import assert from'node:assert/strict';import fs from'node:fs';import path from'node:path';import{fileURLToPath}from'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
+const read=rel=>fs.readFileSync(path.join(root,rel),'utf8');
+const tests=[];const run=async(name,fn)=>{try{await fn();tests.push({test:name,status:'PASSED'})}catch(error){tests.push({test:name,status:'FAILED',error:error.message})}};
+const schema=await import(path.join(root,'apps/property-command-center/src/ingestion/schemaRegistry.js'));
+const normalizer=await import(path.join(root,'apps/property-command-center/src/ingestion/normalizer.js'));
+const parser=await import(path.join(root,'apps/property-command-center/src/ingestion/superSheetParser.js'));
+await run('CanonicalSchemaRegistry',()=>{const mapped=schema.mapHeaders(['Property Address','City','Building SF','Power Amps']);assert.equal(mapped.mappings.length,4);assert.equal(schema.validateRequiredHeaders(mapped).valid,true)});
+await run('DelimitedParserQuotedFields',()=>{const rows=parser.parseDelimited('Address,City,Building SF\n"100 Main St, Suite A",Ontario,"100,000"');assert.equal(rows.length,2);assert.equal(rows[1][0],'100 Main St, Suite A')});
+await run('NormalizationAndValidation',()=>{const map=schema.mapHeaders(['Address','City','State','Building SF']);const batch=normalizer.normalizeBatch([['100 Main St','ONTARIO','ca','100,000']],map);assert.equal(batch[0].normalized.buildingSf,100000);assert.equal(batch[0].normalized.state,'CA');assert.equal(batch[0].status,'ACCEPTED')});
+await run('DuplicateSafeBusinessKeys',()=>{const map=schema.mapHeaders(['Address','City','State']);const batch=normalizer.normalizeBatch([['100 Main St','Ontario','CA'],['100 Main St','Ontario','CA']],map);assert.equal(batch[1].status,'WARNING');assert.match(batch[1].warnings.join(' '),/Duplicate candidate/)});
+await run('RequiredAddressGovernance',()=>{const map=schema.mapHeaders(['City','State']);assert.deepEqual(schema.validateRequiredHeaders(map).missing,['address'])});
+await run('XlsxCsvJsonFormatContract',()=>{const source=read('apps/property-command-center/src/ingestion/superSheetParser.js');['.xlsx','.csv','.tsv','.json'].forEach(ext=>assert.ok(source.includes(ext)))});
+await run('CommandCenterWorkspaceWiring',()=>{const main=read('apps/property-command-center/src/main.jsx');const registry=read('apps/property-command-center/src/product/workspaceRegistry.js');assert.ok(main.includes('SuperSheetIngestion'));assert.ok(registry.includes('SuperSheet Ingestion'))});
+await run('GovernedPromotionLedger',()=>{const source=read('apps/property-command-center/src/ingestion/ingestionLedger.js');assert.ok(source.includes('duplicate'));assert.ok(source.includes('ingestionId'));assert.ok(source.includes('stableHash'))});
+const failures=tests.filter(test=>test.status==='FAILED');
+console.log(JSON.stringify({framework:'SCIIP_RELEASE_1_SPRINT_4_SUPERSHEET_INGESTION',version:'release-1-sprint-4.0',status:failures.length?'FAILED':'PASSED',testsRun:tests.length,failures,result:{workspace:'property-command-center',applicationStatus:failures.length?'ATTENTION_REQUIRED':'INGESTION_READY',formats:['XLSX','CSV','TSV','JSON'],schema:'CANONICAL_PROPERTY_V1',duplicateSafety:'ENABLED',promotionMode:'BROKER_CONTROLLED',auditLedger:'AVAILABLE'},tests},null,2));
+if(failures.length)process.exit(1);

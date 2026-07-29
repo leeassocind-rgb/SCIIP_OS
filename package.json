@@ -179,6 +179,15 @@
     "run:v9:sprint28:live-operations": "node tools/supersheets/sciip-v9-sprint28-governed-live-operations.js --config tools/config/sciip-v9-sprint28-live-operations.local.json",
     "commit:v9:sprint28:production": "node tools/supersheets/sciip-v9-sprint28-governed-live-operations.js --config tools/config/sciip-v9-sprint28-live-operations.local.json --mode commit --approval-token SCIIP_SPRINT28_EXPLICIT_PRODUCTION_APPROVAL",
     "verify:v9:sprint28:live-operations": "node tools/verify/sciip-v9-sprint28-verify.js",
-    "certify:v9:sprint28:live-operations": "npm run test:v9:sprint28:live-operations && npm run run:v9:sprint28:live-operations && npm run deployment:compile && npm run verify:v9:sprint28:live-operations"
+    "certify:v9:sprint28:live-operations": "npm run test:v9:sprint28:live-operations && npm run run:v9:sprint28:live-operations && npm run deployment:compile && npm run verify:v9:sprint28:live-operations",
+    "property-command-center:install": "npm ci --prefix apps/property-command-center",
+    "property-command-center:dev": "npm run dev --prefix apps/property-command-center",
+    "property-command-center:build": "npm run build --prefix apps/property-command-center",
+    "property-command-center:test": "node tools/tests/sciip-release1-sprint3-platform-integration-test.mjs",
+    "property-command-center:certify": "npm run property-command-center:test && npm run property-command-center:build",
+    "property-command-center:test:sprint4": "node tools/tests/sciip-release1-sprint4-supersheet-ingestion-test.mjs",
+    "property-command-center:certify:sprint4": "npm run property-command-center:test:sprint4 && npm run property-command-center:build",
+    "property-command-center:test:sprint5": "node tools/tests/sciip-release1-sprint5-property-knowledge-graph-test.mjs",
+    "property-command-center:certify:sprint5": "npm run property-command-center:test:sprint5 && npm run property-command-center:build"
   }
 }

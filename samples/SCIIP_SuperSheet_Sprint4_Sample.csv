@@ -1,0 +1,4 @@
+Property ID,Address,City,State,Zip Code,Building SF,Available SF,Land Acres,Clear Height,Power Amps,Status,Latitude,Longitude,Source
+PROP-100,100 Main St,Ontario,CA,91761,"100,000","100,000",5.25,32,2000,Available,34.0633,-117.6509,Sprint 4 sample
+PROP-101,2125 W Lowell St,Rialto,CA,92377,"664,859","664,859",39.8,42,4000,Under Construction,34.1364,-117.4168,Sprint 4 sample
+PROP-101,2125 W Lowell St,Rialto,CA,92377,"664,859","664,859",39.8,42,4000,Under Construction,34.1364,-117.4168,Duplicate test row
