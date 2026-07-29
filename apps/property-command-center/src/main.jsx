@@ -1,3 +1,4 @@
+import IdentityReviewGovernanceCenter from "./components/IdentityReviewGovernanceCenter.jsx";
 import CanonicalPropertyIdentityCenter from "./components/CanonicalPropertyIdentityCenter.jsx";
 import React,{useEffect,useMemo,useRef,useState}from'react';
 import{createRoot}from'react-dom/client';
@@ -94,3 +95,5 @@ function App(){
 createRoot(document.getElementById('root')).render(<App/>);
 
 export { CanonicalPropertyIdentityCenter };
+
+export { IdentityReviewGovernanceCenter };

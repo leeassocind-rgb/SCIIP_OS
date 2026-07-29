@@ -1,0 +1,891 @@
+{
+  "framework": "SCIIP_IDENTITY_REVIEW_MERGE_GOVERNANCE",
+  "version": "196.7.0",
+  "status": "PASSED",
+  "generatedAt": "2026-07-29T20:42:17.332Z",
+  "governance": {
+    "appendOnlyDecisionLedger": true,
+    "approveRejectDefer": true,
+    "reversibleMergeRelationships": true,
+    "sourceIdentityPreserved": true,
+    "duplicateSafe": true,
+    "temporalRecalculationRequiredAfterApproval": true,
+    "silentMergeBlocked": true
+  },
+  "summary": {
+    "totalProposals": 24,
+    "pending": 24,
+    "approved": 0,
+    "rejected": 0,
+    "deferred": 0,
+    "decisionLedgerEntries": 0
+  },
+  "reviewQueue": [
+    {
+      "proposalId": "MERGE-8A492A978D7DD9621225",
+      "leftCanonicalPropertyId": "CPROP-C92B3569CA6524077768",
+      "rightCanonicalPropertyId": "CPROP-7E954B19FAB61C3DFA78",
+      "score": 80,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-C92B3569CA6524077768",
+        "address": "1450-1480 Charles Willard St",
+        "city": "Carson",
+        "zip": "90746",
+        "firstObserved": "2026-07-21",
+        "lastObserved": "2026-07-21",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-C92B3569CA6524077768"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-7E954B19FAB61C3DFA78",
+        "address": "1450 Charles Willard St",
+        "city": "Carson",
+        "zip": "90746",
+        "firstObserved": "2026-07-21",
+        "lastObserved": "2026-07-21",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-7E954B19FAB61C3DFA78"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-AAADAE53619FD7AF08B5",
+      "leftCanonicalPropertyId": "CPROP-56AA0A704FE03AAEA671",
+      "rightCanonicalPropertyId": "CPROP-BEBCBB5FEEA2B1E1B052",
+      "score": 80,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-56AA0A704FE03AAEA671",
+        "address": "2421-2461 W 205th St",
+        "city": "Torrance",
+        "zip": "90501",
+        "firstObserved": "2026-06-19",
+        "lastObserved": "2026-06-19",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-56AA0A704FE03AAEA671"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-BEBCBB5FEEA2B1E1B052",
+        "address": "2421 W 205th St, Bldg 1",
+        "city": "Torrance",
+        "zip": "90501",
+        "firstObserved": "2026-06-19",
+        "lastObserved": "2026-06-19",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-96A9E8642E1A7E06B86F"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-3CC4F34117E0BCD186CB",
+      "leftCanonicalPropertyId": "CPROP-92290C077D3E8D728C0D",
+      "rightCanonicalPropertyId": "CPROP-328CF639ECFF12CA9F6A",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-92290C077D3E8D728C0D",
+        "address": "14026-14028 Marquardt Ave",
+        "city": "Santa Fe Springs",
+        "zip": "90670",
+        "firstObserved": "2026-06-19",
+        "lastObserved": "2026-06-19",
+        "observationCount": 2,
+        "sourcePropertyIds": [
+          "PROPERTY-92290C077D3E8D728C0D"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-328CF639ECFF12CA9F6A",
+        "address": "14026 Marquardt Ave",
+        "city": "Santa Fe Springs",
+        "zip": "90670",
+        "firstObserved": "2026-06-19",
+        "lastObserved": "2026-06-19",
+        "observationCount": 2,
+        "sourcePropertyIds": [
+          "PROPERTY-328CF639ECFF12CA9F6A"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-D5C31B3E8F95B1FEDFCA",
+      "leftCanonicalPropertyId": "CPROP-AC606BB6804CA8CF477C",
+      "rightCanonicalPropertyId": "CPROP-DE9DDF7C1A36E39C3501",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-AC606BB6804CA8CF477C",
+        "address": "1151-1351 Pacific Ave",
+        "city": "Oxnard",
+        "zip": "93033",
+        "firstObserved": "2026-06-19",
+        "lastObserved": "2026-06-19",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-AC606BB6804CA8CF477C"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-DE9DDF7C1A36E39C3501",
+        "address": "1151 Pacific Ave",
+        "city": "Oxnard",
+        "zip": "93033",
+        "firstObserved": "2026-06-19",
+        "lastObserved": "2026-06-19",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-DE9DDF7C1A36E39C3501"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-E133C980F90E3C376AF7",
+      "leftCanonicalPropertyId": "CPROP-5B9F7A65BE8CE7E8DBBF",
+      "rightCanonicalPropertyId": "CPROP-FE84E3E8F7E4674557BD",
+      "score": 80,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-5B9F7A65BE8CE7E8DBBF",
+        "address": "1668-1680 E 40th Pl",
+        "city": "Los Angeles",
+        "zip": "90011",
+        "firstObserved": "2026-06-23",
+        "lastObserved": "2026-06-23",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-5B9F7A65BE8CE7E8DBBF"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-FE84E3E8F7E4674557BD",
+        "address": "1668 E 40th Pl",
+        "city": "Los Angeles",
+        "zip": "90011",
+        "firstObserved": "2026-07-28",
+        "lastObserved": "2026-07-28",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-FE84E3E8F7E4674557BD"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-6315EFD196ACB600351E",
+      "leftCanonicalPropertyId": "CPROP-AFD9EDF02629F50510B3",
+      "rightCanonicalPropertyId": "CPROP-50A1391EF023C8AEA338",
+      "score": 80,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-AFD9EDF02629F50510B3",
+        "address": "5252-5256 W 111th Ave",
+        "city": "Los Angeles",
+        "zip": "90045",
+        "firstObserved": "2026-06-24",
+        "lastObserved": "2026-06-24",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-AFD9EDF02629F50510B3"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-50A1391EF023C8AEA338",
+        "address": "5252 W 111th Avenue",
+        "city": "Los Angeles",
+        "zip": "90045",
+        "firstObserved": "2026-06-24",
+        "lastObserved": "2026-06-24",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-50A1391EF023C8AEA338"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-87777C48BC989F3A7D6A",
+      "leftCanonicalPropertyId": "CPROP-BD290C010DEA1AE6C306",
+      "rightCanonicalPropertyId": "CPROP-488DCA309E3BAD39A848",
+      "score": 80,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-BD290C010DEA1AE6C306",
+        "address": "620-630 S Clarence St",
+        "city": "Los Angeles",
+        "zip": "90033",
+        "firstObserved": "2026-06-11",
+        "lastObserved": "2026-06-11",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-BD290C010DEA1AE6C306"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-488DCA309E3BAD39A848",
+        "address": "620 S Clarence St",
+        "city": "Los Angeles",
+        "zip": "90033",
+        "firstObserved": "2026-06-12",
+        "lastObserved": "2026-06-12",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-488DCA309E3BAD39A848"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-3EC7E0710C7962F152FB",
+      "leftCanonicalPropertyId": "CPROP-7C2950C4B69312EE9EB0",
+      "rightCanonicalPropertyId": "CPROP-54D0AD67767233B79CBE",
+      "score": 80,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-7C2950C4B69312EE9EB0",
+        "address": "1713-1723 W 134th St",
+        "city": "Gardena",
+        "zip": "90249",
+        "firstObserved": "2026-06-05",
+        "lastObserved": "2026-06-05",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-7C2950C4B69312EE9EB0"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-54D0AD67767233B79CBE",
+        "address": "1713 W 134th St",
+        "city": "Gardena",
+        "zip": "90249",
+        "firstObserved": "2026-06-05",
+        "lastObserved": "2026-06-05",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-54D0AD67767233B79CBE"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-70555CED72110249E4F4",
+      "leftCanonicalPropertyId": "CPROP-9348050AB6DE94E1C32A",
+      "rightCanonicalPropertyId": "CPROP-A028002ACE3B4130C35F",
+      "score": 80,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-9348050AB6DE94E1C32A",
+        "address": "1835-1845 W 169th St",
+        "city": "Gardena",
+        "zip": "90247",
+        "firstObserved": "2026-06-25",
+        "lastObserved": "2026-06-25",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-9348050AB6DE94E1C32A"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-A028002ACE3B4130C35F",
+        "address": "1835 W 169th St, Unit A",
+        "city": "Gardena",
+        "zip": "90247",
+        "firstObserved": "2026-06-25",
+        "lastObserved": "2026-06-25",
+        "observationCount": 2,
+        "sourcePropertyIds": [
+          "PROPERTY-28D992C78B0B83638740",
+          "PROPERTY-CA6A8E8C109F1755505F"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-63FA358CF1CE0F360D41",
+      "leftCanonicalPropertyId": "CPROP-8091FF88A892DC4957D1",
+      "rightCanonicalPropertyId": "CPROP-950F7C60273CC3D6DCCF",
+      "score": 80,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-8091FF88A892DC4957D1",
+        "address": "4308-4318 Temple City Blvd",
+        "city": "El Monte",
+        "zip": "91731",
+        "firstObserved": "2026-06-08",
+        "lastObserved": "2026-06-08",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-8091FF88A892DC4957D1"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-950F7C60273CC3D6DCCF",
+        "address": "4308 Temple City Blvd, Bldg 1",
+        "city": "El Monte",
+        "zip": "91731",
+        "firstObserved": "2026-06-08",
+        "lastObserved": "2026-06-08",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-968E1ED2BF190E0CD73C"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-4BA6F2A67DC5D32C8D22",
+      "leftCanonicalPropertyId": "CPROP-18E3E2093AD26E054103",
+      "rightCanonicalPropertyId": "CPROP-4ECC3D73A971E041258F",
+      "score": 80,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-18E3E2093AD26E054103",
+        "address": "10225-10235 San Sevaine Way",
+        "city": "Jurupa Valley",
+        "zip": "91752",
+        "firstObserved": "2026-06-18",
+        "lastObserved": "2026-07-10",
+        "observationCount": 2,
+        "sourcePropertyIds": [
+          "PROPERTY-18E3E2093AD26E054103"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-4ECC3D73A971E041258F",
+        "address": "10225 San Sevaine Way",
+        "city": "Jurupa Valley",
+        "zip": "91752",
+        "firstObserved": "2026-06-18",
+        "lastObserved": "2026-07-10",
+        "observationCount": 2,
+        "sourcePropertyIds": [
+          "PROPERTY-4ECC3D73A971E041258F"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-EE4E4DD4AECD35141981",
+      "leftCanonicalPropertyId": "CPROP-6FEFDD18C3589C8CDC62",
+      "rightCanonicalPropertyId": "CPROP-BF9B9BB0C33B7D3E06BF",
+      "score": 80,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-6FEFDD18C3589C8CDC62",
+        "address": "1541-1551 S Harris Ct",
+        "city": "Anaheim",
+        "zip": "92806",
+        "firstObserved": "2026-07-14",
+        "lastObserved": "2026-07-14",
+        "observationCount": 2,
+        "sourcePropertyIds": [
+          "PROPERTY-6FEFDD18C3589C8CDC62"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-BF9B9BB0C33B7D3E06BF",
+        "address": "1541 S Harris Ct",
+        "city": "Anaheim",
+        "zip": "92806",
+        "firstObserved": "2026-07-14",
+        "lastObserved": "2026-07-14",
+        "observationCount": 2,
+        "sourcePropertyIds": [
+          "PROPERTY-BF9B9BB0C33B7D3E06BF"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-529A0B401B2D8EA5407B",
+      "leftCanonicalPropertyId": "CPROP-46D5FD626A2FCD00AE15",
+      "rightCanonicalPropertyId": "CPROP-EA87BEB73F4F51438A3D",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-46D5FD626A2FCD00AE15",
+        "address": "7397-7423 Doig Dr",
+        "city": "Garden Grove",
+        "zip": "92841",
+        "firstObserved": "2026-07-28",
+        "lastObserved": "2026-07-28",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-46D5FD626A2FCD00AE15"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-EA87BEB73F4F51438A3D",
+        "address": "7397 Doig Dr",
+        "city": "Garden Grove",
+        "zip": "92841",
+        "firstObserved": "2026-07-28",
+        "lastObserved": "2026-07-28",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-EA87BEB73F4F51438A3D"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-BA3497C07BE3D444578E",
+      "leftCanonicalPropertyId": "CPROP-806758E00A8A59492F0D",
+      "rightCanonicalPropertyId": "CPROP-44DA98BB8B870BFAE93B",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-806758E00A8A59492F0D",
+        "address": "10731-10737 Chandler Blvd",
+        "city": "North Hollywood",
+        "zip": "91601",
+        "firstObserved": "2026-06-29",
+        "lastObserved": "2026-06-29",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-806758E00A8A59492F0D"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-44DA98BB8B870BFAE93B",
+        "address": "10731 Chandler Blvd",
+        "city": "North Hollywood",
+        "zip": "91601",
+        "firstObserved": "2026-07-13",
+        "lastObserved": "2026-07-13",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-44DA98BB8B870BFAE93B"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-2AEF7AC2061D1FEF3776",
+      "leftCanonicalPropertyId": "CPROP-D2ECB386BDA96FBBA680",
+      "rightCanonicalPropertyId": "CPROP-B92F6350F7F5687C8411",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-D2ECB386BDA96FBBA680",
+        "address": "12273-12277 Foothill Blvd",
+        "city": "Sylmar",
+        "zip": "91342",
+        "firstObserved": "2026-06-18",
+        "lastObserved": "2026-06-18",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-D2ECB386BDA96FBBA680"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-B92F6350F7F5687C8411",
+        "address": "12273 Foothill Blvd",
+        "city": "Sylmar",
+        "zip": "91342",
+        "firstObserved": "2026-06-18",
+        "lastObserved": "2026-06-18",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-B92F6350F7F5687C8411"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-B5A58F5CD85107487575",
+      "leftCanonicalPropertyId": "CPROP-313AFB30AD473621C334",
+      "rightCanonicalPropertyId": "CPROP-0DDF6FCC45D8C16911D9",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-313AFB30AD473621C334",
+        "address": "13943-13949 Balboa Blvd",
+        "city": "Sylmar",
+        "zip": "91342",
+        "firstObserved": "2026-06-19",
+        "lastObserved": "2026-06-19",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-313AFB30AD473621C334"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-0DDF6FCC45D8C16911D9",
+        "address": "13943 Balboa Blvd",
+        "city": "Sylmar",
+        "zip": "91342",
+        "firstObserved": "2026-06-19",
+        "lastObserved": "2026-06-19",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-0DDF6FCC45D8C16911D9"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-96D135A313D9AD5FFC82",
+      "leftCanonicalPropertyId": "CPROP-7BE519799C76AEC80E85",
+      "rightCanonicalPropertyId": "CPROP-68C5D919275BF14DD2D1",
+      "score": 80,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-7BE519799C76AEC80E85",
+        "address": "1242-1268 E Edna Pl",
+        "city": "Covina",
+        "zip": "91724",
+        "firstObserved": "2026-07-15",
+        "lastObserved": "2026-07-15",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-7BE519799C76AEC80E85"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-68C5D919275BF14DD2D1",
+        "address": "1242 E Edna Pl",
+        "city": "Covina",
+        "zip": "91724",
+        "firstObserved": "2026-06-25",
+        "lastObserved": "2026-06-25",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-68C5D919275BF14DD2D1"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-4C35F290DA83B4502C30",
+      "leftCanonicalPropertyId": "CPROP-F14C24DA2F42E89633A2",
+      "rightCanonicalPropertyId": "CPROP-0ECE8452983BC38AE014",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-F14C24DA2F42E89633A2",
+        "address": "13822-13826 Prairie Ave",
+        "city": "Hawthorne",
+        "zip": "90250",
+        "firstObserved": "2026-07-29",
+        "lastObserved": "2026-07-29",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-F14C24DA2F42E89633A2"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-0ECE8452983BC38AE014",
+        "address": "13822 Prairie Ave",
+        "city": "Hawthorne",
+        "zip": "90250",
+        "firstObserved": "2026-07-29",
+        "lastObserved": "2026-07-29",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-0ECE8452983BC38AE014"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-902BE9227373E6ADCD9E",
+      "leftCanonicalPropertyId": "CPROP-696F697E6006DB73C8BC",
+      "rightCanonicalPropertyId": "CPROP-DEA7F8C5D3D9520EBCFC",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-696F697E6006DB73C8BC",
+        "address": "1297-1323 Logan Ave",
+        "city": "Costa Mesa",
+        "zip": "92626",
+        "firstObserved": "2026-07-02",
+        "lastObserved": "2026-07-02",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-696F697E6006DB73C8BC"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-DEA7F8C5D3D9520EBCFC",
+        "address": "1297 Logan Ave",
+        "city": "Costa Mesa",
+        "zip": "92626",
+        "firstObserved": "2026-07-02",
+        "lastObserved": "2026-07-02",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-DEA7F8C5D3D9520EBCFC"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-4FD91FFAC545D14FC6A9",
+      "leftCanonicalPropertyId": "CPROP-1D0CA57E6820DA6E726C",
+      "rightCanonicalPropertyId": "CPROP-EEF54824B573683C2B37",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-1D0CA57E6820DA6E726C",
+        "address": "5200-5210 Hamner Ave, Bldg 13",
+        "city": "Eastvale",
+        "zip": "91752",
+        "firstObserved": "2026-07-13",
+        "lastObserved": "2026-07-13",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-1BEC683BE7A73A65C635"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-EEF54824B573683C2B37",
+        "address": "5200 Hamner Ave, Bldg 13",
+        "city": "Eastvale",
+        "zip": "91752",
+        "firstObserved": "2026-07-13",
+        "lastObserved": "2026-07-13",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-73B094922EFEF82C7714"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-42C4FA0135BCD2D81D71",
+      "leftCanonicalPropertyId": "CPROP-2AA2FD0E08214AE10B69",
+      "rightCanonicalPropertyId": "CPROP-C8A508D0A03B8160FBFD",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-2AA2FD0E08214AE10B69",
+        "address": "5240-5250 Hamner Ave",
+        "city": "Eastvale",
+        "zip": "91752",
+        "firstObserved": "2026-07-13",
+        "lastObserved": "2026-07-13",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-2AA2FD0E08214AE10B69"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-C8A508D0A03B8160FBFD",
+        "address": "5240 Hamner Ave, Bldg 15",
+        "city": "Eastvale",
+        "zip": "91752",
+        "firstObserved": "2026-07-13",
+        "lastObserved": "2026-07-13",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-AD4A36DAAE6DE43C0B1D"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-2A64ECA9B533D0066639",
+      "leftCanonicalPropertyId": "CPROP-AA4D78C3B6D99AE79993",
+      "rightCanonicalPropertyId": "CPROP-2A53FDA86E872E10D8ED",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-AA4D78C3B6D99AE79993",
+        "address": "159 Anderson St",
+        "city": "Boyle Heights",
+        "zip": "90033",
+        "firstObserved": "2026-06-26",
+        "lastObserved": "2026-06-26",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-AA4D78C3B6D99AE79993"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-2A53FDA86E872E10D8ED",
+        "address": "159 S Anderson St",
+        "city": "Boyle Heights",
+        "zip": "90033",
+        "firstObserved": "2026-06-05",
+        "lastObserved": "2026-06-05",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-2A53FDA86E872E10D8ED"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-70776CADA9B97A3C81FE",
+      "leftCanonicalPropertyId": "CPROP-ED4BC8465B0C526C2008",
+      "rightCanonicalPropertyId": "CPROP-261586C93C07CDF6FFE9",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-ED4BC8465B0C526C2008",
+        "address": "524-530 Birch St, Bldg 10",
+        "city": "Lake Elsinore",
+        "zip": "92530",
+        "firstObserved": "2026-06-09",
+        "lastObserved": "2026-06-09",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-F5F8AE3B8EC1D94832C7"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-261586C93C07CDF6FFE9",
+        "address": "524 Birch St, Bldg 11",
+        "city": "Lake Elsinore",
+        "zip": "92530",
+        "firstObserved": "2026-07-10",
+        "lastObserved": "2026-07-10",
+        "observationCount": 1,
+        "sourcePropertyIds": [
+          "PROPERTY-CA331B7975030D31B92D"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    },
+    {
+      "proposalId": "MERGE-418665E248468CF2A88D",
+      "leftCanonicalPropertyId": "CPROP-404FE15887626AFE4A89",
+      "rightCanonicalPropertyId": "CPROP-ECF2C6FE35094BF2D83E",
+      "score": 75,
+      "status": "REVIEW_REQUIRED",
+      "reason": "SAME_STREET_NUMBER_CITY_WITH_ADDRESS_VARIATION",
+      "automaticMerge": false,
+      "leftProperty": {
+        "canonicalPropertyId": "CPROP-404FE15887626AFE4A89",
+        "address": "6700-6750 Artesia Blvd",
+        "city": "Buena Park",
+        "zip": "90620",
+        "firstObserved": "2026-07-29",
+        "lastObserved": "2026-07-29",
+        "observationCount": 2,
+        "sourcePropertyIds": [
+          "PROPERTY-404FE15887626AFE4A89"
+        ]
+      },
+      "rightProperty": {
+        "canonicalPropertyId": "CPROP-ECF2C6FE35094BF2D83E",
+        "address": "6700 Artesia Blvd",
+        "city": "Buena Park",
+        "zip": "90620",
+        "firstObserved": "2026-07-29",
+        "lastObserved": "2026-07-29",
+        "observationCount": 2,
+        "sourcePropertyIds": [
+          "PROPERTY-ECF2C6FE35094BF2D83E"
+        ]
+      },
+      "decision": "PENDING",
+      "decisionId": null,
+      "reviewRequired": true
+    }
+  ],
+  "decisionLedger": []
+}
