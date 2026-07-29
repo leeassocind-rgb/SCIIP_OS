@@ -1,0 +1,79 @@
+{
+  "framework": "SCIIP_MARKET_SIGNAL_DETECTION_REGIME_CLASSIFICATION",
+  "version": "196.12.0",
+  "status": "PASSED",
+  "generatedAt": "2026-07-29T21:09:49.990Z",
+  "governance": {
+    "appendOnlySignalLedger": true,
+    "evidenceLinked": true,
+    "confidenceScored": true,
+    "humanReviewGated": true,
+    "duplicateSafe": true,
+    "noAutonomousMarketAssertion": true
+  },
+  "summary": {
+    "sourceCorrelations": 1,
+    "signalsCreated": 1,
+    "duplicateSafeSkips": 0,
+    "totalSignals": 1,
+    "reviewRequired": 1,
+    "regimeCounts": {
+      "DATA_VOLATILITY": 1
+    },
+    "severityCounts": {
+      "WATCH": 1
+    }
+  },
+  "signals": [
+    {
+      "signalId": "SIG-D95C087B9636ED47609EE98E",
+      "businessKey": "COR-AB902DF6B9EBCFD22DD78BAA|DATA_VOLATILITY",
+      "correlationId": "COR-AB902DF6B9EBCFD22DD78BAA",
+      "geography": "UNASSIGNED",
+      "period": "2026-07",
+      "regime": "DATA_VOLATILITY",
+      "severity": "WATCH",
+      "confidence": 0.91,
+      "reviewRequired": true,
+      "signalScore": -1893.25,
+      "metrics": {
+        "netAvailability": 1526,
+        "falseChurn": 1737,
+        "pricingMomentum": 0,
+        "constructionActivity": 0,
+        "redevelopmentActivity": 0
+      },
+      "evidenceCorrelationIds": [
+        "COR-AB902DF6B9EBCFD22DD78BAA"
+      ],
+      "immutable": true,
+      "modelVersion": "196.12.0"
+    }
+  ],
+  "reviewQueue": [
+    {
+      "signalId": "SIG-D95C087B9636ED47609EE98E",
+      "businessKey": "COR-AB902DF6B9EBCFD22DD78BAA|DATA_VOLATILITY",
+      "correlationId": "COR-AB902DF6B9EBCFD22DD78BAA",
+      "geography": "UNASSIGNED",
+      "period": "2026-07",
+      "regime": "DATA_VOLATILITY",
+      "severity": "WATCH",
+      "confidence": 0.91,
+      "reviewRequired": true,
+      "signalScore": -1893.25,
+      "metrics": {
+        "netAvailability": 1526,
+        "falseChurn": 1737,
+        "pricingMomentum": 0,
+        "constructionActivity": 0,
+        "redevelopmentActivity": 0
+      },
+      "evidenceCorrelationIds": [
+        "COR-AB902DF6B9EBCFD22DD78BAA"
+      ],
+      "immutable": true,
+      "modelVersion": "196.12.0"
+    }
+  ]
+}

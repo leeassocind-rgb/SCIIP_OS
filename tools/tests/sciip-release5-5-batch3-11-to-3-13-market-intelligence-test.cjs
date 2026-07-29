@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+'use strict';
+const assert=require('assert');
+const A=require('../supersheets/sciip-cross-property-market-intelligence-correlation.cjs');
+const B=require('../supersheets/sciip-market-signal-regime-classification.cjs');
+const C=require('../supersheets/sciip-market-opportunity-risk-prioritization.cjs');
+let tests=0; const t=(name,fn)=>{fn();tests++;};
+const inf=[];
+for(let i=0;i<8;i++) inf.push({inferenceId:'I'+i,canonicalPropertyId:'P'+i,effectiveAt:'2026-01-'+String(i+1).padStart(2,'0'),outcome:i<5?'NEW_MARKET_AVAILABILITY':'POSSIBLE_LEASE_OR_WITHDRAWAL',confidenceBand:i%2?'HIGH':'MEDIUM',reviewRequired:i>5,submarket:'IE WEST'});
+for(let i=0;i<5;i++) inf.push({inferenceId:'J'+i,canonicalPropertyId:'Q'+i,effectiveAt:'2026-01-'+String(i+1).padStart(2,'0'),outcome:'LIKELY_LEASE',confidenceBand:'HIGH',reviewRequired:false,submarket:'SOUTH BAY'});
+const a=A.run({inferences:inf},{});
+t('a version',()=>assert.equal(a.version,'196.11.0')); t('a passed',()=>assert.equal(a.status,'PASSED')); t('a source',()=>assert.equal(a.summary.sourceInferences,13)); t('a groups',()=>assert.equal(a.summary.totalCorrelations,2)); t('a evidence',()=>assert(a.correlations.every(x=>x.evidenceInferenceIds.length>0))); t('a immutable',()=>assert(a.correlations.every(x=>x.immutable))); t('a geography',()=>assert.equal(a.summary.geographies,2)); t('a periods',()=>assert.equal(a.summary.periods,1)); t('a governance',()=>assert(a.governance.appendOnlyCorrelationLedger));
+const ar=A.run({inferences:inf},a); t('a rerun',()=>assert.equal(ar.summary.correlationsCreated,0)); t('a skips',()=>assert.equal(ar.summary.duplicateSafeSkips,2));
+const b=B.run(a,{});
+t('b version',()=>assert.equal(b.version,'196.12.0')); t('b passed',()=>assert.equal(b.status,'PASSED')); t('b total',()=>assert.equal(b.summary.totalSignals,2)); t('b confidence',()=>assert(b.signals.every(x=>x.confidence>0))); t('b regimes',()=>assert(b.signals.every(x=>x.regime))); t('b evidence',()=>assert(b.signals.every(x=>x.evidenceCorrelationIds.length===1))); t('b governance',()=>assert(b.governance.noAutonomousMarketAssertion));
+const br=B.run(a,b); t('b rerun',()=>assert.equal(br.summary.signalsCreated,0)); t('b skips',()=>assert.equal(br.summary.duplicateSafeSkips,2));
+const c=C.run(b,{});
+t('c version',()=>assert.equal(c.version,'196.13.0')); t('c passed',()=>assert.equal(c.status,'PASSED')); t('c total',()=>assert.equal(c.summary.totalPriorities,2)); t('c score range',()=>assert(c.priorities.every(x=>x.priorityScore>=0&&x.priorityScore<=100))); t('c approval',()=>assert(c.priorities.every(x=>x.approvalRequired))); t('c no execution',()=>assert(c.priorities.every(x=>!x.executionAuthorized))); t('c action',()=>assert(c.priorities.every(x=>x.recommendedAction))); t('c evidence',()=>assert(c.priorities.every(x=>x.evidenceSignalIds.length===1))); t('c rationale',()=>assert(c.priorities.every(x=>x.rationale))); t('c ranked',()=>assert(c.rankedPriorities[0].priorityScore>=c.rankedPriorities.at(-1).priorityScore)); t('c governance',()=>assert(c.governance.noAutonomousExecution));
+const cr=C.run(b,c); t('c rerun',()=>assert.equal(cr.summary.prioritiesCreated,0)); t('c skips',()=>assert.equal(cr.summary.duplicateSafeSkips,2));
+for(const x of a.correlations)t('cor id',()=>assert(x.correlationId.startsWith('COR-'))); for(const x of b.signals)t('sig id',()=>assert(x.signalId.startsWith('SIG-'))); for(const x of c.priorities)t('pri id',()=>assert(x.priorityId.startsWith('PRI-')));
+for(const g of ['evidenceLinked','duplicateSafe'])t('a '+g,()=>assert(a.governance[g])); for(const g of ['evidenceLinked','confidenceScored','humanReviewGated','duplicateSafe'])t('b '+g,()=>assert(b.governance[g])); for(const g of ['evidenceLinked','approvalRequired','explainableScoring','duplicateSafe'])t('c '+g,()=>assert(c.governance[g]));
+console.log(JSON.stringify({framework:'SCIIP_RELEASE_5_5_BATCH_3_11_TO_3_13_MARKET_INTELLIGENCE',version:'196.13.0',status:'PASSED',testsRun:tests,failures:[],result:{crossPropertyCorrelation:true,marketSignalRegimes:true,opportunityRiskPrioritization:true,batchCertified:true}},null,2));

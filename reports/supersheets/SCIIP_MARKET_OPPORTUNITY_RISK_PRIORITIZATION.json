@@ -1,0 +1,67 @@
+{
+  "framework": "SCIIP_MARKET_OPPORTUNITY_RISK_PRIORITIZATION",
+  "version": "196.13.0",
+  "status": "PASSED",
+  "generatedAt": "2026-07-29T21:09:50.039Z",
+  "governance": {
+    "appendOnlyPriorityLedger": true,
+    "evidenceLinked": true,
+    "approvalRequired": true,
+    "noAutonomousExecution": true,
+    "explainableScoring": true,
+    "duplicateSafe": true
+  },
+  "summary": {
+    "sourceSignals": 1,
+    "prioritiesCreated": 1,
+    "duplicateSafeSkips": 0,
+    "totalPriorities": 1,
+    "highPriorityOpportunities": 0,
+    "highPriorityRisks": 1,
+    "categoryCounts": {
+      "HIGH_PRIORITY_RISK": 1
+    }
+  },
+  "priorities": [
+    {
+      "priorityId": "PRI-66C50F7CCC00391888DC7E37",
+      "businessKey": "SIG-D95C087B9636ED47609EE98E|HIGH_PRIORITY_RISK",
+      "signalId": "SIG-D95C087B9636ED47609EE98E",
+      "geography": "UNASSIGNED",
+      "period": "2026-07",
+      "category": "HIGH_PRIORITY_RISK",
+      "priorityScore": 10,
+      "recommendedAction": "VALIDATE_AND_MITIGATE_RISK",
+      "approvalRequired": true,
+      "executionAuthorized": false,
+      "confidence": 0.91,
+      "evidenceSignalIds": [
+        "SIG-D95C087B9636ED47609EE98E"
+      ],
+      "rationale": "DATA_VOLATILITY classified at 0.91 confidence with governed score 10.",
+      "immutable": true,
+      "modelVersion": "196.13.0"
+    }
+  ],
+  "rankedPriorities": [
+    {
+      "priorityId": "PRI-66C50F7CCC00391888DC7E37",
+      "businessKey": "SIG-D95C087B9636ED47609EE98E|HIGH_PRIORITY_RISK",
+      "signalId": "SIG-D95C087B9636ED47609EE98E",
+      "geography": "UNASSIGNED",
+      "period": "2026-07",
+      "category": "HIGH_PRIORITY_RISK",
+      "priorityScore": 10,
+      "recommendedAction": "VALIDATE_AND_MITIGATE_RISK",
+      "approvalRequired": true,
+      "executionAuthorized": false,
+      "confidence": 0.91,
+      "evidenceSignalIds": [
+        "SIG-D95C087B9636ED47609EE98E"
+      ],
+      "rationale": "DATA_VOLATILITY classified at 0.91 confidence with governed score 10.",
+      "immutable": true,
+      "modelVersion": "196.13.0"
+    }
+  ]
+}
