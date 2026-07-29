@@ -1,13 +1,13 @@
 {
   "name": "sciip-property-command-center",
   "private": true,
-  "version": "15.0.0",
+  "version": "17.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node ../../tools/tests/sciip-release1-sprint5-property-knowledge-graph-test.mjs",
+    "test": "node ../../tools/tests/sciip-release1-sprint7-gis-intelligence-test.mjs",
     "certify": "npm run test && npm run build"
   },
   "dependencies": {
