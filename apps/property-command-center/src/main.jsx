@@ -1,3 +1,4 @@
+import PropertyLifecycleIntelligenceCenter from "./components/PropertyLifecycleIntelligenceCenter.jsx";
 import GovernedIdentityDecisionExecutionCenter from "./components/GovernedIdentityDecisionExecutionCenter.jsx";
 import IdentityReviewGovernanceCenter from "./components/IdentityReviewGovernanceCenter.jsx";
 import CanonicalPropertyIdentityCenter from "./components/CanonicalPropertyIdentityCenter.jsx";
@@ -100,3 +101,5 @@ export { CanonicalPropertyIdentityCenter };
 export { IdentityReviewGovernanceCenter };
 
 export { GovernedIdentityDecisionExecutionCenter };
+
+export { PropertyLifecycleIntelligenceCenter };

@@ -81,3 +81,5 @@ export const canonicalPropertyIdentityWorkspace = { id: "canonical-property-iden
 export const identityReviewGovernanceWorkspace = { id: "identity-review-governance", label: "Identity Review", group: "Intelligence" };
 
 export const identityDecisionExecutionWorkspace = { id: "identity-decision-execution", label: "Identity Execution", group: "Intelligence" };
+
+export const propertyLifecycleIntelligenceWorkspace = { id: "property-lifecycle-intelligence", label: "Property Lifecycle", group: "Intelligence" };
