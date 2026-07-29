@@ -1,0 +1,1 @@
+export function evaluateThreshold(metric,value,{warning,critical}){const severity=value>=critical?'CRITICAL':value>=warning?'WARNING':'NORMAL';return Object.freeze({metric,value,severity,triggered:severity!=='NORMAL'})}

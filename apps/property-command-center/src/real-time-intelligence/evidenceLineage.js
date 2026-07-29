@@ -1,0 +1,1 @@
+export function createLineage(event){if(!event.id||!event.source)throw new Error('event id and source required');return Object.freeze({eventId:event.id,source:event.source,citations:[...(event.citations||[])],required:true})}

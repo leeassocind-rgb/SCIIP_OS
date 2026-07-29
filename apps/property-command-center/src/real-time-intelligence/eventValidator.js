@@ -1,0 +1,1 @@
+export function validateEvent(event={}){const errors=[];if(!event.id)errors.push('id');if(!event.type)errors.push('type');if(!event.source)errors.push('source');return{valid:errors.length===0,errors}}

@@ -1,0 +1,3 @@
+import{fuseEvidence}from'./evidenceFusion.js';import{scoreConfidence}from'./confidenceEngine.js';import{correlateSignals}from'./correlationEngine.js';import{createRecommendation}from'./recommendationEngine.js';import{explainDecision}from'./explainabilityEngine.js';import{generateExecutiveInsights}from'./executiveInsightEngine.js';
+export const IntelligenceAPI=Object.freeze({fuseEvidence,scoreConfidence,correlateSignals,createRecommendation,explainDecision,generateExecutiveInsights});
+export function getIntelligenceCapabilities(){return['EVIDENCE_FUSION','CONFIDENCE_SCORING','CROSS_DOMAIN_CORRELATION','GOVERNED_RECOMMENDATIONS','EXPLAINABILITY','EXECUTIVE_INSIGHTS']}

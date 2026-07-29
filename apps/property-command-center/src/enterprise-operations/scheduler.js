@@ -1,0 +1,1 @@
+export function dueSchedules(schedules=[],now=new Date()){const t=+new Date(now);return schedules.filter(s=>s.enabled!==false&&+new Date(s.nextRunAt)<=t).sort((a,b)=>+new Date(a.nextRunAt)-+new Date(b.nextRunAt)).map(s=>({...s,status:'DUE'}));}

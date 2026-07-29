@@ -1,0 +1,2 @@
+const clamp=n=>Math.max(0,Math.min(100,Number(n)||0));
+export function groundEvidence(items=[]){const accepted=items.filter(x=>x&&x.sourceId&&x.claim&&x.status!=='REJECTED').map(x=>Object.freeze({...x,confidence:clamp(x.confidence)}));const confidence=accepted.length?Math.round(accepted.reduce((s,x)=>s+x.confidence,0)/accepted.length):0;return Object.freeze({items:Object.freeze(accepted),confidence,status:accepted.length?'GROUNDED':'REVIEW_REQUIRED',citationsRequired:true})}

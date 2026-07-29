@@ -1,0 +1,1 @@
+export function compareProperties(properties=[]){const rows=properties.map(p=>({...p,score:Number(p.power||0)*0.35+Number(p.clearHeight||0)*0.25+Number(p.access||0)*0.2+Number(p.market||0)*0.2})).sort((a,b)=>b.score-a.score);return Object.freeze({count:rows.length,ranked:Object.freeze(rows.map(Object.freeze)),winner:rows[0]||null});}

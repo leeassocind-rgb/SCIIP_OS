@@ -1,0 +1,1 @@
+export function detectAnomalies(values=[],threshold=2){if(values.length<2)return[];const mean=values.reduce((a,b)=>a+b,0)/values.length;const variance=values.reduce((s,v)=>s+(v-mean)**2,0)/values.length;const sd=Math.sqrt(variance)||1;return values.map((value,index)=>({index,value,z:(value-mean)/sd})).filter(x=>Math.abs(x.z)>=threshold)}

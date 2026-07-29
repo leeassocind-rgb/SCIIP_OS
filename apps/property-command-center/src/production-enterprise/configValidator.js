@@ -1,0 +1,2 @@
+import{deepFreeze}from'./immutable.js';
+export function validateConfig(config={}){const errors=[];['environment','region','dataRetentionDays','backupSchedule'].forEach(k=>{if(config[k]===undefined||config[k]===null||config[k]==='')errors.push(`Missing ${k}`)});if(config.dataRetentionDays!==undefined&&Number(config.dataRetentionDays)<365)errors.push('dataRetentionDays must be at least 365');return deepFreeze({valid:errors.length===0,errors});}

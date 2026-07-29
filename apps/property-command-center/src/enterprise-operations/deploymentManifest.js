@@ -1,0 +1,1 @@
+export function createDeploymentManifest({version,environment='production',commit='unknown',capabilities=[]}){if(!version)throw new Error('version required');return Object.freeze({version,environment,commit,capabilities:Object.freeze([...new Set(capabilities)].sort()),generatedAt:new Date().toISOString(),rollbackRequired:true,approvalRequired:true});}

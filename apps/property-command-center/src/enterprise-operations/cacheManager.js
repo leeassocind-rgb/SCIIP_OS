@@ -1,0 +1,1 @@
+export function createCache({now=()=>Date.now()}={}){const map=new Map();return{set(key,value,ttlMs=60000){map.set(key,{value,expires:now()+ttlMs});return value},get(key){const e=map.get(key);if(!e)return null;if(e.expires<=now()){map.delete(key);return null}return e.value},invalidate:key=>map.delete(key),size:()=>map.size};}

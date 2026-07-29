@@ -1,0 +1,2 @@
+const clamp=v=>Math.max(0,Math.min(100,Number(v)||0));
+export function propagateRisk(nodes=[],edges=[]){const score=new Map(nodes.map(n=>[n.id,clamp(n.risk)]));for(let pass=0;pass<2;pass++)for(const e of edges){const source=score.get(e.from)||0;score.set(e.to,clamp(Math.max(score.get(e.to)||0,source*(Number(e.weight)||0))));}return Object.freeze([...score].map(([id,risk])=>Object.freeze({id,risk:Number(risk.toFixed(2)),severity:risk>=80?'CRITICAL':risk>=60?'HIGH':risk>=35?'MODERATE':'LOW'})));}

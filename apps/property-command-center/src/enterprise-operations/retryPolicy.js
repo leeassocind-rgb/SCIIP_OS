@@ -1,0 +1,1 @@
+export function evaluateRetry({attempt,maxAttempts=3,baseDelayMs=1000,errorType='TRANSIENT'}){const retryable=errorType!=='PERMANENT'&&attempt<maxAttempts;return Object.freeze({retryable,attempt,maxAttempts,delayMs:retryable?Math.min(baseDelayMs*(2**Math.max(0,attempt-1)),60000):0,nextStatus:retryable?'RETRY_SCHEDULED':'FAILED'});}

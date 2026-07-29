@@ -1,0 +1,2 @@
+const blocked=['send email','execute transaction','approve lease','delete record','publish externally'];
+export function governPrompt(prompt,{actorId,brokerApproved=false}={}){if(!actorId)throw new Error('actorId required');const text=String(prompt||'').trim();if(!text)throw new Error('prompt required');const consequential=blocked.some(x=>text.toLowerCase().includes(x));return Object.freeze({prompt:text,actorId,consequential,brokerApproved:Boolean(brokerApproved),executionAllowed:!consequential||Boolean(brokerApproved),autonomousConsequentialActions:'BLOCKED'})}

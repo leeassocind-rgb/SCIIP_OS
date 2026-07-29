@@ -1,0 +1,4 @@
+const entries=[];let sequence=0;const clone=v=>JSON.parse(JSON.stringify(v));
+export function appendCollaborationEntry(type,payload={},meta={}){if(!type)throw new Error('Collaboration entry type is required');const entry=Object.freeze({id:`COL-${String(++sequence).padStart(6,'0')}`,type:String(type),payload:clone(payload),assignmentId:meta.assignmentId?String(meta.assignmentId):null,actorId:String(meta.actorId||'current-user'),occurredAt:meta.occurredAt||new Date().toISOString()});entries.push(entry);return clone(entry)}
+export function readCollaborationLedger({assignmentId,type,limit=250}={}){return entries.filter(e=>(!assignmentId||e.assignmentId===String(assignmentId))&&(!type||e.type===type)).slice(-Math.max(0,limit)).map(clone)}
+export function resetCollaborationLedger(){entries.length=0;sequence=0}

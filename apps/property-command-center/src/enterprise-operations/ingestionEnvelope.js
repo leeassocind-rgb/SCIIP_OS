@@ -1,0 +1,2 @@
+const freeze=v=>Object.freeze(v);
+export function createIngestionEnvelope({source,eventType,payload={},occurredAt=new Date().toISOString(),id}){if(!source||!eventType)throw new Error('source and eventType are required');const key=id||`${source}:${eventType}:${occurredAt}:${JSON.stringify(payload)}`;return freeze({id:`ING-${hash(key)}`,source,eventType,payload:freeze({...payload}),occurredAt,status:'RECEIVED'});}function hash(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return(h>>>0).toString(16).padStart(8,'0')}

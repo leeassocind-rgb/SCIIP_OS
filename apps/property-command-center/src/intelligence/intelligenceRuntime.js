@@ -1,0 +1,2 @@
+import{getIntelligenceCapabilities}from'./intelligenceApi.js';
+export function initializeIntelligenceRuntime(){return{status:'INTELLIGENCE_PLATFORM_OPERATIONAL',capabilities:getIntelligenceCapabilities(),factsSeparatedFromDerivedIntelligence:true,aiSeparatedFromSystemFacts:true,brokerApprovalRequired:true,autonomousConsequentialActions:'BLOCKED'}}

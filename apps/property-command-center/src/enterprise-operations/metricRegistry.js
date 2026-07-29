@@ -1,0 +1,1 @@
+export function createMetricRegistry(){const metrics=new Map();return{increment(name,amount=1){metrics.set(name,(metrics.get(name)||0)+amount);return metrics.get(name)},gauge(name,value){metrics.set(name,Number(value));return Number(value)},read:name=>metrics.get(name)??0,snapshot:()=>Object.fromEntries(metrics)};}

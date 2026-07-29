@@ -1,0 +1,1 @@
+export function compareRecommendations(items=[]){const scored=items.map(x=>({...x,score:Number(((Number(x.impact)||0)*.4+(Number(x.confidence)||0)*.35+(100-(Number(x.risk)||0))*.25).toFixed(2))})).sort((a,b)=>b.score-a.score);return Object.freeze({ranked:Object.freeze(scored.map(Object.freeze)),winner:scored[0]||null,tie:scored.length>1&&scored[0].score===scored[1].score});}

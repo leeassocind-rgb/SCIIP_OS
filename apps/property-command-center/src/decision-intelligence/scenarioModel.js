@@ -1,0 +1,3 @@
+const finite=(v,n=0)=>Number.isFinite(Number(v))?Number(v):n;
+export function createScenario(input={}){if(!input.id)throw new Error('scenario id required');return Object.freeze({id:String(input.id),label:String(input.label||input.id),assumptions:Object.freeze({...input.assumptions}),financial:Object.freeze({revenue:finite(input.financial?.revenue),cost:finite(input.financial?.cost),capex:finite(input.financial?.capex)}),probability:Math.max(0,Math.min(1,finite(input.probability,.5))),evidence:Object.freeze([...(input.evidence||[])])});}
+export function compareScenarioEconomics(s){return {net:s.financial.revenue-s.financial.cost-s.financial.capex,probability:s.probability};}

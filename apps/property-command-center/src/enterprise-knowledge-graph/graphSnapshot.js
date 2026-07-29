@@ -1,0 +1,1 @@
+export function createGraphSnapshot(entities=[],relationships=[],version=1){return Object.freeze({version,createdAt:new Date(0).toISOString(),entities:Object.freeze(entities.map(Object.freeze)),relationships:Object.freeze(relationships.map(Object.freeze)),immutable:true});}

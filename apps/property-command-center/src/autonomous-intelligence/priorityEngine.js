@@ -1,0 +1,3 @@
+const clamp=n=>Math.max(0,Math.min(100,n));
+export function scorePriority(item={}){const urgency=Number(item.urgency||0),impact=Number(item.impact||0),confidence=Number(item.confidence||0),freshness=Number(item.freshness||0),risk=Number(item.risk||0);const score=clamp(urgency*.25+impact*.3+confidence*.2+freshness*.1+risk*.15);return{...item,priorityScore:Number(score.toFixed(2)),priorityBand:score>=80?'CRITICAL':score>=60?'HIGH':score>=40?'MEDIUM':'LOW'}}
+export function rankPriorities(items=[]){return items.map(scorePriority).sort((a,b)=>b.priorityScore-a.priorityScore||String(a.id||'').localeCompare(String(b.id||'')))}

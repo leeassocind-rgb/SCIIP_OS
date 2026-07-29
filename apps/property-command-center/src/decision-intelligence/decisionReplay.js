@@ -1,0 +1,1 @@
+export function replayDecision(events=[],through=Infinity){return events.filter(e=>new Date(e.timestamp).getTime()<=new Date(through).getTime()).sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp)).reduce((state,e)=>Object.freeze({...state,...(e.patch||{}),lastEvent:e.eventType,lastTimestamp:e.timestamp}),Object.freeze({status:'DRAFT'}));}

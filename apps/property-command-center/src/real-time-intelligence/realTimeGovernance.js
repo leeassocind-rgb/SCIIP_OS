@@ -1,0 +1,1 @@
+export function governAction(action={}){const consequential=['SEND','DELETE','COMMIT','PUBLISH'].includes(String(action.type).toUpperCase());const approved=Boolean(action.brokerApproved);return{allowed:!consequential||approved,consequential,brokerApprovalRequired:consequential,autonomousConsequentialActions:'BLOCKED'}}

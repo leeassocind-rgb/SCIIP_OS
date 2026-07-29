@@ -1,0 +1,1 @@
+export function createStructuredLogger(context={}){const entries=[];const write=(level,message,data={})=>{const e=Object.freeze({timestamp:new Date().toISOString(),level,message,...context,...data});entries.push(e);return e};return{info:(m,d)=>write('INFO',m,d),warn:(m,d)=>write('WARN',m,d),error:(m,d)=>write('ERROR',m,d),entries:()=>[...entries]};}

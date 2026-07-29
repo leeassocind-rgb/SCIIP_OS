@@ -1,0 +1,4 @@
+const snapshots=[];const clone=v=>JSON.parse(JSON.stringify(v));
+export function captureEvidenceSnapshot({decisionId,assignmentId='enterprise',evidence=[],capturedAt=new Date().toISOString()}={}){if(!decisionId)throw new Error('decisionId is required');const normalized=evidence.map((item,index)=>({evidenceId:item.evidenceId||`${decisionId}-e${index+1}`,source:item.source||'UNKNOWN',fact:item.fact||'',observedAt:item.observedAt||null,confidence:Number(item.confidence??1)}));const snapshot={snapshotId:`snapshot-${decisionId}`,decisionId,assignmentId,capturedAt,evidence:normalized,evidenceCount:normalized.length};const existing=snapshots.find(x=>x.snapshotId===snapshot.snapshotId);if(existing)return clone(existing);snapshots.push(Object.freeze(snapshot));return clone(snapshot)}
+export function getEvidenceSnapshot(decisionId){return clone(snapshots.find(x=>x.decisionId===decisionId)||null)}
+export function resetEvidenceSnapshots(){snapshots.length=0}

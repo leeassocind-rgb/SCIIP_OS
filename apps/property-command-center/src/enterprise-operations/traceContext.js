@@ -1,0 +1,1 @@
+let seq=0;export function createTraceContext(parent=null){seq++;const traceId=parent?.traceId||`TRC-${Date.now().toString(36)}-${seq}`;return Object.freeze({traceId,spanId:`SPN-${seq}`,parentSpanId:parent?.spanId||null,sampled:true});}

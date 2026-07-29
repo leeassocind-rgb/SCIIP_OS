@@ -1,0 +1,1 @@
+export async function runJob({job,handlers={}}){if(!job?.type)throw new Error('job type required');const handler=handlers[job.type];if(!handler)return{status:'BLOCKED',reason:'HANDLER_NOT_REGISTERED',jobId:job.id};try{return{status:'COMPLETED',jobId:job.id,result:await handler(job.payload)}}catch(error){return{status:'FAILED',jobId:job.id,error:String(error?.message||error)}}}

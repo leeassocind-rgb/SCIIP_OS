@@ -1,0 +1,1 @@
+export function compileSemanticQuery(input={}){const text=String(input.text||'').trim();if(!text)throw new Error('query text required');return Object.freeze({text,entityTypes:Object.freeze([...(input.entityTypes||[])]),relationshipTypes:Object.freeze([...(input.relationshipTypes||[])]),limit:Math.max(1,Math.min(100,Number(input.limit||20)))})}

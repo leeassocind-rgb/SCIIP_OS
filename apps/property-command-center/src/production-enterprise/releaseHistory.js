@@ -1,0 +1,2 @@
+import{clone,deepFreeze,required}from'./immutable.js';
+export function createReleaseHistory(){const releases=[];return deepFreeze({append(release){required(release?.version,'release.version');if(releases.some(r=>r.version===release.version))return releases.find(r=>r.version===release.version);const entry=deepFreeze({...clone(release),sequence:releases.length+1});releases.push(entry);return entry;},list(){return deepFreeze(releases.map(clone));}});}

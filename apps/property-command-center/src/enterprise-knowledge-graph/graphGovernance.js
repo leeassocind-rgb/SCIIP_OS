@@ -1,0 +1,1 @@
+export function evaluateGraphAction(action={}){const consequential=['DELETE_ENTITY','MERGE_ENTITY','PUBLISH_EXTERNAL'].includes(action.type);return Object.freeze({allowed:!consequential||action.brokerApproved===true,brokerApprovalRequired:consequential,evidenceRequired:true,autonomousConsequentialActions:'BLOCKED'});}

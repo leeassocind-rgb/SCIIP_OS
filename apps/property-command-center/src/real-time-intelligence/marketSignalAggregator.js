@@ -1,0 +1,1 @@
+export function aggregateSignals(events=[]){const byType={};for(const e of events){byType[e.type]=(byType[e.type]||0)+1}return Object.freeze({count:events.length,byType,confidence:events.length?events.reduce((s,e)=>s+(e.confidence??1),0)/events.length:0})}

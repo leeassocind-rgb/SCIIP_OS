@@ -1,0 +1,2 @@
+import{deepFreeze,required}from'./immutable.js';import{stableId}from'./identity.js';
+export function planRecovery({backupId,rtoMinutes=60,rpoMinutes=15,approved=false}){required(backupId,'backupId');return deepFreeze({id:stableId('recovery',backupId,rtoMinutes,rpoMinutes),backupId,rtoMinutes,rpoMinutes,approved:Boolean(approved),status:approved?'READY':'PENDING_APPROVAL',destructiveExecutionBlocked:!approved});}

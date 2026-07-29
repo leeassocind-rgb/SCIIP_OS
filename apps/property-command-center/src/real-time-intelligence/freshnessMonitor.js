@@ -1,0 +1,1 @@
+export function assessFreshness(lastSeen,now=Date.now(),{freshMs=60000,staleMs=300000}={}){const age=Math.max(0,now-Date.parse(lastSeen));return{ageMs:age,status:age<=freshMs?'FRESH':age<=staleMs?'STALE':'EXPIRED'}}

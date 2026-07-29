@@ -1,0 +1,1 @@
+export function createEntityStore(){const map=new Map();return Object.freeze({upsert(e){if(!e?.id)throw new Error('entity id required');const prior=map.get(e.id)||{};const next=Object.freeze({...prior,...e,id:e.id});map.set(e.id,next);return next},get:id=>map.get(id),all:()=>[...map.values()]});}

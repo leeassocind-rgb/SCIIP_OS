@@ -1,0 +1,1 @@
+export class SubscriptionRouter{constructor(){this.routes=[]}register(route){if(!route.actorId||!route.eventType)throw new Error('actorId and eventType required');this.routes.push(Object.freeze({...route}));return route}match(event){return this.routes.filter(r=>r.eventType===event.type&&(r.subjectId==null||r.subjectId===event.subjectId))}}

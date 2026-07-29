@@ -1,0 +1,2 @@
+import{clone,deepFreeze,required}from'./immutable.js';import{stableId}from'./identity.js';
+export function createBackupManager(){const backups=[];return deepFreeze({create({scope,state,createdAt=new Date().toISOString()}){required(scope,'scope');const backup=deepFreeze({id:stableId('backup',scope,createdAt),scope,state:clone(state),createdAt,verified:true,status:'AVAILABLE'});backups.push(backup);return backup;},latest(scope){return [...backups].reverse().find(b=>b.scope===scope)||null;},list(){return deepFreeze(backups.map(clone));}});}

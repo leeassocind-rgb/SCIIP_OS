@@ -1,0 +1,1 @@
+export function generateClientBrief({client='Client',changes=[],actions=[],confidence=0}={}){return Object.freeze({documentType:'CLIENT_BRIEF',client,changes:Object.freeze([...changes]),actions:Object.freeze([...actions]),confidence:Math.max(0,Math.min(100,Number(confidence)||0)),status:changes.length?'READY_FOR_BROKER_REVIEW':'INSUFFICIENT_CHANGE',sendStatus:'NOT_SENT'})}

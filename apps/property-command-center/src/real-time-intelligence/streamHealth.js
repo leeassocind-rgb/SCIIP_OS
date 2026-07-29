@@ -1,0 +1,1 @@
+export function streamHealth({received=0,rejected=0,lagMs=0}={}){const rejectRate=received?rejected/received:0;const status=lagMs>300000||rejectRate>.1?'DOWN':lagMs>60000||rejectRate>.02?'DEGRADED':'HEALTHY';return{status,received,rejected,rejectRate,lagMs}}

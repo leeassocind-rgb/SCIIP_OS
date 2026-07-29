@@ -1,0 +1,2 @@
+import{deepFreeze}from'./immutable.js';
+export function forecastCapacity({currentUsage=0,capacity=1,growthPctPerMonth=0,months=6}={}){let projected=Number(currentUsage);for(let i=0;i<months;i++)projected*=1+Number(growthPctPerMonth)/100;const utilization=capacity?projected/capacity*100:100;return deepFreeze({projectedUsage:Number(projected.toFixed(2)),capacity:Number(capacity),utilizationPct:Number(utilization.toFixed(2)),status:utilization>=90?'CRITICAL':utilization>=75?'WATCH':'HEALTHY'});}

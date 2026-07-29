@@ -1,0 +1,1 @@
+export function createEventIdentity(source,type,key){if(!source||!type||!key)throw new Error('source, type, and key required');return `RTE-${source}-${type}-${key}`.toUpperCase().replace(/[^A-Z0-9-]/g,'-')}

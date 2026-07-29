@@ -1,0 +1,2 @@
+import{deepFreeze}from'./immutable.js';
+export function calculateHealthScore({availability=100,errorRate=0,latencyMs=0,backupFreshnessHours=0,securityFindings=0}={}){const penalty=Math.min(35,errorRate*2)+Math.min(20,latencyMs/100)+Math.min(20,backupFreshnessHours)+Math.min(25,securityFindings*5);const score=Math.max(0,Math.min(100,availability-penalty));return deepFreeze({score:Number(score.toFixed(2)),status:score>=90?'HEALTHY':score>=75?'WATCH':score>=50?'AT_RISK':'CRITICAL'});}

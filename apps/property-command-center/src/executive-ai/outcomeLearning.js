@@ -1,0 +1,2 @@
+export function recordOutcome({decisionId,outcome,actorId,observedAt=new Date().toISOString()}={}){if(!decisionId||!outcome||!actorId)throw new Error('decisionId, outcome, and actorId required');return Object.freeze({eventType:'EXECUTIVE_AI_OUTCOME_RECORDED',decisionId,outcome:Object.freeze({...outcome}),actorId,observedAt,appendOnly:true})}
+export function summarizeOutcomes(events=[]){return Object.freeze({count:events.length,successful:events.filter(x=>x.outcome?.status==='SUCCESS').length,learningMode:'ADVISORY_ONLY',modelOverwrite:false})}

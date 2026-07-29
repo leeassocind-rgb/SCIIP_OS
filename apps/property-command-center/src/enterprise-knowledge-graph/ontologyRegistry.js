@@ -1,0 +1,1 @@
+export function createOntologyRegistry(seed=[]){const map=new Map(seed.map(x=>[x.term,Object.freeze({...x})]));return Object.freeze({register(x){if(!x?.term)throw new Error('term required');if(!map.has(x.term))map.set(x.term,Object.freeze({...x}));return map.get(x.term)},get:t=>map.get(t),all:()=>[...map.values()]});}

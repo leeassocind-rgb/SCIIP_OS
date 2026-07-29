@@ -1,0 +1,1 @@
+export function draftCommunication({audience,subject,points=[],tone='EXECUTIVE'}={}){if(!audience||!subject)throw new Error('audience and subject required');return Object.freeze({audience,subject,tone,body:points.map((x,i)=>`${i+1}. ${x}`).join('\n'),status:'DRAFT',sendStatus:'NOT_SENT',brokerEditable:true})}

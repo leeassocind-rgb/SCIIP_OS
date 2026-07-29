@@ -1,0 +1,1 @@
+export function normalizeEvent(event={}){if(!event.id||!event.type)throw new Error('event id and type required');return Object.freeze({...event,type:String(event.type).toUpperCase(),occurredAt:event.occurredAt||new Date(0).toISOString(),confidence:Math.max(0,Math.min(1,Number(event.confidence??1)))})}

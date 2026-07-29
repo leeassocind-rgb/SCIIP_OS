@@ -1,0 +1,4 @@
+import{listCapabilities}from'./runtimeRegistry.js';import{resolveCapabilityOrder}from'./dependencyGraph.js';import{isFeatureEnabled}from'./featureFlags.js';
+const lifecycle=[];const append=(capabilityId,state)=>{const event=Object.freeze({sequence:lifecycle.length+1,capabilityId,state,occurredAt:new Date().toISOString()});lifecycle.push(event);return event};
+export function initializeRuntime(context={}){const ordered=resolveCapabilityOrder(listCapabilities()),active=[];for(const capability of ordered){const enabled=!capability.featureFlag||isFeatureEnabled(capability.featureFlag,{overrides:context.featureOverrides||{}});append(capability.id,enabled?'ACTIVE':'DISABLED');if(enabled)active.push(capability.id)}return{status:'INITIALIZED',active,disabled:ordered.map(c=>c.id).filter(id=>!active.includes(id))}}
+export function readLifecycleHistory(){return[...lifecycle]}export function resetLifecycleHistory(){lifecycle.length=0}

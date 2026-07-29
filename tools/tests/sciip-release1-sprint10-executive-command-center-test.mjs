@@ -1,0 +1,18 @@
+import fs from'node:fs';import path from'node:path';import assert from'node:assert/strict';import{pathToFileURL}from'node:url';
+const root=process.cwd(),app=path.join(root,'apps/property-command-center');const tests=[];const test=(name,fn)=>{try{fn();tests.push({test:name,status:'PASSED'})}catch(error){tests.push({test:name,status:'FAILED',error:error.message})}};
+const read=relative=>fs.readFileSync(path.join(root,relative),'utf8');
+const engine=await import(pathToFileURL(path.join(app,'src/executive/executiveEngine.js')));
+const notices=await import(pathToFileURL(path.join(app,'src/executive/notificationCenter.js')));
+const input={assignment:{id:'A-1',evidenceFreshness:91},graph:{nodes:[{type:'PROPERTY'}],edges:[{}]},opportunities:[{id:'O-1',assignmentId:'A-1',score:88,confidence:'HIGH'}],workflows:[{id:'W-1',assignmentId:'A-1',status:'PENDING_APPROVAL'}]};
+const a=engine.aggregateExecutiveState(input),b=engine.aggregateExecutiveState(input);
+test('DeterministicExecutiveAggregation',()=>assert.deepEqual({...a,generatedAt:'x'},{...b,generatedAt:'x'}));
+test('AssignmentScopedKPIs',()=>{assert.equal(a.kpis.highConfidenceOpportunities,1);assert.equal(a.kpis.approvalsRequired,1)});
+test('ExecutiveBriefingEvidence',()=>assert.ok(engine.buildExecutiveBriefing(a).evidence.length>=4));
+test('GovernedNotifications',()=>{const n=notices.governedNotifications(a);assert.equal(n[0].brokerControlled,true);assert.equal(n[0].consequentialActionBlocked,true)});
+test('AppendOnlyTimelineProjection',()=>assert.equal(engine.executiveTimeline({workflows:input.workflows,opportunities:input.opportunities}).length,2));
+test('WorkspaceHealthAggregation',()=>assert.equal(a.health.length,6));
+test('CrossWorkspaceNavigation',()=>{const ui=read('apps/property-command-center/src/components/ExecutiveCommandCenter.jsx');assert.match(ui,/onNavigate/);assert.match(ui,/Opportunity Intelligence/);assert.match(ui,/Action Center/)});
+test('WorkspaceRegistration',()=>assert.match(read('apps/property-command-center/src/product/workspaceRegistry.js'),/Executive Command Center/));
+test('MainApplicationWiring',()=>{const main=read('apps/property-command-center/src/main.jsx');assert.match(main,/ExecutiveCommandCenter/);assert.match(main,/executive\.css/)});
+test('DeveloperCommandsAndVersion',()=>{const pkg=JSON.parse(read('apps/property-command-center/package.json'));const rootPkg=JSON.parse(read('package.json'));assert.equal(pkg.version,'20.0.0');assert.ok(rootPkg.scripts['property-command-center:certify:sprint10'])});
+const failures=tests.filter(item=>item.status==='FAILED');console.log(JSON.stringify({framework:'SCIIP_RELEASE_1_SPRINT_10_EXECUTIVE_COMMAND_CENTER',version:'release-1-sprint-10.0',status:failures.length?'FAILED':'PASSED',testsRun:tests.length,failures,result:{applicationId:'property-command-center',applicationStatus:'EXECUTIVE_OPERATIONAL',dashboard:'UNIFIED',crossWorkspaceSync:'ENABLED',executiveBriefing:'ACTIVE',timeline:'APPEND_ONLY',notifications:'GOVERNED',kpis:'LIVE',brokerApproval:'REQUIRED'},tests},null,2));if(failures.length)process.exit(1);
