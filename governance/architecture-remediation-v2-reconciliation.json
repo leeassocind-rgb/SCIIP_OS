@@ -1,0 +1,29 @@
+{
+  "status": "RECONCILED",
+  "framework": "SCIIP_ARCHITECTURE_GOVERNANCE_REMEDIATION_V2",
+  "version": "2.0.0",
+  "backup": "/Users/spencercasement/Desktop/SCIIP_OS-main-merge/.sciip-backups/architecture-governance-v2-20260729-173434",
+  "metrics": {
+    "files": 12269,
+    "syntaxErrors": 0,
+    "duplicateFunctions": 93,
+    "duplicateGlobals": 3,
+    "duplicateProcessorNumbers": 0,
+    "placeholders": 0,
+    "unboundedTestRanges": 0,
+    "storageProcessorFiles": 9640,
+    "storageRuntimeBaseFiles": 0,
+    "storageWriteFiles": 0,
+    "lockServiceFiles": 2
+  },
+  "diagnosticMetrics": {
+    "legacyRawDuplicateFunctions": 303,
+    "legacyRawDuplicateGlobals": 552,
+    "localFunctionCollisionsExcluded": 210,
+    "localVariableCollisionsExcluded": 549
+  },
+  "workflowNode": "24",
+  "githubActionsMajor": "v5",
+  "baselineChanged": false,
+  "gate": "PASSED"
+}

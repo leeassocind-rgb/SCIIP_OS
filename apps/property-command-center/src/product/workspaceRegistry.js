@@ -89,3 +89,5 @@ export const lifecycleMarketOutcomesWorkspace = { id: "lifecycle-market-outcomes
 export const marketIntelligenceCorrelationWorkspace = { id: "market-intelligence-correlation", label: "Market Intelligence", group: "Intelligence" };
 
 export const executiveMarketCommandCenterWorkspace = { id: "executive-market-command-center", label: "Executive Market", group: "Intelligence" };
+
+export const marketDataFoundationWorkspace = { id: "market-data-foundation-command-center", label: "Market Data Foundation", group: "Intelligence" };

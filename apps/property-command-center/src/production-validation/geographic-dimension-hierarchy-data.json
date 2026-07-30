@@ -1,0 +1,27 @@
+{
+  "framework": "SCIIP_GEOGRAPHIC_DIMENSION_HIERARCHY",
+  "version": "196.18.0",
+  "status": "PASSED",
+  "result": {
+    "sourceRecords": 3474,
+    "dimensionsCreated": 1,
+    "markets": 1,
+    "submarkets": 1,
+    "cities": 1,
+    "zips": 1
+  },
+  "dimensions": [
+    {
+      "market": "SOUTHERN_CALIFORNIA",
+      "county": "UNKNOWN",
+      "submarket": "UNASSIGNED",
+      "city": "UNKNOWN",
+      "zip": "UNKNOWN",
+      "geographyKey": "SOUTHERN_CALIFORNIA|UNKNOWN|UNASSIGNED|UNKNOWN|UNKNOWN",
+      "dimensionId": "GEO-6e06f257ece7b36acc59",
+      "effectiveFrom": "1900-01-01",
+      "effectiveTo": null,
+      "isCurrent": true
+    }
+  ]
+}

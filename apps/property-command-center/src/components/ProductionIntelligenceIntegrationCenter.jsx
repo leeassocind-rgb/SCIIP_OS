@@ -1,0 +1,2 @@
+import React from 'react';
+export default function ProductionIntelligenceIntegrationCenter({data={}}){const r=data.result||{};return <section aria-label='Production Intelligence Integration'><h2>Production Intelligence Integration</h2><div className='sciip-kpi-grid'>{Object.entries(r).slice(0,12).map(([k,v])=><article key={k}><strong>{String(v)}</strong><span>{k.replace(/([A-Z])/g,' $1')}</span></article>)}</div><p>Evidence-linked recommendations require human approval. Autonomous execution is disabled.</p></section>}

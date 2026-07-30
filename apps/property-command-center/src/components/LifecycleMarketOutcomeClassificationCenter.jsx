@@ -1,3 +1,6 @@
-import React from "react";
-import data from "../production-validation/lifecycle-market-outcome-classification-data.json";
-export default function LifecycleMarketOutcomeClassificationCenter(){const s=data.summary||{};const counts=s.outcomeCounts||{};return <section aria-label="Lifecycle Market Outcome Classification"><h1>Lifecycle Market Outcomes</h1><p>Evidence-linked outcome inferences derived from governed property lifecycle events.</p><div><strong>{s.propertiesClassified||0}</strong> properties · <strong>{s.totalInferences||0}</strong> inferences · <strong>{s.reviewRequired||0}</strong> require review</div><ul>{Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([k,v])=><li key={k}>{k.replaceAll('_',' ')}: {v}</li>)}</ul></section>}
+import React from'react';
+import{ProductionValidationDataBoundary}from'../production-validation/useProductionValidationData.jsx';
+export default function LifecycleMarketOutcomeClassificationCenter(){
+ return <ProductionValidationDataBoundary fileName="lifecycle-market-outcome-classification-data.json">{data=><LifecycleMarketOutcomeClassificationView data={data}/>}</ProductionValidationDataBoundary>;
+}
+function LifecycleMarketOutcomeClassificationView({data}){const s=data.summary||{};const counts=s.outcomeCounts||{};return <section aria-label="Lifecycle Market Outcome Classification"><h1>Lifecycle Market Outcomes</h1><p>Evidence-linked outcome inferences derived from governed property lifecycle events.</p><div><strong>{s.propertiesClassified||0}</strong> properties · <strong>{s.totalInferences||0}</strong> inferences · <strong>{s.reviewRequired||0}</strong> require review</div><ul>{Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([k,v])=><li key={k}>{k.replaceAll('_',' ')}: {v}</li>)}</ul></section>}

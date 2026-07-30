@@ -1,0 +1,14 @@
+'use strict';
+const {fs,path,readJson,writeJson,now,stableId,norm,first,waveRoot,unifiedPath,loadUnified,propertyFromEvidence,evidenceQuality,base}=require('./sciip-v5-6-wave-2-8-1-common.cjs');
+const FRAMEWORK='SCIIP_V5_6_VITE_CONFIG_AND_CHUNK_STRATEGY',VERSION='197.16.0';
+function run(repo){
+const app=path.join(repo,'apps','property-command-center');
+if(!fs.existsSync(path.join(app,'package.json')))throw new Error('Property Command Center package.json missing');
+const config=path.join(app,'vite.config.mjs');
+const source=`import { defineConfig } from 'vite';\nimport react from '@vitejs/plugin-react';\n\nfunction sciipManualChunks(id) {\n  const normalized = id.replaceAll('\\\\\\\\', '/');\n  if (normalized.includes('/node_modules/react') || normalized.includes('/node_modules/scheduler')) return 'vendor-react';\n  if (normalized.includes('/node_modules/lucide-react')) return 'vendor-icons';\n  if (normalized.includes('/node_modules/')) return 'vendor-core';\n  if (normalized.includes('/src/executive-ai/')) return 'feature-executive-ai';\n  if (normalized.includes('/src/real-time-intelligence/')) return 'feature-real-time';\n  if (normalized.includes('/src/production-enterprise/')) return 'feature-production-enterprise';\n  if (normalized.includes('/src/spatial/')) return 'feature-spatial';\n  if (normalized.includes('/src/collaboration/')) return 'feature-collaboration';\n  if (normalized.includes('/src/ingestion/')) return 'feature-ingestion';\n  if (normalized.includes('/src/components/')) {\n    const name = normalized.split('/').pop() || '';\n    if (/Executive|MorningBrief|Portfolio|Decision/i.test(name)) return 'workspace-executive';\n    if (/GIS|Map|Spatial|Property|Building/i.test(name)) return 'workspace-property-gis';\n    if (/Knowledge|Graph|Evidence|Identity/i.test(name)) return 'workspace-knowledge-evidence';\n    if (/Market|Opportunity|Broker/i.test(name)) return 'workspace-market';\n    if (/Enterprise|Platform|Production|Runtime|Integration/i.test(name)) return 'workspace-enterprise';\n    return 'ui-components';\n  }\n  return undefined;\n}\n\nexport default defineConfig({\n  plugins: [react()],\n  build: {\n    chunkSizeWarningLimit: 750,\n    rollupOptions: { output: { manualChunks: sciipManualChunks } }\n  }\n});\n`;
+fs.writeFileSync(config,source);
+writeJson(path.join(waveRoot(repo),'vite-chunk-strategy.json'),{generatedAt:now(),config:path.relative(repo,config),created:true,reactPlugin:true,chunkGroups:12});
+return base(FRAMEWORK,VERSION,{config:path.relative(repo,config),created:true,reactPlugin:true,chunkGroups:12});
+}
+if(require.main===module){const repo=process.argv[2]||process.cwd();const result=run(repo);writeJson(path.join(waveRoot(repo),VERSION+'-'+FRAMEWORK.toLowerCase()+'.json'),result);console.log(JSON.stringify(result,null,2));if(result.status!=='PASSED')process.exitCode=1}
+module.exports={run,FRAMEWORK,VERSION};

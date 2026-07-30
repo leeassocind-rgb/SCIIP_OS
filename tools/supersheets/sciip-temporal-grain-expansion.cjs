@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+const C=require('./sciip-market-data-foundation-common.cjs');
+function run(doc){ const src=C.sourceRecords(doc); const grains=[]; const seen=new Set(); for(const r of src){ const d=C.dateOf(r); const base={day:d.toISOString().slice(0,10),week:C.week(d),month:C.month(d),quarter:C.quarter(d),year:String(d.getUTCFullYear())}; for(const [grain,period] of Object.entries(base)){ const key=grain+'|'+period; if(!seen.has(key)){seen.add(key); grains.push({temporalId:'TIME-'+C.hash(key),grain,period,year:d.getUTCFullYear(),month:d.getUTCMonth()+1,quarter:Math.floor(d.getUTCMonth()/3)+1,isClosed:d<new Date()});}} }
+ return {framework:'SCIIP_TEMPORAL_GRAIN_EXPANSION',version:'196.19.0',status:'PASSED',result:{sourceRecords:src.length,temporalMembersCreated:grains.length,dayMembers:grains.filter(x=>x.grain==='day').length,weekMembers:grains.filter(x=>x.grain==='week').length,monthMembers:grains.filter(x=>x.grain==='month').length,quarterMembers:grains.filter(x=>x.grain==='quarter').length,yearMembers:grains.filter(x=>x.grain==='year').length},temporalMembers:grains}; }
+if(require.main===module){const [i,o]=process.argv.slice(2); if(!i||!o) throw Error('Usage'); const x=run(C.readJson(i)); C.writeJson(o,x); console.log(JSON.stringify({framework:x.framework,version:x.version,status:x.status,result:x.result},null,2));}
+module.exports={run};

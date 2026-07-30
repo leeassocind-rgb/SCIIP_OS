@@ -1,0 +1,91 @@
+{
+  "framework": "SCIIP_INCREMENTAL_MARKET_CUBE_MATERIALIZATION",
+  "version": "196.21.0",
+  "status": "PASSED",
+  "result": {
+    "sourceRecords": 3474,
+    "cellsCreated": 0,
+    "cellsUpdated": 6948,
+    "duplicateSafeSkips": 0,
+    "totalCells": 2,
+    "geographies": 1,
+    "periods": 2,
+    "incremental": true
+  },
+  "cells": [
+    {
+      "cellId": "CELL-57f02d67707db4ca2c92",
+      "cellKey": "SOUTHERN_CALIFORNIA|UNKNOWN|UNASSIGNED|UNKNOWN|UNKNOWN||month||2026-07||INDUSTRIAL|UNKNOWN|UNKNOWN|UNKNOWN|STANDARD_OR_UNKNOWN|UNKNOWN|UNKNOWN",
+      "geography": {
+        "market": "SOUTHERN_CALIFORNIA",
+        "submarket": "UNASSIGNED",
+        "city": "UNKNOWN",
+        "zip": "UNKNOWN"
+      },
+      "temporal": {
+        "grain": "month",
+        "period": "2026-07"
+      },
+      "dimensions": {
+        "recordId": "LIF-32DE814898442CEA2B2EA6AB",
+        "propertyId": "PROPERTY-C1B0DFA2929EF08CA096",
+        "assetClass": "INDUSTRIAL",
+        "sizeBucket": "UNKNOWN",
+        "powerBucket": "UNKNOWN",
+        "clearHeightBucket": "UNKNOWN",
+        "yardCapability": "STANDARD_OR_UNKNOWN",
+        "tenantSector": "UNKNOWN",
+        "ownershipType": "UNKNOWN",
+        "sourceEvidenceId": "LIF-32DE814898442CEA2B2EA6AB",
+        "dimensionKey": "INDUSTRIAL|UNKNOWN|UNKNOWN|UNKNOWN|STANDARD_OR_UNKNOWN|UNKNOWN|UNKNOWN"
+      },
+      "metrics": {
+        "recordCount": 6948,
+        "availableSf": 0,
+        "signalScore": 0
+      },
+      "createdAt": "2026-07-29T21:22:46.663Z",
+      "updatedAt": "2026-07-29T21:25:19.655Z",
+      "evidence": [
+        "LIF-32DE814898442CEA2B2EA6AB"
+      ]
+    },
+    {
+      "cellId": "CELL-dce22f25861d82b5f094",
+      "cellKey": "SOUTHERN_CALIFORNIA|UNKNOWN|UNASSIGNED|UNKNOWN|UNKNOWN||quarter||2026-Q3||INDUSTRIAL|UNKNOWN|UNKNOWN|UNKNOWN|STANDARD_OR_UNKNOWN|UNKNOWN|UNKNOWN",
+      "geography": {
+        "market": "SOUTHERN_CALIFORNIA",
+        "submarket": "UNASSIGNED",
+        "city": "UNKNOWN",
+        "zip": "UNKNOWN"
+      },
+      "temporal": {
+        "grain": "quarter",
+        "period": "2026-Q3"
+      },
+      "dimensions": {
+        "recordId": "LIF-32DE814898442CEA2B2EA6AB",
+        "propertyId": "PROPERTY-C1B0DFA2929EF08CA096",
+        "assetClass": "INDUSTRIAL",
+        "sizeBucket": "UNKNOWN",
+        "powerBucket": "UNKNOWN",
+        "clearHeightBucket": "UNKNOWN",
+        "yardCapability": "STANDARD_OR_UNKNOWN",
+        "tenantSector": "UNKNOWN",
+        "ownershipType": "UNKNOWN",
+        "sourceEvidenceId": "LIF-32DE814898442CEA2B2EA6AB",
+        "dimensionKey": "INDUSTRIAL|UNKNOWN|UNKNOWN|UNKNOWN|STANDARD_OR_UNKNOWN|UNKNOWN|UNKNOWN"
+      },
+      "metrics": {
+        "recordCount": 6948,
+        "availableSf": 0,
+        "signalScore": 0
+      },
+      "createdAt": "2026-07-29T21:22:46.664Z",
+      "updatedAt": "2026-07-29T21:25:19.655Z",
+      "evidence": [
+        "LIF-32DE814898442CEA2B2EA6AB"
+      ]
+    }
+  ]
+}

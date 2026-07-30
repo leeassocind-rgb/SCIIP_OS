@@ -1,3 +1,4 @@
+import MarketDataFoundationCommandCenter from "./components/MarketDataFoundationCommandCenter.jsx";
 import ExecutiveMarketCommandCenter from "./components/ExecutiveMarketCommandCenter.jsx";
 import MarketIntelligenceCorrelationCenter from "./components/MarketIntelligenceCorrelationCenter.jsx";
 import LifecycleMarketOutcomeClassificationCenter from "./components/LifecycleMarketOutcomeClassificationCenter.jsx";
@@ -5,7 +6,7 @@ import PropertyLifecycleIntelligenceCenter from "./components/PropertyLifecycleI
 import GovernedIdentityDecisionExecutionCenter from "./components/GovernedIdentityDecisionExecutionCenter.jsx";
 import IdentityReviewGovernanceCenter from "./components/IdentityReviewGovernanceCenter.jsx";
 import CanonicalPropertyIdentityCenter from "./components/CanonicalPropertyIdentityCenter.jsx";
-import React,{useEffect,useMemo,useRef,useState}from'react';
+import React,{Suspense,lazy,useEffect,useMemo,useRef,useState}from'react';
 import{createRoot}from'react-dom/client';
 import{Activity,ArrowUpRight,BookOpen,BriefcaseBusiness,Building2,Check,ChevronDown,ChevronRight,Clock3,FileText,HeartHandshake,LayoutDashboard,Map,MapPin,Menu,MessageSquareText,PanelLeftClose,PanelLeftOpen,Search,Settings,Sparkles,TriangleAlert,Users,Plus,SlidersHorizontal}from'lucide-react';
 import'./styles.css';
@@ -32,30 +33,30 @@ import'./temporal-intelligence.css';
 import{assignments}from'./product/assignmentData.js';
 import{getWorkspaceDefinition}from'./product/workspaceRegistry.js';
 import{createWorkspaceMemory}from'./product/workspaceMemory.js';
-import SuperSheetIngestion from'./components/SuperSheetIngestion.jsx';
-import KnowledgeGraphWorkspace from'./components/KnowledgeGraphWorkspace.jsx';
-import AIPropertyCopilot from'./components/AIPropertyCopilot.jsx';
-import GISIntelligenceWorkspace from'./components/GISIntelligenceWorkspace.jsx';
-import OpportunityIntelligenceWorkspace from'./components/OpportunityIntelligenceWorkspace.jsx';
-import BrokerActionCenter from'./components/BrokerActionCenter.jsx';
-import ExecutiveCommandCenter from'./components/ExecutiveCommandCenter.jsx';
-import EnterpriseFoundationCenter from'./components/EnterpriseFoundationCenter.jsx';
-import EnterpriseCollaborationCenter from'./components/EnterpriseCollaborationCenter.jsx';
-import IntegrationPlatformCenter from'./components/IntegrationPlatformCenter.jsx';
-import IntelligencePlatformCenter from'./components/IntelligencePlatformCenter.jsx';
-import MarketIntelligenceCenter from'./components/MarketIntelligenceCenter.jsx';
-import PlatformRuntimeCenter from'./components/PlatformRuntimeCenter.jsx';
-import ExecutiveMorningBriefCenter from'./components/ExecutiveMorningBriefCenter.jsx';
-import PropertyDigitalTwinCenter from'./components/PropertyDigitalTwinCenter.jsx';
-import DecisionIntelligenceCenter from'./components/DecisionIntelligenceCenter.jsx';
-import ExecutiveAICommandCenter from'./components/ExecutiveAICommandCenter.jsx';
-import EnterpriseOperationsCenter from'./components/EnterpriseOperationsCenter.jsx';
-import EnterpriseKnowledgeGraphCenter from'./components/EnterpriseKnowledgeGraphCenter.jsx';
-import RealTimeIntelligenceCenter from'./components/RealTimeIntelligenceCenter.jsx';
-import ProductionEnterpriseCenter from'./components/ProductionEnterpriseCenter.jsx';
-import ProductionDataCertificationCenter from'./components/ProductionDataCertificationCenter.jsx';
-import EvidenceCertificationCenter from'./components/EvidenceCertificationCenter.jsx';
-import TemporalPropertyIntelligenceCenter from'./components/TemporalPropertyIntelligenceCenter.jsx';
+const SuperSheetIngestion=lazy(()=>import('./components/SuperSheetIngestion.jsx'));
+const KnowledgeGraphWorkspace=lazy(()=>import('./components/KnowledgeGraphWorkspace.jsx'));
+const AIPropertyCopilot=lazy(()=>import('./components/AIPropertyCopilot.jsx'));
+const GISIntelligenceWorkspace=lazy(()=>import('./components/GISIntelligenceWorkspace.jsx'));
+const OpportunityIntelligenceWorkspace=lazy(()=>import('./components/OpportunityIntelligenceWorkspace.jsx'));
+const BrokerActionCenter=lazy(()=>import('./components/BrokerActionCenter.jsx'));
+const ExecutiveCommandCenter=lazy(()=>import('./components/ExecutiveCommandCenter.jsx'));
+const EnterpriseFoundationCenter=lazy(()=>import('./components/EnterpriseFoundationCenter.jsx'));
+const EnterpriseCollaborationCenter=lazy(()=>import('./components/EnterpriseCollaborationCenter.jsx'));
+const IntegrationPlatformCenter=lazy(()=>import('./components/IntegrationPlatformCenter.jsx'));
+const IntelligencePlatformCenter=lazy(()=>import('./components/IntelligencePlatformCenter.jsx'));
+const MarketIntelligenceCenter=lazy(()=>import('./components/MarketIntelligenceCenter.jsx'));
+const PlatformRuntimeCenter=lazy(()=>import('./components/PlatformRuntimeCenter.jsx'));
+const ExecutiveMorningBriefCenter=lazy(()=>import('./components/ExecutiveMorningBriefCenter.jsx'));
+const PropertyDigitalTwinCenter=lazy(()=>import('./components/PropertyDigitalTwinCenter.jsx'));
+const DecisionIntelligenceCenter=lazy(()=>import('./components/DecisionIntelligenceCenter.jsx'));
+const ExecutiveAICommandCenter=lazy(()=>import('./components/ExecutiveAICommandCenter.jsx'));
+const EnterpriseOperationsCenter=lazy(()=>import('./components/EnterpriseOperationsCenter.jsx'));
+const EnterpriseKnowledgeGraphCenter=lazy(()=>import('./components/EnterpriseKnowledgeGraphCenter.jsx'));
+const RealTimeIntelligenceCenter=lazy(()=>import('./components/RealTimeIntelligenceCenter.jsx'));
+const ProductionEnterpriseCenter=lazy(()=>import('./components/ProductionEnterpriseCenter.jsx'));
+const ProductionDataCertificationCenter=lazy(()=>import('./components/ProductionDataCertificationCenter.jsx'));
+const EvidenceCertificationCenter=lazy(()=>import('./components/EvidenceCertificationCenter.jsx'));
+const TemporalPropertyIntelligenceCenter=lazy(()=>import('./components/TemporalPropertyIntelligenceCenter.jsx'));
 import{parseWorkspaceRoute,replaceWorkspaceRoute}from'./platform/workspaceRouter.js';
 import{createPlatformBridge,PLATFORM_EVENTS}from'./platform/platformBridge.js';
 import{PROPERTY_COMMAND_CENTER_APP}from'./platform/appManifest.js';
@@ -95,7 +96,7 @@ function App(){
  useEffect(()=>{bridge.announceReady({assignmentId:assignment.id,selectedTab});return bridge.subscribe(PLATFORM_EVENTS.NAVIGATE,({destination})=>{if(destination?.applicationId&&destination.applicationId!==PROPERTY_COMMAND_CENTER_APP.id)return;if(destination?.nav)setNav(destination.nav);if(destination?.assignmentId){const next=assignments.find(a=>a.id===destination.assignmentId);if(next)setAssignment(next)}if(destination?.tab)setSelectedTab(destination.tab)})},[]);
  const switchAssignment=a=>{if(scroller.current)memory.save(assignment.id,{scrollPosition:scroller.current.scrollTop});setAssignment(a)};
  const content=selectedTab==='Executive Summary'?<ExecutiveSummary assignment={assignment} notes={notes} setNotes={setNotes}/>:selectedTab==='Property Digital Twin'?<PropertyDigitalTwinCenter assignment={assignment}/>:selectedTab==='Decision Intelligence'?<DecisionIntelligenceCenter assignment={assignment}/>:selectedTab==='Executive AI'?<ExecutiveAICommandCenter assignment={assignment}/>:selectedTab==='Enterprise Operations'?<EnterpriseOperationsCenter/>:selectedTab==='Enterprise Knowledge Graph'?<EnterpriseKnowledgeGraphCenter assignment={assignment}/>:selectedTab==='Real-Time Intelligence'?<RealTimeIntelligenceCenter assignment={assignment}/>:selectedTab==='Temporal Intelligence'?<TemporalPropertyIntelligenceCenter/>:selectedTab==='Evidence Inspector'?<EvidenceCertificationCenter/>:selectedTab==='Production Data Certification'?<ProductionDataCertificationCenter/>:selectedTab==='Enterprise Production'?<ProductionEnterpriseCenter/>:selectedTab==='Morning Brief'?<MorningBrief assignment={assignment} brief={brief} setBrief={setBrief}/>:selectedTab==='Assignment Health'?<AssignmentHealth assignment={assignment}/>:selectedTab==='SuperSheet Ingestion'?<SuperSheetIngestion assignment={assignment}/>:selectedTab==='Knowledge Graph'?<KnowledgeGraphWorkspace assignment={assignment}/>:selectedTab==='AI Assistant'?<AIPropertyCopilot assignment={assignment}/>:selectedTab==='GIS Intelligence'?<GISIntelligenceWorkspace assignment={assignment}/>:selectedTab==='Opportunity Intelligence'?<OpportunityIntelligenceWorkspace assignment={assignment}/>:selectedTab==='Platform Runtime'?<PlatformRuntimeCenter/>:selectedTab==='Market Intelligence'?<MarketIntelligenceCenter assignment={assignment}/>:selectedTab==='Intelligence Platform'?<IntelligencePlatformCenter assignment={assignment}/>:selectedTab==='Integration Platform'?<IntegrationPlatformCenter assignment={assignment}/>:selectedTab==='Enterprise Collaboration'?<EnterpriseCollaborationCenter assignment={assignment}/>:selectedTab==='Enterprise Foundation'?<EnterpriseFoundationCenter assignment={assignment} onNavigate={setSelectedTab}/>:selectedTab==='Executive Command Center'?<ExecutiveCommandCenter assignment={assignment} onNavigate={setSelectedTab}/>:selectedTab==='Action Center'?<BrokerActionCenter assignment={assignment}/>:<GenericWorkspace tab={selectedTab} assignment={assignment}/>;
- return <div className={`app ${collapsed?'collapsed':''}`}><aside className="sidebar"><div className="brand"><div className="brand-mark">S</div><div><strong>SCIIP</strong><span>Industrial Intelligence OS</span></div></div><nav>{primaryNav.map(([label,Icon])=><button key={label} className={nav===label?'active':''} onClick={()=>setNav(label)}><Icon size={19}/><span>{label}</span></button>)}</nav><div className="sidebar-foot"><span className="status-dot"/><div><strong>Release 1.0</strong><span>Product governed</span></div></div></aside><main><header className="topbar"><button className="icon-button" onClick={()=>setCollapsed(!collapsed)}>{collapsed?<PanelLeftOpen size={19}/>:<PanelLeftClose size={19}/>}</button><div className="global-search"><Search size={16}/><span>Search assignments, properties, markets…</span><kbd>⌘ K</kbd></div><div className="top-actions"><button><MessageSquareText size={17}/></button><div className="avatar">SC</div></div></header><section className="assignment-shell"><div className="assignment-command"><AssignmentPicker selected={assignment} onSelect={switchAssignment}/><div className="command-context"><div><span>STAGE</span><strong>{assignment.stage}</strong></div><div><span>LOCATION</span><strong><MapPin size={13}/>{assignment.location}</strong></div><div><span>UPDATED</span><strong><Clock3 size={13}/>{assignment.updated}</strong></div></div><button className="ask-button"><Sparkles size={16}/>Ask SCIIP</button></div><div className="workspace-meta"><span>{workspace.focus}</span><Badge>{workspace.type} workspace</Badge></div><div className="tab-strip">{workspace.tabs.map(tab=><button key={tab} className={selectedTab===tab?'active':''} onClick={()=>setSelectedTab(tab)}>{tab}</button>)}</div><div className="workspace-content" ref={scroller} onScroll={e=>memory.save(assignment.id,{scrollPosition:e.currentTarget.scrollTop})}>{content}</div></section></main></div>
+ return <div className={`app ${collapsed?'collapsed':''}`}><aside className="sidebar"><div className="brand"><div className="brand-mark">S</div><div><strong>SCIIP</strong><span>Industrial Intelligence OS</span></div></div><nav>{primaryNav.map(([label,Icon])=><button key={label} className={nav===label?'active':''} onClick={()=>setNav(label)}><Icon size={19}/><span>{label}</span></button>)}</nav><div className="sidebar-foot"><span className="status-dot"/><div><strong>Release 1.0</strong><span>Product governed</span></div></div></aside><main><header className="topbar"><button className="icon-button" onClick={()=>setCollapsed(!collapsed)}>{collapsed?<PanelLeftOpen size={19}/>:<PanelLeftClose size={19}/>}</button><div className="global-search"><Search size={16}/><span>Search assignments, properties, markets…</span><kbd>⌘ K</kbd></div><div className="top-actions"><button><MessageSquareText size={17}/></button><div className="avatar">SC</div></div></header><section className="assignment-shell"><div className="assignment-command"><AssignmentPicker selected={assignment} onSelect={switchAssignment}/><div className="command-context"><div><span>STAGE</span><strong>{assignment.stage}</strong></div><div><span>LOCATION</span><strong><MapPin size={13}/>{assignment.location}</strong></div><div><span>UPDATED</span><strong><Clock3 size={13}/>{assignment.updated}</strong></div></div><button className="ask-button"><Sparkles size={16}/>Ask SCIIP</button></div><div className="workspace-meta"><span>{workspace.focus}</span><Badge>{workspace.type} workspace</Badge></div><div className="tab-strip">{workspace.tabs.map(tab=><button key={tab} className={selectedTab===tab?'active':''} onClick={()=>setSelectedTab(tab)}>{tab}</button>)}</div><div className="workspace-content" ref={scroller} onScroll={e=>memory.save(assignment.id,{scrollPosition:e.currentTarget.scrollTop})}><Suspense fallback={<div className="workspace-loading" role="status" aria-live="polite">Loading workspace…</div>}>{content}</Suspense></div></section></main></div>
 }
 createRoot(document.getElementById('root')).render(<App/>);
 
@@ -112,3 +113,5 @@ export { LifecycleMarketOutcomeClassificationCenter };
 export { MarketIntelligenceCorrelationCenter };
 
 export { ExecutiveMarketCommandCenter };
+
+export { MarketDataFoundationCommandCenter };

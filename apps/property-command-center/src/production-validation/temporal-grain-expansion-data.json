@@ -1,0 +1,61 @@
+{
+  "framework": "SCIIP_TEMPORAL_GRAIN_EXPANSION",
+  "version": "196.19.0",
+  "status": "PASSED",
+  "result": {
+    "sourceRecords": 3474,
+    "temporalMembersCreated": 5,
+    "dayMembers": 1,
+    "weekMembers": 1,
+    "monthMembers": 1,
+    "quarterMembers": 1,
+    "yearMembers": 1
+  },
+  "temporalMembers": [
+    {
+      "temporalId": "TIME-a34a69d92f8a2043f1c0",
+      "grain": "day",
+      "period": "2026-07-29",
+      "year": 2026,
+      "month": 7,
+      "quarter": 3,
+      "isClosed": true
+    },
+    {
+      "temporalId": "TIME-ac54de40b0362a0e31df",
+      "grain": "week",
+      "period": "2026-W31",
+      "year": 2026,
+      "month": 7,
+      "quarter": 3,
+      "isClosed": true
+    },
+    {
+      "temporalId": "TIME-0c7a0795ff01e98cbcc6",
+      "grain": "month",
+      "period": "2026-07",
+      "year": 2026,
+      "month": 7,
+      "quarter": 3,
+      "isClosed": true
+    },
+    {
+      "temporalId": "TIME-37d8779424bb24150ba1",
+      "grain": "quarter",
+      "period": "2026-Q3",
+      "year": 2026,
+      "month": 7,
+      "quarter": 3,
+      "isClosed": true
+    },
+    {
+      "temporalId": "TIME-51b8c86928a761459d96",
+      "grain": "year",
+      "period": "2026",
+      "year": 2026,
+      "month": 7,
+      "quarter": 3,
+      "isClosed": true
+    }
+  ]
+}

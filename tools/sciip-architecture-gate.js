@@ -1,6 +1,18 @@
 #!/usr/bin/env node
 "use strict";
 
+/**
+ * SCIIP Architecture Gate v2
+ *
+ * v1 counted every named function and every `var` assignment in every lexical
+ * scope as an Apps Script global. That produced false regressions whenever
+ * modules added private functions or local variables inside closures.
+ *
+ * v2 records only declarations visible at Apps Script file scope (brace depth
+ * zero after comments and strings are neutralized). It reports the legacy raw
+ * counts separately for migration/audit visibility.
+ */
+
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
@@ -10,6 +22,7 @@ const SRC = path.join(ROOT, "src");
 const REPORT_DIR = path.join(ROOT, "governance");
 const BASELINE_PATH = path.join(REPORT_DIR, "architecture-baseline.json");
 const REPORT_PATH = path.join(REPORT_DIR, "architecture-report.json");
+const SCHEMA_VERSION = 2;
 
 function walk(dir) {
   if (!fs.existsSync(dir)) return [];
@@ -56,27 +69,49 @@ function stripCommentsAndStrings(source) {
   return out;
 }
 
+function braceDepths(clean) {
+  const depths = new Int32Array(clean.length);
+  let depth = 0;
+  for (let i = 0; i < clean.length; i++) {
+    depths[i] = depth;
+    if (clean[i] === "{") depth++;
+    else if (clean[i] === "}") depth = Math.max(0, depth - 1);
+  }
+  return depths;
+}
+
+function add(map, name, file) {
+  if (!map.has(name)) map.set(name, []);
+  map.get(name).push(file);
+}
+
 function collectDefinitions(files) {
   const functions = new Map();
   const globals = new Map();
+  const rawFunctions = new Map();
+  const rawGlobals = new Map();
 
   for (const file of files) {
     const source = fs.readFileSync(file, "utf8");
     const clean = stripCommentsAndStrings(source);
+    const depths = braceDepths(clean);
+    const location = rel(file);
 
     for (const match of clean.matchAll(/\bfunction\s+([A-Za-z_$][\w$]*)\s*\(/g)) {
-      const name = match[1];
-      if (!functions.has(name)) functions.set(name, []);
-      functions.get(name).push(rel(file));
+      add(rawFunctions, match[1], location);
+      if (depths[match.index] === 0) add(functions, match[1], location);
     }
-    for (const match of clean.matchAll(/^\s*var\s+([A-Za-z_$][\w$]*)\s*=/gm)) {
-      const name = match[1];
-      if (!globals.has(name)) globals.set(name, []);
-      globals.get(name).push(rel(file));
+
+    // Apps Script globals declared with `var` are only global at file scope.
+    // The legacy gate treated every local `var` as a global.
+    for (const match of clean.matchAll(/(^|[;\n])\s*var\s+([A-Za-z_$][\w$]*)\s*(?:=|;|,)/gm)) {
+      const declarationIndex = match.index + (match[1] ? match[1].length : 0);
+      add(rawGlobals, match[2], location);
+      if (depths[declarationIndex] === 0) add(globals, match[2], location);
     }
   }
 
-  return { functions, globals };
+  return { functions, globals, rawFunctions, rawGlobals };
 }
 
 function duplicates(map) {
@@ -86,7 +121,14 @@ function duplicates(map) {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
-const files = walk(SRC).filter((f) => f.endsWith(".gs"));
+function parseBaseline() {
+  if (!fs.existsSync(BASELINE_PATH)) return null;
+  const value = JSON.parse(fs.readFileSync(BASELINE_PATH, "utf8"));
+  if (!value || !value.metrics) return null;
+  return value;
+}
+
+const files = walk(SRC).filter((file) => file.endsWith(".gs"));
 const syntaxErrors = [];
 const placeholders = [];
 const unboundedRanges = [];
@@ -99,6 +141,7 @@ let lockServiceFiles = 0;
 for (const file of files) {
   const source = fs.readFileSync(file, "utf8");
   const clean = stripCommentsAndStrings(source);
+
   try {
     new vm.Script(source, { filename: rel(file) });
   } catch (error) {
@@ -108,7 +151,6 @@ for (const file of files) {
   if (/Implement using the established|TODO\s*:\s*implement|throw new Error\(['"]Implement/.test(source)) {
     placeholders.push(rel(file));
   }
-
   if (/\bSCIIP_TEST\.runRange\s*\(\s*\)/.test(clean)) {
     unboundedRanges.push(rel(file));
   }
@@ -116,9 +158,7 @@ for (const file of files) {
   const base = path.basename(file);
   const processorMatch = base.match(/^(\d+)_.*Processor\.gs$/);
   if (processorMatch && /src\/processors\//.test(rel(file))) {
-    const number = processorMatch[1];
-    if (!processorNumbers.has(number)) processorNumbers.set(number, []);
-    processorNumbers.get(number).push(rel(file));
+    add(processorNumbers, processorMatch[1], rel(file));
   }
 
   if (/src\/processors\/runtime\/storage\//.test(rel(file)) && /Processor\.gs$/.test(base)) {
@@ -132,9 +172,13 @@ for (const file of files) {
 const defs = collectDefinitions(files);
 const duplicateFunctions = duplicates(defs.functions);
 const duplicateGlobals = duplicates(defs.globals);
+const rawDuplicateFunctions = duplicates(defs.rawFunctions);
+const rawDuplicateGlobals = duplicates(defs.rawGlobals);
 const duplicateProcessorNumbers = duplicates(processorNumbers);
 
 const report = {
+  schemaVersion: SCHEMA_VERSION,
+  analyzer: "SCOPE_AWARE_APPS_SCRIPT_FILE_SCOPE",
   generatedAt: new Date().toISOString(),
   metrics: {
     files: files.length,
@@ -149,6 +193,12 @@ const report = {
     storageWriteFiles,
     lockServiceFiles,
   },
+  diagnosticMetrics: {
+    legacyRawDuplicateFunctions: rawDuplicateFunctions.length,
+    legacyRawDuplicateGlobals: rawDuplicateGlobals.length,
+    localFunctionCollisionsExcluded: rawDuplicateFunctions.length - duplicateFunctions.length,
+    localVariableCollisionsExcluded: rawDuplicateGlobals.length - duplicateGlobals.length,
+  },
   details: {
     syntaxErrors,
     duplicateFunctions,
@@ -156,18 +206,34 @@ const report = {
     duplicateProcessorNumbers,
     placeholders,
     unboundedRanges,
+    legacyRawDuplicateFunctions: rawDuplicateFunctions,
+    legacyRawDuplicateGlobals: rawDuplicateGlobals,
   },
 };
 
 fs.mkdirSync(REPORT_DIR, { recursive: true });
 fs.writeFileSync(REPORT_PATH, JSON.stringify(report, null, 2) + "\n");
 
-const mode = process.argv.includes("--strict") ? "strict" : "baseline";
-const baseline = fs.existsSync(BASELINE_PATH)
-  ? JSON.parse(fs.readFileSync(BASELINE_PATH, "utf8"))
-  : null;
+if (process.argv.includes("--write-baseline")) {
+  fs.writeFileSync(BASELINE_PATH, JSON.stringify({
+    schemaVersion: SCHEMA_VERSION,
+    analyzer: report.analyzer,
+    generatedAt: report.generatedAt,
+    metrics: {
+      duplicateFunctions: report.metrics.duplicateFunctions,
+      duplicateGlobals: report.metrics.duplicateGlobals,
+      duplicateProcessorNumbers: report.metrics.duplicateProcessorNumbers,
+    },
+  }, null, 2) + "\n");
+  console.log(JSON.stringify(report.metrics, null, 2));
+  console.log("ARCHITECTURE BASELINE WRITTEN (schema v2)");
+  process.exit(0);
+}
 
+const mode = process.argv.includes("--strict") ? "strict" : "baseline";
+const baseline = parseBaseline();
 const failures = [];
+
 if (report.metrics.syntaxErrors) failures.push(`syntaxErrors=${report.metrics.syntaxErrors}`);
 if (report.metrics.placeholders) failures.push(`placeholders=${report.metrics.placeholders}`);
 if (report.metrics.unboundedTestRanges) failures.push(`unboundedTestRanges=${report.metrics.unboundedTestRanges}`);
@@ -178,15 +244,19 @@ if (mode === "strict") {
   if (report.metrics.duplicateProcessorNumbers) failures.push(`duplicateProcessorNumbers=${report.metrics.duplicateProcessorNumbers}`);
 } else if (baseline && baseline.metrics) {
   for (const key of ["duplicateFunctions", "duplicateGlobals", "duplicateProcessorNumbers"]) {
-    if (report.metrics[key] > baseline.metrics[key]) {
+    if (report.metrics[key] > Number(baseline.metrics[key] || 0)) {
       failures.push(`${key} regressed ${baseline.metrics[key]} -> ${report.metrics[key]}`);
     }
   }
 }
 
-console.log(JSON.stringify(report.metrics, null, 2));
+console.log(JSON.stringify({
+  ...report.metrics,
+  ...report.diagnosticMetrics,
+}, null, 2));
+
 if (failures.length) {
   console.error(`ARCHITECTURE GATE FAILED: ${failures.join(", ")}`);
   process.exit(1);
 }
-console.log(`ARCHITECTURE GATE PASSED (${mode})`);
+console.log(`ARCHITECTURE GATE PASSED (${mode}, schema v2)`);

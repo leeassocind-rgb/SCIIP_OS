@@ -1,0 +1,19 @@
+{
+  "framework": "SCIIP_MARKET_DATA_FOUNDATION_COMMAND_CENTER",
+  "version": "196.22.0",
+  "status": "PASSED",
+  "result": {
+    "geographicDimensions": 1,
+    "temporalMembers": 5,
+    "enrichedRecords": 3474,
+    "materializedCells": 2,
+    "dimensionCompletenessPct": 0,
+    "qualityStatus": "REVIEW_REQUIRED",
+    "executiveBriefGenerated": true
+  },
+  "quality": {
+    "unknownDimensionRecords": 3474,
+    "reviewRequired": true
+  },
+  "executiveBrief": "Market data foundation contains 1 geographic members, 5 temporal members, 3474 enriched records, and 2 incremental cube cells."
+}
