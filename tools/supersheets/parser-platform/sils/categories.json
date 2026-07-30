@@ -1,0 +1,12 @@
+[
+  {"id":"BUILDING_DIMENSION","displayName":"Building Dimension","description":"Physical dimensions and area measurements of industrial buildings."},
+  {"id":"BUILDING_SYSTEM","displayName":"Building System","description":"Mechanical and operational building systems."},
+  {"id":"LOADING","displayName":"Loading","description":"Truck loading infrastructure and access positions."},
+  {"id":"PARKING","displayName":"Parking","description":"Automobile and trailer parking capacity."},
+  {"id":"SITE","displayName":"Site","description":"Land, yard, and exterior site characteristics."},
+  {"id":"FIRE_PROTECTION","displayName":"Fire Protection","description":"Fire suppression and sprinkler systems."},
+  {"id":"UTILITIES","displayName":"Utilities","description":"Electrical and utility infrastructure."},
+  {"id":"SUSTAINABILITY","displayName":"Sustainability","description":"Energy and environmental systems."},
+  {"id":"TRANSPORTATION","displayName":"Transportation","description":"Rail and intermodal transportation features."},
+  {"id":"SPECIALIZED_INFRASTRUCTURE","displayName":"Specialized Infrastructure","description":"High-value or specialized industrial infrastructure."}
+]

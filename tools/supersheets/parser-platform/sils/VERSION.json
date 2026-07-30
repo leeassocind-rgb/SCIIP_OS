@@ -1,0 +1,12 @@
+{
+  "name": "SCIIP Industrial Language Standard",
+  "shortName": "SILS",
+  "version": "1.0.0",
+  "schemaVersion": "1.0.0",
+  "status": "development",
+  "description": "Governed industrial language standard for deterministic semantic interpretation across SCIIP_OS ingestion pipelines.",
+  "maintainer": "SCIIP_OS Platform",
+  "executionMode": "DIAGNOSTIC_ONLY",
+  "productionWrites": 0,
+  "commitEnabled": false
+}

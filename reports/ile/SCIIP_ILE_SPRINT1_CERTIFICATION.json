@@ -1,0 +1,21 @@
+{
+  "framework": "SCIIP_ILE_SPRINT1_LANGUAGE_ONTOLOGY_CERTIFICATION",
+  "version": "ile-v1.0.0-sprint1.1",
+  "status": "PASSED",
+  "testsRun": 18,
+  "failures": [],
+  "result": {
+    "silsVersion": "1.0.0",
+    "concepts": 20,
+    "categories": 10,
+    "deterministicLookup": true,
+    "deepImmutability": true,
+    "duplicateSafety": true,
+    "categoryGovernance": true,
+    "executionMode": "DIAGNOSTIC_ONLY",
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "existingParserAuthoritative": true
+  },
+  "command": "node tools/tests/ile/sciip-language-ontology.test.js"
+}

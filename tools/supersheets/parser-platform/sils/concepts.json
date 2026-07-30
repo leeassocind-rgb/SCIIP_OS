@@ -1,0 +1,153 @@
+[
+  {
+    "id":"POWER","displayName":"Electrical Power","category":"UTILITIES","valueType":"NUMBER",
+    "units":["amps","kva","mw"],
+    "aliases":["power","amps","amp service","electrical service","electrical capacity","power service","3 phase power"],
+    "examples":["4,000 Amps","2,000 amp service","277/480V 3 Phase"],
+    "negativeIndicators":["power unknown","power tbd","no power information"],
+    "validation":{"minimum":100,"maximum":200000}
+  },
+  {
+    "id":"CLEAR_HEIGHT","displayName":"Clear Height","category":"BUILDING_DIMENSION","valueType":"LENGTH",
+    "units":["ft","feet"],
+    "aliases":["clear height","clear ht","warehouse clear","ceiling clearance","clearance height"],
+    "examples":["36' Clear","40 ft clear height"],
+    "negativeIndicators":["clear height unknown","clear tbd"],
+    "validation":{"minimum":8,"maximum":100}
+  },
+  {
+    "id":"DOCK_HIGH","displayName":"Dock High Doors","category":"LOADING","valueType":"COUNT",
+    "units":["doors","positions"],
+    "aliases":["dock high","dock high doors","dock doors","dock positions","dh doors","dock loading"],
+    "examples":["48 Dock High Doors","36 DH doors"],
+    "negativeIndicators":["no dock high doors","dock high none"],
+    "validation":{"minimum":0,"maximum":1000}
+  },
+  {
+    "id":"GRADE_LEVEL","displayName":"Grade Level Doors","category":"LOADING","valueType":"COUNT",
+    "units":["doors","positions"],
+    "aliases":["grade level","grade level doors","ground level doors","gl doors","drive in doors","drive-in doors"],
+    "examples":["4 Grade Level Doors","2 GL doors"],
+    "negativeIndicators":["no grade level doors","grade level none"],
+    "validation":{"minimum":0,"maximum":500}
+  },
+  {
+    "id":"TRUCK_COURT","displayName":"Truck Court","category":"SITE","valueType":"LENGTH",
+    "units":["ft","feet"],
+    "aliases":["truck court","truck court depth","loading court","court depth"],
+    "examples":["185' Truck Court","130 ft loading court"],
+    "negativeIndicators":["truck court unknown"],
+    "validation":{"minimum":20,"maximum":1000}
+  },
+  {
+    "id":"AUTO_PARKING","displayName":"Automobile Parking","category":"PARKING","valueType":"COUNT",
+    "units":["spaces","stalls"],
+    "aliases":["auto parking","car parking","automobile parking","parking spaces","auto stalls"],
+    "examples":["265 Auto Parking Spaces","190 car stalls"],
+    "negativeIndicators":["no auto parking"],
+    "validation":{"minimum":0,"maximum":10000}
+  },
+  {
+    "id":"TRAILER_PARKING","displayName":"Trailer Parking","category":"PARKING","valueType":"COUNT",
+    "units":["spaces","stalls"],
+    "aliases":["trailer parking","trailer stalls","trailer spaces","trailer positions"],
+    "examples":["398 Trailer Parking Spaces","120 trailer stalls"],
+    "negativeIndicators":["no trailer parking"],
+    "validation":{"minimum":0,"maximum":10000}
+  },
+  {
+    "id":"ESFR","displayName":"ESFR Sprinkler System","category":"FIRE_PROTECTION","valueType":"BOOLEAN",
+    "units":[],
+    "aliases":["esfr","esfr sprinklers","early suppression fast response","esfr fire protection"],
+    "examples":["ESFR Sprinklers","ESFR fire protection system"],
+    "negativeIndicators":["not esfr","no esfr"]
+  },
+  {
+    "id":"SPRINKLER","displayName":"Sprinkler System","category":"FIRE_PROTECTION","valueType":"TEXT",
+    "units":[],
+    "aliases":["sprinklers","sprinkler system","fire sprinklers","fire suppression system"],
+    "examples":["K-25 Sprinkler System","Fire sprinklers throughout"],
+    "negativeIndicators":["no sprinklers","unsprinklered"]
+  },
+  {
+    "id":"BUILDING_AREA","displayName":"Building Area","category":"BUILDING_DIMENSION","valueType":"AREA",
+    "units":["sf","sq ft","square feet"],
+    "aliases":["building area","building size","building sf","total building area","square footage"],
+    "examples":["664,859 SF Building","Building Size: 250,000 SF"],
+    "negativeIndicators":["building size unknown"],
+    "validation":{"minimum":100,"maximum":10000000}
+  },
+  {
+    "id":"OFFICE_AREA","displayName":"Office Area","category":"BUILDING_DIMENSION","valueType":"AREA",
+    "units":["sf","sq ft","square feet","percent"],
+    "aliases":["office area","office sf","office space","office percentage","office buildout"],
+    "examples":["10,000 SF Office","5% Office"],
+    "negativeIndicators":["no office","office tbd"],
+    "validation":{"minimum":0,"maximum":5000000}
+  },
+  {
+    "id":"WAREHOUSE_AREA","displayName":"Warehouse Area","category":"BUILDING_DIMENSION","valueType":"AREA",
+    "units":["sf","sq ft","square feet"],
+    "aliases":["warehouse area","warehouse sf","warehouse space","warehouse square footage"],
+    "examples":["240,000 SF Warehouse","Warehouse Area: 80,000 SF"],
+    "negativeIndicators":["warehouse area unknown"],
+    "validation":{"minimum":0,"maximum":10000000}
+  },
+  {
+    "id":"LAND_AREA","displayName":"Land Area","category":"SITE","valueType":"AREA",
+    "units":["acres","ac","sf"],
+    "aliases":["land area","site area","lot size","land acres","site acreage"],
+    "examples":["38.2 Acres","Site Area: 12.5 AC"],
+    "negativeIndicators":["land area unknown"],
+    "validation":{"minimum":0,"maximum":100000}
+  },
+  {
+    "id":"YARD","displayName":"Industrial Yard","category":"SITE","valueType":"AREA",
+    "units":["acres","ac","sf"],
+    "aliases":["yard","secured yard","paved yard","fenced yard","outside storage yard"],
+    "examples":["10 Acre Secured Yard","Paved and fenced yard"],
+    "negativeIndicators":["no yard","yard not included"]
+  },
+  {
+    "id":"COLUMN_SPACING","displayName":"Column Spacing","category":"BUILDING_DIMENSION","valueType":"DIMENSION_PAIR",
+    "units":["ft","feet"],
+    "aliases":["column spacing","bay spacing","column grid","bay size"],
+    "examples":["52' x 60' Column Spacing","50 x 50 column grid"],
+    "negativeIndicators":["column spacing unknown"]
+  },
+  {
+    "id":"HVAC","displayName":"HVAC","category":"BUILDING_SYSTEM","valueType":"TEXT",
+    "units":["tons","percent"],
+    "aliases":["hvac","air conditioning","warehouse hvac","heating and cooling","climate controlled"],
+    "examples":["100% HVAC","Warehouse air conditioning"],
+    "negativeIndicators":["no hvac","unconditioned warehouse"]
+  },
+  {
+    "id":"RAIL","displayName":"Rail Service","category":"TRANSPORTATION","valueType":"BOOLEAN",
+    "units":[],
+    "aliases":["rail served","rail service","rail spur","rail access","active rail"],
+    "examples":["Union Pacific Rail Served","Active rail spur"],
+    "negativeIndicators":["no rail","rail inactive"]
+  },
+  {
+    "id":"CRANE","displayName":"Overhead Crane","category":"SPECIALIZED_INFRASTRUCTURE","valueType":"TEXT",
+    "units":["tons"],
+    "aliases":["crane","overhead crane","bridge crane","gantry crane","crane served"],
+    "examples":["20 Ton Bridge Crane","Crane Served Manufacturing Bay"],
+    "negativeIndicators":["no crane","crane removed"]
+  },
+  {
+    "id":"SOLAR","displayName":"Solar Energy System","category":"SUSTAINABILITY","valueType":"TEXT",
+    "units":["kw","mw"],
+    "aliases":["solar","solar panels","solar array","photovoltaic system","rooftop solar"],
+    "examples":["2 MW Rooftop Solar Array","Solar panels installed"],
+    "negativeIndicators":["no solar","solar ready only"]
+  },
+  {
+    "id":"BATTERY_STORAGE","displayName":"Battery Energy Storage","category":"SUSTAINABILITY","valueType":"TEXT",
+    "units":["kwh","mwh","mw"],
+    "aliases":["battery storage","energy storage","bess","battery energy storage system","onsite batteries"],
+    "examples":["5 MWh Battery Storage","BESS installed onsite"],
+    "negativeIndicators":["no battery storage","bess proposed"]
+  }
+]
