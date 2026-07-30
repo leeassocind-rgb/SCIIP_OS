@@ -34,7 +34,24 @@ for(const domain of Object.keys(groups).sort()){
 for(const f of fs.readdirSync(OUT)){if(f.endsWith('.gs')&&!bundleManifest.some(b=>b.file===f)) fs.unlinkSync(path.join(OUT,f));}
 for(const f of html){fs.copyFileSync(path.join(ROOT,f),path.join(OUT,path.basename(f)));}
 fs.copyFileSync(path.join(ROOT,manifestPath),path.join(OUT,'appsscript.json'));
-const claspSrc=path.join(ROOT,'.clasp.json'); if(fs.existsSync(claspSrc)){const c=JSON.parse(fs.readFileSync(claspSrc));c.rootDir='.';fs.writeFileSync(path.join(OUT,'.clasp.json'),JSON.stringify(c,null,2)+'\n');}
+const claspSrc=path.join(ROOT,'.clasp.json');
+const claspOut=path.join(OUT,'.clasp.json');
+if(fs.existsSync(claspSrc)){
+  const c=JSON.parse(fs.readFileSync(claspSrc,'utf8'));
+  c.rootDir='.';
+  fs.writeFileSync(claspOut,JSON.stringify(c,null,2)+'\n');
+}else{
+  // Clean CI checkouts intentionally do not contain the ignored developer
+  // .clasp.json. Emit a deterministic certification config so compilation
+  // can be validated without exposing or requiring deployment credentials.
+  fs.writeFileSync(
+    claspOut,
+    JSON.stringify({
+      scriptId: process.env.SCIIP_APPS_SCRIPT_ID || 'CI_CERTIFICATION_ONLY',
+      rootDir: '.'
+    },null,2)+'\n'
+  );
+}
 const deployable=gs.length+html.length+1; const compiled=bundleManifest.reduce((n,b)=>n+b.sources.length,0)+html.length+1;
 if(compiled!==deployable) throw new Error(`integrity mismatch: deployable=${deployable} compiled=${compiled}`);
 const deploymentFiles=bundleCount+html.length+1; if(deploymentFiles>POLICY.maxDeploymentFiles) throw new Error(`deployment file ceiling exceeded: ${deploymentFiles}>${POLICY.maxDeploymentFiles}`);
