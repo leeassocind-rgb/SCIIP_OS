@@ -1,0 +1,18 @@
+{
+  "framework": "SCIIP_ILE_SPRINT3_GOVERNED_PHRASE_BUILDER_CERTIFICATION",
+  "version": "ile-v1.0.0-sprint3.0",
+  "status": "PASSED",
+  "testsRun": 27,
+  "failures": [],
+  "result": {
+    "deterministicPhraseAssembly": true,
+    "sourceSpanIntegrity": true,
+    "compoundPhraseRecognition": true,
+    "nonOverlappingPhraseGovernance": true,
+    "deepImmutability": true,
+    "executionMode": "DIAGNOSTIC_ONLY",
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "existingParserAuthoritative": true
+  }
+}
