@@ -1,0 +1,21 @@
+{
+  "framework": "SCIIP_ILE_SPRINT5A_END_TO_END_PIPELINE_CERTIFICATION",
+  "version": "ile-v1.0.0-sprint5a.0",
+  "status": "PASSED",
+  "testsRun": 37,
+  "failures": [],
+  "result": {
+    "endToEndContractCompatibility": true,
+    "deterministicOutput": true,
+    "canonicalPropertyModelGeneration": true,
+    "evidencePreservation": true,
+    "stableOrdering": true,
+    "duplicateResolution": true,
+    "validationPropagation": true,
+    "contextPropagation": true,
+    "executionMode": "DIAGNOSTIC_ONLY",
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "existingParserAuthoritative": true
+  }
+}
