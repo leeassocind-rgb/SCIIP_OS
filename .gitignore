@@ -6,3 +6,31 @@ node_modules/
 clasprc.json
 __MACOSX/
 .sciip-backups/
+
+# SCIIP_OS generated artifacts and local state
+.sciip-backups/
+.sciip_backups/
+backups/
+.sciip-cache/
+outputs/
+__MACOSX/
+.DS_Store
+
+# Build output
+/dist/
+/apps/*/dist/
+/apps/*/node_modules/
+
+# Runtime-generated data copies
+/apps/property-command-center/public/production-validation-data/
+
+# High-volume transient evidence
+/reports/supersheets/
+/reports/release-5.6/wave-2.5/
+/reports/release-5.6/wave-2.6/
+/reports/release-5.6/wave-2.7/
+/reports/release-5.6/wave-2.8/
+/reports/release-5.6/wave-2.8.1/
+
+
+/reports/repository-governance/severe-cleanup-audit.json

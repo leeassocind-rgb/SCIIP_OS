@@ -1,6 +1,6 @@
 {
   "name": "sciip-os",
-  "version": "196.17.0",
+  "version": "196.40.0",
   "private": true,
   "description": "Southern California Industrial Intelligence Platform",
   "scripts": {
@@ -264,6 +264,18 @@
     "market-trends:run": "node tools/supersheets/sciip-market-trend-momentum.cjs",
     "market-forecast:run": "node tools/supersheets/sciip-explainable-market-forecasting.cjs",
     "executive-market-command:run": "node tools/supersheets/sciip-executive-market-command-center.cjs",
-    "test:multidimensional-market-intelligence-batch": "node tools/tests/sciip-release5-5-batch3-14-to-3-17-multidimensional-market-intelligence-test.cjs"
+    "test:multidimensional-market-intelligence-batch": "node tools/tests/sciip-release5-5-batch3-14-to-3-17-multidimensional-market-intelligence-test.cjs",
+    "market-geography:run": "node tools/supersheets/sciip-geographic-dimension-hierarchy.cjs",
+    "market-time:run": "node tools/supersheets/sciip-temporal-grain-expansion.cjs",
+    "market-dimensions:run": "node tools/supersheets/sciip-asset-tenant-dimension-enrichment.cjs",
+    "market-cube:incremental": "node tools/supersheets/sciip-incremental-market-cube-materialization.cjs",
+    "market-foundation:command": "node tools/supersheets/sciip-market-data-foundation-command-center.cjs",
+    "test:market-data-foundation-batch": "node tools/tests/sciip-release5-5-batch3-18-to-3-22-market-data-foundation-test.cjs",
+    "test:release5.5:batch3.23-3.30": "node tools/tests/sciip-release5-5-batch3-23-to-3-30-enterprise-knowledge-graph-spatial-intelligence-test.cjs",
+    "architecture:test": "node tools/tests/sciip-architecture-gate-v2-test.js",
+    "architecture:ci": "npm run architecture:test && npm run architecture:report",
+    "repository:audit": "node tools/repository/severe-cleanup-audit.cjs .",
+    "repository:verify": "node tools/repository/verify-severe-cleanup.cjs .",
+    "repository:sync-runtime-data": "node tools/repository/sync-production-validation-assets.cjs ."
   }
 }
