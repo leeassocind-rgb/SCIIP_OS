@@ -1,7 +1,0 @@
-#!/usr/bin/env node
-'use strict';const fs=require('fs'),path=require('path');
-const input=process.argv[2];if(!input)throw new Error('Usage: node sciip-air-cre-review-analyzer.cjs <extraction.json> [output.json]');
-const data=JSON.parse(fs.readFileSync(input,'utf8'));const queue=data.documents.flatMap(d=>(d.reviewQueue||[]).map(x=>({...x,sourceDocument:d.document.fileName,reportDate:d.document.reportDate})));
-const byField={},byReason={},byDocument={};for(const x of queue){byField[x.field]=(byField[x.field]||0)+1;byReason[x.reason]=(byReason[x.reason]||0)+1;byDocument[x.sourceDocument]=(byDocument[x.sourceDocument]||0)+1}
-const fieldStates={};for(const d of data.documents){for(const [field,counts] of Object.entries(d.fieldStateSummary||{})){fieldStates[field]??={};for(const [state,n] of Object.entries(counts))fieldStates[field][state]=(fieldStates[field][state]||0)+n}}
-const result={framework:'SCIIP_AIR_CRE_REVIEW_ANALYZER',version:'196.1.0',status:queue.some(x=>x.critical)?'CRITICAL_REVIEW_REQUIRED':queue.length?'REVIEW_REQUIRED':'CERTIFIED',generatedAt:new Date().toISOString(),summary:{total:queue.length,critical:queue.filter(x=>x.critical).length,byField,byReason,byDocument,fieldStates},queue};const out=process.argv[3]||path.join(path.dirname(input),'SCIIP_AIR_CRE_REVIEW_QUEUE.json');fs.writeFileSync(out,JSON.stringify(result,null,2));console.log(JSON.stringify({framework:result.framework,status:result.status,result:result.summary},null,2));
