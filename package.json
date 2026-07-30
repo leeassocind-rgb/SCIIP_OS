@@ -277,6 +277,18 @@
     "repository:audit": "node tools/repository/severe-cleanup-audit.cjs .",
     "repository:verify": "node tools/repository/verify-severe-cleanup.cjs .",
     "repository:sync-runtime-data": "node tools/repository/sync-production-validation-assets.cjs .",
-    "test:epic3:sprint13": "node tools/tests/sciip-epic3-sprint13-test.js"
+    "test:epic3:sprint13": "node tools/tests/sciip-epic3-sprint13-test.js",
+    "governance:ci": "node tools/tests/sciip-repository-governance-phase5-test.js",
+    "test:epic3:sprint9": "node tools/tests/sciip-epic3-sprint9-test.js",
+    "test:epic3:sprint10": "node tools/tests/sciip-epic3-sprint10-test.js",
+    "test:epic3:sprint12": "node tools/tests/sciip-epic3-sprint12-test.js",
+    "test:epic3:sprint14": "node tools/tests/sciip-epic3-sprint14-test.js",
+    "test:epic4:digital-twin-runtime": "node tools/tests/sciip-epic4-digital-twin-runtime-test.js",
+    "test:epic4:platform-core": "node tools/tests/sciip-epic4-platform-core-test.js",
+    "test:epic4:sprint1": "node tools/tests/sciip-epic4-sprint1-test.js",
+    "test:pi25-27": "node tools/tests/sciip-program-increment25-27-test.js",
+    "test:pi28-30": "node tools/tests/sciip-program-increment28-30-test.js",
+    "test:pi31-33": "node tools/tests/sciip-program-increment31-33-test.js",
+    "test:sprint24": "node tools/tests/sciip-integration-sprint24-test.js"
   }
 }
