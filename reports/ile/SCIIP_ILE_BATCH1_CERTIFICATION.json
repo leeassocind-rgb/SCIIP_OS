@@ -1,0 +1,17 @@
+{
+  "framework": "SCIIP_ILE_BATCH1_PLATFORM_INTEGRATION_CERTIFICATION",
+  "version": "ile-v1.0.0-batch1.0",
+  "status": "PASSED",
+  "testsRun": 54,
+  "failures": [],
+  "result": {
+    "sprint6IntegrationAdapter": true,
+    "sprint7CorpusValidation": true,
+    "sprint8KnowledgeGraphIntegration": true,
+    "executionMode": "DIAGNOSTIC_ONLY",
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "existingParserAuthoritative": true,
+    "existingKnowledgeGraphAuthoritative": true
+  }
+}

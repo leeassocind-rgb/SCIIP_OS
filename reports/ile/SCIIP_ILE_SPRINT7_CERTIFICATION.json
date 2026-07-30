@@ -1,0 +1,18 @@
+{
+  "framework": "SCIIP_ILE_SPRINT7_CORPUS_VALIDATION_CERTIFICATION",
+  "version": "ile-v1.0.0-sprint7.0",
+  "status": "PASSED",
+  "testsRun": 18,
+  "failures": [],
+  "result": {
+    "differentialValidation": true,
+    "agreementMetrics": true,
+    "conceptMetrics": true,
+    "thresholdGovernance": true,
+    "corpusMutation": false,
+    "deterministic": true,
+    "executionMode": "DIAGNOSTIC_ONLY",
+    "productionWrites": 0,
+    "existingParserAuthoritative": true
+  }
+}

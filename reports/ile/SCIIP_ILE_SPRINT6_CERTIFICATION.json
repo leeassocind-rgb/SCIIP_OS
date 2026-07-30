@@ -1,0 +1,18 @@
+{
+  "framework": "SCIIP_ILE_SPRINT6_INTEGRATION_ADAPTER_CERTIFICATION",
+  "version": "ile-v1.0.0-sprint6.0",
+  "status": "PASSED",
+  "testsRun": 18,
+  "failures": [],
+  "result": {
+    "contractTranslationCorrectness": true,
+    "evidencePreservation": true,
+    "confidencePreservation": true,
+    "deterministicTranslation": true,
+    "sideBySideComparison": true,
+    "duplicateSafe": true,
+    "executionMode": "DIAGNOSTIC_ONLY",
+    "productionWrites": 0,
+    "existingParserAuthoritative": true
+  }
+}
