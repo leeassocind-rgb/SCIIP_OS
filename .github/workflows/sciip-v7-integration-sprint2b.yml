@@ -10,5 +10,6 @@ jobs:
           node-version: '20'
       - run: npm run certification:integration-sprint2b
       - run: npm run certification:fast
+      - run: npm run deployment:compile
       - run: npm run deployment:compile:test
       - run: npm run architecture:validate

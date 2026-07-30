@@ -14,5 +14,6 @@ jobs:
           node-version: '20'
       - run: npm ci
       - run: npm run certification:integration-sprint3d
+      - run: npm run deployment:compile
       - run: npm run deployment:compile:test
       - run: npm run architecture:validate

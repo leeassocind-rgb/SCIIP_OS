@@ -14,5 +14,6 @@ jobs:
           node-version: '22'
       - run: npm run certification:integration-sprint1
       - run: npm run certification:integration-sprint1-workspace-wiring
+      - run: npm run deployment:compile
       - run: npm run deployment:compile:test
       - run: npm run architecture:validate

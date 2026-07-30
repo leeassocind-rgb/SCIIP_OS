@@ -11,5 +11,6 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: '20'}
       - run: npm run certification:integration-sprint1
+      - run: npm run deployment:compile
       - run: npm run deployment:compile:test
       - run: npm run architecture:validate

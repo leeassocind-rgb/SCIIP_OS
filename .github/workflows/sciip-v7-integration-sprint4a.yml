@@ -8,5 +8,6 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: '20'}
       - run: node tools/tests/sciip-integration-sprint4a-test.js
+      - run: npm run deployment:compile
       - run: npm run deployment:compile:test
       - run: npm run architecture:governance
