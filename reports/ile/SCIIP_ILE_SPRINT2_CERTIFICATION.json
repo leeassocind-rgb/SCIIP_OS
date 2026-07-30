@@ -1,0 +1,17 @@
+{
+  "framework": "SCIIP_ILE_SPRINT2_PHRASE_TOKENIZER_CERTIFICATION",
+  "version": "ile-v1.0.0-sprint2.0",
+  "status": "PASSED",
+  "testsRun": 24,
+  "failures": [],
+  "result": {
+    "deterministicTokenization": true,
+    "sourceSpanIntegrity": true,
+    "compoundRecognition": true,
+    "deepImmutability": true,
+    "executionMode": "DIAGNOSTIC_ONLY",
+    "productionWrites": 0,
+    "commitEnabled": false,
+    "existingParserAuthoritative": true
+  }
+}
