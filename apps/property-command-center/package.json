@@ -123,7 +123,11 @@
     "test:phase4:sprint43": "node tests/large-supersheet-ingestion-stress.test.mjs",
     "certify:phase4:sprint43": "npm run test:phase4:sprint43",
     "test:phase4:sprint44": "node --expose-gc tests/runtime-performance-memory-profiling.test.mjs",
-    "certify:phase4:sprint44": "npm run test:phase4:sprint44"
+    "certify:phase4:sprint44": "npm run test:phase4:sprint44",
+    "test:phase4:sprint45": "node tests/ingestion-error-recovery-replay.test.mjs",
+    "certify:phase4:sprint45": "npm run test:phase4:sprint45",
+    "test:phase4:sprint46": "node tests/offline-resilience-durable-checkpoints.test.mjs",
+    "certify:phase4:sprint46": "npm run test:phase4:sprint46"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
