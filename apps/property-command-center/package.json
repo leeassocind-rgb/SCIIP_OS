@@ -93,7 +93,11 @@
     "test:phase2:sprint28": "node tests/property-digital-twin-runtime-adapter.test.mjs",
     "certify:phase2:sprint28": "npm run test:phase2:sprint28",
     "test:phase2:sprint29": "node tests/gis-runtime-adapter.test.mjs",
-    "certify:phase2:sprint29": "npm run test:phase2:sprint29"
+    "certify:phase2:sprint29": "npm run test:phase2:sprint29",
+    "test:phase2:sprint30": "node tests/document-intelligence-runtime-adapter.test.mjs",
+    "certify:phase2:sprint30": "npm run test:phase2:sprint30",
+    "test:phase2:sprint31": "node tests/executive-ai-runtime-adapter.test.mjs",
+    "certify:phase2:sprint31": "npm run test:phase2:sprint31"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
