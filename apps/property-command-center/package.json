@@ -152,7 +152,15 @@
     "test:phase5:hotfix58a": "node tests/browser-compatibility-navigation-hotfix.test.mjs",
     "test:phase5:sprint59": "node tests/production-activation-state-runtime.test.mjs",
     "test:phase5:sprint60": "node tests/phase5-activation-operations-certification.test.mjs",
-    "certify:phase5:activation-operations": "npm run test:phase5:hotfix58a && npm run test:phase5:sprint59 && npm run test:phase5:sprint60"
+    "certify:phase5:activation-operations": "npm run test:phase5:hotfix58a && npm run test:phase5:sprint59 && npm run test:phase5:sprint60",
+    "test:phase5:sprint61": "node tests/phase5-evidence-report-hydration.test.mjs",
+    "test:phase5:sprint62": "node tests/phase5-activation-operations-console.test.mjs",
+    "test:phase5:sprint63": "node tests/phase5-evidence-operations-certification.test.mjs",
+    "certify:phase5:evidence-operations": "npm run test:phase5:sprint61 && npm run test:phase5:sprint62 && npm run test:phase5:sprint63",
+    "test:phase5:sprint64": "node tests/live-supersheet-runtime.test.mjs",
+    "test:phase5:sprint65": "node tests/live-property-command-center.test.mjs",
+    "test:phase5:sprint66": "node tests/phase5-end-to-end-production-data-validation.test.mjs",
+    "certify:phase5:production-data": "npm run test:phase5:sprint64 && npm run test:phase5:sprint65 && npm run test:phase5:sprint66"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
