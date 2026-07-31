@@ -14,3 +14,12 @@
 .exec-primary-action span{display:flex;flex-direction:column;align-items:flex-start;gap:3px}
 @media(max-width:1100px){.exec-signal-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.exec-domain-strip{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(max-width:700px){.exec-signal-summary{grid-template-columns:1fr}.exec-domain-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.exec-timeline-experience{max-height:520px;overflow:auto}
+.exec-timeline-filters{display:flex;flex-wrap:wrap;gap:6px;margin:-6px 0 8px}
+.exec-timeline-filters span{font-size:10px;padding:5px 7px;border-radius:999px;background:#f1f5f9;color:#475569}
+.exec-timeline-row{align-items:flex-start}
+.exec-timeline-row div{gap:2px}
+.exec-timeline-row.signal .exec-timeline-dot{background:#2563eb}
+.exec-timeline-row.decision .exec-timeline-dot{background:#7c3aed}
+.exec-timeline-row.workflow .exec-timeline-dot{background:#d97706}
+.exec-timeline-row.opportunity .exec-timeline-dot{background:#059669}
