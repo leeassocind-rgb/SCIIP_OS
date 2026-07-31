@@ -178,7 +178,14 @@
     "test:phase6:sprint79": "node tests/executive-copilot-grounding.test.mjs",
     "test:phase6:sprint80": "node tests/autonomous-opportunity-detection.test.mjs",
     "test:phase6:sprint81": "node tests/enterprise-intelligence-certification.test.mjs",
-    "certify:phase6:enterprise-intelligence": "npm run test:phase6:sprint76 && npm run test:phase6:sprint77 && npm run test:phase6:sprint78 && npm run test:phase6:sprint79 && npm run test:phase6:sprint80 && npm run test:phase6:sprint81"
+    "certify:phase6:enterprise-intelligence": "npm run test:phase6:sprint76 && npm run test:phase6:sprint77 && npm run test:phase6:sprint78 && npm run test:phase6:sprint79 && npm run test:phase6:sprint80 && npm run test:phase6:sprint81",
+    "test:phase6:sprint82": "node tests/enterprise-intelligence-runtime.test.mjs",
+    "test:phase6:sprint83": "node tests/enterprise-intelligence-workspace.test.mjs",
+    "test:phase6:sprint84": "node tests/recommendation-opportunity-review.test.mjs",
+    "test:phase6:sprint85": "node tests/copilot-evidence-panel.test.mjs",
+    "test:phase6:sprint86": "node tests/enterprise-intelligence-ux-certification.test.mjs",
+    "test:phase6:sprint87": "node tests/enterprise-intelligence-productization-certification.test.mjs",
+    "certify:phase6:enterprise-intelligence-productization": "npm run test:phase6:sprint82 && npm run test:phase6:sprint83 && npm run test:phase6:sprint84 && npm run test:phase6:sprint85 && npm run test:phase6:sprint86 && npm run test:phase6:sprint87"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

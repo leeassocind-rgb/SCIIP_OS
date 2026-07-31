@@ -1,0 +1,8 @@
+import React,{useMemo}from'react';import{ShieldCheck}from'lucide-react';
+import{createIntelligenceReviewViewModel}from'../enterprise-intelligence/review/index.js';
+export default function RecommendationOpportunityReview({recommendations=[],opportunities=[]}){
+ const view=useMemo(()=>createIntelligenceReviewViewModel({recommendations,opportunities}),[recommendations,opportunities]);
+ return <section className="production-activation-center"><header className="production-activation-hero"><div><p>Phase 6 Intelligence</p><h1>Recommendation & Opportunity Review</h1><p>Human review of ranked opportunities and evidence-backed recommendations.</p></div><span className="production-activation-badge">APPROVAL REQUIRED</span></header>
+ <section className="production-kpis"><article><span>Total items</span><strong>{view.total}</strong></article><article><span>Review ready</span><strong>{view.reviewReady}</strong></article><article><span>Evidence complete</span><strong>{view.evidenceComplete}</strong></article><article><span>Auto execution</span><strong>OFF</strong></article></section>
+ <div className="production-panel"><header><ShieldCheck size={17}/><h2>Review queue</h2></header>{view.items.length?view.items.map(item=><div className="production-row" key={item.id}><span><strong>{item.kind} · {item.subjectId}</strong><small>{item.action} · score {item.score.toFixed(1)} · {item.evidenceCount} evidence references</small></span><b className="production-pill">{item.status}</b></div>):<div className="production-row"><span><strong>No intelligence items yet</strong><small>Run recommendations and opportunity detection first.</small></span></div>}</div></section>;
+}

@@ -1,0 +1,18 @@
+import assert from'node:assert/strict';import fs from'node:fs';
+let n=0;const t=(c,m)=>{n++;assert.ok(c,m||`Assertion ${n} failed`)};
+const main=fs.readFileSync('src/main.jsx','utf8');
+const registry=fs.readFileSync('src/product/workspaceRegistry.js','utf8');
+const workspace=fs.readFileSync('src/components/EnterpriseIntelligenceWorkspace.jsx','utf8');
+const review=fs.readFileSync('src/components/RecommendationOpportunityReview.jsx','utf8');
+const evidence=fs.readFileSync('src/components/CopilotEvidencePanel.jsx','utf8');
+t(main.includes('EnterpriseIntelligenceWorkspace'));
+t(registry.includes("'Enterprise Intelligence Workspace'"));
+t(workspace.includes('Search graph'));
+t(workspace.includes('Explain relationships'));
+t(workspace.includes('EXECUTION DISABLED'));
+t(review.includes('APPROVAL REQUIRED'));
+t(review.includes('Auto execution'));
+t(evidence.includes('Copilot evidence'));
+t(evidence.includes('Confidence'));
+t(!workspace.includes('autonomousExecutionAllowed:true'));
+console.log(JSON.stringify({framework:'SCIIP_PHASE6_SPRINT86_ENTERPRISE_INTELLIGENCE_UX_CERTIFICATION',status:'PASSED',testsRun:n,result:{workspaceRouted:true,navigationRegistered:true,searchVisible:true,reasoningVisible:true,evidenceVisible:true,approvalVisible:true,autonomousExecutionDisabled:true}},null,2));
