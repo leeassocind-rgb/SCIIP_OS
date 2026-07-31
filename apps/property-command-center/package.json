@@ -83,7 +83,9 @@
     "test:phase2:sprint23": "node tests/executive-governance-decision-to-action-proposal-bridge.test.mjs",
     "certify:phase2:sprint23": "npm run test:phase2:sprint23",
     "test:phase2:sprint24": "node tests/executive-governance-action-proposal-review-orchestration-submission.test.mjs",
-    "certify:phase2:sprint24": "npm run test:phase2:sprint24"
+    "certify:phase2:sprint24": "npm run test:phase2:sprint24",
+    "test:phase2:sprint25": "node tests/executive-runtime-integration.test.mjs",
+    "certify:phase2:sprint25": "npm run test:phase2:sprint25"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
