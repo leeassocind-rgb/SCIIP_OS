@@ -160,7 +160,18 @@
     "test:phase5:sprint64": "node tests/live-supersheet-runtime.test.mjs",
     "test:phase5:sprint65": "node tests/live-property-command-center.test.mjs",
     "test:phase5:sprint66": "node tests/phase5-end-to-end-production-data-validation.test.mjs",
-    "certify:phase5:production-data": "npm run test:phase5:sprint64 && npm run test:phase5:sprint65 && npm run test:phase5:sprint66"
+    "certify:phase5:production-data": "npm run test:phase5:sprint64 && npm run test:phase5:sprint65 && npm run test:phase5:sprint66",
+    "test:phase5:sprint67": "node tests/batch-supersheet-intake.test.mjs",
+    "test:phase5:sprint68": "node tests/property-identity-resolution.test.mjs",
+    "test:phase5:sprint69": "node tests/production-corpus-activation-certification.test.mjs",
+    "certify:phase5:production-corpus": "npm run test:phase5:sprint67 && npm run test:phase5:sprint68 && npm run test:phase5:sprint69",
+    "test:phase5:sprint70": "node tests/cross-supersheet-relationship-stitching.test.mjs",
+    "test:phase5:sprint71": "node tests/enterprise-entity-resolution.test.mjs",
+    "test:phase5:sprint72": "node tests/graph-promotion-pipeline.test.mjs",
+    "test:phase5:sprint73": "node tests/temporal-event-linking.test.mjs",
+    "test:phase5:sprint74": "node tests/production-graph-validation.test.mjs",
+    "test:phase5:sprint75": "node tests/knowledge-graph-activation-certification.test.mjs",
+    "certify:phase5:knowledge-graph": "npm run test:phase5:sprint70 && npm run test:phase5:sprint71 && npm run test:phase5:sprint72 && npm run test:phase5:sprint73 && npm run test:phase5:sprint74 && npm run test:phase5:sprint75"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
