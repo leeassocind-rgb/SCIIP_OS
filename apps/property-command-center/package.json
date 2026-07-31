@@ -91,7 +91,9 @@
     "test:phase2:sprint27": "node tests/knowledge-graph-runtime-adapter.test.mjs",
     "certify:phase2:sprint27": "npm run test:phase2:sprint27",
     "test:phase2:sprint28": "node tests/property-digital-twin-runtime-adapter.test.mjs",
-    "certify:phase2:sprint28": "npm run test:phase2:sprint28"
+    "certify:phase2:sprint28": "npm run test:phase2:sprint28",
+    "test:phase2:sprint29": "node tests/gis-runtime-adapter.test.mjs",
+    "certify:phase2:sprint29": "npm run test:phase2:sprint29"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
