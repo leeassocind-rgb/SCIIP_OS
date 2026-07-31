@@ -61,7 +61,9 @@
     "test:phase2:sprint12": "node tests/executive-semantic-reasoning-explainability.test.mjs",
     "certify:phase2:sprint12": "npm run test:phase2:sprint12",
     "test:phase2:sprint13": "node tests/executive-scenario-simulation-stress-testing.test.mjs",
-    "certify:phase2:sprint13": "npm run test:phase2:sprint13"
+    "certify:phase2:sprint13": "npm run test:phase2:sprint13",
+    "test:phase2:sprint14": "node tests/executive-decision-portfolio-optimization.test.mjs",
+    "certify:phase2:sprint14": "npm run test:phase2:sprint14"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
