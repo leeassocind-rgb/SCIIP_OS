@@ -1,0 +1,4 @@
+export function createExecutiveRecommendationScorecard({recommendationId,decisionId,rankedAlternative,generatedAt=new Date(0).toISOString()}={}){
+  if(!recommendationId||!decisionId||!rankedAlternative)throw new Error('recommendationId, decisionId, and rankedAlternative are required');
+  return Object.freeze({recommendationId,decisionId,generatedAt,alternativeId:rankedAlternative.alternativeId,rank:rankedAlternative.rank,utilityScore:rankedAlternative.utilityScore,evidenceStrength:rankedAlternative.evidenceStrength.strength,constraintStatus:rankedAlternative.constraint.feasible?'SATISFIED':'VIOLATED',sourceSignalIds:Object.freeze([...new Set(rankedAlternative.evidence.flatMap(e=>e.sourceSignalIds||[]))]),readOnly:true,advisoryOnly:true,humanApprovalRequired:true,workflowMutationAllowed:false,autonomousExecutionAllowed:false,decisionTraceability:true});
+}
