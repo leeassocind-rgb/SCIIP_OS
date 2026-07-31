@@ -107,7 +107,19 @@
     "test:phase3:sprint35": "node tests/morning-brief-signal-experience.test.mjs",
     "certify:phase3:sprint35": "npm run test:phase3:sprint35",
     "test:phase3:sprint36": "node tests/executive-timeline-experience.test.mjs",
-    "certify:phase3:sprint36": "npm run test:phase3:sprint36"
+    "certify:phase3:sprint36": "npm run test:phase3:sprint36",
+    "test:phase3:sprint37": "node tests/executive-copilot-experience.test.mjs",
+    "certify:phase3:sprint37": "npm run test:phase3:sprint37",
+    "test:phase3:sprint38": "node tests/gis-maps-experience.test.mjs",
+    "certify:phase3:sprint38": "npm run test:phase3:sprint38",
+    "test:phase3:sprint39": "node tests/property-workspace-experience.test.mjs",
+    "certify:phase3:sprint39": "npm run test:phase3:sprint39",
+    "test:phase3:sprint40": "node tests/search-experience.test.mjs",
+    "certify:phase3:sprint40": "npm run test:phase3:sprint40",
+    "test:phase3:sprint41": "node tests/performance-loading-experience.test.mjs",
+    "certify:phase3:sprint41": "npm run test:phase3:sprint41",
+    "test:phase3:sprint42": "node tests/phase3-responsive-ux-certification.test.mjs",
+    "certify:phase3": "npm run test:phase3:sprint34 && npm run test:phase3:sprint35 && npm run test:phase3:sprint36 && npm run test:phase3:sprint37 && npm run test:phase3:sprint38 && npm run test:phase3:sprint39 && npm run test:phase3:sprint40 && npm run test:phase3:sprint41 && npm run test:phase3:sprint42"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

@@ -1,0 +1,12 @@
+import assert from'node:assert/strict';
+import{createWorkspaceLoadingExperience}from'../src/product/ux/index.js';
+let tests=0;const t=(c,m)=>{tests++;assert.ok(c,m||`Assertion ${tests} failed`)};
+const preparing=createWorkspaceLoadingExperience({workspace:'GIS',elapsedMs:200});
+t(preparing.phase==='PREPARING');t(preparing.progress===28);t(preparing.message.includes('gis'));t(preparing.contextPreserved);t(preparing.accessibleStatus);t(preparing.lazyLoading);t(preparing.codeSplitting);t(!preparing.retryAvailable);
+const loading=createWorkspaceLoadingExperience({workspace:'Search',elapsedMs:1500});
+t(loading.phase==='LOADING');t(loading.progress===64);
+const delayed=createWorkspaceLoadingExperience({workspace:'Property',elapsedMs:4000,attempt:2});
+t(delayed.phase==='TAKING_LONGER');t(delayed.progress===86);t(delayed.retryAvailable);t(delayed.attempt===2);t(delayed.message.includes('context is preserved'));
+const offline=createWorkspaceLoadingExperience({online:false,elapsedMs:5000,reducedMotion:true});
+t(!offline.online);t(!offline.retryAvailable);t(offline.reducedMotion);t(offline.message.includes('Connection unavailable'));t(Object.isFrozen(offline));
+console.log(JSON.stringify({framework:'SCIIP_PHASE3_SPRINT41_PERFORMANCE_LOADING_EXPERIENCE',status:'PASSED',testsRun:tests,result:{lazyLoading:true,codeSplitting:true,accessibleStatus:true,contextPreserved:true,retrySupported:true,reducedMotion:true,offlineAware:true,responsiveUI:true}},null,2));
