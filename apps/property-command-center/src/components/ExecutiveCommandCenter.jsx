@@ -5,10 +5,11 @@ import{readOpportunityLedger}from'../opportunity/opportunityLedger.js';
 import{actionCenterSnapshot}from'../workflow/actionCenterService.js';
 import{aggregateExecutiveState,buildExecutiveBriefing,executiveTimeline}from'../executive/executiveEngine.js';
 import{governedNotifications}from'../executive/notificationCenter.js';
+import{createExecutiveDashboardSignalExperience}from'../executive-command-center/ux/index.js';
 
 const iconMap={ingestion:Database,graph:Network,ai:Sparkles,gis:Map,opportunity:Target,workflow:Workflow};
 const metric=(label,value,suffix='')=><div className="exec-metric"><span>{label}</span><strong>{value}{suffix}</strong></div>;
-export default function ExecutiveCommandCenter({assignment,onNavigate}){
+export default function ExecutiveCommandCenter({assignment,onNavigate,signalState={},signalRuntime={}}){
  const graph=useMemo(()=>readGraph(),[assignment?.id]);
  const opportunityLedger=useMemo(()=>readOpportunityLedger(),[assignment?.id]);
  const workflowSnapshot=useMemo(()=>actionCenterSnapshot(assignment?.id),[assignment?.id]);
@@ -16,9 +17,21 @@ export default function ExecutiveCommandCenter({assignment,onNavigate}){
  const briefing=useMemo(()=>buildExecutiveBriefing(snapshot),[snapshot]);
  const notices=useMemo(()=>governedNotifications(snapshot),[snapshot]);
  const timeline=useMemo(()=>executiveTimeline({workflows:workflowSnapshot.workflows,opportunities:opportunityLedger}),[workflowSnapshot,opportunityLedger]);
+ const signalExperience=useMemo(()=>createExecutiveDashboardSignalExperience({legacySnapshot:snapshot,signalState,signalRuntime}),[snapshot,signalState,signalRuntime]);
  const go=workspace=>onNavigate?.(workspace);
  return <div className="executive-command-center">
   <section className="exec-hero"><div><span className="kicker">SCIIP EXECUTIVE OPERATING VIEW</span><h2>Executive Command Center</h2><p>One governed view of assignment health, evidence, opportunities, workflows, and broker decisions.</p></div><div className="exec-governance"><ShieldCheck size={20}/><div><strong>Broker controlled</strong><span>Evidence-backed recommendations only</span></div></div></section>
+  <section className="exec-signal-summary">
+   <div><span>Signal health</span><strong>{signalExperience.health}</strong><small>{signalExperience.severity} severity</small></div>
+   <div><span>Integrated domains</span><strong>{signalExperience.integratedDomainCount}/7</strong><small>Phase 2 runtime coverage</small></div>
+   <div><span>Traceable signals</span><strong>{signalExperience.sourceSignalCount}</strong><small>{signalExperience.traceable?'Evidence lineage available':'Awaiting live signal lineage'}</small></div>
+   <div><span>Executive review</span><strong>{signalExperience.reviewRequired?'REQUIRED':'CLEAR'}</strong><small>{signalExperience.recommendationCount} recommendations</small></div>
+  </section>
+  <section className="exec-panel exec-signal-status"><header><div><Activity size={18}/><h3>Executive signal status</h3></div><span>{signalExperience.generatedAt?new Date(signalExperience.generatedAt).toLocaleString('en-US'):''}</span></header>
+   <h4>{signalExperience.headline}</h4>
+   <div className="exec-domain-strip">{signalExperience.domains.map(domain=><span key={domain.id} className={domain.status==='INTEGRATED'?'integrated':'ready'}>{domain.label}<strong>{domain.status}</strong></span>)}</div>
+   {signalExperience.immediateAction?<button className="exec-primary-action" onClick={()=>go('Action Center')}><span><strong>Immediate action</strong><small>{signalExperience.immediateAction}</small></span><ArrowRight size={17}/></button>:null}
+  </section>
   <section className="exec-kpi-grid">
    {metric('Properties under review',snapshot.kpis.propertiesUnderReview)}
    {metric('High-confidence opportunities',snapshot.kpis.highConfidenceOpportunities)}
