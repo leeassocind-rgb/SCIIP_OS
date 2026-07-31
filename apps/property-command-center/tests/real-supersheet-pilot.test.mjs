@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import path from 'node:path';
+import { runRealSuperSheetPilot } from '../src/production-activation/pilot/index.js';
+const filePath=process.env.SCIIP_PILOT_SUPERSHEET||process.argv[2];
+if(!filePath)throw new Error('SCIIP_PILOT_SUPERSHEET is required');
+let tests=0;const t=(condition,message)=>{tests++;assert.ok(condition,message||`Assertion ${tests} failed`)};
+const result=runRealSuperSheetPilot({filePath:path.resolve(filePath)});
+t(result.framework==='SCIIP_PHASE5_SPRINT49_REAL_SUPERSHEET_PILOT');t(result.status==='PASSED');
+t(result.fileSize>0);t(result.workbookSheets.length>=5);t(result.workbookSheets.some(item=>item.name==='Industrial'));
+t(result.inputRows>0);t(result.schema.coveragePct>=90);t(result.schema.missing.length<=1);t(result.uniqueCandidateIds>0);
+t(result.actionableRows>0);t(result.stagedRows>0);t(result.duplicateRows>=0);t(result.rejectedRows===0);t(result.filteredRows>0);
+t(result.sourceFiles.length>0);t(result.targetTables.length>0);t(result.eventCategories.length>0);t(result.digest.length===64);
+t(result.durationMs>=0);t(result.duplicateSafe);t(result.approvalRequired);t(!result.masterInventoryMutationAllowed);
+t(Object.values(result.gates).every(Boolean));
+console.log(JSON.stringify({framework:result.framework,status:'PASSED',testsRun:tests,result:{fileName:result.fileName,workbookSheets:result.workbookSheets.length,inputRows:result.inputRows,actionableRows:result.actionableRows,stagedRows:result.stagedRows,duplicateRows:result.duplicateRows,rejectedRows:result.rejectedRows,filteredRows:result.filteredRows,schemaCoveragePct:result.schema.coveragePct,targetTables:result.targetTables,eventCategories:result.eventCategories,duplicateSafe:true,approvalRequired:true,masterInventoryMutationAllowed:false}},null,2));
