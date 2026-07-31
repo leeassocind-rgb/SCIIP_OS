@@ -143,7 +143,12 @@
     "test:phase5:sprint53": "node tests/persistent-approval-queue.test.mjs",
     "operate:phase5:sprint53": "node ../../tools/production-activation/run-persistent-approval-queue.mjs ../..",
     "test:phase5:sprint54": "node tests/governed-canary-writeback.test.mjs",
-    "canary:phase5:sprint54": "node ../../tools/production-activation/run-canary-writeback.mjs ../.."
+    "canary:phase5:sprint54": "node ../../tools/production-activation/run-canary-writeback.mjs ../..",
+    "test:phase5:sprint55": "node tests/persistent-approval-operations-center.test.mjs",
+    "test:phase5:sprint56": "node tests/canary-operations-dashboard.test.mjs",
+    "test:phase5:sprint57": "node tests/multi-stage-promotion-pipeline.test.mjs",
+    "test:phase5:sprint58": "node tests/enterprise-production-command-center.test.mjs",
+    "certify:phase5:operations": "npm run test:phase5:sprint55 && npm run test:phase5:sprint56 && npm run test:phase5:sprint57 && npm run test:phase5:sprint58"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
