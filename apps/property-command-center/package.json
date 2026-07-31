@@ -133,9 +133,13 @@
     "certify:phase4:sprint47": "npm run test:phase4:sprint47 && npm run build && npm run certify:build-output",
     "test:phase4:sprint48": "node --expose-gc tests/phase4-production-hardening-certification.test.mjs",
     "certify:phase4": "npm run test:phase4:sprint43 && npm run test:phase4:sprint44 && npm run test:phase4:sprint45 && npm run test:phase4:sprint46 && npm run test:phase4:sprint47 && npm run build && npm run certify:build-output && npm run test:phase4:sprint48",
-    "test:phase5:sprint49": "node tests/real-supersheet-pilot.test.mjs",
-    "pilot:phase5:sprint49": "node ../../tools/production-activation/run-real-supersheet-pilot.mjs ../..",
-    "test:phase5:sprint50": "node tests/production-activation-readiness.test.mjs"
+    "test:phase5:sprint49": "node ../../tools/production-activation/run-phase5-pilot-test-auto.mjs",
+    "pilot:phase5:sprint49": "node ../../tools/production-activation/run-phase5-pilot-auto.mjs ../..",
+    "test:phase5:sprint50": "node tests/production-activation-readiness.test.mjs",
+    "test:phase5:sprint51": "node tests/multi-supersheet-batch-activation.test.mjs",
+    "batch:phase5:sprint51": "node ../../tools/production-activation/run-multi-supersheet-batch.mjs ../..",
+    "test:phase5:sprint52": "node tests/approval-queue-controlled-writeback.test.mjs",
+    "simulate:phase5:sprint52": "node ../../tools/production-activation/run-approval-writeback-simulation.mjs ../.."
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
