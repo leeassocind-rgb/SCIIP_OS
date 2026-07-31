@@ -1,0 +1,6 @@
+import{queryExecutiveDecisionGraph}from'./executiveKnowledgeQueries.js';
+export function reasonAboutExecutiveDecision(runtime,decisionId){const graph=queryExecutiveDecisionGraph(runtime,decisionId);if(!graph.decision)return Object.freeze({status:'INSUFFICIENT_CONTEXT',confidence:'LOW',findings:Object.freeze([]),readOnly:true});const evidence=graph.entities.filter(e=>e.type==='EvidenceArtifact').length;const outcomes=graph.entities.filter(e=>e.type==='ExecutionOutcome');const recommendations=graph.entities.filter(e=>e.type==='ExecutiveRecommendation');const findings=[];
+if(outcomes.some(x=>x.classification==='FAILED'||x.classification==='CANCELLED'))findings.push('Executive review is warranted based on adverse outcome history.');
+if(recommendations.length) findings.push('At least one evidence-linked executive recommendation is available.');
+if(evidence===0)findings.push('Evidence coverage should be improved before increasing recommendation confidence.');
+return Object.freeze({status:'REASONED',confidence:evidence>=2?'HIGH':evidence===1?'MEDIUM':'LOW',findings:Object.freeze(findings),evidenceCount:evidence,outcomeCount:outcomes.length,recommendationCount:recommendations.length,readOnly:true,workflowMutationAllowed:false,autonomousExecutionAllowed:false});}

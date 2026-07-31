@@ -1,0 +1,3 @@
+function freeze(v){if(Array.isArray(v))return Object.freeze(v.map(freeze));if(v&&typeof v==='object')return Object.freeze(Object.fromEntries(Object.entries(v).map(([k,x])=>[k,freeze(x)])));return v}
+export function createExecutiveEvidenceEntities(input={}){return Object.freeze((input.evidence||[]).filter(x=>x?.id).map(e=>freeze({id:String(e.id),type:'EvidenceArtifact',label:e.label||e.id,source:e.source||'UNKNOWN',uri:e.uri||null,confidence:Number.isFinite(e.confidence)?e.confidence:null,immutable:true})));}
+export function projectExecutiveEvidence(entityStore,input={}){if(!entityStore?.upsert)throw new Error('entity store required');return Object.freeze(createExecutiveEvidenceEntities(input).map(entity=>entityStore.upsert(entity)));}
