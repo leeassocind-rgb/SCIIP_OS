@@ -1,0 +1,2 @@
+import{freeze}from'./_shared.js';
+export function buildExecutiveReadinessRecommendations(gapAnalysis={}){const recommendations=(gapAnalysis.gaps||[]).map((g,i)=>freeze({id:`REC-${i+1}`,gapId:g.id,priority:g.severity,action:g.type==='CAPABILITY'?'Close capability maturity gap':g.type==='DEPENDENCY'?'Resolve required dependency':'Raise readiness dimension to threshold',humanApprovalRequired:true,advisoryOnly:true}));return freeze(recommendations)}

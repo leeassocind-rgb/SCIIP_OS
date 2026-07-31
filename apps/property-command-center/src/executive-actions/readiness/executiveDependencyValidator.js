@@ -1,0 +1,2 @@
+import{freeze,uniq}from'./_shared.js';
+export function validateExecutiveDependencies(input={}){const available=new Set(uniq(input.availableDependencies));const required=uniq(input.requiredDependencies);const checks=required.map(id=>freeze({id,satisfied:available.has(id),critical:!(input.optionalDependencies||[]).includes(id)}));const missing=checks.filter(x=>!x.satisfied).map(x=>x.id);return freeze({checks,required:required.length,satisfied:checks.filter(x=>x.satisfied).length,missing,complete:missing.length===0})}

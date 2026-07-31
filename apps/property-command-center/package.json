@@ -65,7 +65,9 @@
     "test:phase2:sprint14": "node tests/executive-decision-portfolio-optimization.test.mjs",
     "certify:phase2:sprint14": "npm run test:phase2:sprint14",
     "test:phase2:sprint15": "node tests/executive-strategy-orchestration-roadmap-intelligence.test.mjs",
-    "certify:phase2:sprint15": "npm run test:phase2:sprint15"
+    "certify:phase2:sprint15": "npm run test:phase2:sprint15",
+    "test:phase2:sprint16": "node tests/executive-operational-readiness-intelligence.test.mjs",
+    "certify:phase2:sprint16": "npm run test:phase2:sprint16"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
