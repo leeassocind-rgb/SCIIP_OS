@@ -69,7 +69,9 @@
     "test:phase2:sprint16": "node tests/executive-operational-readiness-intelligence.test.mjs",
     "certify:phase2:sprint16": "npm run test:phase2:sprint16",
     "test:phase2:sprint17": "node tests/executive-readiness-remediation-planning.test.mjs",
-    "certify:phase2:sprint17": "npm run test:phase2:sprint17"
+    "certify:phase2:sprint17": "npm run test:phase2:sprint17",
+    "test:phase2:sprint18": "node tests/executive-remediation-verification-readiness-recertification.test.mjs",
+    "certify:phase2:sprint18": "npm run test:phase2:sprint18"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
