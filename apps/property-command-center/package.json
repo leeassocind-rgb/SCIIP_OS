@@ -35,7 +35,9 @@
     "test:phase1:sprint2": "node tests/production-signal-adapter.test.mjs",
     "certify:phase1:sprint2": "npm run test:phase1:sprint2 && npm run build",
     "test:phase1:sprint3": "node tests/executive-insight-signal-subscriber.test.mjs",
-    "certify:phase1:sprint3": "npm run test:phase1:sprint3 && npm run build"
+    "certify:phase1:sprint3": "npm run test:phase1:sprint3 && npm run build",
+    "test:phase1:sprint4": "node tests/executive-engine-signal-integration.test.mjs",
+    "certify:phase1:sprint4": "npm run test:phase1:sprint4 && npm run build"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
