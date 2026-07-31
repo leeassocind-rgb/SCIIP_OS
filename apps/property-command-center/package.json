@@ -139,7 +139,11 @@
     "test:phase5:sprint51": "node tests/multi-supersheet-batch-activation.test.mjs",
     "batch:phase5:sprint51": "node ../../tools/production-activation/run-multi-supersheet-batch.mjs ../..",
     "test:phase5:sprint52": "node tests/approval-queue-controlled-writeback.test.mjs",
-    "simulate:phase5:sprint52": "node ../../tools/production-activation/run-approval-writeback-simulation.mjs ../.."
+    "simulate:phase5:sprint52": "node ../../tools/production-activation/run-approval-writeback-simulation.mjs ../..",
+    "test:phase5:sprint53": "node tests/persistent-approval-queue.test.mjs",
+    "operate:phase5:sprint53": "node ../../tools/production-activation/run-persistent-approval-queue.mjs ../..",
+    "test:phase5:sprint54": "node tests/governed-canary-writeback.test.mjs",
+    "canary:phase5:sprint54": "node ../../tools/production-activation/run-canary-writeback.mjs ../.."
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

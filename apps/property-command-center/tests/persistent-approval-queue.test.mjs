@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {createMemoryDurableStorage} from '../src/production-hardening/offline/index.js';
+import {createPersistentApprovalQueue} from '../src/production-activation/approval-queue/index.js';
+let tests=0;const t=(c,m)=>{tests++;assert.ok(c,m||`Assertion ${tests} failed`)};
+const queue=createPersistentApprovalQueue({storage:createMemoryDurableStorage()});
+const simulation={proposals:[{proposalId:'P-53-1',candidateId:'C-1',sourceFile:'source.xlsx',targetTable:'AVAILABILITY_CURRENT_LIVE',suggestedAction:'UPSERT'},{proposalId:'P-53-2',candidateId:'C-2',sourceFile:'source.xlsx',targetTable:'COMPS_HISTORY_LIVE',suggestedAction:'APPEND'}]};
+const imported=queue.importSimulation(simulation);t(imported.imported===2);t(imported.duplicates===0);t(queue.snapshot().proposals===2);t(queue.snapshot().counts.PENDING_REVIEW===2);t(queue.snapshot().events===2);t(queue.snapshot().persistent);t(queue.snapshot().appendOnlyEvents);
+t(queue.enqueue(simulation.proposals[0]).duplicate);t(queue.snapshot().proposals===2);
+const approved=queue.approve({proposalId:'P-53-1',actorId:'BROKER-1',reason:'Evidence verified.'});t(approved.status==='APPROVED');t(approved.revision===2);t(approved.approvalToken.startsWith('AT-'));t(queue.snapshot().approvalTokensIssued===1);
+const deferred=queue.defer({proposalId:'P-53-2',actorId:'BROKER-2',reason:'Awaiting confirmation.'});t(deferred.status==='DEFERRED');
+const reopened=queue.reopen({proposalId:'P-53-2',actorId:'BROKER-2',reason:'Confirmation received.'});t(reopened.status==='PENDING_REVIEW');
+const rejected=queue.reject({proposalId:'P-53-2',actorId:'BROKER-2',reason:'Evidence conflict.'});t(rejected.status==='REJECTED');
+let invalid=false;try{queue.approve({proposalId:'P-53-1',actorId:'BROKER-1',reason:'Again'})}catch{invalid=true}t(invalid);
+const events=queue.events();t(events.length===6);t(events.every((e,i)=>e.sequence===i+1));t(events.every(e=>e.immutable));t(queue.events({proposalId:'P-53-1'}).length===2);t(queue.snapshot().counts.APPROVED===1);t(queue.snapshot().counts.REJECTED===1);t(!queue.snapshot().destructiveMutationAllowed);
+console.log(JSON.stringify({framework:'SCIIP_PHASE5_SPRINT53_PERSISTENT_APPROVAL_QUEUE',status:'PASSED',testsRun:tests,result:{proposals:queue.snapshot().proposals,events:queue.snapshot().events,approved:1,rejected:1,approvalTokensIssued:1,persistent:true,appendOnlyEvents:true,destructiveMutationAllowed:false}},null,2));
