@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { deterministicBrowserHash, createDeterministicIdentifier, createPromotionPipeline } from '../src/production-activation/promotion/index.js';
+let tests=0; const t=(c,m)=>{tests++;assert.ok(c,m||`Assertion ${tests} failed`)};
+const hashA=deterministicBrowserHash({b:2,a:1}); const hashB=deterministicBrowserHash({b:2,a:1});
+t(hashA===hashB); t(hashA.length===32); t(/^[0-9a-f]+$/.test(hashA)); t(createDeterministicIdentifier('PC',['A','B']).startsWith('PC-'));
+const pipeline=createPromotionPipeline();
+const first=pipeline.promote({from:'DEVELOPMENT',to:'CANARY',artifactDigest:'artifact-1',approvedBy:'BROKER-1',gates:{tests:true,evidence:true}});
+t(first.status==='PROMOTED'); t(first.certificate.certificateId.length===23); t(first.certificate.rollbackCheckpoint.startsWith('PRB-')); t(pipeline.snapshot().browserHash.browserSafe); t(!pipeline.snapshot().browserHash.cryptographic);
+const source=fs.readFileSync(path.resolve('src/production-activation/promotion/promotionPipeline.js'),'utf8');
+t(!source.includes('node:crypto')); t(!source.includes("from'crypto'")); t(!source.includes('from "crypto"'));
+const registry=fs.readFileSync(path.resolve('src/product/workspaceRegistry.js'),'utf8');
+for(const workspace of ['Approval Operations','Canary Operations','Promotion Pipeline','Production Command Center']) t(registry.includes(`'${workspace}'`),`Missing workspace ${workspace}`);
+console.log(JSON.stringify({framework:'SCIIP_PHASE5_HOTFIX58A_BROWSER_COMPATIBILITY_NAVIGATION',status:'PASSED',testsRun:tests,result:{nodeCryptoRemoved:true,deterministicIdentifiers:true,browserSafe:true,cryptographicUse:false,operationalWorkspacesRegistered:4}},null,2));

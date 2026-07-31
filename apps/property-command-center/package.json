@@ -148,7 +148,11 @@
     "test:phase5:sprint56": "node tests/canary-operations-dashboard.test.mjs",
     "test:phase5:sprint57": "node tests/multi-stage-promotion-pipeline.test.mjs",
     "test:phase5:sprint58": "node tests/enterprise-production-command-center.test.mjs",
-    "certify:phase5:operations": "npm run test:phase5:sprint55 && npm run test:phase5:sprint56 && npm run test:phase5:sprint57 && npm run test:phase5:sprint58"
+    "certify:phase5:operations": "npm run test:phase5:sprint55 && npm run test:phase5:sprint56 && npm run test:phase5:sprint57 && npm run test:phase5:sprint58",
+    "test:phase5:hotfix58a": "node tests/browser-compatibility-navigation-hotfix.test.mjs",
+    "test:phase5:sprint59": "node tests/production-activation-state-runtime.test.mjs",
+    "test:phase5:sprint60": "node tests/phase5-activation-operations-certification.test.mjs",
+    "certify:phase5:activation-operations": "npm run test:phase5:hotfix58a && npm run test:phase5:sprint59 && npm run test:phase5:sprint60"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
