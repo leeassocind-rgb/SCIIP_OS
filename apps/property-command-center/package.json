@@ -77,7 +77,9 @@
     "test:phase2:sprint20": "node tests/executive-certification-monitoring-drift-intelligence.test.mjs",
     "certify:phase2:sprint20": "npm run test:phase2:sprint20",
     "test:phase2:sprint21": "node tests/executive-autonomous-governance-advisor.test.mjs",
-    "certify:phase2:sprint21": "npm run test:phase2:sprint21"
+    "certify:phase2:sprint21": "npm run test:phase2:sprint21",
+    "test:phase2:sprint22": "node tests/executive-governance-recommendation-review-decision-ledger.test.mjs",
+    "certify:phase2:sprint22": "npm run test:phase2:sprint22"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
