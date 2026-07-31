@@ -103,7 +103,11 @@
     "test:phase2:sprint33": "node tests/phase2-cross-domain-integration-certification.test.mjs",
     "certify:phase2": "npm run test:phase2:sprint26 && npm run test:phase2:sprint27 && npm run test:phase2:sprint28 && npm run test:phase2:sprint29 && npm run test:phase2:sprint30 && npm run test:phase2:sprint31 && npm run test:phase2:sprint32 && npm run test:phase2:sprint33",
     "test:phase3:sprint34": "node tests/executive-dashboard-signal-experience.test.mjs",
-    "certify:phase3:sprint34": "npm run test:phase3:sprint34"
+    "certify:phase3:sprint34": "npm run test:phase3:sprint34",
+    "test:phase3:sprint35": "node tests/morning-brief-signal-experience.test.mjs",
+    "certify:phase3:sprint35": "npm run test:phase3:sprint35",
+    "test:phase3:sprint36": "node tests/executive-timeline-experience.test.mjs",
+    "certify:phase3:sprint36": "npm run test:phase3:sprint36"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

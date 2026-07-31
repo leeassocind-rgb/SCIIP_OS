@@ -1,1 +1,22 @@
 .morning-brief-center{display:grid;gap:1.25rem;padding:1.5rem}.morning-brief-center header{max-width:880px}.morning-brief-center h1{margin:.15rem 0}.morning-brief-center .eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.68}.brief-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.9rem}.brief-grid article,.brief-detail{border:1px solid rgba(127,127,127,.25);border-radius:14px;padding:1rem;background:rgba(127,127,127,.05)}.brief-grid span{display:block;font-size:.8rem;opacity:.7}.brief-grid strong{display:block;margin-top:.35rem;font-size:1.15rem}.brief-detail h2{margin-top:0;font-size:1.05rem}
+.brief-hero{display:flex;justify-content:space-between;align-items:center;gap:18px}
+.brief-governance{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:#ecfdf5;color:#065f46}
+.brief-governance span{display:flex;flex-direction:column}.brief-governance small{font-size:11px}
+.brief-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+.brief-grid small{display:block;margin-top:4px;opacity:.65}
+.brief-headline{display:flex;justify-content:space-between;align-items:center;gap:18px}
+.brief-headline p{margin:5px 0 0;opacity:.65}
+.brief-headline button,.brief-section button{border:1px solid rgba(127,127,127,.25);background:transparent;border-radius:10px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left}
+.brief-headline button span,.brief-section button span,.brief-section div span{display:flex;flex-direction:column;gap:3px}
+.brief-headline small,.brief-section small{opacity:.65}
+.brief-clear{display:flex;align-items:center;gap:7px;color:#047857}
+.brief-experience-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.brief-section{border:1px solid rgba(127,127,127,.25);border-radius:14px;padding:14px;background:rgba(127,127,127,.04)}
+.brief-section header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.brief-section h3{margin:0;font-size:15px}
+.brief-section button,.brief-section>div{width:100%;margin-top:8px}
+.brief-section>div{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid rgba(127,127,127,.18)}
+.brief-evidence{display:flex;flex-wrap:wrap;gap:7px}
+.brief-evidence span{font-size:11px;padding:5px 8px;border-radius:999px;background:rgba(127,127,127,.10)}
+@media(max-width:1000px){.brief-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.brief-experience-grid{grid-template-columns:1fr}}
+@media(max-width:680px){.brief-hero,.brief-headline{align-items:flex-start;flex-direction:column}.brief-grid{grid-template-columns:1fr 1fr}}
