@@ -47,7 +47,9 @@
     "test:phase2:sprint3": "node tests/executive-workflow-execution-tracking.test.mjs",
     "certify:phase2:sprint3": "npm run test:phase2:sprint3 && npm run build",
     "test:phase2:sprint4": "node tests/executive-execution-outcome-intelligence.test.mjs",
-    "certify:phase2:sprint4": "npm run test:phase2:sprint4 && npm run build"
+    "certify:phase2:sprint4": "npm run test:phase2:sprint4 && npm run build",
+    "test:phase2:sprint5": "node tests/executive-outcome-command-center-integration.test.mjs",
+    "certify:phase2:sprint5": "npm run test:phase2:sprint5 && npm run build"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
