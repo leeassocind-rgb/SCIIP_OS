@@ -119,7 +119,11 @@
     "test:phase3:sprint41": "node tests/performance-loading-experience.test.mjs",
     "certify:phase3:sprint41": "npm run test:phase3:sprint41",
     "test:phase3:sprint42": "node tests/phase3-responsive-ux-certification.test.mjs",
-    "certify:phase3": "npm run test:phase3:sprint34 && npm run test:phase3:sprint35 && npm run test:phase3:sprint36 && npm run test:phase3:sprint37 && npm run test:phase3:sprint38 && npm run test:phase3:sprint39 && npm run test:phase3:sprint40 && npm run test:phase3:sprint41 && npm run test:phase3:sprint42"
+    "certify:phase3": "npm run test:phase3:sprint34 && npm run test:phase3:sprint35 && npm run test:phase3:sprint36 && npm run test:phase3:sprint37 && npm run test:phase3:sprint38 && npm run test:phase3:sprint39 && npm run test:phase3:sprint40 && npm run test:phase3:sprint41 && npm run test:phase3:sprint42",
+    "test:phase4:sprint43": "node tests/large-supersheet-ingestion-stress.test.mjs",
+    "certify:phase4:sprint43": "npm run test:phase4:sprint43",
+    "test:phase4:sprint44": "node --expose-gc tests/runtime-performance-memory-profiling.test.mjs",
+    "certify:phase4:sprint44": "npm run test:phase4:sprint44"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
