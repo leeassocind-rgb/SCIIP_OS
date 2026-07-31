@@ -97,7 +97,11 @@
     "test:phase2:sprint30": "node tests/document-intelligence-runtime-adapter.test.mjs",
     "certify:phase2:sprint30": "npm run test:phase2:sprint30",
     "test:phase2:sprint31": "node tests/executive-ai-runtime-adapter.test.mjs",
-    "certify:phase2:sprint31": "npm run test:phase2:sprint31"
+    "certify:phase2:sprint31": "npm run test:phase2:sprint31",
+    "test:phase2:sprint32": "node tests/workflow-engine-runtime-adapter.test.mjs",
+    "certify:phase2:sprint32": "npm run test:phase2:sprint32",
+    "test:phase2:sprint33": "node tests/phase2-cross-domain-integration-certification.test.mjs",
+    "certify:phase2": "npm run test:phase2:sprint26 && npm run test:phase2:sprint27 && npm run test:phase2:sprint28 && npm run test:phase2:sprint29 && npm run test:phase2:sprint30 && npm run test:phase2:sprint31 && npm run test:phase2:sprint32 && npm run test:phase2:sprint33"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
