@@ -185,7 +185,14 @@
     "test:phase6:sprint85": "node tests/copilot-evidence-panel.test.mjs",
     "test:phase6:sprint86": "node tests/enterprise-intelligence-ux-certification.test.mjs",
     "test:phase6:sprint87": "node tests/enterprise-intelligence-productization-certification.test.mjs",
-    "certify:phase6:enterprise-intelligence-productization": "npm run test:phase6:sprint82 && npm run test:phase6:sprint83 && npm run test:phase6:sprint84 && npm run test:phase6:sprint85 && npm run test:phase6:sprint86 && npm run test:phase6:sprint87"
+    "certify:phase6:enterprise-intelligence-productization": "npm run test:phase6:sprint82 && npm run test:phase6:sprint83 && npm run test:phase6:sprint84 && npm run test:phase6:sprint85 && npm run test:phase6:sprint86 && npm run test:phase6:sprint87",
+    "test:phase7:sprint88": "node tests/unified-command-runtime.test.mjs",
+    "test:phase7:sprint89": "node tests/ask-sciip-command-bar.test.mjs",
+    "test:phase7:sprint90": "node tests/cross-workspace-context-continuity.test.mjs",
+    "test:phase7:sprint91": "node tests/governed-intelligence-handoff.test.mjs",
+    "test:phase7:sprint92": "node tests/unified-executive-command-platform.test.mjs",
+    "test:phase7:sprint93": "node tests/unified-command-platform-certification.test.mjs",
+    "certify:phase7:unified-command": "npm run test:phase7:sprint88 && npm run test:phase7:sprint89 && npm run test:phase7:sprint90 && npm run test:phase7:sprint91 && npm run test:phase7:sprint92 && npm run test:phase7:sprint93"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
