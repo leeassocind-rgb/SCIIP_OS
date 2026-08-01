@@ -231,7 +231,12 @@
     "test:phase12:sprint121": "node tests/enterprise-digital-twin-v2.test.mjs",
     "test:phase12:sprint122": "node tests/executive-mission-control.test.mjs",
     "test:phase12:sprint123": "node tests/enterprise-operating-system-certification.test.mjs",
-    "certify:phase12:batch-a": "npm run test:phase12:sprint121 && npm run test:phase12:sprint122 && npm run test:phase12:sprint123"
+    "certify:phase12:batch-a": "npm run test:phase12:sprint121 && npm run test:phase12:sprint122 && npm run test:phase12:sprint123",
+    "test:phase12:sprint124": "node tests/live-enterprise-os-runtime.test.mjs",
+    "test:phase12:sprint125": "node tests/mission-control-live-data-wiring.test.mjs",
+    "test:phase12:sprint126:user-validation": "node tests/enterprise-os-end-to-end-user-validation.test.mjs",
+    "test:phase12:sprint126": "node tests/enterprise-os-activation-certification.test.mjs",
+    "certify:phase12:batch-b": "npm run test:phase12:sprint124 && npm run test:phase12:sprint125 && npm run test:phase12:sprint126:user-validation && npm run test:phase12:sprint126"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
