@@ -300,7 +300,15 @@
     "test:phase15:sprint167": "node tests/release-performance-analytics.test.mjs",
     "test:phase15:sprint168:user-validation": "node tests/capacity-performance-optimization-user-validation.test.mjs",
     "test:phase15:sprint168": "node tests/capacity-performance-optimization-certification.test.mjs",
-    "certify:phase15:batch-d": "npm run test:phase15:sprint163 && npm run test:phase15:sprint164 && npm run test:phase15:sprint165 && npm run test:phase15:sprint166 && npm run test:phase15:sprint167 && npm run test:phase15:sprint168:user-validation && npm run test:phase15:sprint168"
+    "certify:phase15:batch-d": "npm run test:phase15:sprint163 && npm run test:phase15:sprint164 && npm run test:phase15:sprint165 && npm run test:phase15:sprint166 && npm run test:phase15:sprint167 && npm run test:phase15:sprint168:user-validation && npm run test:phase15:sprint168",
+    "test:phase15:sprint169": "node tests/sprint169.test.mjs",
+    "test:phase15:sprint170": "node tests/sprint170.test.mjs",
+    "test:phase15:sprint171": "node tests/sprint171.test.mjs",
+    "test:phase15:sprint172": "node tests/sprint172.test.mjs",
+    "test:phase15:sprint173": "node tests/sprint173.test.mjs",
+    "test:phase15:sprint174:user-validation": "node tests/final-user-validation.test.mjs",
+    "test:phase15:sprint174": "node tests/final-certification.test.mjs",
+    "certify:phase15:batch-e": "npm run test:phase15:sprint169 && npm run test:phase15:sprint170 && npm run test:phase15:sprint171 && npm run test:phase15:sprint172 && npm run test:phase15:sprint173 && npm run test:phase15:sprint174:user-validation && npm run test:phase15:sprint174"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
