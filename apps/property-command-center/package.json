@@ -223,7 +223,11 @@
     "test:phase11:sprint116": "node tests/enterprise-workflow-orchestrator.test.mjs",
     "test:phase11:sprint117": "node tests/cross-workspace-intelligence-engine.test.mjs",
     "test:phase11:batch-b-certification": "node tests/phase11-batch-b-enterprise-intelligence-certification.test.mjs",
-    "certify:phase11:batch-b": "npm run test:phase11:sprint115 && npm run test:phase11:sprint116 && npm run test:phase11:sprint117 && npm run test:phase11:batch-b-certification"
+    "certify:phase11:batch-b": "npm run test:phase11:sprint115 && npm run test:phase11:sprint116 && npm run test:phase11:sprint117 && npm run test:phase11:batch-b-certification",
+    "test:phase11:sprint118": "node tests/executive-scenario-simulation-engine.test.mjs",
+    "test:phase11:sprint119": "node tests/enterprise-decision-memory.test.mjs",
+    "test:phase11:sprint120": "node tests/executive-intelligence-certification.test.mjs",
+    "certify:phase11:batch-c": "npm run test:phase11:sprint118 && npm run test:phase11:sprint119 && npm run test:phase11:sprint120"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
