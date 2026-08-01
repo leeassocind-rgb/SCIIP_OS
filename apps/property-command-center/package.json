@@ -271,7 +271,20 @@
     "test:phase14:sprint146": "node tests/controlled-traffic-rehearsal.test.mjs",
     "test:phase14:sprint147:user-validation": "node tests/production-launch-rehearsal-user-validation.test.mjs",
     "test:phase14:sprint147": "node tests/production-launch-rehearsal-certification.test.mjs",
-    "certify:phase14:batch-c": "npm run test:phase14:sprint145 && npm run test:phase14:sprint146 && npm run test:phase14:sprint147:user-validation && npm run test:phase14:sprint147"
+    "certify:phase14:batch-c": "npm run test:phase14:sprint145 && npm run test:phase14:sprint146 && npm run test:phase14:sprint147:user-validation && npm run test:phase14:sprint147",
+    "test:phase15:sprint148": "node tests/production-operations-command-center.test.mjs",
+    "test:phase15:sprint149": "node tests/live-operations-telemetry.test.mjs",
+    "test:phase15:sprint150:user-validation": "node tests/production-operations-user-validation.test.mjs",
+    "test:phase15:sprint150": "node tests/production-operations-certification.test.mjs",
+    "certify:phase15:batch-a": "npm run test:phase15:sprint148 && npm run test:phase15:sprint149 && npm run test:phase15:sprint150:user-validation && npm run test:phase15:sprint150",
+    "test:phase15:sprint151": "node tests/enterprise-workflow-orchestrator-v2.test.mjs",
+    "test:phase15:sprint152": "node tests/cross-domain-event-bus.test.mjs",
+    "test:phase15:sprint153": "node tests/intelligent-job-scheduler.test.mjs",
+    "test:phase15:sprint154": "node tests/production-automation-policies.test.mjs",
+    "test:phase15:sprint155": "node tests/human-approval-orchestration.test.mjs",
+    "test:phase15:sprint156:user-validation": "node tests/enterprise-operations-orchestration-user-validation.test.mjs",
+    "test:phase15:sprint156": "node tests/enterprise-operations-orchestration-certification.test.mjs",
+    "certify:phase15:batch-b": "npm run test:phase15:sprint151 && npm run test:phase15:sprint152 && npm run test:phase15:sprint153 && npm run test:phase15:sprint154 && npm run test:phase15:sprint155 && npm run test:phase15:sprint156:user-validation && npm run test:phase15:sprint156"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

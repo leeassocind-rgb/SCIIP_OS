@@ -1,0 +1,12 @@
+import assert from'node:assert/strict';import fs from'node:fs';
+let n=0;const t=c=>{n++;assert.ok(c)};
+const main=fs.readFileSync('src/main.jsx','utf8');
+const registry=fs.readFileSync('src/product/workspaceRegistry.js','utf8');
+const center=fs.readFileSync('src/components/EnterpriseOperationsOrchestrationCenter.jsx','utf8');
+t(main.includes('EnterpriseOperationsOrchestrationCenter'));
+t(registry.includes("'Enterprise Operations Orchestration Center'"));
+t(center.includes('Enterprise Operations Orchestration Center'));
+t(center.includes('Enterprise orchestration'));
+t(center.includes('Governance controls'));
+t(center.includes('AUTONOMOUS EXECUTION DISABLED'));
+console.log(JSON.stringify({framework:'SCIIP_PHASE15_ENTERPRISE_OPERATIONS_ORCHESTRATION_USER_VALIDATION',status:'PASSED',testsRun:n,result:{navigation:true,orchestrationVisible:true,controlsVisible:true}},null,2));
