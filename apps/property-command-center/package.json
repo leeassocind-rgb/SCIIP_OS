@@ -199,7 +199,14 @@
     "test:phase8:sprint97": "node tests/real-time-executive-monitoring.test.mjs",
     "test:phase8:sprint98": "node tests/enterprise-observability.test.mjs",
     "test:phase8:sprint99": "node tests/autonomous-executive-os-certification.test.mjs",
-    "certify:phase8:autonomous-executive-os": "npm run test:phase8:sprint94 && npm run test:phase8:sprint95 && npm run test:phase8:sprint96 && npm run test:phase8:sprint97 && npm run test:phase8:sprint98 && npm run test:phase8:sprint99"
+    "certify:phase8:autonomous-executive-os": "npm run test:phase8:sprint94 && npm run test:phase8:sprint95 && npm run test:phase8:sprint96 && npm run test:phase8:sprint97 && npm run test:phase8:sprint98 && npm run test:phase8:sprint99",
+    "test:phase9:sprint100": "node tests/autonomous-executive-runtime.test.mjs",
+    "test:phase9:sprint101": "node tests/executive-playbook-approval-queue.test.mjs",
+    "test:phase9:sprint102": "node tests/real-time-alert-operations.test.mjs",
+    "test:phase9:sprint103": "node tests/executive-observability-timeline.test.mjs",
+    "test:phase9:sprint104": "node tests/autonomous-executive-operations-center.test.mjs",
+    "test:phase9:sprint105": "node tests/autonomous-executive-operations-certification.test.mjs",
+    "certify:phase9:autonomous-executive-operations": "npm run test:phase9:sprint100 && npm run test:phase9:sprint101 && npm run test:phase9:sprint102 && npm run test:phase9:sprint103 && npm run test:phase9:sprint104 && npm run test:phase9:sprint105"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
