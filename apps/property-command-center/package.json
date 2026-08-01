@@ -213,7 +213,12 @@
     "test:phase10:sprint109": "node tests/canary-outcome-verification.test.mjs",
     "test:phase10:sprint110": "node tests/controlled-autonomy-operations-center.test.mjs",
     "test:phase10:sprint111": "node tests/controlled-autonomous-operations-certification.test.mjs",
-    "certify:phase10:controlled-autonomous-operations": "npm run test:phase10:sprint106 && npm run test:phase10:sprint107 && npm run test:phase10:sprint108 && npm run test:phase10:sprint109 && npm run test:phase10:sprint110 && npm run test:phase10:sprint111"
+    "certify:phase10:controlled-autonomous-operations": "npm run test:phase10:sprint106 && npm run test:phase10:sprint107 && npm run test:phase10:sprint108 && npm run test:phase10:sprint109 && npm run test:phase10:sprint110 && npm run test:phase10:sprint111",
+    "test:phase11:sprint112": "node tests/enterprise-command-bus.test.mjs",
+    "test:phase11:sprint113": "node tests/global-state-synchronization.test.mjs",
+    "test:phase11:sprint114": "node tests/executive-decision-graph.test.mjs",
+    "test:phase11:batch-a-certification": "node tests/phase11-batch-a-enterprise-runtime-certification.test.mjs",
+    "certify:phase11:batch-a": "npm run test:phase11:sprint112 && npm run test:phase11:sprint113 && npm run test:phase11:sprint114 && npm run test:phase11:batch-a-certification"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
