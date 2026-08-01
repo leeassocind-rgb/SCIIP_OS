@@ -251,7 +251,12 @@
     "test:phase13:sprint134": "node tests/adoption-and-workflow-analytics.test.mjs",
     "test:phase13:sprint135:user-validation": "node tests/pilot-improvement-user-validation.test.mjs",
     "test:phase13:sprint135": "node tests/pilot-improvement-certification.test.mjs",
-    "certify:phase13:batch-b": "npm run test:phase13:sprint133 && npm run test:phase13:sprint134 && npm run test:phase13:sprint135:user-validation && npm run test:phase13:sprint135"
+    "certify:phase13:batch-b": "npm run test:phase13:sprint133 && npm run test:phase13:sprint134 && npm run test:phase13:sprint135:user-validation && npm run test:phase13:sprint135",
+    "test:phase13:sprint136": "node tests/governed-improvement-proposals.test.mjs",
+    "test:phase13:sprint137": "node tests/pilot-release-candidate.test.mjs",
+    "test:phase13:sprint138:user-validation": "node tests/pilot-graduation-user-validation.test.mjs",
+    "test:phase13:sprint138": "node tests/pilot-graduation-certification.test.mjs",
+    "certify:phase13:batch-c": "npm run test:phase13:sprint136 && npm run test:phase13:sprint137 && npm run test:phase13:sprint138:user-validation && npm run test:phase13:sprint138"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
