@@ -1,0 +1,4 @@
+import assert from'node:assert/strict';import{certifyAutonomousExecutiveOS}from'../src/autonomous-executive/certification/index.js';
+let n=0;const t=c=>{n++;assert.ok(c)};const r=certifyAutonomousExecutiveOS({stream:{eventSourced:true,duplicateSafe:true,productionExecutionAuthorized:false},orchestration:{planningAutonomous:true,approvalAware:true,executionAuthorized:false},playbooks:{approvalRequired:true,executionAuthorized:false},monitoring:{monitoringActive:true,notificationOnly:true,executionAuthorized:false},observability:{traceable:true,auditable:true,productionExecutionAuthorized:false}});
+t(r.status==='CERTIFIED');t(r.checksPassed===6);t(r.checksFailed===0);t(r.continuousDetection);t(r.autonomousPlanning);t(!r.autonomousExecutionAllowed);t(!r.productionExecutionAuthorized);
+console.log(JSON.stringify({framework:'SCIIP_PHASE8_SPRINT99_AUTONOMOUS_EXECUTIVE_OS_CERTIFICATION',status:'PASSED',testsRun:n,result:r},null,2));

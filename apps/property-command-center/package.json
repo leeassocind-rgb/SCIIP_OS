@@ -192,7 +192,14 @@
     "test:phase7:sprint91": "node tests/governed-intelligence-handoff.test.mjs",
     "test:phase7:sprint92": "node tests/unified-executive-command-platform.test.mjs",
     "test:phase7:sprint93": "node tests/unified-command-platform-certification.test.mjs",
-    "certify:phase7:unified-command": "npm run test:phase7:sprint88 && npm run test:phase7:sprint89 && npm run test:phase7:sprint90 && npm run test:phase7:sprint91 && npm run test:phase7:sprint92 && npm run test:phase7:sprint93"
+    "certify:phase7:unified-command": "npm run test:phase7:sprint88 && npm run test:phase7:sprint89 && npm run test:phase7:sprint90 && npm run test:phase7:sprint91 && npm run test:phase7:sprint92 && npm run test:phase7:sprint93",
+    "test:phase8:sprint94": "node tests/governed-executive-event-stream.test.mjs",
+    "test:phase8:sprint95": "node tests/executive-orchestration-engine.test.mjs",
+    "test:phase8:sprint96": "node tests/governed-executive-playbooks.test.mjs",
+    "test:phase8:sprint97": "node tests/real-time-executive-monitoring.test.mjs",
+    "test:phase8:sprint98": "node tests/enterprise-observability.test.mjs",
+    "test:phase8:sprint99": "node tests/autonomous-executive-os-certification.test.mjs",
+    "certify:phase8:autonomous-executive-os": "npm run test:phase8:sprint94 && npm run test:phase8:sprint95 && npm run test:phase8:sprint96 && npm run test:phase8:sprint97 && npm run test:phase8:sprint98 && npm run test:phase8:sprint99"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
