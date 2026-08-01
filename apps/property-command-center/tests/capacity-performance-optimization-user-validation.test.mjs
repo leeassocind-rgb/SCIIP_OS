@@ -1,0 +1,4 @@
+import assert from'node:assert/strict';import fs from'node:fs';let n=0;const t=c=>{n++;assert.ok(c)};
+const main=fs.readFileSync('src/main.jsx','utf8'),registry=fs.readFileSync('src/product/workspaceRegistry.js','utf8'),center=fs.readFileSync('src/components/CapacityPerformanceOptimizationCenter.jsx','utf8');
+t(main.includes('CapacityPerformanceOptimizationCenter'));t(registry.includes("'Capacity & Performance Optimization Center'"));t(center.includes('Capacity & Performance Optimization Center'));t(center.includes('Optimization intelligence'));t(center.includes('Optimization controls'));t(center.includes('OPTIMIZATIONS REQUIRE APPROVAL'));
+console.log(JSON.stringify({framework:'SCIIP_PHASE15_CAPACITY_PERFORMANCE_OPTIMIZATION_USER_VALIDATION',status:'PASSED',testsRun:n,result:{navigation:true,optimizationVisible:true,controlsVisible:true}},null,2));

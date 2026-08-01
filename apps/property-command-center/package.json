@@ -292,7 +292,15 @@
     "test:phase15:sprint161": "node tests/slo-and-error-budget-management.test.mjs",
     "test:phase15:sprint162:user-validation": "node tests/incident-response-recovery-user-validation.test.mjs",
     "test:phase15:sprint162": "node tests/incident-response-recovery-certification.test.mjs",
-    "certify:phase15:batch-c": "npm run test:phase15:sprint157 && npm run test:phase15:sprint158 && npm run test:phase15:sprint159 && npm run test:phase15:sprint160 && npm run test:phase15:sprint161 && npm run test:phase15:sprint162:user-validation && npm run test:phase15:sprint162"
+    "certify:phase15:batch-c": "npm run test:phase15:sprint157 && npm run test:phase15:sprint158 && npm run test:phase15:sprint159 && npm run test:phase15:sprint160 && npm run test:phase15:sprint161 && npm run test:phase15:sprint162:user-validation && npm run test:phase15:sprint162",
+    "test:phase15:sprint163": "node tests/capacity-forecasting.test.mjs",
+    "test:phase15:sprint164": "node tests/performance-optimization.test.mjs",
+    "test:phase15:sprint165": "node tests/memory-and-cache-governance.test.mjs",
+    "test:phase15:sprint166": "node tests/adaptive-scaling-policies.test.mjs",
+    "test:phase15:sprint167": "node tests/release-performance-analytics.test.mjs",
+    "test:phase15:sprint168:user-validation": "node tests/capacity-performance-optimization-user-validation.test.mjs",
+    "test:phase15:sprint168": "node tests/capacity-performance-optimization-certification.test.mjs",
+    "certify:phase15:batch-d": "npm run test:phase15:sprint163 && npm run test:phase15:sprint164 && npm run test:phase15:sprint165 && npm run test:phase15:sprint166 && npm run test:phase15:sprint167 && npm run test:phase15:sprint168:user-validation && npm run test:phase15:sprint168"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
