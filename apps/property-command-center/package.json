@@ -261,7 +261,12 @@
     "test:phase14:sprint140": "node tests/production-readiness-observability.test.mjs",
     "test:phase14:sprint141:user-validation": "node tests/governed-production-activation-user-validation.test.mjs",
     "test:phase14:sprint141": "node tests/governed-production-activation-certification.test.mjs",
-    "certify:phase14:batch-a": "npm run test:phase14:sprint139 && npm run test:phase14:sprint140 && npm run test:phase14:sprint141:user-validation && npm run test:phase14:sprint141"
+    "certify:phase14:batch-a": "npm run test:phase14:sprint139 && npm run test:phase14:sprint140 && npm run test:phase14:sprint141:user-validation && npm run test:phase14:sprint141",
+    "test:phase14:sprint142": "node tests/production-approval-board.test.mjs",
+    "test:phase14:sprint143": "node tests/staged-go-live-orchestration.test.mjs",
+    "test:phase14:sprint144:user-validation": "node tests/production-go-live-readiness-user-validation.test.mjs",
+    "test:phase14:sprint144": "node tests/production-go-live-readiness-certification.test.mjs",
+    "certify:phase14:batch-b": "npm run test:phase14:sprint142 && npm run test:phase14:sprint143 && npm run test:phase14:sprint144:user-validation && npm run test:phase14:sprint144"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
