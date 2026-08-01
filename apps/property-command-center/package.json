@@ -266,7 +266,12 @@
     "test:phase14:sprint143": "node tests/staged-go-live-orchestration.test.mjs",
     "test:phase14:sprint144:user-validation": "node tests/production-go-live-readiness-user-validation.test.mjs",
     "test:phase14:sprint144": "node tests/production-go-live-readiness-certification.test.mjs",
-    "certify:phase14:batch-b": "npm run test:phase14:sprint142 && npm run test:phase14:sprint143 && npm run test:phase14:sprint144:user-validation && npm run test:phase14:sprint144"
+    "certify:phase14:batch-b": "npm run test:phase14:sprint142 && npm run test:phase14:sprint143 && npm run test:phase14:sprint144:user-validation && npm run test:phase14:sprint144",
+    "test:phase14:sprint145": "node tests/production-launch-authorization-controls.test.mjs",
+    "test:phase14:sprint146": "node tests/controlled-traffic-rehearsal.test.mjs",
+    "test:phase14:sprint147:user-validation": "node tests/production-launch-rehearsal-user-validation.test.mjs",
+    "test:phase14:sprint147": "node tests/production-launch-rehearsal-certification.test.mjs",
+    "certify:phase14:batch-c": "npm run test:phase14:sprint145 && npm run test:phase14:sprint146 && npm run test:phase14:sprint147:user-validation && npm run test:phase14:sprint147"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
