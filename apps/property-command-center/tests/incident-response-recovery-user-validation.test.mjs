@@ -1,0 +1,4 @@
+import assert from'node:assert/strict';import fs from'node:fs';let n=0;const t=c=>{n++;assert.ok(c)};
+const main=fs.readFileSync('src/main.jsx','utf8'),registry=fs.readFileSync('src/product/workspaceRegistry.js','utf8'),center=fs.readFileSync('src/components/IncidentResponseRecoveryCenter.jsx','utf8');
+t(main.includes('IncidentResponseRecoveryCenter'));t(registry.includes("'Incident Response & Recovery Center'"));t(center.includes('Incident Response & Recovery Center'));t(center.includes('Operational resilience'));t(center.includes('Recovery controls'));t(center.includes('MANUAL RECOVERY CONTROL'));
+console.log(JSON.stringify({framework:'SCIIP_PHASE15_INCIDENT_RESPONSE_RECOVERY_USER_VALIDATION',status:'PASSED',testsRun:n,result:{navigation:true,resilienceVisible:true,controlsVisible:true}},null,2));

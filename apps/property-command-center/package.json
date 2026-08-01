@@ -284,7 +284,15 @@
     "test:phase15:sprint155": "node tests/human-approval-orchestration.test.mjs",
     "test:phase15:sprint156:user-validation": "node tests/enterprise-operations-orchestration-user-validation.test.mjs",
     "test:phase15:sprint156": "node tests/enterprise-operations-orchestration-certification.test.mjs",
-    "certify:phase15:batch-b": "npm run test:phase15:sprint151 && npm run test:phase15:sprint152 && npm run test:phase15:sprint153 && npm run test:phase15:sprint154 && npm run test:phase15:sprint155 && npm run test:phase15:sprint156:user-validation && npm run test:phase15:sprint156"
+    "certify:phase15:batch-b": "npm run test:phase15:sprint151 && npm run test:phase15:sprint152 && npm run test:phase15:sprint153 && npm run test:phase15:sprint154 && npm run test:phase15:sprint155 && npm run test:phase15:sprint156:user-validation && npm run test:phase15:sprint156",
+    "test:phase15:sprint157": "node tests/runtime-diagnostics.test.mjs",
+    "test:phase15:sprint158": "node tests/incident-command.test.mjs",
+    "test:phase15:sprint159": "node tests/governed-recovery-orchestration.test.mjs",
+    "test:phase15:sprint160": "node tests/chaos-and-recovery-drills.test.mjs",
+    "test:phase15:sprint161": "node tests/slo-and-error-budget-management.test.mjs",
+    "test:phase15:sprint162:user-validation": "node tests/incident-response-recovery-user-validation.test.mjs",
+    "test:phase15:sprint162": "node tests/incident-response-recovery-certification.test.mjs",
+    "certify:phase15:batch-c": "npm run test:phase15:sprint157 && npm run test:phase15:sprint158 && npm run test:phase15:sprint159 && npm run test:phase15:sprint160 && npm run test:phase15:sprint161 && npm run test:phase15:sprint162:user-validation && npm run test:phase15:sprint162"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
