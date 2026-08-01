@@ -241,7 +241,12 @@
     "test:phase12:sprint128": "node tests/mission-control-operational-ux-hardening.test.mjs",
     "test:phase12:sprint129:user-validation": "node tests/enterprise-os-pilot-user-validation.test.mjs",
     "test:phase12:sprint129": "node tests/enterprise-os-pilot-readiness-certification.test.mjs",
-    "certify:phase12:batch-c": "npm run test:phase12:sprint127 && npm run test:phase12:sprint128 && npm run test:phase12:sprint129:user-validation && npm run test:phase12:sprint129"
+    "certify:phase12:batch-c": "npm run test:phase12:sprint127 && npm run test:phase12:sprint128 && npm run test:phase12:sprint129:user-validation && npm run test:phase12:sprint129",
+    "test:phase13:sprint130": "node tests/controlled-pilot-operations-runtime.test.mjs",
+    "test:phase13:sprint131": "node tests/pilot-telemetry-and-issue-triage.test.mjs",
+    "test:phase13:sprint132:user-validation": "node tests/controlled-pilot-operations-user-validation.test.mjs",
+    "test:phase13:sprint132": "node tests/controlled-pilot-operations-certification.test.mjs",
+    "certify:phase13:batch-a": "npm run test:phase13:sprint130 && npm run test:phase13:sprint131 && npm run test:phase13:sprint132:user-validation && npm run test:phase13:sprint132"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
