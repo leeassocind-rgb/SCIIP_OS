@@ -1,0 +1,10 @@
+import assert from'node:assert/strict';
+import{createCanaryRollbackManager}from'../src/controlled-autonomy/rollback/index.js';
+let n=0;const t=c=>{n++;assert.ok(c)};
+const manager=createCanaryRollbackManager();
+const cp=manager.createCheckpoint({runId:'R1',state:{status:'BEFORE'},evidenceDigest:'D1'});
+t(cp.status==='AVAILABLE');t(cp.state.status==='BEFORE');
+const result=manager.rollback({runId:'R1',reason:'Verification failed',approvedBy:'BROKER-1'});
+t(result.status==='ROLLED_BACK');t(result.restoredState.status==='BEFORE');t(!result.productionMutation);
+t(manager.snapshot().rollbackReady);t(manager.snapshot().checkpoints===1);
+console.log(JSON.stringify({framework:'SCIIP_PHASE10_SPRINT107_CANARY_ROLLBACK_CHECKPOINTS',status:'PASSED',testsRun:n,result:manager.snapshot()},null,2));

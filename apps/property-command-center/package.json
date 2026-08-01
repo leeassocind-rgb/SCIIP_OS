@@ -206,7 +206,14 @@
     "test:phase9:sprint103": "node tests/executive-observability-timeline.test.mjs",
     "test:phase9:sprint104": "node tests/autonomous-executive-operations-center.test.mjs",
     "test:phase9:sprint105": "node tests/autonomous-executive-operations-certification.test.mjs",
-    "certify:phase9:autonomous-executive-operations": "npm run test:phase9:sprint100 && npm run test:phase9:sprint101 && npm run test:phase9:sprint102 && npm run test:phase9:sprint103 && npm run test:phase9:sprint104 && npm run test:phase9:sprint105"
+    "certify:phase9:autonomous-executive-operations": "npm run test:phase9:sprint100 && npm run test:phase9:sprint101 && npm run test:phase9:sprint102 && npm run test:phase9:sprint103 && npm run test:phase9:sprint104 && npm run test:phase9:sprint105",
+    "test:phase10:sprint106": "node tests/governed-canary-execution-runtime.test.mjs",
+    "test:phase10:sprint107": "node tests/canary-rollback-checkpoints.test.mjs",
+    "test:phase10:sprint108": "node tests/approval-to-canary-handoff.test.mjs",
+    "test:phase10:sprint109": "node tests/canary-outcome-verification.test.mjs",
+    "test:phase10:sprint110": "node tests/controlled-autonomy-operations-center.test.mjs",
+    "test:phase10:sprint111": "node tests/controlled-autonomous-operations-certification.test.mjs",
+    "certify:phase10:controlled-autonomous-operations": "npm run test:phase10:sprint106 && npm run test:phase10:sprint107 && npm run test:phase10:sprint108 && npm run test:phase10:sprint109 && npm run test:phase10:sprint110 && npm run test:phase10:sprint111"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
