@@ -227,7 +227,11 @@
     "test:phase11:sprint118": "node tests/executive-scenario-simulation-engine.test.mjs",
     "test:phase11:sprint119": "node tests/enterprise-decision-memory.test.mjs",
     "test:phase11:sprint120": "node tests/executive-intelligence-certification.test.mjs",
-    "certify:phase11:batch-c": "npm run test:phase11:sprint118 && npm run test:phase11:sprint119 && npm run test:phase11:sprint120"
+    "certify:phase11:batch-c": "npm run test:phase11:sprint118 && npm run test:phase11:sprint119 && npm run test:phase11:sprint120",
+    "test:phase12:sprint121": "node tests/enterprise-digital-twin-v2.test.mjs",
+    "test:phase12:sprint122": "node tests/executive-mission-control.test.mjs",
+    "test:phase12:sprint123": "node tests/enterprise-operating-system-certification.test.mjs",
+    "certify:phase12:batch-a": "npm run test:phase12:sprint121 && npm run test:phase12:sprint122 && npm run test:phase12:sprint123"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
