@@ -256,7 +256,12 @@
     "test:phase13:sprint137": "node tests/pilot-release-candidate.test.mjs",
     "test:phase13:sprint138:user-validation": "node tests/pilot-graduation-user-validation.test.mjs",
     "test:phase13:sprint138": "node tests/pilot-graduation-certification.test.mjs",
-    "certify:phase13:batch-c": "npm run test:phase13:sprint136 && npm run test:phase13:sprint137 && npm run test:phase13:sprint138:user-validation && npm run test:phase13:sprint138"
+    "certify:phase13:batch-c": "npm run test:phase13:sprint136 && npm run test:phase13:sprint137 && npm run test:phase13:sprint138:user-validation && npm run test:phase13:sprint138",
+    "test:phase14:sprint139": "node tests/controlled-deployment-runtime.test.mjs",
+    "test:phase14:sprint140": "node tests/production-readiness-observability.test.mjs",
+    "test:phase14:sprint141:user-validation": "node tests/governed-production-activation-user-validation.test.mjs",
+    "test:phase14:sprint141": "node tests/governed-production-activation-certification.test.mjs",
+    "certify:phase14:batch-a": "npm run test:phase14:sprint139 && npm run test:phase14:sprint140 && npm run test:phase14:sprint141:user-validation && npm run test:phase14:sprint141"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
