@@ -1,0 +1,5 @@
+import assert from'node:assert/strict';import fs from'node:fs';import{evaluateModelRetirement}from'../src/enterprise-ai/lifecycle/retirement/index.js';
+let n=0;const t=c=>{n++;assert.ok(c)};const r=evaluateModelRetirement({model:{modelId:'M1'},replacement:{modelId:'M2',certified:true},gates:{trafficMigrated:true,memoryPreserved:true,provenancePreserved:true,rollbackWindowComplete:true},approvals:[{role:'AI_GOVERNANCE',status:'APPROVED'},{role:'SECURITY',status:'APPROVED'},{role:'PRODUCT',status:'APPROVED'},{role:'OPERATIONS',status:'APPROVED'}]});
+t(r.modelId==='M1');t(r.replacementModelId==='M2');t(r.approvalQuorum);t(r.gatesPassed);t(r.status==='READY_FOR_RETIREMENT');t(r.memoryPreserved);t(r.provenancePreserved);t(!r.autoRetire);t(r.productionTrafficGoverned);
+const s=fs.readFileSync('src/components/EnterpriseAILifecycleCenter.jsx','utf8');t(s.includes('Enterprise AI Lifecycle Center'));t(s.includes('AI LIFECYCLE GOVERNED'));
+console.log(JSON.stringify({framework:'SCIIP_PHASE16_SPRINT203_GOVERNED_MODEL_RETIREMENT',status:'PASSED',testsRun:n,result:r},null,2));
