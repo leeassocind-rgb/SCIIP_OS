@@ -308,7 +308,15 @@
     "test:phase15:sprint173": "node tests/sprint173.test.mjs",
     "test:phase15:sprint174:user-validation": "node tests/final-user-validation.test.mjs",
     "test:phase15:sprint174": "node tests/final-certification.test.mjs",
-    "certify:phase15:batch-e": "npm run test:phase15:sprint169 && npm run test:phase15:sprint170 && npm run test:phase15:sprint171 && npm run test:phase15:sprint172 && npm run test:phase15:sprint173 && npm run test:phase15:sprint174:user-validation && npm run test:phase15:sprint174"
+    "certify:phase15:batch-e": "npm run test:phase15:sprint169 && npm run test:phase15:sprint170 && npm run test:phase15:sprint171 && npm run test:phase15:sprint172 && npm run test:phase15:sprint173 && npm run test:phase15:sprint174:user-validation && npm run test:phase15:sprint174",
+    "test:phase16:sprint181": "node tests/enterprise-knowledge-graph-intelligence.test.mjs",
+    "test:phase16:sprint182": "node tests/executive-ai-memory.test.mjs",
+    "test:phase16:sprint183": "node tests/governed-autonomous-research-engine.test.mjs",
+    "test:phase16:sprint184": "node tests/executive-decision-studio.test.mjs",
+    "test:phase16:sprint185": "node tests/cross-workspace-intelligence.test.mjs",
+    "test:phase16:sprint186:user-validation": "node tests/enterprise-ai-user-validation.test.mjs",
+    "test:phase16:sprint186": "node tests/enterprise-ai-certification.test.mjs",
+    "certify:phase16:batch-a": "npm run test:phase16:sprint181 && npm run test:phase16:sprint182 && npm run test:phase16:sprint183 && npm run test:phase16:sprint184 && npm run test:phase16:sprint185 && npm run test:phase16:sprint186:user-validation && npm run test:phase16:sprint186"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
