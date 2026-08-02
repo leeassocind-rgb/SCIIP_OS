@@ -340,7 +340,15 @@
     "test:phase16:sprint203": "node tests/governed-model-retirement.test.mjs",
     "test:phase16:sprint204:user-validation": "node tests/enterprise-ai-lifecycle-user-validation.test.mjs",
     "test:phase16:sprint204": "node tests/enterprise-ai-lifecycle-certification.test.mjs",
-    "certify:phase16:batch-d": "npm run test:phase16:sprint199 && npm run test:phase16:sprint200 && npm run test:phase16:sprint201 && npm run test:phase16:sprint202 && npm run test:phase16:sprint203 && npm run test:phase16:sprint204:user-validation && npm run test:phase16:sprint204"
+    "certify:phase16:batch-d": "npm run test:phase16:sprint199 && npm run test:phase16:sprint200 && npm run test:phase16:sprint201 && npm run test:phase16:sprint202 && npm run test:phase16:sprint203 && npm run test:phase16:sprint204:user-validation && npm run test:phase16:sprint204",
+    "test:phase17:sprint205": "node tests/cross-domain-reasoning-engine.test.mjs",
+    "test:phase17:sprint206": "node tests/evidence-fusion-engine.test.mjs",
+    "test:phase17:sprint207": "node tests/multi-agent-intelligence-orchestration.test.mjs",
+    "test:phase17:sprint208": "node tests/executive-decision-graph.test.mjs",
+    "test:phase17:sprint209": "node tests/strategic-recommendation-engine.test.mjs",
+    "test:phase17:sprint210:user-validation": "node tests/enterprise-intelligence-platform-user-validation.test.mjs",
+    "test:phase17:sprint210": "node tests/enterprise-intelligence-platform-certification.test.mjs",
+    "certify:phase17:batch-a": "npm run test:phase17:sprint205 && npm run test:phase17:sprint206 && npm run test:phase17:sprint207 && npm run test:phase17:sprint208 && npm run test:phase17:sprint209 && npm run test:phase17:sprint210:user-validation && npm run test:phase17:sprint210"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

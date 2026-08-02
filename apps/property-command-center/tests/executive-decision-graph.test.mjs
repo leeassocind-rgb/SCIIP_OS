@@ -1,34 +1,35 @@
 import assert from 'node:assert/strict';
-import { createExecutiveDecisionGraph } from '../src/enterprise-runtime/decision-graph/index.js';
+import { buildExecutiveDecisionGraph } from '../src/intelligence-platform/decision-graph/index.js';
 
-let tests=0;
-const t=(condition,message)=>{tests++;assert.ok(condition,message||`Assertion ${tests} failed`)};
+let n = 0;
+const t = condition => { n++; assert.ok(condition); };
 
-const graph=createExecutiveDecisionGraph();
-const result=graph.recordDecision({
-  decisionId:'DEC-1',
-  label:'Prioritize Rialto pursuit',
-  propertyIds:['P1'],
-  marketIds:['M1'],
-  peopleIds:['PERSON-1'],
-  approvalIds:['APP-1'],
-  outcomeIds:['OUT-1'],
-  evidence:[{source:'SuperSheet',recordId:'ROW-1'}]
+const result = buildExecutiveDecisionGraph({
+  decisionId: 'D1',
+  alternatives: [
+    { alternativeId: 'A', label: 'Acquire' },
+    { alternativeId: 'B', label: 'Lease' }
+  ],
+  evidence: [
+    { alternativeId: 'A', confidence: .9 },
+    { alternativeId: 'A', confidence: .8 },
+    { alternativeId: 'B', confidence: .7 }
+  ],
+  dependencies: [{ from: 'A', to: 'B', type: 'COMPARED_WITH' }]
 });
 
-const query=graph.queryDecision('DEC-1');
-t(result.relatedNodes===5);
-t(query.relationships.length===5);
-t(query.relatedNodes.length===5);
-t(query.evidence.length===1);
-t(graph.snapshot().queryable);
-t(graph.snapshot().evidenceLinked);
-t(graph.snapshot().appendOnly);
-t(!graph.snapshot().productionExecutionAuthorized);
+t(result.nodeCount === 2);
+t(result.edgeCount === 1);
+t(result.nodes[0].evidenceCount === 2);
+t(result.nodes[0].confidence === .85);
+t(result.evidenceLinked);
+t(result.permanentHistory);
+t(result.explainable);
+t(!result.productionExecutionAuthorized);
 
 console.log(JSON.stringify({
-  framework:'SCIIP_PHASE11_SPRINT114_EXECUTIVE_DECISION_GRAPH',
-  status:'PASSED',
-  testsRun:tests,
-  result:graph.snapshot()
-},null,2));
+  framework: 'SCIIP_PHASE17_SPRINT208_EXECUTIVE_DECISION_GRAPH',
+  status: 'PASSED',
+  testsRun: n,
+  result
+}, null, 2));
