@@ -316,7 +316,15 @@
     "test:phase16:sprint185": "node tests/cross-workspace-intelligence.test.mjs",
     "test:phase16:sprint186:user-validation": "node tests/enterprise-ai-user-validation.test.mjs",
     "test:phase16:sprint186": "node tests/enterprise-ai-certification.test.mjs",
-    "certify:phase16:batch-a": "npm run test:phase16:sprint181 && npm run test:phase16:sprint182 && npm run test:phase16:sprint183 && npm run test:phase16:sprint184 && npm run test:phase16:sprint185 && npm run test:phase16:sprint186:user-validation && npm run test:phase16:sprint186"
+    "certify:phase16:batch-a": "npm run test:phase16:sprint181 && npm run test:phase16:sprint182 && npm run test:phase16:sprint183 && npm run test:phase16:sprint184 && npm run test:phase16:sprint185 && npm run test:phase16:sprint186:user-validation && npm run test:phase16:sprint186",
+    "test:phase16:sprint187": "node tests/enterprise-model-routing.test.mjs",
+    "test:phase16:sprint188": "node tests/prompt-and-policy-governance.test.mjs",
+    "test:phase16:sprint189": "node tests/governed-agent-orchestration.test.mjs",
+    "test:phase16:sprint190": "node tests/ai-provenance-and-traceability.test.mjs",
+    "test:phase16:sprint191": "node tests/continuous-ai-evaluation.test.mjs",
+    "test:phase16:sprint192:user-validation": "node tests/enterprise-ai-runtime-user-validation.test.mjs",
+    "test:phase16:sprint192": "node tests/enterprise-ai-runtime-certification.test.mjs",
+    "certify:phase16:batch-b": "npm run test:phase16:sprint187 && npm run test:phase16:sprint188 && npm run test:phase16:sprint189 && npm run test:phase16:sprint190 && npm run test:phase16:sprint191 && npm run test:phase16:sprint192:user-validation && npm run test:phase16:sprint192"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
