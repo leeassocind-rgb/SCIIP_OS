@@ -364,7 +364,15 @@
     "test:phase17:sprint221": "node tests/executive-assignment-intelligence.test.mjs",
     "test:phase17:sprint222:user-validation": "node tests/assignment-relationship-intelligence-user-validation.test.mjs",
     "test:phase17:sprint222": "node tests/assignment-relationship-intelligence-certification.test.mjs",
-    "certify:phase17:batch-c": "npm run test:phase17:sprint217 && npm run test:phase17:sprint218 && npm run test:phase17:sprint219 && npm run test:phase17:sprint220 && npm run test:phase17:sprint221 && npm run test:phase17:sprint222:user-validation && npm run test:phase17:sprint222"
+    "certify:phase17:batch-c": "npm run test:phase17:sprint217 && npm run test:phase17:sprint218 && npm run test:phase17:sprint219 && npm run test:phase17:sprint220 && npm run test:phase17:sprint221 && npm run test:phase17:sprint222:user-validation && npm run test:phase17:sprint222",
+    "test:phase17:sprint223": "node tests/executive-assignment-orchestration.test.mjs",
+    "test:phase17:sprint224": "node tests/deal-requirement-decision-support.test.mjs",
+    "test:phase17:sprint225": "node tests/relationship-action-planning.test.mjs",
+    "test:phase17:sprint226": "node tests/broker-workflow-intelligence.test.mjs",
+    "test:phase17:sprint227": "node tests/executive-assignment-command-center.test.mjs",
+    "test:phase17:sprint228:user-validation": "node tests/executive-assignment-operations-user-validation.test.mjs",
+    "test:phase17:sprint228": "node tests/executive-assignment-operations-certification.test.mjs",
+    "certify:phase17:batch-d": "npm run test:phase17:sprint223 && npm run test:phase17:sprint224 && npm run test:phase17:sprint225 && npm run test:phase17:sprint226 && npm run test:phase17:sprint227 && npm run test:phase17:sprint228:user-validation && npm run test:phase17:sprint228"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
