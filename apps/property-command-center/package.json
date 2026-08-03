@@ -452,7 +452,15 @@
     "test:phase18:sprint287": "node tests/production-validation-command-center.test.mjs",
     "test:phase18:sprint288:user-validation": "node tests/phase18-supersheet-production-validation-user-validation.test.mjs",
     "test:phase18:sprint288": "node tests/phase18-supersheet-production-validation-certification.test.mjs",
-    "certify:phase18:batch-a": "npm run test:phase18:sprint283 && npm run test:phase18:sprint284 && npm run test:phase18:sprint285 && npm run test:phase18:sprint286 && npm run test:phase18:sprint287 && npm run test:phase18:sprint288:user-validation && npm run test:phase18:sprint288"
+    "certify:phase18:batch-a": "npm run test:phase18:sprint283 && npm run test:phase18:sprint284 && npm run test:phase18:sprint285 && npm run test:phase18:sprint286 && npm run test:phase18:sprint287 && npm run test:phase18:sprint288:user-validation && npm run test:phase18:sprint288",
+    "test:phase18:sprint289": "node tests/live-supersheet-ingestion-orchestrator.test.mjs",
+    "test:phase18:sprint290": "node tests/cross-sheet-referential-integrity.test.mjs",
+    "test:phase18:sprint291": "node tests/incremental-delta-ingestion.test.mjs",
+    "test:phase18:sprint292": "node tests/large-scale-ingestion-rehearsal.test.mjs",
+    "test:phase18:sprint293": "node tests/enterprise-ingestion-command-center.test.mjs",
+    "test:phase18:sprint294:user-validation": "node tests/phase18-enterprise-data-ingestion-user-validation.test.mjs",
+    "test:phase18:sprint294": "node tests/phase18-enterprise-data-ingestion-certification.test.mjs",
+    "certify:phase18:batch-b": "npm run test:phase18:sprint289 && npm run test:phase18:sprint290 && npm run test:phase18:sprint291 && npm run test:phase18:sprint292 && npm run test:phase18:sprint293 && npm run test:phase18:sprint294:user-validation && npm run test:phase18:sprint294"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
