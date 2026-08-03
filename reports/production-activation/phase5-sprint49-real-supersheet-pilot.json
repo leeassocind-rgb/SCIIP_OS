@@ -1,0 +1,441 @@
+{
+  "framework": "SCIIP_PHASE5_SPRINT49_REAL_SUPERSHEET_PILOT",
+  "status": "PASSED",
+  "generatedAt": "2026-07-31T21:25:18.200Z",
+  "fileName": "SCIIP_Bridge_2026-06-17.xlsx",
+  "fileSize": 78035,
+  "workbookSheets": [
+    {
+      "name": "Summary",
+      "rowCount": 19
+    },
+    {
+      "name": "DAILY_ACTIVITY_LOG",
+      "rowCount": 55
+    },
+    {
+      "name": "FILTERED_ACTIVITY",
+      "rowCount": 18
+    },
+    {
+      "name": "APPROVAL_QUEUE",
+      "rowCount": 18
+    },
+    {
+      "name": "Industrial",
+      "rowCount": 45
+    },
+    {
+      "name": "Land",
+      "rowCount": 10
+    },
+    {
+      "name": "Change_Log",
+      "rowCount": 55
+    },
+    {
+      "name": "DROPPED_SUPERSHEET_ROWS",
+      "rowCount": 0
+    }
+  ],
+  "pilotSheet": "Industrial",
+  "inputRows": 45,
+  "uniqueCandidateIds": 45,
+  "actionableRows": 15,
+  "stagedRows": 15,
+  "duplicateRows": 0,
+  "rejectedRows": 0,
+  "filteredRows": 30,
+  "rejectedRowPct": 0,
+  "schema": {
+    "coveragePct": 100,
+    "present": [
+      "candidate_id",
+      "report_date",
+      "property_type",
+      "raw_address",
+      "city",
+      "reported_sf",
+      "event_category",
+      "suggested_action",
+      "target_table",
+      "source_file"
+    ],
+    "missing": []
+  },
+  "eventCategories": [
+    "New Listing"
+  ],
+  "targetTables": [
+    "AVAILABILITY_CURRENT_LIVE",
+    "COMPS_HISTORY_LIVE"
+  ],
+  "sourceFiles": [
+    "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf"
+  ],
+  "digest": "b917bbe83e6bdb725a3c5f70a2bf2df4c259011fa91c34b54c205af36ae2ca8d",
+  "durationMs": 22.02,
+  "gates": {
+    "realWorkbook": true,
+    "requiredSheet": true,
+    "schemaCoverage": true,
+    "duplicateAccounting": true,
+    "rejectedRows": true,
+    "stagingControlled": true,
+    "masterInventoryMutationBlocked": true
+  },
+  "duplicateSafe": true,
+  "approvalRequired": true,
+  "masterInventoryMutationAllowed": false,
+  "actionable": [
+    {
+      "rowNumber": 2,
+      "candidateId": "DA-20260617-001",
+      "address": "7261 E Slauson Ave",
+      "city": "Commerce",
+      "buildingSf": 128833,
+      "eventCategory": "New Listing",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "1",
+      "eligible": true
+    },
+    {
+      "rowNumber": 3,
+      "candidateId": "DA-20260617-002",
+      "address": "5928 S Malt Ave",
+      "city": "Commerce",
+      "buildingSf": 66967,
+      "eventCategory": "New Listing",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "1",
+      "eligible": true
+    },
+    {
+      "rowNumber": 8,
+      "candidateId": "DA-20260617-009",
+      "address": "15928 Commerce Wy",
+      "city": "Cerritos",
+      "buildingSf": 163290,
+      "eventCategory": "New Listing",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "3",
+      "eligible": true
+    },
+    {
+      "rowNumber": 9,
+      "candidateId": "DA-20260617-010",
+      "address": "1241 Old Temescal Rd, Unit 103",
+      "city": "Corona",
+      "buildingSf": 206024,
+      "eventCategory": "",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "3",
+      "eligible": true
+    },
+    {
+      "rowNumber": 11,
+      "candidateId": "DA-20260617-012",
+      "address": "12772 Monarch St",
+      "city": "Garden Grove",
+      "buildingSf": 175429,
+      "eventCategory": "",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "3",
+      "eligible": true
+    },
+    {
+      "rowNumber": 12,
+      "candidateId": "DA-20260617-013",
+      "address": "12752 Monarch St",
+      "city": "Garden Grove",
+      "buildingSf": 175429,
+      "eventCategory": "",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "3",
+      "eligible": true
+    },
+    {
+      "rowNumber": 21,
+      "candidateId": "DA-20260617-022",
+      "address": "1656 S Cucamonga Ave",
+      "city": "Ontario",
+      "buildingSf": 210703,
+      "eventCategory": "New Listing",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "6",
+      "eligible": true
+    },
+    {
+      "rowNumber": 22,
+      "candidateId": "DA-20260617-023",
+      "address": "1241 Old Temescal Rd, Unit 103",
+      "city": "Corona",
+      "buildingSf": 206024,
+      "eventCategory": "",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "6",
+      "eligible": true
+    },
+    {
+      "rowNumber": 24,
+      "candidateId": "DA-20260617-025",
+      "address": "2260 S Haven Ave, Unit B",
+      "city": "Ontario",
+      "buildingSf": 163291,
+      "eventCategory": "",
+      "suggestedAction": "Create Comp",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "6",
+      "eligible": true
+    },
+    {
+      "rowNumber": 30,
+      "candidateId": "DA-20260617-036",
+      "address": "15928 Commerce Wy",
+      "city": "Cerritos",
+      "buildingSf": 163290,
+      "eventCategory": "New Listing",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "9",
+      "eligible": true
+    },
+    {
+      "rowNumber": 37,
+      "candidateId": "DA-20260617-045",
+      "address": "2222 Rosemead Blvd",
+      "city": "South El Monte",
+      "buildingSf": 156877,
+      "eventCategory": "New Listing",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "11",
+      "eligible": true
+    },
+    {
+      "rowNumber": 38,
+      "candidateId": "DA-20260617-046",
+      "address": "2222 Rosemead Blvd",
+      "city": "South El Monte",
+      "buildingSf": 156877,
+      "eventCategory": "New Listing",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "11",
+      "eligible": true
+    },
+    {
+      "rowNumber": 39,
+      "candidateId": "DA-20260617-047",
+      "address": "2222 Rosemead Blvd",
+      "city": "South El Monte",
+      "buildingSf": 156877,
+      "eventCategory": "",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "11",
+      "eligible": true
+    },
+    {
+      "rowNumber": 44,
+      "candidateId": "DA-20260617-052",
+      "address": "2610 Columbia St, Unit A",
+      "city": "Torrance",
+      "buildingSf": 95353,
+      "eventCategory": "",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "13",
+      "eligible": true
+    },
+    {
+      "rowNumber": 45,
+      "candidateId": "DA-20260617-053",
+      "address": "2610 Columbia St, Unit B",
+      "city": "Torrance",
+      "buildingSf": 95353,
+      "eventCategory": "",
+      "suggestedAction": "Update Availability",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "13",
+      "eligible": true
+    }
+  ],
+  "rejected": [],
+  "filtered": [
+    {
+      "rowNumber": 4,
+      "candidateId": "DA-20260617-003",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 5,
+      "candidateId": "DA-20260617-004",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 6,
+      "candidateId": "DA-20260617-005",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 7,
+      "candidateId": "DA-20260617-006",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 10,
+      "candidateId": "DA-20260617-011",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 13,
+      "candidateId": "DA-20260617-014",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 14,
+      "candidateId": "DA-20260617-015",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 15,
+      "candidateId": "DA-20260617-016",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 16,
+      "candidateId": "DA-20260617-017",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 17,
+      "candidateId": "DA-20260617-018",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 18,
+      "candidateId": "DA-20260617-019",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 19,
+      "candidateId": "DA-20260617-020",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 20,
+      "candidateId": "DA-20260617-021",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 23,
+      "candidateId": "DA-20260617-024",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 25,
+      "candidateId": "DA-20260617-026",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 26,
+      "candidateId": "DA-20260617-027",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 27,
+      "candidateId": "DA-20260617-028",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 28,
+      "candidateId": "DA-20260617-029",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 29,
+      "candidateId": "DA-20260617-030",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 31,
+      "candidateId": "DA-20260617-037",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 32,
+      "candidateId": "DA-20260617-038",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 33,
+      "candidateId": "DA-20260617-039",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 34,
+      "candidateId": "DA-20260617-040",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 35,
+      "candidateId": "DA-20260617-041",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 36,
+      "candidateId": "DA-20260617-042",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 40,
+      "candidateId": "DA-20260617-048",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 41,
+      "candidateId": "DA-20260617-049",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 42,
+      "candidateId": "DA-20260617-050",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 43,
+      "candidateId": "DA-20260617-051",
+      "reason": "BELOW_50000_SF"
+    },
+    {
+      "rowNumber": 46,
+      "candidateId": "DA-20260617-054",
+      "reason": "BELOW_50000_SF"
+    }
+  ],
+  "duplicates": []
+}

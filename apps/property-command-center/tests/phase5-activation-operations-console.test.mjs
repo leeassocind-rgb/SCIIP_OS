@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict'; import {createActivationOperationsViewModel} from '../src/production-activation/console/index.js';
+let n=0;const t=(x,m)=>{n++;assert.ok(x,m)}; const state={revision:4,approval:{approved:2},canary:{status:'ROLLED_BACK_VERIFIED'},promotion:{productionDefaultDenied:true},build:{passed:true}};
+const current=[{type:'BUILD',source:'build.json',generatedAt:'2026-07-31T21:30:00Z'}];const a=createActivationOperationsViewModel(state,current,{now:new Date('2026-07-31T22:00:00Z')});t(a.health==='OPERATIONAL');t(a.staleReports===0);t(a.gates.buildPassed);t(a.gates.canaryVerified);t(!a.productionExecutionAuthorized);
+const stale=createActivationOperationsViewModel(state,[{type:'BUILD',generatedAt:'2026-07-31T19:00:00Z'}],{now:new Date('2026-07-31T22:00:00Z')});t(stale.health==='ATTENTION_REQUIRED');t(stale.staleReports===1);
+console.log(JSON.stringify({framework:'SCIIP_PHASE5_SPRINT62_UNIFIED_ACTIVATION_OPERATIONS_CONSOLE',status:'PASSED',testsRun:n,result:{currentHealth:a.health,staleHealth:stale.health,productionExecutionAuthorized:false}},null,2));

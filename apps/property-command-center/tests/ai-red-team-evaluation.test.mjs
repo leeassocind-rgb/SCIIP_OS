@@ -1,0 +1,4 @@
+import assert from'node:assert/strict';import{evaluateAIRedTeam}from'../src/enterprise-ai/assurance/red-team/index.js';
+let n=0;const t=c=>{n++;assert.ok(c)};const r=evaluateAIRedTeam({minimumPassRate:.75,tests:[{testId:'T1',category:'PROMPT_INJECTION',passed:true,severity:'CRITICAL'},{testId:'T2',category:'DATA_LEAKAGE',passed:true,severity:'CRITICAL'},{testId:'T3',category:'TOOL_MISUSE',passed:true,severity:'HIGH'},{testId:'T4',category:'HALLUCINATION',passed:false,severity:'MEDIUM'}]});
+t(r.testsRun===4);t(r.testsPassed===3);t(r.testsFailed===1);t(r.passRate===.75);t(r.criticalFailures===0);t(r.status==='PASSED');t(r.releaseGate);t(!r.autonomousPromotionAllowed);
+console.log(JSON.stringify({framework:'SCIIP_PHASE16_SPRINT194_AI_RED_TEAM_EVALUATION',status:'PASSED',testsRun:n,result:r},null,2));

@@ -1,0 +1,776 @@
+{
+  "framework": "SCIIP_PHASE5_SPRINT52_APPROVAL_QUEUE_CONTROLLED_WRITEBACK",
+  "status": "SIMULATION_CERTIFIED",
+  "generatedAt": "2026-07-31T21:25:20.589Z",
+  "reviewer": "PHASE5_PILOT_REVIEWER",
+  "proposals": [
+    {
+      "proposalId": "WB-02fd965f25cbbc37",
+      "candidateId": "DA-20260617-001",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "7261 E Slauson Ave",
+      "city": "Commerce",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "1",
+      "beforeStateDigest": "4f8b4cfda58a324f6ce65c446bee5d6eed8f02dc5f9c2f8bcde69262c0611b0c",
+      "proposedStateDigest": "1ede003b042113b1e16a2902e3f85283c3239d25bbbb737697abc9443c9d737a",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-0adf60def2f7f4fb",
+      "candidateId": "DA-20260617-002",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "5928 S Malt Ave",
+      "city": "Commerce",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "1",
+      "beforeStateDigest": "b69d5bdecc69a7f1e29109b3b5e873bdffacec467e410e4c983f100b38c4034c",
+      "proposedStateDigest": "64976bf14fd084bcb4245a3dd3f6d4a35d19b9859485115d0fecad10c6f460e7",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-553e769623af17d7",
+      "candidateId": "DA-20260617-009",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "15928 Commerce Wy",
+      "city": "Cerritos",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "3",
+      "beforeStateDigest": "14d54cd0a48b5e72ccb6e517ec122d0f296483c97169fa498f791cb4806b8880",
+      "proposedStateDigest": "e57ea94810a6d9f73afa4023ca98d12af253335ecc38e79bd23c0a1a8a4e5d3d",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-2c9b41e6892103c9",
+      "candidateId": "DA-20260617-010",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "1241 Old Temescal Rd, Unit 103",
+      "city": "Corona",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "suggestedAction": "Create Comp",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "3",
+      "beforeStateDigest": "e79df070d77deb74ce1deaa7a96ce72651bcbfa632380db092f8b2d94f165e78",
+      "proposedStateDigest": "6857f590a2bce2612615d22674ebfc06648bb9ab0f307cc1782590619936a169",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-b3ea8eff03e54438",
+      "candidateId": "DA-20260617-012",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "12772 Monarch St",
+      "city": "Garden Grove",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "3",
+      "beforeStateDigest": "e910981e657312d3297c19063eb0f842313847cccf654eb5b0df5c0568ea5fbd",
+      "proposedStateDigest": "7ddc0f176d636cdc398fa78137de8492cc64d114b2ae7799c8d1437b5edfa742",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-1b93078ecf06b597",
+      "candidateId": "DA-20260617-013",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "12752 Monarch St",
+      "city": "Garden Grove",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "3",
+      "beforeStateDigest": "f06afcc2e4e04469359648dc2960ca7bcd9d2d9d702f01fa723e4c433bac0b1d",
+      "proposedStateDigest": "5d73a9379b2c65b906e4aa18ed49495e595afc58e7e64f26e1a3b833a6e50059",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-4e57777762b61338",
+      "candidateId": "DA-20260617-022",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "1656 S Cucamonga Ave",
+      "city": "Ontario",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "6",
+      "beforeStateDigest": "320f4308a5a5f9d28395f5289613c69841653bc1ed3b52910ed5e8ff3ef87516",
+      "proposedStateDigest": "5c2ac45ac5fe1e87f38de8c2ef1f56443570c34020779c4f7540482c407a1849",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-63cae0042cfc8de8",
+      "candidateId": "DA-20260617-023",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "1241 Old Temescal Rd, Unit 103",
+      "city": "Corona",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "suggestedAction": "Create Comp",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "6",
+      "beforeStateDigest": "218ae0fcc5e7013f3731f6063f99e16a5533494f040d665daf072a395a95411b",
+      "proposedStateDigest": "abfb7f69befc7d106037f790891cd498bac983bfb240f05cf2f9152e904c1d31",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-bc101217c20ef40d",
+      "candidateId": "DA-20260617-025",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "2260 S Haven Ave, Unit B",
+      "city": "Ontario",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "suggestedAction": "Create Comp",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "6",
+      "beforeStateDigest": "60f5c2fcbab78f3dffe28851b559d1f31c644a834dbc2bcee99a143fd11a0e47",
+      "proposedStateDigest": "8e30511e71bba5920ec3c759780e1375b0bbeb8d16ed961e471ec4a2561858e2",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-5bf28d18b711d2d8",
+      "candidateId": "DA-20260617-036",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "15928 Commerce Wy",
+      "city": "Cerritos",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "9",
+      "beforeStateDigest": "5c6336aa09d775facac4ff6fa81b176777a43914a351611a8e59692923e4b102",
+      "proposedStateDigest": "415fdf206dfbd51af06a493b35e5ee1ac4080df112d459d98d53400f15bd8f73",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-01848636174b35bf",
+      "candidateId": "DA-20260617-045",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "2222 Rosemead Blvd",
+      "city": "South El Monte",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "11",
+      "beforeStateDigest": "85376e421a2f75811ab915336f807bc87d1638b973d9b2be0c892fe9242f35c7",
+      "proposedStateDigest": "3dd6ea2a46d1dd9165b3d323225ca581d384fd054299bae1146be727f8f938a1",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-fceecd2e531b4314",
+      "candidateId": "DA-20260617-046",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "2222 Rosemead Blvd",
+      "city": "South El Monte",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "11",
+      "beforeStateDigest": "1595147b3b35a0e4a0985989340776ff5ee3c343103f316b6e398400225f8098",
+      "proposedStateDigest": "8409eef3829dabbd396ce3a15667a83065b0c43f0ca1d6b9a82ada35feb62f80",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-3fc5ceb382f31103",
+      "candidateId": "DA-20260617-047",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "2222 Rosemead Blvd",
+      "city": "South El Monte",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "11",
+      "beforeStateDigest": "44c5d97bdd1b749f3cffa6d54b92dbcfe6dcab2ba84b7ece27336cc25b404b34",
+      "proposedStateDigest": "a7a26c0e2ce130e7e53cbf38c5b2aa5eaaa3d4445742733f31f42fdd45e0d82e",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-939e67b5dffa6fba",
+      "candidateId": "DA-20260617-052",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "2610 Columbia St, Unit A",
+      "city": "Torrance",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "13",
+      "beforeStateDigest": "2192b1a50afb48a8f86b0fcdec868e5dc59900a4bf239315c5061f984be2b373",
+      "proposedStateDigest": "df162f7adde1c25b8903ec975841427af6d581d86a76c4890604edb6414de901",
+      "status": "PENDING_REVIEW"
+    },
+    {
+      "proposalId": "WB-a8609b6ba16d817f",
+      "candidateId": "DA-20260617-053",
+      "workbook": "SCIIP_Bridge_2026-06-17.xlsx",
+      "address": "2610 Columbia St, Unit B",
+      "city": "Torrance",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "suggestedAction": "Update Availability",
+      "sourceFile": "AIR-CRE-SuperSheets-SoCal-Research-Listings-All-Regions-6-17-2026.pdf",
+      "sourcePage": "13",
+      "beforeStateDigest": "1c5c54be680c157cbe08971df4d622cf95c86058909278f136e46b9b2554721c",
+      "proposedStateDigest": "bf1edc298e83bf9073633dccb306b2ee2e1e9c597be19d30752cd0ae4bac5b4d",
+      "status": "PENDING_REVIEW"
+    }
+  ],
+  "decisions": [
+    {
+      "decisionId": "DEC-00001",
+      "proposalId": "WB-02fd965f25cbbc37",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00002",
+      "proposalId": "WB-0adf60def2f7f4fb",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00003",
+      "proposalId": "WB-553e769623af17d7",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00004",
+      "proposalId": "WB-2c9b41e6892103c9",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00005",
+      "proposalId": "WB-b3ea8eff03e54438",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00006",
+      "proposalId": "WB-1b93078ecf06b597",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00007",
+      "proposalId": "WB-4e57777762b61338",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00008",
+      "proposalId": "WB-63cae0042cfc8de8",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00009",
+      "proposalId": "WB-bc101217c20ef40d",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00010",
+      "proposalId": "WB-5bf28d18b711d2d8",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00011",
+      "proposalId": "WB-01848636174b35bf",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00012",
+      "proposalId": "WB-fceecd2e531b4314",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00013",
+      "proposalId": "WB-3fc5ceb382f31103",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00014",
+      "proposalId": "WB-939e67b5dffa6fba",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    },
+    {
+      "decisionId": "DEC-00015",
+      "proposalId": "WB-a8609b6ba16d817f",
+      "reviewer": "PHASE5_PILOT_REVIEWER",
+      "decision": "APPROVED_FOR_SIMULATION",
+      "decidedAt": "1970-01-01T00:00:00.000Z",
+      "evidenceComplete": true
+    }
+  ],
+  "simulatedWrites": [
+    {
+      "transactionId": "TX-3b39cc54a3d10822",
+      "proposalId": "WB-02fd965f25cbbc37",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-001",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-02755fbb713ff3a523b2"
+    },
+    {
+      "transactionId": "TX-58482ad5deae1703",
+      "proposalId": "WB-0adf60def2f7f4fb",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-002",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-a94920dea6c0073d46d8"
+    },
+    {
+      "transactionId": "TX-e30b78c2cb5be6bc",
+      "proposalId": "WB-553e769623af17d7",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-009",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-631fe3f74c8860d1e08b"
+    },
+    {
+      "transactionId": "TX-70ad708db2d43ab1",
+      "proposalId": "WB-2c9b41e6892103c9",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "candidateId": "DA-20260617-010",
+      "operation": "Create Comp",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-7e3057500a01e1f38d7f"
+    },
+    {
+      "transactionId": "TX-2817d3b77de0faa4",
+      "proposalId": "WB-b3ea8eff03e54438",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-012",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-01ee1188c9f648f2897d"
+    },
+    {
+      "transactionId": "TX-96cb0f8a31d21725",
+      "proposalId": "WB-1b93078ecf06b597",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-013",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-0b762489052dd33da412"
+    },
+    {
+      "transactionId": "TX-a990be0725cc0fa1",
+      "proposalId": "WB-4e57777762b61338",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-022",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-a4cd6fe947d8dbe6f663"
+    },
+    {
+      "transactionId": "TX-065776343ce6adac",
+      "proposalId": "WB-63cae0042cfc8de8",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "candidateId": "DA-20260617-023",
+      "operation": "Create Comp",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-bff0a5b009f1afbcbfc5"
+    },
+    {
+      "transactionId": "TX-124d0653c1763f36",
+      "proposalId": "WB-bc101217c20ef40d",
+      "targetTable": "COMPS_HISTORY_LIVE",
+      "candidateId": "DA-20260617-025",
+      "operation": "Create Comp",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-8f803148d07fc46335c9"
+    },
+    {
+      "transactionId": "TX-e0c29d3b1b8a9e11",
+      "proposalId": "WB-5bf28d18b711d2d8",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-036",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-0fdfc1072f17099ebef1"
+    },
+    {
+      "transactionId": "TX-2fdba89e8c36c46d",
+      "proposalId": "WB-01848636174b35bf",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-045",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-1c6e37b76e527f0bb553"
+    },
+    {
+      "transactionId": "TX-872277fa5c705103",
+      "proposalId": "WB-fceecd2e531b4314",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-046",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-70631195b107e3f02fd6"
+    },
+    {
+      "transactionId": "TX-d26a0cc758c3a860",
+      "proposalId": "WB-3fc5ceb382f31103",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-047",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-2ad58c365e307b2f0dcf"
+    },
+    {
+      "transactionId": "TX-2060b563e93711c1",
+      "proposalId": "WB-939e67b5dffa6fba",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-052",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-4443df64e1d6244564ef"
+    },
+    {
+      "transactionId": "TX-9d68126686ffda6a",
+      "proposalId": "WB-a8609b6ba16d817f",
+      "targetTable": "AVAILABILITY_CURRENT_LIVE",
+      "candidateId": "DA-20260617-053",
+      "operation": "Update Availability",
+      "mode": "DRY_RUN",
+      "committed": false,
+      "sourceWorkbookMutated": false,
+      "masterInventoryMutated": false,
+      "rollbackToken": "RB-e724322cdfc8addc69fe"
+    }
+  ],
+  "ledger": [
+    {
+      "ledgerId": "LED-3b39cc54a3d1082274",
+      "proposalId": "WB-02fd965f25cbbc37",
+      "decisionId": "DEC-00001",
+      "transactionId": "TX-3b39cc54a3d10822",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-58482ad5deae1703e0",
+      "proposalId": "WB-0adf60def2f7f4fb",
+      "decisionId": "DEC-00002",
+      "transactionId": "TX-58482ad5deae1703",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-e30b78c2cb5be6bc46",
+      "proposalId": "WB-553e769623af17d7",
+      "decisionId": "DEC-00003",
+      "transactionId": "TX-e30b78c2cb5be6bc",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-70ad708db2d43ab173",
+      "proposalId": "WB-2c9b41e6892103c9",
+      "decisionId": "DEC-00004",
+      "transactionId": "TX-70ad708db2d43ab1",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-2817d3b77de0faa4fa",
+      "proposalId": "WB-b3ea8eff03e54438",
+      "decisionId": "DEC-00005",
+      "transactionId": "TX-2817d3b77de0faa4",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-96cb0f8a31d2172585",
+      "proposalId": "WB-1b93078ecf06b597",
+      "decisionId": "DEC-00006",
+      "transactionId": "TX-96cb0f8a31d21725",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-a990be0725cc0fa169",
+      "proposalId": "WB-4e57777762b61338",
+      "decisionId": "DEC-00007",
+      "transactionId": "TX-a990be0725cc0fa1",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-065776343ce6adac2a",
+      "proposalId": "WB-63cae0042cfc8de8",
+      "decisionId": "DEC-00008",
+      "transactionId": "TX-065776343ce6adac",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-124d0653c1763f36aa",
+      "proposalId": "WB-bc101217c20ef40d",
+      "decisionId": "DEC-00009",
+      "transactionId": "TX-124d0653c1763f36",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-e0c29d3b1b8a9e1199",
+      "proposalId": "WB-5bf28d18b711d2d8",
+      "decisionId": "DEC-00010",
+      "transactionId": "TX-e0c29d3b1b8a9e11",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-2fdba89e8c36c46d63",
+      "proposalId": "WB-01848636174b35bf",
+      "decisionId": "DEC-00011",
+      "transactionId": "TX-2fdba89e8c36c46d",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-872277fa5c70510323",
+      "proposalId": "WB-fceecd2e531b4314",
+      "decisionId": "DEC-00012",
+      "transactionId": "TX-872277fa5c705103",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-d26a0cc758c3a86067",
+      "proposalId": "WB-3fc5ceb382f31103",
+      "decisionId": "DEC-00013",
+      "transactionId": "TX-d26a0cc758c3a860",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-2060b563e93711c1e2",
+      "proposalId": "WB-939e67b5dffa6fba",
+      "decisionId": "DEC-00014",
+      "transactionId": "TX-2060b563e93711c1",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    },
+    {
+      "ledgerId": "LED-9d68126686ffda6abb",
+      "proposalId": "WB-a8609b6ba16d817f",
+      "decisionId": "DEC-00015",
+      "transactionId": "TX-9d68126686ffda6a",
+      "immutable": true,
+      "status": "SIMULATED_NOT_COMMITTED"
+    }
+  ],
+  "rollbackPlan": [
+    {
+      "rollbackToken": "RB-02755fbb713ff3a523b2",
+      "transactionId": "TX-3b39cc54a3d10822",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-a94920dea6c0073d46d8",
+      "transactionId": "TX-58482ad5deae1703",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-631fe3f74c8860d1e08b",
+      "transactionId": "TX-e30b78c2cb5be6bc",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-7e3057500a01e1f38d7f",
+      "transactionId": "TX-70ad708db2d43ab1",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-01ee1188c9f648f2897d",
+      "transactionId": "TX-2817d3b77de0faa4",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-0b762489052dd33da412",
+      "transactionId": "TX-96cb0f8a31d21725",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-a4cd6fe947d8dbe6f663",
+      "transactionId": "TX-a990be0725cc0fa1",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-bff0a5b009f1afbcbfc5",
+      "transactionId": "TX-065776343ce6adac",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-8f803148d07fc46335c9",
+      "transactionId": "TX-124d0653c1763f36",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-0fdfc1072f17099ebef1",
+      "transactionId": "TX-e0c29d3b1b8a9e11",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-1c6e37b76e527f0bb553",
+      "transactionId": "TX-2fdba89e8c36c46d",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-70631195b107e3f02fd6",
+      "transactionId": "TX-872277fa5c705103",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-2ad58c365e307b2f0dcf",
+      "transactionId": "TX-d26a0cc758c3a860",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-4443df64e1d6244564ef",
+      "transactionId": "TX-2060b563e93711c1",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    },
+    {
+      "rollbackToken": "RB-e724322cdfc8addc69fe",
+      "transactionId": "TX-9d68126686ffda6a",
+      "action": "NO_OP_DRY_RUN",
+      "required": false,
+      "verified": true
+    }
+  ],
+  "counts": {
+    "proposals": 15,
+    "approved": 15,
+    "rejected": 0,
+    "simulatedWrites": 15,
+    "committedWrites": 0,
+    "ledgerEntries": 15,
+    "rollbackTokens": 15
+  },
+  "gates": {
+    "proposalsGenerated": true,
+    "everyProposalHasEvidence": true,
+    "everyDecisionLedgered": true,
+    "approvedWritesAreDryRun": true,
+    "noCommitOccurred": true,
+    "sourceWorkbooksProtected": true,
+    "masterInventoryProtected": true,
+    "rollbackTokensPresent": true,
+    "rollbackPlanVerified": true
+  },
+  "writebackMode": "DRY_RUN_APPROVAL_GATED",
+  "consequentialActions": "BLOCKED",
+  "sourceWorkbookMutationAllowed": false,
+  "masterInventoryMutationAllowed": false,
+  "ledgerDigest": "a46eabb410fef2dcc4e5b1e810f718eedd11457046347991e35d20cef3de5389"
+}

@@ -1,0 +1,67 @@
+{
+  "framework": "SCIIP_PHASE5_SPRINT54_GOVERNED_CANARY_WRITEBACK_REPORT",
+  "status": "PASSED",
+  "disabledResult": {
+    "transactionId": "CTX-02ed49f60cb1e29b6911",
+    "status": "COMMIT_DISABLED",
+    "committed": false,
+    "rolledBack": false,
+    "targetMutated": false,
+    "approvalTokenAccepted": true,
+    "rollbackVerified": true
+  },
+  "rollbackResult": {
+    "transactionId": "CTX-02ed49f60cb1e29b6911",
+    "status": "ROLLED_BACK_VERIFIED",
+    "committed": false,
+    "rolledBack": true,
+    "targetMutated": false,
+    "approvalTokenAccepted": true,
+    "rollbackVerified": true
+  },
+  "targetSnapshot": {
+    "AVAILABILITY_CURRENT_LIVE": {}
+  },
+  "ledger": [
+    {
+      "type": "CANARY_PREPARED",
+      "transactionId": "CTX-02ed49f60cb1e29b6911",
+      "proposalId": "WB-02fd965f25cbbc37",
+      "table": "AVAILABILITY_CURRENT_LIVE",
+      "key": "DA-20260617-001",
+      "beforeDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "allowCommit": true,
+      "sequence": 1,
+      "eventId": "CE-9b21befbfc78952441",
+      "occurredAt": "2026-07-31T21:35:07.619Z",
+      "immutable": true
+    },
+    {
+      "type": "CANARY_WRITTEN",
+      "transactionId": "CTX-02ed49f60cb1e29b6911",
+      "proposalId": "WB-02fd965f25cbbc37",
+      "afterDigest": "c253b9969cb891448657ab50b78bda60e590eca5584172d7d050b13f52d319db",
+      "sequence": 2,
+      "eventId": "CE-c28a9eaa9533456f1a",
+      "occurredAt": "2026-07-31T21:35:07.619Z",
+      "immutable": true
+    },
+    {
+      "type": "CANARY_ROLLED_BACK",
+      "transactionId": "CTX-02ed49f60cb1e29b6911",
+      "proposalId": "WB-02fd965f25cbbc37",
+      "rollbackVerified": true,
+      "sequence": 3,
+      "eventId": "CE-a733cdb366580bc9e4",
+      "occurredAt": "2026-07-31T21:35:07.619Z",
+      "immutable": true
+    }
+  ],
+  "gates": {
+    "defaultCommitDisabled": true,
+    "explicitApprovalAccepted": true,
+    "automaticRollback": true,
+    "rollbackVerified": true,
+    "productionTargetAllowed": false
+  }
+}

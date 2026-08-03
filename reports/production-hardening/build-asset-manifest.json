@@ -1,0 +1,656 @@
+{
+  "framework": "SCIIP_BUILD_ASSET_MANIFEST",
+  "version": "1.0.0",
+  "generatedAt": "2026-07-31T20:49:09.592Z",
+  "certification": {
+    "passed": true,
+    "status": "BUILD_OPTIMIZATION_CERTIFIED",
+    "gates": {
+      "shellGzip": true,
+      "staticAssetGzip": true,
+      "entryGzip": true,
+      "vendorReactGzip": true,
+      "cssGzip": true,
+      "duplicateGroups": true,
+      "codeSplitting": true
+    },
+    "metrics": {
+      "shellGzipKb": 172.87,
+      "staticAssetGzipKb": 3851.39,
+      "totalGzipKb": 4024.26,
+      "entryGzipKb": 6.16,
+      "vendorReactGzipKb": 58.76,
+      "cssGzipKb": 13.59,
+      "duplicateGroups": 6,
+      "javascriptChunks": 70
+    }
+  },
+  "analysis": {
+    "generatedAt": "2026-07-31T20:49:09.592Z",
+    "distDirectory": "/Users/spencercasement/Desktop/SCIIP_OS-main-merge/apps/property-command-center/dist",
+    "assets": [
+      {
+        "file": "production-validation-data/temporal-intelligence-data 2.json",
+        "kind": "ASSET",
+        "bytes": 7586804,
+        "gzipBytes": 636680
+      },
+      {
+        "file": "production-validation-data/temporal-intelligence-data.json",
+        "kind": "ASSET",
+        "bytes": 7586804,
+        "gzipBytes": 636680
+      },
+      {
+        "file": "production-validation-data/canonical-property-identity-data 2.json",
+        "kind": "ASSET",
+        "bytes": 4419488,
+        "gzipBytes": 421268
+      },
+      {
+        "file": "production-validation-data/canonical-property-identity-data.json",
+        "kind": "ASSET",
+        "bytes": 4419488,
+        "gzipBytes": 421268
+      },
+      {
+        "file": "production-validation-data/lifecycle-market-outcome-classification-data 2.json",
+        "kind": "ASSET",
+        "bytes": 3994669,
+        "gzipBytes": 411633
+      },
+      {
+        "file": "production-validation-data/lifecycle-market-outcome-classification-data.json",
+        "kind": "ASSET",
+        "bytes": 3994669,
+        "gzipBytes": 411633
+      },
+      {
+        "file": "production-validation-data/identity-decision-execution-data 2.json",
+        "kind": "ASSET",
+        "bytes": 3245571,
+        "gzipBytes": 276701
+      },
+      {
+        "file": "production-validation-data/identity-decision-execution-data.json",
+        "kind": "ASSET",
+        "bytes": 3245571,
+        "gzipBytes": 276701
+      },
+      {
+        "file": "production-validation-data/property-lifecycle-intelligence-data 2.json",
+        "kind": "ASSET",
+        "bytes": 2789297,
+        "gzipBytes": 225630
+      },
+      {
+        "file": "production-validation-data/property-lifecycle-intelligence-data.json",
+        "kind": "ASSET",
+        "bytes": 2789297,
+        "gzipBytes": 225630
+      },
+      {
+        "file": "assets/vendor-react-dzjnOsT9.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 192347,
+        "gzipBytes": 60168
+      },
+      {
+        "file": "assets/index-B-8C0mI_.css",
+        "kind": "CSS",
+        "bytes": 78813,
+        "gzipBytes": 13912
+      },
+      {
+        "file": "assets/index-Cqgj8UfB.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 21334,
+        "gzipBytes": 6311
+      },
+      {
+        "file": "assets/vendor-icons-CnnM1IqM.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 20447,
+        "gzipBytes": 6687
+      },
+      {
+        "file": "assets/domain-runtime-mlhncrN2.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 13334,
+        "gzipBytes": 3004
+      },
+      {
+        "file": "assets/domain-production-operations-B4zRw-eN.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 12501,
+        "gzipBytes": 4612
+      },
+      {
+        "file": "assets/component-executivecommandcenter-DVD5232f.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 7887,
+        "gzipBytes": 2248
+      },
+      {
+        "file": "assets/domain-ai-BCQhNji2.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 7738,
+        "gzipBytes": 3180
+      },
+      {
+        "file": "assets/domain-property-digital-twin-CnryzVRG.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 7668,
+        "gzipBytes": 3041
+      },
+      {
+        "file": "assets/domain-product-BVc6DqTo.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 7586,
+        "gzipBytes": 2954
+      },
+      {
+        "file": "assets/domain-ingestion-B4ng6fLr.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 7065,
+        "gzipBytes": 3148
+      },
+      {
+        "file": "assets/domain-production-validation-Clv4Ljio.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 7014,
+        "gzipBytes": 3101
+      },
+      {
+        "file": "assets/component-aipropertycopilot-B87b6TFQ.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 6731,
+        "gzipBytes": 2154
+      },
+      {
+        "file": "assets/component-productiondatacertificationcenter-B43r5xOR.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 6650,
+        "gzipBytes": 2557
+      },
+      {
+        "file": "assets/domain-autonomous-intelligence-CVNthZGo.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 6529,
+        "gzipBytes": 2473
+      },
+      {
+        "file": "assets/domain-executive-C1JvUeuH.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 5639,
+        "gzipBytes": 2212
+      },
+      {
+        "file": "assets/component-gisintelligenceworkspace-B3OoICdT.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 5509,
+        "gzipBytes": 2091
+      },
+      {
+        "file": "assets/component-opportunityintelligenceworkspace-C50quJQu.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 5482,
+        "gzipBytes": 1889
+      },
+      {
+        "file": "assets/domain-workflow-C8nYbv69.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 5431,
+        "gzipBytes": 2117
+      },
+      {
+        "file": "assets/component-productioningestionoperations-5oxNAowE.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 5237,
+        "gzipBytes": 2115
+      },
+      {
+        "file": "assets/component-supersheetingestion-DJIlOmEW.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 5143,
+        "gzipBytes": 1993
+      },
+      {
+        "file": "assets/component-evidencecertificationcenter-CK8cYdZq.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 5091,
+        "gzipBytes": 1822
+      },
+      {
+        "file": "assets/domain-opportunity-ybnDap7m.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 5066,
+        "gzipBytes": 2126
+      },
+      {
+        "file": "assets/component-propertydigitaltwincenter-C_n7rC7S.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 4768,
+        "gzipBytes": 1732
+      },
+      {
+        "file": "assets/component-brokeractioncenter-s_uWzjey.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 4633,
+        "gzipBytes": 1665
+      },
+      {
+        "file": "assets/component-executivemorningbriefcenter-DOpfxYV8.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 4599,
+        "gzipBytes": 1484
+      },
+      {
+        "file": "assets/domain-spatial-BH4zSh_a.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 4429,
+        "gzipBytes": 1783
+      },
+      {
+        "file": "assets/component-knowledgegraphworkspace-B8ZIO1g4.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 4254,
+        "gzipBytes": 1489
+      },
+      {
+        "file": "assets/component-enterprisefoundationcenter-B-4Ms0jB.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 4205,
+        "gzipBytes": 1466
+      },
+      {
+        "file": "assets/component-enterprisecollaborationcenter-DShK0ghQ.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 4042,
+        "gzipBytes": 1284
+      },
+      {
+        "file": "assets/component-decisionintelligencecenter-DZJ5th33.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 3990,
+        "gzipBytes": 1449
+      },
+      {
+        "file": "assets/domain-knowledge-DmI15uDw.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 3835,
+        "gzipBytes": 1612
+      },
+      {
+        "file": "assets/domain-collaboration-BI7xXgbG.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 3603,
+        "gzipBytes": 1383
+      },
+      {
+        "file": "assets/component-temporalpropertyintelligencecenter-C-8tsYF-.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 3209,
+        "gzipBytes": 1209
+      },
+      {
+        "file": "assets/domain-market-intelligence-BHDPxtPh.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 3129,
+        "gzipBytes": 1388
+      },
+      {
+        "file": "assets/domain-decision-intelligence-DXeYjuQg.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2888,
+        "gzipBytes": 1290
+      },
+      {
+        "file": "assets/domain-search-C0GBlJsm.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2672,
+        "gzipBytes": 1339
+      },
+      {
+        "file": "assets/component-productionenterprisecenter-BpX79oST.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2605,
+        "gzipBytes": 979
+      },
+      {
+        "file": "assets/domain-executive-ai-CRIvf1fs.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2514,
+        "gzipBytes": 1167
+      },
+      {
+        "file": "assets/component-integrationplatformcenter-DQjmK17F.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2454,
+        "gzipBytes": 966
+      },
+      {
+        "file": "assets/domain-production-enterprise-BSjUv2S_.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2451,
+        "gzipBytes": 1277
+      },
+      {
+        "file": "assets/component-productioncorpusoperations-OKFVPscw.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2400,
+        "gzipBytes": 1077
+      },
+      {
+        "file": "assets/domain-integrations-DpAytZLD.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2238,
+        "gzipBytes": 1077
+      },
+      {
+        "file": "assets/component-executiveaicommandcenter-CqSrdDqJ.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2193,
+        "gzipBytes": 1009
+      },
+      {
+        "file": "assets/component-intelligenceplatformcenter-DPHwQVOj.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2163,
+        "gzipBytes": 913
+      },
+      {
+        "file": "assets/domain-enterprise-knowledge-graph-BF4Tk_9Z.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2122,
+        "gzipBytes": 994
+      },
+      {
+        "file": "assets/domain-platform-DSPKbFi6.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 2113,
+        "gzipBytes": 1015
+      },
+      {
+        "file": "assets/domain-enterprise-operations-l0g3znDU.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 1815,
+        "gzipBytes": 890
+      },
+      {
+        "file": "assets/domain-executive-command-center-Bh_Uurug.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 1758,
+        "gzipBytes": 892
+      },
+      {
+        "file": "assets/component-enterpriseoperationscenter-DRQuzFWF.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 1738,
+        "gzipBytes": 811
+      },
+      {
+        "file": "assets/domain-identity-C-GUDV_0.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 1632,
+        "gzipBytes": 735
+      },
+      {
+        "file": "assets/component-marketintelligencecenter-CZ9-7jDY.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 1612,
+        "gzipBytes": 697
+      },
+      {
+        "file": "assets/component-enterpriseknowledgegraphcenter-A370qPEY.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 1543,
+        "gzipBytes": 735
+      },
+      {
+        "file": "assets/domain-intelligence-CccMQMqF.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 1480,
+        "gzipBytes": 861
+      },
+      {
+        "file": "assets/component-platformruntimecenter-BWlWZoOV.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 1336,
+        "gzipBytes": 571
+      },
+      {
+        "file": "assets/component-workspaceloadingexperience-BGi8jqZP.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 1287,
+        "gzipBytes": 701
+      },
+      {
+        "file": "index.html",
+        "kind": "HTML",
+        "bytes": 1077,
+        "gzipBytes": 441
+      },
+      {
+        "file": "assets/component-realtimeintelligencecenter-D_LowhVq.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 1036,
+        "gzipBytes": 536
+      },
+      {
+        "file": "assets/domain-domain-XSBJZ0F-.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 826,
+        "gzipBytes": 500
+      },
+      {
+        "file": "assets/domain-foundation-BW4zTnZn.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 590,
+        "gzipBytes": 390
+      },
+      {
+        "file": "assets/domain-real-time-intelligence-DBUjH3Nn.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 373,
+        "gzipBytes": 280
+      },
+      {
+        "file": "assets/component-ui-healthicon-CnWcrGyG.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 317,
+        "gzipBytes": 214
+      },
+      {
+        "file": "assets/component-ui-panel-WVKPpNqp.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 281,
+        "gzipBytes": 196
+      },
+      {
+        "file": "assets/component-ui-badge-B_zQsaMV.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 162,
+        "gzipBytes": 156
+      },
+      {
+        "file": "assets/component-canonicalpropertyidentitycenter-C45sMAkS.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 36,
+        "gzipBytes": 56
+      },
+      {
+        "file": "assets/component-executivemarketcommandcenter-C45sMAkS.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 36,
+        "gzipBytes": 56
+      },
+      {
+        "file": "assets/component-governedidentitydecisionexecutioncenter-C45sMAkS.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 36,
+        "gzipBytes": 56
+      },
+      {
+        "file": "assets/component-identityreviewgovernancecenter-C45sMAkS.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 36,
+        "gzipBytes": 56
+      },
+      {
+        "file": "assets/component-lifecyclemarketoutcomeclassificationcenter-C45sMAkS.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 36,
+        "gzipBytes": 56
+      },
+      {
+        "file": "assets/component-marketdatafoundationcommandcenter-C45sMAkS.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 36,
+        "gzipBytes": 56
+      },
+      {
+        "file": "assets/component-marketintelligencecorrelationcenter-C45sMAkS.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 36,
+        "gzipBytes": 56
+      },
+      {
+        "file": "assets/component-propertylifecycleintelligencecenter-C45sMAkS.js",
+        "kind": "JAVASCRIPT",
+        "bytes": 36,
+        "gzipBytes": 56
+      }
+    ],
+    "counts": {
+      "total": 82,
+      "javascript": 70,
+      "css": 1,
+      "html": 1,
+      "other": 10
+    },
+    "totals": {
+      "bytes": 44614560,
+      "gzipBytes": 4120840,
+      "javascriptBytes": 463012,
+      "javascriptGzipBytes": 162663,
+      "cssBytes": 78813,
+      "cssGzipBytes": 13912,
+      "shellGzipBytes": 177016,
+      "staticAssetGzipBytes": 3943824
+    },
+    "largestAssets": [
+      {
+        "file": "production-validation-data/temporal-intelligence-data 2.json",
+        "kind": "ASSET",
+        "bytes": 7586804,
+        "gzipBytes": 636680
+      },
+      {
+        "file": "production-validation-data/temporal-intelligence-data.json",
+        "kind": "ASSET",
+        "bytes": 7586804,
+        "gzipBytes": 636680
+      },
+      {
+        "file": "production-validation-data/canonical-property-identity-data 2.json",
+        "kind": "ASSET",
+        "bytes": 4419488,
+        "gzipBytes": 421268
+      },
+      {
+        "file": "production-validation-data/canonical-property-identity-data.json",
+        "kind": "ASSET",
+        "bytes": 4419488,
+        "gzipBytes": 421268
+      },
+      {
+        "file": "production-validation-data/lifecycle-market-outcome-classification-data 2.json",
+        "kind": "ASSET",
+        "bytes": 3994669,
+        "gzipBytes": 411633
+      },
+      {
+        "file": "production-validation-data/lifecycle-market-outcome-classification-data.json",
+        "kind": "ASSET",
+        "bytes": 3994669,
+        "gzipBytes": 411633
+      },
+      {
+        "file": "production-validation-data/identity-decision-execution-data 2.json",
+        "kind": "ASSET",
+        "bytes": 3245571,
+        "gzipBytes": 276701
+      },
+      {
+        "file": "production-validation-data/identity-decision-execution-data.json",
+        "kind": "ASSET",
+        "bytes": 3245571,
+        "gzipBytes": 276701
+      },
+      {
+        "file": "production-validation-data/property-lifecycle-intelligence-data 2.json",
+        "kind": "ASSET",
+        "bytes": 2789297,
+        "gzipBytes": 225630
+      },
+      {
+        "file": "production-validation-data/property-lifecycle-intelligence-data.json",
+        "kind": "ASSET",
+        "bytes": 2789297,
+        "gzipBytes": 225630
+      }
+    ],
+    "duplicateContent": [
+      {
+        "signature": "7586804:636680",
+        "files": [
+          "production-validation-data/temporal-intelligence-data 2.json",
+          "production-validation-data/temporal-intelligence-data.json"
+        ]
+      },
+      {
+        "signature": "4419488:421268",
+        "files": [
+          "production-validation-data/canonical-property-identity-data 2.json",
+          "production-validation-data/canonical-property-identity-data.json"
+        ]
+      },
+      {
+        "signature": "3994669:411633",
+        "files": [
+          "production-validation-data/lifecycle-market-outcome-classification-data 2.json",
+          "production-validation-data/lifecycle-market-outcome-classification-data.json"
+        ]
+      },
+      {
+        "signature": "3245571:276701",
+        "files": [
+          "production-validation-data/identity-decision-execution-data 2.json",
+          "production-validation-data/identity-decision-execution-data.json"
+        ]
+      },
+      {
+        "signature": "2789297:225630",
+        "files": [
+          "production-validation-data/property-lifecycle-intelligence-data 2.json",
+          "production-validation-data/property-lifecycle-intelligence-data.json"
+        ]
+      },
+      {
+        "signature": "36:56",
+        "files": [
+          "assets/component-canonicalpropertyidentitycenter-C45sMAkS.js",
+          "assets/component-executivemarketcommandcenter-C45sMAkS.js",
+          "assets/component-governedidentitydecisionexecutioncenter-C45sMAkS.js",
+          "assets/component-identityreviewgovernancecenter-C45sMAkS.js",
+          "assets/component-lifecyclemarketoutcomeclassificationcenter-C45sMAkS.js",
+          "assets/component-marketdatafoundationcommandcenter-C45sMAkS.js",
+          "assets/component-marketintelligencecorrelationcenter-C45sMAkS.js",
+          "assets/component-propertylifecycleintelligencecenter-C45sMAkS.js"
+        ]
+      }
+    ],
+    "manifestVersion": "1.0.0"
+  }
+}
