@@ -396,7 +396,15 @@
     "test:phase17:sprint245": "node tests/executive-growth-command.test.mjs",
     "test:phase17:sprint246:user-validation": "node tests/growth-strategy-executive-planning-user-validation.test.mjs",
     "test:phase17:sprint246": "node tests/growth-strategy-executive-planning-certification.test.mjs",
-    "certify:phase17:batch-g": "npm run test:phase17:sprint241 && npm run test:phase17:sprint242 && npm run test:phase17:sprint243 && npm run test:phase17:sprint244 && npm run test:phase17:sprint245 && npm run test:phase17:sprint246:user-validation && npm run test:phase17:sprint246"
+    "certify:phase17:batch-g": "npm run test:phase17:sprint241 && npm run test:phase17:sprint242 && npm run test:phase17:sprint243 && npm run test:phase17:sprint244 && npm run test:phase17:sprint245 && npm run test:phase17:sprint246:user-validation && npm run test:phase17:sprint246",
+    "test:phase17:sprint247": "node tests/enterprise-forecasting-engine.test.mjs",
+    "test:phase17:sprint248": "node tests/capital-allocation-intelligence.test.mjs",
+    "test:phase17:sprint249": "node tests/enterprise-scenario-simulator.test.mjs",
+    "test:phase17:sprint250": "node tests/executive-decision-support.test.mjs",
+    "test:phase17:sprint251": "node tests/enterprise-planning-command-center.test.mjs",
+    "test:phase17:sprint252:user-validation": "node tests/enterprise-planning-user-validation.test.mjs",
+    "test:phase17:sprint252": "node tests/enterprise-planning-certification.test.mjs",
+    "certify:phase17:batch-h": "npm run test:phase17:sprint247 && npm run test:phase17:sprint248 && npm run test:phase17:sprint249 && npm run test:phase17:sprint250 && npm run test:phase17:sprint251 && npm run test:phase17:sprint252:user-validation && npm run test:phase17:sprint252"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
