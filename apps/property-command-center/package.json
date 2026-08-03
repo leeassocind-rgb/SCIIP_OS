@@ -500,7 +500,15 @@
     "test:phase18:sprint323": "node tests/executive-intelligence-command-center.test.mjs",
     "test:phase18:sprint324:user-validation": "node tests/phase18-executive-intelligence-user-validation.test.mjs",
     "test:phase18:sprint324": "node tests/phase18-executive-intelligence-certification.test.mjs",
-    "certify:phase18:batch-g": "npm run test:phase18:sprint319 && npm run test:phase18:sprint320 && npm run test:phase18:sprint321 && npm run test:phase18:sprint322 && npm run test:phase18:sprint323 && npm run test:phase18:sprint324:user-validation && npm run test:phase18:sprint324"
+    "certify:phase18:batch-g": "npm run test:phase18:sprint319 && npm run test:phase18:sprint320 && npm run test:phase18:sprint321 && npm run test:phase18:sprint322 && npm run test:phase18:sprint323 && npm run test:phase18:sprint324:user-validation && npm run test:phase18:sprint324",
+    "test:phase18:sprint325": "node tests/strategic-scenario-engine.test.mjs",
+    "test:phase18:sprint326": "node tests/strategic-forecasting-engine.test.mjs",
+    "test:phase18:sprint327": "node tests/portfolio-simulation-engine.test.mjs",
+    "test:phase18:sprint328": "node tests/scenario-comparison-recommendation.test.mjs",
+    "test:phase18:sprint329": "node tests/executive-scenario-command-center.test.mjs",
+    "test:phase18:sprint330:user-validation": "node tests/phase18-scenario-user-validation.test.mjs",
+    "test:phase18:sprint330": "node tests/phase18-scenario-forecasting-simulation-certification.test.mjs",
+    "certify:phase18:batch-h": "npm run test:phase18:sprint325 && npm run test:phase18:sprint326 && npm run test:phase18:sprint327 && npm run test:phase18:sprint328 && npm run test:phase18:sprint329 && npm run test:phase18:sprint330:user-validation && npm run test:phase18:sprint330"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
