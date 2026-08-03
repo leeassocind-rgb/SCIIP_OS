@@ -428,7 +428,15 @@
     "test:phase17:sprint269": "node tests/executive-deployment-command-center.test.mjs",
     "test:phase17:sprint270:user-validation": "node tests/enterprise-deployment-adoption-value-user-validation.test.mjs",
     "test:phase17:sprint270": "node tests/enterprise-deployment-adoption-value-certification.test.mjs",
-    "certify:phase17:batch-k": "npm run test:phase17:sprint265 && npm run test:phase17:sprint266 && npm run test:phase17:sprint267 && npm run test:phase17:sprint268 && npm run test:phase17:sprint269 && npm run test:phase17:sprint270:user-validation && npm run test:phase17:sprint270"
+    "certify:phase17:batch-k": "npm run test:phase17:sprint265 && npm run test:phase17:sprint266 && npm run test:phase17:sprint267 && npm run test:phase17:sprint268 && npm run test:phase17:sprint269 && npm run test:phase17:sprint270:user-validation && npm run test:phase17:sprint270",
+    "test:phase17:sprint271": "node tests/enterprise-portfolio-intelligence.test.mjs",
+    "test:phase17:sprint272": "node tests/cross-portfolio-optimization.test.mjs",
+    "test:phase17:sprint273": "node tests/strategic-planning-intelligence.test.mjs",
+    "test:phase17:sprint274": "node tests/executive-kpi-scorecards.test.mjs",
+    "test:phase17:sprint275": "node tests/executive-performance-review-center.test.mjs",
+    "test:phase17:sprint276:user-validation": "node tests/enterprise-portfolio-performance-user-validation.test.mjs",
+    "test:phase17:sprint276": "node tests/enterprise-portfolio-performance-certification.test.mjs",
+    "certify:phase17:batch-l": "npm run test:phase17:sprint271 && npm run test:phase17:sprint272 && npm run test:phase17:sprint273 && npm run test:phase17:sprint274 && npm run test:phase17:sprint275 && npm run test:phase17:sprint276:user-validation && npm run test:phase17:sprint276"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

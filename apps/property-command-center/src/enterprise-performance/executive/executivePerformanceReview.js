@@ -1,0 +1,5 @@
+const freeze=v=>Object.freeze(v);
+export function createExecutivePerformanceReview({portfolios=[],optimizations=[],plans=[],scorecards=[],approvals=[]}={}){
+ const attention=[...portfolios.filter(x=>x.status==='ATTENTION').map(x=>freeze({type:'PORTFOLIO',id:x.portfolioId})),...optimizations.filter(x=>x.status==='OPTIMIZATION_CANDIDATE').map(x=>freeze({type:'OPTIMIZATION',id:x.portfolioId,score:x.score})),...plans.filter(x=>x.status==='AT_RISK').map(x=>freeze({type:'PLAN',id:x.objectiveId})),...scorecards.filter(x=>x.status==='BELOW_TARGET').map(x=>freeze({type:'KPI',id:x.metricId})),...approvals.filter(x=>x.status==='PENDING').map(x=>freeze({type:'APPROVAL',id:x.approvalId}))];
+ return freeze({portfolios:freeze([...portfolios]),optimizations:freeze([...optimizations]),plans:freeze([...plans]),scorecards:freeze([...scorecards]),approvals:freeze([...approvals]),attention:freeze(attention),attentionCount:attention.length,executivePerformanceReviewReady:true,executiveApprovalRequired:true,autonomousExecutionAllowed:false,autonomousReallocationAllowed:false});
+}

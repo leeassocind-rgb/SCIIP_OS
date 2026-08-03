@@ -1,0 +1,4 @@
+import assert from'node:assert/strict';import{optimizeCrossPortfolio}from'../src/enterprise-performance/optimization/index.js';
+let n=0;const t=c=>{n++;assert.ok(c)};const r=optimizeCrossPortfolio({constraints:{maximumRisk:50,minimumCapacityFit:60},portfolios:[{portfolioId:'P1',expectedValue:90,riskScore:20,capacityFit:85,strategicFit:90},{portfolioId:'P2',expectedValue:95,riskScore:70,capacityFit:90,strategicFit:80}]});
+t(r.candidateCount===1);t(r.topCandidate.portfolioId==='P1');t(r.portfolios.find(x=>x.portfolioId==='P2').status==='CONSTRAINED');t(r.constraintsApplied);t(r.assumptionsVisible);t(r.executiveApprovalRequired);t(!r.autonomousReallocationAllowed);
+console.log(JSON.stringify({framework:'SCIIP_PHASE17_SPRINT272_CROSS_PORTFOLIO_OPTIMIZATION',status:'PASSED',testsRun:n,result:r},null,2));
