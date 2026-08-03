@@ -460,7 +460,15 @@
     "test:phase18:sprint293": "node tests/enterprise-ingestion-command-center.test.mjs",
     "test:phase18:sprint294:user-validation": "node tests/phase18-enterprise-data-ingestion-user-validation.test.mjs",
     "test:phase18:sprint294": "node tests/phase18-enterprise-data-ingestion-certification.test.mjs",
-    "certify:phase18:batch-b": "npm run test:phase18:sprint289 && npm run test:phase18:sprint290 && npm run test:phase18:sprint291 && npm run test:phase18:sprint292 && npm run test:phase18:sprint293 && npm run test:phase18:sprint294:user-validation && npm run test:phase18:sprint294"
+    "certify:phase18:batch-b": "npm run test:phase18:sprint289 && npm run test:phase18:sprint290 && npm run test:phase18:sprint291 && npm run test:phase18:sprint292 && npm run test:phase18:sprint293 && npm run test:phase18:sprint294:user-validation && npm run test:phase18:sprint294",
+    "test:phase18:sprint295": "node tests/production-corpus-activation.test.mjs",
+    "test:phase18:sprint296": "node tests/canonical-identity-resolution.test.mjs",
+    "test:phase18:sprint297": "node tests/event-relationship-synchronization.test.mjs",
+    "test:phase18:sprint298": "node tests/knowledge-graph-reconciliation.test.mjs",
+    "test:phase18:sprint299": "node tests/corpus-activation-command-center.test.mjs",
+    "test:phase18:sprint300:user-validation": "node tests/phase18-production-corpus-user-validation.test.mjs",
+    "test:phase18:sprint300": "node tests/phase18-production-corpus-certification.test.mjs",
+    "certify:phase18:batch-c": "npm run test:phase18:sprint295 && npm run test:phase18:sprint296 && npm run test:phase18:sprint297 && npm run test:phase18:sprint298 && npm run test:phase18:sprint299 && npm run test:phase18:sprint300:user-validation && npm run test:phase18:sprint300"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

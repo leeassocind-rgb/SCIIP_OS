@@ -1,0 +1,13 @@
+import assert from'node:assert/strict';
+import fs from'node:fs';
+let n=0;const t=c=>{n++;assert.ok(c)};
+const main=fs.readFileSync('src/main.jsx','utf8');
+const registry=fs.readFileSync('src/product/workspaceRegistry.js','utf8');
+const center=fs.readFileSync('src/components/ProductionCorpusIdentityGraphCenter.jsx','utf8');
+t(main.includes('ProductionCorpusIdentityGraphCenter'));
+t(registry.includes("'Production Corpus, Identity & Knowledge Graph Center'"));
+t(center.includes('Production Corpus, Identity & Knowledge Graph Center'));
+t(center.includes('Corpus activation command'));
+t(center.includes('Corpus controls'));
+t(center.includes('CORPUS GOVERNANCE ACTIVE'));
+console.log(JSON.stringify({framework:'SCIIP_PHASE18_PRODUCTION_CORPUS_USER_VALIDATION',status:'PASSED',testsRun:n,result:{navigation:true,corpusVisible:true,controlsVisible:true}},null,2));
