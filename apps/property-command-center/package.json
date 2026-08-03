@@ -380,7 +380,15 @@
     "test:phase17:sprint233": "node tests/brokerage-operations-review-center.test.mjs",
     "test:phase17:sprint234:user-validation": "node tests/brokerage-operations-client-delivery-user-validation.test.mjs",
     "test:phase17:sprint234": "node tests/brokerage-operations-client-delivery-certification.test.mjs",
-    "certify:phase17:batch-e": "npm run test:phase17:sprint229 && npm run test:phase17:sprint230 && npm run test:phase17:sprint231 && npm run test:phase17:sprint232 && npm run test:phase17:sprint233 && npm run test:phase17:sprint234:user-validation && npm run test:phase17:sprint234"
+    "certify:phase17:batch-e": "npm run test:phase17:sprint229 && npm run test:phase17:sprint230 && npm run test:phase17:sprint231 && npm run test:phase17:sprint232 && npm run test:phase17:sprint233 && npm run test:phase17:sprint234:user-validation && npm run test:phase17:sprint234",
+    "test:phase17:sprint235": "node tests/portfolio-command-center.test.mjs",
+    "test:phase17:sprint236": "node tests/portfolio-performance-intelligence.test.mjs",
+    "test:phase17:sprint237": "node tests/cross-assignment-relationship-intelligence.test.mjs",
+    "test:phase17:sprint238": "node tests/executive-portfolio-review.test.mjs",
+    "test:phase17:sprint239": "node tests/portfolio-operations-workspace.test.mjs",
+    "test:phase17:sprint240:user-validation": "node tests/portfolio-operations-user-validation.test.mjs",
+    "test:phase17:sprint240": "node tests/portfolio-operations-certification.test.mjs",
+    "certify:phase17:batch-f": "npm run test:phase17:sprint235 && npm run test:phase17:sprint236 && npm run test:phase17:sprint237 && npm run test:phase17:sprint238 && npm run test:phase17:sprint239 && npm run test:phase17:sprint240:user-validation && npm run test:phase17:sprint240"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
