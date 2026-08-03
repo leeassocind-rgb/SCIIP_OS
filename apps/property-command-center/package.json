@@ -444,7 +444,15 @@
     "test:phase17:sprint281": "node tests/phase17-enterprise-graduation-center.test.mjs",
     "test:phase17:sprint282:user-validation": "node tests/phase17-enterprise-operating-model-user-validation.test.mjs",
     "test:phase17:sprint282": "node tests/phase17-enterprise-operating-model-certification.test.mjs",
-    "certify:phase17:batch-m": "npm run test:phase17:sprint277 && npm run test:phase17:sprint278 && npm run test:phase17:sprint279 && npm run test:phase17:sprint280 && npm run test:phase17:sprint281 && npm run test:phase17:sprint282:user-validation && npm run test:phase17:sprint282"
+    "certify:phase17:batch-m": "npm run test:phase17:sprint277 && npm run test:phase17:sprint278 && npm run test:phase17:sprint279 && npm run test:phase17:sprint280 && npm run test:phase17:sprint281 && npm run test:phase17:sprint282:user-validation && npm run test:phase17:sprint282",
+    "test:phase18:sprint283": "node tests/supersheet-production-validator.test.mjs",
+    "test:phase18:sprint284": "node tests/ingestion-quality-gate.test.mjs",
+    "test:phase18:sprint285": "node tests/ingestion-performance-benchmark.test.mjs",
+    "test:phase18:sprint286": "node tests/broker-workflow-user-validation.test.mjs",
+    "test:phase18:sprint287": "node tests/production-validation-command-center.test.mjs",
+    "test:phase18:sprint288:user-validation": "node tests/phase18-supersheet-production-validation-user-validation.test.mjs",
+    "test:phase18:sprint288": "node tests/phase18-supersheet-production-validation-certification.test.mjs",
+    "certify:phase18:batch-a": "npm run test:phase18:sprint283 && npm run test:phase18:sprint284 && npm run test:phase18:sprint285 && npm run test:phase18:sprint286 && npm run test:phase18:sprint287 && npm run test:phase18:sprint288:user-validation && npm run test:phase18:sprint288"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
