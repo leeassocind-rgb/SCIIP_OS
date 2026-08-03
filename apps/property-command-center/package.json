@@ -492,7 +492,15 @@
     "test:phase18:sprint317": "node tests/executive-outcome-improvement-center.test.mjs",
     "test:phase18:sprint318:user-validation": "node tests/phase18-outcome-feedback-user-validation.test.mjs",
     "test:phase18:sprint318": "node tests/phase18-outcome-feedback-improvement-certification.test.mjs",
-    "certify:phase18:batch-f": "npm run test:phase18:sprint313 && npm run test:phase18:sprint314 && npm run test:phase18:sprint315 && npm run test:phase18:sprint316 && npm run test:phase18:sprint317 && npm run test:phase18:sprint318:user-validation && npm run test:phase18:sprint318"
+    "certify:phase18:batch-f": "npm run test:phase18:sprint313 && npm run test:phase18:sprint314 && npm run test:phase18:sprint315 && npm run test:phase18:sprint316 && npm run test:phase18:sprint317 && npm run test:phase18:sprint318:user-validation && npm run test:phase18:sprint318",
+    "test:phase18:sprint319": "node tests/enterprise-kpi-intelligence.test.mjs",
+    "test:phase18:sprint320": "node tests/strategic-objective-tracking.test.mjs",
+    "test:phase18:sprint321": "node tests/decision-effectiveness-analytics.test.mjs",
+    "test:phase18:sprint322": "node tests/predictive-executive-recommendations.test.mjs",
+    "test:phase18:sprint323": "node tests/executive-intelligence-command-center.test.mjs",
+    "test:phase18:sprint324:user-validation": "node tests/phase18-executive-intelligence-user-validation.test.mjs",
+    "test:phase18:sprint324": "node tests/phase18-executive-intelligence-certification.test.mjs",
+    "certify:phase18:batch-g": "npm run test:phase18:sprint319 && npm run test:phase18:sprint320 && npm run test:phase18:sprint321 && npm run test:phase18:sprint322 && npm run test:phase18:sprint323 && npm run test:phase18:sprint324:user-validation && npm run test:phase18:sprint324"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
