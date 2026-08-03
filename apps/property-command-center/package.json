@@ -404,7 +404,15 @@
     "test:phase17:sprint251": "node tests/enterprise-planning-command-center.test.mjs",
     "test:phase17:sprint252:user-validation": "node tests/enterprise-planning-user-validation.test.mjs",
     "test:phase17:sprint252": "node tests/enterprise-planning-certification.test.mjs",
-    "certify:phase17:batch-h": "npm run test:phase17:sprint247 && npm run test:phase17:sprint248 && npm run test:phase17:sprint249 && npm run test:phase17:sprint250 && npm run test:phase17:sprint251 && npm run test:phase17:sprint252:user-validation && npm run test:phase17:sprint252"
+    "certify:phase17:batch-h": "npm run test:phase17:sprint247 && npm run test:phase17:sprint248 && npm run test:phase17:sprint249 && npm run test:phase17:sprint250 && npm run test:phase17:sprint251 && npm run test:phase17:sprint252:user-validation && npm run test:phase17:sprint252",
+    "test:phase17:sprint253": "node tests/enterprise-risk-aggregation.test.mjs",
+    "test:phase17:sprint254": "node tests/enterprise-stress-testing.test.mjs",
+    "test:phase17:sprint255": "node tests/strategic-contingency-planning.test.mjs",
+    "test:phase17:sprint256": "node tests/strategic-assurance-engine.test.mjs",
+    "test:phase17:sprint257": "node tests/executive-resilience-command.test.mjs",
+    "test:phase17:sprint258:user-validation": "node tests/enterprise-risk-resilience-assurance-user-validation.test.mjs",
+    "test:phase17:sprint258": "node tests/enterprise-risk-resilience-assurance-certification.test.mjs",
+    "certify:phase17:batch-i": "npm run test:phase17:sprint253 && npm run test:phase17:sprint254 && npm run test:phase17:sprint255 && npm run test:phase17:sprint256 && npm run test:phase17:sprint257 && npm run test:phase17:sprint258:user-validation && npm run test:phase17:sprint258"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
