@@ -412,7 +412,15 @@
     "test:phase17:sprint257": "node tests/executive-resilience-command.test.mjs",
     "test:phase17:sprint258:user-validation": "node tests/enterprise-risk-resilience-assurance-user-validation.test.mjs",
     "test:phase17:sprint258": "node tests/enterprise-risk-resilience-assurance-certification.test.mjs",
-    "certify:phase17:batch-i": "npm run test:phase17:sprint253 && npm run test:phase17:sprint254 && npm run test:phase17:sprint255 && npm run test:phase17:sprint256 && npm run test:phase17:sprint257 && npm run test:phase17:sprint258:user-validation && npm run test:phase17:sprint258"
+    "certify:phase17:batch-i": "npm run test:phase17:sprint253 && npm run test:phase17:sprint254 && npm run test:phase17:sprint255 && npm run test:phase17:sprint256 && npm run test:phase17:sprint257 && npm run test:phase17:sprint258:user-validation && npm run test:phase17:sprint258",
+    "test:phase17:sprint259": "node tests/governance-policy-evaluation.test.mjs",
+    "test:phase17:sprint260": "node tests/audit-evidence-orchestration.test.mjs",
+    "test:phase17:sprint261": "node tests/compliance-readiness-intelligence.test.mjs",
+    "test:phase17:sprint262": "node tests/release-assurance-engine.test.mjs",
+    "test:phase17:sprint263": "node tests/executive-governance-command-center.test.mjs",
+    "test:phase17:sprint264:user-validation": "node tests/enterprise-governance-audit-release-user-validation.test.mjs",
+    "test:phase17:sprint264": "node tests/enterprise-governance-audit-release-certification.test.mjs",
+    "certify:phase17:batch-j": "npm run test:phase17:sprint259 && npm run test:phase17:sprint260 && npm run test:phase17:sprint261 && npm run test:phase17:sprint262 && npm run test:phase17:sprint263 && npm run test:phase17:sprint264:user-validation && npm run test:phase17:sprint264"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
