@@ -468,7 +468,15 @@
     "test:phase18:sprint299": "node tests/corpus-activation-command-center.test.mjs",
     "test:phase18:sprint300:user-validation": "node tests/phase18-production-corpus-user-validation.test.mjs",
     "test:phase18:sprint300": "node tests/phase18-production-corpus-certification.test.mjs",
-    "certify:phase18:batch-c": "npm run test:phase18:sprint295 && npm run test:phase18:sprint296 && npm run test:phase18:sprint297 && npm run test:phase18:sprint298 && npm run test:phase18:sprint299 && npm run test:phase18:sprint300:user-validation && npm run test:phase18:sprint300"
+    "certify:phase18:batch-c": "npm run test:phase18:sprint295 && npm run test:phase18:sprint296 && npm run test:phase18:sprint297 && npm run test:phase18:sprint298 && npm run test:phase18:sprint299 && npm run test:phase18:sprint300:user-validation && npm run test:phase18:sprint300",
+    "test:phase18:sprint301": "node tests/decision-graph-engine.test.mjs",
+    "test:phase18:sprint302": "node tests/evidence-chain-orchestration.test.mjs",
+    "test:phase18:sprint303": "node tests/recommendation-prioritization.test.mjs",
+    "test:phase18:sprint304": "node tests/cross-workspace-decision-orchestration.test.mjs",
+    "test:phase18:sprint305": "node tests/executive-decision-command-center.test.mjs",
+    "test:phase18:sprint306:user-validation": "node tests/phase18-enterprise-decision-user-validation.test.mjs",
+    "test:phase18:sprint306": "node tests/phase18-enterprise-decision-certification.test.mjs",
+    "certify:phase18:batch-d": "npm run test:phase18:sprint301 && npm run test:phase18:sprint302 && npm run test:phase18:sprint303 && npm run test:phase18:sprint304 && npm run test:phase18:sprint305 && npm run test:phase18:sprint306:user-validation && npm run test:phase18:sprint306"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

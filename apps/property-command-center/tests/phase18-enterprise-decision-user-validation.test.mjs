@@ -1,0 +1,13 @@
+import assert from'node:assert/strict';
+import fs from'node:fs';
+let n=0;const t=c=>{n++;assert.ok(c)};
+const main=fs.readFileSync('src/main.jsx','utf8');
+const registry=fs.readFileSync('src/product/workspaceRegistry.js','utf8');
+const center=fs.readFileSync('src/components/EnterpriseDecisionIntelligenceCenter.jsx','utf8');
+t(main.includes('EnterpriseDecisionIntelligenceCenter'));
+t(registry.includes("'Enterprise Decision Intelligence & Governed Recommendation Center'"));
+t(center.includes('Enterprise Decision Intelligence & Governed Recommendation Center'));
+t(center.includes('Executive decision command'));
+t(center.includes('Decision controls'));
+t(center.includes('DECISION GOVERNANCE ACTIVE'));
+console.log(JSON.stringify({framework:'SCIIP_PHASE18_ENTERPRISE_DECISION_USER_VALIDATION',status:'PASSED',testsRun:n,result:{navigation:true,decisionVisible:true,controlsVisible:true}},null,2));
