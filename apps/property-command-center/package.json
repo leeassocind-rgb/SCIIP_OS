@@ -388,7 +388,15 @@
     "test:phase17:sprint239": "node tests/portfolio-operations-workspace.test.mjs",
     "test:phase17:sprint240:user-validation": "node tests/portfolio-operations-user-validation.test.mjs",
     "test:phase17:sprint240": "node tests/portfolio-operations-certification.test.mjs",
-    "certify:phase17:batch-f": "npm run test:phase17:sprint235 && npm run test:phase17:sprint236 && npm run test:phase17:sprint237 && npm run test:phase17:sprint238 && npm run test:phase17:sprint239 && npm run test:phase17:sprint240:user-validation && npm run test:phase17:sprint240"
+    "certify:phase17:batch-f": "npm run test:phase17:sprint235 && npm run test:phase17:sprint236 && npm run test:phase17:sprint237 && npm run test:phase17:sprint238 && npm run test:phase17:sprint239 && npm run test:phase17:sprint240:user-validation && npm run test:phase17:sprint240",
+    "test:phase17:sprint241": "node tests/strategic-account-growth.test.mjs",
+    "test:phase17:sprint242": "node tests/territory-expansion-intelligence.test.mjs",
+    "test:phase17:sprint243": "node tests/pipeline-scenario-planning.test.mjs",
+    "test:phase17:sprint244": "node tests/capacity-resource-planning.test.mjs",
+    "test:phase17:sprint245": "node tests/executive-growth-command.test.mjs",
+    "test:phase17:sprint246:user-validation": "node tests/growth-strategy-executive-planning-user-validation.test.mjs",
+    "test:phase17:sprint246": "node tests/growth-strategy-executive-planning-certification.test.mjs",
+    "certify:phase17:batch-g": "npm run test:phase17:sprint241 && npm run test:phase17:sprint242 && npm run test:phase17:sprint243 && npm run test:phase17:sprint244 && npm run test:phase17:sprint245 && npm run test:phase17:sprint246:user-validation && npm run test:phase17:sprint246"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
