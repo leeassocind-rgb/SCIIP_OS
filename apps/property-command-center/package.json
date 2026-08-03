@@ -420,7 +420,15 @@
     "test:phase17:sprint263": "node tests/executive-governance-command-center.test.mjs",
     "test:phase17:sprint264:user-validation": "node tests/enterprise-governance-audit-release-user-validation.test.mjs",
     "test:phase17:sprint264": "node tests/enterprise-governance-audit-release-certification.test.mjs",
-    "certify:phase17:batch-j": "npm run test:phase17:sprint259 && npm run test:phase17:sprint260 && npm run test:phase17:sprint261 && npm run test:phase17:sprint262 && npm run test:phase17:sprint263 && npm run test:phase17:sprint264:user-validation && npm run test:phase17:sprint264"
+    "certify:phase17:batch-j": "npm run test:phase17:sprint259 && npm run test:phase17:sprint260 && npm run test:phase17:sprint261 && npm run test:phase17:sprint262 && npm run test:phase17:sprint263 && npm run test:phase17:sprint264:user-validation && npm run test:phase17:sprint264",
+    "test:phase17:sprint265": "node tests/enterprise-deployment-readiness.test.mjs",
+    "test:phase17:sprint266": "node tests/enterprise-adoption-intelligence.test.mjs",
+    "test:phase17:sprint267": "node tests/enterprise-value-realization.test.mjs",
+    "test:phase17:sprint268": "node tests/change-enablement-operations.test.mjs",
+    "test:phase17:sprint269": "node tests/executive-deployment-command-center.test.mjs",
+    "test:phase17:sprint270:user-validation": "node tests/enterprise-deployment-adoption-value-user-validation.test.mjs",
+    "test:phase17:sprint270": "node tests/enterprise-deployment-adoption-value-certification.test.mjs",
+    "certify:phase17:batch-k": "npm run test:phase17:sprint265 && npm run test:phase17:sprint266 && npm run test:phase17:sprint267 && npm run test:phase17:sprint268 && npm run test:phase17:sprint269 && npm run test:phase17:sprint270:user-validation && npm run test:phase17:sprint270"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
