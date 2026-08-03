@@ -484,7 +484,15 @@
     "test:phase18:sprint311": "node tests/executive-action-operations-center.test.mjs",
     "test:phase18:sprint312:user-validation": "node tests/phase18-governed-execution-user-validation.test.mjs",
     "test:phase18:sprint312": "node tests/phase18-governed-execution-certification.test.mjs",
-    "certify:phase18:batch-e": "npm run test:phase18:sprint307 && npm run test:phase18:sprint308 && npm run test:phase18:sprint309 && npm run test:phase18:sprint310 && npm run test:phase18:sprint311 && npm run test:phase18:sprint312:user-validation && npm run test:phase18:sprint312"
+    "certify:phase18:batch-e": "npm run test:phase18:sprint307 && npm run test:phase18:sprint308 && npm run test:phase18:sprint309 && npm run test:phase18:sprint310 && npm run test:phase18:sprint311 && npm run test:phase18:sprint312:user-validation && npm run test:phase18:sprint312",
+    "test:phase18:sprint313": "node tests/execution-outcome-intelligence.test.mjs",
+    "test:phase18:sprint314": "node tests/broker-feedback-intelligence.test.mjs",
+    "test:phase18:sprint315": "node tests/outcome-improvement-mapping.test.mjs",
+    "test:phase18:sprint316": "node tests/controlled-learning-governance.test.mjs",
+    "test:phase18:sprint317": "node tests/executive-outcome-improvement-center.test.mjs",
+    "test:phase18:sprint318:user-validation": "node tests/phase18-outcome-feedback-user-validation.test.mjs",
+    "test:phase18:sprint318": "node tests/phase18-outcome-feedback-improvement-certification.test.mjs",
+    "certify:phase18:batch-f": "npm run test:phase18:sprint313 && npm run test:phase18:sprint314 && npm run test:phase18:sprint315 && npm run test:phase18:sprint316 && npm run test:phase18:sprint317 && npm run test:phase18:sprint318:user-validation && npm run test:phase18:sprint318"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
