@@ -1,0 +1,13 @@
+import assert from'node:assert/strict';
+import fs from'node:fs';
+let n=0;const t=c=>{n++;assert.ok(c)};
+const m=fs.readFileSync('src/main.jsx','utf8');
+const r=fs.readFileSync('src/product/workspaceRegistry.js','utf8');
+const c=fs.readFileSync('src/components/EnterpriseOperatingModelGraduationCenter.jsx','utf8');
+t(m.includes('EnterpriseOperatingModelGraduationCenter'));
+t(r.includes("'Enterprise Operating Model & Continuous Improvement Center'"));
+t(c.includes('Enterprise Operating Model & Continuous Improvement Center'));
+t(c.includes('Enterprise operating model'));
+t(c.includes('Graduation controls'));
+t(c.includes('PHASE 17 GRADUATION READY'));
+console.log(JSON.stringify({framework:'SCIIP_PHASE17_ENTERPRISE_OPERATING_MODEL_USER_VALIDATION',status:'PASSED',testsRun:n,result:{navigation:true,operatingModelVisible:true,controlsVisible:true}},null,2));

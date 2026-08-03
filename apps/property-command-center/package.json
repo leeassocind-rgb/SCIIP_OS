@@ -436,7 +436,15 @@
     "test:phase17:sprint275": "node tests/executive-performance-review-center.test.mjs",
     "test:phase17:sprint276:user-validation": "node tests/enterprise-portfolio-performance-user-validation.test.mjs",
     "test:phase17:sprint276": "node tests/enterprise-portfolio-performance-certification.test.mjs",
-    "certify:phase17:batch-l": "npm run test:phase17:sprint271 && npm run test:phase17:sprint272 && npm run test:phase17:sprint273 && npm run test:phase17:sprint274 && npm run test:phase17:sprint275 && npm run test:phase17:sprint276:user-validation && npm run test:phase17:sprint276"
+    "certify:phase17:batch-l": "npm run test:phase17:sprint271 && npm run test:phase17:sprint272 && npm run test:phase17:sprint273 && npm run test:phase17:sprint274 && npm run test:phase17:sprint275 && npm run test:phase17:sprint276:user-validation && npm run test:phase17:sprint276",
+    "test:phase17:sprint277": "node tests/enterprise-operating-model.test.mjs",
+    "test:phase17:sprint278": "node tests/continuous-improvement-intelligence.test.mjs",
+    "test:phase17:sprint279": "node tests/enterprise-benchmarking.test.mjs",
+    "test:phase17:sprint280": "node tests/executive-operating-rhythm.test.mjs",
+    "test:phase17:sprint281": "node tests/phase17-enterprise-graduation-center.test.mjs",
+    "test:phase17:sprint282:user-validation": "node tests/phase17-enterprise-operating-model-user-validation.test.mjs",
+    "test:phase17:sprint282": "node tests/phase17-enterprise-operating-model-certification.test.mjs",
+    "certify:phase17:batch-m": "npm run test:phase17:sprint277 && npm run test:phase17:sprint278 && npm run test:phase17:sprint279 && npm run test:phase17:sprint280 && npm run test:phase17:sprint281 && npm run test:phase17:sprint282:user-validation && npm run test:phase17:sprint282"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
