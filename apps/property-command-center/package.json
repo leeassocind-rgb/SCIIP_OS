@@ -508,7 +508,15 @@
     "test:phase18:sprint329": "node tests/executive-scenario-command-center.test.mjs",
     "test:phase18:sprint330:user-validation": "node tests/phase18-scenario-user-validation.test.mjs",
     "test:phase18:sprint330": "node tests/phase18-scenario-forecasting-simulation-certification.test.mjs",
-    "certify:phase18:batch-h": "npm run test:phase18:sprint325 && npm run test:phase18:sprint326 && npm run test:phase18:sprint327 && npm run test:phase18:sprint328 && npm run test:phase18:sprint329 && npm run test:phase18:sprint330:user-validation && npm run test:phase18:sprint330"
+    "certify:phase18:batch-h": "npm run test:phase18:sprint325 && npm run test:phase18:sprint326 && npm run test:phase18:sprint327 && npm run test:phase18:sprint328 && npm run test:phase18:sprint329 && npm run test:phase18:sprint330:user-validation && npm run test:phase18:sprint330",
+    "test:phase18:sprint331": "node tests/strategic-capital-allocation-engine.test.mjs",
+    "test:phase18:sprint332": "node tests/resource-capacity-optimization.test.mjs",
+    "test:phase18:sprint333": "node tests/investment-portfolio-planning.test.mjs",
+    "test:phase18:sprint334": "node tests/capital-scenario-stress-testing.test.mjs",
+    "test:phase18:sprint335": "node tests/executive-capital-planning-center.test.mjs",
+    "test:phase18:sprint336:user-validation": "node tests/phase18-capital-user-validation.test.mjs",
+    "test:phase18:sprint336": "node tests/phase18-capital-allocation-investment-planning-certification.test.mjs",
+    "certify:phase18:batch-i": "npm run test:phase18:sprint331 && npm run test:phase18:sprint332 && npm run test:phase18:sprint333 && npm run test:phase18:sprint334 && npm run test:phase18:sprint335 && npm run test:phase18:sprint336:user-validation && npm run test:phase18:sprint336"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
