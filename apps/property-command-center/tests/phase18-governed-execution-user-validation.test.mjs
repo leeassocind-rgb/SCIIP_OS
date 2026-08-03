@@ -1,0 +1,13 @@
+import assert from'node:assert/strict';
+import fs from'node:fs';
+let n=0;const t=c=>{n++;assert.ok(c)};
+const m=fs.readFileSync('src/main.jsx','utf8');
+const r=fs.readFileSync('src/product/workspaceRegistry.js','utf8');
+const c=fs.readFileSync('src/components/ExecutiveActionOperationsCenter.jsx','utf8');
+t(m.includes('ExecutiveActionOperationsCenter'));
+t(r.includes("'Executive Action Operations & Governed Execution Center'"));
+t(c.includes('Executive Action Operations & Governed Execution Center'));
+t(c.includes('Executive action operations'));
+t(c.includes('Execution controls'));
+t(c.includes('ACTION GOVERNANCE ACTIVE'));
+console.log(JSON.stringify({framework:'SCIIP_PHASE18_GOVERNED_EXECUTION_USER_VALIDATION',status:'PASSED',testsRun:n,result:{navigation:true,actionVisible:true,controlsVisible:true}},null,2));

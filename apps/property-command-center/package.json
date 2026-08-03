@@ -476,7 +476,15 @@
     "test:phase18:sprint305": "node tests/executive-decision-command-center.test.mjs",
     "test:phase18:sprint306:user-validation": "node tests/phase18-enterprise-decision-user-validation.test.mjs",
     "test:phase18:sprint306": "node tests/phase18-enterprise-decision-certification.test.mjs",
-    "certify:phase18:batch-d": "npm run test:phase18:sprint301 && npm run test:phase18:sprint302 && npm run test:phase18:sprint303 && npm run test:phase18:sprint304 && npm run test:phase18:sprint305 && npm run test:phase18:sprint306:user-validation && npm run test:phase18:sprint306"
+    "certify:phase18:batch-d": "npm run test:phase18:sprint301 && npm run test:phase18:sprint302 && npm run test:phase18:sprint303 && npm run test:phase18:sprint304 && npm run test:phase18:sprint305 && npm run test:phase18:sprint306:user-validation && npm run test:phase18:sprint306",
+    "test:phase18:sprint307": "node tests/governed-action-planner.test.mjs",
+    "test:phase18:sprint308": "node tests/approval-operations-engine.test.mjs",
+    "test:phase18:sprint309": "node tests/controlled-execution-engine.test.mjs",
+    "test:phase18:sprint310": "node tests/execution-audit-rollback.test.mjs",
+    "test:phase18:sprint311": "node tests/executive-action-operations-center.test.mjs",
+    "test:phase18:sprint312:user-validation": "node tests/phase18-governed-execution-user-validation.test.mjs",
+    "test:phase18:sprint312": "node tests/phase18-governed-execution-certification.test.mjs",
+    "certify:phase18:batch-e": "npm run test:phase18:sprint307 && npm run test:phase18:sprint308 && npm run test:phase18:sprint309 && npm run test:phase18:sprint310 && npm run test:phase18:sprint311 && npm run test:phase18:sprint312:user-validation && npm run test:phase18:sprint312"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
