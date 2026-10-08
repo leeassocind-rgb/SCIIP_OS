@@ -1,0 +1,1 @@
+Consumes the certified R1-R5-R1 successor-six evidence, removes the six historical prior-200 overlaps from the candidate New-200, appends the six certified successors, and recertifies an exact unique disjoint Reference-400. Read-only with respect to application and governed data.

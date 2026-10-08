@@ -1,0 +1,10 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_RUNTIME_REBOOTSTRAP_TRANSPORT_EXERCISE_AND_NON_EXPORT_RECERTIFICATION",
+  "version": "4.0-r29b-r2-r3",
+  "diagnosedCondition": "R29B_SYNTAX_CERTIFIED_APP_RUNTIME_DROPPED_BEFORE_TRANSPORT_EXERCISE",
+  "repairScope": "RUNTIME_REBOOTSTRAP_ONLY",
+  "r29bRunnerMutation": false,
+  "rawWebSocketTransportPreserved": true,
+  "governedDataMutation": false,
+  "exportInvocation": false
+}

@@ -1,0 +1,33 @@
+SCIIP Explorer 4.0 — M4.19D4BN15A
+Exact-Ten Live End-to-End Governed Explorer Workflow Recertification
+
+PURPOSE
+-------
+Execute one continuous read-only live Explorer workflow for each record in the exact-ten
+governed cohort, composing the previously certified consumer families into a single run.
+
+Stages:
+01 GLOBAL_SEARCH
+02 SELECTED_PROPERTY
+03 PROPERTY_DETAIL_GOVERNED_CONSUMER
+04 MARKET_CONTEXT_NEIGHBORS
+05 SPATIAL_SELECTION_MAP_FOCUS
+06 COMPARE
+07 COMMAND
+08 PROPERTY_INTELLIGENCE
+09 ANALYZE_PRESENT
+10 EXPLAIN_EVIDENCE
+11 EXPORT_PRESENTATION
+12 GRAPH_RELATIONSHIP
+13 DEEP_LINK_CONTEXT_RESTORE
+
+This package uses an existing validated SCIIP CDP target and a self-contained WebSocket client.
+No application source mutation. No governed data mutation. Pixel evidence remains OFF.
+
+EXPECTED SUCCESS
+----------------
+OBSERVED: 10/10
+STATUS: PASSED
+STATE: M419D4BN15A_EXACT_TEN_LIVE_END_TO_END_GOVERNED_EXPLORER_WORKFLOW_RECERTIFIED
+DIAGNOSIS: EXACT_TEN_LIVE_END_TO_END_GOVERNED_EXPLORER_WORKFLOW_RECERTIFIED
+NEXT_MILESTONE: M4_19D4BN15B_END_TO_END_GOVERNED_EXPLORER_WORKFLOW_LIFECYCLE_CLOSURE

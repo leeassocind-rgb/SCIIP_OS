@@ -1,0 +1,28 @@
+M2.40 governed Market Context ribbon consumer contract
+explicitRibbonBinding=1
+liveConsumer=MarketContextRibbon
+consumerContext=marketContextRibbonContext
+presentationAuthority=governedMarketMetricPresentation
+legacyMetricShapePreserved=true
+metricIdsPreserved=true
+metricLabelsPreserved=true
+metricSubtitlesPreserved=true
+drilldownRowsPreserved=true
+radiusStatePreserved=true
+formulaRewritten=false
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+automaticCanonicalWrites=false
+
+TRACE
+24:import{buildGovernedMarketContextRibbonContract}from'../GovernedMarketContextRibbonContract.js';
+169:const governedMarketMetricPresentation=useMemo(
+177:const marketMetricPresentation=governedMarketMetricPresentation.metrics;
+180:const marketContextRibbonContext=useMemo(
+181:()=>buildGovernedMarketContextRibbonContract(
+183:governedMarketMetricPresentation
+185:[marketContext,governedMarketMetricPresentation]
+256:{state.mode!=='present'&&<MarketContextRibbon context={marketContextRibbonContext} radius={marketRadius} onRadius={value=>{setMarketRadius(value);setActiveMarketMetricId(null);}} activeId={activeMarketMetricId} onSelect={id=>setActiveMarketMetricId(current=>current===id?null:id)}/>}
+263:{activeMarketMetric&&state.mode!=='present'&&<MarketMetricDetailPanel metric={activeMarketMetric} context={marketContext} onClose={()=>setActiveMarketMetricId(null)} onShowProperty={selectProperty}/>}
+319:function MarketContextRibbon({context,radius,onRadius,activeId,onSelect}){return <section className="explorer3__ribbon explorer3__market-ribbon">
+326:function MarketMetricDetailPanel({metric,context,onClose,onShowProperty}){return <aside className="explorer3__ribbon-detail explorer3__market-detail"><header><div><span>Market Context · {context.radiusMiles} mi</span><strong>{metric.value} {metric.label}</strong><small>{metric.subtitle}</small></div><button onClick={onClose}><X size={15}/></button></header><div>{metric.rows.length?metric.rows.map((detail,index)=><article key={`${metric.id}-${index}`}><div><strong>{detail.title}</strong><span>{detail.meta}</span></div>{detail.propertyId&&<button onClick={()=>onShowProperty(detail.propertyId)}>Show on map <ArrowRight size={12}/></button>}</article>):<p className="explorer3__empty-context">No records in the current radius and filter cohort.</p>}</div></aside>;}

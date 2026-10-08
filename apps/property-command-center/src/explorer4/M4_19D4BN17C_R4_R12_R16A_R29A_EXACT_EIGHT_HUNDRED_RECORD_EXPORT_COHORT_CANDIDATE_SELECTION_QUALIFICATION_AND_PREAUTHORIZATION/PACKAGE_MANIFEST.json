@@ -1,0 +1,11 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A",
+  "version": "4.0-r29a",
+  "liveUiScope": "EXPLORER_ENTRY_AND_MARKER_INVENTORY_READBACK_ONLY",
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false,
+  "expectedTargetArtifact": "exact_new_four_hundred_candidates.json",
+  "expectedNextMilestone": "M4_19D4BN17C_R4_R12_R16A_R29B_FOUR_HUNDRED_NEW_RECORD_NON_EXPORT_LIVE_QUALIFICATION"
+}

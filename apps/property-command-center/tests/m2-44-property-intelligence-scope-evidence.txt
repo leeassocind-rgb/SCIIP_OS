@@ -1,0 +1,12 @@
+M2.44 corrected Property Intelligence synchronization
+contextDrawerReceivesPropertyIntelligenceProperty=true
+contextDrawerForwardsGovernedProperty=true
+drawerSectionUsesScopedPropertyProp=true
+scopeLeakBlocked=true
+governedSelectionAuthoritative=true
+propertyIntelligenceSynchronized=true
+selectedPropertyFlowPreserved=true
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+formulaRewritten=false
+automaticCanonicalWrites=false

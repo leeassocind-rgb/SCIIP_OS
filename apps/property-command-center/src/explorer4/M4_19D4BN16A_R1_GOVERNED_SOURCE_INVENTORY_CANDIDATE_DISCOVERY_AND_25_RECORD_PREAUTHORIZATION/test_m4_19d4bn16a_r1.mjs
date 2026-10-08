@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+import fs from"node:fs";import path from"node:path";import{fileURLToPath}from"node:url";
+const d=path.dirname(fileURLToPath(import.meta.url)),t=fs.readFileSync(path.join(d,"select_bn16a_r1.py"),"utf8");
+const req=["originalBn16aBlockedOnlyCandidateQualification","GOVERNED_REPOSITORY_SOURCE_INVENTORY","strictSingleLineQualification","uiTextContaminationRejected","atLeastFifteenQualifiedCandidatesFound","exactlyFifteenNewCandidatesSelected","exactlyTwentyFiveTotal","originalTenRemainFirstAndUnchanged","allTwentyFiveUnique","allNewCandidatesPassStrictQualification","M419D4BN16A_R1_25_RECORD_GOVERNED_SOURCE_INVENTORY_COHORT_PREAUTHORIZED","M4_19D4BN16B_25_RECORD_GOVERNED_EXPLORER_CONTRACT_PARITY_CERTIFICATION"];
+for(const x of req)if(!t.includes(x)){console.error("FAIL",x);process.exit(1)}
+console.log(JSON.stringify({framework:"SCIIP_EXPLORER_4_BN16A_R1_STATIC_TEST",status:"PASSED",assertions:req.length,repair:"CANDIDATE_DISCOVERY_MOVED_FROM_EVIDENCE_SNIPPETS_TO_GOVERNED_SOURCE_INVENTORY"},null,2));

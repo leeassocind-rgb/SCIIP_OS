@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+import fs from"node:fs";import path from"node:path";import{fileURLToPath}from"node:url";const d=path.dirname(fileURLToPath(import.meta.url)),t=fs.readFileSync(path.join(d,"activate_bn17a_r7.py"),"utf8");
+const req=["HTMLInputElement.prototype","InputEvent('input'","Page.reload","bn17aR6KeyboardResetFailureObserved","controlledInputAcceptedMultipleExactQueries","queryResultStateTransitionsObserved","exactlyFiftyTotal","allFiftyUnique","M4_19D4BN17B_50_RECORD_GOVERNED_EXPLORER_CONTRACT_PARITY_CERTIFICATION"];
+for(const x of req)if(!t.includes(x)){console.error("FAIL",x);process.exit(1)}console.log(JSON.stringify({framework:"SCIIP_EXPLORER_4_BN17A_R7_STATIC_TEST",status:"PASSED",assertions:req.length,repair:"KEYBOARD_RESET_REPLACED_WITH_NATIVE_INPUT_VALUE_SETTER_PLUS_REACT_INPUT_CHANGE_EVENTS"},null,2));

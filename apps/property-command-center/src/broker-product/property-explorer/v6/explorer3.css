@@ -1,0 +1,648 @@
+.explorer3{position:relative;height:calc(100vh - 56px);min-height:650px;overflow:hidden;background:#eef1f3;color:#15202a;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.explorer3>.explorer-v5__provider-shell{position:absolute;inset:0}.explorer3 .explorer-v5__provider-map{height:100%;min-height:100%}
+/* Explorer 3.0 owns the spatial chrome. Native map controls get a dedicated quiet zone. */
+.explorer3 .explorer-v5__map-tools{top:154px;right:18px}.explorer3--present .explorer-v5__map-tools{top:82px}
+.explorer3__topbar{position:absolute;top:48px;left:18px;right:18px;height:52px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;z-index:300;pointer-events:none}.explorer3__topbar>*{pointer-events:auto}
+.explorer3__brand{justify-self:start;display:flex;align-items:baseline;gap:7px;background:rgba(255,255,255,.95);border:1px solid rgba(21,32,42,.11);border-radius:13px;padding:10px 13px;box-shadow:0 8px 24px rgba(20,31,42,.11);backdrop-filter:blur(14px)}.explorer3__brand span{font-size:11px;font-weight:800;letter-spacing:.16em;color:#56636e}.explorer3__brand strong{font-size:17px}.explorer3__brand b{font-size:9px;background:#e9eef1;color:#344957;border-radius:6px;padding:3px 6px}
+.explorer3__mode-switch{justify-self:center;display:flex;background:rgba(255,255,255,.96);border:1px solid rgba(21,32,42,.11);border-radius:14px;padding:4px;box-shadow:0 8px 24px rgba(20,31,42,.11)}.explorer3__mode-switch button{border:0;background:transparent;border-radius:9px;padding:9px 15px;font-size:12px;font-weight:750;color:#56636e;display:flex;align-items:center;gap:5px}.explorer3__mode-switch button.active{background:#173f56;color:#fff}
+.explorer3__palette-shortcut{justify-self:end;height:40px;border:1px solid rgba(21,32,42,.11);border-radius:11px;background:rgba(255,255,255,.95);display:flex;align-items:center;gap:7px;padding:0 10px;box-shadow:0 8px 24px rgba(20,31,42,.1);color:#33424d}.explorer3__palette-shortcut kbd,.explorer3__search-dock kbd,.explorer3__search-collapsed kbd{font:700 10px system-ui;background:#eef2f4;border:1px solid #d9e0e4;border-radius:6px;padding:3px 6px;color:#44535d}
+.explorer3__ribbon{position:absolute;top:0;left:0;right:0;height:38px;background:rgba(18,28,37,.94);color:#fff;z-index:320;display:flex;align-items:center;padding:0 18px;gap:4px}.explorer3__ribbon>strong{font-size:10px;letter-spacing:.09em;text-transform:uppercase;margin-right:8px}.explorer3__ribbon button{height:100%;border:0;border-left:1px solid rgba(255,255,255,.1);background:transparent;color:#dfe7ec;padding:0 12px;display:flex;align-items:center;gap:6px;font-size:10px}.explorer3__ribbon button b{color:#fff;font-size:13px}.explorer3__ribbon-live{margin-left:auto;font-size:9px;color:#aab8c1;display:flex;gap:6px;align-items:center}.explorer3__ribbon-live i{width:6px;height:6px;border-radius:50%;background:#62b487}
+/* Single search surface: bottom-center, collapsible, no duplicate command/search rows. */
+.explorer3__search-dock{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:305;width:min(620px,52vw);min-width:390px;height:50px;border:1px solid rgba(21,32,42,.14);border-radius:25px;background:rgba(255,255,255,.97);display:flex;align-items:center;gap:10px;padding:0 10px 0 17px;box-shadow:0 14px 34px rgba(20,31,42,.17);backdrop-filter:blur(16px)}.explorer3__search-dock input{min-width:0;flex:1;border:0;outline:0;background:transparent;font-size:13px;color:#263640}.explorer3__search-dock input::placeholder{color:#74808a}.explorer3__search-command,.explorer3__search-collapse{height:34px;border:0;border-radius:17px;background:#eef2f4;display:grid;place-items:center;padding:0 9px;color:#40515d}.explorer3__search-collapse{width:34px;padding:0;background:#173f56;color:#fff}.explorer3__search-results{position:absolute;background:#fff;border:1px solid #dbe1e5;border-radius:12px;box-shadow:0 14px 36px rgba(20,31,42,.16);overflow:hidden}.explorer3__search-results--dock{left:0;right:0;bottom:58px;max-height:260px;overflow:auto}.explorer3__search-results button{width:100%;border:0;background:#fff;padding:10px 12px;display:flex;gap:9px;text-align:left}.explorer3__search-results button:hover{background:#f4f7f8}.explorer3__search-results span{display:flex;flex-direction:column}.explorer3__search-results small{color:#6d7780}.explorer3__search-collapsed{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:305;height:44px;border:1px solid rgba(21,32,42,.14);border-radius:22px;background:rgba(255,255,255,.96);display:flex;align-items:center;gap:9px;padding:0 15px;box-shadow:0 12px 30px rgba(20,31,42,.15);font-size:11px;font-weight:800;color:#33424d}
+/* Legend is collapsed by default and expands upward so it never consumes map width. */
+.explorer3__legend{position:absolute;left:18px;bottom:18px;z-index:304;display:flex;flex-direction:column;align-items:flex-start;gap:7px}.explorer3__legend>button{height:44px;border:1px solid rgba(21,32,42,.14);border-radius:12px;background:rgba(255,255,255,.96);display:flex;align-items:center;gap:9px;padding:0 13px;box-shadow:0 12px 30px rgba(20,31,42,.15);color:#33424d}.explorer3__legend>button strong{font-size:11px}.explorer3__legend-items{display:grid;gap:8px;background:rgba(255,255,255,.97);border:1px solid rgba(21,32,42,.13);border-radius:12px;padding:11px 13px;box-shadow:0 12px 30px rgba(20,31,42,.15);backdrop-filter:blur(14px)}.explorer3__legend-items span{display:flex;align-items:center;gap:8px;font-size:10px;color:#46545e;white-space:nowrap}.explorer3__legend-items i{width:10px;height:10px;border-radius:50%;background:#88949d}.explorer3__legend-items i.selected{background:#2f73d9;box-shadow:0 0 0 3px rgba(47,115,217,.16)}.explorer3__legend-items i.nearby{background:#87939c}.explorer3__legend-items i.available{background:#388b5a}.explorer3__legend-items i.assignment{background:#d78a2c}
+.explorer3__property-card{position:absolute;left:18px;top:154px;z-index:280;width:360px;background:rgba(255,255,255,.96);border:1px solid rgba(21,32,42,.12);border-radius:16px;box-shadow:0 18px 45px rgba(20,31,42,.2);backdrop-filter:blur(16px);overflow:hidden}.explorer3__property-card header{display:flex;justify-content:space-between;gap:10px;padding:15px 16px 11px}.explorer3__property-card header span{font-size:9px;font-weight:800;letter-spacing:.09em;color:#6e7b84}.explorer3__property-card h2{font-size:18px;margin:2px 0}.explorer3__property-card p{margin:0;font-size:11px;color:#6b7680}.explorer3__outlook{height:28px;border:0;border-radius:8px;background:#edf6f0;color:#2d6649;display:flex;align-items:center;gap:5px;padding:0 8px;font-size:10px;font-weight:800}.explorer3__property-facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #edf0f2;border-bottom:1px solid #edf0f2}.explorer3__property-facts div{padding:10px 12px;border-right:1px solid #edf0f2}.explorer3__property-facts div:last-child{border-right:0}.explorer3__property-facts strong{display:block;font-size:14px}.explorer3__property-facts span{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#7a858d}.explorer3__owner{padding:10px 14px;display:flex;align-items:center;gap:8px}.explorer3__owner>span{display:flex;flex-direction:column;flex:1}.explorer3__owner small{font-size:9px;color:#7d8790}.explorer3__owner strong{font-size:11px}.explorer3__owner button{border:0;background:#f2f5f6;border-radius:8px;padding:7px 8px;display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700}.explorer3__property-card footer{display:flex;gap:6px;padding:0 12px 12px}.explorer3__property-card footer button,.explorer3__drawer footer button,.explorer3__compare-dock button{border:1px solid #d8dfe3;background:#fff;border-radius:8px;padding:8px 10px;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:5px}.explorer3__property-card footer .primary,.explorer3__drawer footer .primary,.explorer3__compare-dock .primary{background:#173f56;color:#fff;border-color:#173f56;flex:1}.explorer3__property-card footer .selected{background:#e8f0f4;border-color:#6e8fa0}
+.explorer3__map-rail{position:absolute;right:18px;top:266px;z-index:275;display:flex;flex-direction:column;gap:6px}.explorer3__map-rail button{width:40px;height:40px;border:1px solid rgba(21,32,42,.14);border-radius:10px;background:rgba(255,255,255,.94);display:grid;place-items:center;box-shadow:0 7px 18px rgba(20,31,42,.12)}
+.explorer3__drawer{position:absolute;right:16px;top:112px;bottom:16px;width:390px;z-index:310;background:rgba(255,255,255,.98);border:1px solid rgba(21,32,42,.12);border-radius:16px;box-shadow:0 22px 55px rgba(20,31,42,.22);display:flex;flex-direction:column;overflow:hidden}.explorer3__drawer>header{padding:14px 15px 10px;display:flex;justify-content:space-between}.explorer3__drawer>header div{display:flex;flex-direction:column}.explorer3__drawer>header span{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#7a858d}.explorer3__drawer>header strong{font-size:16px}.explorer3__drawer>header button{border:0;background:#eef2f4;border-radius:7px;width:30px;height:30px}.explorer3__drawer>nav{display:flex;padding:0 10px;border-bottom:1px solid #e8ecef;overflow-x:auto}.explorer3__drawer>nav button{border:0;background:transparent;padding:9px 8px;font-size:10px;color:#6b7680;border-bottom:2px solid transparent;white-space:nowrap}.explorer3__drawer>nav button.active{color:#173f56;border-bottom-color:#173f56;font-weight:800}.explorer3__drawer-body{flex:1;overflow:auto;padding:14px}.explorer3__drawer>footer{display:flex;gap:7px;border-top:1px solid #e7ecef;padding:10px}.explorer3__section-title{margin:4px 0 9px}.explorer3__section-title div{display:flex;justify-content:space-between;align-items:baseline}.explorer3__section-title strong{font-size:12px}.explorer3__section-title span{font-size:9px;color:#82909a}.explorer3__detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:16px}.explorer3__detail-grid article{background:#f4f6f7;border:1px solid #e7ebee;border-radius:9px;padding:9px}.explorer3__detail-grid span{display:block;font-size:9px;color:#7b8790}.explorer3__detail-grid strong{font-size:12px}.explorer3__copy{font-size:11px;line-height:1.55;color:#56636e;margin:0 0 16px}.explorer3__hero-signal{display:flex;gap:9px;padding:11px;background:#edf6f2;border:1px solid #d9e9e1;border-radius:10px;margin-bottom:13px}.explorer3__hero-signal strong{font-size:12px}.explorer3__hero-signal p{margin:3px 0 0;font-size:10px;color:#586a61;line-height:1.4}.explorer3__drawer-cta{border:0;background:#173f56;color:#fff;border-radius:9px;padding:9px 11px;font-size:10px;font-weight:800;display:flex;align-items:center;gap:6px}.explorer3__neighbor-list{display:flex;flex-direction:column;gap:7px}.explorer3__neighbor-list article{display:flex;border:1px solid #e1e6e9;border-radius:10px;overflow:hidden}.explorer3__neighbor-main{border:0;background:#fff;text-align:left;padding:9px 10px;display:flex;flex-direction:column;gap:2px;flex:1}.explorer3__neighbor-main:hover{background:#f4f7f8}.explorer3__neighbor-main span{font-size:8px;text-transform:uppercase;color:#67808e;font-weight:800}.explorer3__neighbor-main strong{font-size:11px}.explorer3__neighbor-main small{font-size:9px;color:#79858d}.explorer3__neighbor-open{border:0;border-left:1px solid #e6eaed;background:#f7f9fa;padding:0 9px;font-size:9px;font-weight:800}.explorer3__timeline{display:flex;flex-direction:column}.explorer3__timeline article{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid #edf0f2}.explorer3__timeline i{width:7px;height:7px;border-radius:50%;background:#557c91;margin-top:4px}.explorer3__timeline div{display:flex;flex-direction:column}.explorer3__timeline strong{font-size:10px}.explorer3__timeline span{font-size:9px;color:#87919a}
+.explorer3__compare-dock{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);z-index:300;background:#fff;border:1px solid #dbe1e5;border-radius:12px;box-shadow:0 12px 32px rgba(20,31,42,.16);display:flex;align-items:center;gap:6px;padding:7px 8px}.explorer3__compare-dock>strong{font-size:10px;margin:0 4px}.explorer3__compare-dock button{padding:6px 8px}
+.explorer3__palette-backdrop{position:absolute;inset:0;background:rgba(12,19,24,.28);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding-top:110px;backdrop-filter:blur(2px)}.explorer3__palette{width:min(640px,90vw);background:#fff;border-radius:16px;box-shadow:0 28px 80px rgba(7,13,18,.28);overflow:hidden}.explorer3__palette>header{height:54px;display:flex;align-items:center;gap:9px;padding:0 15px;border-bottom:1px solid #e6ebee}.explorer3__palette input{flex:1;border:0;outline:0;font-size:14px}.explorer3__palette>header button{border:0;background:#eef2f4;border-radius:7px;width:29px;height:29px}.explorer3__palette-suggestions{padding:8px}.explorer3__palette-suggestions>span{display:flex;gap:6px;align-items:center;padding:6px 8px;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#7d8991}.explorer3__palette-suggestions button{width:100%;border:0;background:#fff;border-radius:9px;padding:9px 10px;display:flex;align-items:center;text-align:left}.explorer3__palette-suggestions button:hover{background:#f3f6f7}.explorer3__palette-suggestions button div{display:flex;flex-direction:column;flex:1}.explorer3__palette-suggestions strong{font-size:11px}.explorer3__palette-suggestions small{font-size:9px;color:#7d8991}.explorer3__palette kbd{font-size:10px;color:#8a949b}.explorer3__palette footer{border-top:1px solid #e8ecef;padding:9px 13px;font-size:9px;color:#829099;display:flex;align-items:center;gap:6px}
+.explorer3--present .explorer3__topbar{top:14px}.explorer3--present .explorer3__brand{background:rgba(255,255,255,.88)}.explorer3--present .explorer3__property-card{width:390px;left:50%;top:auto;transform:translateX(-50%);bottom:24px}.explorer3--present .explorer3__property-card h2{font-size:21px}.explorer3--present .explorer3__property-card footer button:not(.primary){display:none}
+@media(max-width:1050px){.explorer3__brand strong{display:none}.explorer3__ribbon button:nth-of-type(n+5){display:none}.explorer3__search-dock{width:min(560px,58vw)}.explorer3__property-card{width:330px}}
+@media(max-width:900px){.explorer3__topbar{grid-template-columns:auto 1fr}.explorer3__palette-shortcut{display:none}.explorer3__mode-switch{justify-self:end}.explorer3__ribbon button:nth-of-type(n+4){display:none}.explorer3__property-card{width:min(340px,calc(100vw - 36px));top:150px}.explorer3__drawer{left:12px;right:12px;width:auto}.explorer3__search-dock{width:calc(100vw - 32px);min-width:0}.explorer3__legend{bottom:76px}.explorer3 .explorer-v5__map-tools{top:150px;right:12px}}
+@media(max-width:640px){.explorer3__brand{display:none}.explorer3__topbar{display:flex;justify-content:center}.explorer3__mode-switch button{padding:8px 10px}.explorer3__ribbon>strong,.explorer3__ribbon-live{display:none}.explorer3__ribbon{overflow:hidden}.explorer3__property-card{left:12px;right:12px;width:auto;top:auto;bottom:76px}.explorer3__legend{left:12px;bottom:132px}.explorer3__map-rail{display:none}}
+@media(prefers-reduced-motion:reduce){.explorer3 *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Explorer 3.0 Milestone 1.2 — information architecture + interactive intelligence */
+.explorer3__ribbon button{cursor:pointer;transition:background .16s ease,color .16s ease}.explorer3__ribbon button:hover,.explorer3__ribbon button.active{background:rgba(255,255,255,.11);color:#fff}.explorer3__ribbon button.active{box-shadow:inset 0 -2px 0 #79b7d5}
+.explorer3__ribbon-detail{position:absolute;top:106px;right:18px;z-index:318;width:390px;max-height:340px;background:rgba(255,255,255,.98);border:1px solid rgba(21,32,42,.13);border-radius:14px;box-shadow:0 18px 45px rgba(20,31,42,.2);backdrop-filter:blur(16px);overflow:hidden}.explorer3__ribbon-detail>header{display:flex;align-items:center;justify-content:space-between;padding:12px 13px;border-bottom:1px solid #e8ecef}.explorer3__ribbon-detail>header div{display:flex;flex-direction:column;gap:1px}.explorer3__ribbon-detail>header span{font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:#7d8992}.explorer3__ribbon-detail>header strong{font-size:13px}.explorer3__ribbon-detail>header button{border:0;background:#eef2f4;border-radius:7px;width:28px;height:28px;display:grid;place-items:center}.explorer3__ribbon-detail>div{max-height:275px;overflow:auto;padding:6px}.explorer3__ribbon-detail article{display:flex;align-items:center;gap:10px;padding:9px 8px;border-bottom:1px solid #edf0f2}.explorer3__ribbon-detail article:last-child{border-bottom:0}.explorer3__ribbon-detail article>div{display:flex;flex:1;flex-direction:column;min-width:0}.explorer3__ribbon-detail article strong{font-size:10px}.explorer3__ribbon-detail article span{font-size:9px;color:#75818a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.explorer3__ribbon-detail article button{border:1px solid #d8e0e4;background:#fff;border-radius:7px;padding:6px 7px;font-size:9px;font-weight:800;display:flex;align-items:center;gap:4px;white-space:nowrap}
+
+/* Map visibility is explicit, direct, and checkbox-driven — no dropdown hunting. */
+.explorer3__visibility{position:absolute;left:50%;bottom:76px;transform:translateX(-50%);z-index:304;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.96);border:1px solid rgba(21,32,42,.14);border-radius:12px;padding:7px 9px;box-shadow:0 10px 26px rgba(20,31,42,.14);backdrop-filter:blur(14px)}.explorer3__visibility>strong{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#73808a;padding:0 4px;white-space:nowrap}.explorer3__visibility label{display:flex;align-items:center;gap:5px;padding:5px 7px;border-radius:7px;cursor:pointer;font-size:9px;font-weight:700;color:#58656e;white-space:nowrap;user-select:none}.explorer3__visibility label:hover{background:#f1f5f7}.explorer3__visibility label.checked{color:#173f56;background:#eef4f6}.explorer3__visibility input{position:absolute;opacity:0;pointer-events:none}.explorer3__check{width:15px;height:15px;border:1px solid #aeb9c0;border-radius:4px;display:grid;place-items:center;background:#fff;color:transparent}.explorer3__visibility label.checked .explorer3__check{background:#173f56;border-color:#173f56;color:#fff}
+
+/* Basemap + Selected controls live at the bottom edge, outside Property Intelligence. */
+.explorer3 .explorer-v5__map-tools{top:auto!important;right:78px!important;bottom:18px!important;z-index:306!important;display:flex!important;align-items:center!important;gap:6px!important}.explorer3--drawer-open .explorer-v5__map-tools{right:424px!important}.explorer3--present .explorer-v5__map-tools{top:auto!important;bottom:18px!important}.explorer3__map-rail{top:auto;bottom:76px;right:18px}.explorer3--drawer-open .explorer3__map-rail{right:420px}
+
+/* Compare stays above visibility/search controls. */
+.explorer3__compare-dock{bottom:124px}
+
+/* Property Intelligence: Overview is consolidated into Property and property detail is denser. */
+.explorer3__drawer>nav button{flex:1;text-align:center;padding-left:10px;padding-right:10px}.explorer3__detail-grid--dense{grid-template-columns:repeat(2,minmax(0,1fr))}.explorer3__detail-grid--dense article{min-height:48px}.explorer3__detail-grid strong{overflow-wrap:anywhere}
+
+/* Visibility-aligned legend semantics. */
+.explorer3__legend-items i.comparable{background:#7250a8}.explorer3__legend-items i.supersheet{background:#156f78;border-radius:3px}.explorer3__legend-items i.available{background:#1f6f9f}
+
+@media(max-width:1180px){.explorer3__visibility label{padding:5px}.explorer3__visibility{gap:3px}.explorer3__ribbon-detail{width:350px}.explorer3--drawer-open .explorer-v5__map-tools{right:414px!important}}
+@media(max-width:900px){.explorer3__visibility{left:16px;right:16px;transform:none;justify-content:center;overflow-x:auto}.explorer3__visibility>strong{display:none}.explorer3__compare-dock{bottom:128px}.explorer3__ribbon-detail{top:102px;left:16px;right:16px;width:auto}.explorer3 .explorer-v5__map-tools{right:12px!important;bottom:132px!important}.explorer3--drawer-open .explorer-v5__map-tools{right:12px!important}.explorer3__map-rail{bottom:188px}.explorer3--drawer-open .explorer3__map-rail{right:18px}}
+@media(max-width:640px){.explorer3__visibility{bottom:128px;justify-content:flex-start}.explorer3__visibility label span:last-child{font-size:8px}.explorer3 .explorer-v5__map-tools{bottom:184px!important}.explorer3__legend{bottom:184px}.explorer3__property-card{bottom:238px}.explorer3__compare-dock{display:none}}
+
+
+/* Explorer 3.0 Milestone 1.3 — spatial declutter + progressive property intelligence */
+.explorer3__property-card{display:none!important}
+
+.explorer3__property-meta{display:flex;align-items:center;gap:6px;margin:0 0 10px;color:#74818a;font-size:9px;font-weight:750;text-transform:uppercase;letter-spacing:.07em}
+.explorer3__property-meta i{width:3px;height:3px;border-radius:50%;background:#9aa5ad}
+.explorer3__disclosure{margin:0 0 9px;border:1px solid #e2e7ea;border-radius:10px;background:#fff;overflow:hidden}
+.explorer3__disclosure>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 11px;background:#f7f9fa;user-select:none}
+.explorer3__disclosure>summary::-webkit-details-marker{display:none}
+.explorer3__disclosure>summary div{display:flex;flex:1;align-items:baseline;justify-content:space-between;gap:10px;min-width:0}
+.explorer3__disclosure>summary strong{font-size:11px;color:#263640}
+.explorer3__disclosure>summary span{font-size:8px;color:#87929a;white-space:nowrap}
+.explorer3__disclosure-chevron{color:#687783;transition:transform .16s ease}
+.explorer3__disclosure[open] .explorer3__disclosure-chevron{transform:rotate(180deg)}
+.explorer3__disclosure-body{padding:10px}
+.explorer3__disclosure-body .explorer3__detail-grid{margin-bottom:0}
+.explorer3__disclosure-body .explorer3__copy{margin-bottom:0}
+
+.explorer3__visibility{left:18px!important;right:auto!important;bottom:76px!important;transform:none!important;z-index:304!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:7px!important;background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;backdrop-filter:none!important}
+.explorer3__visibility-toggle{height:44px;border:1px solid rgba(21,32,42,.14);border-radius:12px;background:rgba(255,255,255,.97);display:flex;align-items:center;gap:8px;padding:0 12px;box-shadow:0 12px 30px rgba(20,31,42,.15);color:#33424d;font-size:10px;font-weight:800}
+.explorer3__visibility-toggle b{min-width:18px;height:18px;border-radius:9px;background:#173f56;color:#fff;display:grid;place-items:center;font-size:9px}
+.explorer3__visibility-options{width:185px;display:flex;flex-direction:column;gap:3px;background:rgba(255,255,255,.98);border:1px solid rgba(21,32,42,.13);border-radius:12px;padding:7px;box-shadow:0 12px 30px rgba(20,31,42,.16);backdrop-filter:blur(14px)}
+.explorer3__visibility-options header{display:flex;align-items:center;justify-content:space-between;padding:3px 4px 5px}
+.explorer3__visibility-options header strong{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#74818a}
+.explorer3__visibility-options header button{width:24px;height:24px;border:0;border-radius:6px;background:#eef2f4;color:#586670;display:grid;place-items:center}
+.explorer3__visibility-options label{width:100%;box-sizing:border-box}
+
+.explorer3 .explorer-v5__map-tools{top:112px!important;right:18px!important;bottom:auto!important;z-index:306!important}
+.explorer3--drawer-open .explorer-v5__map-tools{right:424px!important}
+.explorer3--present .explorer-v5__map-tools{top:72px!important;right:18px!important;bottom:auto!important}
+
+.explorer3__map-rail{top:170px!important;bottom:auto!important;right:18px!important}
+.explorer3--drawer-open .explorer3__map-rail{right:420px!important}
+
+.explorer3__search-dock,.explorer3__search-collapsed{bottom:18px!important}
+.explorer3__compare-dock{bottom:78px!important}
+.explorer3__drawer-body{padding:12px}
+
+@media(max-width:900px){
+  .explorer3__visibility{left:12px!important;bottom:76px!important}
+  .explorer3 .explorer-v5__map-tools,.explorer3--drawer-open .explorer-v5__map-tools{top:112px!important;right:12px!important;bottom:auto!important}
+  .explorer3__map-rail,.explorer3--drawer-open .explorer3__map-rail{top:170px!important;right:12px!important}
+}
+@media(max-width:640px){
+  .explorer3__visibility{left:12px!important;bottom:132px!important}
+  .explorer3 .explorer-v5__map-tools{top:108px!important;right:12px!important}
+  .explorer3__legend{bottom:76px!important}
+}
+
+/* Explorer 3.0 Milestone 1.4 — dynamic spatial market context */
+.explorer3__market-ribbon{height:54px;gap:8px;padding:0 14px;background:rgba(18,28,37,.96)}
+.explorer3__market-ribbon-label{min-width:150px;display:flex;flex-direction:column;gap:2px;padding-right:10px;border-right:1px solid rgba(255,255,255,.12)}
+.explorer3__market-ribbon-label strong{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#fff}.explorer3__market-ribbon-label span{font-size:8px;color:#9fb0ba;white-space:nowrap}
+.explorer3__radius-control{display:flex;align-items:center;gap:2px;background:rgba(255,255,255,.07);border-radius:8px;padding:3px}.explorer3__radius-control button{height:28px!important;border:0!important;border-radius:6px!important;padding:0 7px!important;font-size:8px!important;color:#b8c5cc!important}.explorer3__radius-control button.active{background:#fff!important;color:#173f56!important;box-shadow:none!important;font-weight:800}
+.explorer3__market-metrics{display:flex;align-items:stretch;min-width:0;flex:1;height:100%}.explorer3__market-metrics>button{flex:1;min-width:82px;justify-content:center;flex-direction:column;gap:0!important;padding:0 9px!important;line-height:1.12}.explorer3__market-metrics>button b{font-size:13px!important}.explorer3__market-metrics>button span{font-size:8px;white-space:nowrap;color:#b8c5cc}.explorer3__market-metrics>button:hover span,.explorer3__market-metrics>button.active span{color:#fff}
+.explorer3__cohort-filtered{font-size:8px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#173f56;background:#dcebf2;border-radius:12px;padding:5px 8px}
+.explorer3__topbar{top:64px}.explorer3__drawer{top:126px}.explorer3 .explorer-v5__map-tools{top:126px!important}.explorer3__map-rail{top:184px!important}.explorer3__ribbon-detail{top:126px}.explorer3__market-detail>header small{font-size:8px;color:#839099;margin-top:2px}.explorer3__empty-context{font-size:10px;color:#71808a;margin:12px}
+.explorer3__visibility-options--market{width:220px}.explorer3__cohort-filter-head{margin:5px 3px 2px;padding-top:8px;border-top:1px solid #e7ecef;display:flex;align-items:center;justify-content:space-between}.explorer3__cohort-filter-head strong{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:#74818a}.explorer3__cohort-filter-head button{border:0;background:transparent;color:#24627d;font-size:8px;font-weight:800}
+.explorer3__cohort-fields{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:2px}.explorer3__cohort-fields label{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:3px!important;padding:0!important;background:transparent!important}.explorer3__cohort-fields label:last-child{grid-column:1/-1}.explorer3__cohort-fields label>span{font-size:8px!important;color:#71808a!important;font-weight:700}.explorer3__cohort-fields input{position:static!important;opacity:1!important;pointer-events:auto!important;width:100%;box-sizing:border-box;border:1px solid #d8e0e4;border-radius:7px;background:#f8fafb;padding:6px 7px;font-size:9px;color:#263640;outline:none}.explorer3__cohort-fields input:focus{border-color:#6f93a5;background:#fff}.explorer3__filter-dot{width:6px;height:6px;border-radius:50%;background:#d8872c}
+@media(max-width:1180px){.explorer3__market-ribbon-label{min-width:120px}.explorer3__market-metrics>button:nth-child(6){display:none}.explorer3__radius-control button{padding:0 5px!important}}
+@media(max-width:900px){.explorer3__market-ribbon-label span{display:none}.explorer3__market-ribbon-label{min-width:auto}.explorer3__market-metrics>button:nth-child(n+5){display:none}.explorer3__topbar{top:64px}.explorer3__drawer{top:126px}.explorer3 .explorer-v5__map-tools,.explorer3--drawer-open .explorer-v5__map-tools{top:126px!important}.explorer3__map-rail,.explorer3--drawer-open .explorer3__map-rail{top:184px!important}}
+@media(max-width:640px){.explorer3__radius-control button:not(.active){display:none}.explorer3__market-metrics>button:nth-child(n+4){display:none}.explorer3__cohort-filtered{display:none}}
+
+/* Explorer 3.0 Milestone 1.6 — balanced map workspace */
+/* Solid, edge-anchored surfaces: the aerial is the visual center of gravity. */
+.explorer3__market-ribbon{background:#17242d!important;box-shadow:0 5px 18px rgba(9,18,24,.16);backdrop-filter:none!important}
+.explorer3__brand,.explorer3__mode-switch,.explorer3__search-dock,.explorer3__search-collapsed,.explorer3__drawer,.explorer3__ribbon-detail,.explorer3__map-rail button{background:#fff!important;backdrop-filter:none!important}
+.explorer3__mode-switch button.active{background:#173f56!important;color:#fff!important}
+.explorer3__palette-shortcut{display:none!important}
+.explorer3 .explorer-v5__map-tools{display:none!important}
+
+/* One combined control at the bottom-left. It starts collapsed and opens upward. */
+.explorer3__visibility,.explorer3__legend{display:none!important}
+.explorer3__legend-layers{position:absolute;left:18px;bottom:18px;z-index:307;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.explorer3__legend-layers-toggle{height:44px;border:1px solid #d8e0e4;border-radius:12px;background:#fff;color:#33424d;display:flex;align-items:center;gap:9px;padding:0 13px;box-shadow:0 10px 24px rgba(20,31,42,.14)}
+.explorer3__legend-layers-toggle strong{font-size:11px}.explorer3__legend-layers-toggle>.explorer3__filter-dot{margin-left:1px}
+.explorer3__legend-layers-panel{width:248px;max-height:min(620px,calc(100vh - 190px));overflow:auto;background:#fff;border:1px solid #d8e0e4;border-radius:14px;box-shadow:0 18px 42px rgba(20,31,42,.18)}
+.explorer3__legend-layers-panel>header{display:flex;align-items:center;justify-content:space-between;padding:12px 13px;border-bottom:1px solid #e8ecef}
+.explorer3__legend-layers-panel>header div{display:flex;flex-direction:column;gap:1px}.explorer3__legend-layers-panel>header strong{font-size:11px}.explorer3__legend-layers-panel>header span{font-size:8px;color:#7a8790}.explorer3__legend-layers-panel>header button{width:28px;height:28px;border:0;border-radius:7px;background:#eef2f4;color:#586670;display:grid;place-items:center}
+.explorer3__layer-group{padding:10px 12px;border-bottom:1px solid #edf0f2}.explorer3__layer-group:last-child{border-bottom:0}.explorer3__layer-group>strong,.explorer3__cohort-filter-head>strong{display:block;margin-bottom:7px;font-size:8px;text-transform:uppercase;letter-spacing:.09em;color:#74818a}
+.explorer3__basemap-options{display:grid;gap:4px}.explorer3__basemap-options label{display:flex;align-items:center;gap:7px;padding:5px 3px;font-size:10px;color:#35434d}.explorer3__basemap-options input{accent-color:#173f56}
+.explorer3__layer-check{display:flex;align-items:center;gap:7px;padding:6px 4px;border-radius:7px;font-size:10px;color:#3d4a53}.explorer3__layer-check:hover{background:#f5f7f8}.explorer3__layer-check input{position:absolute;opacity:0;pointer-events:none}.explorer3__layer-check .explorer3__check{width:16px;height:16px;border-radius:4px;border:1px solid #9eabb3;display:grid;place-items:center;color:transparent;background:#fff}.explorer3__layer-check.checked .explorer3__check{background:#173f56;border-color:#173f56;color:#fff}
+.explorer3__legend-key>div{display:grid;grid-template-columns:1fr;gap:7px}.explorer3__legend-key span{display:flex;align-items:center;gap:8px;font-size:9px;color:#46545e}.explorer3__legend-key i{width:10px;height:10px;border-radius:50%;background:#87939c}.explorer3__legend-key i.selected{background:#2f73d9;box-shadow:0 0 0 3px rgba(47,115,217,.13)}.explorer3__legend-key i.available{background:#388b5a}.explorer3__legend-key i.comparable{background:#7250a8}.explorer3__legend-key i.supersheet{background:#156f78;border-radius:3px}
+
+/* Keep search visually centered and a little narrower to preserve map area. */
+.explorer3__search-dock{width:min(560px,47vw)!important;min-width:360px!important;box-shadow:0 10px 26px rgba(20,31,42,.15)!important}
+.explorer3__search-collapsed{box-shadow:0 10px 24px rgba(20,31,42,.13)!important}
+
+/* Adaptive Property Intelligence: natural content height up to a governed viewport cap. */
+.explorer3__drawer{top:126px!important;bottom:auto!important;height:auto!important;max-height:calc(100vh - 160px)!important;overflow:hidden!important;background:#fff!important}
+.explorer3__drawer-body{flex:0 1 auto!important;overflow:auto!important;max-height:calc(100vh - 330px)!important}
+.explorer3__drawer>footer{flex:0 0 auto;background:#fff}
+.explorer3__disclosure{background:#fff}.explorer3__disclosure>summary{background:#f7f9fa}
+
+/* Keep utility rail tight to the right edge, never floating over Property Intelligence. */
+.explorer3__map-rail{right:18px!important;top:184px!important}.explorer3--drawer-open .explorer3__map-rail{right:424px!important}
+
+@media(max-width:900px){
+  .explorer3__legend-layers{left:12px;bottom:76px}
+  .explorer3__legend-layers-panel{width:min(248px,calc(100vw - 24px));max-height:55vh}
+  .explorer3__search-dock{width:calc(100vw - 32px)!important;min-width:0!important}
+  .explorer3__drawer{left:12px!important;right:12px!important;width:auto!important;max-height:calc(100vh - 150px)!important}
+  .explorer3__drawer-body{max-height:calc(100vh - 320px)!important}
+  .explorer3__map-rail,.explorer3--drawer-open .explorer3__map-rail{right:12px!important}
+}
+@media(max-width:640px){
+  .explorer3__legend-layers{bottom:132px}
+  .explorer3__market-ribbon{height:50px!important}
+}
+
+/* Explorer 3.0 Milestone 1.7 — left-docked intelligence workspace */
+/* Tesla/Google Maps spatial pattern: intelligence lives left, map owns everything else. */
+.explorer3{--explorer3-intelligence-width:390px}
+.explorer3>.explorer-v5__provider-shell{left:0!important;right:0!important;transition:left .22s ease}
+.explorer3--drawer-open>.explorer-v5__provider-shell{left:var(--explorer3-intelligence-width)!important}
+
+/* Dock Property Intelligence into the application frame rather than floating over the aerial. */
+.explorer3__drawer{
+  left:0!important;right:auto!important;top:54px!important;bottom:0!important;
+  width:var(--explorer3-intelligence-width)!important;height:auto!important;max-height:none!important;
+  border-radius:0!important;border-left:0!important;border-bottom:0!important;
+  border-top:1px solid #e4e9ec!important;border-right:1px solid #d7dfe4!important;
+  box-shadow:8px 0 24px rgba(20,31,42,.10)!important;background:#fff!important;
+}
+.explorer3__drawer-body{flex:1 1 auto!important;max-height:none!important;overflow:auto!important}
+.explorer3__drawer>footer{position:relative;z-index:2;box-shadow:0 -6px 18px rgba(20,31,42,.05)}
+
+/* All map chrome is positioned inside the usable map canvas, not behind the dock. */
+.explorer3--drawer-open .explorer3__topbar{left:calc(var(--explorer3-intelligence-width) + 18px)!important}
+.explorer3--drawer-open .explorer3__search-dock,
+.explorer3--drawer-open .explorer3__search-collapsed{left:calc(50% + (var(--explorer3-intelligence-width) / 2))!important}
+.explorer3--drawer-open .explorer3__legend-layers{left:calc(var(--explorer3-intelligence-width) + 18px)!important}
+.explorer3--drawer-open .explorer3__compare-dock{left:calc(50% + (var(--explorer3-intelligence-width) / 2))!important}
+.explorer3--drawer-open .explorer3__map-rail{right:18px!important}
+
+/* Market Context describes the visible map universe; keep it aligned to that universe. */
+.explorer3--drawer-open .explorer3__market-ribbon{left:var(--explorer3-intelligence-width)!important}
+.explorer3__market-ribbon{transition:left .22s ease}
+
+/* Reduce visual chrome further in Analyze: map tools live at edges and open only on demand. */
+.explorer3__map-rail{top:auto!important;bottom:76px!important;right:18px!important}
+.explorer3__map-rail button{box-shadow:0 5px 15px rgba(20,31,42,.10)!important}
+
+/* Desktop dock width scales gently rather than consuming excessive map area. */
+@media(max-width:1180px){.explorer3{--explorer3-intelligence-width:360px}}
+@media(max-width:900px){
+  .explorer3{--explorer3-intelligence-width:0px}
+  .explorer3--drawer-open>.explorer-v5__provider-shell{left:0!important}
+  .explorer3__drawer{left:12px!important;right:12px!important;top:68px!important;bottom:12px!important;width:auto!important;border:1px solid #d8e0e4!important;border-radius:14px!important;box-shadow:0 18px 42px rgba(20,31,42,.20)!important}
+  .explorer3--drawer-open .explorer3__topbar{left:18px!important}
+  .explorer3--drawer-open .explorer3__search-dock,.explorer3--drawer-open .explorer3__search-collapsed{left:50%!important}
+  .explorer3--drawer-open .explorer3__legend-layers{left:12px!important}
+  .explorer3--drawer-open .explorer3__market-ribbon{left:0!important}
+}
+
+/* Explorer 3.0 Milestone 1.7.1 — map-relative alignment refinement */
+/* Topbar spans the usable map canvas. Brand is edge-anchored; operating modes are truly centered. */
+.explorer3__topbar{
+  grid-template-columns:1fr!important;
+  justify-items:center!important;
+}
+.explorer3__brand{
+  position:absolute!important;
+  left:0!important;
+  top:50%!important;
+  transform:translateY(-50%)!important;
+}
+.explorer3__mode-switch{
+  justify-self:center!important;
+  align-self:center!important;
+}
+
+/* Put Map Legend & Layers on the opposite side of the search surface. */
+.explorer3__legend-layers{
+  left:calc(50% + 300px)!important;
+  right:auto!important;
+  bottom:18px!important;
+  align-items:flex-end!important;
+}
+.explorer3__legend-layers-panel{
+  transform-origin:bottom right;
+}
+
+/* When the intelligence dock opens, both controls remain centered/aligned to the remaining map canvas. */
+.explorer3--drawer-open .explorer3__legend-layers{
+  left:calc(50% + (var(--explorer3-intelligence-width) / 2) + 300px)!important;
+}
+
+@media(max-width:1180px){
+  .explorer3__legend-layers{left:auto!important;right:18px!important}
+  .explorer3--drawer-open .explorer3__legend-layers{left:auto!important;right:18px!important}
+}
+@media(max-width:900px){
+  .explorer3__topbar{grid-template-columns:1fr!important}
+  .explorer3__brand{left:0!important}
+  .explorer3__legend-layers,.explorer3--drawer-open .explorer3__legend-layers{
+    left:auto!important;right:12px!important;bottom:76px!important;align-items:flex-end!important
+  }
+}
+@media(max-width:640px){
+  .explorer3__legend-layers,.explorer3--drawer-open .explorer3__legend-layers{bottom:132px!important}
+}
+
+/* Explorer 3.0 Milestone 1.7.2 — bottom control polish */
+/* One shared baseline: dock actions, search, and Legend & Layers all finish 18px above the map edge. */
+.explorer3{--explorer3-bottom-baseline:18px;--explorer3-bottom-control-height:50px}
+.explorer3__search-dock{bottom:var(--explorer3-bottom-baseline)!important;height:var(--explorer3-bottom-control-height)!important}
+.explorer3__search-collapsed{bottom:var(--explorer3-bottom-baseline)!important;height:var(--explorer3-bottom-control-height)!important;border-radius:25px!important}
+.explorer3__legend-layers{bottom:var(--explorer3-bottom-baseline)!important}
+.explorer3__legend-layers-toggle{height:var(--explorer3-bottom-control-height)!important;border-radius:14px!important}
+
+/* The dock itself reaches the viewport edge; pad its footer so its buttons share the map-control baseline. */
+.explorer3__drawer>footer{padding:10px 12px var(--explorer3-bottom-baseline)!important;align-items:flex-end!important}
+.explorer3__drawer>footer button{min-height:var(--explorer3-bottom-control-height)!important}
+
+/* Keep the Legend/Layers control to the right of Search, but reserve a clean Google-native-control zone. */
+.explorer3__legend-layers{
+  left:min(calc(50% + 260px),calc(100% - 330px))!important;
+  right:auto!important;
+  align-items:flex-end!important;
+}
+.explorer3--drawer-open .explorer3__legend-layers{
+  left:min(calc(50% + (var(--explorer3-intelligence-width) / 2) + 260px),calc(100% - 330px))!important;
+  right:auto!important;
+}
+
+/* SCIIP utility rail stays above the native Google bottom-right controls. */
+.explorer3__map-rail{bottom:96px!important;right:18px!important}
+
+@media(max-width:1180px){
+  .explorer3__legend-layers,.explorer3--drawer-open .explorer3__legend-layers{left:auto!important;right:92px!important}
+}
+@media(max-width:900px){
+  .explorer3__drawer>footer{padding-bottom:12px!important}
+  .explorer3__legend-layers,.explorer3--drawer-open .explorer3__legend-layers{left:auto!important;right:72px!important;bottom:76px!important}
+  .explorer3__map-rail{bottom:144px!important;right:12px!important}
+}
+@media(max-width:640px){
+  .explorer3__legend-layers,.explorer3--drawer-open .explorer3__legend-layers{right:12px!important;bottom:132px!important}
+}
+
+/* Explorer 3.0 Milestone 1.7.3 — map canvas reset
+   The bottom toolbar experiment is retired. Global header search is the single search surface.
+   Legend & Layers returns to a compact edge control; Google owns the lower-right corner. */
+.explorer3__search-dock,
+.explorer3__search-collapsed{
+  display:none!important;
+}
+
+/* Restore a compact map-edge control, independent of any search surface. */
+.explorer3__legend-layers,
+.explorer3--drawer-open .explorer3__legend-layers{
+  right:auto!important;
+  bottom:18px!important;
+  align-items:flex-start!important;
+}
+.explorer3__legend-layers{
+  left:18px!important;
+}
+.explorer3--drawer-open .explorer3__legend-layers{
+  left:calc(var(--explorer3-intelligence-width) + 18px)!important;
+}
+.explorer3__legend-layers-panel{
+  transform-origin:bottom left!important;
+}
+.explorer3__legend-layers-toggle{
+  height:44px!important;
+  border-radius:12px!important;
+}
+
+/* Property actions belong to the intelligence dock, not a shared map toolbar baseline. */
+.explorer3__drawer>footer{
+  padding:10px 12px 12px!important;
+  align-items:center!important;
+}
+.explorer3__drawer>footer button{
+  min-height:42px!important;
+}
+
+/* Reserve Google's bottom-right control stack completely. Keep SCIIP utilities higher on the edge. */
+.explorer3__map-rail{
+  top:190px!important;
+  bottom:auto!important;
+  right:18px!important;
+}
+.explorer3--drawer-open .explorer3__map-rail{
+  right:18px!important;
+}
+
+/* Compare is contextual; without a bottom search toolbar it can sit just above the map edge. */
+.explorer3__compare-dock{
+  bottom:18px!important;
+}
+
+@media(max-width:900px){
+  .explorer3__legend-layers,
+  .explorer3--drawer-open .explorer3__legend-layers{
+    left:12px!important;
+    right:auto!important;
+    bottom:12px!important;
+    align-items:flex-start!important;
+  }
+  .explorer3__map-rail,
+  .explorer3--drawer-open .explorer3__map-rail{
+    top:174px!important;
+    bottom:auto!important;
+    right:12px!important;
+  }
+}
+
+@media(max-width:640px){
+  .explorer3__legend-layers,
+  .explorer3--drawer-open .explorer3__legend-layers{
+    bottom:12px!important;
+  }
+}
+
+.reconciliation-evidence-audit{margin:8px 10px 10px;border-top:1px solid rgba(29,57,72,.10);padding-top:8px}
+.reconciliation-evidence-audit summary{cursor:pointer;font-size:11px;font-weight:700;color:#254657;list-style:none}
+.reconciliation-evidence-audit summary::-webkit-details-marker{display:none}
+.reconciliation-evidence-audit__summary{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.reconciliation-evidence-audit__summary span{font-size:10px;padding:4px 6px;border:1px solid #d9e3e8;border-radius:999px;background:#f7fafb;color:#536b78}
+.reconciliation-evidence-audit__rows{display:grid;gap:6px}
+.reconciliation-evidence-audit__row{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:6px;padding:7px;border:1px solid #dfe7eb;border-radius:7px;background:#fbfcfd}
+.reconciliation-evidence-audit__row>div{display:flex;flex-direction:column;min-width:0}
+.reconciliation-evidence-audit__row span,.reconciliation-evidence-audit__row em{font-size:9px;color:#6c7e88;font-style:normal}
+.reconciliation-evidence-audit__row strong{font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.reconciliation-evidence-audit__row em{grid-column:1/-1;text-transform:lowercase}
+.reconciliation-evidence-audit p{margin:8px 0 0;font-size:10px;line-height:1.4;color:#627681}
+
+.verified-parcel-intelligence{margin:8px 10px 10px;border:1px solid #dbe5e9;border-radius:9px;background:#fbfcfc;overflow:hidden}
+.verified-parcel-intelligence summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;cursor:pointer;list-style:none}
+.verified-parcel-intelligence summary::-webkit-details-marker{display:none}
+.verified-parcel-intelligence summary div{display:flex;flex-direction:column;gap:2px}
+.verified-parcel-intelligence summary span{font-size:8px;letter-spacing:.12em;color:#748791;font-weight:700}
+.verified-parcel-intelligence summary strong{font-size:11px;color:#203b49}
+.verified-parcel-intelligence summary em{font-size:9px;font-style:normal;color:#66808d}
+.verified-parcel-intelligence__notice{padding:8px 10px;border-top:1px solid #e3eaed;background:#f4f8f7;font-size:9px;line-height:1.4;color:#5a707a}
+.verified-parcel-intelligence__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid #e7edef}
+.verified-parcel-intelligence__value{display:flex;flex-direction:column;min-width:0;padding:8px 10px;border-right:1px solid #e7edef;border-bottom:1px solid #e7edef}
+.verified-parcel-intelligence__value span{font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:#81919a}
+.verified-parcel-intelligence__value strong{font-size:10px;color:#203945;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.verified-parcel-intelligence__value small{font-size:8px;color:#71858f}
+.verified-parcel-intelligence__section h4{margin:0;padding:8px 10px 5px;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#687e89}
+.verified-parcel-intelligence__footer{display:flex;justify-content:space-between;gap:8px;padding:7px 10px;font-size:8px;color:#778a94;background:#f6f9fa}
+
+.parcel-synthesis{margin:8px 10px 10px;border:1px solid #d7e3e8;border-radius:9px;background:#fff;overflow:hidden}
+.parcel-synthesis summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;cursor:pointer;list-style:none}
+.parcel-synthesis summary::-webkit-details-marker{display:none}
+.parcel-synthesis summary div{display:flex;flex-direction:column;gap:2px}
+.parcel-synthesis summary span{font-size:8px;letter-spacing:.12em;color:#748791;font-weight:700}
+.parcel-synthesis summary strong{font-size:11px;color:#193c4e}
+.parcel-synthesis summary em{font-size:9px;font-style:normal;font-weight:700;color:#3d6d5b}
+.parcel-synthesis__notice{padding:7px 10px;border-top:1px solid #e4ecef;background:#f8fafb;font-size:9px;line-height:1.4;color:#60747e}
+.parcel-synthesis__metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid #e7edef}
+.parcel-synthesis__metric{display:flex;flex-direction:column;min-width:0;padding:8px 10px;border-right:1px solid #e7edef;border-bottom:1px solid #e7edef}
+.parcel-synthesis__metric span{font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:#81919a}
+.parcel-synthesis__metric strong{font-size:10px;color:#203945;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.parcel-synthesis__metric small{font-size:8px;color:#71858f}
+.parcel-synthesis__signals{display:grid;gap:5px;padding:8px 10px}
+.parcel-synthesis__signal{display:flex;justify-content:space-between;gap:8px;padding:7px 8px;border:1px solid #e1e8eb;border-radius:7px;background:#fafcfc}
+.parcel-synthesis__signal div{display:flex;flex-direction:column;min-width:0}
+.parcel-synthesis__signal strong{font-size:9px;color:#264552}
+.parcel-synthesis__signal span{font-size:8px;color:#6d818b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.parcel-synthesis__signal em{font-size:8px;font-style:normal;font-weight:700;color:#58707c}
+.parcel-synthesis__signal--review em,.parcel-synthesis__signal--warning em{color:#9a6a21}
+.parcel-synthesis__footer{display:flex;justify-content:space-between;gap:6px;padding:7px 10px;background:#f6f9fa;border-top:1px solid #e5ecef;font-size:8px;color:#778a94}
+
+.field-provenance{margin:8px 10px 10px;border:1px solid #d9e3e8;border-radius:9px;background:#fff;overflow:hidden}
+.field-provenance summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;cursor:pointer;list-style:none}
+.field-provenance summary::-webkit-details-marker{display:none}
+.field-provenance summary div{display:flex;flex-direction:column;gap:2px}
+.field-provenance summary span{font-size:8px;letter-spacing:.12em;color:#758892;font-weight:700}
+.field-provenance summary strong{font-size:11px;color:#1e3d4c}
+.field-provenance summary>em{font-size:8px;font-style:normal;font-weight:700;color:#476d5e}
+.field-provenance__summary{display:flex;gap:5px;flex-wrap:wrap;padding:7px 10px;border-top:1px solid #e5ecef;background:#f7fafb}
+.field-provenance__summary span{font-size:8px;padding:3px 5px;border:1px solid #dfe7ea;border-radius:999px;color:#657984;background:#fff}
+.field-provenance__rows{display:grid}
+.field-provenance__row{display:grid;grid-template-columns:1.1fr 1fr 1fr .75fr;gap:6px;padding:7px 9px;border-top:1px solid #edf1f3;align-items:center}
+.field-provenance__row>div{display:flex;flex-direction:column;min-width:0}
+.field-provenance__row span{font-size:7px;letter-spacing:.06em;text-transform:uppercase;color:#8a99a1}
+.field-provenance__row strong{font-size:9px;color:#294450;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.field-provenance__name span{text-transform:none;letter-spacing:0}
+.field-provenance__result{align-items:flex-end}
+.field-provenance__result small{font-size:7px;color:#7b8c94}
+.field-provenance__state{font-size:7px;font-style:normal;font-weight:700}
+.field-provenance__state--agreed{color:#34735a}
+.field-provenance__state--review{color:#9a6a21}
+.field-provenance__state--conflict{color:#a44747}
+.field-provenance__state--enrichment_only{color:#476b8a}
+.field-provenance__state--canonical_only{color:#697d86}
+.field-provenance__footer{display:flex;justify-content:space-between;gap:6px;padding:7px 10px;border-top:1px solid #e5ecef;background:#f7fafb;font-size:8px;color:#778a94}
+
+.attribute-resolution{margin:8px 10px 10px;border:1px solid #d9e3e8;border-radius:9px;background:#fff;overflow:hidden}
+.attribute-resolution summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;cursor:pointer;list-style:none}
+.attribute-resolution summary::-webkit-details-marker{display:none}
+.attribute-resolution summary div{display:flex;flex-direction:column;gap:2px}
+.attribute-resolution summary span{font-size:8px;letter-spacing:.12em;color:#758892;font-weight:700}
+.attribute-resolution summary strong{font-size:11px;color:#1f3e4c}
+.attribute-resolution summary>em{font-size:8px;font-style:normal;font-weight:700;color:#6a7e88}
+.attribute-resolution__notice{padding:8px 10px;border-top:1px solid #e5ecef;background:#fafcfc;font-size:9px;line-height:1.4;color:#60747e}
+.attribute-resolution__policy{display:flex;gap:5px;flex-wrap:wrap;padding:7px 10px;border-top:1px solid #edf1f3;background:#f7fafb}
+.attribute-resolution__policy span{font-size:8px;padding:3px 5px;border:1px solid #dfe7ea;border-radius:999px;color:#657984;background:#fff}
+.attribute-resolution__rows{display:grid}
+.attribute-resolution__row{display:grid;grid-template-columns:1.05fr .8fr .8fr 1.15fr;gap:6px;padding:8px 9px;border-top:1px solid #edf1f3;align-items:center}
+.attribute-resolution__row>div{display:flex;flex-direction:column;min-width:0}
+.attribute-resolution__row span{font-size:7px;letter-spacing:.05em;text-transform:uppercase;color:#8a99a1}
+.attribute-resolution__row strong{font-size:9px;color:#294450;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.attribute-resolution__field span{text-transform:none;letter-spacing:0}
+.attribute-resolution__actions{display:flex!important;flex-direction:row!important;gap:3px;justify-content:flex-end}
+.attribute-resolution__actions button{appearance:none;border:1px solid #d7e1e5;background:#fff;border-radius:5px;padding:4px 5px;font-size:7px;font-weight:700;color:#365563;cursor:pointer}
+.attribute-resolution__actions button:first-child{background:#1f4d62;color:#fff;border-color:#1f4d62}
+.attribute-resolution__actions button:disabled{opacity:.4;cursor:not-allowed}
+.attribute-resolution__decision{font-size:7px!important;font-weight:700;color:#476d5e!important;text-align:right}
+.attribute-resolution__audit{display:flex;flex-direction:column;gap:2px;margin:8px 10px;padding:7px 8px;border:1px solid #dce6e9;border-radius:7px;background:#f7faf9}
+.attribute-resolution__audit strong{font-size:9px;color:#294a3d}
+.attribute-resolution__audit span,.attribute-resolution__audit small{font-size:8px;color:#687d75}
+.attribute-resolution__footer{display:flex;justify-content:space-between;gap:6px;padding:7px 10px;border-top:1px solid #e5ecef;background:#f7fafb;font-size:8px;color:#778a94}
+
+.attribute-resolution--diagnostic{margin:8px 10px;padding:10px;border:1px solid #d8a94f;background:#fffaf0}
+.attribute-resolution--diagnostic div{display:flex;flex-direction:column}
+.attribute-resolution--diagnostic span{font-size:8px;letter-spacing:.12em;color:#8b6a2c;font-weight:700}
+.attribute-resolution--diagnostic strong{font-size:11px;color:#5b4720}
+.attribute-resolution--diagnostic p,.attribute-resolution__empty{font-size:9px;line-height:1.4;color:#6d6048;margin:7px 0 0}
+.attribute-resolution__empty{padding:10px;border-top:1px solid #edf1f3;margin:0;color:#647780}
+
+.approval-workflow{margin:8px 10px 10px;border:1px solid #d8e2e7;border-radius:9px;background:#fff;overflow:hidden}
+.approval-workflow summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;cursor:pointer;list-style:none}
+.approval-workflow summary::-webkit-details-marker{display:none}
+.approval-workflow summary div{display:flex;flex-direction:column}
+.approval-workflow summary span{font-size:8px;letter-spacing:.12em;color:#758892;font-weight:700}
+.approval-workflow summary strong{font-size:11px;color:#203f4d}
+.approval-workflow summary>em{font-size:8px;font-style:normal;font-weight:700;color:#7a6c35}
+.approval-workflow__notice{padding:8px 10px;border-top:1px solid #e6ecef;background:#fafcfc;font-size:9px;line-height:1.4;color:#60747e}
+.approval-workflow__summary{display:flex;gap:5px;flex-wrap:wrap;padding:7px 10px;border-top:1px solid #edf1f3;background:#f7fafb}
+.approval-workflow__summary span{font-size:8px;padding:3px 5px;border:1px solid #dfe7ea;border-radius:999px;background:#fff;color:#647883}
+.approval-workflow__rows{display:grid}
+.approval-workflow__row{display:grid;grid-template-columns:1fr .85fr .85fr 1.15fr;gap:6px;padding:8px 9px;border-top:1px solid #edf1f3;align-items:center}
+.approval-workflow__row>div{display:flex;flex-direction:column;min-width:0}
+.approval-workflow__row span{font-size:7px;color:#84949d}
+.approval-workflow__row strong{font-size:9px;color:#294550;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.approval-workflow__actions{display:flex!important;flex-direction:row!important;gap:3px;justify-content:flex-end}
+.approval-workflow__actions button{appearance:none;border:1px solid #d7e1e5;background:#fff;border-radius:5px;padding:4px 5px;font-size:7px;font-weight:700;color:#365563;cursor:pointer}
+.approval-workflow__actions button:first-child{background:#1f4d62;color:#fff;border-color:#1f4d62}
+.approval-workflow__empty{padding:10px;border-top:1px solid #edf1f3;font-size:9px;color:#697d87}
+.approval-workflow__footer{display:flex;justify-content:space-between;gap:6px;padding:7px 10px;border-top:1px solid #e5ecef;background:#f7fafb;font-size:8px;color:#778a94}
+
+.approval-workflow__execute{background:#1f4d62!important;color:#fff!important;border-color:#1f4d62!important;padding:5px 8px!important}
+.approval-workflow__executed{font-size:7px!important;font-weight:700;color:#34735a!important}
+.approval-workflow__execution-audit{display:flex;flex-direction:column;gap:2px;margin:8px 10px;padding:8px;border:1px solid #cfe1d8;border-radius:7px;background:#f4faf7}
+.approval-workflow__execution-audit strong{font-size:9px;color:#2d5e49}
+.approval-workflow__execution-audit span,.approval-workflow__execution-audit small{font-size:8px;color:#62796e}
+
+.execution-history{margin:8px 10px 10px;border:1px solid #d8e2e7;border-radius:9px;background:#fff;overflow:hidden}
+.execution-history summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;cursor:pointer;list-style:none}
+.execution-history summary::-webkit-details-marker{display:none}
+.execution-history summary div{display:flex;flex-direction:column}
+.execution-history summary span{font-size:8px;letter-spacing:.12em;color:#758892;font-weight:700}
+.execution-history summary strong{font-size:11px;color:#203f4d}
+.execution-history summary>em{font-size:8px;font-style:normal;font-weight:700;color:#4f725f}
+.execution-history__notice{padding:8px 10px;border-top:1px solid #e6ecef;background:#fafcfc;font-size:9px;line-height:1.4;color:#60747e}
+.execution-history__summary{display:flex;gap:5px;flex-wrap:wrap;padding:7px 10px;border-top:1px solid #edf1f3;background:#f7fafb}
+.execution-history__summary span{font-size:8px;padding:3px 5px;border:1px solid #dfe7ea;border-radius:999px;background:#fff;color:#647883}
+.execution-history__active{display:grid}
+.execution-history__overlay{display:grid;grid-template-columns:1fr .7fr .7fr .65fr;gap:6px;padding:8px 9px;border-top:1px solid #edf1f3;align-items:center}
+.execution-history__overlay>div{display:flex;flex-direction:column;min-width:0}
+.execution-history__overlay span{font-size:7px;color:#84949d}
+.execution-history__overlay strong{font-size:9px;color:#294550;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.execution-history__overlay button{appearance:none;border:1px solid #d5dfe4;background:#fff;border-radius:5px;padding:4px 6px;font-size:7px;font-weight:700;color:#7b4a3f;cursor:pointer}
+.execution-history__events{display:grid;padding:6px 8px;gap:5px;border-top:1px solid #edf1f3}
+.execution-history__event{padding:7px 8px;border:1px solid #e2e9ec;border-radius:7px;background:#fbfcfc}
+.execution-history__event-title,.execution-history__event-meta{display:flex;justify-content:space-between;gap:6px}
+.execution-history__event-title strong{font-size:9px;color:#294550}
+.execution-history__event-title em{font-size:7px;font-style:normal;font-weight:700;color:#5e776b}
+.execution-history__event-values span{font-size:9px;color:#395661}
+.execution-history__event-meta span,.execution-history__event small{font-size:7px;color:#82939b}
+.execution-history__rollback-audit{display:flex;flex-direction:column;gap:2px;margin:8px 10px;padding:8px;border:1px solid #ead9c9;border-radius:7px;background:#fff9f4}
+.execution-history__rollback-audit strong{font-size:9px;color:#7b5036}
+.execution-history__rollback-audit span,.execution-history__rollback-audit small{font-size:8px;color:#7c6a5e}
+.execution-history__empty{padding:10px;border-top:1px solid #edf1f3;font-size:9px;color:#697d87}
+.execution-history__footer{display:flex;justify-content:space-between;gap:6px;padding:7px 10px;border-top:1px solid #e5ecef;background:#f7fafb;font-size:8px;color:#778a94}
+
+.execution-history__confirm{display:grid;gap:7px;margin:8px 10px;padding:9px;border:1px solid #e6d2be;border-radius:7px;background:#fffaf5}
+.execution-history__confirm>div:first-child{display:flex;flex-direction:column}
+.execution-history__confirm strong{font-size:9px;color:#6f4b34}
+.execution-history__confirm span{font-size:8px;color:#79695f}
+.execution-history__confirm label{display:flex;flex-direction:column;gap:3px}
+.execution-history__confirm input{border:1px solid #d9e2e6;border-radius:5px;padding:6px 7px;font-size:9px;color:#294550;background:#fff}
+.execution-history__confirm-actions{display:flex;justify-content:flex-end;gap:5px}
+.execution-history__confirm-actions button{appearance:none;border:1px solid #d6e0e4;background:#fff;border-radius:5px;padding:5px 7px;font-size:8px;font-weight:700;cursor:pointer}
+.execution-history__confirm-actions button:last-child{background:#7b4a3f;color:#fff;border-color:#7b4a3f}
+.execution-history__confirm-actions button:disabled{opacity:.4;cursor:not-allowed}
+.execution-history__error{font-size:8px;color:#a44747}
+.execution-history__event-reason{margin-top:3px;font-size:8px;color:#6f625b}
+
+.decision-lifecycle{margin:8px 10px 10px;border:1px solid #d8e2e7;border-radius:9px;background:#fff;overflow:hidden}
+.decision-lifecycle summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;cursor:pointer;list-style:none}
+.decision-lifecycle summary::-webkit-details-marker{display:none}
+.decision-lifecycle summary div{display:flex;flex-direction:column}
+.decision-lifecycle summary span{font-size:8px;letter-spacing:.12em;color:#758892;font-weight:700}
+.decision-lifecycle summary strong{font-size:11px;color:#203f4d}
+.decision-lifecycle summary>em{font-size:8px;font-style:normal;font-weight:700;color:#506f61}
+.decision-lifecycle__notice{padding:8px 10px;border-top:1px solid #e6ecef;background:#fafcfc;font-size:9px;line-height:1.4;color:#60747e}
+.decision-lifecycle__rows{display:grid}
+.decision-lifecycle__row{display:grid;grid-template-columns:1fr .8fr 1.2fr;gap:6px;padding:8px 9px;border-top:1px solid #edf1f3;align-items:center}
+.decision-lifecycle__row strong{font-size:9px;color:#294550}
+.decision-lifecycle__row span{font-size:8px;font-weight:700;color:#4d6f60}
+.decision-lifecycle__row small{font-size:8px;color:#7d8d95;text-align:right}
+.decision-lifecycle__footer{display:flex;justify-content:space-between;gap:6px;padding:7px 10px;border-top:1px solid #e5ecef;background:#f7fafb;font-size:8px;color:#778a94}
+
+.governed-property-state{margin:8px 10px 10px;border:1px solid #ccdce3;border-radius:9px;background:#fff;overflow:hidden}
+.governed-property-state summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;cursor:pointer;list-style:none}
+.governed-property-state summary::-webkit-details-marker{display:none}
+.governed-property-state summary div{display:flex;flex-direction:column}
+.governed-property-state summary span{font-size:8px;letter-spacing:.12em;color:#6f838d;font-weight:700}
+.governed-property-state summary strong{font-size:11px;color:#1e3f4d}
+.governed-property-state summary>em{font-size:8px;font-style:normal;font-weight:700;color:#4f6f62}
+.governed-property-state__hero{display:grid;grid-template-columns:.8fr 1.2fr;gap:8px;padding:10px;border-top:1px solid #e4ecef;background:#f7faf9}
+.governed-property-state__hero>div:first-child{display:flex;flex-direction:column}
+.governed-property-state__hero span{font-size:7px;color:#7b8d95}
+.governed-property-state__hero strong{font-size:14px;color:#294f5c}
+.governed-property-state__hero small{font-size:8px;color:#6d8089}
+.governed-property-state__hero-copy{display:flex;flex-direction:column;justify-content:center}
+.governed-property-state__hero-copy strong{font-size:10px!important}
+.governed-property-state__metrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #edf1f3}
+.governed-property-state__metrics>div{display:flex;flex-direction:column;padding:8px;border-right:1px solid #edf1f3;border-bottom:1px solid #edf1f3}
+.governed-property-state__metrics span{font-size:7px;color:#81929a}
+.governed-property-state__metrics strong{font-size:10px;color:#294550}
+.governed-property-state__signals{display:flex;gap:5px;flex-wrap:wrap;padding:7px 10px}
+.governed-property-state__signals span{font-size:8px;padding:3px 5px;border:1px solid #dde6e9;border-radius:999px;background:#fbfcfc;color:#657b85}
+.governed-property-state__footer{display:flex;justify-content:space-between;gap:6px;padding:7px 10px;border-top:1px solid #e5ecef;background:#f7fafb;font-size:8px;color:#778a94}
+
+.intelligence-quality{margin:8px 10px 10px;border:1px solid #cbdbe2;border-radius:9px;background:#fff;overflow:hidden}
+.intelligence-quality summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;cursor:pointer;list-style:none}
+.intelligence-quality summary::-webkit-details-marker{display:none}
+.intelligence-quality summary div{display:flex;flex-direction:column}
+.intelligence-quality summary span{font-size:8px;letter-spacing:.12em;color:#70858f;font-weight:700}
+.intelligence-quality summary strong{font-size:11px;color:#1f414f}
+.intelligence-quality summary>em{font-size:8px;font-style:normal;font-weight:700;color:#47705d}
+.intelligence-quality__hero{display:grid;grid-template-columns:.72fr 1.28fr;gap:10px;padding:10px;border-top:1px solid #e3ebee;background:#f5f9f8}
+.intelligence-quality__hero>div{display:flex;flex-direction:column}
+.intelligence-quality__hero span{font-size:7px;color:#788d96}
+.intelligence-quality__hero strong{font-size:15px;color:#244d5a}
+.intelligence-quality__hero em{font-size:8px;font-style:normal;font-weight:700;color:#4a6e5d}
+.intelligence-quality__hero p{margin:0;font-size:8px;line-height:1.4;color:#667c85;align-self:center}
+.intelligence-quality__dimensions{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #e8eef0}
+.intelligence-quality__dimension{display:flex;flex-direction:column;gap:2px;padding:8px;border-right:1px solid #e8eef0}
+.intelligence-quality__dimension:last-child{border-right:none}
+.intelligence-quality__dimension>div{display:flex;flex-direction:column}
+.intelligence-quality__dimension span{font-size:7px;color:#7b8e97}
+.intelligence-quality__dimension strong{font-size:11px;color:#294a57}
+.intelligence-quality__dimension em{font-size:7px;font-style:normal;font-weight:700;color:#527263}
+.intelligence-quality__dimension small{font-size:7px;line-height:1.35;color:#83929a}
+.intelligence-quality__principle{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border-top:1px solid #e8eef0;background:#fbfcfc}
+.intelligence-quality__principle strong{font-size:8px;color:#294f5c}
+.intelligence-quality__principle span{font-size:8px;color:#6f8189}
+.intelligence-quality__footer{display:flex;justify-content:space-between;gap:6px;padding:7px 10px;border-top:1px solid #e5ecef;background:#f7fafb;font-size:8px;color:#778a94}
+
+.intelligence-gaps{margin:8px 10px 10px;border:1px solid #d3dfe4;border-radius:9px;background:#fff;overflow:hidden}
+.intelligence-gaps summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 10px;cursor:pointer;list-style:none}
+.intelligence-gaps summary::-webkit-details-marker{display:none}
+.intelligence-gaps summary div{display:flex;flex-direction:column}
+.intelligence-gaps summary span{font-size:8px;letter-spacing:.12em;color:#748892;font-weight:700}
+.intelligence-gaps summary strong{font-size:11px;color:#21414f}
+.intelligence-gaps summary>em{font-size:8px;font-style:normal;font-weight:700;color:#725e3d}
+.intelligence-gaps__hero{display:grid;grid-template-columns:.8fr 1.2fr;gap:10px;padding:10px;border-top:1px solid #e6ecef;background:#faf9f6}
+.intelligence-gaps__hero>div{display:flex;flex-direction:column}
+.intelligence-gaps__hero span{font-size:7px;color:#887f72}
+.intelligence-gaps__hero strong{font-size:12px;color:#4b453b}
+.intelligence-gaps__hero em{font-size:8px;font-style:normal;font-weight:700;color:#84623d}
+.intelligence-gaps__hero p{margin:0;font-size:8px;line-height:1.4;color:#6f6c65;align-self:center}
+.intelligence-gaps__summary{display:flex;gap:5px;flex-wrap:wrap;padding:7px 10px;border-top:1px solid #eceff0}
+.intelligence-gaps__summary span{font-size:8px;padding:3px 5px;border:1px solid #e0e6e8;border-radius:999px;background:#fff;color:#6d7d84}
+.intelligence-gaps__rows{display:grid}
+.intelligence-gaps__row{display:grid;grid-template-columns:1.1fr .45fr 1.2fr .5fr;gap:6px;padding:8px 9px;border-top:1px solid #edf1f3;align-items:center}
+.intelligence-gaps__row>div{display:flex;flex-direction:column;min-width:0}
+.intelligence-gaps__row span{font-size:7px;color:#84939a}
+.intelligence-gaps__row strong{font-size:9px;color:#304c58;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.intelligence-gaps__row em{font-size:7px;font-style:normal;font-weight:700;color:#795b3d}
+.intelligence-gaps__row small{grid-column:1/-1;font-size:8px;color:#71828a}
+.intelligence-gaps__empty{padding:10px;border-top:1px solid #edf1f3;font-size:9px;color:#697d87}
+.intelligence-gaps__footer{display:flex;justify-content:space-between;gap:6px;padding:7px 10px;border-top:1px solid #e5ecef;background:#f7fafb;font-size:8px;color:#778a94}
+
+/* SCIIP Explorer 3.0 — M2.22c Governed Acquisition Workflow UI Integration */
+.intelligence-gaps__acquisition{border-top:1px solid #dfe8eb;background:#fff}
+.intelligence-gaps__acquisition-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;padding:9px 10px 7px}
+.intelligence-gaps__acquisition-header>div{display:flex;flex-direction:column;min-width:0}
+.intelligence-gaps__acquisition-header span{font-size:7px;line-height:1.25;letter-spacing:.12em;color:#748892;font-weight:700}
+.intelligence-gaps__acquisition-header strong{margin-top:1px;font-size:10px;line-height:1.25;color:#21414f;font-weight:700}
+.intelligence-gaps__acquisition-header>em{flex:0 0 auto;margin-top:1px;padding:2px 5px;border-radius:999px;background:#f4f8f9;font-size:7px;line-height:1.35;font-style:normal;font-weight:700;color:#58717c;white-space:nowrap}
+.intelligence-gaps__acquisition>p{margin:0;padding:0 10px 8px;font-size:8px;line-height:1.45;color:#6f8189}
+.intelligence-gaps__acquisition-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:8px 10px;border-top:1px solid #edf1f3}
+.intelligence-gaps__acquisition-row>div{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:7px;row-gap:2px;min-width:0;align-items:center}
+.intelligence-gaps__acquisition-row strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px;line-height:1.25;color:#304c58}
+.intelligence-gaps__acquisition-row span{font-size:7px;line-height:1.25;font-weight:700;color:#8a704c;text-transform:uppercase;white-space:nowrap}
+.intelligence-gaps__acquisition-row small{grid-column:1/-1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:7px;line-height:1.35;color:#7b8c93}
+.intelligence-gaps__acquisition-row button{appearance:none;border:1px solid #214f62;border-radius:5px;background:#214f62;color:#fff;padding:5px 8px;font:700 8px/1 inherit;cursor:pointer;white-space:nowrap;box-shadow:none}
+.intelligence-gaps__acquisition-row button:hover{background:#173e4e;border-color:#173e4e}
+.intelligence-gaps__acquisition-row button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.intelligence-gaps__acquisition-row>em{max-width:92px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:1px solid #d9e5df;border-radius:999px;background:#f3f8f5;padding:3px 6px;font-size:7px;line-height:1.25;font-style:normal;font-weight:700;color:#547262;text-transform:uppercase}
+.intelligence-gaps__acquisition-footer{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:7px 10px;border-top:1px solid #e5ecef;background:#f7fafb;font-size:7px;line-height:1.3;color:#778a94}

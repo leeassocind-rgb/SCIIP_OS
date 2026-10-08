@@ -1,0 +1,13 @@
+M2.43 governed Market spatial selection synchronization
+explicitSelectionBindings=3
+bindings=['focus', 'neighbor', 'map-select-property']
+governedDetailContext=true
+governedSpatialContext=true
+detailContextBeforeSpatialContext=true
+selectedPropertyFlowPreserved=true
+focusFlowPreserved=true
+neighborOpenFlowPreserved=true
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+formulaRewritten=false
+automaticCanonicalWrites=false

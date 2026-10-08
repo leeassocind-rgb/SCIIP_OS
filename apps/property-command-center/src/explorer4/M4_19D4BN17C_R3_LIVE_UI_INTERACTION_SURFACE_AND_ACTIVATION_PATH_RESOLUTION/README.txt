@@ -1,0 +1,1 @@
+R3 diagnoses the exact live UI interaction surfaces after BN17C-R2 proved generic DOM text activation insufficient. READ ONLY. No application or governed-data mutation.

@@ -1,0 +1,8 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29A_R4_R2_R2_R2_R3_R2_R2_R2_R1_R3_MISSING_SIX_PRIOR200_MEMBERS_LINEAGE_RECONSTRUCTION",
+  "version": "4.0-r29a-r4-r2-r2-r2-r3-r2-r2-r2-r1-r3",
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "liveUiInteraction": false,
+  "exportInvocation": false
+}

@@ -1,0 +1,11 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R4_R2_R2_R2_R3_R2_R2_R2_R1_R1",
+  "version": "4.0-r29a-r4-r2-r2-r2-r3-r2-r2-r2-r1-r1",
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "liveUiInteraction": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false
+}

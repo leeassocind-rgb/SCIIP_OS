@@ -1,0 +1,13 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R4_R2_R2_R2_R1_R1",
+  "version": "4.0-r29a-r4-r2-r2-r2-r1-r1",
+  "repair": "R29A_R4_R2_R2_R2_R1_BLOCKED_BY_MISSING_WEBSOCKET_MODULE_TO_SELF_CONTAINED_PYTHON_STDLIB_CDP_TRANSPORT_AND_DIAGNOSIS_RECERTIFICATION",
+  "externalPythonPackagesRequired": [],
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "explorerClick": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false
+}

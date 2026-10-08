@@ -1,0 +1,8 @@
+M2.32 governed map consumer migration
+selectedPropertyOnly=true
+runtimeAuthority=M2.30 GovernedPropertyRuntimeBoundary
+propertyIntelligenceParity=true
+directMapPropReplacements=0
+rawInventoryPreserved=true
+marketContextMigration=false
+mapWideMigration=false

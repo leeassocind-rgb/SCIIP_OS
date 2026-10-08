@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+import fs from"node:fs";import path from"node:path";import{fileURLToPath}from"node:url";
+const d=path.dirname(fileURLToPath(import.meta.url)),s=fs.readFileSync(path.join(d,"diagnose_r24b_r2_r1.py"),"utf8");
+const q=["SINGLE_RECORD_NON_EXPORT_REPORT_REVIEW_CAUSAL_DIAGNOSIS","9400 Holly Rd","Generate Client Listing Report","Report Review","Review Client Listing Report","Download Client Listing Report","GENERATE_CLICK_DIRECTLY_MATERIALIZES_REPORT_REVIEW_R24B_R2_ERRONEOUS_EXTRA_REPORT_REVIEW_BUTTON_ASSUMPTION","GENERATE_CLICK_MATERIALIZES_INTERMEDIATE_REPORT_REVIEW_CONTROL","generateControlUniqueEnabled","postGenerateSamplesCaptured","exportInvocationOff","R24B_R2_R1_RECERTIFICATION_RESIDUAL_CAUSE_DIAGNOSED"];
+for(const x of q)if(!s.includes(x)){console.error("FAIL",x);process.exit(1)}
+console.log(JSON.stringify({framework:"SCIIP_EXPLORER_4_R24B_R2_R1_STATIC_TEST",status:"PASSED",assertions:q.length,repair:"R24B_R2_FIRST_RECORD_REPORT_REVIEW_FAILURE_TO_EXACT_GENERATE_CONTROL_POST_CLICK_REPORT_REVIEW_AND_DOWNLOAD_MATERIALIZATION_CAUSAL_DIAGNOSIS"},null,2));

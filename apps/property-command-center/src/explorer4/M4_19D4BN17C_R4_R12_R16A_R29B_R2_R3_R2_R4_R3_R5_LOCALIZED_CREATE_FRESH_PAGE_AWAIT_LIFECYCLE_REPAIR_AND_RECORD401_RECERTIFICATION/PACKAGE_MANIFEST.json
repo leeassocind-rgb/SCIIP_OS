@@ -1,0 +1,12 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_R5_LOCALIZED_CREATE_FRESH_PAGE_AWAIT_LIFECYCLE_REPAIR_AND_RECORD401_RECERTIFICATION",
+  "version": "4.0-r29b-r2-r3-r2-r4-r3-r5",
+  "repair": "LOCALIZED_CREATE_FRESH_PAGE_CDP_OPEN_UNSETTLED_AWAIT_TO_TIMER_BACKED_PROMISE_RACE_LIFECYCLE_BOUND",
+  "applicationSourceMutation": "R29B_CREATE_FRESH_PAGE_OPEN_ONLY",
+  "governedDataMutation": false,
+  "exportInvocation": false,
+  "strictSequential": true,
+  "haltOnFirstFailure": true,
+  "cdpOpenBoundMilliseconds": 2000,
+  "recertificationBoundSeconds": 20
+}

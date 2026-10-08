@@ -1,0 +1,8 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R1_SYNTAX_ONLY_REPAIR_AND_NON_EXPORT_LIVE_QUALIFICATION_RECERTIFICATION",
+  "version": "4.0-r29b-r1",
+  "classification": "R29B_MIXED_NULLISH_LOGICAL_OR_GRAMMAR_ERROR",
+  "repairScope": "RUNNER_SYNTAX_ONLY",
+  "governedDataMutation": false,
+  "exportInvocation": false
+}

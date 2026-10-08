@@ -1,0 +1,4 @@
+import assert from'node:assert/strict';import fs from'node:fs';let n=0;const t=c=>{n++;assert.ok(c)};
+const s=fs.readFileSync('src/broker-product/AssignmentImpactPage.jsx','utf8'),c=fs.readFileSync('src/broker-product/assignment-workspace-v1-2.css','utf8');
+t(!s.includes('pr-impact-summary'));t(!s.includes('Changes directly affecting this assignment'));t(!s.includes('Market changes affecting strategy'));t(s.includes('High Priority'));t(s.includes('Market Signals'));t(s.includes("Today's preparation"));t(s.includes('Build AI Call Brief'));t(s.includes('Comparable Transactions'));t(s.includes('Market Overview'));t(c.includes('.pr-upcoming-call__body'));t(c.includes('.pr-report-queue'));
+console.log(JSON.stringify({framework:'SCIIP_PRODUCT_REALISM_ASSIGNMENT_WORKSPACE_V1_2',status:'PASSED',testsRun:n,result:{redundantNarrativeRemoved:true,simplifiedHeaders:true,callSpacingImproved:true,structuredAgenda:true,specificReportQueue:true}},null,2));

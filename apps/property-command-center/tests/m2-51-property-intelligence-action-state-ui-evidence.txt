@@ -1,0 +1,15 @@
+M2.51 governed Property Intelligence action-state UI synchronization
+actionStateContractBound=true
+reactiveEventStateBound=true
+propertyScopedState=true
+requestStateProjected=true
+reviewStateProjected=true
+verificationStateProjected=true
+rejectionStateProjected=true
+promotionStateProjected=true
+holdStateProjected=true
+uiRevisionProjected=true
+presentationOnly=true
+actionEnginesRewritten=false
+canonicalExecutionRewritten=false
+automaticCanonicalWrites=false

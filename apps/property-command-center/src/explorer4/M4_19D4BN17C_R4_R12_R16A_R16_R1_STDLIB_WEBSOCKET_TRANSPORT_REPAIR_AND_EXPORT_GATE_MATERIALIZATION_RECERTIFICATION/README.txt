@@ -1,0 +1,1 @@
+R16 failed before its live probe because the package assumed the third-party Python websocket module. R16-R1 removes that undeclared dependency and uses a Python-standard-library raw WebSocket/CDP transport. No pip install is required. The R15 selected-property + workspace gate contract is preserved; application source and governed data remain unmodified; Export is not invoked.

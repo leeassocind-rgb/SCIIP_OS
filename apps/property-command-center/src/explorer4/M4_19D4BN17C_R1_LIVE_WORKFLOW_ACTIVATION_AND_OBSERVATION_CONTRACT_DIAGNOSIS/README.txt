@@ -1,0 +1,1 @@
+BN17C-R1 diagnoses the invariant live-workflow gaps from BN17C without weakening certification. It resolves source references for selected-property activation and action-specific Compare, Command, Analyze/Present, Export/Presentation observation. All authority remains read-only.

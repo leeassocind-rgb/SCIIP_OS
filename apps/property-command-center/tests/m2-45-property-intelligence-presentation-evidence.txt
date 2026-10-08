@@ -1,0 +1,13 @@
+M2.45 corrected governed Property Intelligence presentation synchronization
+presentationContractBound=true
+contextDrawerReceivesPresentation=true
+drawerPropertyInsideFunctionBody=true
+drawerPropertyScoped=true
+headerUsesGovernedPresentation=true
+bodyUsesGovernedPresentation=true
+headerBodyIdentityUnified=true
+governedSelectionAuthoritative=true
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+formulaRewritten=false
+automaticCanonicalWrites=false

@@ -1,0 +1,10 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_R5_R1_R6_R1_DUAL_EXPLORER_ENTRY_BINDING_CALLSITE_REPAIR_AND_RECORD401_RECERTIFICATION",
+  "version": "4.0-r29b-r5-r1-r6-r1",
+  "applicationSourceMutation": true,
+  "mutationScope": "remaining exact r29bR4CertifyExplorerEntry(w) callsite(s) -> cdp",
+  "governedDataMutation": false,
+  "exportInvocation": false,
+  "strictSequential": true,
+  "haltOnFirstFailure": true
+}

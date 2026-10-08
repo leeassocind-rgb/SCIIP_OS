@@ -1,0 +1,10 @@
+M2.38 governed Market Context metric presentation
+presentationBound=true
+presentationAuthority=marketContext
+metricContract=marketMetricPresentation
+explicitMetricBindings=0
+metrics=totalSf,properties,available,avgAsking,avgLeaseComp,leaseComps
+formulaRewritten=false
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+automaticCanonicalWrites=false

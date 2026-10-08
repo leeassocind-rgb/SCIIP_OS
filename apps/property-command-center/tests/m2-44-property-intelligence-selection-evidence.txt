@@ -1,0 +1,10 @@
+M2.44 governed spatial selection -> Property Intelligence synchronization
+explicitPropertyIntelligenceBindings=3
+bindings=['property-intelligence', 'property-intelligence', 'property-prop']
+governedSelectionAuthoritative=true
+propertyIntelligenceSynchronized=true
+selectedPropertyFlowPreserved=true
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+formulaRewritten=false
+automaticCanonicalWrites=false

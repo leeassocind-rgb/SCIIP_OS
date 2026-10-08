@@ -21,7 +21,7 @@ export default function LivePropertyCommandCenter({onNavigate}){
    <span className="production-activation-badge">{view.health}</span>
   </header>
   <section className="production-kpis">
-   <article><span>Properties</span><strong>{view.propertyCount}</strong></article>
+   <article><span>Explorer</span><strong>{view.propertyCount}</strong></article>
    <article><span>Accepted</span><strong>{view.accepted}</strong></article>
    <article><span>Warnings</span><strong>{view.warnings}</strong></article>
    <article><span>Rejected</span><strong>{view.rejected}</strong></article>

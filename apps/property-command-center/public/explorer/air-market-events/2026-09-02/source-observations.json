@@ -1,0 +1,38 @@
+{
+  "schema": "SCIIP_AIR_SOURCE_OBSERVATIONS_V1",
+  "sourceDate": "2026-09-02",
+  "records": [
+    {
+      "sourceObservationId": "AIROBS-F908DFF630BA15ED09EF7E57",
+      "sourceDate": "2026-09-02",
+      "sourceCoordinate": "P3:R4",
+      "identityRef": "BASESRC-5745",
+      "identityConfidence": "EXISTING_BASE_IDENTITY_RECONCILED",
+      "canonicalIdentityMerge": false
+    },
+    {
+      "sourceObservationId": "AIROBS-C4139EEB7CC9B48F1D1ED815",
+      "sourceDate": "2026-09-02",
+      "sourceCoordinate": "P7:R3",
+      "identityRef": "BASESRC-5933",
+      "identityConfidence": "EXISTING_BASE_IDENTITY_RECONCILED",
+      "canonicalIdentityMerge": false
+    },
+    {
+      "sourceObservationId": "AIROBS-2EC38DA3BE58D94E93F50DC1",
+      "sourceDate": "2026-09-02",
+      "sourceCoordinate": "P7:R5",
+      "identityRef": "BASESRC-247",
+      "identityConfidence": "EXISTING_BASE_IDENTITY_RECONCILED",
+      "canonicalIdentityMerge": false
+    },
+    {
+      "sourceObservationId": "AIROBS-CA9E318C73DD55EF43FCDD20",
+      "sourceDate": "2026-09-02",
+      "sourceCoordinate": "P12:R3",
+      "identityRef": "BASESRC-5745",
+      "identityConfidence": "EXISTING_BASE_IDENTITY_RECONCILED",
+      "canonicalIdentityMerge": false
+    }
+  ]
+}

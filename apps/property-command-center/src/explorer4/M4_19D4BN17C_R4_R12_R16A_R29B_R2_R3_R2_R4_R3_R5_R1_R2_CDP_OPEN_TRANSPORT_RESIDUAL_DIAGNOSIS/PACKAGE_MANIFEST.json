@@ -1,0 +1,12 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_R5_R1_R2_CDP_OPEN_TRANSPORT_RESIDUAL_DIAGNOSIS",
+  "version": "4.0-r29b-r5-r1-r2",
+  "mode": "READ_ONLY_CDP_TRANSPORT_ABSTRACTION_DIAGNOSIS",
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "liveUiInteraction": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false
+}

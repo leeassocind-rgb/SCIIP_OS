@@ -1,0 +1,1504 @@
+{
+  "anchorDate": "2026-08-28",
+  "contract": "SCIIP_AIR_INCREMENTAL_EVENT_COMMIT_V1",
+  "events": [
+    {
+      "address": "3305 E Vernon Ave",
+      "availableSf": 103633,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 11750,
+      "city": "Vernon",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-C54ABA02BA5A195692F46B1A",
+      "identityConfidence": "REFINED_UNIVERSE_DETERMINISTIC",
+      "identityRef": "AIRREF-E1CAE4743C3232AD2565",
+      "observationDate": "2026-08-31",
+      "postalCode": "90058",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 1,
+      "sourceRowNumber": 1,
+      "sourceTransactionScopes": [
+        "For Lease & Sale",
+        "For Lease"
+      ]
+    },
+    {
+      "address": "2210 Davie Ave",
+      "availableSf": 59600,
+      "baseInventoryEligibility": "IN_SCOPE_BUILDING_GE_50000",
+      "buildingSf": 59600,
+      "city": "Commerce",
+      "currentStateTransitionEligible": true,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-604E67B0FD174AC76A4093B4",
+      "identityConfidence": "REFINED_UNIVERSE_DETERMINISTIC",
+      "identityRef": "AIRREF-92C301CEA9D3561DD57C",
+      "observationDate": "2026-08-31",
+      "postalCode": "90040",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "New Rate"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 1,
+      "sourceRowNumber": 2,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "2020-2040 E 7th Pl",
+      "availableSf": 32548,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 8563,
+      "city": "Los Angeles",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-2C81486943956E9EA74AD0A9",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90021",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 1,
+      "sourceRowNumber": 3,
+      "sourceTransactionScopes": [
+        "For Sale"
+      ]
+    },
+    {
+      "address": "1701 Bay St",
+      "availableSf": 32470,
+      "baseInventoryEligibility": "IN_SCOPE_BUILDING_GE_50000",
+      "buildingSf": 160000,
+      "city": "Los Angeles",
+      "currentStateTransitionEligible": true,
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-29CACA986FB24DBB4CE8E4B4",
+      "identityConfidence": "CORROBORATED",
+      "identityRef": "AIRREFQ-703EBCB9F1C814AA048D",
+      "observationDate": "2026-08-31",
+      "postalCode": "90021",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "Leased"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 1,
+      "sourceRowNumber": 4,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "650 E 16th St",
+      "availableSf": 32240,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 14800,
+      "city": "Los Angeles",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-E4888458D348C3F504E55A30",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90015",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 1,
+      "sourceRowNumber": 5,
+      "sourceTransactionScopes": [
+        "For Lease & Sale",
+        "For Lease"
+      ]
+    },
+    {
+      "address": "650 E 16th St, Unit A",
+      "availableSf": 17440,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 32240,
+      "city": "Los Angeles",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-A9883A5A64EDD9326C799D62",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90015",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 1,
+      "sourceRowNumber": 6,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "650 E 16th St, Unit C",
+      "availableSf": 14800,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 32240,
+      "city": "Los Angeles",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-17321E9E4257AB4030B5D758",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90015",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 2,
+      "sourceRowNumber": 7,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "1625 Riverside Dr",
+      "availableSf": 12607,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 12607,
+      "city": "Los Angeles",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-A925A895B13BBC22F21BD959",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90031",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "New Rate"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 2,
+      "sourceRowNumber": 8,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "834 E 108th St",
+      "availableSf": 12100,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 12100,
+      "city": "Los Angeles",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-78D32322B746FDD369BA0F07",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90059",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "Correction - Leased"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 2,
+      "sourceRowNumber": 9,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "2045 Violet St",
+      "availableSf": 10625,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 10625,
+      "city": "Los Angeles",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-8B9CDD619A584E4BD511CEE3",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90021",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 2,
+      "sourceRowNumber": 10,
+      "sourceTransactionScopes": [
+        "For Sale"
+      ]
+    },
+    {
+      "address": "5722 Union Pacific Ave, Unit B",
+      "availableSf": 9600,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 34965,
+      "city": "Commerce",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-5BFFE0779B86DD9B263BC432",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90022",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "Leased"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 2,
+      "sourceRowNumber": 11,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "1017 E 14th St",
+      "availableSf": 4320,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 4320,
+      "city": "Los Angeles",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-EC4A0B848883C6222172F983",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90021",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "Rate Reduced"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 2,
+      "sourceRowNumber": 12,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "643 Gibbons St",
+      "availableSf": 4020,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 4020,
+      "city": "Lincoln Heights",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "OTHER_EXPLICIT_SOURCE_CHANGE"
+      ],
+      "eventId": "AIREVT-32F319A1FD20629AD995D936",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90031",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "Updated Information"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 3,
+      "sourceRowNumber": 13,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "6148 S Eastern Ave",
+      "availableSf": 3650,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 35500,
+      "city": "Commerce",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-C3EE3A4507FAD0CD6F252E7C",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90040",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 3,
+      "sourceRowNumber": 14,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "4 Goodyear",
+      "availableSf": 94195,
+      "baseInventoryEligibility": "IN_SCOPE_BUILDING_GE_50000",
+      "buildingSf": 94195,
+      "city": "Irvine",
+      "currentStateTransitionEligible": true,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-3759D0867FD8589964CDF102",
+      "identityConfidence": "REFINED_UNIVERSE_DETERMINISTIC",
+      "identityRef": "AIRREF-D5D02DD3BF49906BCCEF",
+      "observationDate": "2026-08-31",
+      "postalCode": "92618",
+      "region": "Orange County",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 4,
+      "sourceRowNumber": 1,
+      "sourceTransactionScopes": [
+        "For Sublease"
+      ]
+    },
+    {
+      "address": "1511 E Edinger Ave",
+      "availableSf": 25394,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 25394,
+      "city": "Santa Ana",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-965FE753C4181E3BBF62A510",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92705",
+      "region": "Orange County",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 4,
+      "sourceRowNumber": 2,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "3602 W Central Ave",
+      "availableSf": 14249,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 14249,
+      "city": "Santa Ana",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-09EDC0EE81EC5A5565D48397",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92704",
+      "region": "Orange County",
+      "sourceChangeLabels": [
+        "Leased"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 4,
+      "sourceRowNumber": 3,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "2875 N Orange Olive Rd, Unit A",
+      "availableSf": 13600,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 13600,
+      "city": "Orange",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-C89B1617880697B1E48BE124",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92865",
+      "region": "Orange County",
+      "sourceChangeLabels": [
+        "Rate Reduced"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 4,
+      "sourceRowNumber": 4,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "10400 Pioneer Blvd, Unit 2",
+      "availableSf": 13581,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 48481,
+      "city": "Santa Fe Springs",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "AVAILABLE_SF_CHANGE"
+      ],
+      "eventId": "AIREVT-9AABEBCF907D13BA0A3D9A4C",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90670",
+      "region": "Orange County",
+      "sourceChangeLabels": [
+        "New Size"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 4,
+      "sourceRowNumber": 5,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "1601 E McFadden Ave",
+      "availableSf": 10332,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 21660,
+      "city": "Santa Ana",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-31774CE8D1E1D847707B835D",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92705",
+      "region": "Orange County",
+      "sourceChangeLabels": [
+        "New Rate"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 4,
+      "sourceRowNumber": 6,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "1525 E Edinger Ave, Unit C",
+      "availableSf": 8300,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 35067,
+      "city": "Santa Ana",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-C34E0F3A52618BFDC6ED44CB",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92705",
+      "region": "Orange County",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 5,
+      "sourceRowNumber": 7,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "225 Benjamin Dr, Unit 103",
+      "availableSf": 7414,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 1200,
+      "city": "Corona",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-DFDF6BB908E0268890581CFC",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92879",
+      "region": "Orange County",
+      "sourceChangeLabels": [
+        "Leased"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 5,
+      "sourceRowNumber": 8,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "17712 Gothard St, Unit A",
+      "availableSf": 4500,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 13520,
+      "city": "Huntington Beach",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-A3288BBE7F182FA3A481D4B1",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92647",
+      "region": "Orange County",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 5,
+      "sourceRowNumber": 9,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "18251 Mt Baldy Cir",
+      "availableSf": 3212,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 29018,
+      "city": "Fountain Valley",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-6F7B57CD679526E8DB15FC23",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92708",
+      "region": "Orange County",
+      "sourceChangeLabels": [
+        "Leased"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 5,
+      "sourceRowNumber": 10,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "2780 Rubidoux Blvd",
+      "availableSf": 70362,
+      "baseInventoryEligibility": "IN_SCOPE_BUILDING_GE_50000",
+      "buildingSf": 70362,
+      "city": "Riverside",
+      "currentStateTransitionEligible": true,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-79DBD6FDFFA24DD35408E640",
+      "identityConfidence": "REFINED_UNIVERSE_DETERMINISTIC",
+      "identityRef": "AIRREF-BAA535B257875AB6D87D",
+      "observationDate": "2026-08-31",
+      "postalCode": "92509",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 6,
+      "sourceRowNumber": 1,
+      "sourceTransactionScopes": [
+        "For Sale"
+      ]
+    },
+    {
+      "address": "1623 W 2nd St",
+      "availableSf": 22194,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 22194,
+      "city": "Pomona",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-1702707C10776158949DE1DC",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91766",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "New Rate"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 6,
+      "sourceRowNumber": 2,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "40880 County Center Dr, Unit G",
+      "availableSf": 10299,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 41210,
+      "city": "Temecula",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-B64905703DC10507B57DF277",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92591",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 6,
+      "sourceRowNumber": 3,
+      "sourceTransactionScopes": [
+        "For Sublease"
+      ]
+    },
+    {
+      "address": "600 S Wineville Ave",
+      "availableSf": 8821,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 8821,
+      "city": "Ontario",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-91F2F24DF7565234B961C209",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 6,
+      "sourceRowNumber": 4,
+      "sourceTransactionScopes": [
+        "For Sale"
+      ]
+    },
+    {
+      "address": "4241 E Brickell St",
+      "availableSf": 8748,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 1600,
+      "city": "Ontario",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-98C350FAAFEF4696B3030C6C",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91761",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "Leased"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 6,
+      "sourceRowNumber": 5,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "1110 Research Dr, Unit A",
+      "availableSf": 7810,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 21570,
+      "city": "Redlands",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-016812310C09F691A8B2D2FE",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92374",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 6,
+      "sourceRowNumber": 6,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "225 Benjamin Dr, Unit 103",
+      "availableSf": 7414,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 1200,
+      "city": "Corona",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-4C8AED2D7E667C487AF985AA",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92879",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "Leased"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 7,
+      "sourceRowNumber": 7,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "8424 Cottonwood Ave",
+      "availableSf": 5000,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 5000,
+      "city": "Fontana",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "OTHER_EXPLICIT_SOURCE_CHANGE"
+      ],
+      "eventId": "AIREVT-7A87AB84EE8BF2B965C4E8F5",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "Updated Information"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 7,
+      "sourceRowNumber": 8,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "5061 E State St, Unit 6",
+      "availableSf": 3968,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 37350,
+      "city": "Montclair",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "OTHER_EXPLICIT_SOURCE_CHANGE"
+      ],
+      "eventId": "AIREVT-66E31765CCA2A68053DC2EEB",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91762",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "Price Reduced"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 7,
+      "sourceRowNumber": 9,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "36800 Lenwood Rd",
+      "availableSf": 1597345,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 0,
+      "city": "Hinkley",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-F3ABBC254A790BFF747D42CE",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92347",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 7,
+      "sourceRowNumber": 10,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "SW of Harvill Ave and Orange Ave",
+      "availableSf": 605920,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 11630,
+      "city": "Perris",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "OTHER_EXPLICIT_SOURCE_CHANGE"
+      ],
+      "eventId": "AIREVT-45D7AA8EBA7E63FA5C6A1811",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92570",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "Updated Information"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 7,
+      "sourceRowNumber": 11,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "16235-16297 Valley Blvd",
+      "availableSf": 500504,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 2100,
+      "city": "Fontana",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "OTHER_EXPLICIT_SOURCE_CHANGE"
+      ],
+      "eventId": "AIREVT-D0D53371C08A6183AC2EB9B5",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "Updated Information"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 8,
+      "sourceRowNumber": 12,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "8424 Cottonwood Ave",
+      "availableSf": 207781,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 5000,
+      "city": "Fontana",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "OTHER_EXPLICIT_SOURCE_CHANGE"
+      ],
+      "eventId": "AIREVT-2C6312F85C5663B10FF68F72",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92335",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "Updated Information"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 8,
+      "sourceRowNumber": 13,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "2780 Rubidoux Blvd",
+      "availableSf": 160301,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 5000,
+      "city": "Riverside",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-9B0D061DD31E070324E5C055",
+      "identityConfidence": "REFINED_UNIVERSE_DETERMINISTIC",
+      "identityRef": "AIRREF-BAA535B257875AB6D87D",
+      "observationDate": "2026-08-31",
+      "postalCode": "92509",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 8,
+      "sourceRowNumber": 14,
+      "sourceTransactionScopes": [
+        "For Sale"
+      ]
+    },
+    {
+      "address": "1173 Harley Knox Blvd",
+      "availableSf": 70566,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 1982,
+      "city": "Perris",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-53C0068300A7B032E4BC441E",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92571",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 8,
+      "sourceRowNumber": 15,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "2875 N Orange Olive Rd, Unit A",
+      "availableSf": 13600,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 13600,
+      "city": "Orange",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-48B29F8B8D62C321EEB22F44",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "92865",
+      "region": "MidCounties",
+      "sourceChangeLabels": [
+        "Rate Reduced"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 9,
+      "sourceRowNumber": 1,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "10400 Pioneer Blvd, Unit 2",
+      "availableSf": 13581,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 48481,
+      "city": "Santa Fe Springs",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "AVAILABLE_SF_CHANGE"
+      ],
+      "eventId": "AIREVT-1296AACF213D8A77437A9D63",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90670",
+      "region": "MidCounties",
+      "sourceChangeLabels": [
+        "New Size"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 9,
+      "sourceRowNumber": 2,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "677 & 725 Pacific Ave",
+      "availableSf": 24536,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 24536,
+      "city": "Oxnard",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "LISTING_STATUS_CHANGE"
+      ],
+      "eventId": "AIREVT-1122B243BB9A4B52A80838B7",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "93030",
+      "region": "LA Northwest & Ventura",
+      "sourceChangeLabels": [
+        "Back on Market"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 10,
+      "sourceRowNumber": 1,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "8803 Shirley Ave",
+      "availableSf": 5040,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 10080,
+      "city": "Northridge",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-065ACF23C4DF6FFB365C429D",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91324",
+      "region": "LA Northwest & Ventura",
+      "sourceChangeLabels": [
+        "Leased"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 10,
+      "sourceRowNumber": 2,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "9858 Glenoaks Blvd",
+      "availableSf": 3600,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 45870,
+      "city": "Sun Valley",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-D74D70F4FB679660833EE2C9",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91352",
+      "region": "LA Northwest & Ventura",
+      "sourceChangeLabels": [
+        "Leased"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 10,
+      "sourceRowNumber": 3,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "840-858 S Oxnard Blvd",
+      "availableSf": 29096,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 7336,
+      "city": "Oxnard",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-43BBF280F5A96A0BDED33883",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "93030",
+      "region": "LA Northwest & Ventura",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 10,
+      "sourceRowNumber": 4,
+      "sourceTransactionScopes": [
+        "For Sale"
+      ]
+    },
+    {
+      "address": "368 Cheryl Ln",
+      "availableSf": 109448,
+      "baseInventoryEligibility": "IN_SCOPE_BUILDING_GE_50000",
+      "buildingSf": 109448,
+      "city": "Industry",
+      "currentStateTransitionEligible": true,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-D89AAAE8BA2723FA9CAEEC8A",
+      "identityConfidence": "REFINED_UNIVERSE_DETERMINISTIC",
+      "identityRef": "AIRREF-4111E341189703A30404",
+      "observationDate": "2026-08-31",
+      "postalCode": "91789",
+      "region": "LA East",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 11,
+      "sourceRowNumber": 1,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "1623 W 2nd St",
+      "availableSf": 22194,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 22194,
+      "city": "Pomona",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-56058F032C4792A5675E416F",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91766",
+      "region": "LA East",
+      "sourceChangeLabels": [
+        "New Rate"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 11,
+      "sourceRowNumber": 2,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "1 Dock High Door    400",
+      "availableSf": 18659,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 18659,
+      "city": "Covina",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "OTHER_EXPLICIT_SOURCE_CHANGE"
+      ],
+      "eventId": "AIREVT-5B3E9AB5216CAA89E1A286F4",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91722",
+      "region": "LA East",
+      "sourceChangeLabels": [
+        "Updated Information"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 11,
+      "sourceRowNumber": 3,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "9619 Remer St",
+      "availableSf": 7245,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 7245,
+      "city": "South El Monte",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-ED2D36CC50E7046F6761E461",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91733",
+      "region": "LA East",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 11,
+      "sourceRowNumber": 4,
+      "sourceTransactionScopes": [
+        "For Sublease"
+      ]
+    },
+    {
+      "address": "11400 Ramona Blvd",
+      "availableSf": 3480,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 3480,
+      "city": "El Monte",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-A51F699AE701B62D58AC1D5D",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91731",
+      "region": "LA East",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 11,
+      "sourceRowNumber": 5,
+      "sourceTransactionScopes": [
+        "For Sale"
+      ]
+    },
+    {
+      "address": "214 S 5th Ave",
+      "availableSf": 3078,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 28064,
+      "city": "Industry",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-FC55BAB4530C87DF2D257056",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91746",
+      "region": "LA East",
+      "sourceChangeLabels": [
+        "Leased"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 11,
+      "sourceRowNumber": 6,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "9863-9869 Garvey Ave",
+      "availableSf": 23681,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 5417,
+      "city": "El Monte",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-88B06E9217BF1C621C36FB85",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91733",
+      "region": "LA East",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 12,
+      "sourceRowNumber": 7,
+      "sourceTransactionScopes": [
+        "For Sale"
+      ]
+    },
+    {
+      "address": "9877 Garvey Ave",
+      "availableSf": 14142,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 854,
+      "city": "El Monte",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-E0E5195A6CA578189C1280E1",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "91733",
+      "region": "LA East",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 12,
+      "sourceRowNumber": 8,
+      "sourceTransactionScopes": [
+        "For Sale"
+      ]
+    },
+    {
+      "address": "2640 E Del Amo Blvd",
+      "availableSf": 31500,
+      "baseInventoryEligibility": "IN_SCOPE_BUILDING_GE_50000",
+      "buildingSf": 110720,
+      "city": "Carson",
+      "currentStateTransitionEligible": true,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-9B10C62CA0B8D7A8438C9815",
+      "identityConfidence": "REFINED_UNIVERSE_DETERMINISTIC",
+      "identityRef": "AIRREF-4334AE4DD675560822C9",
+      "observationDate": "2026-08-31",
+      "postalCode": "90221",
+      "region": "LA South & West",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 13,
+      "sourceRowNumber": 1,
+      "sourceTransactionScopes": [
+        "For Sublease"
+      ]
+    },
+    {
+      "address": "16910 Cherie Pl",
+      "availableSf": 28800,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 28800,
+      "city": "Carson",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-60195857E3129CFB1A5FB5F5",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90746",
+      "region": "LA South & West",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 13,
+      "sourceRowNumber": 2,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "1656 W 134th St",
+      "availableSf": 22000,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 22000,
+      "city": "Gardena",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-E88BF1C7B373D66BF5280E0B",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90249",
+      "region": "LA South & West",
+      "sourceChangeLabels": [
+        "Rate Reduced"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 13,
+      "sourceRowNumber": 3,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "13614 S Western Ave",
+      "availableSf": 9900,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 9900,
+      "city": "Gardena",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-4D3E907F4FA1D87D3BF8EF3E",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90249",
+      "region": "LA South & West",
+      "sourceChangeLabels": [
+        "Rate Reduced"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 13,
+      "sourceRowNumber": 4,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "1526 Seabright Ave",
+      "availableSf": 4880,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 4880,
+      "city": "Long Beach",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-D0E3B6559C76A4289EA2091B",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90813",
+      "region": "LA South & West",
+      "sourceChangeLabels": [
+        "New Rate"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 13,
+      "sourceRowNumber": 5,
+      "sourceTransactionScopes": []
+    },
+    {
+      "address": "2635 Manhattan Beach Blvd",
+      "availableSf": 1920,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 27180,
+      "city": "Redondo Beach",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-4E3306E055F80F2E9ECDDB1E",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90278",
+      "region": "LA South & West",
+      "sourceChangeLabels": [
+        "New Listing"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 13,
+      "sourceRowNumber": 6,
+      "sourceTransactionScopes": [
+        "For Lease"
+      ]
+    },
+    {
+      "address": "413 W 131st St",
+      "availableSf": 7317,
+      "baseInventoryEligibility": "OUTSIDE_CURRENT_BASE_INVENTORY_SIZE_SCOPE_BUILDING_LT_50000",
+      "buildingSf": 7317,
+      "city": "Los Angeles",
+      "currentStateTransitionEligible": false,
+      "eventFamilies": [
+        "RATE_CHANGE"
+      ],
+      "eventId": "AIREVT-78EC17201A4B296C9279B234",
+      "identityConfidence": "OUTSIDE_CURRENT_BASE_INVENTORY_SCOPE",
+      "identityRef": null,
+      "observationDate": "2026-08-31",
+      "postalCode": "90061",
+      "region": "LA South & West",
+      "sourceChangeLabels": [
+        "Rate Reduced"
+      ],
+      "sourceObservationAppendEligible": true,
+      "sourcePage": 14,
+      "sourceRowNumber": 7,
+      "sourceTransactionScopes": []
+    }
+  ],
+  "partitionDate": "2026-08-31",
+  "sourceObservationCount": 60
+}

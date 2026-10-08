@@ -1,0 +1,104 @@
+import React,{useMemo,useState}from'react';
+import{
+  evidenceWorkflow,
+  openEvidenceReview,
+  attachEvidence,
+  verifyEvidence
+}from'./GovernedEvidenceWorkflow.js';
+import'./GovernedEvidenceWorkflowInline.css';
+
+const statusLabel=status=>String(status||'NOT_STARTED').replaceAll('_',' ');
+
+export default function GovernedEvidenceWorkflowInline({property,gaps=[]}){
+  const[revision,setRevision]=useState(0);
+  const[drafts,setDrafts]=useState({});
+  const workflow=useMemo(()=>evidenceWorkflow(property,gaps),[property,gaps,revision]);
+
+  if(!workflow.items.length)return null;
+
+  const setDraft=(key,patch)=>setDrafts(d=>({...d,[key]:{...(d[key]||{}),...patch}}));
+
+  return <section className="governed-evidence" data-milestone="M2.23a" aria-label="Evidence Intake and Verification">
+    <header className="governed-evidence__header">
+      <div className="governed-evidence__heading">
+        <span>GOVERNED EVIDENCE</span>
+        <strong>Evidence Intake &amp; Verification</strong>
+      </div>
+      <em>{workflow.items.length} tracked</em>
+    </header>
+
+    <p className="governed-evidence__intro">
+      Attach evidence, verify it through governance, and keep canonical promotion explicit.
+    </p>
+
+    <div className="governed-evidence__rows">
+      {workflow.items.map(item=>{
+        const draft=drafts[item.fieldKey]||{};
+        const status=item.evidenceStatus||'NOT_STARTED';
+        return <div className="governed-evidence__row" key={item.fieldKey}>
+          <div className="governed-evidence__identity">
+            <strong>{item.label||item.fieldKey}</strong>
+            <span>{item.recommendedSource||item.source||'Governed source'}</span>
+          </div>
+
+          <span className={`governed-evidence__status governed-evidence__status--${status.toLowerCase()}`}>
+            {statusLabel(status)}
+          </span>
+
+          <div className="governed-evidence__controls">
+            {status==='NOT_STARTED'&&
+              <button type="button" className="governed-evidence__button" onClick={()=>{
+                openEvidenceReview({property,gap:item});
+                setRevision(v=>v+1);
+              }}>Review Evidence</button>}
+
+            {status==='REQUESTED'&&<div className="governed-evidence__intake">
+              <input
+                aria-label={`${item.fieldKey} evidence value`}
+                placeholder="Observed value"
+                value={draft.value||''}
+                onChange={e=>setDraft(item.fieldKey,{value:e.target.value})}
+              />
+              <input
+                aria-label={`${item.fieldKey} evidence source`}
+                placeholder="Verified source"
+                value={draft.source||''}
+                onChange={e=>setDraft(item.fieldKey,{source:e.target.value})}
+              />
+              <button type="button" className="governed-evidence__button" onClick={()=>{
+                attachEvidence({
+                  property,
+                  fieldKey:item.fieldKey,
+                  value:draft.value,
+                  source:draft.source,
+                  reference:draft.reference||'MANUAL_REVIEW'
+                });
+                setRevision(v=>v+1);
+              }}>Attach</button>
+            </div>}
+
+            {status==='EVIDENCE_ATTACHED'&&
+              <div className="governed-evidence__actions">
+                <button type="button" className="governed-evidence__button" onClick={()=>{
+                  verifyEvidence({property,fieldKey:item.fieldKey,decision:'VERIFIED'});
+                  setRevision(v=>v+1);
+                }}>Verify</button>
+                <button type="button" className="governed-evidence__button governed-evidence__button--secondary" onClick={()=>{
+                  verifyEvidence({property,fieldKey:item.fieldKey,decision:'REJECTED'});
+                  setRevision(v=>v+1);
+                }}>Reject</button>
+              </div>}
+
+            {['VERIFIED','REJECTED'].includes(status)&&
+              <span className="governed-evidence__complete">Decision recorded</span>}
+          </div>
+        </div>;
+      })}
+    </div>
+
+    <footer className="governed-evidence__footer">
+      <span>Canonical writes: OFF</span>
+      <span>Verified evidence ≠ canonical promotion</span>
+    </footer>
+  </section>;
+}

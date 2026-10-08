@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+import fs from"node:fs";import path from"node:path";import{fileURLToPath}from"node:url";
+const d=path.dirname(fileURLToPath(import.meta.url)),s=fs.readFileSync(path.join(d,"execute_r22b.py"),"utf8");
+const q=["exactThreeRecordQualificationConsumed","freshPagePerRecordPolicyUsed","strictSequentialObserved","haltOnFirstFailureObserved","allExecutedSelectionsCertified","allExecutedAssignmentsCertified","allExecutedReportReviewsCertified","allExecutedExportControlsCertified","allExecutedLiveHandlersCertified","allExecutedExportsCertified","allThreeExportsCertified","applicationMutationOff","governedMutationOff","networkAuthorityOff","pixelEvidenceOff","EXACT_THREE_RECORD_GUARDED_EXPORT_MICRO_COHORT_CERTIFIED_THREE_OF_THREE"];
+for(const x of q)if(!s.includes(x)){console.error("FAIL",x);process.exit(1)}
+console.log(JSON.stringify({framework:"SCIIP_EXPLORER_4_R22B_STATIC_TEST",status:"PASSED",assertions:q.length,repair:"R22A_R3_CERTIFIED_EXACT_THREE_RECORD_TARGETS_TO_ONE_EXPORT_PER_RECORD_GUARDED_PDF_MICRO_COHORT_EXECUTION"},null,2));

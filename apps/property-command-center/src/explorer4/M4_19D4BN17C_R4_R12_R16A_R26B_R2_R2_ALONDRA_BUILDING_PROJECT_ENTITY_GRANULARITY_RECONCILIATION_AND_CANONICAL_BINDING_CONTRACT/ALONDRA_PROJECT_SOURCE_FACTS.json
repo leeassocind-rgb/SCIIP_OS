@@ -1,0 +1,38 @@
+{
+  "sourceType": "USER_PROVIDED_SITE_PLAN_EVIDENCE",
+  "projectName": "Alondra Boulevard three-building project",
+  "projectAggregateSf": 422277,
+  "buildings": [
+    {
+      "building": "Building 1",
+      "address": "112 W Alondra Blvd",
+      "city": "Carson",
+      "state": "CA",
+      "availableSf": 181831,
+      "clearHeightFt": 36
+    },
+    {
+      "building": "Building 2",
+      "address": "219 W Gardena Blvd",
+      "city": "Carson",
+      "state": "CA",
+      "availableSf": 102083,
+      "clearHeightFt": 36
+    },
+    {
+      "building": "Building 3",
+      "address": "16325 S Main St",
+      "city": "Carson",
+      "state": "CA",
+      "availableSf": 138363,
+      "clearHeightFtMin": 20,
+      "clearHeightFtMax": 26
+    }
+  ],
+  "assertedRelationship": "PROJECT_AGGREGATE_EQUALS_SUM_OF_BUILDINGS_1_2_3",
+  "canonicalIntent": {
+    "building1Key": "112 W Alondra Blvd|181831",
+    "projectAggregateKey": "ALONDRA_THREE_BUILDING_PROJECT|422277",
+    "building1MustNotAliasProjectAggregate": true
+  }
+}

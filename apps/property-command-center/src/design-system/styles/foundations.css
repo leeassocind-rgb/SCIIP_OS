@@ -1,0 +1,78 @@
+.sciip-ds-root {
+  font-family: var(--sciip-font-sans);
+  color: var(--sciip-color-text);
+  background: var(--sciip-color-bg);
+}
+
+.sciip-ds-root *,
+.sciip-ds-root *::before,
+.sciip-ds-root *::after {
+  box-sizing: border-box;
+}
+
+.sciip-ds-root :focus-visible {
+  outline: none;
+  box-shadow: var(--sciip-focus-ring);
+}
+
+.sciip-page {
+  width: min(100%, var(--sciip-content-max));
+  margin: 0 auto;
+  padding: var(--sciip-space-6);
+}
+
+.sciip-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sciip-stack-gap, var(--sciip-space-4));
+}
+
+.sciip-cluster {
+  display: flex;
+  align-items: center;
+  gap: var(--sciip-cluster-gap, var(--sciip-space-3));
+  flex-wrap: wrap;
+}
+
+.sciip-grid {
+  display: grid;
+  gap: var(--sciip-grid-gap, var(--sciip-space-4));
+  grid-template-columns: repeat(var(--sciip-grid-columns, 12), minmax(0, 1fr));
+}
+
+.sciip-surface {
+  background: var(--sciip-color-surface);
+  border: 1px solid var(--sciip-color-border);
+  border-radius: var(--sciip-radius-lg);
+  box-shadow: var(--sciip-shadow-sm);
+}
+
+.sciip-kicker {
+  margin: 0;
+  color: var(--sciip-color-text-muted);
+  font-size: var(--sciip-font-size-11);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sciip-title {
+  margin: 0;
+  color: var(--sciip-color-text);
+  font-size: clamp(var(--sciip-font-size-24), 3vw, var(--sciip-font-size-40));
+  line-height: var(--sciip-line-tight);
+  letter-spacing: -0.025em;
+}
+
+.sciip-subtitle {
+  margin: 0;
+  color: var(--sciip-color-text-muted);
+  font-size: var(--sciip-font-size-16);
+  line-height: var(--sciip-line-relaxed);
+}
+
+@media (max-width: 768px) {
+  .sciip-page {
+    padding: var(--sciip-space-4);
+  }
+}

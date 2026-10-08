@@ -1,0 +1,10 @@
+{
+  "milestone": "M2.21f",
+  "resolver": "src/broker-product/property-explorer/intelligence/CanonicalPropertyFieldResolver.js",
+  "patched": [
+    "src/broker-product/property-explorer/intelligence/PropertyIntelligenceModel.js",
+    "src/broker-product/property-explorer/intelligence/GovernedPropertyState.js",
+    "src/broker-product/property-explorer/intelligence/IntelligenceGapEngine.js"
+  ],
+  "invariant": "CANONICAL_RUNTIME_INVARIANT_VIOLATION"
+}

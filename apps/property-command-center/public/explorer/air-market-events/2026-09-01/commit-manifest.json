@@ -1,0 +1,18 @@
+{
+  "authorizedCommitPartitionSha256": "894563dd9a060cba167f776bf3d7b8e8ee83875ca002c9b23d796b4eb7c4cc4d",
+  "canonicalIdentityMerge": false,
+  "crossBasisAskingPointEstimate": false,
+  "evidenceOnlyCount": 8,
+  "payloadSha256": {
+    "evidence-only-observations.json": "eb33fc2898bc7585a18c0150327253691679de44615c0159209e08fb84abe66c",
+    "source-observations.json": "91cab7715e8db4a1c6bd65cdb55a21973ff8cc17e4e29de2d2735eb15e6cef58",
+    "state-transition-events.json": "b6ad5501bc4dd4f385db86749d307acfcfead2a17ee6c6e8b097bcc88ede0932"
+  },
+  "runtimeCodeMutation": false,
+  "schema": "SCIIP_AIR_EVENT_COMMIT_MANIFEST_V1",
+  "sourceDate": "2026-09-01",
+  "sourceObservationCount": 69,
+  "stateTransitionEventCount": 61,
+  "uiMutation": false,
+  "vacancyPublication": false
+}

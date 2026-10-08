@@ -1,0 +1,11 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R2_FIRST_RECORD_AWAIT_STAGE_BOUNDED_INSTRUMENTATION_AND_EXACT_HANG_LOCALIZATION",
+  "version": "4.0-r29b-r2-r3-r2-r4-r2",
+  "mode": "RUNNER_ONLY_DIAGNOSTIC_INSTRUMENTATION_FIRST_RECORD_BOUNDED_EXECUTION",
+  "applicationSourceMutation": "TEMPORARY_DIAGNOSTIC_INSTRUMENTATION_RESTORED_AFTER_EXECUTION",
+  "governedDataMutation": false,
+  "exportInvocation": false,
+  "strictSequential": true,
+  "haltOnFirstFailure": true,
+  "executionBoundSeconds": 12
+}

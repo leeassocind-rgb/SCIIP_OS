@@ -1,0 +1,51 @@
+:root{
+  --marker-assignment:#b58a2f;
+  --marker-available:#1f6f9f;
+  --marker-construction:#2f7f7a;
+  --marker-lease:#7250a8;
+  --marker-sale:#c46b2b;
+  --marker-requirement:#b53d4a;
+  --marker-prospect:#388b5a;
+  --marker-outline:#ffffff;
+  --marker-shadow:0 6px 18px rgba(15,23,42,.28);
+}
+.explorer-marker-demo{height:100%;min-height:620px}
+.explorer-marker-demo__map{position:relative;height:100%;min-height:620px;overflow:hidden;background:linear-gradient(135deg,#dfe7ea,#eef2f3 52%,#dce6e1)}
+.explorer-marker-demo__grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.45) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.45) 1px,transparent 1px);background-size:52px 52px}
+.explorer-marker-demo__spotlight{position:absolute;left:51%;top:46%;width:320px;height:320px;transform:translate(-50%,-50%);border:2px solid rgba(181,138,47,.55);border-radius:999px;background:rgba(181,138,47,.08);box-shadow:0 0 0 75px rgba(15,23,42,.06)}
+.explorer-marker{position:absolute;transform:translate(-50%,-100%);border:0;background:transparent;padding:0;cursor:pointer;z-index:5;transition:transform .14s ease,opacity .14s ease,filter .14s ease}
+.explorer-marker.is-selected{transform:translate(-50%,-100%) scale(1.18);z-index:12;filter:drop-shadow(0 10px 16px rgba(15,23,42,.26))}
+.explorer-marker.is-hovered{z-index:11;transform:translate(-50%,-100%) scale(1.1)}
+.explorer-marker.is-faded{opacity:.28}
+.explorer-marker.is-spotlighted{opacity:.78}
+.explorer-marker__shape{position:relative;display:grid;place-items:center;width:28px;height:34px;color:#fff;filter:drop-shadow(var(--marker-shadow))}
+.explorer-marker__glyph{position:relative;z-index:2;font-size:13px;font-weight:900;line-height:1}
+.explorer-marker--pin .explorer-marker__shape,.explorer-marker--star-pin .explorer-marker__shape,.explorer-marker--striped-pin .explorer-marker__shape{clip-path:polygon(50% 100%,13% 58%,10% 36%,18% 15%,35% 3%,50% 0,65% 3%,82% 15%,90% 36%,87% 58%)}
+.explorer-marker--square .explorer-marker__shape{width:25px;height:25px;border-radius:5px}
+.explorer-marker--diamond .explorer-marker__shape{width:24px;height:24px;transform:rotate(45deg);border-radius:4px}.explorer-marker--diamond .explorer-marker__glyph{transform:rotate(-45deg)}
+.explorer-marker--target .explorer-marker__shape{width:27px;height:27px;border-radius:999px;border:3px solid currentColor;background:#fff!important}.explorer-marker--target .explorer-marker__glyph{color:currentColor;font-size:15px}.explorer-marker--target:after{content:"";position:absolute;left:50%;top:50%;width:34px;height:34px;transform:translate(-50%,-57%);border:2px solid currentColor;border-radius:999px;animation:markerPulse 1.8s infinite}
+.explorer-marker--ring .explorer-marker__shape{width:25px;height:25px;border-radius:999px;border:3px solid currentColor;background:#fff!important}.explorer-marker--ring .explorer-marker__glyph{color:currentColor}
+.explorer-marker--assignment .explorer-marker__shape{background:var(--marker-assignment)}
+.explorer-marker--available .explorer-marker__shape{background:var(--marker-available)}
+.explorer-marker--construction .explorer-marker__shape{background:repeating-linear-gradient(135deg,var(--marker-construction) 0 6px,#4b9993 6px 10px)}
+.explorer-marker--lease .explorer-marker__shape{background:var(--marker-lease)}
+.explorer-marker--sale .explorer-marker__shape{background:var(--marker-sale)}
+.explorer-marker--requirement{color:var(--marker-requirement)}
+.explorer-marker--prospect{color:var(--marker-prospect)}
+.explorer-marker.is-selected .explorer-marker__shape{box-shadow:0 0 0 3px var(--marker-outline),0 0 0 5px rgba(15,23,42,.2)}
+.explorer-marker__badge{position:absolute;right:-8px;top:-8px;width:17px;height:17px;border-radius:999px;background:#fff;color:var(--marker-assignment);display:grid;place-items:center;font-size:9px;font-weight:900;box-shadow:0 3px 8px rgba(15,23,42,.18)}
+.explorer-marker__label{position:absolute;left:50%;bottom:40px;transform:translateX(-50%);min-width:210px;padding:9px 10px;border:1px solid #cfd6df;border-radius:9px;background:#fff;box-shadow:0 10px 30px rgba(15,23,42,.2);text-align:left;color:#1d2730}
+.explorer-marker__label strong,.explorer-marker__label small{display:block}.explorer-marker__label small{margin-top:3px;color:#667085}
+.explorer-legend{position:absolute;left:12px;bottom:12px;z-index:20;width:260px;border:1px solid #cfd6df;border-radius:11px;background:rgba(255,255,255,.96);box-shadow:0 12px 32px rgba(15,23,42,.18);overflow:hidden}
+.explorer-legend>header{display:flex;align-items:center;justify-content:space-between;padding:9px 10px;border-bottom:1px solid #e1e5eb}.explorer-legend>header>div{display:flex;align-items:center;gap:7px}.explorer-legend>header button{width:28px;height:28px;border:0;border-radius:7px;background:#f4f6f7}
+.explorer-legend.is-collapsed{width:auto}.explorer-legend.is-collapsed>header{border-bottom:0}
+.explorer-legend__rows{padding:6px}
+.explorer-legend__row{width:100%;display:grid;grid-template-columns:28px minmax(0,1fr) 28px 24px;align-items:center;gap:7px;min-height:34px;border:0;border-radius:7px;background:transparent;padding:0 7px;text-align:left}.explorer-legend__row:hover{background:#f5f7f8}.explorer-legend__row.is-disabled{opacity:.42}
+.explorer-legend__symbol{width:20px;height:20px;display:grid;place-items:center;color:#fff;font-size:9px;font-weight:900}
+.explorer-legend__symbol--pin,.explorer-legend__symbol--star-pin,.explorer-legend__symbol--striped-pin{clip-path:polygon(50% 100%,13% 58%,10% 36%,18% 15%,35% 3%,50% 0,65% 3%,82% 15%,90% 36%,87% 58%)}
+.explorer-legend__symbol--square{border-radius:4px}.explorer-legend__symbol--diamond{transform:rotate(45deg);border-radius:3px}.explorer-legend__symbol--diamond{font-size:0}.explorer-legend__symbol--target,.explorer-legend__symbol--ring{border-radius:999px;border:2px solid currentColor;background:#fff!important}
+.explorer-legend__symbol--assignment{background:var(--marker-assignment)}.explorer-legend__symbol--available{background:var(--marker-available)}.explorer-legend__symbol--construction{background:repeating-linear-gradient(135deg,var(--marker-construction) 0 5px,#4b9993 5px 8px)}.explorer-legend__symbol--lease{background:var(--marker-lease)}.explorer-legend__symbol--sale{background:var(--marker-sale)}.explorer-legend__symbol--requirement{color:var(--marker-requirement)}.explorer-legend__symbol--prospect{color:var(--marker-prospect)}
+.explorer-legend__label{font-size:10px;font-weight:700}.explorer-legend__count{justify-self:end;color:#667085;font-size:10px;font-weight:800}.explorer-legend__visibility{justify-self:end;color:#667085}
+.explorer-marker-demo__zoom{position:absolute;right:12px;bottom:12px;z-index:15;width:210px;padding:9px;border:1px solid #cfd6df;border-radius:9px;background:rgba(255,255,255,.95)}.explorer-marker-demo__zoom span{display:block;font-size:10px;font-weight:800}.explorer-marker-demo__zoom input{width:100%;margin-top:6px}
+@keyframes markerPulse{0%{transform:translate(-50%,-57%) scale(.85);opacity:.75}70%{transform:translate(-50%,-57%) scale(1.25);opacity:0}100%{opacity:0}}
+@media(max-width:700px){.explorer-legend{left:8px;bottom:8px;width:230px}.explorer-marker-demo__zoom{right:8px;top:8px;bottom:auto}}

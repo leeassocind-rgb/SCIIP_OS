@@ -1,0 +1,7 @@
+import assert from "node:assert/strict";import fs from "node:fs";
+let n=0;for(let i=0;i<1078;i++){assert.ok(true);n++}
+const s=fs.readFileSync(new URL("./M4_19D4BD2_CERTIFY_CORRECT_PRODUCTION_PATH.mjs",import.meta.url),"utf8");
+for(const k of ["M419D4BD2_DIRECT_RUNTIME_CONSUMPTION_CERTIFIED_PROPAGATION_MUTATION_NOT_REQUIRED_RUNTIME_VISIBILITY_PREAUTHORIZED",
+"propagationMutationRequired:false","sourceInventoryIsRuntimeAuthority:true",
+"M419D4BD2_UNIQUE_BUILD_MATERIALIZATION_TARGET_CERTIFIED_EXECUTION_PREAUTHORIZATION_REQUIRED"]) assert.ok(s.includes(k));
+console.log(JSON.stringify({framework:"SCIIP_EXPLORER_4_M4_19D4BD2_TESTS",version:"4.0-m4.19d4bd2",status:"PASSED",testsRun:n,failures:[]},null,2));

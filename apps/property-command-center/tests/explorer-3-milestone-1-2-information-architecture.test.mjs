@@ -1,0 +1,36 @@
+import fs from'node:fs';import path from'node:path';
+const root=process.cwd();
+const read=file=>fs.readFileSync(path.join(root,file),'utf8');
+const jsx=read('src/broker-product/property-explorer/v6/Explorer3.jsx');
+const css=read('src/broker-product/property-explorer/v6/explorer3.css');
+const data=read('src/broker-product/property-explorer/v6/explorer3Data.js');
+const workspace=read('src/broker-product/property-explorer/v6/useExplorerWorkspace.js');
+const checks=[];const test=(name,ok)=>{checks.push({name,status:ok?'PASSED':'FAILED'});if(!ok)throw new Error(name);};
+
+test('checkbox map visibility component',jsx.includes('function MapVisibilityFilters')&&jsx.includes('type="checkbox"'));
+test('base inventory visibility',jsx.includes("base:'Base Inventory'"));
+test('available visibility',jsx.includes("available:'Available'"));
+test('comparable visibility',jsx.includes("comparable:'Comparables'"));
+test('supersheet visibility',jsx.includes("supersheet:'SuperSheet'"));
+test('selected property remains visible',jsx.includes("if(item.id===property.id)return true"));
+test('visible properties drive map',jsx.includes('properties={visibleProperties}'));
+test('interactive executive ribbon',jsx.includes('activeRibbonId')&&jsx.includes('aria-expanded={activeId===item.id}'));
+test('executive drilldown panel',jsx.includes('function RibbonDetailPanel'));
+test('executive show on map',jsx.includes('Show on map')&&jsx.includes('onShowProperty'));
+test('ribbon evidence details',data.includes('details:[')&&data.includes('propertyId:'));
+test('overview tab removed',jsx.includes("const tabs=['property','market','neighbors','activity']"));
+test('overview state migrates to property',workspace.includes("saved.drawerSection==='overview'"));
+test('property is default drawer section',workspace.includes("drawerSection:'property'"));
+test('expanded property building specs',jsx.includes('Dock High')&&jsx.includes('Grade Level')&&jsx.includes('Trailer Parking')&&jsx.includes('Truck Court'));
+test('availability-specific transaction fields',jsx.includes("recordType==='AVAILABLE'")&&jsx.includes('Asking Rate')&&jsx.includes('OPEX'));
+test('lease comp-specific fields',jsx.includes("recordType==='LEASE_COMPARABLE'")&&jsx.includes('Comp Rate')&&jsx.includes('TI Allowance'));
+test('sale comp-specific fields',jsx.includes("recordType==='SALE_COMPARABLE'")&&jsx.includes('Sale Price')&&jsx.includes('Cap Rate'));
+test('record source displayed',jsx.includes('property.source'));
+test('basemap controls moved to bottom zone',css.includes('bottom:18px!important')&&css.includes('.explorer-v5__map-tools'));
+test('drawer clears basemap controls',css.includes('.explorer3--drawer-open .explorer-v5__map-tools'));
+test('map rail moves with drawer',css.includes('.explorer3--drawer-open .explorer3__map-rail'));
+test('visibility filter styled direct',css.includes('.explorer3__visibility label.checked'));
+test('ribbon active state styled',css.includes('.explorer3__ribbon button.active'));
+test('responsive refinement retained',css.includes('@media(max-width:900px)'));
+
+console.log(JSON.stringify({framework:'SCIIP_EXPLORER_3_MILESTONE_1_2_INFORMATION_ARCHITECTURE_INTERACTIVE_INTELLIGENCE',version:'explorer-3.0-m1.2',status:'PASSED',testsRun:checks.length,checks},null,2));

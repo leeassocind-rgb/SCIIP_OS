@@ -1,0 +1,41 @@
+M2.39 live Market Context ribbon presentation binding
+ribbonAuthority=governedMarketMetricPresentation
+metricAuthority=marketMetricPresentation
+formulaRewritten=false
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+automaticCanonicalWrites=false
+explicitRibbonBindings=0
+bindings=[]
+
+TRACE
+7:import{buildMarketContext,DEFAULT_MARKET_FILTERS,isPropertyVisibleForMarket,passesMarketFilters,MARKET_RADII}from'./marketContextEngine.js';
+19:import{resolveGovernedMarketContextAnchor}from'../GovernedMarketContextAnchor.js';
+20:import{resolveGovernedMarketContextConsumer}from'../GovernedMarketContextConsumer.js';
+22:import{resolveGovernedMarketContextCohort}from'../GovernedMarketContextCohortRuntime.js';
+23:import{buildGovernedMarketContextMetricPresentation}from'../GovernedMarketContextMetricPresentation.js';
+97:// M2.34: Market Context/radius calculations use the governed selected
+99:const governedMarketContextAnchor=resolveGovernedMarketContextAnchor(
+103:const marketContextProperty=governedMarketContextAnchor.anchorProperty||property;
+104:// M2.35: live Market Context ribbon consumer binding.
+105:const governedMarketContextConsumer=resolveGovernedMarketContextConsumer(
+109:const marketContextConsumerProperty=
+110:governedMarketContextConsumer.property||marketContextProperty;
+111:const governedNeighborContext=useMemo(()=>buildGovernedNeighborContext(marketContextConsumerProperty,EXPLORER3_PROPERTIES,{maxFeet:5280,adjacencyToleranceFeet:45,limit:24}),[property,EXPLORER3_PROPERTIES]);
+155:// M2.37: Market Context candidate/cohort properties resolve through
+157:const governedMarketContextCohort=useMemo(
+158:()=>resolveGovernedMarketContextCohort(EXPLORER3_PROPERTIES),
+161:const marketContextProperties=governedMarketContextCohort.properties;
+163:const marketContext=useMemo(()=>buildMarketContext({subject:marketContextConsumerProperty,properties:marketContextProperties,radiusMiles:marketRadius,filters:marketFilters,visibility:mapVisibility}),[marketContextConsumerProperty,marketContextProperties,marketRadius,marketFilters,mapVisibility]);
+166:// M2.38: one governed presentation contract for visible Market Context metrics.
+168:const governedMarketMetricPresentation=useMemo(
+170:()=>buildGovernedMarketContextMetricPresentation(marketContext),
+172:[marketContext]
+176:const marketMetricPresentation=governedMarketMetricPresentation.metrics;
+177:const activeMarketMetric=marketContext.metrics.find(item=>item.id===activeMarketMetricId)||null;
+179:const spatialContext=useMemo(()=>({mode:state.drawerSection==='neighbors'?'neighbors':'market',highlightedPropertyIds,cohortPropertyIds:marketContext.cohort.map(row=>row.id)}),[state.drawerSection,highlightedPropertyIds,marketContext.cohort]);
+246:{state.mode!=='present'&&<MarketContextRibbon context={marketContext} radius={marketRadius} onRadius={value=>{setMarketRadius(value);setActiveMarketMetricId(null);}} activeId={activeMarketMetricId} onSelect={id=>setActiveMarketMetricId(current=>current===id?null:id)}/>}
+253:{activeMarketMetric&&state.mode!=='present'&&<MarketMetricDetailPanel metric={activeMarketMetric} context={marketContext} onClose={()=>setActiveMarketMetricId(null)} onShowProperty={selectProperty}/>}
+309:function MarketContextRibbon({context,radius,onRadius,activeId,onSelect}){return <section className="explorer3__ribbon explorer3__market-ribbon">
+310:<div className="explorer3__market-ribbon-label"><strong>Market Context</strong><span>{context.summary}</span></div>
+316:function MarketMetricDetailPanel({metric,context,onClose,onShowProperty}){return <aside className="explorer3__ribbon-detail explorer3__market-detail"><header><div><span>Market Context · {context.radiusMiles} mi</span><strong>{metric.value} {metric.label}</strong><small>{metric.subtitle}</small></div><button onClick={onClose}><X size={15}/></button></header><div>{metric.rows.length?metric.rows.map((detail,index)=><article key={`${metric.id}-${index}`}><div><strong>{detail.title}</strong><span>{detail.meta}</span></div>{detail.propertyId&&<button onClick={()=>onShowProperty(detail.propertyId)}>Show on map <ArrowRight size={12}/></button>}</article>):<p className="explorer3__empty-context">No records in the current radius and filter cohort.</p>}</div></aside>;}

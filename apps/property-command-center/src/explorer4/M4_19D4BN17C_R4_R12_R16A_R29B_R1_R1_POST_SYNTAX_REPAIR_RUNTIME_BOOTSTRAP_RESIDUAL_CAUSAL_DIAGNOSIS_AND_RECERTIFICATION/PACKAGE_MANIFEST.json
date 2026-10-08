@@ -1,0 +1,9 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R1_R1_POST_SYNTAX_REPAIR_RUNTIME_BOOTSTRAP_RESIDUAL_CAUSAL_DIAGNOSIS_AND_RECERTIFICATION",
+  "version": "4.0-r29b-r1-r1",
+  "diagnosedFailure": "ECONNREFUSED_127_0_0_1_5173_BEFORE_RECORD401",
+  "recovery": "PROPERTY_COMMAND_CENTER_RUNTIME_BOOTSTRAP_IF_NEEDED",
+  "authoritativeR29BRunnerMutation": false,
+  "governedDataMutation": false,
+  "exportInvocation": false
+}

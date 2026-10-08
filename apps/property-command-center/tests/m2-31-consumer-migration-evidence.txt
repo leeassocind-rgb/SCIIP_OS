@@ -1,0 +1,7 @@
+M2.31 governed consumer migration
+consumer=PropertyIntelligence
+sourceProperty=preserved
+effectiveProperty=governedConsumerRuntime.property
+runtimeAuthority=M2.30 GovernedPropertyRuntimeBoundary
+rawEvidenceInputs=preserved
+mapWideMigration=deferred

@@ -1,0 +1,13 @@
+M2.57 governed Property Intelligence recovery audit and observability
+recoveryAuditContractBound=true
+auditPropertyScoped=true
+auditSessionScoped=true
+appendOnlyAudit=true
+actionFailureObservable=true
+retryStartObservable=true
+retrySuccessObservable=true
+retryFailureObservable=true
+recoverySessionClearObservable=true
+actionEnginesRewritten=false
+canonicalExecutionRewritten=false
+automaticCanonicalWrites=false

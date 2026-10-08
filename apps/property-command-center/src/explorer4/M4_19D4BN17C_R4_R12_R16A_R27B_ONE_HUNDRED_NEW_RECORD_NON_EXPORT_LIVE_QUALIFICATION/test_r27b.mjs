@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+import fs from"node:fs";import path from"node:path";import{fileURLToPath}from"node:url";const d=path.dirname(fileURLToPath(import.meta.url)),s=fs.readFileSync(path.join(d,"qualify_r27b.py"),"utf8");
+const q=["targetCount\":100","Fresh page per record: REQUIRED","Strict sequential: ON","Halt on first failure: ON","explorerSettleCertified","targetBindingSettleCertified","selectedPropertySettleCertified","assignmentsEntryCertified","generateControlCertified","reportReviewEntryCertified","exportControlCertified","exportInvocation\":False","sameOrigin","R27C_EXACT_TWO_HUNDRED_GUARDED_EXPORT_EXECUTION_READINESS_AND_AUTHORIZATION"];
+for(const x of q)if(!s.includes(x)){console.error("FAIL",x);process.exit(1)}
+console.log(JSON.stringify({framework:"SCIIP_EXPLORER_4_R27B_STATIC_TEST",status:"PASSED",assertions:q.length,repair:"R27A_EXACT_NEW100_PREAUTHORIZED_TO_STRICT_SEQUENTIAL_FRESH_PAGE_NON_EXPORT_LIVE_QUALIFICATION"},null,2));

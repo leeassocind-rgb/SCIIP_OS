@@ -1,0 +1,47 @@
+{
+  "framework": "SCIIP_LIGHTBOX_VERIFIED_CONTRACT_REGISTRY",
+  "version": "1.0.0",
+  "policy": {
+    "activationRequiresOpenApi": true,
+    "activationRequiresCertification": true,
+    "canonicalAuthority": "SCIIP",
+    "browserSecretsForbidden": true
+  },
+  "contracts": {
+    "parcels.geometry": {
+      "capability": "parcels",
+      "status": "ACTIVE_VERIFIED",
+      "method": "GET",
+      "path": "/parcels/{countryCode}/geometry",
+      "source": "POSTMAN_VERIFIED"
+    },
+    "structures": {
+      "capability": "structures",
+      "status": "AWAITING_OPENAPI"
+    },
+    "assessment": {
+      "capability": "assessment",
+      "status": "AWAITING_OPENAPI"
+    },
+    "true-owner": {
+      "capability": "true-owner",
+      "status": "AWAITING_OPENAPI"
+    },
+    "zoning": {
+      "capability": "zoning",
+      "status": "AWAITING_OPENAPI"
+    },
+    "transactions": {
+      "capability": "transactions",
+      "status": "AWAITING_OPENAPI"
+    },
+    "location-info": {
+      "capability": "location-info",
+      "status": "AWAITING_OPENAPI"
+    },
+    "environmental": {
+      "capability": "environmental",
+      "status": "AWAITING_OPENAPI"
+    }
+  }
+}

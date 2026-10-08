@@ -1,0 +1,8 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_RUNTIME_ANCHORED_TRANSPORT_PROBE_AND_NON_EXPORT_RECERTIFICATION",
+  "version": "4.0-r29b-r2-r3-r2",
+  "mode": "RUNTIME_ANCHORED_SINGLE_TRANSPORT_PROBE_THEN_CONDITIONAL_R29B_RECERTIFICATION",
+  "runnerMutation": false,
+  "governedDataMutation": false,
+  "exportInvocation": false
+}

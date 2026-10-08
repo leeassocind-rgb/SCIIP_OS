@@ -1,0 +1,9 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R1_RAW_WEBSOCKET_HTTP_UPGRADE_SYNTAX_ONLY_REPAIR_AND_NON_EXPORT_RECERTIFICATION",
+  "version": "4.0-r29b-r2-r1",
+  "diagnosedFailure": "INVALID_REGULAR_EXPRESSION_FLAGS_IN_RAW_WEBSOCKET_HTTP_101_TEST",
+  "repairScope": "R29B_RAW_WEBSOCKET_HTTP_UPGRADE_SYNTAX_ONLY",
+  "rawWebSocketTransportPreserved": true,
+  "governedDataMutation": false,
+  "exportInvocation": false
+}

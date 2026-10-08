@@ -1,0 +1,9 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_R5_R1_R3_CDP_CALL_TRANSPORT_METHOD_BINDING_REPAIR_AND_RECORD401_RECERTIFICATION",
+  "version": "4.0-r29b-r5-r1-r3",
+  "repair": "CDP_CALL_RAW_SOCKET_MASKED_RFC6455_TEXT_FRAME_ADAPTER_ONLY",
+  "governedDataMutation": false,
+  "exportInvocation": false,
+  "strictSequential": true,
+  "haltOnFirstFailure": true
+}

@@ -1,0 +1,101 @@
+#!/usr/bin/env node
+import fs from "node:fs";
+import path from "node:path";
+
+const repo=path.resolve(process.argv[2]||".");
+const app=path.join(repo,"apps/property-command-center");
+const ev=path.join(app,"evidence");
+const prior=path.join(ev,"m4-19d4bk2-r1-browser-runtime-visibility-and-explorer-read-path-certification.json");
+const interaction=path.join(ev,"m4-19d4bk2-r2-cdp-navigation-result.json");
+const out=path.join(ev,"m4-19d4bk2-r2-live-explorer-navigation-activation-and-search-control-read-path-reconciliation.json");
+
+if(!fs.existsSync(prior)) throw new Error("BK2-R1 evidence missing");
+const P=JSON.parse(fs.readFileSync(prior,"utf8"));
+if(P.state!=="M419D4BK2_R1_BROWSER_RUNTIME_READ_PATH_CERTIFICATION_BLOCKED")
+  throw new Error("BK2-R1 state mismatch: "+P.state);
+if(!fs.existsSync(interaction)) throw new Error("BK2-R2 CDP interaction result missing");
+
+const I=JSON.parse(fs.readFileSync(interaction,"utf8"));
+const checks={
+  priorBrowserRenderHealthy:
+    P.certification?.shellChecks?.serverReachable===true &&
+    P.certification?.shellChecks?.domCaptured===true &&
+    P.certification?.shellChecks?.explorerShellVisible===true,
+  priorFailureWasSearchControlOnly:
+    P.certification?.shellChecks?.searchControlVisible===false,
+  uniqueExplorerNavigationControl:
+    I.before?.explorerCandidates?.length===1,
+  explorerNavigationActivated:
+    I.click?.clicked===true,
+  explorerMountedAfterNavigation:
+    I.after?.explorerMounted===true,
+  exactSearchControlUnique:
+    I.after?.searchControlCount===1,
+  exactSearchType:
+    I.after?.searchControls?.[0]?.type==="search",
+  exactSearchPlaceholder:
+    I.after?.searchControls?.[0]?.placeholder==="Search SCIIP…",
+  exactSearchAria:
+    I.after?.searchControls?.[0]?.aria==="Search SCIIP"
+};
+const passed=Object.values(checks).every(Boolean);
+
+const R={
+  contract:"SCIIP_EXPLORER_4_M4_19D4BK2_R2_LIVE_EXPLORER_NAVIGATION_ACTIVATION_AND_SEARCH_CONTROL_READ_PATH_RECONCILIATION",
+  version:"4.0-m4.19d4bk2-r2",
+  status:passed?"PASSED":"BLOCKED",
+  state:passed
+    ?"M419D4BK2_R2_LIVE_EXPLORER_NAVIGATION_AND_EXACT_SEARCH_CONTROL_CERTIFIED_BK3_INTERACTIVE_FIVE_PROPERTY_VISIBILITY_READY"
+    :"M419D4BK2_R2_LIVE_EXPLORER_NAVIGATION_OR_SEARCH_BINDING_NOT_CERTIFIED",
+  certifiedAt:new Date().toISOString(),
+  correction:{
+    priorBK2R1BlockedState:P.state,
+    diagnosis:"INITIAL_BROWSER_RENDER_WAS_HOME_EXECUTIVE_DASHBOARD_NOT_EXPLORER_COMPONENT",
+    canonicalRuntimeMirrorAlreadyCertified:true,
+    applicationChangeRequired:false
+  },
+  certification:{
+    before:I.before,
+    navigation:I.click,
+    after:I.after,
+    checks
+  },
+  cohort:{
+    size:5,
+    runtimeMirrorBindingsCertified:P.certification?.shellChecks?.allFiveCanonicalMirrorBindingsStillCertified===true
+  },
+  artifacts:{
+    interaction,
+    screenshot:path.join(ev,"m4-19d4bk2-r2-post-navigation-screenshot.png")
+  },
+  policy:{
+    exactVisibleExplorerNavigationUsed:true,
+    inventedRouteInferenceProhibited:true,
+    applicationMutation:false,
+    canonicalMutation:false,
+    eventMutation:false,
+    governedInventoryMutation:false,
+    interactivePropertySearchNotYetExecuted:true
+  },
+  nextMilestone:passed
+    ?"M4.19D4BK3_INTERACTIVE_FIVE_PROPERTY_EXPLORER_SEARCH_SELECTION_AND_VISIBILITY_CERTIFICATION"
+    :"M4.19D4BK2_R3_NAVIGATION_CONTROL_RECONCILIATION",
+  authorityClosure:{
+    temporalWriteAuthority:false,canonicalWriteAuthority:false,identityWriteAuthority:false,
+    externalObservationIngestionAuthority:false,refreshExecutionAuthority:false,
+    operationalIngestionAuthority:false,syncAuthority:false,propagationAuthority:false,automaticRetry:false
+  },
+  safety:{
+    networkRequestsPerformed:0,
+    productionCanonicalMutationPerformed:false,
+    productionEventMutationPerformed:false,
+    temporalMutationPerformed:false,
+    governedInventoryMutationPerformed:false,
+    applicationMutationPerformed:false,
+    uiSourceMutationPerformed:false,
+    automaticRetry:false
+  }
+};
+fs.writeFileSync(out,JSON.stringify(R,null,2)+"\n");
+console.log(JSON.stringify(R,null,2));
+if(!passed) process.exit(2);

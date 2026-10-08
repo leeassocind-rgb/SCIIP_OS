@@ -1,0 +1,137 @@
+{
+  "count": 8,
+  "identities": [
+    {
+      "identityRef": "AIRCORR-274CF37D6F8C9EB40EE9",
+      "identityStatus": "CORROBORATED_SOURCE_BACKED",
+      "address": "8610 Atlantic Ave",
+      "city": "South Gate",
+      "zip": "90280",
+      "buildingSf": 54530.0,
+      "sourceObservations": [
+        {
+          "scope": "LEASE",
+          "excelRow": 54
+        },
+        {
+          "scope": "LEASE",
+          "excelRow": 178
+        }
+      ],
+      "canonicalIdentityClaim": false
+    },
+    {
+      "identityRef": "AIRPROV-F5782D56246AF8AD01A1",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "address": "9525 Imperial Hwy",
+      "city": "Downey",
+      "zip": "90242",
+      "buildingSf": 120022.0,
+      "sourceObservations": [
+        {
+          "scope": "LEASE",
+          "excelRow": 72
+        },
+        {
+          "scope": "LEASE",
+          "excelRow": 285
+        }
+      ],
+      "canonicalIdentityClaim": false
+    },
+    {
+      "identityRef": "AIRCORR-20065EAD870D997AFB9A",
+      "identityStatus": "CORROBORATED_SOURCE_BACKED",
+      "address": "1332 S Lone Hill Ave",
+      "city": "Glendora",
+      "zip": "91740",
+      "buildingSf": 59840.0,
+      "sourceObservations": [
+        {
+          "scope": "LEASE",
+          "excelRow": 80
+        }
+      ],
+      "canonicalIdentityClaim": false
+    },
+    {
+      "identityRef": "AIRPROV-4FED1BDA14B9486A3319",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "address": "2651 E 12th St, 2nd Floor",
+      "city": "Los Angeles",
+      "zip": "90023",
+      "buildingSf": 1844445.0,
+      "sourceObservations": [
+        {
+          "scope": "LEASE",
+          "excelRow": 88
+        }
+      ],
+      "canonicalIdentityClaim": false
+    },
+    {
+      "identityRef": "AIRCORR-10B739C1552CEBF40743",
+      "identityStatus": "CORROBORATED_SOURCE_BACKED",
+      "address": "1217 W Artesia Blvd",
+      "city": "Compton",
+      "zip": "90220",
+      "buildingSf": 71949.0,
+      "sourceObservations": [
+        {
+          "scope": "LEASE",
+          "excelRow": 291
+        },
+        {
+          "scope": "SALE",
+          "excelRow": 101
+        }
+      ],
+      "canonicalIdentityClaim": false
+    },
+    {
+      "identityRef": "AIRPROV-1767CA9A7FF25EA406BF",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "address": "298 W Bonita Ave, 2741 & 2755 Thompson Creek Rd",
+      "city": "Pomona",
+      "zip": "91767",
+      "buildingSf": 74645.0,
+      "sourceObservations": [
+        {
+          "scope": "SALE",
+          "excelRow": 68
+        }
+      ],
+      "canonicalIdentityClaim": false
+    },
+    {
+      "identityRef": "AIRCORR-564EA06A91655AFCA748",
+      "identityStatus": "CORROBORATED_SOURCE_BACKED",
+      "address": "459 Park Ave",
+      "city": "San Fernando",
+      "zip": "91340",
+      "buildingSf": 65025.0,
+      "sourceObservations": [
+        {
+          "scope": "SALE",
+          "excelRow": 93
+        }
+      ],
+      "canonicalIdentityClaim": false
+    },
+    {
+      "identityRef": "AIRCORR-D60991D42EE4D041DAC0",
+      "identityStatus": "CORROBORATED_SOURCE_BACKED",
+      "address": "1421-1481 Edinger Ave",
+      "city": "Tustin",
+      "zip": "92780",
+      "buildingSf": 68330.0,
+      "sourceObservations": [
+        {
+          "scope": "SALE",
+          "excelRow": 171
+        }
+      ],
+      "canonicalIdentityClaim": false
+    }
+  ]
+}

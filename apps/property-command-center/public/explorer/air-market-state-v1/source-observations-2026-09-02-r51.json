@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "SCIIP_R51_SOURCE_OBSERVATIONS_V1",
+  "sourceDate": "2026-09-02",
+  "observations": [
+    {
+      "sourceRecordId": "AIRSUPER:2026-09-02:P3:R2",
+      "sourceDate": "2026-09-02",
+      "page": 3,
+      "recordOrdinal": 2,
+      "rawAddress": "16222 Phoebe Ave",
+      "addressCandidates": [
+        "16222 Phoebe Ave"
+      ],
+      "rawStatus": null,
+      "normalizedStatus": null,
+      "dealScopes": [],
+      "rawBlock": "2                                                               137,700 SF                  $0.50 NNN                        5/2              Existing              20'              DIVISIBLE TO \u00b141,250 SF & \u00b196,450 SF\n          16222 Phoebe Ave                                         Yes                         NFS                              Yes              Leased                1200             Heavy Power\n          La Mirada, CA 90638                                      6,360 SF                    137,700 SF                       Fncd/Pvd         Now                                    Close Proximity to 5, 91 & 605 Freeways\n          Marketing Flyer                                                                                                                                                               Large Fenced & Paved Yard w/ Trailer Parking\n                                                                    Lee & Associates - Jake Arellano 562-568-2088, Tim Cronin 323-767-2088, Jack                                        Rail Capability\n                                                                    Cline 213-590-3512                                                                                                  Racking\n\n         Leased                                                      Research in Progress",
+      "bindingDisposition": "BOUND_EXPLICIT_UNIQUE_ADDRESS",
+      "governedIdentityRef": "BASESRC-1427",
+      "identityConfidence": "EXISTING_BASE_IDENTITY_RECONCILED"
+    },
+    {
+      "sourceRecordId": "AIRSUPER:2026-09-02:P12:R1",
+      "sourceDate": "2026-09-02",
+      "page": 12,
+      "recordOrdinal": 1,
+      "rawAddress": "16222 Phoebe Ave",
+      "addressCandidates": [
+        "16222 Phoebe Ave"
+      ],
+      "rawStatus": null,
+      "normalizedStatus": null,
+      "dealScopes": [],
+      "rawBlock": "1                                                               137,700 SF                  $0.50 NNN                        5/2              Existing              20'              DIVISIBLE TO \u00b141,250 SF & \u00b196,450 SF\n          16222 Phoebe Ave                                         Yes                         NFS                              Yes              Leased                1200             Heavy Power\n          La Mirada, CA 90638                                      6,360 SF                    137,700 SF                       Fncd/Pvd         Now                                    Close Proximity to 5, 91 & 605 Freeways\n          Marketing Flyer                                                                                                                                                               Large Fenced & Paved Yard w/ Trailer Parking\n                                                                    Lee & Associates - Jake Arellano 562-568-2088, Tim Cronin 323-767-2088, Jack                                        Rail Capability\n                                                                    Cline 213-590-3512                                                                                                  Racking\n\n         Leased                                                      Research in Progress",
+      "bindingDisposition": "BOUND_EXPLICIT_UNIQUE_ADDRESS",
+      "governedIdentityRef": "BASESRC-1427",
+      "identityConfidence": "EXISTING_BASE_IDENTITY_RECONCILED"
+    },
+    {
+      "sourceRecordId": "AIRSUPER:2026-09-02:P16:R1",
+      "sourceDate": "2026-09-02",
+      "page": 16,
+      "recordOrdinal": 1,
+      "rawAddress": "1033 N Todd Ave, Bldg 5",
+      "addressCandidates": [
+        "1033 N Todd Ave, Bldg 5"
+      ],
+      "rawStatus": null,
+      "normalizedStatus": null,
+      "dealScopes": [],
+      "rawBlock": "1      Canyon Commerce Park                                     54,611 SF                   $1.34 NNN                        5/1              Existing              28'              Free Standing Building\n          1033 N Todd Ave, Bldg 5                                  No                          NFS                              ESFR             Leased                800              28' Minimum Clear Height\n          Azusa, CA 91702                                          6,413 SF                    54,611 SF                        Fncd/Pvd         05/01/2026            1.2:1/64         5 DH Positions, 1 GL Door\n          Marketing Flyer                                                                                                                                                               Two 40K Lb Capacity Dock Levelers\n                                                                    Daum Commercial - Steve Haston 909-234-1170, Christopher Tolles 213-955-5129,                                       ESFR Sprinkler System (K25 @ 20 PSI)\n                                                                    Erik Larson 213-955-5126                                                                                            800 Amps, 277/480 Volts\n\n         Leased                                                      Research in Progress",
+      "bindingDisposition": "BOUND_EXPLICIT_UNIQUE_ADDRESS",
+      "governedIdentityRef": "BASESRC-4446",
+      "identityConfidence": "EXISTING_BASE_IDENTITY_RECONCILED"
+    }
+  ]
+}

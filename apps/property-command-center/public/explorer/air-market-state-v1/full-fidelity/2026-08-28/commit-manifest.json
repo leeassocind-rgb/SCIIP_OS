@@ -1,0 +1,17 @@
+{
+  "anchorId": "AIR_BASELINE_2026_08_28_V1",
+  "anchorOverwriteAuthorized": false,
+  "asOf": "2026-08-28",
+  "baseInventoryMutationAuthorized": false,
+  "canonicalIdentityMutationAuthorized": false,
+  "commitMode": "CREATE_ONLY_OR_VERIFY_IDENTICAL",
+  "contract": "SCIIP_AIR_082826_FULL_FIDELITY_MARKET_PAYLOAD_COMMIT_MANIFEST_V1",
+  "externalApiCallsAuthorized": false,
+  "incrementalPartitionMutationAuthorized": false,
+  "leaseObservationCount": 445,
+  "observationCount": 696,
+  "payloadPath": "public/explorer/air-market-state-v1/full-fidelity/2026-08-28/anchor-market-payload.json",
+  "payloadSha256": "14d962bd55503fbcd35cf1148d2427c52f132d16421c86fba1c5f874c11e1556",
+  "runtimeMutationAuthorized": false,
+  "saleObservationCount": 251
+}

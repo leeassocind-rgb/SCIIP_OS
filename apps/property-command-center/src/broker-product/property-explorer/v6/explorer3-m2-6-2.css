@@ -1,0 +1,54 @@
+/* Explorer 3.0 Milestone 2.6.2 — Runtime + Provenance Recovery */
+.explorer3__provenance-contract{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:7px 10px;border:1px solid #e6ecef;border-radius:10px;background:#fbfcfd;
+  font-size:10px;color:#7b8992
+}
+.explorer3__provenance-contract span{
+  text-transform:uppercase;letter-spacing:.08em;font-weight:800
+}
+.explorer3__provenance-contract strong{font-size:10px;color:#243844}
+.explorer3__runtime-guard{
+  position:absolute;z-index:1200;left:50%;top:18px;transform:translateX(-50%);
+  display:flex;gap:8px;align-items:center;max-width:min(720px,calc(100% - 40px));
+  padding:10px 14px;border:1px solid #d9e2e7;border-radius:12px;background:#fff;
+  box-shadow:0 6px 20px rgba(16,36,48,.10);font-size:11px;color:#60717c
+}
+.explorer3__runtime-guard strong{color:#243844}
+
+.explorer3__provenance-contract em{
+  margin-left:auto;font-style:normal;font-size:9px;font-weight:800;
+  letter-spacing:.05em;color:#75858f
+}
+
+/* Explorer 3.0 Milestone 2.7 — Live Governed Property Intelligence */
+.explorer3__live-governed{
+  border:1px solid #dde6ea;border-radius:12px;background:#fff;overflow:hidden
+}
+.explorer3__live-governed-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:10px 12px;border-bottom:1px solid #eef2f4
+}
+.explorer3__live-governed-head div{display:flex;flex-direction:column;gap:2px}
+.explorer3__live-governed-head span{font-size:8px;font-weight:800;letter-spacing:.12em;color:#8d9aa2}
+.explorer3__live-governed-head strong{font-size:12px;color:#20333f}
+.explorer3__live-governed-head em{
+  font-style:normal;font-size:9px;font-weight:800;border-radius:999px;padding:5px 7px;background:#f1f4f6;color:#687983
+}
+.explorer3__live-governed-head em.is-success{background:#eef6f1;color:#2f694b}
+.explorer3__live-governed-head em.is-warning{background:#faf4e8;color:#8a621e}
+.explorer3__live-governed-grid{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr))
+}
+.explorer3__live-governed-grid>div{padding:8px 10px;border-right:1px solid #eef2f4;border-bottom:1px solid #eef2f4}
+.explorer3__live-governed-grid>div:nth-child(3n){border-right:0}
+.explorer3__live-governed-grid span{display:block;font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:#8a989f}
+.explorer3__live-governed-grid strong{display:block;margin-top:2px;font-size:10px;color:#263a46;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.explorer3__live-governed>p{margin:0;padding:9px 12px;font-size:10px;line-height:1.45;color:#687983}
+
+/* Explorer 3.0 Milestone 2.8 — Live LightBox connection state */
+.explorer3__lb-connection{display:flex;align-items:center;gap:7px;padding:7px 9px;border:1px solid #e4eaee;border-radius:10px;background:#fff;font-size:9px;color:#7b8992}
+.explorer3__lb-connection-dot{width:7px;height:7px;border-radius:50%;background:#9aa7ae;flex:0 0 auto}
+.explorer3__lb-connection.is-ready .explorer3__lb-connection-dot{background:#3f7a5b}
+.explorer3__lb-connection strong{font-size:10px;color:#263a46}
+.explorer3__lb-connection em{margin-left:auto;font-style:normal;color:#8a979f}

@@ -1,0 +1,7283 @@
+{
+  "anchorId": "AIR_BASELINE_2026_08_28_V1",
+  "asOf": "2026-08-28",
+  "derivedStateCount": 572,
+  "states": [
+    {
+      "identityRef": "BASESRC-4606",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A4D874DF70CD38E9369728E1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4563",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C474761DE6776430359137C9"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4507",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-664C0FAB6F486C3A919D266E",
+        "AIROBS-53C9B0544A85DE64B8EEEF21"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5914",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5D963A79D8770A4526F1F56C"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4572",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-CC440BF477A20139B8B7A847"
+      ],
+      "saleObservationIds": [
+        "AIROBS-BCD14133098AAC706BB901D0"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-145",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D3CE02A6CCB123E7F049F796"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5867",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C0BE13087D54F979EA3ECD26"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4476",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-11278F1F270B213002DFFB0E",
+        "AIROBS-879CD26C5D592DD854AA5C64"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4391",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-927ACC85D36A1F7C1AAE8F01"
+      ],
+      "saleObservationIds": [
+        "AIROBS-BE8222ABD4DA29058AF211AB"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5980",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D8DA23C31D6A4D8A555602E3"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-135",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-BC8C5C3BAC35D22A5140BE6E"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4320",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8D80E8AF8B80D07C40F06447"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-249",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D3A1E1DB5F5115BF5F1DF0EB"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4264",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D6288F9C7B35FD04E58D5C54"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5979",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-71487EB161D02836ABB3531B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1632",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-22854E4766B1CC509A92D04A",
+        "AIROBS-63A7C1C3CB2F25BCA72CF5D1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-271",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-0667FB26D923A5C49F405640"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4614",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E827B0C0142DF0DA37E05ED9"
+      ],
+      "saleObservationIds": [
+        "AIROBS-30CCE051430F1514F5AFED3A"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4335",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6E587C2B5A764FF13C51877B"
+      ],
+      "saleObservationIds": [
+        "AIROBS-733E7DE88FD911D857ECD57A"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5782",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5409B77BBA3511B7B05D0577"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4628",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A7557D66F1EA55C4006E2148"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4567",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-55B051ECB51F784C227D4C80"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5745",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9D7D73DD01EAB29DF1174F7A"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-LOGICAL-FC5616D2A15D44148106",
+          "sourceDate": "2026-09-02",
+          "eventFamily": "RATE_CHANGE",
+          "sourceObservationIds": [
+            "AIROBS-CA9E318C73DD55EF43FCDD20",
+            "AIROBS-F908DFF630BA15ED09EF7E57"
+          ]
+        }
+      ]
+    },
+    {
+      "identityRef": "BASESRC-4257",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D55E42716E95AEB35015B941"
+      ],
+      "saleObservationIds": [
+        "AIROBS-8414CE5441A726AF05252AB5"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4478",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F305D62D0835B626B4318C4D"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4490",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-0D5F5B690E34B520C861227A"
+      ],
+      "saleObservationIds": [
+        "AIROBS-78326C1C8BDBF5BE3BB0944F"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4337",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-DE0F9E2EDA880C078490AD35"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-181",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-26B710FC02C653E4BBF5687A",
+        "AIROBS-AA4E74F76C76C6299A53F080"
+      ],
+      "saleObservationIds": [
+        "AIROBS-6C71DA43185BAFFC5BD65D69"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1588",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D6FD738E21B1FC85A3311433",
+        "AIROBS-F0702856FD801D2D72D21DD6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-364",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-48B4147EE4EC2E1E8FFA60C4"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-339",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-FA279466DF9E666DEAA288E6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5842",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-351ACD886572D27B9AC0F18F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5894",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-04DCEDDF0B82F9059400F939"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5890",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B1B41C5AE67B17234A097E94"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5742",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-582B5473C6B0A160E9A1753E"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5892",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6A140A64132A0FC371A68376"
+      ],
+      "saleObservationIds": [
+        "AIROBS-92BBB47F5991BF852F2626A5"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5733",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-FCA3D72FE41DD3EC7D31490D"
+      ],
+      "saleObservationIds": [
+        "AIROBS-7ACEA1852660F799CFF84A67"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-159",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-1E07DDD492DC8D2A55E1A390"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4552",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-1B1F52DCA39CEED7A8ADAA98"
+      ],
+      "saleObservationIds": [
+        "AIROBS-645CD3B212C97AEA01AD379E"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-168",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6FBBB0559C28CCEE2DCE658A",
+        "AIROBS-B14CCD17B467CC16E6F2F184"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5699",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-05A74780E156DC8A1889A8B6"
+      ],
+      "saleObservationIds": [
+        "AIROBS-5A59467BC880AF251CA25CD1"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-107",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D387F75F0B274052A55238C4",
+        "AIROBS-8E1E59F907405415765E28F5"
+      ],
+      "saleObservationIds": [
+        "AIROBS-B181ABA08D6CF3430B92EB64"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4227",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AE75438705BA8D81B0DFDD22"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4483",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-11917CB2ACC47A4AE2C58DC3"
+      ],
+      "saleObservationIds": [
+        "AIROBS-86A58CBE8C699A87D2C67D68"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5790",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5EC78636A414496EC3C9D9BF"
+      ],
+      "saleObservationIds": [
+        "AIROBS-D3FD4D4FECE37D4B2D80D706"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5907",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-45D38454302901DA521C1076"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4582",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-1897818B969DB8CAB08BEA7D"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4592",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-46E64DDC775363489A4C9EC9"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5783",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C8E8FB44B8EAB203245561C5"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4595",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-1892165221BD826146B48EA3"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4599",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-3D2515C32AFD96D03F0A8F02"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4600",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-481E62AAEF870F9DDC5A8B46"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4355",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D80084D38BE49366E8FA47F9"
+      ],
+      "saleObservationIds": [
+        "AIROBS-199A4BEDB2CB989FFAEC5406"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5799",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-7E29CE4B34BB2DADFF13C0F0",
+        "AIROBS-8B41A2F76727CDC920CEEDE4"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5803",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-54FD4696EB708FDB3FC7C218",
+        "AIROBS-769414344B65049B517F0B3B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4358",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-BC08BFB348A4FA4700C6B918"
+      ],
+      "saleObservationIds": [
+        "AIROBS-ED64D3DD3E1644774635F8C0"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5985",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-3570B9A4AA8D97B4EB2C99D9"
+      ],
+      "saleObservationIds": [
+        "AIROBS-1FD951D4B7DCD2828617D397"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5994",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-02F714C37F76969451EBC70B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4623",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5D66A78C58DA297A0DCC34DE"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4521",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-1C6AC3A8477BEF0BFFC0899F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4570",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-BF1A49F20ACAC13EC9592AE6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4413",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-58FB52B1F1519871D557EC92"
+      ],
+      "saleObservationIds": [
+        "AIROBS-0FA681826E124FBB9AF4E236"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4496",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-29FDFCE74F910DCC0F212C9B",
+        "AIROBS-269667E95F1408814BB4E19B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4498",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AF152141F4D110651150169E"
+      ],
+      "saleObservationIds": [
+        "AIROBS-F6086FBEA24608ECE16C61BC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5743",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-821754C2FAB7EEF504B979EC"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4586",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-CF1D0C2A5E4B092DE07E73AA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4632",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-15300830BA46587AC3D76DD2"
+      ],
+      "saleObservationIds": [
+        "AIROBS-C2A2575837D8874FEED89D73"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4618",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A1724F89DA9366664ADE4DF7"
+      ],
+      "saleObservationIds": [
+        "AIROBS-EE95A447E2E409325F6861DE"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4621",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-40F904BB6763D71DA6F7A578"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-160",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8D65CC95FC08A744E915303C",
+        "AIROBS-3A7B76FFF44BDE7A0B669417"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-367",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6D6AB61468E219DF4E53CF4E"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5961",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E6E1469319AFCC0104B72C24"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5991",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-76953D72AC174FA0CBE904EC"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4642",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AC45AEA43876465C293408A7"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1538",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5FCE7A3187A9D288AB96793A",
+        "AIROBS-607F0FA7F1A70E34EF6BD6F2"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4608",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-3B2044F733878369F982C4A5"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4637",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-92619ED545A4F2C41D11E7E6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5922",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C8376D77CC075BF8D7D39AD1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4566",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C387CB42EE5AE4852DE216CB",
+        "AIROBS-F739EDF158FBF6500FFD2094",
+        "AIROBS-A8D536F06E8D40B16ED58094"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-313",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-64EFEBC5D7D335C386D84B32"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4571",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-453CAB9EA73DC282E7815B05"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5973",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-CC5C0355F06952E6F3472B6C"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4609",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B8F517A6C5498ED81DF5D3DF"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4495",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-0FC42EF4CCA174B9495E6507"
+      ],
+      "saleObservationIds": [
+        "AIROBS-F6A5E1BDAE18687A138C014B"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4360",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-82DD75524C5EAF393B76513C",
+        "AIROBS-4431BE8B0DF36B05117C025F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4446",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EDAABC76C9E84A5DEB37655A"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4235",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-7B43371B27B5031BB3B2A61A"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4432",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-74DFF7277B9E1A3BD75041C3"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5951",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E3FED76AC12B985B4D1DA2CB"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1442",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E29CE225E860352A2FA447FE",
+        "AIROBS-8FFDD866B0FABFB1D10F4732"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5710",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-179F73100B65EEE97CEBEF06"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5712",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B57B819FAFE06A3F9DBF0A8B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4434",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-43671BE025FAB21508201220"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4345",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E1DEF18BDFEE53766E38F650"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-83",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-713CC6699814EE84F5BC0C44"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1398",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-20B84D9BDF7626CDCB3B7FBE"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5696",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-33049F5EBD0F835753A4CFCB"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5947",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-94A63D2A26D025F97BA93945"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5941",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-065CA7A6CF7FA9F2452886C5"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-316",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-67EADD21784AC337D044D830"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4502",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-19DBB93E1A409FE2DB2BD7FA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4581",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-42073B948D8F68AFD8E41470"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5871",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-3F105F646B20E0D0C63B9486"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4315",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B0C903FC5AD0AC19E077A8E3"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5771",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-38B3C8E8BA2E057316173CE0"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5939",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-63D6D07C115BC1ABDCD2A74A"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-169",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-CE21124E912D9F9DD1E510CC"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1600",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-FE89E0B82C6F94C5620C61B3"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4591",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-1AAD211295124602C4C52BEF"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5798",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A75129DF837C035A9A949C51"
+      ],
+      "saleObservationIds": [
+        "AIROBS-13D24CB16D0E14B5D8BAD654"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5814",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EBAA8BF670835B3A95609B01"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5711",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-4C55115093E273380BF5CFDB"
+      ],
+      "saleObservationIds": [
+        "AIROBS-F9AD4789A63F04D7A1E18748"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4251",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2041B5BE5560E113A82B1406"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4442",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AE593E3136401E44066491BC"
+      ],
+      "saleObservationIds": [
+        "AIROBS-D35805F843A2F29E5609D218"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4485",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-57443CF40B991ACCE273C0BA"
+      ],
+      "saleObservationIds": [
+        "AIROBS-48DB916D9C636CC1B05E1452"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4407",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D470A88042BC0F795BB0E766"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5993",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-67A56299CC7C085CF577C53C"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5717",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-CC436BBD022CB6F119C03998"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-8B3170CBDACF62A8B899",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P1:R1",
+          "eventFamily": "PRICE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_SALE_PRICE_UPDATE"
+        },
+        {
+          "eventId": "AIREVT-457D755CAF9D34DCB6CA",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P1:R2",
+          "eventFamily": "LEASE",
+          "semanticAction": "APPLY_LEASE_EVENT_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+        },
+        {
+          "eventId": "AIREVT-1F38C6B21EB7F8A23588",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P1:R3",
+          "eventFamily": "LEASE",
+          "semanticAction": "APPLY_LEASE_EVENT_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+        },
+        {
+          "eventId": "AIREVT-F6597E06B7B7C56CDE8A",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P1:R4",
+          "eventFamily": "RATE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_RATE_UPDATE"
+        },
+        {
+          "eventId": "AIREVT-703105879FB28CC37EFB",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P2:R8",
+          "eventFamily": "SALE",
+          "semanticAction": "APPLY_COMPLETED_SALE_EVENT_NO_IMPLIED_LEASE_STATE"
+        },
+        {
+          "eventId": "AIREVT-9E17C8E0483D51346F9C",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P3:R3",
+          "eventFamily": "LEASE",
+          "semanticAction": "APPLY_LEASE_EVENT_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+        },
+        {
+          "eventId": "AIREVT-9D35EDFFDF71626C893A",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P3:R5",
+          "eventFamily": "RATE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_RATE_UPDATE"
+        },
+        {
+          "eventId": "AIREVT-CEB3682A36E484C88CA9",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P4:R7",
+          "eventFamily": "SALE",
+          "semanticAction": "APPLY_COMPLETED_SALE_EVENT_NO_IMPLIED_LEASE_STATE"
+        },
+        {
+          "eventId": "AIREVT-1BD67DC0955CF12AFCC5",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P4:R10",
+          "eventFamily": "LISTING_STATUS_CHANGE",
+          "semanticAction": "APPLY_EXPLICIT_LISTING_STATUS_CHANGE"
+        },
+        {
+          "eventId": "AIREVT-09E126E1116013AD9CF7",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P4:R11",
+          "eventFamily": "LEASE",
+          "semanticAction": "APPLY_LEASE_EVENT_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+        },
+        {
+          "eventId": "AIREVT-B92FB73AFDDC7FD47F6C",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P5:R13",
+          "eventFamily": "LEASE",
+          "semanticAction": "APPLY_LEASE_EVENT_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+        },
+        {
+          "eventId": "AIREVT-16CA8B85B46789E1E4DF",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P6:R6",
+          "eventFamily": "LEASE",
+          "semanticAction": "APPLY_LEASE_EVENT_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+        },
+        {
+          "eventId": "AIREVT-1DC43757B622F48134B9",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P7:R9",
+          "eventFamily": "SALE",
+          "semanticAction": "APPLY_COMPLETED_SALE_EVENT_NO_IMPLIED_LEASE_STATE"
+        },
+        {
+          "eventId": "AIREVT-022B332A1113AB40A1F8",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P8:R12",
+          "eventFamily": "RATE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_RATE_UPDATE"
+        },
+        {
+          "eventId": "AIREVT-FCCC1EF55BB9FD501C6A",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P8:R15",
+          "eventFamily": "PRICE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_SALE_PRICE_UPDATE"
+        },
+        {
+          "eventId": "AIREVT-895F049083EB86AF7041",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P9:R3",
+          "eventFamily": "RATE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_RATE_UPDATE"
+        },
+        {
+          "eventId": "AIREVT-D8365D89BB51941E87B9",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P9:R5",
+          "eventFamily": "SALE",
+          "semanticAction": "APPLY_COMPLETED_SALE_EVENT_NO_IMPLIED_LEASE_STATE"
+        },
+        {
+          "eventId": "AIREVT-D9039C125B4F84231ADD",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P10:R7",
+          "eventFamily": "LISTING_STATUS_CHANGE",
+          "semanticAction": "APPLY_EXPLICIT_LISTING_STATUS_CHANGE"
+        },
+        {
+          "eventId": "AIREVT-75C7382685C455B4E3A5",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P10:R8",
+          "eventFamily": "LEASE",
+          "semanticAction": "APPLY_LEASE_EVENT_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+        },
+        {
+          "eventId": "AIREVT-EA0672E29701FD64CEE8",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P10:R10",
+          "eventFamily": "LEASE",
+          "semanticAction": "APPLY_LEASE_EVENT_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+        },
+        {
+          "eventId": "AIREVT-189FC6FBBA12354753ED",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P12:R1",
+          "eventFamily": "PENDING_SALE",
+          "semanticAction": "APPLY_PENDING_SALE_NOT_COMPLETED_SALE"
+        },
+        {
+          "eventId": "AIREVT-AFE4894ED8F008B42EBE",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P12:R3",
+          "eventFamily": "LEASE",
+          "semanticAction": "APPLY_LEASE_EVENT_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+        },
+        {
+          "eventId": "AIREVT-D31255770BD256138681",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P13:R1",
+          "eventFamily": "LEASE",
+          "semanticAction": "APPLY_LEASE_EVENT_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+        },
+        {
+          "eventId": "AIREVT-CD7E84A3FDE21A108BE3",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P13:R2",
+          "eventFamily": "RATE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_RATE_UPDATE"
+        },
+        {
+          "eventId": "AIREVT-01282A6A70C6AA28F723",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P13:R3",
+          "eventFamily": "RATE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_RATE_UPDATE"
+        },
+        {
+          "eventId": "AIREVT-C024FDCD4308EA9D75A0",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P13:R4",
+          "eventFamily": "LEASE",
+          "semanticAction": "APPLY_LEASE_EVENT_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+        },
+        {
+          "eventId": "AIREVT-FE39AA20924FF62449DB",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P13:R5",
+          "eventFamily": "PRICE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_SALE_PRICE_UPDATE"
+        },
+        {
+          "eventId": "AIREVT-FBB2EC08186996CCD41B",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P14:R7",
+          "eventFamily": "PENDING_SALE",
+          "semanticAction": "APPLY_PENDING_SALE_NOT_COMPLETED_SALE"
+        },
+        {
+          "eventId": "AIREVT-B3FD6E27AF3B633D6F64",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P15:R3",
+          "eventFamily": "RATE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_RATE_UPDATE"
+        },
+        {
+          "eventId": "AIREVT-2326A14AACD944A9076D",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P15:R4",
+          "eventFamily": "RATE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_RATE_UPDATE"
+        },
+        {
+          "eventId": "AIREVT-BE0FBAD73C078B1368C3",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P15:R5",
+          "eventFamily": "RATE_CHANGE",
+          "semanticAction": "APPLY_RECONCILED_RATE_UPDATE"
+        }
+      ]
+    },
+    {
+      "identityRef": "BASESRC-4467",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-1140E7C6CA5D3B473E678158"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5818",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-0586CF495AD2EC097C8B1A31"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5756",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-DF49DECF234FDE7078693FC1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4463",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-BEE65450C02653B04C67226B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5974",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9CC4D86B1A12D10561B5921D"
+      ],
+      "saleObservationIds": [
+        "AIROBS-8AB6A326117678193EBF1ABC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4550",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A9FEDE1FFD8C0F5F99BCC702"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4271",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8911EDE34FF69534D958B4DD"
+      ],
+      "saleObservationIds": [
+        "AIROBS-5EBE14766F32A10042D44C71"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5827",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-045513BD7A8BF0578F864642"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4528",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-405E6E02228A711BE3FDD081"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4388",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-98E5F38392A1AD7807C18BD8"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5789",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AAEBD38E1A7BD76FA4C63C6A"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5741",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D90005E5F5CDFB9E9B557E50"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5757",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-864ABE13F1346AE0C28F1314"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4277",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C77A138E85B2AB83D5A577F1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4237",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-7250EED9A99CDA1A51165C3E"
+      ],
+      "saleObservationIds": [
+        "AIROBS-2E154D0273616A5ADE2D9761"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4557",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-255035865811655BD494F2DD"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4513",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-3AFD40DF8C023AC47582C7B6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4583",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-396BE68A577C6B7FB30E4831"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5690",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-DC030367AD771B85FB84047C"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5793",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-306EBCA9B5C5BCB3D23444E2"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5998",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EF8EBF3DDE269FF50DDF5ED3"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4453",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5831F666A42C9A00E4AA6FBA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5832",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-BB7D899EADA708EAFA4F54A1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4302",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2BF95C631B177DD7E9BE96F0"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4263",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2661A291B7AB16DABBEE99BE"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5424",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-0B96048544D6B4FAF257F476"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4554",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6C9B6B0DB89C954A47DC3A7A"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4515",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-19BB6BE225DDD8CBC0B948FF"
+      ],
+      "saleObservationIds": [
+        "AIROBS-BAE9132540449CC9AA7CE0E0"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5700",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-4370431585A0852EEC94B0DC"
+      ],
+      "saleObservationIds": [
+        "AIROBS-23FEEC858AB9D6DA661C0CE1"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4648",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-02F243F20854A2B490653329"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5762",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B00AD31B9189468581E008A0"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4386",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E9DDBC3405B98F3F60EACEA1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4216",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5AEB8460C5FC7D971A1CFD46",
+        "AIROBS-D9458FF24F87C9D5DB894283"
+      ],
+      "saleObservationIds": [
+        "AIROBS-8DE21A7EFC1B045369596BF1"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5943",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5FFD4A0EA0C2B59480F1D9E9",
+        "AIROBS-D4B0E3C189203FD88B026ACE"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1552",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-14E72F81A3738BBC5D398FBB"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-425",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-14723280064DE3E218CD1F19"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1694",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-1C0EE321A5AB4041BE6EE535",
+        "AIROBS-647B71F752D920662CC15E44"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-260",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E44BED66DFB400BF9BABCC62",
+        "AIROBS-06C2CB1F4202CCCC3694F9EC"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-82",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-13AD1D5F5D53E991D9585221"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1631",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D9F920006B528C0D0F3483B8"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-350",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D7F4FBA754F5BC9F63739F20",
+        "AIROBS-DA68EF9E1A99DF9EE4FEA242",
+        "AIROBS-8B13A79BD7D24700979BA4A3",
+        "AIROBS-3E2E1B75FF08284A50BC6D17"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-96",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-ACA091D9C55F18463CFFA670"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-477",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-25EF7F3421E565549C370518",
+        "AIROBS-71D7406EBAC209D8FABA3CDD"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4207",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-7275FF6C58A88096EFBB807D",
+        "AIROBS-8319CD53FA66DA28CB3E2242"
+      ],
+      "saleObservationIds": [
+        "AIROBS-ED93922130683B3A604C9D21"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1495",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-73B61D01235F714E0E2617E1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4324",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E4223469F3651619D4349FFA"
+      ],
+      "saleObservationIds": [
+        "AIROBS-B5EBB1684324D893EF59C2E1"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5784",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AC095F6B7A827AD19CB84797"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4551",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B1B19D6B1AC84594B58D3CAF"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4519",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8BDD84EC6878E40D900312B9"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4419",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A62DDA2F1A75DE974DEBE571"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4380",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-60C72239BE3154AEA1BCF520"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5976",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E6163A8A8953860E91E2042A"
+      ],
+      "saleObservationIds": [
+        "AIROBS-27A90B5180924B2ABA16EB57"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4605",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AA82BC86429BF8894BCC8F18"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-306",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B33D318CAC793ECA979077CD"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1449",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5A7F7F142DC2A24F9B2ACCD5"
+      ],
+      "saleObservationIds": [
+        "AIROBS-9D99D939C1834C3EAE1A0650"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-202",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B3B2F14A6F5BA0E5840A254D"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4222",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-36BFB73C58CC29E4E72FA108"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4437",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B3EDB6FEC5F7D9654526C2A5"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5910",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EBF905BADA0441CAA9EFA6A4"
+      ],
+      "saleObservationIds": [
+        "AIROBS-684A72A1BA01961D007EDD29"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4564",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AD308A20BCC8FED6C220A431"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5897",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EC7AA33D959E0614F321322A"
+      ],
+      "saleObservationIds": [
+        "AIROBS-D796743A37412B2A1AD5F8AF"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1595",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A273818FCEF0352F5C4722E4"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1407",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F58B21C71B3C02D84FEB1874"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5881",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C561BF4CD90F348AB1D4F085"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1623",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C11F341EA5931970A1F64D4D",
+        "AIROBS-6A5B7D0311F2F8B22BEBC32E"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5863",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A39D89A6B3879C7C163E34A9"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1653",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-3B10F9F4036F33D588FAD46F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-241",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D1E8D0D3F5654E20564D4FA6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1559",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F4458D5FC2CF2D46C2E0F1A2"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1655",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-BAB615F7FFF4F89F035D7471"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-73",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-71A6BC7838C2D4EE9B6D638B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5933",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F61F3F25D41DCA580F68D52F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-0902-B2384BE35041AA21CBD3",
+          "sourceDate": "2026-09-02",
+          "eventFamily": "RATE_CHANGE",
+          "sourceObservationIds": [
+            "AIROBS-C4139EEB7CC9B48F1D1ED815"
+          ]
+        }
+      ]
+    },
+    {
+      "identityRef": "BASESRC-201",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-4CAB036C2DB397077DADB376"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5787",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-3432D190F0D0ACAB43034175"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-282",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-67C0C2913892B06E9CD09601"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4494",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F1A83685C028492CF4255654",
+        "AIROBS-C4FF6C9A3E2EB6B5320F52EA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5698",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-4D14A825A8DEC176173B01C3"
+      ],
+      "saleObservationIds": [
+        "AIROBS-B944852369145F08C9FA15BD"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-353",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-0AB1CE54943DD0A9FEF06816"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4359",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-860E9EE3725F72F38EEE887C"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1571",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-390850CFFF0D9D779E0F9DB3"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5777",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-4EE72F58CBE0FEBF8D1E1E40"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4317",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-40311813B24C2505D1F1CC95"
+      ],
+      "saleObservationIds": [
+        "AIROBS-C6D0EFCA3A37BA71F6251152"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5719",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-61F321CD14FF412EDA5CF2FE"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5720",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-CA7483FA5EDBB7ACAC1EEE09"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4396",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B1E49B192C187F88C90A5954"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5732",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2C53C5F121020ECA476786AB"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-221",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2E59824CB2B470AC851C3FBF"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4402",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-DEA945B3593567C1184BEBBE"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4481",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6B8BF5DDA4EE1268BEA8989D"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5936",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-0718BA5484AEA030D1302C20"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5780",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6622191CEC7D9621139434DF"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5908",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-823E3018C3977C78BEAAE420"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1385",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-429D9907730DD30CB9BD4152"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4598",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C949D517D450E4157746B181"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5972",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2258FD0E711A561D146E1455"
+      ],
+      "saleObservationIds": [
+        "AIROBS-1CB6292756166CC0CBE4CEEF"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5734",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-935AB6E5EF87187F90E1F93D"
+      ],
+      "saleObservationIds": [
+        "AIROBS-A7E09B51D8940E60A26F90FB"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5810",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EE9F83A11BA64E59A68AE969"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5811",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D4BDC05682404262A3E92E9D"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5812",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5178001A453DC6485D65226C"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5986",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-FC917E8060E136B346053331"
+      ],
+      "saleObservationIds": [
+        "AIROBS-A3546AB76E3CB6642D4E350D"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5813",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9EEBEE861BA22794523F0773"
+      ],
+      "saleObservationIds": [
+        "AIROBS-AD7E65E0858E29DB9F45BC84"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4584",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-DD53BB509642FD438888720D"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-396",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-7527E14CC9DA1F01CFFA7919"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5995",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-17AC74D4282A6E3FC33CA5EA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5772",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AE7459420C3243BCB9C5B24F"
+      ],
+      "saleObservationIds": [
+        "AIROBS-67856EBC9F9259E85FE8E7BE"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4543",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EFE99E23F3DAE2C8C74AED04"
+      ],
+      "saleObservationIds": [
+        "AIROBS-1429796ECF17EC4E53BC2C3F"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4574",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-BF827191AE294D0C0BD949D0"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5706",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-CA3E0CEBE4DDD44423B467CE"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-397",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9EAC9F8ED10540D54B01FF7B",
+        "AIROBS-D5422501F96A18B059C12BDC"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5879",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2BEA9ACF32EA24A955CD71DC"
+      ],
+      "saleObservationIds": [
+        "AIROBS-B0C848DB9DE2CF7E9B9F45DC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-21",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-7FE7F315C6B626CC5FCAA6F8"
+      ],
+      "saleObservationIds": [
+        "AIROBS-1DB96A6E105BA83B925CBF1F"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4279",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-39930D42E8C6E242482F100E"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4278",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D8F06C69E6B7BF5E86DD27FA"
+      ],
+      "saleObservationIds": [
+        "AIROBS-B2B7D951EBD913D4CB60646B"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4575",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9BCB48425024331C7505791D"
+      ],
+      "saleObservationIds": [
+        "AIROBS-A7713B2BFF81DA2E70C45661"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4523",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C7DE969937471201A4EDBEBA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4548",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-72C8197952B5CBFA360F2D9E"
+      ],
+      "saleObservationIds": [
+        "AIROBS-00B50C759268E73E28B1BF70"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4229",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-71F41997BE359CFCA87F3043"
+      ],
+      "saleObservationIds": [
+        "AIROBS-5C860E45930EAC3607915501"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4593",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A6CEB2D0A9CE958C2A097DD4"
+      ],
+      "saleObservationIds": [
+        "AIROBS-E0270D3C9AE40E244B4597F2"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5966",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-CC9B478B85D2851080345A6F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4440",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-BFE06C0B7ADA69DA6260B0A8"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4633",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E944C0322D32446BA5EEE1BC"
+      ],
+      "saleObservationIds": [
+        "AIROBS-83EFDE79E2D15DA0CD4A1B01"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4649",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-71FC4F3D6DBBA19A641457F1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4389",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B35BDEF6014A39181D68ED00"
+      ],
+      "saleObservationIds": [
+        "AIROBS-5145946C6AA0CC7751F47766"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4390",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-CDFAB108DE1E1E3D78C17B44"
+      ],
+      "saleObservationIds": [
+        "AIROBS-1560A8A4AA9D049C1A3EC94C"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5692",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-67BFE3E56521156A9E7A4ABF"
+      ],
+      "saleObservationIds": [
+        "AIROBS-820AC006D06D4E7AD63F2F1B"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4613",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5DCA9C5402A17BD0CCC15641"
+      ],
+      "saleObservationIds": [
+        "AIROBS-E90FC36D837A151D170B1E80"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4620",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D365B8B21163E5F80B2B2A62"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4457",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-0CFE20968A8C97B618CD7864"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4579",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-542488E2633C5A56A14FF094"
+      ],
+      "saleObservationIds": [
+        "AIROBS-5451F528B4F6EC948FA9607E"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-152",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-512F70B627E45B1A9C0AC701"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4285",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6D5260A33C71E4AC0FA27070"
+      ],
+      "saleObservationIds": [
+        "AIROBS-677172FF0647B23FFC233625"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4503",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-078D71D2D8E735793FFE1813"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4256",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C271FA8841EDF5CBC6C13594"
+      ],
+      "saleObservationIds": [
+        "AIROBS-2EA4A1D006F832661E28F1B5"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4646",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-789D8CE01648D60345E5565A"
+      ],
+      "saleObservationIds": [
+        "AIROBS-B2FD6D9043101FFF3A42D410"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5823",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-BFD755D79419A24B4EBBECF8"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4305",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6F9252A963E68AEC20B33389"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1539",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AACD39D221A9DDB5424555C6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1540",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D7874EA61C11F41F4AC7AE28"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4537",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-7ADA0BB623A56480D2F12480"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4635",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-3DE8E7158D97F29F14AEC2B1"
+      ],
+      "saleObservationIds": [
+        "AIROBS-8B9DF5B2B739CC6BA9F610D3"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-291",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E402DF6E5E4A6D655FB18CC1",
+        "AIROBS-C7DDE60F846B3C0ADD7FB25B",
+        "AIROBS-74C90FA6819C21E8F9ED0EA1",
+        "AIROBS-735804FB5ACB3A62EF74EBBD",
+        "AIROBS-66C583B311DBE46979D1B607"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4597",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-72D3952ACA08D23127094ACB"
+      ],
+      "saleObservationIds": [
+        "AIROBS-0017F7FA7ACF39530C6133A0"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4596",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5488747A6F4BE40B334270E8"
+      ],
+      "saleObservationIds": [
+        "AIROBS-E5BBB25DA194CFA7CC80131F"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5955",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-133F620AF6DA3256E35010ED"
+      ],
+      "saleObservationIds": [
+        "AIROBS-4A44B131F5628E0A52575856"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4242",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5D7F4743A270C9FC5EFBF331"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-74439A47A2AAF1154F1BB8A2",
+        "AIROBS-28E59B94D8A42FBE1A04C909"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4306",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C5A2798AF977562D9D648174"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4547",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F9D7E1F01722F9AF1B4BAEC0"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-234",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A6041A14AB24C8343F732A8F"
+      ],
+      "saleObservationIds": [
+        "AIROBS-DB323B9A909BC4B7CCCC91FC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-314",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-829AD83A0B2DB525ACDEB7DE"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4509",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-68B35A1AF114099B9B953EDE"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-419",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6887815679CED8A419769EAA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4539",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-DF15B3A2664990D1D10405AB"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4318",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5E7CD1111218F6D285C1674A"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4634",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-334D5ABBB7C9E3A3E825468F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5999",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-7C316960D5A15EDC3DFE9737"
+      ],
+      "saleObservationIds": [
+        "AIROBS-57F4AC086E160F218AD2D5D9"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5785",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8EE8F60308C822E66377E842"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4281",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5C46489E5FDA2C10F63C8D96"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5746",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-70F64D5ADF00D12405E9B60D"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5859",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-3BD6BE420EE5D9F94F856EF8"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4460",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AD97FCE7BAD25562B55AE6E6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4203",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D46063B004095939E4991C1F"
+      ],
+      "saleObservationIds": [
+        "AIROBS-8821228AEA83DAD387BBB6D5"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5792",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9C1C50DE37B30D37B793C822"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-331",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-27A403476B68DAD389F77DB6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5826",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-86761BC1E1DFA145DC078A87"
+      ],
+      "saleObservationIds": [
+        "AIROBS-6FB2123C82CC3A4D11151937"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5963",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D099BCFBB63493547590B34B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4272",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A0E6CE8294CC734AE72680BE"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4590",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E9219B30164CC46BCDED03ED"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4393",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-7DC85E0827FA7E5F0F322DE9"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1601",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A52AF9B24FCF4B7BBFC4676F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5938",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D74040583F2AB54967A0A479"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4480",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9677A7E26AE0360EBB85163F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-72",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-673ED02D05ABA4CE656CE36E"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5900",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9D82E010B79337F04EB9721B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4329",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8FAF0E5F41091F43D9272BF4"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4647",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-818E5FE7C4892AAF46FAC870"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4529",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-7C392B2D52B41AD2E1585F5C"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4475",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A1E256A2756C13A6A5181FBD"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4253",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6D59A54D750788BAF4ED7460"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5760",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D49092CAC7AB8B6503D337C1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4348",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-4A601634758301D44B720303"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4484",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E7F0A07CFA6578AAD435EC15"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-6000",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2DB41E0E5E9C8A8ECA38CB61"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4410",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-54C344AEC36CB4D6EBC989AA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4385",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EE8D5E6503EF75163E4EBDE8"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4530",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B719F9A3B92F2F77437B1850"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5775",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2A88FF0259E19BF78F5110F1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4366",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-88222323ECC05526BBFA0D1B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5962",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6A4C05B9DB25E38631DE86C5"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4215",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-42DCC339891E2FFDBDB58C5C"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5754",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-FCB0AF7DCEA8C02CC6965B0B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5707",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9C9E8A5A2ADEC47BFAEC2E7F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4454",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AACF8662994B3E5BAA85EBE8"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5949",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9575083A2ED044BA9092AFE1"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4326",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-41180B17F2D1F8303BDACF41",
+        "AIROBS-56D34FBB8CD1A374B9A93A73"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5899",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C4F08A6FD422D4F33B97A3E7"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5807",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-1C20B6A2186787E994B15794"
+      ],
+      "saleObservationIds": [
+        "AIROBS-0382AAF31439C891ABEFE685"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5752",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C6D8663371989292DE5EA1D0"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-388",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6B2C393A8D8FE83B06170186"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4449",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-905B51228BEC1ACA6DD4D443"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4353",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-28DE72496646826F7B34698E"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4377",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E42EA9C749A00A8022F8A6AE"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4510",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-255AF4B5585564426556DB8B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4274",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-75EFBACF86BAB2186AF19BD6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4430",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-72AED95F5D9352F02DE506CB"
+      ],
+      "saleObservationIds": [
+        "AIROBS-1FB980C440EF08168E56F22F"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4408",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8FA1E8E4C1E4C2CD69A7DFCA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5872",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-52B467C48B36A6D2E1AECA8B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4225",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6C341307999D81CE39172156"
+      ],
+      "saleObservationIds": [
+        "AIROBS-10BD3F6AEAF869AF7E0E561B"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4293",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C2C3614A38D15C80B65FF4B3"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4384",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EF824B62B0C8FC357D8F29EA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4441",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-48C19DA3AC6D403BF53A2FBD"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-375",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-71CEC07117DCF1262B1338D6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-144",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6F160D5C54EA4F6C1699C7B6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1598",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-7734BFD0EE35661C5562BFA4"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4520",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-A9A1EE63CFA6E8E782F5C202"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-45",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E785C7B2EB264CCAF927C404",
+        "AIROBS-E478E18FB5F15C103FC20244"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4636",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8689556263543DD8BF09421F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5714",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-DF6DC56914B4F237CFA450F8"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4559",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2CF98E5AC5A048189A43AE28",
+        "AIROBS-0B1FF3414AD4E64B5524138E"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4585",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B058C2CA66595102C0E001D0"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4625",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E4B11BA6BCF067A51F8A18EA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4466",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-BED8A24B6635769CB2D1D164"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5825",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2BA648BB4F72EB6580B21C75"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4522",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-14527D08A3FD71A6335CF564"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-192",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-1C9F9C1FDEAE7EEF6A87CE07"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4356",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-5888B764DF2345C6CE8CABA7"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-379",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-B231EBFA3ED2D960EBC85B74"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-88",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-DA20DBCF7FBADCD6200EFF13"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-137",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-52A211E6A2E3EB3A81F0C2D0"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4438",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-DF46C828B4C57E446EFBF465"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1493",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-3E8A6482F7721FFDA038F58B"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4400",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-34C64DB72143A94A101F8D09"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4577",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-B05C5959284620500519270E"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-13",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-D859A9E03231AD2239630B67"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1570",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-1CD788146D935592BEF29150"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5708",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-682BB3CC76CB493D22FD5E07"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4206",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-104608D310B1789C5FAFD4D8"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4644",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-97B2B3B2BC5BBBA73C5699E0"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5935",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-0602744A8D2D550AF164D93D"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4213",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-74E46E976BBFFAC7D4BD5885"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4443",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-53E7BB9E74D1386412896DBE"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1664",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-C3013693914F98DC8B438E1D"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-156",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-2902BFD4459C1E9791BA1E42"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5866",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-572BF606C2B5C9357426E488"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1606",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-6B425C4AB93B07FE1F33ABCC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-54",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-A56B05A155FBAA086449D61E"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1558",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-81597BFE9177F03ABED20063"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-165",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-5C7918D0A1196F39CFE5DC36"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-302",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-C7AB41D77645174A47807AF9"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-386",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-EC0236542209B7DC41D1B55C"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4568",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-AACA46336E972579A8F977E8"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-162",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-E5DFC2FD565DEB818EEFC009"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5902",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-FEA187DEA662697EB3DEE596"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1562",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-212B750B30F1AEDBEB5D1528"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1567",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-FF85C1008B92AFD6EF35F169"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1568",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-DFEC135E2099CD4E80EC12EF"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4291",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-0E24483E66D19265959DADCB"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5713",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-9496E3D61CBCFBC5F855EAB0"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1583",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-4F2A67D959CDC3D2108B5CF8"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1561",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-4EEF23CCB5279C0E873B78EC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1582",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-422FD1D2CDD84217D503C7F0"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1584",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-F8C1EA3C3BC4C0C1327DD6B2"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1421",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-E2FDAAA7507B72AD01E8F602"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-85",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-CE6973165559D02E88BCDD93"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5740",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-BDE1231DBF56E9C97E4474D8"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1440",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-B99C2A11236A87A5AA345475"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1621",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-A80CCA9D6ABA04B830092AE3"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4447",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-80BDDF01A0C72E4F054FDAFF"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5701",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-B55124D957A7BC4E84CA27F0"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-288",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-F807193B5A3F4EC841D83739"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4451",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-BF632A8C408D222280E63D9F"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1670",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-E6D0F425B43318588B76B143"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-351",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-A469DA90F637732AE9789C78"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5851",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-BAE1E32D4D0E856E525939BE"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-8120",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-5A4271F90A52CEBB09D9E11F"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1504",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-5FB7EB68EDD71AFC4197413E"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1505",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-80989001629EA5A667470DD3"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4477",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-DE2A9799063F6DC4B22478EA"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-395",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-9344455CD1862C1E2F9B25B0"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1651",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-25159FA218FC8697B6F6F917"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4286",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-0AEBE72BAEA6D66A2CFC1BE1"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1678",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-509BF45ED4D271824D0207BC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-391",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-1E72FE85D1202EAA9ECAD7CF"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1705",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-2E18148E042EBC71F6CA7957"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-233",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-EF9C575582D91D641EBDBF88"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1646",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-BCAFF95C8AEFB67728E037FC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-457",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-212246970D684453CD900983"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-15",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-D81186FA094FCEAF714EB364"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-443",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-D99E8ED39B0112D07F3DC2F2"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5945",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-03AB801D068C41EDF791DA44"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1506",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-022520B64A29FB872EAA81C8"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-455",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-8563FDDCE96607A800E2DC25"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-61",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-79BACF8498D5FE064C4ACD44",
+        "AIROBS-D3311F386C36B50F724122C5"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1432",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-7C7231FEF6531FC3280E7608"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1555",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-8B6DAEE8E1925CB464DA7DA9"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1554",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-A592538092A3A899795C1510"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-276",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-C15B167044CD16DB0EE2116B"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5970",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-5600FD9606F4F25BEFF46BEC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-398",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-68B7D5F5A0DDB0694BF476F5"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-267",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-5317FDC38F6E985E0147C0FB"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1732",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-C49CE4297601A02D2B324E0D"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-473",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-B336F742447FF378E250BC6F"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-139",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-FF24607E7AD24D2E29C435DE"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-439",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-BCD76CD5BCF756A0487A210A"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1519",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-684DD1BE804C182E2CBEB62F"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1702",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-3F221C873C63FFE2293C73B1"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4364",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-1CBEC162B8881FC50F3C7292"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-410",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-8D289B86C9A7C3D30DACC6E3"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-81",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-4AE610FA88BFDCE9380956B2"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-243",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-97EF72C4079DC8D61702D380"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-223",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-620EA4A34007929F95FA520B"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-492",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-D65BF049653CA006CFC3CC0D"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-219",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-EFA81ED929468496010A6DA2"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5977",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-679EEE01AC5010B15B785B0F"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-198",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-25E2852F7989AEAB8613A807"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1727",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-0E2301BB8463B8BA53B40846"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-05E8BA91AEF0A1E4B7B0F1FC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4435",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-A3DBDDEB2571AFFCA10D8163"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-384",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-544192C68CF6CED378DA5067"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-32",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-A0C17033B3A3CAF444F9D41C"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-409",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-B3C97C220399C240FB8BF195"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-408",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-B485F76E640677016756A2DF"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-407",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-E2A083E883B05600220B50A2"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-478",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-8EEDFE3F015B58A6C5D60349"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1387",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-35EB5CF63F275F860AFAF583"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-153",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-E90DDBA4F87954AB72E15DE8"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-46",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-556B32C70A350D701078EBFD"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-161",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-F5EEA192D2E8DB8E3A69ABF7"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1492",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-C29FFFECD4FF2C36B5E6144E"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1680",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-05352F1CE9ED590FBD4346AF"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4236",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-2029447C4CE25B7D868C1403"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-362",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-9B8FD303F99B7D1B8EA1CFCF"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4297",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-D55F9E5F63D34D8A4B0685C8"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-102",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-FF0B6834B037031F19B872F1"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4392",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-BB4D17FE66BB84D940334DE2"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4283",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-B1781B19350FF306D236F030",
+        "AIROBS-13A323B3B0DA517B50AF54BF"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5683",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EE9C45E6BD436A98D9170FA7"
+      ],
+      "saleObservationIds": [
+        "AIROBS-3FF2DD28B9280004B87ABAC9"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4431",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-56B7CFA4094D944623ADBB0C"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-64",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-69DA30B6A4AD0F4FC2AD2C0E"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-253",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-1E4F92138101DD27BF01BF80"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4421",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-DD2731D03420C54FEBB51CC5"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4650",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-48ECEEA74B342BDFF064FC0D"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5906",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-5B676D223BF863CE594AC375"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4422",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-2BFD34FD42A3506BDDF3CF29"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4307",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-8B8AFC0479A0F2484BAF0D6A"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5778",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-95523BC85DFCA027F08E16DC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4429",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-5ABC240E51A10D32DDFE29E9"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4295",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-1A22304E297420E79DF17312"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4316",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-28E5403612F8A0951A4C179C"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4365",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-42BEC8BF17F9CDCCC2C35095"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5716",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-ACA1775BB6F24A455F5247B9"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5927",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-020EDB577FC17450A864F09E"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5885",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-3409442F6207AA8505AB76DA"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5848",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-18E0EE3D3555CB36E0CCEA4E"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4372",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-41CE9741E95D3BB67ADD4F2E"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4469",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-AE2CFEA200770A7A65F615CD"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5838",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-C4ACC9CB648A86A334921EC9"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4258",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-D6C3D94CFD7F7244F1031666"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4238",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-3000C3CC827D66E9D3577FD2"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4350",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-33FA0456E329B1711E8F8C82"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5724",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-E71D323DA92743619C56312A"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5705",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-C8FA9CC45259F8055F36496D"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4245",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-6D79ED878F90A0948F4555BF"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-343",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-22C4559F632B483AE68A0F29"
+      ],
+      "saleObservationIds": [
+        "AIROBS-51BCEF5404EE091599657F9E"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4325",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-61D9D88EBFCB8DD17A395BEC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1413",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-32E454D26DBAF07627991520"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5975",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-4A6797C491B78A8C8E6E4C46"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-272",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-E87F8B8922A8105CF024738A"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4604",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-8DAB588B238D6B1630F4F3FB"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1572",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-F0C3BAD05E7AA8DBBDF2304B"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1427",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-3320719DC9A183E1D44813BE"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1437",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-66CB8DE4A83C169DF7E675F1"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1403",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-0008BB2DD17A57F2D00207D2"
+      ],
+      "saleObservationIds": [
+        "AIROBS-35827EDF3F3E9D930D51666B"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-268",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-2B84F2F0320A4FA2519D20C4"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1441",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-0521B6253F6D1C768B905EFB"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4626",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-F4D7D840DAC59F52F1B4A8B2"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4534",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-0A1E1156635E520B325AB38F"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5709",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-A18AA99D9D7EB492234C8269"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-115",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-5C0ADAD1EFFD28601F0D8857"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5816",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-B9502190376DB338D308A036"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-383",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-8146AF240316C49672F00FCF"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4311",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-246BDD054C46AAE1E4271D72"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4340",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-82CE988C8AB3BF79F6D8D757"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5739",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-774B07B56B0564689352BAEA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5809",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B5AF575E3175DBA4BD758CFA"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-320",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-6EB73DE375B45981BC4BE483"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5944",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D0152D3AA6AB06B72B910792"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1627",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F55F43C36CD46E8585A48DD8"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4338",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8EBB94A07008B23526C4D1B9",
+        "AIROBS-6F3F779FCA682FA4209A3CEF"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-58",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F9397903756B1B63EEFCC465"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-283",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-209CC976C61B64BEE00F5A41"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5727",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D853A8D51E20E70471246AE7"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1547",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9C420BA0AD8DDF1DA55AA903"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-185",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-590E9C170941E63A20651720",
+        "AIROBS-68AC7881AD0FC4EEC994FFBC"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5846",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-59D9FA8CAC877E4E050B5F98"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5845",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-746B87245AC8B6458184A173"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-122",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C04E6A6399E75A08EA033A0A"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1447",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-48882266B4945D0F57EBA1FC",
+        "AIROBS-73A50CE48892281914D6B67B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1665",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-047BD82FE708441AA8708F6C"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-247",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EF8FD8F87496A339FD3355CB"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-0902-47CAEBDD54D83E821A3C",
+          "sourceDate": "2026-09-02",
+          "eventFamily": "RATE_CHANGE",
+          "sourceObservationIds": [
+            "AIROBS-2EC38DA3BE58D94E93F50DC1"
+          ]
+        }
+      ]
+    },
+    {
+      "identityRef": "BASESRC-312",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-321732A8601E17507AF9835D"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1388",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-AB29784A801D6BC51ED0411B"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5801",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-36DD2765EF3EA15BAB7A5304"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5800",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-030AE51122368CEC1FCFBF33"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5715",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-40C996DC04D821E91E827444"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5726",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C904689C17C4E61CD08E068F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4471",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8A3F05C655FBE26A2D2427BB"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1577",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2BCA3DB79D8167A1B061F57B",
+        "AIROBS-C777AFCAC57E676154E5B7AF"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1667",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-10197CF345DF7648BF4E0237"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-326",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-82B6E649EE7FF1C7687003B7",
+        "AIROBS-AD2B2F4BF8EFBC2DAED5C0BB"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1501",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2737FB0E4C9AFB380F72F3E5"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1636",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F8207607A229E5A980AB70C0"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-109",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E24FCB4306992CA897960200"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5911",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-23F1386968E3E151D573B7E2"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1456",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B08AAFEC94A3DFE35ACC4E7F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-3",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-9D8D1E83462531946597D56F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-208",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-BE9CDBBC4BD1E5A1FFD998D7"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-57",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8397B93A9716A127CAB6FFD9"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-43",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-C1D8784CBCD71B4695E23640"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1446",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EB63CA5134E50E72E98C433F"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5916",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-5CEE7004637B92E103433512"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5749",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-32745CBC525F91C4B7FE6303"
+      ],
+      "saleObservationIds": [
+        "AIROBS-1EE006BC37268134C6FC4BA1"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4645",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-EDC7C4BCC0E3B5ED449AA34C"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4395",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E986FC50848E66D8EB715EA2"
+      ],
+      "saleObservationIds": [
+        "AIROBS-A454E0AC57C906A372001FE0"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-138",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F7F5C1D24E86577E2CB2700C"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4536",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-D08FCED11B886C03FB9649CC"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1640",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-B1971851034A6F1B88319964"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-188",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-ED384DB2C49A7D8A4852646E"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4351",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-2BE624F55C7C553F26A37047"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-182",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F6DEA11F5511ABA2BD04C382"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-27",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-528AA7669972D7CEDDF10895"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-113",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-F8886C596C81A554C5C0ACA6"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-98",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-0338F2025F976F9785A4A5EB"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-235",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-E24E3A4158E527130B165C62"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4310",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-6364EEB5785BCB89E3CC338A"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-210",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-FBD9E7592FC07D3BEE69DF0C"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4314",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-00BC1D0EA0F9A1E081AAD787"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4643",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-22159F553231732701224A93"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1701",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-1136FEF7F5D5EE3EF316E0B5"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-378",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-FB77A58A118A08E66043B54C"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4455",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-7C25CC1DCBEE27847231BA90"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-5804",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-786102332A0138DEB0DC1D55"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-4436",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-A325AD7521B083CECCE937EA"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1408",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-AC11308DE0A35CA1DDEABEBB"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-1511",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-A8330FDE906F47B1D2D1536A"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "BASESRC-412",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-537CEC62946215FE8B469ECC"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "AIRCORR-274CF37D6F8C9EB40EE9",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-DBDEA5712910744D2BBAA1CD",
+        "AIROBS-329A3B0E50E8B32B2C0A4675"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "AIRPROV-F5782D56246AF8AD01A1",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-0832F736C91D6BE1CDA058D7",
+        "AIROBS-999BBA3B7B5C5C7E3C4D575E"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "AIRCORR-20065EAD870D997AFB9A",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-27CDC51328E63BC98FA98369"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "AIRPROV-4FED1BDA14B9486A3319",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-17A1A3BF86C1BB5F3D4EF20E"
+      ],
+      "saleObservationIds": [],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "AIRCORR-10B739C1552CEBF40743",
+      "marketStatuses": [
+        "AVAILABLE_FOR_LEASE",
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [
+        "AIROBS-8DBD234813508506B2800656"
+      ],
+      "saleObservationIds": [
+        "AIROBS-02A03949058C9F61ABA818BA"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "AIRPROV-1767CA9A7FF25EA406BF",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-71524486D1946D17992CACB9"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "AIRCORR-564EA06A91655AFCA748",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-089EFDB7F128C48DEFED9258"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "AIRCORR-D60991D42EE4D041DAC0",
+      "marketStatuses": [
+        "AVAILABLE_FOR_SALE"
+      ],
+      "leaseObservationIds": [],
+      "saleObservationIds": [
+        "AIROBS-9C2D99FFADD41248FEAE4630"
+      ],
+      "asOf": "2026-08-28"
+    },
+    {
+      "identityRef": "AIRSTATE-09827194C576E3A910ED",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-DE3EAD734DAD4B8330AA",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P1:R5",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-8D7AABC8D029ED8B58AA",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-78DCA8044351DCA6DE5C",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P2:R7",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-755204E500FE09CE58ED",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-03C4334B8D6B6C67FA9C",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P3:R1",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-F8636F0CE65EF40C4EC7",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-4E6A411371D6A7FF6D50",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P3:R2",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-8A6C3F0761B19D7615B9",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-FE22A4075A8364891E4C",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P4:R6",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-E964739872C60523D987",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-71DB52FDFE5EEB730255",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P4:R8",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-13B32D601A2ACDBC991B",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-600261D694C1176F28A5",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P4:R9",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-1A1B887BCBB5D3BB7815",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-4FA7CE2C40DFAA668D60",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P5:R14",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-6545FBF9F37C78CCB8AC",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-F8908C819CB998565960",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P6:R1",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-0379B4DC6AC9F261812D",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-1BB1FFFC392BBE96C880",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P6:R2",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-C0EC2BA5C6E99B172B2F",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-FF92F49685695D2AD890",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P6:R5",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-03B3B7E72FA487827CCA",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-822A56A621757373B43F",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P7:R8",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-9C300F8AABF109B032FC",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-209A358882916FFDBB7C",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P7:R10",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-92DA28F9812F52ACA722",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-134A35A78CF89D3CD810",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P7:R11",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-1F5B6EE10140DB494D5B",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-E327C2F26E77C6AEB391",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P8:R13",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-F643395A7F0D3DA1DAB4",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-C74712F209F28DF8C7F3",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P8:R14",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-E1DED31694831BA1F18E",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-713ECF6CD5FD180C4FA9",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P8:R16",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-DD28E579F766F1915A4A",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-3783D222D8FEE8109A5C",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P9:R1",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-BDE019769327D76810B8",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-FCC0316BAE77451A8612",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P9:R2",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-2C47FEC836AF31D35B31",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-4AB8E3549A8A5268B64A",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P9:R4",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-5F6B857638DCDEB61D8E",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-4BAC9E3E8FA0A9DB00D1",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P10:R6",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-EA0673930361F8BFCD3C",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-40AEEC240347E2C5D83A",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P11:R11",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-DCFA36F074305CF96507",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-F8347D9D09B05677B798",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P12:R2",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-4133BC618D4F1FCC68DF",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-548BE30D6F0DF9CFF06B",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P12:R4",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-227759DD169FA78CEF51",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-7401078769DA4034A089",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P12:R5",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-339C7759C37CDF1C2319",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-784C0183899C750F8779",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P13:R6",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-24986F299A68FA3F073F",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-4FFBDC7B8269B0558E24",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P15:R1",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-DB3404646552C10C0F26",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-92701201A09F1AC9460F",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P15:R2",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-F3AF9AC8152D281A81D6",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-A841AE7171EFA11CDDBF",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P16:R7",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    },
+    {
+      "identityRef": "AIRSTATE-984F5278954F357D15E6",
+      "identityStatus": "PROVISIONAL_SOURCE_BACKED",
+      "canonicalIdentityClaim": false,
+      "stateRole": "ACTIVE_IDENTITY_STATE",
+      "pendingCertifiedMarketEventApplications": [
+        {
+          "eventId": "AIREVT-37FD3AF57BDCA513B631",
+          "sourceDate": "2026-09-01",
+          "sourceRecordIdentity": "AIRSUPER:2026-09-01:P16:R8",
+          "eventFamily": "NEWLY_AVAILABLE",
+          "semanticAction": "UPSERT_ACTIVE_LISTING_OBSERVATION"
+        }
+      ]
+    }
+  ],
+  "absenceDoesNotMeanLeased": true,
+  "missingAvailabilityDoesNotMeanZero": true
+}

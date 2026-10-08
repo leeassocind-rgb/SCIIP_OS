@@ -1,0 +1,12 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R1_POST_TRANSPORT_EXERCISE_RESIDUAL_CAUSAL_DIAGNOSIS",
+  "version": "4.0-r29b-r2-r3-r1",
+  "mode": "SINGLE_FRESH_PAGE_READ_ONLY_CDP_TRANSPORT_PROBE",
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "explorerClick": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false
+}

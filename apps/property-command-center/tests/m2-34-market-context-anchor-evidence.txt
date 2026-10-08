@@ -1,0 +1,10 @@
+M2.34 governed market context anchor migration
+selectedAnchorOnly=true
+anchorAuthority=GovernedSelectedPropertyMapRuntime
+marketContextProperty=governedMarketContextAnchor.anchorProperty
+explicitAnchorReplacements=0
+inventoryDatasetRewritten=false
+aggregateLogicRewritten=false
+mapSelectionParity=true
+propertyIntelligenceParity=true
+automaticCanonicalWrites=false

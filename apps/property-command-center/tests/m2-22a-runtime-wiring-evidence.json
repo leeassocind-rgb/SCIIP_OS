@@ -1,0 +1,6 @@
+{
+  "milestone": "M2.22a",
+  "target": "src/broker-product/property-explorer/intelligence/LiveGovernedPropertyCard.jsx",
+  "gapExpression": "model?.intelligenceGaps?.gaps",
+  "propertyExpression": "model?.property||model"
+}

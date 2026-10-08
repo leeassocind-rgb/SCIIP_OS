@@ -1,0 +1,1 @@
+Read-only bounded fresh-page Explorer settle diagnosis after the certified syntax-only repair. No UI clicks, governed mutation, or Export.

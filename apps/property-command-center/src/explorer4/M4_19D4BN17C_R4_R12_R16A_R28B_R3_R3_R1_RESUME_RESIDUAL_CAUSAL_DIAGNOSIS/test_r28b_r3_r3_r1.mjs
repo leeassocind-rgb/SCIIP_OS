@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+import fs from"node:fs";import path from"node:path";import{fileURLToPath}from"node:url";
+const d=path.dirname(fileURLToPath(import.meta.url)),s=fs.readFileSync(path.join(d,"diagnose_r28b_r3_r3_r1.py"),"utf8");
+const q=["READ_ONLY_STRUCTURED_EXECUTION_EVIDENCE_DIAGNOSIS","previousCertifiedCountExactly32","residualCertifiedCountZero","exactNewTwoHundredCertifiedCountStill32","firstFailureOrdinal233","firstFailureTarget13310ValleyBlvd","failureExplorerSettleFailed","failedStageExplorerSettleCertified","freshPageCreated","downstreamWorkflowUntouched","priorThirtyTwoPreserved","RECORD_233_FRESH_PAGE_CREATED_BUT_EXPLORER_SETTLE_NOT_CERTIFIED_BEFORE_ANY_INTERACTION","R28B_R3_R3_R2_RECORD_233_EXPLORER_CONTROL_MATERIALIZATION_TIMING_DEEP_DIAGNOSIS","Resume retry: OFF","Live UI interaction: OFF","Explorer click: OFF","Property click: OFF","Assignments invocation: OFF","Generate invocation: OFF","Export invocation: OFF","Application source mutation: OFF","Governed data mutation: OFF"];
+for(const x of q){if(!s.includes(x)){console.error("FAIL",x);process.exit(1)}}
+console.log(JSON.stringify({framework:"SCIIP_EXPLORER_4_R28B_R3_R3_R1_STATIC_TEST",status:"PASSED",assertions:q.length,repair:"R28B_R3_R3_PRESERVED_32_THEN_RECORD233_FRESH_PAGE_EXPLORER_SETTLE_FAILURE_TO_READ_ONLY_EXACT_STAGE_RESIDUAL_CAUSAL_DIAGNOSIS_WITHOUT_REPLAY"},null,2));

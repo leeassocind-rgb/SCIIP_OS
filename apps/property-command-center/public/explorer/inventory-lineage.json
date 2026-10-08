@@ -1,0 +1,41 @@
+{
+  "framework": "SCIIP_EXPLORER_INVENTORY_LINEAGE",
+  "version": "3.0-m2.9",
+  "sourceMasterInventory": {
+    "source": "Industrial_DB_Phase1_Master_Inventory.xlsx",
+    "rows": 4506,
+    "grain": "one master property record per row",
+    "role": "SOURCE_BASE_INVENTORY"
+  },
+  "sourceExplorerCandidateRows": {
+    "source": "governed-base-inventory.json.generatedFrom",
+    "rows": 8711,
+    "role": "SOURCE_PROPERTY_ROWS_BEFORE_SPATIAL_GATE"
+  },
+  "governedExplorerRuntime": {
+    "rows": 841,
+    "role": "SPATIALLY_VERIFIED_RUNTIME_SUBSET",
+    "note": "Calculated at installation from public/explorer/governed-base-inventory.json"
+  },
+  "terminology": {
+    "baseInventory": "The full source/master inventory; do not use this term for the 840-record runtime subset.",
+    "governedExplorerRuntime": "Properties admitted to Explorer after identity + spatial provenance gating."
+  },
+  "coverage": {
+    "versusPhase1MasterInventoryPct": 18.66,
+    "versusExplorerCandidateRowsPct": 9.65
+  },
+  "lowellSpatialCorrection": {
+    "address": "2125 W Lowell St",
+    "priorCoordinate": {
+      "lat": 34.0978,
+      "lng": -117.4147
+    },
+    "adjudicatedCoordinate": {
+      "lat": 34.0978,
+      "lng": -117.4147
+    },
+    "parcelGeometry": "WITHHELD_PENDING_VERIFICATION",
+    "temporalMode": "PROJECT_FUTURE_STATE"
+  }
+}

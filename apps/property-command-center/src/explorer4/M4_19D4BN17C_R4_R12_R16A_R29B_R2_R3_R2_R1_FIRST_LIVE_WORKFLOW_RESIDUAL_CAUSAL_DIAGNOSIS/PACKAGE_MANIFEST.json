@@ -1,0 +1,12 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R1_FIRST_LIVE_WORKFLOW_RESIDUAL_CAUSAL_DIAGNOSIS",
+  "version": "4.0-r29b-r2-r3-r2-r1",
+  "mode": "READ_ONLY_EXIT13_SOURCE_MAPPING_AND_SINGLE_FRESH_PAGE_NAVIGATION_DIAGNOSIS",
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "explorerClick": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false
+}

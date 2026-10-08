@@ -1,0 +1,1 @@
+Consumes R5-R1-R2 transport diagnosis. Narrowly replaces CDP.call this.ws.send with a masked RFC6455 client text-frame write on the already-open raw socket, then reruns authoritative R29B. Governed data mutation OFF; Export OFF.

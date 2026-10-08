@@ -1,0 +1,12 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R2_FIRST_RECORD_EXPLORER_SETTLE_STAGE_DIAGNOSIS",
+  "version": "4.0-r29b-r2-r3-r2-r2",
+  "mode": "SINGLE_FRESH_PAGE_READ_ONLY_EXPLORER_SETTLE_DIAGNOSIS",
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "explorerClick": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false
+}

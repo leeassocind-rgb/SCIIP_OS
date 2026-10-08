@@ -1,0 +1,11 @@
+M2.37 governed Market Context cohort runtime
+cohortBoundaryBound=true
+sourceCollection=EXPLORER3_PROPERTIES
+effectiveCollection=marketContextProperties
+marketContextSubject=marketContextConsumerProperty
+aggregateFormula=buildMarketContext unchanged
+mapInventoryRewritten=false
+filterLogicRewritten=false
+sourceArrayRewritten=false
+sourcePropertiesRewritten=false
+automaticCanonicalWrites=false

@@ -1,0 +1,1 @@
+Consumes explicit R29B_CDP_OPEN_TIMEOUT_2000MS and repairs only CDP.open raw WebSocket handshake completion semantics. Export OFF; governed data mutation OFF; strict sequential; halt on first failure.

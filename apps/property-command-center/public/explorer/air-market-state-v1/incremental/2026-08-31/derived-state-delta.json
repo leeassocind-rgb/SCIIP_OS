@@ -1,0 +1,111 @@
+{
+  "anchorId": "AIR_BASELINE_2026_08_28_V1",
+  "appliedDerivedDeltaCount": 5,
+  "candidateEventCount": 6,
+  "contract": "SCIIP_AIR_083126_DERIVED_STATE_DELTA_V1",
+  "deltas": [
+    {
+      "address": "1701 Bay St",
+      "buildingSf": 160000,
+      "buildingWideUnavailableInference": false,
+      "city": "Los Angeles",
+      "derivedAction": "SET_LISTING_LEVEL_LEASE_EVENT",
+      "eventFamilies": [
+        "LEASE"
+      ],
+      "eventId": "AIREVT-29CACA986FB24DBB4CE8E4B4",
+      "identityConfidence": "CORROBORATED",
+      "identityRef": "AIRREFQ-703EBCB9F1C814AA048D",
+      "listingLevelLeaseOnly": true,
+      "observationDate": "2026-08-31",
+      "postalCode": "90021",
+      "region": "LA Central",
+      "sourceChangeLabels": [
+        "Leased"
+      ]
+    },
+    {
+      "address": "4 Goodyear",
+      "availableSf": 94195,
+      "buildingSf": 94195,
+      "buildingWideUnavailableInference": false,
+      "city": "Irvine",
+      "derivedAction": "SET_LISTING_LEVEL_ACTIVE_MARKET_OBSERVATION",
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-3759D0867FD8589964CDF102",
+      "identityConfidence": "REFINED_UNIVERSE_DETERMINISTIC",
+      "identityRef": "AIRREF-D5D02DD3BF49906BCCEF",
+      "observationDate": "2026-08-31",
+      "postalCode": "92618",
+      "region": "Orange County",
+      "sourceChangeLabels": [
+        "New Listing"
+      ]
+    },
+    {
+      "address": "2780 Rubidoux Blvd",
+      "availableSf": 70362,
+      "buildingSf": 70362,
+      "buildingWideUnavailableInference": false,
+      "city": "Riverside",
+      "derivedAction": "SET_LISTING_LEVEL_ACTIVE_MARKET_OBSERVATION",
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-79DBD6FDFFA24DD35408E640",
+      "identityConfidence": "REFINED_UNIVERSE_DETERMINISTIC",
+      "identityRef": "AIRREF-BAA535B257875AB6D87D",
+      "observationDate": "2026-08-31",
+      "postalCode": "92509",
+      "region": "Inland Empire",
+      "sourceChangeLabels": [
+        "New Listing"
+      ]
+    },
+    {
+      "address": "368 Cheryl Ln",
+      "availableSf": 109448,
+      "buildingSf": 109448,
+      "buildingWideUnavailableInference": false,
+      "city": "Industry",
+      "derivedAction": "SET_LISTING_LEVEL_ACTIVE_MARKET_OBSERVATION",
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-D89AAAE8BA2723FA9CAEEC8A",
+      "identityConfidence": "REFINED_UNIVERSE_DETERMINISTIC",
+      "identityRef": "AIRREF-4111E341189703A30404",
+      "observationDate": "2026-08-31",
+      "postalCode": "91789",
+      "region": "LA East",
+      "sourceChangeLabels": [
+        "New Listing"
+      ]
+    },
+    {
+      "address": "2640 E Del Amo Blvd",
+      "availableSf": 31500,
+      "buildingSf": 110720,
+      "buildingWideUnavailableInference": false,
+      "city": "Carson",
+      "derivedAction": "SET_LISTING_LEVEL_ACTIVE_MARKET_OBSERVATION",
+      "eventFamilies": [
+        "NEWLY_AVAILABLE"
+      ],
+      "eventId": "AIREVT-9B10C62CA0B8D7A8438C9815",
+      "identityConfidence": "REFINED_UNIVERSE_DETERMINISTIC",
+      "identityRef": "AIRREF-4334AE4DD675560822C9",
+      "observationDate": "2026-08-31",
+      "postalCode": "90221",
+      "region": "LA South & West",
+      "sourceChangeLabels": [
+        "New Listing"
+      ]
+    }
+  ],
+  "eventOnlyInScopeCount": 1,
+  "partitionDate": "2026-08-31",
+  "rateChangeWithoutCertifiedParsedValueRemainsEventOnly": true
+}

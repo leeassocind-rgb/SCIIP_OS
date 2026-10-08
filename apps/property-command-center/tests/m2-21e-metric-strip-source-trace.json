@@ -1,0 +1,52 @@
+{
+  "candidates": [
+    {
+      "score": 13,
+      "file": "src/broker-product/property-explorer/intelligence/IntelligenceGapEngine.js"
+    },
+    {
+      "score": 12,
+      "file": "src/broker-product/property-explorer/v5/propertyDecisionEngine.js"
+    },
+    {
+      "score": 12,
+      "file": "src/components/PropertyDigitalTwinCenter.jsx"
+    },
+    {
+      "score": 11,
+      "file": "src/broker-product/BrokerMorningBrief.jsx"
+    },
+    {
+      "score": 11,
+      "file": "src/broker-product/property-explorer/intelligence/PropertyIntelligenceProvenance.js"
+    },
+    {
+      "score": 11,
+      "file": "src/broker-product/property-explorer/v5/ExplorerPropertyIntelligenceOS.jsx"
+    },
+    {
+      "score": 11,
+      "file": "src/broker-product/property-explorer/v6/explorer3Data.js"
+    },
+    {
+      "score": 9,
+      "file": "src/ai/copilotEngine.js"
+    },
+    {
+      "score": 9,
+      "file": "src/broker-product/ListingAssignmentProductionHouse.jsx"
+    },
+    {
+      "score": 9,
+      "file": "src/broker-product/PropertyWorkspaceOverview.jsx"
+    },
+    {
+      "score": 9,
+      "file": "src/broker-product/properties/PropertySearchDiscovery.jsx"
+    },
+    {
+      "score": 9,
+      "file": "src/broker-product/properties/propertySearchEngine.js"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29A_R4_R2_R2_R2_R3_R2_R2_R2_R1_R4_SIX_MEMBER_LINEAGE_DEEP_DIAGNOSIS",
+  "version": "4.0-r29a-r4-r2-r2-r2-r3-r2-r2-r2-r1-r4",
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "liveInventoryFallback": "bounded read-only if evidence unresolved",
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false
+}

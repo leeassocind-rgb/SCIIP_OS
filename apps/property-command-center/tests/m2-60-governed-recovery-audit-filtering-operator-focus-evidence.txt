@@ -1,0 +1,14 @@
+M2.60 governed recovery audit filtering and operator focus
+m259InspectionPreserved=true
+filterControlsBound=true
+failureFilterBound=true
+retryFilterBound=true
+recoveryFilterBound=true
+authoritativeFilterBound=true
+selectionReconcilesToFilteredSet=true
+appendOnlyAuditPreserved=true
+readOnlyFiltering=true
+m257AuditAuthoritative=true
+actionEnginesRewritten=false
+canonicalExecutionRewritten=false
+automaticCanonicalWrites=false

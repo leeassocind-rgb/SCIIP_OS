@@ -1,0 +1,21 @@
+{
+  "anchorOverwriteAuthorized": false,
+  "baseInventoryMutationAuthorized": false,
+  "canonicalIdentityMutationAuthorized": false,
+  "commitMode": "CREATE_ONLY_OR_VERIFY_IDENTICAL",
+  "contract": "SCIIP_AIR_083126_INCREMENTAL_COMMIT_MANIFEST_V1",
+  "derivedStateDeltaCount": 5,
+  "externalApiCallsAuthorized": false,
+  "historicalReplayAuthorized": false,
+  "inScopeEventOnlyCount": 1,
+  "inScopeStateTransitionCandidateCount": 6,
+  "noncanonicalIdentityDeltaCount": 1,
+  "outOfScopeEvidenceOnlyCount": 54,
+  "partitionDate": "2026-08-31",
+  "payloadHashes": {
+    "staged-derived-state-delta.json": "f0b40ee8407d17cc7772b84625fdc1a5998ad65586858e266e615ee658af9b1e",
+    "staged-noncanonical-identity-delta.json": "28668676ec00a39c965aa51b645586f34cce1b7047d276a88f3ee61a4c80be68",
+    "staged-source-observations.json": "41ca83c71eb02c45e1a6a4e663f61b560404a3a1b94603f594f4bf6d0759a139"
+  },
+  "sourceObservationCount": 60
+}

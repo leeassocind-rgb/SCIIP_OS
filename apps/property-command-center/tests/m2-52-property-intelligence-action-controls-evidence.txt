@@ -1,0 +1,12 @@
+M2.52 governed Property Intelligence action controls and transition enforcement
+actionControlsContractBound=true
+actionStateAuthoritative=true
+propertyScopedControls=true
+revisionAwareControls=true
+validNextActionsProjected=true
+invalidTransitionsBlockedAtUIBoundary=true
+engineRemainsAuthoritative=true
+presentationAndControlBoundaryOnly=true
+actionEnginesRewritten=false
+canonicalExecutionRewritten=false
+automaticCanonicalWrites=false

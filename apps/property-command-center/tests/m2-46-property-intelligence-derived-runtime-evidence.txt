@@ -1,0 +1,12 @@
+M2.46 governed Property Intelligence derived runtime synchronization
+derivedRuntimeBound=true
+presentationAuthoritative=true
+propertyIntelligenceRuntimePropertyBound=true
+propertyIntelligenceSpatialIdentityBound=true
+propertyIntelligenceLiveGovernedIntelligenceBound=true
+contextDrawerDerivedDataBound=true
+existingGlobalDerivedRuntimePreserved=true
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+formulaRewritten=false
+automaticCanonicalWrites=false

@@ -1,0 +1,10 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_R5_R1_R6_RECORD401_POST_TRANSPORT_RESIDUAL_DIAGNOSIS_AND_EXPLORER_ENTRY_BINDING_REPAIR",
+  "version": "4.0-r29b-r5-r1-r6",
+  "applicationSourceMutation": true,
+  "mutationScope": "exact explorer-entry undefined binding repair: w -> per-record cdp",
+  "governedDataMutation": false,
+  "exportInvocation": false,
+  "strictSequential": true,
+  "haltOnFirstFailure": true
+}

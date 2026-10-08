@@ -1,0 +1,7 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R4_R2_R2_R2_R3_R2",
+  "applicationSourceMutation": true,
+  "mutationScope": "R29A selector only",
+  "governedDataMutation": false,
+  "exportInvocation": false
+}

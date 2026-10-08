@@ -1,0 +1,13 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R4_R2_R2_R2_R3",
+  "version": "4.0-r29a-r4-r2-r2-r2-r3",
+  "repair": "CONFIRMED_APP_RUNTIME_DOWN_STALE_CDP_ERROR_PAGE_TO_RUNTIME_REVALIDATION_FRESH_CDP_PAGE_REATTACHMENT_AND_SELECTOR_RECERTIFICATION",
+  "externalPythonPackagesRequired": [],
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false,
+  "expectedNextMilestone": "M4_19D4BN17C_R4_R12_R16A_R29B_EXACT_NEW_FOUR_HUNDRED_NON_EXPORT_LIVE_QUALIFICATION"
+}

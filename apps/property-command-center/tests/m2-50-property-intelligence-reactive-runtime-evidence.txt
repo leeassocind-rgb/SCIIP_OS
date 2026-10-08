@@ -1,0 +1,13 @@
+M2.50 corrected governed Property Intelligence reactive runtime synchronization
+prerequisitePathsCorrected=true
+actionEventListenerBound=true
+propertyScopedRefresh=true
+governedActionRevisionBound=true
+consumerRuntimeRevisionAware=true
+pageReloadRequired=false
+actionEnginesRewritten=false
+canonicalExecutionRewritten=false
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+formulaRewritten=false
+automaticCanonicalWrites=false

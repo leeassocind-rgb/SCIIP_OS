@@ -1,0 +1,18 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R3",
+  "version": "4.0-r29a-r3",
+  "repair": "R29A_R2_APP_AND_CDP_READY_BUT_SELECTOR_EXPLORER_SETTLE_FAILED_TO_SINGLE_FRESH_PAGE_BOUNDED_TIMING_CAUSAL_DIAGNOSIS",
+  "files": [
+    "APPLY_M4_19D4BN17C_R4_R12_R16A_R29A_R3_EXPLORER_CONTROL_SETTLE_RESIDUAL_CAUSAL_DIAGNOSIS.command",
+    "diagnose_r29a_r3.py",
+    "test_r29a_r3.mjs",
+    "README.txt",
+    "PACKAGE_MANIFEST.json"
+  ],
+  "liveUiInteraction": "READ_ONLY_FRESH_PAGE_TIMING_OBSERVATION",
+  "explorerClick": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false
+}

@@ -1,0 +1,11 @@
+M2.56 governed Property Intelligence recovery persistence and session continuity
+recoverySessionContractBound=true
+persistencePropertyScoped=true
+drawerContinuitySupported=true
+propertyNavigationContinuitySupported=true
+sessionOnlyPersistence=true
+crossPropertyLeakageBlocked=true
+recoveredStateClearsSession=true
+actionEnginesRewritten=false
+canonicalExecutionRewritten=false
+automaticCanonicalWrites=false

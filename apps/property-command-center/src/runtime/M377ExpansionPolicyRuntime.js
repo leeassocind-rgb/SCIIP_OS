@@ -1,0 +1,7 @@
+export const CONTRACT =
+  'SCIIP_EXPLORER_3_M3_77_NEXT_BOUNDED_OPERATIONAL_INGESTION_EXPANSION_POLICY';
+export const VERSION='3.0-m3.77';
+export const REFERENCE_COHORT=50;
+export const NEXT_COHORT_CEILING=100;
+export const FIELD='availableSf';
+export const MAX_RATE=5;

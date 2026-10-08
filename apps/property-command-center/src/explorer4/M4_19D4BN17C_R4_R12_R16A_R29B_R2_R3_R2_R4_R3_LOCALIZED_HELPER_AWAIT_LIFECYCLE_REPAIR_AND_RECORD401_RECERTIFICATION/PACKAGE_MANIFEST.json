@@ -1,0 +1,11 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_LOCALIZED_HELPER_AWAIT_LIFECYCLE_REPAIR_AND_RECORD401_RECERTIFICATION",
+  "version": "4.0-r29b-r2-r3-r2-r4-r3",
+  "mode": "LOCALIZED_HTTP_OK_AWAIT_LIFECYCLE_REPAIR_AND_RECORD401_RECERTIFICATION",
+  "applicationSourceMutation": "R29B_HTTP_OK_HELPER_ONLY",
+  "governedDataMutation": false,
+  "exportInvocation": false,
+  "strictSequential": true,
+  "haltOnFirstFailure": true,
+  "httpOkBoundMilliseconds": 2000
+}

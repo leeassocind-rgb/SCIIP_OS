@@ -1,0 +1,55 @@
+{
+  "schema": "SCIIP_AIR_STATE_TRANSITION_EVENTS_V1",
+  "sourceDate": "2026-09-02",
+  "records": [
+    {
+      "eventId": "AIREVT-0902-47CAEBDD54D83E821A3C",
+      "eventFamily": "RATE_CHANGE",
+      "sourceDate": "2026-09-02",
+      "sourceRecordIdentity": "BASESRC-247",
+      "identityRef": "BASESRC-247",
+      "oldRate": "1.18",
+      "oldBasis": "G",
+      "newRate": "1.08",
+      "newBasis": "G",
+      "sourceObservationId": "AIROBS-2EC38DA3BE58D94E93F50DC1",
+      "sourceObservationIds": [
+        "AIROBS-2EC38DA3BE58D94E93F50DC1"
+      ],
+      "canonicalIdentityMerge": false
+    },
+    {
+      "eventId": "AIREVT-0902-B2384BE35041AA21CBD3",
+      "eventFamily": "RATE_CHANGE",
+      "sourceDate": "2026-09-02",
+      "sourceRecordIdentity": "BASESRC-5933",
+      "identityRef": "BASESRC-5933",
+      "oldRate": "1.18",
+      "oldBasis": "G",
+      "newRate": "1.08",
+      "newBasis": "G",
+      "sourceObservationId": "AIROBS-C4139EEB7CC9B48F1D1ED815",
+      "sourceObservationIds": [
+        "AIROBS-C4139EEB7CC9B48F1D1ED815"
+      ],
+      "canonicalIdentityMerge": false
+    },
+    {
+      "eventId": "AIREVT-LOGICAL-FC5616D2A15D44148106",
+      "eventFamily": "RATE_CHANGE",
+      "sourceDate": "2026-09-02",
+      "sourceRecordIdentity": "BASESRC-5745",
+      "identityRef": "BASESRC-5745",
+      "oldRate": "1.35",
+      "oldBasis": "IG",
+      "newRate": "1.29",
+      "newBasis": "IG",
+      "sourceObservationId": "AIROBS-CA9E318C73DD55EF43FCDD20",
+      "sourceObservationIds": [
+        "AIROBS-CA9E318C73DD55EF43FCDD20",
+        "AIROBS-F908DFF630BA15ED09EF7E57"
+      ],
+      "canonicalIdentityMerge": false
+    }
+  ]
+}

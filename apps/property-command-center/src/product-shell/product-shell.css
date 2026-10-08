@@ -1,0 +1,23 @@
+.product-shell{min-height:100vh;display:grid;grid-template-columns:236px minmax(0,1fr);background:var(--sciip-color-bg,#f7f8fa);color:var(--sciip-color-text,#151922)}
+.product-sidebar{position:sticky;top:0;height:100vh;padding:20px;background:#0f2a3a;color:#fff;display:flex;flex-direction:column;gap:24px}
+.product-brand{display:flex;align-items:center;gap:12px}.product-brand__mark{width:40px;height:40px;display:grid;place-items:center;border-radius:10px;background:#ffffff1f;font-weight:800}
+.product-brand strong,.product-brand span{display:block}.product-brand span{font-size:11px;opacity:.66}
+.product-nav{display:flex;flex-direction:column;gap:4px}.product-nav button{min-height:44px;border:0;border-radius:10px;background:transparent;color:#ffffffc7;padding:0 12px;display:flex;align-items:center;gap:12px;font:inherit;font-weight:700;cursor:pointer}.product-nav button:hover,.product-nav button.active{background:#ffffff1a;color:#fff}
+.product-sidebar footer{margin-top:auto;padding-top:16px;border-top:1px solid #ffffff22;font-size:12px;opacity:.66}
+.product-main{min-width:0}.product-topbar{height:64px;padding:0 24px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--sciip-color-border,#d8dde6);background:var(--sciip-color-surface,#fff);position:sticky;top:0;z-index:20}
+.product-topbar button{flex:1;max-width:720px;min-height:42px;border:1px solid var(--sciip-color-border,#d8dde6);border-radius:10px;background:var(--sciip-color-surface,#fff);color:var(--sciip-color-text-muted,#667085);display:flex;align-items:center;gap:12px;padding:0 12px;cursor:pointer}.product-topbar kbd{margin-left:auto}
+.product-avatar{width:38px;height:38px;border-radius:999px;background:var(--sciip-color-primary,#133c55);color:#fff;display:grid;place-items:center;font-weight:800}
+.product-page{max-width:1440px;margin:0 auto;padding:28px}
+.product-hero{padding:28px 30px;border-radius:20px;background:linear-gradient(135deg,#102a3a,#185a70);color:#fff;box-shadow:var(--sciip-shadow-lg);margin-bottom:24px}
+.product-hero .sciip-kicker,.product-hero p{color:#ffffffbd}.product-hero h1{margin:6px 0 10px;font-size:clamp(2.4rem,5vw,5rem);line-height:.96;letter-spacing:-.05em}.product-hero p{max-width:880px;line-height:1.65}
+.product-section{background:var(--sciip-color-surface,#fff);border:1px solid var(--sciip-color-border,#d8dde6);border-radius:14px;overflow:hidden;margin-bottom:24px}
+.product-section>header{padding:18px 20px;border-bottom:1px solid var(--sciip-color-border,#d8dde6);display:flex;align-items:center;justify-content:space-between}.product-section h2{margin:0;font-size:18px}
+.product-grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.product-info-card{padding:18px;border:1px solid var(--sciip-color-border,#d8dde6);border-radius:14px;background:var(--sciip-color-surface,#fff)}
+.product-info-card span,.product-info-card small{display:block;color:var(--sciip-color-text-muted,#667085)}.product-info-card strong{display:block;margin:8px 0;font-size:1.7rem}
+.product-list{display:flex;flex-direction:column}.product-row{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:12px;align-items:center;padding:16px 20px;border-bottom:1px solid var(--sciip-color-border,#d8dde6)}.product-row:last-child{border-bottom:0}
+.product-row__icon{width:30px;height:30px;border-radius:999px;background:var(--sciip-color-surface-subtle,#f1f3f6);display:grid;place-items:center}.product-row strong,.product-row span{display:block}.product-row span{font-size:12px;color:var(--sciip-color-text-muted,#667085)}
+.product-two-column{display:grid;grid-template-columns:1.4fr .8fr;gap:24px}
+.product-placeholder{padding:32px}.product-placeholder h1{margin:0 0 8px}.product-placeholder p{color:var(--sciip-color-text-muted,#667085);max-width:760px}.product-placeholder-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.product-placeholder-card{min-height:140px;border:1px solid var(--sciip-color-border,#d8dde6);border-radius:14px;background:var(--sciip-color-surface,#fff);padding:20px;text-align:left}
+@media(max-width:1000px){.product-two-column,.product-grid-3,.product-placeholder-grid{grid-template-columns:1fr}}
+@media(max-width:800px){.product-shell{grid-template-columns:1fr}.product-sidebar{display:none}.product-topbar{position:static}.product-page{padding:16px}}

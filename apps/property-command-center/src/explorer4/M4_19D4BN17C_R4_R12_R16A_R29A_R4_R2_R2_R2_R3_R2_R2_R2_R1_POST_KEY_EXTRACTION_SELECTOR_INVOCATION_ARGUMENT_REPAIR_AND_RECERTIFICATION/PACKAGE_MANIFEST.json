@@ -1,0 +1,7 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R4_R2_R2_R2_R3_R2_R2_R2_R1",
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "exportInvocation": false,
+  "repair": "wrapper invocation only; pass repository root as selector argv[1]"
+}

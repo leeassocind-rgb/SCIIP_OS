@@ -1,0 +1,11 @@
+M2.42 corrected runtime order
+detailContextBeforeSpatialContext=true
+tdzRegressionBlocked=true
+governedMetricRowsAuthoritative=true
+showOnMapHighlightPathPreserved=true
+cohortPreserved=true
+neighborModePreserved=true
+formulaRewritten=false
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+automaticCanonicalWrites=false

@@ -1,0 +1,13 @@
+M2.55 governed Property Intelligence action recovery and retry lifecycle
+recoveryContractBound=true
+failedFeedbackRetryReady=true
+retryLineageTracked=true
+retryCountIncremented=true
+retryPendingProjected=true
+retrySuccessReconciled=true
+retryFailureReconciled=true
+propertyScopeSafe=true
+governedRetryCallbackBound=true
+actionEnginesRewritten=false
+canonicalExecutionRewritten=false
+automaticCanonicalWrites=false

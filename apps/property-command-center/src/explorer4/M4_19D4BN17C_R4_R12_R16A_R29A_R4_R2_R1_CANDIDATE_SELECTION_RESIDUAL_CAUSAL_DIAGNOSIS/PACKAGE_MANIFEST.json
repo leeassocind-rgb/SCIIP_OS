@@ -1,0 +1,14 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R4_R2_R1",
+  "version": "4.0-r29a-r4-r2-r1",
+  "repair": "R29A_R4_R2_VALID_AUTHORITATIVE_PRIOR200_STILL_REJECTED_TO_READ_ONLY_ARGUMENT_AND_COMPARATOR_SEMANTIC_DIAGNOSIS",
+  "files": [
+    "APPLY_M4_19D4BN17C_R4_R12_R16A_R29A_R4_R2_R1_CANDIDATE_SELECTION_RESIDUAL_CAUSAL_DIAGNOSIS.command",
+    "diagnose_r29a_r4_r2_r1.py",
+    "test_r29a_r4_r2_r1.mjs",
+    "README.txt",
+    "PACKAGE_MANIFEST.json"
+  ],
+  "liveUiInteraction": false,
+  "exportInvocation": false
+}

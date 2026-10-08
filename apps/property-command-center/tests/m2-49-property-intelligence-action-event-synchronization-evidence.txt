@@ -1,0 +1,16 @@
+M2.49 governed Property Intelligence action event synchronization
+actionEventContractBound=true
+requestAcquisitionEventBound=true
+openEvidenceReviewEventBound=true
+attachEvidenceEventBound=true
+verifyEvidenceEventBound=true
+rejectEvidenceEventBound=true
+promoteDecisionEventBound=true
+holdDecisionEventBound=true
+actionEngineResultPreserved=true
+acquisitionEngineRewritten=false
+evidenceEngineRewritten=false
+promotionEngineRewritten=false
+canonicalExecutionRewritten=false
+eventStoreMutation=false
+automaticCanonicalWrites=false

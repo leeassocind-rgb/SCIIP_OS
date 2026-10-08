@@ -1,0 +1,13 @@
+M2.47 governed Property Intelligence evidence runtime synchronization
+evidenceRuntimeBound=true
+governedPropertyIdentityAuthoritative=true
+evidencePresentationSynchronized=true
+inlineEvidenceObjectRetired=true
+evidenceEngineRewritten=false
+acquisitionEngineRewritten=false
+promotionEngineRewritten=false
+canonicalExecutionRewritten=false
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+formulaRewritten=false
+automaticCanonicalWrites=false

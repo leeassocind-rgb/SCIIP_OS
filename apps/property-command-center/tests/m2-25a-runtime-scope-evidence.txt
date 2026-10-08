@@ -1,0 +1,3 @@
+evidenceEvents=evidenceEvents(property)
+promotionDecisions=promotionEvents(property)
+undefinedDecisionsReferenceRemoved=true

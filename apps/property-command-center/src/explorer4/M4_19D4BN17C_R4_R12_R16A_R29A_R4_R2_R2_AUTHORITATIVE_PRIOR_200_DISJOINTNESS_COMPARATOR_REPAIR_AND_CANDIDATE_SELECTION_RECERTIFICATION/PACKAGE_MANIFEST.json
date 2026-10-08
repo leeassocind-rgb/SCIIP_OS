@@ -1,0 +1,18 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R4_R2_R2",
+  "version": "4.0-r29a-r4-r2-r2",
+  "repair": "R29A_R4_R2_R1_PROVED_PRIOR200_BRANCH_WRONGLY_COMPARED_AGAINST_LIVEKEYS_TO_NEW200_DISJOINTNESS_COMPARATOR_REPAIR_AND_R29A_RECERTIFICATION",
+  "files": [
+    "APPLY_M4_19D4BN17C_R4_R12_R16A_R29A_R4_R2_R2_AUTHORITATIVE_PRIOR_200_DISJOINTNESS_COMPARATOR_REPAIR_AND_CANDIDATE_SELECTION_RECERTIFICATION.command",
+    "repair_r29a_r4_r2_r2.py",
+    "test_r29a_r4_r2_r2.mjs",
+    "README.txt",
+    "PACKAGE_MANIFEST.json"
+  ],
+  "applicationSourceMutation": "RUNNER_REPAIR_ONLY",
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false,
+  "expectedNextMilestone": "M4_19D4BN17C_R4_R12_R16A_R29B_EXACT_NEW_FOUR_HUNDRED_NON_EXPORT_LIVE_QUALIFICATION"
+}

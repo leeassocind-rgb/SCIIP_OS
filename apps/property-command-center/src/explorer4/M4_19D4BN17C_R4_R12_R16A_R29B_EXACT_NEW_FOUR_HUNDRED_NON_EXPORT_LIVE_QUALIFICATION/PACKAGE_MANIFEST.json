@@ -1,0 +1,11 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_EXACT_NEW_FOUR_HUNDRED_NON_EXPORT_LIVE_QUALIFICATION",
+  "version": "4.0-r29b",
+  "scope": "EXACT_NEW_400_ONLY",
+  "freshPagePerRecord": true,
+  "strictSequential": true,
+  "haltOnFirstFailure": true,
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "exportInvocation": false
+}

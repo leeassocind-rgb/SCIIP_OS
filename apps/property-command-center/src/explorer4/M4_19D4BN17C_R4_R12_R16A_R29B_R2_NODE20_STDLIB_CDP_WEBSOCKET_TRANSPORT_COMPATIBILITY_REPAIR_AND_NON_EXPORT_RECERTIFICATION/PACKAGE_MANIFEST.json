@@ -1,0 +1,10 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_NODE20_STDLIB_CDP_WEBSOCKET_TRANSPORT_COMPATIBILITY_REPAIR_AND_NON_EXPORT_RECERTIFICATION",
+  "version": "4.0-r29b-r2",
+  "diagnosedFailure": "NODE20_GLOBAL_WEBSOCKET_UNDEFINED_AT_RECORD401",
+  "repairScope": "R29B_CDP_TRANSPORT_ONLY",
+  "transport": "NODE_STDLIB_RAW_RFC6455_WEBSOCKET",
+  "externalPackagesRequired": false,
+  "governedDataMutation": false,
+  "exportInvocation": false
+}

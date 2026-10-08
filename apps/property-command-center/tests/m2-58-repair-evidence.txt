@@ -1,0 +1,10 @@
+M2.58 governed recovery audit presentation repair
+restoredPreM258Backup=true
+singleGovernedRecoveryAuditDeclaration=true
+singleDiagnosticsDeclaration=true
+contextDrawerDirectPresentation=true
+drawerSectionUntouched=true
+propertyIntelligenceUntouched=true
+m257AuditAuthoritative=true
+canonicalExecutionRewritten=false
+automaticCanonicalWrites=false

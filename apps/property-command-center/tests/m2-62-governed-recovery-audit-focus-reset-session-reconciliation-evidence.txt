@@ -1,0 +1,12 @@
+M2.62 governed recovery audit focus reset and session reconciliation
+m261PersistencePreserved=true
+resetControlBound=true
+resetTargetAll=true
+sessionPersistenceReconciled=true
+m260FiltersPreserved=true
+m259InspectionPreserved=true
+m257AuditAuthoritative=true
+appendOnlyAuditMutation=false
+governedStateMutation=false
+canonicalExecutionRewritten=false
+automaticCanonicalWrites=false

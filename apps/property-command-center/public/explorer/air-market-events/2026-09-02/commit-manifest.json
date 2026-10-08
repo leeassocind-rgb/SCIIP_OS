@@ -1,0 +1,23 @@
+{
+  "schema": "SCIIP_AIR_EVENT_COMMIT_MANIFEST_V1",
+  "sourceDate": "2026-09-02",
+  "authorizedCommitPartitionSha256": "c961538bec29e8cb2c873b24eff7977d701b16d3b7dc7b155b69f592bcef0fa8",
+  "payloadSha256": "cefde3e132b31d1243b47836e4d036062afe95478bcfd5e460911efb44352db4",
+  "sourceObservationCount": 4,
+  "stateTransitionEventCount": 3,
+  "evidenceOnlyCount": 0,
+  "canonicalIdentityMerge": false,
+  "runtimeCodeMutation": false,
+  "uiMutation": false,
+  "vacancyPublication": false,
+  "crossBasisAskingPointEstimate": false,
+  "fileSha256": {
+    "source-observations.json": "a2cdca358cb42b50b7270570d08299114828cdfa0a7a2464215cc1f7994b5e1d",
+    "state-transition-events.json": "87d61eab6084a3ed754ea6da3c32895ae16454cd107a99ac2f6b1c2dfbe133d0"
+  },
+  "optionB": {
+    "identityRef": "BASESRC-5745",
+    "logicalEventId": "AIREVT-LOGICAL-FC5616D2A15D44148106",
+    "linkedSourceObservationCount": 2
+  }
+}

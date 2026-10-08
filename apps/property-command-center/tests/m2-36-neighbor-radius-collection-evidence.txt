@@ -1,0 +1,11 @@
+M2.36 governed neighbor/radius collection runtime
+collectionBoundaryBound=true
+sourceCollection=sourceNeighbors
+effectiveCollection=neighbors
+governedCollection=governedNeighborCollection.properties
+runtimeOrderSafe=true
+marketContextFallbackSafe=true
+sourceArrayRewritten=false
+sourcePropertiesRewritten=false
+aggregateLogicRewritten=false
+automaticCanonicalWrites=false

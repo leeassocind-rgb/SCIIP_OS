@@ -1,0 +1,1 @@
+Consumes R6-R2 exact diagnosis and replaces the three helper-local legacy ev(w, expression) calls with cdp.eval(expression), then reruns authoritative R29B. Governed data mutation OFF. Export invocation OFF. Strict sequential ON.

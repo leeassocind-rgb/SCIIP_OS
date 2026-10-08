@@ -1,0 +1,12 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_R4_FIRST_RECORD_ASYNC_BOUNDARY_EXACT_LOCALIZATION",
+  "version": "4.0-r29b-r2-r3-r2-r4-r3-r4",
+  "mode": "TEMPORARY_CREATE_FRESH_PAGE_INTERNAL_LIFECYCLE_INSTRUMENTATION",
+  "applicationSourceMutation": "TEMPORARY_DIAGNOSTIC_ONLY_RESTORED",
+  "governedDataMutation": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false,
+  "executionBoundSeconds": 8
+}

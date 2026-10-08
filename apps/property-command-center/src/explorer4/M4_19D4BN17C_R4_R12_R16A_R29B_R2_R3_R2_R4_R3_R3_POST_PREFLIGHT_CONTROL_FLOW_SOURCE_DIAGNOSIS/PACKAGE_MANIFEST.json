@@ -1,0 +1,12 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_R3_POST_PREFLIGHT_CONTROL_FLOW_SOURCE_DIAGNOSIS",
+  "version": "4.0-r29b-r2-r3-r2-r4-r3-r3",
+  "mode": "TEMPORARY_SYNCHRONOUS_CONTROL_FLOW_BREADCRUMB_DIAGNOSIS",
+  "applicationSourceMutation": "TEMPORARY_DIAGNOSTIC_ONLY_RESTORED",
+  "governedDataMutation": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false,
+  "executionBoundSeconds": 8
+}

@@ -1,0 +1,18 @@
+M2.48 governed Property Intelligence action synchronization
+governedActionContextBound=true
+governedSelectionAuthoritative=true
+acquisitionPropertyGoverned=true
+evidencePropertyGoverned=true
+requestIdentitySynchronized=true
+evidenceReviewIdentitySynchronized=true
+verificationIdentitySynchronized=true
+promotionIdentitySynchronized=true
+liveAcquisitionSeamGoverned=true
+acquisitionEngineRewritten=false
+evidenceEngineRewritten=false
+promotionEngineRewritten=false
+canonicalExecutionRewritten=false
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+formulaRewritten=false
+automaticCanonicalWrites=false

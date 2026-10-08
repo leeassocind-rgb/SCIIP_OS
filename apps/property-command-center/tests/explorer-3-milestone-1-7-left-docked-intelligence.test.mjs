@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+
+const root=process.cwd();
+const jsx=fs.readFileSync(path.join(root,'src/broker-product/property-explorer/v6/Explorer3.jsx'),'utf8');
+const css=fs.readFileSync(path.join(root,'src/broker-product/property-explorer/v6/explorer3.css'),'utf8');
+const checks=[];
+const check=(name,fn)=>{fn();checks.push(name)};
+check('map resizes when drawer opens',()=>assert.match(css,/drawer-open>\.explorer-v5__provider-shell\{left:var\(--explorer3-intelligence-width\)!important\}/));
+check('property intelligence docks left',()=>assert.match(css,/\.explorer3__drawer\{[\s\S]*left:0!important;right:auto!important/));
+check('market context aligns to map canvas',()=>assert.match(css,/drawer-open \.explorer3__market-ribbon\{left:var\(--explorer3-intelligence-width\)!important\}/));
+check('search recenters in usable map canvas',()=>assert.match(css,/drawer-open \.explorer3__search-dock[\s\S]*calc\(50% \+ \(var\(--explorer3-intelligence-width\) \/ 2\)\)/));
+check('legend relocates to usable map canvas',()=>assert.match(css,/drawer-open \.explorer3__legend-layers\{left:calc\(var\(--explorer3-intelligence-width\) \+ 18px\)!important\}/));
+check('selected property refocus hook is wired',()=>assert.match(jsx,/focusRequestKey=\{focusRequestKey\}/));
+check('drawer state triggers map refocus request',()=>assert.match(jsx,/\[state\.drawerOpen\]/));
+check('legend remains collapsed initially',()=>assert.match(jsx,/const\[layersOpen,setLayersOpen\]=useState\(false\)/));
+check('mobile falls back to overlay',()=>assert.match(css,/@media\(max-width:900px\)[\s\S]*drawer-open>\.explorer-v5__provider-shell\{left:0!important\}/));
+check('map rail stays right edge',()=>assert.match(css,/drawer-open \.explorer3__map-rail\{right:18px!important\}/));
+console.log(JSON.stringify({framework:'SCIIP_EXPLORER_3_MILESTONE_1_7_LEFT_DOCKED_INTELLIGENCE',version:'3.0-m1.7',status:'PASSED',testsRun:checks.length,checks},null,2));

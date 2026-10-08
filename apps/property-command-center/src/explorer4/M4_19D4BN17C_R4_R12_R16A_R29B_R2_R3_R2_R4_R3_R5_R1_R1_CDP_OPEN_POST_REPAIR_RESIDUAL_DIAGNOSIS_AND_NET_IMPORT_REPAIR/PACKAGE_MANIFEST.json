@@ -1,0 +1,10 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_R5_R1_R1_CDP_OPEN_POST_REPAIR_RESIDUAL_DIAGNOSIS_AND_NET_IMPORT_REPAIR",
+  "version": "4.0-r29b-r5-r1-r1",
+  "priorFailure": "net is not defined",
+  "repair": "ADD_EXPLICIT_NODE_NET_ESM_IMPORT_ONLY",
+  "governedDataMutation": false,
+  "exportInvocation": false,
+  "strictSequential": true,
+  "haltOnFirstFailure": true
+}

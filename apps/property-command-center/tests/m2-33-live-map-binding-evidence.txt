@@ -1,0 +1,11 @@
+M2.33 live map selection binding
+selectedBoundaryBound=true
+rawSelectedProperty=sourceSelectedProperty
+effectiveSelectedProperty=property
+mapSelectedProperty=property
+governedRuntime=GovernedSelectedPropertyMapRuntime
+duplicateM232RuntimeRemoved=1
+inventoryCollectionsRewritten=false
+marketContextRewritten=false
+neighborsRewritten=false
+automaticCanonicalWrites=false

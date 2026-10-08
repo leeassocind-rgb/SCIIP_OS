@@ -1,0 +1,11 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_R2_POST_PREFLIGHT_FIRST_RECORD_AWAIT_LOCALIZATION",
+  "version": "4.0-r29b-r2-r3-r2-r4-r3-r2",
+  "mode": "TEMPORARY_POST_PREFLIGHT_AWAIT_BREADCRUMB_INSTRUMENTATION",
+  "applicationSourceMutation": "TEMPORARY_DIAGNOSTIC_ONLY_RESTORED",
+  "governedDataMutation": false,
+  "exportInvocation": false,
+  "strictSequential": true,
+  "haltOnFirstFailure": true,
+  "executionBoundSeconds": 10
+}

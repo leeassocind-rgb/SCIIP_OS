@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+import fs from"node:fs";import path from"node:path";import{fileURLToPath}from"node:url";
+const d=path.dirname(fileURLToPath(import.meta.url)),s=fs.readFileSync(path.join(d,"verify_r25e.py"),"utf8");
+const q=["READ_ONLY_POST_EXECUTION_EVIDENCE_VERIFICATION","exactFiftyOutcomeCount","singlePdfDownloadPerRecord","singlePdfObjectUrlEventPerRecord","pdfMimeApplicationPdfPerRecord","positivePdfSizePerRecord","pdfFilenamePerRecord","zeroRuntimeErrorsPerRecord","zeroUnhandledRejectionsPerRecord","postPublishUnmountPerRecord","explorerContinuityPerRecord","sameOriginPerRecord","artifactVerificationCertified","runtimeVerificationCertified","noLiveUiInteraction","noExportInvocation","R25F_EXACT_FIFTY_RECORD_EXPORT_LIFECYCLE_CLOSURE_AND_NEXT_SCALE_READINESS"];
+for(const x of q)if(!s.includes(x)){console.error("FAIL",x);process.exit(1)}
+console.log(JSON.stringify({framework:"SCIIP_EXPLORER_4_R25E_STATIC_TEST",status:"PASSED",assertions:q.length,repair:"R25D_R3_EXACT_FIFTY_CERTIFIED_EXPORT_EXECUTION_TO_READ_ONLY_PER_RECORD_ARTIFACT_AND_RUNTIME_EVIDENCE_VERIFICATION"},null,2));

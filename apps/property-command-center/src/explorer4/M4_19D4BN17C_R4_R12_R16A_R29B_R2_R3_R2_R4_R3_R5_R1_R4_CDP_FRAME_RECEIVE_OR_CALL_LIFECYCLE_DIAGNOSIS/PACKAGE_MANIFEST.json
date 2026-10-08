@@ -1,0 +1,12 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_R5_R1_R4_CDP_FRAME_RECEIVE_OR_CALL_LIFECYCLE_DIAGNOSIS",
+  "version": "4.0-r29b-r5-r1-r4",
+  "mode": "READ_ONLY_CDP_RECEIVE_AND_PENDING_RESOLUTION_DIAGNOSIS",
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "liveUiInteraction": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false
+}

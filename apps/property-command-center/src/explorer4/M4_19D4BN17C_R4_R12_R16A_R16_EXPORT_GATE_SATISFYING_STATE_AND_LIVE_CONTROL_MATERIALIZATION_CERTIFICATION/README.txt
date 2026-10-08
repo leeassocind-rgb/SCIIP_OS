@@ -1,0 +1,1 @@
+SCIIP Explorer 4.0 — R16. Consumes R15 and uses only bounded live UI state transition to test Export control materialization. No application source or governed data mutation. Export itself is not invoked.

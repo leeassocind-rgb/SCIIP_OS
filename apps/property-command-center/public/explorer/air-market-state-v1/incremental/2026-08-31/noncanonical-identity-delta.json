@@ -1,0 +1,18 @@
+{
+  "contract": "SCIIP_SOURCE_BACKED_NONCANONICAL_IDENTITY_DELTA_V1",
+  "identities": [
+    {
+      "address": "1701 Bay St",
+      "automaticCanonicalMergeAuthorized": false,
+      "buildingSf": 160000,
+      "canonicalIdentityClaim": false,
+      "city": "Los Angeles",
+      "identityConfidence": "CORROBORATED",
+      "identityRef": "AIRREFQ-703EBCB9F1C814AA048D",
+      "postalCode": "90021",
+      "sourceObservationDate": "2026-08-31"
+    }
+  ],
+  "identityCount": 1,
+  "partitionDate": "2026-08-31"
+}

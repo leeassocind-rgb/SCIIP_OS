@@ -1,0 +1,28 @@
+import crypto from 'node:crypto';
+
+export const CONTRACT =
+  'SCIIP_EXPLORER_4_M4_09_FINAL_PUBLIC_PARITY_REPAIR_188_RECORD_PROVENANCE_AWARE_REENTRY_LIFECYCLE_CLOSURE';
+export const VERSION='4.0-m4.09';
+export const AUTH_PHRASE='AUTHORIZE_M409_FINAL_PUBLIC_PARITY_REPAIR';
+
+export const EXPECTED_PRE_REPAIR_CANONICAL_COUNT=5261;
+export const EXPECTED_PRE_REPAIR_PUBLIC_COUNT=5073;
+export const EXPECTED_POST_REPAIR_COUNT=5261;
+export const EXPECTED_PUBLIC_LAG=188;
+export const EXPECTED_COHORT_RECORDS=188;
+export const EXPECTED_QUARANTINE_ROWS=7;
+
+export const EXPECTED_CANONICAL_SHA =
+  'e206138f92db612d66916d82cab09eb9e606c793bcd113431af3feb98b0d6093';
+
+export const EXPECTED_PUBLIC_PRE_REPAIR_SHA =
+  '1010b69f28aa218e2f9f4b88b645f906dd84b433085272b6552aa03ee1e06b0f';
+
+export const EXPECTED_TEMPORAL_SHA =
+  '255f47d9776a41943c030ff313b048cee1b07a5d15c284b91fd9110049768133';
+
+export const sha256=x=>crypto.createHash('sha256').update(x).digest('hex');
+
+export function fileSha(fs,p){
+  return sha256(fs.readFileSync(p));
+}

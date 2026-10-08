@@ -1,0 +1,27 @@
+import crypto from 'node:crypto';
+
+export const CONTRACT='SCIIP_EXPLORER_3_M3_69C16_EXPLICIT_GOVERNED_6_RECORD_RECOVERY_EXECUTION';
+export const VERSION='3.0-m3.69c16';
+
+export function shaFile(fs,p){
+  return crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+}
+
+export function currentValue(events,pid,field,fallback){
+  let v=fallback;
+  for(const e of events||[]){
+    if(e?.canonicalPropertyId!==pid) continue;
+    for(const c of e?.changes||[]){
+      if(c?.field===field) v=c.after;
+    }
+  }
+  return v;
+}
+
+export function eventIdFor(row){
+  return 'EVENT-M369C16-'+crypto.createHash('sha256')
+    .update(row.recoveryIdempotencyKey)
+    .digest('hex')
+    .slice(0,20)
+    .toUpperCase();
+}

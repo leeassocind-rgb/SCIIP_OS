@@ -1,0 +1,12 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R4_R2_R2_R2_R3_R1",
+  "version": "4.0-r29a-r4-r2-r2-r2-r3-r1",
+  "purpose": "DIAGNOSE_AUTHORITATIVE_PRIOR200_BRANCH_WITH_CURRENT_SELECTOR_HELPERS_AFTER_RUNTIME_CDP_REPAIR",
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "liveUiInteraction": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false
+}

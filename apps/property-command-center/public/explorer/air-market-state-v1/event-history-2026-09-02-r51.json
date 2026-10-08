@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "SCIIP_R51_EVENT_HISTORY_V1",
+  "sourceDate": "2026-09-02",
+  "events": [
+    {
+      "logicalEventKey": "R51-0902-LEASE-BASESRC-1427",
+      "identityRef": "BASESRC-1427",
+      "semanticClass": "LEASE",
+      "sourceObservationIds": [
+        "AIRSUPER:2026-09-02:P3:R2",
+        "AIRSUPER:2026-09-02:P12:R1"
+      ],
+      "sourceObservationCount": 2,
+      "eventScope": "LISTING_SCOPE_ONLY",
+      "effectiveStateEffect": "NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE",
+      "eventId": "AIREVT-R51-228C129827FA9266091C",
+      "sourceDate": "2026-09-02",
+      "stateApplicationStatus": "LISTING_SCOPE_ONLY_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+    },
+    {
+      "logicalEventKey": "R51-0902-LEASE-BASESRC-4446",
+      "identityRef": "BASESRC-4446",
+      "semanticClass": "LEASE",
+      "sourceObservationIds": [
+        "AIRSUPER:2026-09-02:P16:R1"
+      ],
+      "sourceObservationCount": 1,
+      "eventScope": "LISTING_SCOPE_ONLY",
+      "effectiveStateEffect": "NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE",
+      "eventId": "AIREVT-R51-3FA0F49EB75F29F60AB3",
+      "sourceDate": "2026-09-02",
+      "stateApplicationStatus": "LISTING_SCOPE_ONLY_NO_BUILDING_WIDE_UNAVAILABLE_INFERENCE"
+    }
+  ]
+}

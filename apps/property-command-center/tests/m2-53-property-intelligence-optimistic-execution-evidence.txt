@@ -1,0 +1,14 @@
+M2.53 governed Property Intelligence action execution and optimistic UI reconciliation
+optimisticExecutionContractBound=true
+optimisticProjectionPropertyScoped=true
+optimisticProjectionRevisionAware=true
+authoritativeActionEventReconciliation=true
+engineResultAuthoritative=true
+uiProjectionOnly=true
+rollbackAware=true
+actionEnginesRewritten=false
+canonicalExecutionRewritten=false
+sourceInventoryRewritten=false
+filterLogicRewritten=false
+formulaRewritten=false
+automaticCanonicalWrites=false

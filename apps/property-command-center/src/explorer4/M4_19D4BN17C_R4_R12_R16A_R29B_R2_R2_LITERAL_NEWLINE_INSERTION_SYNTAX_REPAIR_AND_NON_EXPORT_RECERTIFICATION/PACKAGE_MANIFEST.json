@@ -1,0 +1,9 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R2_LITERAL_NEWLINE_INSERTION_SYNTAX_REPAIR_AND_NON_EXPORT_RECERTIFICATION",
+  "version": "4.0-r29b-r2-r2",
+  "diagnosedFailure": "LITERAL_BACKSLASH_N_BEFORE_CLASS_CDP",
+  "repairScope": "R29B_SYNTAX_ONLY_LITERAL_NEWLINE_REPAIR",
+  "rawWebSocketTransportPreserved": true,
+  "governedDataMutation": false,
+  "exportInvocation": false
+}

@@ -1,0 +1,11 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R4",
+  "version": "4.0-r29a-r4",
+  "repair": "R29A_R3_PROVED_EXPLORER_MATERIALIZES_STABLY_AT_0_50S_TO_PAGE_READY_ANCHORED_THREE_SAMPLE_TWO_SECOND_SETTLE_HELPER_REPAIR_AND_CANDIDATE_SELECTION_RECERTIFICATION",
+  "applicationSourceMutation": "RUNNER_REPAIR_ONLY",
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false,
+  "expectedNextMilestone": "M4_19D4BN17C_R4_R12_R16A_R29B_FOUR_HUNDRED_NEW_RECORD_NON_EXPORT_LIVE_QUALIFICATION"
+}

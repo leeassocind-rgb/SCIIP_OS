@@ -1,0 +1,13 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R4_R2_R2_R2_R3_R2_R2",
+  "version": "4.0-r29a-r4-r2-r2-r2-r3-r2-r2",
+  "repair": "MOVE_AUTHORITATIVE_PRIOR200_RESOLUTION_BEFORE_LIVE_EXPLORER_DEPENDENCY",
+  "applicationSourceMutation": true,
+  "mutationScope": "R29A selector control-flow only",
+  "governedDataMutation": false,
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false,
+  "expectedNextMilestone": "M4_19D4BN17C_R4_R12_R16A_R29B_EXACT_NEW_FOUR_HUNDRED_NON_EXPORT_LIVE_QUALIFICATION"
+}

@@ -1,0 +1,90 @@
+import React,{useMemo,useState}from'react';
+import{
+  evidenceWorkflow,
+  openEvidenceReview,
+  attachEvidence,
+  verifyEvidence
+}from'./GovernedEvidenceWorkflow.js';
+
+export default function GovernedEvidenceWorkflowInline({property,gaps=[]}){
+  const[revision,setRevision]=useState(0);
+  const[drafts,setDrafts]=useState({});
+  const workflow=useMemo(()=>evidenceWorkflow(property,gaps),[property,gaps,revision]);
+
+  if(!workflow.items.length)return null;
+
+  const setDraft=(key,patch)=>setDrafts(d=>({...d,[key]:{...(d[key]||{}),...patch}}));
+
+  return <div className="intelligence-gaps__evidence" data-milestone="M2.23">
+    <div className="intelligence-gaps__acquisition-header">
+      <div>
+        <span>GOVERNED EVIDENCE</span>
+        <strong>Evidence Intake & Verification</strong>
+      </div>
+      <em>{workflow.items.length} tracked</em>
+    </div>
+
+    {workflow.items.map(item=>{
+      const draft=drafts[item.fieldKey]||{};
+      return <div className="intelligence-gaps__evidence-row" key={item.fieldKey}>
+        <div className="intelligence-gaps__evidence-meta">
+          <strong>{item.label||item.fieldKey}</strong>
+          <span>{item.evidenceStatus.replaceAll('_',' ')}</span>
+        </div>
+
+        {item.evidenceStatus==='NOT_STARTED'&&
+          <button type="button" onClick={()=>{
+            openEvidenceReview({property,gap:item});
+            setRevision(v=>v+1);
+          }}>Review Evidence</button>}
+
+        {item.evidenceStatus==='REQUESTED'&&<>
+          <input
+            aria-label={`${item.fieldKey} evidence value`}
+            placeholder="Observed value"
+            value={draft.value||''}
+            onChange={e=>setDraft(item.fieldKey,{value:e.target.value})}
+          />
+          <input
+            aria-label={`${item.fieldKey} evidence source`}
+            placeholder="Verified source"
+            value={draft.source||''}
+            onChange={e=>setDraft(item.fieldKey,{source:e.target.value})}
+          />
+          <button type="button" onClick={()=>{
+            attachEvidence({
+              property,
+              fieldKey:item.fieldKey,
+              value:draft.value,
+              source:draft.source,
+              reference:draft.reference||'MANUAL_REVIEW'
+            });
+            setRevision(v=>v+1);
+          }}>Attach</button>
+        </>}
+
+        {item.evidenceStatus==='EVIDENCE_ATTACHED'&&
+          <div className="intelligence-gaps__evidence-actions">
+            <button type="button" onClick={()=>{
+              verifyEvidence({property,fieldKey:item.fieldKey,decision:'VERIFIED'});
+              setRevision(v=>v+1);
+            }}>Verify</button>
+            <button type="button" className="secondary" onClick={()=>{
+              verifyEvidence({property,fieldKey:item.fieldKey,decision:'REJECTED'});
+              setRevision(v=>v+1);
+            }}>Reject</button>
+          </div>}
+
+        {['VERIFIED','REJECTED'].includes(item.evidenceStatus)&&
+          <em className={`evidence-status evidence-status--${item.evidenceStatus.toLowerCase()}`}>
+            {item.evidenceStatus}
+          </em>}
+      </div>
+    })}
+
+    <div className="intelligence-gaps__acquisition-footer">
+      <span>Canonical writes: OFF</span>
+      <span>Verified evidence ≠ canonical promotion</span>
+    </div>
+  </div>;
+}

@@ -1,0 +1,10 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29A_R4_R2_R2_R2_R3_R2_R2_R2_R1_R5_R1_CDP_FRESH_PAGE_CREATION_METHOD_REPAIR_AND_LIVE_INVENTORY_RECERTIFICATION",
+  "applicationSourceMutation": false,
+  "governedDataMutation": false,
+  "cdpRepair": "GET /json/new -> PUT /json/new",
+  "propertyClick": false,
+  "assignmentsInvocation": false,
+  "generateInvocation": false,
+  "exportInvocation": false
+}

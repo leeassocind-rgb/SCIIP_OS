@@ -1,0 +1,11 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_EXPLORER_ENTRY_CERTIFICATION_LOGIC_REPAIR_AND_RECORD401_RECERTIFICATION",
+  "version": "4.0-r29b-r2-r3-r2-r4",
+  "mode": "RUNNER_ONLY_EXPLORER_ENTRY_CERTIFICATION_REPAIR_AND_RECORD401_RECERTIFICATION",
+  "applicationSourceMutation": "R29B_RUNNER_ENTRY_CERTIFICATION_ONLY",
+  "governedDataMutation": false,
+  "exportInvocation": false,
+  "freshPagePerRecord": true,
+  "strictSequential": true,
+  "haltOnFirstFailure": true
+}

@@ -1,0 +1,9 @@
+{
+  "framework": "SCIIP_EXPLORER_4_R29A_R4_R2_R2_R2_R2",
+  "purpose": "DISTINGUISH_APP_RUNTIME_OR_CDP_NAVIGATION_FAILURE_FROM_TRUE_EXPLORER_SETTLE_POLICY_FAILURE",
+  "externalPythonPackagesRequired": [],
+  "liveUiInteraction": false,
+  "exportInvocation": false,
+  "applicationSourceMutation": false,
+  "governedDataMutation": false
+}

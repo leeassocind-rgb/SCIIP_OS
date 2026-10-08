@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+import fs from"node:fs";import path from"node:path";import{fileURLToPath}from"node:url";
+const d=path.dirname(fileURLToPath(import.meta.url)),s=fs.readFileSync(path.join(d,"recertify_r24b_r2.py"),"utf8");
+const q=["norm_candidate","PROPOSED","statusSuffixBoundaryOnly","SE of Adelanto Rd and Rancho RdPROPOSED ·","SE of Emerald Rd and Rancho RdPROPOSED ·","Fresh page per record","wait_target","wait_selected","Assignments","Generate Client Listing Report","Report Review","Download Client Listing Report","exportInvocation\":False","outcomes=[]","NORMALIZATION_MISMATCH","R24C_EXACT_TWENTY_FIVE_RECORD_GUARDED_EXPORT_EXECUTION"];
+for(const x of q)if(!s.includes(x)){console.error("FAIL",x);process.exit(1)}
+console.log(JSON.stringify({framework:"SCIIP_EXPLORER_4_R24B_R2_STATIC_TEST",status:"PASSED",assertions:q.length,repair:"R24B_R1_CERTIFIED_STATUS_SUFFIX_READBACK_NORMALIZATION_MISMATCH_TO_BOUNDARY_ONLY_CANDIDATE_LABEL_NORMALIZATION_AND_EXACT_FIFTEEN_NON_EXPORT_RECERTIFICATION"},null,2));

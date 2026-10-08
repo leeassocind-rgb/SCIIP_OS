@@ -1,0 +1,12 @@
+M2.35 live market context consumer binding
+consumerBound=true
+consumerAuthority=GovernedMarketContextAnchor
+consumerProperty=marketContextConsumerProperty
+explicitConsumerBindings=2
+selectedPropertyAlreadyGovernedViaM233=true
+mapSelectionParity=true
+propertyIntelligenceParity=true
+inventoryDatasetRewritten=false
+aggregateLogicRewritten=false
+automaticCanonicalWrites=false
+bindings=['call:buildGovernedNeighborContext(property,', 'nearby-line:107']

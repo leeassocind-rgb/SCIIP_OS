@@ -1,0 +1,1 @@
+Deep bounded diagnosis of the persistent Node exit-13 after the httpOk repair. Temporarily instruments native fetch and both top-level HTTP preflight awaits, then restores the authoritative runner byte-for-byte. Governed data mutation OFF; live workflow mutation OFF; export OFF.

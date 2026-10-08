@@ -14,14 +14,14 @@ export function normalizeRow(raw,mapping,rowNumber){
   const normalized={
     propertyId:text(row.propertyId), address:text(row.address), city:title(row.city), state:upper(row.state), postalCode:text(row.postalCode),
     buildingSf:number(row.buildingSf), availableSf:number(row.availableSf), landAcres:number(row.landAcres), clearHeightFt:number(row.clearHeightFt),
-    dockHighDoors:number(row.dockHighDoors), powerAmps:number(row.powerAmps), askingRate:number(row.askingRate), status:title(row.status),
+    dockHighDoors:number(row.dockHighDoors), gradeLevelDoors:number(row.gradeLevelDoors), yearBuilt:number(row.yearBuilt), autoParking:number(row.autoParking), powerAmps:number(row.powerAmps), askingRate:number(row.askingRate), status:title(row.status),
     latitude:number(row.latitude), longitude:number(row.longitude), source:text(row.source), updatedAt:text(row.updatedAt), sourceRow:rowNumber
   };
   const errors=[]; const warnings=[];
   if(!normalized.address) errors.push('Address is required');
   if(normalized.latitude!==null && (normalized.latitude < -90 || normalized.latitude > 90)) errors.push('Latitude is outside valid range');
   if(normalized.longitude!==null && (normalized.longitude < -180 || normalized.longitude > 180)) errors.push('Longitude is outside valid range');
-  ['buildingSf','availableSf','landAcres','clearHeightFt','dockHighDoors','powerAmps'].forEach(field=>{if(normalized[field]!==null&&normalized[field]<0)errors.push(`${field} cannot be negative`)});
+  ['buildingSf','availableSf','landAcres','clearHeightFt','dockHighDoors','gradeLevelDoors','yearBuilt','autoParking','powerAmps'].forEach(field=>{if(normalized[field]!==null&&normalized[field]<0)errors.push(`${field} cannot be negative`)});
   if(!normalized.city) warnings.push('City is missing');
   if(!normalized.state) warnings.push('State is missing');
   return {raw,normalized,errors,warnings,status:errors.length?'REJECTED':warnings.length?'WARNING':'ACCEPTED'};

@@ -1,0 +1,13 @@
+M2.59 governed recovery audit drilldown and event inspection
+m258DiagnosticsPreserved=true
+timelineSelectable=true
+eventInspectionBound=true
+latestEventFallback=true
+propertyScopePreserved=true
+appendOnlyAuditPreserved=true
+readOnlyInspection=true
+m257AuditAuthoritative=true
+actionEnginesRewritten=false
+retryExecutionRewritten=false
+canonicalExecutionRewritten=false
+automaticCanonicalWrites=false

@@ -1,0 +1,10 @@
+{
+  "framework": "M4_19D4BN17C_R4_R12_R16A_R29B_R2_R3_R2_R4_R3_R5_R1_R5_CDP_JSON_DECODE_AND_PENDING_RESOLUTION_REPAIR",
+  "version": "4.0-r29b-r5-r1-r5",
+  "applicationSourceMutation": true,
+  "mutationScope": "CDP inbound RFC6455 decode + CDP JSON parse + pending promise resolution only",
+  "governedDataMutation": false,
+  "exportInvocation": false,
+  "strictSequential": true,
+  "haltOnFirstFailure": true
+}

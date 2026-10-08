@@ -1,0 +1,1 @@
+R1-R5 bootstraps/revalidates the SCIIP runtime, requires CDP, then performs a targeted read-only live inventory diagnosis to resolve the six canonical records needed to repair the contaminated new-200 boundary. No property clicks or export-side actions.
