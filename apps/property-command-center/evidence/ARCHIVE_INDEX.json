@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0",
+  "archives": [
+    {
+      "archiveId": "SCIIP-R108A-FIRST-WAVE-20261009-135004",
+      "createdAt": "2026-10-09T13:50:04-07:00",
+      "sourceCheckpointCommit": "d812f588d3eef19ee39655c62c93e9888957e391",
+      "sourceCheckpointTag": "sciip-explorer4-precleanup-20261008",
+      "sourceRepositoryRelativeRoots": [
+        "apps/property-command-center/evidence/m4-19d4bh3b1c1-profile",
+        "apps/property-command-center/evidence/m4-19d4bh4b-chrome-profile",
+        "apps/property-command-center/evidence/m4-19d4bh4d-profile",
+        "apps/property-command-center/evidence/m4-19d4bh3-chrome-profile",
+        "apps/property-command-center/evidence/m4-19d4bh2-chrome-profile",
+        "apps/property-command-center/evidence/m4-19d4bh3a-profile",
+        "apps/property-command-center/evidence/m4-19d4bh3b-profile"
+      ],
+      "fileCount": 14835,
+      "sourceBytes": 1692585901,
+      "archiveArtifactName": "SCIIP_R108A_FIRST_WAVE_EVIDENCE_ARCHIVE_20261009_135004.tar",
+      "archiveArtifactBytes": 1723269120,
+      "archiveArtifactSha256": "b87b4964ccbf9653222048936c6f7c725c98779291163eff48fdac8f9e484425",
+      "perFileManifestArtifactName": "SCIIP_R108A_PER_FILE_SHA256_MANIFEST_20261009_135004.json",
+      "perFileManifestSha256": "9adebe63429c80194c5055df88f6fe81b0f8abad7fcbccf0654b6f1014694736",
+      "verificationArtifactName": "SCIIP_R108A_ARCHIVE_VERIFICATION_20261009_135004.json",
+      "storageLocationHumanLabel": "~/Downloads (local private archive; external to repository)",
+      "retentionPolicy": "COPY_VERIFIED_SOURCE_RETAINED_PENDING_SEPARATE_CLEANUP_AUTHORIZATION",
+      "sourceEvidenceDeleted": false,
+      "sourceEvidenceRelocated": false,
+      "restoreInstructions": "Verify archive SHA-256 before use, extract with repository-relative paths preserved, then verify each restored regular file against the per-file SHA-256 manifest."
+    }
+  ]
+}
