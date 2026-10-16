@@ -160,18 +160,18 @@ CREATE TABLE transaction_history (
     REFERENCES source_observation(source_observation_id)
 );
 
-CREATE TABLE geography (
+CREATE TABLE geography_registry (
   geography_id text PRIMARY KEY,
   geography_type text NOT NULL,
   name text NOT NULL,
-  parent_geography_id text REFERENCES geography(geography_id),
+  parent_geography_id text REFERENCES geography_registry(geography_id),
   authority_source text NOT NULL,
   geom geometry(MultiPolygon,4326)
 );
 
 CREATE TABLE asset_geography (
   asset_id text NOT NULL REFERENCES asset(asset_id),
-  geography_id text NOT NULL REFERENCES geography(geography_id),
+  geography_id text NOT NULL REFERENCES geography_registry(geography_id),
   assignment_method text NOT NULL,
   source_observation_id text
     REFERENCES source_observation(source_observation_id),
@@ -207,7 +207,7 @@ CREATE INDEX parcel_geom_gix
   ON parcel USING gist(geom);
 
 CREATE INDEX geography_geom_gix
-  ON geography USING gist(geom);
+  ON geography_registry USING gist(geom);
 
 CREATE INDEX spatial_feature_geom_gix
   ON spatial_feature USING gist(geom);
