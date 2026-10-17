@@ -1,0 +1,950 @@
+{
+  "contractVersion": "R150",
+  "database": "sciip_local_r148",
+  "materializedViewCount": 2,
+  "materializedViews": [
+    "mv_asset_current_availability",
+    "mv_current_listing_state"
+  ],
+  "postgisVersion": "3.6.4",
+  "postgresqlVersion": "18.6 (Homebrew)",
+  "repositoryHead": "277531ed659492fe5e07e00221d66b31992b7ff2",
+  "schemaSqlSha256": "8f45f4bd8521ebb257ff0e87587b00c2f6fb10a69ce8338a281959c8b2b701f1",
+  "tableCount": 19,
+  "tables": {
+    "address": {
+      "columns": [
+        {
+          "default": null,
+          "name": "address_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "address_line1",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "city",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "state",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "zip5",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "normalized_key",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "geom",
+          "nullable": true,
+          "schema": "public",
+          "type": "geometry(Point,4326)"
+        }
+      ],
+      "requiredColumns": [
+        "address_id"
+      ]
+    },
+    "asset": {
+      "columns": [
+        {
+          "default": null,
+          "name": "asset_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "canonical_name",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": "'ACTIVE'::text",
+          "name": "asset_status",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        }
+      ],
+      "requiredColumns": [
+        "asset_id"
+      ]
+    },
+    "asset_geography": {
+      "columns": [
+        {
+          "default": null,
+          "name": "asset_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "geography_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "assignment_method",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "source_observation_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        }
+      ],
+      "requiredColumns": [
+        "asset_id",
+        "geography_id",
+        "assignment_method"
+      ]
+    },
+    "asset_parcel_edge": {
+      "columns": [
+        {
+          "default": null,
+          "name": "asset_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "parcel_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "relationship_type",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "source_observation_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        }
+      ],
+      "requiredColumns": [
+        "asset_id",
+        "parcel_id",
+        "relationship_type",
+        "source_observation_id"
+      ]
+    },
+    "building": {
+      "columns": [
+        {
+          "default": null,
+          "name": "building_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "asset_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "address_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "building_sf",
+          "nullable": true,
+          "schema": "public",
+          "type": "numeric"
+        },
+        {
+          "default": null,
+          "name": "year_built",
+          "nullable": true,
+          "schema": "public",
+          "type": "integer"
+        },
+        {
+          "default": null,
+          "name": "clear_height_text",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "amps",
+          "nullable": true,
+          "schema": "public",
+          "type": "numeric"
+        },
+        {
+          "default": null,
+          "name": "zoning",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        }
+      ],
+      "requiredColumns": [
+        "building_id"
+      ]
+    },
+    "event_observation_edge": {
+      "columns": [
+        {
+          "default": null,
+          "name": "event_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "source_observation_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        }
+      ],
+      "requiredColumns": [
+        "event_id",
+        "source_observation_id"
+      ]
+    },
+    "event_registry": {
+      "columns": [
+        {
+          "default": null,
+          "name": "event_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "listing_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "asset_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "event_type",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "effective_date",
+          "nullable": true,
+          "schema": "public",
+          "type": "date"
+        },
+        {
+          "default": "'{}'::jsonb",
+          "name": "payload",
+          "nullable": false,
+          "schema": "public",
+          "type": "jsonb"
+        },
+        {
+          "default": "now()",
+          "name": "created_at",
+          "nullable": false,
+          "schema": "public",
+          "type": "timestamp with time zone"
+        }
+      ],
+      "requiredColumns": [
+        "event_id",
+        "event_type"
+      ]
+    },
+    "geography_registry": {
+      "columns": [
+        {
+          "default": null,
+          "name": "geography_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "geography_type",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "name",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "parent_geography_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "authority_source",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "geom",
+          "nullable": true,
+          "schema": "public",
+          "type": "geometry(MultiPolygon,4326)"
+        }
+      ],
+      "requiredColumns": [
+        "geography_id",
+        "geography_type",
+        "name",
+        "authority_source"
+      ]
+    },
+    "identity_crosswalk": {
+      "columns": [
+        {
+          "default": null,
+          "name": "identity_crosswalk_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "object_type",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "canonical_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "source_system",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "source_key",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "confidence",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "source_observation_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        }
+      ],
+      "requiredColumns": [
+        "identity_crosswalk_id",
+        "object_type",
+        "canonical_id",
+        "source_system",
+        "source_key",
+        "confidence"
+      ]
+    },
+    "listing": {
+      "columns": [
+        {
+          "default": null,
+          "name": "listing_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "asset_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "listing_number",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "offer_type",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "source_system",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        }
+      ],
+      "requiredColumns": [
+        "listing_id",
+        "source_system"
+      ]
+    },
+    "listing_configuration": {
+      "columns": [
+        {
+          "default": null,
+          "name": "listing_configuration_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "listing_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "label",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "marketed_sf",
+          "nullable": true,
+          "schema": "public",
+          "type": "numeric"
+        },
+        {
+          "default": null,
+          "name": "source_observation_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        }
+      ],
+      "requiredColumns": [
+        "listing_configuration_id",
+        "listing_id"
+      ]
+    },
+    "listing_configuration_space": {
+      "columns": [
+        {
+          "default": null,
+          "name": "listing_configuration_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "space_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        }
+      ],
+      "requiredColumns": [
+        "listing_configuration_id",
+        "space_id"
+      ]
+    },
+    "listing_state": {
+      "columns": [
+        {
+          "default": null,
+          "name": "listing_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "status",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "rate",
+          "nullable": true,
+          "schema": "public",
+          "type": "jsonb"
+        },
+        {
+          "default": null,
+          "name": "price",
+          "nullable": true,
+          "schema": "public",
+          "type": "numeric"
+        },
+        {
+          "default": null,
+          "name": "marketed_sf",
+          "nullable": true,
+          "schema": "public",
+          "type": "numeric"
+        },
+        {
+          "default": null,
+          "name": "unique_available_sf",
+          "nullable": true,
+          "schema": "public",
+          "type": "numeric"
+        },
+        {
+          "default": null,
+          "name": "vacant_sf",
+          "nullable": true,
+          "schema": "public",
+          "type": "numeric"
+        },
+        {
+          "default": null,
+          "name": "vacant",
+          "nullable": true,
+          "schema": "public",
+          "type": "boolean"
+        },
+        {
+          "default": null,
+          "name": "possession",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "overlap_status",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "last_event_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "last_event_date",
+          "nullable": true,
+          "schema": "public",
+          "type": "date"
+        }
+      ],
+      "requiredColumns": [
+        "listing_id",
+        "status"
+      ]
+    },
+    "parcel": {
+      "columns": [
+        {
+          "default": null,
+          "name": "parcel_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "apn_normalized",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "geom",
+          "nullable": true,
+          "schema": "public",
+          "type": "geometry(MultiPolygon,4326)"
+        }
+      ],
+      "requiredColumns": [
+        "parcel_id"
+      ]
+    },
+    "source_document": {
+      "columns": [
+        {
+          "default": null,
+          "name": "source_document_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "source_system",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "source_kind",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "effective_date",
+          "nullable": true,
+          "schema": "public",
+          "type": "date"
+        },
+        {
+          "default": null,
+          "name": "original_name",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "content_sha256",
+          "nullable": false,
+          "schema": "public",
+          "type": "character(64)"
+        },
+        {
+          "default": "'{}'::jsonb",
+          "name": "metadata",
+          "nullable": false,
+          "schema": "public",
+          "type": "jsonb"
+        }
+      ],
+      "requiredColumns": [
+        "source_document_id",
+        "source_system",
+        "source_kind",
+        "original_name",
+        "content_sha256"
+      ]
+    },
+    "source_observation": {
+      "columns": [
+        {
+          "default": null,
+          "name": "source_observation_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "source_document_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "record_locator",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "observed_object_type",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "effective_date",
+          "nullable": true,
+          "schema": "public",
+          "type": "date"
+        },
+        {
+          "default": null,
+          "name": "source_key",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "raw_record",
+          "nullable": false,
+          "schema": "public",
+          "type": "jsonb"
+        },
+        {
+          "default": "now()",
+          "name": "created_at",
+          "nullable": false,
+          "schema": "public",
+          "type": "timestamp with time zone"
+        }
+      ],
+      "requiredColumns": [
+        "source_observation_id",
+        "source_document_id",
+        "record_locator",
+        "observed_object_type",
+        "raw_record"
+      ]
+    },
+    "space": {
+      "columns": [
+        {
+          "default": null,
+          "name": "space_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "building_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "parent_space_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "label",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "physical_sf",
+          "nullable": true,
+          "schema": "public",
+          "type": "numeric"
+        }
+      ],
+      "requiredColumns": [
+        "space_id",
+        "building_id"
+      ]
+    },
+    "spatial_feature": {
+      "columns": [
+        {
+          "default": null,
+          "name": "spatial_feature_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "feature_type",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "name",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": "'{}'::jsonb",
+          "name": "attributes",
+          "nullable": false,
+          "schema": "public",
+          "type": "jsonb"
+        },
+        {
+          "default": null,
+          "name": "geom",
+          "nullable": false,
+          "schema": "public",
+          "type": "geometry(Geometry,4326)"
+        },
+        {
+          "default": null,
+          "name": "source_document_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        }
+      ],
+      "requiredColumns": [
+        "spatial_feature_id",
+        "feature_type",
+        "geom"
+      ]
+    },
+    "transaction_history": {
+      "columns": [
+        {
+          "default": null,
+          "name": "transaction_id",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "asset_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "transaction_type",
+          "nullable": false,
+          "schema": "public",
+          "type": "text"
+        },
+        {
+          "default": null,
+          "name": "transaction_date",
+          "nullable": true,
+          "schema": "public",
+          "type": "date"
+        },
+        {
+          "default": null,
+          "name": "comp_sf",
+          "nullable": true,
+          "schema": "public",
+          "type": "numeric"
+        },
+        {
+          "default": null,
+          "name": "rate",
+          "nullable": true,
+          "schema": "public",
+          "type": "jsonb"
+        },
+        {
+          "default": null,
+          "name": "price",
+          "nullable": true,
+          "schema": "public",
+          "type": "numeric"
+        },
+        {
+          "default": "'{}'::jsonb",
+          "name": "parties",
+          "nullable": false,
+          "schema": "public",
+          "type": "jsonb"
+        },
+        {
+          "default": null,
+          "name": "source_observation_id",
+          "nullable": true,
+          "schema": "public",
+          "type": "text"
+        }
+      ],
+      "requiredColumns": [
+        "transaction_id",
+        "transaction_type"
+      ]
+    }
+  }
+}
