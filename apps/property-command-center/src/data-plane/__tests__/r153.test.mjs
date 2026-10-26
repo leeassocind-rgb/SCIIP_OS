@@ -684,3 +684,252 @@ test(
     );
   }
 );
+
+// -----------------------------------------------------------------------------
+// R154-A10F5 PERMANENT FROZEN SPATIAL CORRECTION GATES
+//
+// Source-native KML attributes travel on a non-enumerable Symbol sidecar so
+// source_observation canonical content and deterministic identity remain
+// unchanged. The row bundle projects that sidecar only into
+// spatial_feature.attributes and uses the same source observation's governed
+// sourceDocumentId for spatial_feature.source_document_id.
+// -----------------------------------------------------------------------------
+
+import { test as r154A10dTest } from "node:test";
+import assertR154A10D from "node:assert/strict";
+import {
+  readFileSync as readFileSyncR154A10D,
+} from "node:fs";
+import {
+  fileURLToPath as fileURLToPathR154A10D,
+} from "node:url";
+import {
+  dirname as dirnameR154A10D,
+  resolve as resolveR154A10D,
+} from "node:path";
+import {
+  canonicalJson as canonicalJsonR154A10D,
+} from "../ingestion/postgresRowBundle.mjs";
+
+r154A10dTest(
+  "R154-A10F5 sidecar is non-enumerable and canonical-source-observation neutral",
+  () => {
+    const sidecar =
+      Symbol.for(
+        "SCIIP_SOURCE_NATIVE_ATTRIBUTES"
+      );
+
+    const baseline = {
+      sourceFamily:
+        "REFERENCE_AND_SPATIAL",
+      sourceDocumentId:
+        "SOURCE_DOCUMENT:test",
+      sourcePath:
+        "snapshots/test/reference.kml",
+      sourceSha256:
+        "test-sha",
+      observationKind:
+        "REFERENCE_KML_PLACEMARK",
+      sourceRecordOrdinal:
+        1,
+      name:
+        null,
+      fields:
+        {},
+      geometry: {
+        type:
+          "Point",
+        coordinates: [
+          -118,
+          34,
+        ],
+      },
+      referenceSubtype:
+        "REFERENCE",
+    };
+
+    const candidate = {
+      ...baseline,
+    };
+
+    Object.defineProperty(
+      candidate,
+      sidecar,
+      {
+        value: {
+          OBJECTID:
+            "1",
+          LOCATION:
+            "TEST",
+        },
+        enumerable:
+          false,
+        writable:
+          false,
+        configurable:
+          false,
+      }
+    );
+
+    assertR154A10D.deepEqual(
+      Object.keys(candidate),
+      Object.keys(baseline)
+    );
+
+    assertR154A10D.equal(
+      JSON.stringify(candidate),
+      JSON.stringify(baseline)
+    );
+
+    assertR154A10D.equal(
+      canonicalJsonR154A10D(
+        candidate
+      ),
+      canonicalJsonR154A10D(
+        baseline
+      )
+    );
+
+    assertR154A10D.deepEqual(
+      candidate[sidecar],
+      {
+        OBJECTID:
+          "1",
+        LOCATION:
+          "TEST",
+      }
+    );
+  }
+);
+
+r154A10dTest(
+  "R154-A10F5 parser and row bundle retain the sidecar projection architecture",
+  () => {
+    const here =
+      dirnameR154A10D(
+        fileURLToPathR154A10D(
+          import.meta.url
+        )
+      );
+
+    const parserSource =
+      readFileSyncR154A10D(
+        resolveR154A10D(
+          here,
+          "../ingestion/referenceSpatialParser.mjs"
+        ),
+        "utf8"
+      );
+
+    const rowBundleSource =
+      readFileSyncR154A10D(
+        resolveR154A10D(
+          here,
+          "../ingestion/postgresRowBundle.mjs"
+        ),
+        "utf8"
+      );
+
+    assertR154A10D.match(
+      parserSource,
+      /SCIIP_SOURCE_NATIVE_ATTRIBUTES/
+    );
+
+    assertR154A10D.match(
+      parserSource,
+      /SimpleData/
+    );
+
+    assertR154A10D.match(
+      rowBundleSource,
+      /SCIIP_SOURCE_NATIVE_ATTRIBUTES/
+    );
+
+    assertR154A10D.match(
+      rowBundleSource,
+      /\battributes\s*:/
+    );
+
+    assertR154A10D.match(
+      rowBundleSource,
+      /\bsource_document_id\s*:/
+    );
+
+    assertR154A10D.match(
+      rowBundleSource,
+      /observation[\s\S]{0,500}\.sourceDocumentId/
+    );
+  }
+);
+
+r154A10dTest(
+  "R154-A10F5 raw KML sidecar survives subtype classification",
+  () => {
+    const here =
+      dirnameR154A10D(
+        fileURLToPathR154A10D(
+          import.meta.url
+        )
+      );
+
+    const parserSource =
+      readFileSyncR154A10D(
+        resolveR154A10D(
+          here,
+          "../ingestion/referenceSpatialParser.mjs"
+        ),
+        "utf8"
+      );
+
+    const rowBundleSource =
+      readFileSyncR154A10D(
+        resolveR154A10D(
+          here,
+          "../ingestion/postgresRowBundle.mjs"
+        ),
+        "utf8"
+      );
+
+    const helperStart =
+      parserSource.indexOf(
+        "function sourceNativeKmlAttributes("
+      );
+    const helperEnd =
+      parserSource.indexOf(
+        "\nfunction kmlObservations(",
+        helperStart
+      );
+
+    assertR154A10D.ok(
+      helperStart >= 0
+      && helperEnd > helperStart
+    );
+
+    const helperSource =
+      parserSource.slice(
+        helperStart,
+        helperEnd
+      );
+
+    assertR154A10D.doesNotMatch(
+      helperSource,
+      /\bnormalizeKey\s*\(/
+    );
+
+    assertR154A10D.match(
+      helperSource,
+      /const key\s*=[\s\S]{0,120}xmlUnescape\([\s\S]{0,80}rawName/
+    );
+
+    assertR154A10D.match(
+      parserSource,
+      /const classifiedObservation\s*=\s*\{[\s\S]{0,1800}Object\.defineProperty\([\s\S]{0,700}SCIIP_SOURCE_NATIVE_ATTRIBUTES/
+    );
+
+    assertR154A10D.match(
+      rowBundleSource,
+      /source_document_id\s*:[\s\S]{0,120}observation[\s\S]{0,80}\.sourceDocumentId/
+    );
+  }
+);
+

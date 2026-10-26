@@ -4542,6 +4542,18 @@ function collectReferenceEvidence(
           source_observation_id:
             sourceObservation
               .observationId,
+          source_document_id:
+            observation
+              .sourceDocumentId,
+          attributes:
+            observation[
+              Symbol.for(
+                "SCIIP_SOURCE_NATIVE_ATTRIBUTES"
+              )
+            ]
+            ?? observation
+              .fields
+            ?? {},
           properties:
             observation
               .fields

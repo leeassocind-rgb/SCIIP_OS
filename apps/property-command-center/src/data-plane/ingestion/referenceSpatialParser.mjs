@@ -320,6 +320,144 @@ function parseCoordinateText(
     .filter(Boolean);
 }
 
+function sourceNativeKmlAttributes(
+  block
+) {
+  const fields = {};
+
+  const setField = (
+    rawName,
+    rawValue
+  ) => {
+    const key =
+      xmlUnescape(
+        rawName
+      );
+
+    if (!key) {
+      return;
+    }
+
+    fields[key] =
+      rawValue == null
+      || rawValue === ""
+        ? null
+        : xmlUnescape(
+          rawValue
+        );
+  };
+
+  for (
+    const dataMatch
+    of block.matchAll(
+      /<(?:\w+:)?Data\b([^>]*)>([\s\S]*?)<\/(?:\w+:)?Data>/gi
+    )
+  ) {
+    const nameMatch =
+      (dataMatch[1] ?? "")
+        .match(
+          /\bname=["']([^"']+)["']/i
+        );
+
+    if (!nameMatch) {
+      continue;
+    }
+
+    const valueMatch =
+      (dataMatch[2] ?? "")
+        .match(
+          /<(?:\w+:)?value\b[^>]*>([\s\S]*?)<\/(?:\w+:)?value>/i
+        );
+
+    setField(
+      nameMatch[1],
+      valueMatch
+        ? valueMatch[1]
+        : null
+    );
+  }
+
+  for (
+    const dataMatch
+    of block.matchAll(
+      /<(?:\w+:)?Data\b([^>]*)\/>/gi
+    )
+  ) {
+    const nameMatch =
+      (dataMatch[1] ?? "")
+        .match(
+          /\bname=["']([^"']+)["']/i
+        );
+
+    if (
+      nameMatch
+      && !Object.prototype.hasOwnProperty.call(
+        fields,
+        xmlUnescape(
+          nameMatch[1]
+        )
+      )
+    ) {
+      setField(
+        nameMatch[1],
+        null
+      );
+    }
+  }
+
+  for (
+    const simpleMatch
+    of block.matchAll(
+      /<(?:\w+:)?SimpleData\b([^>]*)>([\s\S]*?)<\/(?:\w+:)?SimpleData>/gi
+    )
+  ) {
+    const nameMatch =
+      (simpleMatch[1] ?? "")
+        .match(
+          /\bname=["']([^"']+)["']/i
+        );
+
+    if (!nameMatch) {
+      continue;
+    }
+
+    setField(
+      nameMatch[1],
+      simpleMatch[2] ?? null
+    );
+  }
+
+  for (
+    const simpleMatch
+    of block.matchAll(
+      /<(?:\w+:)?SimpleData\b([^>]*)\/>/gi
+    )
+  ) {
+    const nameMatch =
+      (simpleMatch[1] ?? "")
+        .match(
+          /\bname=["']([^"']+)["']/i
+        );
+
+    if (
+      nameMatch
+      && !Object.prototype.hasOwnProperty.call(
+        fields,
+        xmlUnescape(
+          nameMatch[1]
+        )
+      )
+    ) {
+      setField(
+        nameMatch[1],
+        null
+      );
+    }
+  }
+
+  return fields;
+}
+
 function kmlObservations(
   text,
   context
@@ -431,7 +569,7 @@ function kmlObservations(
         );
     }
 
-    result.push({
+    const parsedObservation = {
       ...context,
       observationKind:
         "REFERENCE_KML_PLACEMARK",
@@ -441,7 +579,30 @@ function kmlObservations(
       fields:
         extended,
       geometry,
-    });
+    };
+
+    Object.defineProperty(
+      parsedObservation,
+      Symbol.for(
+        "SCIIP_SOURCE_NATIVE_ATTRIBUTES"
+      ),
+      {
+        value:
+          sourceNativeKmlAttributes(
+            block
+          ),
+        enumerable:
+          false,
+        writable:
+          false,
+        configurable:
+          false,
+      }
+    );
+
+    result.push(
+      parsedObservation
+    );
   }
 
   return result;
@@ -637,14 +798,47 @@ function decorateSubtype(
   observations
 ) {
   return observations.map(
-    observation => ({
-      ...observation,
-      referenceSubtype:
-        classifyReferenceSubtype(
-          observation.sourcePath,
-          observation.fields
-        ),
-    })
+    observation => {
+      const classifiedObservation = {
+        ...observation,
+        referenceSubtype:
+          classifyReferenceSubtype(
+            observation.sourcePath,
+            observation.fields
+          ),
+      };
+
+      const sourceNativeAttributes =
+        observation[
+          Symbol.for(
+            "SCIIP_SOURCE_NATIVE_ATTRIBUTES"
+          )
+        ];
+
+      if (
+        sourceNativeAttributes
+        !== undefined
+      ) {
+        Object.defineProperty(
+          classifiedObservation,
+          Symbol.for(
+            "SCIIP_SOURCE_NATIVE_ATTRIBUTES"
+          ),
+          {
+            value:
+              sourceNativeAttributes,
+            enumerable:
+              false,
+            writable:
+              false,
+            configurable:
+              false,
+          }
+        );
+      }
+
+      return classifiedObservation;
+    }
   );
 }
 
