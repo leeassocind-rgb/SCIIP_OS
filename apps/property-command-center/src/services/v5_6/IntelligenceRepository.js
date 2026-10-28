@@ -83,3 +83,8 @@ export function readPostgresBuildings(options = {}) {
 export function readPostgresListings(options = {}) {
   return sciipPostgresRead("listings", options);
 }
+
+// SCIIP_A10BA_POSTGRES_PROPERTIES_BRIDGE
+export function readPostgresProperties(options = {}) {
+  return sciipPostgresRead("properties", options);
+}

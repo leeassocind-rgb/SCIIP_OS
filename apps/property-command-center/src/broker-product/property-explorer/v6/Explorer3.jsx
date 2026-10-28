@@ -4,6 +4,7 @@ import {
   readPostgresAssets,
   readPostgresBuildings,
   readPostgresListings,
+  readPostgresProperties,
 } from '../../../services/v5_6/IntelligenceRepository.js';
 import { getCertifiedAskingMarketMetricDisclosureBinding } from "../../../explorer4/runtime/MarketAvailabilityRuntimeShadowSidecar.mjs";
 import { buildAskingMarketMetricUiDisclosureViewModelV1 } from "../../../explorer4/runtime/AirAskingMarketMetricUiDisclosureViewModelV1.mjs";
@@ -226,7 +227,7 @@ function SciipBoundedAvailabilityDisclosure({model}){
 }
 /* SCIIP_R35_R2_R2_R10_R4_R1_BOUNDED_AVAILABILITY_UI_BINDING MODEL END */
 
-function Explorer3Base(){
+function Explorer3Base({sciipPostgresProperties=null}={}){
   const[state,workspace]=useExplorerWorkspace();
   const{
   properties:EXPLORER3_SOURCE_PROPERTIES,
@@ -256,8 +257,12 @@ bh4g1UseEffect(()=>{
     .catch(()=>{if(active)setBh4g1GovernedProperties(null)});
   return()=>{active=false};
 },[]);
-const EXPLORER3_PROPERTIES=bh4g1GovernedProperties||EXPLORER3_SOURCE_PROPERTIES;
-const SEARCH_PROPERTIES=(Array.isArray(bh4g1GovernedProperties)&&bh4g1GovernedProperties.length)?bh4g1GovernedProperties:EXPLORER3_SOURCE_PROPERTIES;
+/* SCIIP_A10BA_POSTGRES_PROPERTY_SOURCE — explicit opt-in only; certified governed/static fallbacks preserved verbatim. */
+const SCIIP_POSTGRES_PROPERTIES=(Array.isArray(sciipPostgresProperties)&&sciipPostgresProperties.length)?sciipPostgresProperties:null;
+const EXPLORER3_FALLBACK_PROPERTIES=bh4g1GovernedProperties||EXPLORER3_SOURCE_PROPERTIES;
+const SEARCH_FALLBACK_PROPERTIES=(Array.isArray(bh4g1GovernedProperties)&&bh4g1GovernedProperties.length)?bh4g1GovernedProperties:EXPLORER3_SOURCE_PROPERTIES;
+const EXPLORER3_PROPERTIES=SCIIP_POSTGRES_PROPERTIES||EXPLORER3_FALLBACK_PROPERTIES;
+const SEARCH_PROPERTIES=SCIIP_POSTGRES_PROPERTIES||SEARCH_FALLBACK_PROPERTIES;
   const[paletteOpen,setPaletteOpen]=useState(false);
   const[focusPropertyId,setFocusPropertyId]=useState(null);
   const[focusRequestKey,setFocusRequestKey]=useState(0);
@@ -1530,9 +1535,98 @@ function SCIIPPostgresReadPanel(){
   </aside>;
 }
 
+function SCIIPPostgresPropertySourceControl({source,onEnable,onDisable}){
+  const active=source.status==='ready'&&Array.isArray(source.rows)&&source.rows.length>0;
+  return <aside
+    aria-label="PostgreSQL Explorer property source"
+    style={{
+      position:'fixed',
+      top:16,
+      right:16,
+      zIndex:2147483001,
+      width:320,
+      background:'rgba(255,255,255,0.97)',
+      border:'1px solid rgba(15,23,42,0.18)',
+      borderRadius:10,
+      boxShadow:'0 12px 32px rgba(15,23,42,0.18)',
+      padding:12,
+      color:'#0f172a',
+      fontSize:12,
+      lineHeight:1.4,
+    }}
+  >
+    <strong style={{display:'block',fontSize:13,marginBottom:4}}>Explorer Property Source</strong>
+    <span
+      aria-label="Explorer property source status"
+      style={{display:'block',opacity:0.76,marginBottom:8}}
+    >
+      {active?`PostgreSQL active · ${source.rows.length.toLocaleString()} properties`:'Governed/static source active'}
+    </span>
+    {!active&&
+      <button
+        type="button"
+        onClick={onEnable}
+        disabled={source.status==='loading'}
+        style={{cursor:'pointer',padding:'6px 9px'}}
+      >
+        {source.status==='loading'?'Loading 8,923 PostgreSQL properties...':'Use PostgreSQL Property Source'}
+      </button>
+    }
+    {active&&
+      <button
+        type="button"
+        onClick={onDisable}
+        style={{cursor:'pointer',padding:'6px 9px'}}
+      >
+        Return to Governed/Static Source
+      </button>
+    }
+    {source.status==='error'&&
+      <p role="alert" style={{margin:'8px 0 0'}}>
+        PostgreSQL property source failed; governed/static fallback remains active: {source.error?.message||String(source.error)}
+      </p>
+    }
+    <span style={{display:'block',opacity:0.66,marginTop:8}}>
+      Explicit opt-in only · read-only · no automatic PostgreSQL loading
+    </span>
+  </aside>;
+}
+
 export default function Explorer3(props){
+  const [postgresPropertySource,setPostgresPropertySource]=SCIIPPostgresReact.useState({
+    status:'idle',
+    rows:null,
+    error:null,
+  });
+
+  async function enablePostgresPropertySource(){
+    setPostgresPropertySource({status:'loading',rows:null,error:null});
+    try{
+      const payload=await readPostgresProperties({limit:10000,offset:0});
+      const rows=Array.isArray(payload?.rows)?payload.rows:[];
+      if(rows.length!==8923){
+        throw new Error(`Expected 8,923 certified PostgreSQL properties; received ${rows.length}`);
+      }
+      setPostgresPropertySource({status:'ready',rows,error:null});
+    }catch(error){
+      setPostgresPropertySource({status:'error',rows:null,error});
+    }
+  }
+
+  function disablePostgresPropertySource(){
+    setPostgresPropertySource({status:'idle',rows:null,error:null});
+  }
+
   return <>
-    <Explorer3Base {...props}/>
+    <Explorer3Base
+      {...props}
+      sciipPostgresProperties={postgresPropertySource.status==='ready'?postgresPropertySource.rows:null}
+    />
+    <SCIIPPostgresPropertySourceControl
+      source={postgresPropertySource}
+      onEnable={enablePostgresPropertySource}
+      onDisable={disablePostgresPropertySource}
+    />
     <SCIIPPostgresReadPanel/>
   </>;
 }

@@ -53,6 +53,16 @@ export function createSciipPostgresReadApi({
         return;
       }
 
+      // SCIIP_A10BA_POSTGRES_PROPERTIES_ENDPOINT
+      if (url.pathname === "/api/postgres/properties") {
+        const data = await repository.explorerProperties({
+          limit: url.searchParams.get("limit"),
+          offset: url.searchParams.get("offset"),
+        });
+        json(res, 200, data, origin);
+        return;
+      }
+
       const match = url.pathname.match(/^\/api\/postgres\/(assets|buildings|listings)$/);
       if (!match) {
         json(res, 404, { error: "not_found" }, origin);
