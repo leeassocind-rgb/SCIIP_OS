@@ -1,3 +1,10 @@
+import * as SCIIPPostgresReact from 'react';
+import {
+  readPostgresHealth,
+  readPostgresAssets,
+  readPostgresBuildings,
+  readPostgresListings,
+} from '../../../services/v5_6/IntelligenceRepository.js';
 import { getCertifiedAskingMarketMetricDisclosureBinding } from "../../../explorer4/runtime/MarketAvailabilityRuntimeShadowSidecar.mjs";
 import { buildAskingMarketMetricUiDisclosureViewModelV1 } from "../../../explorer4/runtime/AirAskingMarketMetricUiDisclosureViewModelV1.mjs";
 // M2.63: Production Evidence Contract Recovery — provenance/source/spatial contract certified.
@@ -219,7 +226,7 @@ function SciipBoundedAvailabilityDisclosure({model}){
 }
 /* SCIIP_R35_R2_R2_R10_R4_R1_BOUNDED_AVAILABILITY_UI_BINDING MODEL END */
 
-export default function Explorer3(){
+function Explorer3Base(){
   const[state,workspace]=useExplorerWorkspace();
   const{
   properties:EXPLORER3_SOURCE_PROPERTIES,
@@ -1437,3 +1444,95 @@ function CompareDock({ids,onRemove,properties=[]}){const rows=ids.map(id=>proper
 function formatNumber(value){const number=Number(value)||0;return number?number.toLocaleString():'—';}
 function moneyRate(value){return Number(value)?`$${Number(value).toFixed(2)} NNN`:'—';}
 function recordTypeLabel(value){return({BASE_INVENTORY:'Base Inventory',AVAILABLE:'Available',LEASE_COMPARABLE:'Lease Comparable',SALE_COMPARABLE:'Sale Comparable'}[value]||'Property');}
+
+// SCIIP_A10AH_LIVE_POSTGRES_PANEL
+function SCIIPPostgresReadPanel(){
+  const [state,setState]=SCIIPPostgresReact.useState({status:'idle',data:null,error:null});
+
+  async function loadPostgresReadModel(){
+    setState({status:'loading',data:null,error:null});
+    try{
+      const [health,assets,buildings,listings]=await Promise.all([
+        readPostgresHealth(),
+        readPostgresAssets({limit:3,offset:0}),
+        readPostgresBuildings({limit:3,offset:0}),
+        readPostgresListings({limit:3,offset:0}),
+      ]);
+      setState({
+        status:'ready',
+        data:{
+          health,
+          assets:assets.rows,
+          buildings:buildings.rows,
+          listings:listings.rows,
+        },
+        error:null,
+      });
+    }catch(error){
+      setState({status:'error',data:null,error});
+    }
+  }
+
+  return <aside
+    aria-label="PostgreSQL live read model"
+    style={{
+      position:'fixed',
+      right:16,
+      bottom:16,
+      zIndex:2147483000,
+      width:320,
+      maxHeight:'70vh',
+      overflow:'auto',
+      background:'rgba(255,255,255,0.97)',
+      border:'1px solid rgba(15,23,42,0.18)',
+      borderRadius:10,
+      boxShadow:'0 12px 32px rgba(15,23,42,0.18)',
+      padding:12,
+      color:'#0f172a',
+      fontSize:12,
+      lineHeight:1.4,
+    }}
+  >
+    <strong style={{display:'block',fontSize:13,marginBottom:4}}>PostgreSQL Live Read</strong>
+    <span style={{display:'block',opacity:0.72,marginBottom:8}}>Optional - read-only - Explorer baseline unchanged</span>
+    <button
+      type="button"
+      onClick={loadPostgresReadModel}
+      disabled={state.status==='loading'}
+      style={{cursor:'pointer',padding:'6px 9px'}}
+    >
+      {state.status==='loading'?'Loading PostgreSQL...':'Load PostgreSQL Read Model'}
+    </button>
+
+    {state.status==='error'&&
+      <p role="alert" style={{margin:'8px 0 0'}}>
+        PostgreSQL read failed: {state.error?.message||String(state.error)}
+      </p>
+    }
+
+    {state.status==='ready'&&state.data&&<>
+      <p aria-label="PostgreSQL governed row counts" style={{margin:'8px 0'}}>
+        Assets: {state.data.health.assets.toLocaleString()} - Buildings: {state.data.health.buildings.toLocaleString()} - Listings: {state.data.health.listings.toLocaleString()}
+      </p>
+      <details>
+        <summary>Asset sample (3)</summary>
+        <pre aria-label="PostgreSQL asset sample" style={{whiteSpace:'pre-wrap'}}>{JSON.stringify(state.data.assets,null,2)}</pre>
+      </details>
+      <details>
+        <summary>Building sample (3)</summary>
+        <pre aria-label="PostgreSQL building sample" style={{whiteSpace:'pre-wrap'}}>{JSON.stringify(state.data.buildings,null,2)}</pre>
+      </details>
+      <details>
+        <summary>Listing sample (3)</summary>
+        <pre aria-label="PostgreSQL listing sample" style={{whiteSpace:'pre-wrap'}}>{JSON.stringify(state.data.listings,null,2)}</pre>
+      </details>
+    </>}
+  </aside>;
+}
+
+export default function Explorer3(props){
+  return <>
+    <Explorer3Base {...props}/>
+    <SCIIPPostgresReadPanel/>
+  </>;
+}

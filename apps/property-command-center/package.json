@@ -596,14 +596,16 @@
     "certify:explorer:2.1:spatial-focus": "npm run test:explorer:2.1:spatial-focus && npm run build",
     "test:explorer-2-2": "node tests/explorer-2-2-progressive-neighbor-intelligence.test.mjs",
     "test:explorer-3:m1": "node tests/explorer-3-milestone-1.test.mjs",
-    "certify:explorer-3:m1": "npm run test:explorer-3:m1 && npm run build"
+    "certify:explorer-3:m1": "npm run test:explorer-3:m1 && npm run build",
+    "sciip:postgres-read-api": "node server/postgres/read-api.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.468.0",
+    "pg": "8.23.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "vite": "^7.0.0",
-    "leaflet": "^1.9.4"
+    "vite": "^7.0.0"
   }
 }

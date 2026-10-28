@@ -32,3 +32,54 @@ export async function loadMarketIntelligence() {
 export async function loadDecisionQueue() {
   return loadJson('decision-queue-live.json');
 }
+
+// SCIIP_A10Y3_R1_POSTGRES_READ_BRIDGE
+const SCIIP_POSTGRES_READ_API_DEFAULT = "http://127.0.0.1:43154";
+
+function sciipPostgresReadApiBaseUrl() {
+  const configured = import.meta.env?.VITE_SCIIP_POSTGRES_READ_API_URL;
+  return String(configured || SCIIP_POSTGRES_READ_API_DEFAULT).replace(/\/+$/, "");
+}
+
+async function sciipPostgresRead(collection, { limit = 100, offset = 0, signal } = {}) {
+  const baseUrl = sciipPostgresReadApiBaseUrl();
+  const url = new URL(`/api/postgres/${collection}`, `${baseUrl}/`);
+  url.searchParams.set("limit", String(limit));
+  url.searchParams.set("offset", String(offset));
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: { Accept: "application/json" },
+    signal,
+  });
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`SCIIP PostgreSQL read failed (${response.status}): ${body}`);
+  }
+  return response.json();
+}
+
+export async function readPostgresHealth({ signal } = {}) {
+  const response = await fetch(`${sciipPostgresReadApiBaseUrl()}/health`, {
+    method: "GET",
+    headers: { Accept: "application/json" },
+    signal,
+  });
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`SCIIP PostgreSQL health check failed (${response.status}): ${body}`);
+  }
+  return response.json();
+}
+
+export function readPostgresAssets(options = {}) {
+  return sciipPostgresRead("assets", options);
+}
+
+export function readPostgresBuildings(options = {}) {
+  return sciipPostgresRead("buildings", options);
+}
+
+export function readPostgresListings(options = {}) {
+  return sciipPostgresRead("listings", options);
+}
