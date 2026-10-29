@@ -34,7 +34,7 @@ export async function loadDecisionQueue() {
 }
 
 // SCIIP_A10Y3_R1_POSTGRES_READ_BRIDGE
-const SCIIP_POSTGRES_READ_API_DEFAULT = "http://127.0.0.1:43154";
+const SCIIP_POSTGRES_READ_API_DEFAULT = globalThis.location?.origin || "";
 
 function sciipPostgresReadApiBaseUrl() {
   const configured = import.meta.env?.VITE_SCIIP_POSTGRES_READ_API_URL;

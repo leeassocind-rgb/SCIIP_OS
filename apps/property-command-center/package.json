@@ -597,7 +597,8 @@
     "test:explorer-2-2": "node tests/explorer-2-2-progressive-neighbor-intelligence.test.mjs",
     "test:explorer-3:m1": "node tests/explorer-3-milestone-1.test.mjs",
     "certify:explorer-3:m1": "npm run test:explorer-3:m1 && npm run build",
-    "sciip:postgres-read-api": "node server/postgres/read-api.mjs"
+    "sciip:postgres-read-api": "node server/postgres/read-api.mjs",
+    "sciip:production": "node server/production-server.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
